@@ -10,6 +10,12 @@
             <class name="clearCache.ClearCache"/>
         </classes>
     </test>
+    <test name="StandartTest">
+        <classes>
+            <class name="tests.CreateAccountTest"/>
+        </classes>
+    </test>
+
 </suite>
 
 
