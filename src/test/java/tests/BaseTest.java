@@ -71,7 +71,7 @@ public class BaseTest {
         accounts = new AccountsPage(driver);
     }
 
-    //@AfterClass
+    @AfterClass
     public void teardown(){
         driver.close();
         driver.quit();

@@ -60,10 +60,10 @@ public class CreateAccountTest extends BaseTest {
         Assert.assertEquals(producedName, expectedAccountName);
     }
 
-    @Test(priority = 4, description = "ChangeIndusty")
+    @Test(priority = 4, description = "ChangeIndustry")
     @Severity(SeverityLevel.NORMAL)
-    @Description("Test Description: ChangeIndusty")
-    @Story("ChangeIndusty")
+    @Description("Test Description: ChangeIndustry")
+    @Story("ChangeIndustry")
     public void changeIndustry() throws InterruptedException{
         //Given
         String expectedIndustryName = "Food & Beverage";
