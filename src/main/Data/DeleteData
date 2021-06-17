@@ -1,0 +1,9 @@
+    delete [select id from sfims__Investment__c];
+    delete [select id from sfims__Loan_Product__c];
+    delete [select id from sfims__Fund__c];
+    delete [select id from sfims__Interest_Rate_Source__c];
+    delete [select id from sfims__Application__c];
+    delete [select id from sfims__Milestone_History__c];
+    delete [select id from sfims__Milestone_Configuration__c];
+    delete [select id from Account];
+    delete [select id from sfims__Task_List_Template__c];
