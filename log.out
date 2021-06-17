@@ -1,4 +1,4 @@
-2021-06-17 15:07:59,406 INFO  - testLogIn test is starting.
-2021-06-17 15:08:02,481 INFO  - deleteOldData test is starting.
-2021-06-17 15:08:54,923 INFO  - testCreateNewAccount test is starting.
-2021-06-17 15:09:35,225 INFO  - changeIndustry test is starting.
+2021-06-17 16:07:31,977 INFO  - testLogIn test is starting.
+2021-06-17 16:07:32,953 INFO  - deleteOldData test is starting.
+2021-06-17 16:08:25,541 INFO  - testCreateNewAccount test is starting.
+2021-06-17 16:09:06,386 INFO  - changeIndustry test is starting.
