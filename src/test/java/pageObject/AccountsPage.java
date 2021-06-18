@@ -28,7 +28,7 @@ public class AccountsPage extends BasePage {
             xpath("//ul[@role='tablist']//a[@id='detailTab__item']");
     private static final By EDIT_INDUSTRY = By.
             xpath("//button[@title='Edit Industry']");
-    By INDUSTRY_INPUT = By.xpath("//label[text()='Industry']/following-sibling::div//input");
+    By INDUSTRY_INPUT = By.xpath("//label[text()='Industry']/following-sibling::div//div");
     By FOOD_AND_BEVERAGE = By.xpath("//div//span[@title='Food & Beverage']");
     By SAVE_BUTTON = By.xpath("//button[@name='SaveEdit']");
     private static final By INDUSTRY_NAME_SELECTOR = By.
