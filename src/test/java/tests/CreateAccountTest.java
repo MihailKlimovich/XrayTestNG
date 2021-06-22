@@ -71,7 +71,5 @@ public class CreateAccountTest extends BaseTest {
         String industryName = accounts.getIndustryName(driver);
         //Then
         Assert.assertEquals(industryName, expectedIndustryName);
-
-
     }
 }
