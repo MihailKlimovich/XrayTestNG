@@ -11,7 +11,7 @@ public class Dates {
     public String todayDate2;
 
     public String generateTodayDate(){
-        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
         Calendar c = Calendar.getInstance();
         c.setTime(new Date());
         Date d = c.getTime();

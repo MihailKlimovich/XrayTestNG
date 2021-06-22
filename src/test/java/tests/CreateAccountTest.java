@@ -33,7 +33,6 @@ public class CreateAccountTest extends BaseTest {
     developerConsoleWindow.openExecuteAnonymousWindow();
     developerConsoleWindow.runApexCode("  delete [select id from Account];" );
     Thread.sleep(10000);
-    //where name='First Test Account'
     }
 
     @Test(priority = 3, description = "CreateNewAccount")

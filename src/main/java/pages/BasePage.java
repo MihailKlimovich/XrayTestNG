@@ -245,29 +245,12 @@ public class BasePage {
     }
 
     //Scrolling
-    public void scrollToElement(By elementLocation) {
-        WebElement element = driver.findElement((elementLocation));
-        Actions action = new Actions(driver);
-        action.moveToElement(element);
-        action.perform();
+    public void scrollToElement(By locator) {
+        WebElement element = driver.findElement(locator);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);",element);
     }
 
     public void scrollToElement2(By elementLocation, By elementLocation2) {
-        try {
-            WebElement element = driver.findElement((elementLocation));
-            Actions action = new Actions(driver);
-            action.moveToElement(element);
-            action.perform();
-        }
-        catch (NoSuchElementException e) {
-            WebElement element2 = driver.findElement((elementLocation2));
-            Actions action2 = new Actions(driver);
-            action2.moveToElement(element2);
-            action2.perform();
-        }
-    }
-
-    public void scrollToElement3(By elementLocation, By elementLocation2) {
         try {
             WebElement element = driver.findElement((elementLocation));
             ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();", element);
@@ -277,6 +260,8 @@ public class BasePage {
             ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();", element2);
         }
     }
+
+
 
     /** Popup Methods*/
     public Boolean isDisplayed(By elementLocation) {
