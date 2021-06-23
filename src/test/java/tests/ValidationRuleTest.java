@@ -23,13 +23,10 @@ public class ValidationRuleTest extends BaseTest{
     @Severity(SeverityLevel.NORMAL)
     @Description("Setup.thn__ByPass__c.thn__ByPassVR__c == false and User.thn__ByPassVR__c == false")
     @Story("Settings")
-    public void deleteOldData() throws InterruptedException {
+    public void settingUpValidationRules() throws InterruptedException {
         developerConsoleWindow.openDeveloperConsole();
         developerConsoleWindow.openExecuteAnonymousWindow();
-        developerConsoleWindow.runApexCode("  User u = [SELECT Id, Username, LastName, Name FROM User WHERE Name='User User'];\n" +
-                "u.thn__ByPassVR__c = false;\n" +
-                "update u;\n" +
-                "\n" +
+        developerConsoleWindow.runApexCode("  update new User(Id = UserInfo.getUserId(),thn__ByPassVR__c = false);\n" +
                 "thn__bypass__c bp = [SELECT Id, thn__bypassvr__c FROM thn__bypass__c];\n" +
                 "bp.thn__bypassvr__c = false;\n" +
                 "update bp;" );
@@ -84,10 +81,47 @@ public class ValidationRuleTest extends BaseTest{
         String expectedMessage = "We hit a snag.";
         //when
         myceQuotes.createNewMyceQuote(driver);
-        myceQuotes.fillOutTheQuotaForm_whenCommissionIsAgent
+        myceQuotes.fillOutTheQuotaForm_whenCommissionIsCompany
                 ("Test1508", date.generateTodayDate(), date.generateTodayDate(),
                         "123", "test");
         String message = myceQuotes.readErrorMessage(driver);
+        //then
+        Assert.assertEquals(message, expectedMessage);
+        myceQuotes.closeWindow(driver);
+    }
+
+    @Test(priority = 6, description = "")
+    @Severity(SeverityLevel.NORMAL)
+    @Description("Test Description: Create New MYСE Quote where Departure Date < Arrival Date")
+    @Story("")
+    public void testCreateNewMyceQuote4() throws InterruptedException {
+        //given
+        String expectedMessage = "Departure Date";
+        //when
+        myceQuotes.createNewMyceQuote(driver);
+        myceQuotes.fillOutTheQuotaFormWithoutCommission
+                ("Test1508", date.generateTodayDate(), date.generateDate_ddMMyyyy(1, 1),
+                        "123", "test");
+        String message = myceQuotes.readErrorMessage2(driver);
+        //then
+        Assert.assertEquals(message, expectedMessage);
+        myceQuotes.closeWindow(driver);
+    }
+
+    @Test(priority = 7, description = "")
+    @Severity(SeverityLevel.NORMAL)
+    @Description("Test Description: Create New MYСE Quote where Сompany is selected in the Agent field and Agent is" +
+            " selected in the Company field")
+    @Story("")
+    public void testCreateNewMyceQuote5() throws InterruptedException {
+        //given
+        String expectedMessage = "Company cannot be of type 'Agent' and Agent must be of type 'Agent' or 'Leads'";
+        //when
+        myceQuotes.createNewMyceQuote(driver);
+        myceQuotes.fillOutTheQuotaForm_whenCompanyIsAgentAndAgentIsCompany
+                ("Test1508", date.generateTodayDate(), date.generateTodayDate(), "123", "Test",
+                        "Agent", "Company");
+        String message = myceQuotes.readErrorMessage2(driver);
         //then
         Assert.assertEquals(message, expectedMessage);
         myceQuotes.closeWindow(driver);

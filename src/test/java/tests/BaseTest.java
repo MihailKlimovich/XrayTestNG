@@ -78,10 +78,12 @@ public class BaseTest {
         driver.close();
         driver.quit();
         if (driver != null) {
-            driver = null;
+            //driver = null;
         }
     }
 
+    //Successfully set the password "PWBgjUWd26#s|" for user test-unbuxpim9tgh@example.com.
+    //Successfully set the password "vt*P7[VrGp&]P" for user test-6epicstbdzhd@example.com.
 
 
 
