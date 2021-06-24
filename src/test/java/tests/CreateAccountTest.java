@@ -29,6 +29,7 @@ public class CreateAccountTest extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     @Story("Settings")
     public void deleteOldData() throws InterruptedException {
+        loginPageForScratchOrg.logInOnScratchOrg(driver);
     developerConsoleWindow.openDeveloperConsole();
     developerConsoleWindow.openExecuteAnonymousWindow();
     developerConsoleWindow.runApexCode("  delete [select id from Account];" );

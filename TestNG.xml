@@ -15,6 +15,11 @@
             <class name="tests.CreateAccountTest"/>
         </classes>
     </test>
+    <test name="ValidationRule">
+        <classes>
+            <class name="tests.ValidationRuleTest"/>
+        </classes>
+    </test>
 
 </suite>
 
