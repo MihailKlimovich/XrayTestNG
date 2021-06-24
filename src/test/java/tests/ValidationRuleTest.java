@@ -33,7 +33,7 @@ public class ValidationRuleTest extends BaseTest{
         Thread.sleep(10000);
     }
 
-    @Test(priority = 3, description = "")
+    @Test(priority = 3, description = "Commission_Validation_Rule")
     @Severity(SeverityLevel.NORMAL)
     @Description("Test Description: Create New MYСE Quote with an empty commission field  ")
     @Story("")
@@ -54,7 +54,7 @@ public class ValidationRuleTest extends BaseTest{
         myceQuotes.closeWindow(driver);
     }
 
-    @Test(priority = 4, description = "")
+    @Test(priority = 4, description = "Commission_Validation_Rule")
     @Severity(SeverityLevel.NORMAL)
     @Description("Test Description: Create New MYСE Quote where commission field is Agent  ")
     @Story("")
@@ -72,7 +72,7 @@ public class ValidationRuleTest extends BaseTest{
         myceQuotes.closeWindow(driver);
     }
 
-    @Test(priority = 5, description = "")
+    @Test(priority = 5, description = "Commission_Validation_Rule")
     @Severity(SeverityLevel.NORMAL)
     @Description("Test Description: Create New MYСE Quote where commission field is Company")
     @Story("")
@@ -90,7 +90,7 @@ public class ValidationRuleTest extends BaseTest{
         myceQuotes.closeWindow(driver);
     }
 
-    @Test(priority = 6, description = "")
+    @Test(priority = 6, description = "Dates")
     @Severity(SeverityLevel.NORMAL)
     @Description("Test Description: Create New MYСE Quote where Departure Date < Arrival Date")
     @Story("")
@@ -108,7 +108,7 @@ public class ValidationRuleTest extends BaseTest{
         myceQuotes.closeWindow(driver);
     }
 
-    @Test(priority = 7, description = "")
+    @Test(priority = 7, description = "Company_Agent_Type")
     @Severity(SeverityLevel.NORMAL)
     @Description("Test Description: Create New MYСE Quote where Сompany is selected in the Agent field and Agent is" +
             " selected in the Company field")
@@ -126,6 +126,63 @@ public class ValidationRuleTest extends BaseTest{
         Assert.assertEquals(message, expectedMessage);
         myceQuotes.closeWindow(driver);
     }
+
+    @Test(priority = 8, description = "Reservation_Guest")
+    @Severity(SeverityLevel.NORMAL)
+    @Description("Test Description: Create New MYСE Quote where Reservation Guest field is empty")
+    @Story("")
+    public void testCreateNewMyceQuote6() throws InterruptedException {
+        //given
+        String expectedMessage = "Reservation Guest";
+        //when
+        myceQuotes.createNewMyceQuote(driver);
+        myceQuotes.fillOutTheQuotaFormWhereReservationGuestIsNull
+                ("Test1508", date.generateTodayDate(), date.generateTodayDate(), "123", "Test");
+        String message = myceQuotes.readErrorMessage2(driver);
+        //then
+        Assert.assertEquals(message, expectedMessage);
+        myceQuotes.closeWindow(driver);
+    }
+
+    @Test(priority = 9, description = "Closed_Status")
+    @Severity(SeverityLevel.NORMAL)
+    @Description("Test Description: Change Stage on MYCE Quote to '4 - Closed'")
+    @Story("")
+    public void testChangeMyceQuote1() throws InterruptedException {
+        //given
+        String expectedMessage = "Closed Status is required when quote is at stage '4 - Closed'";
+        //when
+        myceQuotes.createNewMyceQuote(driver);
+        myceQuotes.createMyceQuote_happyPath
+                ("Test1508", date.generateTodayDate(), date.generateTodayDate(), "123", "Test");
+        myceQuotes.clickEdit(driver);
+        myceQuotes.changeStage(driver);
+        myceQuotes.clickSave(driver);
+        String message = myceQuotes.readErrorMessage2(driver);
+        //then
+        Assert.assertEquals(message, expectedMessage);
+        myceQuotes.closeWindow(driver);
+    }
+
+    @Test(priority = 10, description = "Cancelled_Status")
+    @Severity(SeverityLevel.NORMAL)
+    @Description("Test Description: Change MYCE Quote Closed Status to ‘Cancelled’")
+    @Story("")
+    public void testChangeMyceQuote2() throws InterruptedException {
+        //given
+        String expectedMessage = "We hit a snag.";
+        //when
+        myceQuotes.clickEdit(driver);
+        myceQuotes.clickIsConfirmed(driver);
+        myceQuotes.changeCloseStatus(driver);
+        myceQuotes.clickSave(driver);
+        String message = myceQuotes.readErrorMessage(driver);
+        //then
+        Assert.assertEquals(message, expectedMessage);
+        //myceQuotes.closeWindow(driver);
+    }
+
+
 
 
 
