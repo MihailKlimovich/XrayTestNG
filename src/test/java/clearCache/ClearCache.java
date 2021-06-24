@@ -9,9 +9,9 @@ public class ClearCache extends BaseTest {
     public void clearCache() throws InterruptedException{
         driver.get("chrome://settings/clearBrowserData");
         Thread.sleep(5000);
-        account.clickEnterButton();
+        account.enter();
         Thread.sleep(5000);
-        account.clickEnterButton();
+        account.enter();
         Thread.sleep(10000);
 
     }
