@@ -218,6 +218,7 @@ public class ValidationRuleTest extends BaseTest{
         //when
         String text = "Packages";
         packages.goToPackages();
+        Thread.sleep(3000);
         packages.clickNewPackage(driver);
         packages.createPackage_happyPath("Test15", "Demo");
         packageLine.clickNewPackageLine(driver);
@@ -240,6 +241,7 @@ public class ValidationRuleTest extends BaseTest{
         //when
         String text = "Packages";
         packages.goToPackages();
+        Thread.sleep(3000);
         packages.clickNewPackage(driver);
         packages.createPackage_happyPath2("Test15", "Demo");
         packageLine.clickNewPackageLine(driver);
