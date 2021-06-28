@@ -253,7 +253,7 @@ public class MyceQuotes extends BasePage{
 
     @Step("Click Is Confirmed radio button")
     public void clickIsConfirmed(WebDriver driver){
-        wait1.until(ExpectedConditions.elementToBeClickable(IS_CONFIRMED_RADIO_BUTTON)).click();
+        wait1.until(ExpectedConditions.presenceOfElementLocated(IS_CONFIRMED_RADIO_BUTTON)).click();
     }
 
 

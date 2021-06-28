@@ -82,9 +82,10 @@ public class HomePageForScratchOrg extends BasePage {
     public void  sendTextInAppWindow(WebDriver driver, String text) throws InterruptedException {
         WebDriverWait = new WebDriverWait(driver, 30);
         WebElement searchAppWindow = wait1.until(ExpectedConditions.visibilityOfElementLocated(SEARCH_APP_WINDOW));
-        searchAppWindow.findElement(By.xpath("//input[@class='slds-input']")).sendKeys(text);
-        Thread.sleep(2000);
+        searchAppWindow.findElement(By.xpath("//input[@placeholder='Search apps and items...']")).sendKeys(text);
+        Thread.sleep(3000);
         enter();
+
 
     }
 

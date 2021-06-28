@@ -5,7 +5,12 @@ import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.Story;
 import org.testng.Assert;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
+import pageObject.CreditNoteLine;
+import utils.Listeners.TestListener;
+
+@Listeners({TestListener.class})
 
 public class ValidationRuleTest extends BaseTest{
 
@@ -30,7 +35,7 @@ public class ValidationRuleTest extends BaseTest{
                 "thn__bypass__c bp = [SELECT Id, thn__bypassvr__c FROM thn__bypass__c];\n" +
                 "bp.thn__bypassvr__c = false;\n" +
                 "update bp;" );
-        Thread.sleep(10000);
+        Thread.sleep(5000);
     }
 
     @Test(priority = 3, description = "Commission_Validation_Rule")
@@ -181,6 +186,71 @@ public class ValidationRuleTest extends BaseTest{
         Assert.assertEquals(message, expectedMessage);
         //myceQuotes.closeWindow(driver);
     }
+
+    @Test(priority = 11, description = "Invoice_Line_Validation")
+    @Severity(SeverityLevel.NORMAL)
+    @Description("Test Description: Create New Credit Note Lines Quote" +
+            " where Invoice Line == null & Amount == null & Quantity == null")
+    @Story("")
+    public void testCreateNewCreditNoteLine() throws InterruptedException {
+        //given
+        String expectedMessage = "When a credit note line isn't linked to an Invoice line then the Amount and VAT is required.";
+        //when
+        String text = "Credit Note Lines";
+        homePageForScratchOrg.openAppLauncher(driver);
+        homePageForScratchOrg.sendTextInAppWindow(driver, text);
+        creditNoteLine.clickNewCreditNoteLineButton(driver);
+        creditNoteLine.fillOutNewCreditNoteLineForm(driver, "20");
+        String message = creditNoteLine.readErrorMessage2(driver);
+        //then
+        Assert.assertEquals(message, expectedMessage);
+        creditNoteLine.closeWindow(driver);
+    }
+
+    @Test(priority = 12, description = "Package_Line")
+    @Severity(SeverityLevel.NORMAL)
+    @Description("Test Description:For package where hn__Multi_Days__c == true," +
+            " create Package line:thn__AppliedDay__c == null")
+    @Story("")
+    public void testCreateNewPackageLine() throws InterruptedException {
+        //given
+        String expectedMessage = "Applied Day is required when a package is Multi days";
+        //when
+        String text = "Packages";
+        packages.goToPackages();
+        packages.clickNewPackage(driver);
+        packages.createPackage_happyPath("Test15", "Demo");
+        packageLine.clickNewPackageLine(driver);
+        packageLine.createPackageLine_whereAppliedDateIsEmpty("Test15", "00:00", "01:00", "25");
+        String message = packageLine.readErrorMessage2(driver);
+        //then
+        Assert.assertEquals(message, expectedMessage);
+        packageLine.closeWindow(driver);
+        Thread.sleep(3000);
+    }
+
+    @Test(priority = 13, description = "Package_Line")
+    @Severity(SeverityLevel.NORMAL)
+    @Description("Test Description:For package where hn__Multi_Days__c == false," +
+            " create Package line:thn__AppliedDay__c !== null")
+    @Story("")
+    public void testCreateNewPackageLine2() throws InterruptedException {
+        //given
+        String expectedMessage = "Applied Day must be left empty when a package is Multi days";
+        //when
+        String text = "Packages";
+        packages.goToPackages();
+        packages.clickNewPackage(driver);
+        packages.createPackage_happyPath2("Test15", "Demo");
+        packageLine.clickNewPackageLine(driver);
+        packageLine.createPackageLine_whereAppliedDateIsNotEmpty
+                ("Test15", "00:00", "01:00", "25", "20");
+        String message = packageLine.readErrorMessage2(driver);
+        //then
+        Assert.assertEquals(message, expectedMessage);
+        packageLine.closeWindow(driver);
+    }
+
 
 
 

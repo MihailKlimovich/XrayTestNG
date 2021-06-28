@@ -29,7 +29,7 @@ public class BasePage {
     public BasePage(WebDriver driver){
         this.driver = driver;
         wait1 = new WebDriverWait(driver, 60);
-        wait2 = new WebDriverWait(driver, 360);
+        wait2 = new WebDriverWait(driver, 10);
         waitForTests = new FluentWait(this.driver)
                 .withTimeout(Duration.ofSeconds(2))
                 .pollingEvery(Duration.ofSeconds(5));
@@ -65,6 +65,8 @@ public class BasePage {
         }
     }
 
+
+
     //Double click
     public void doubleClick(By elementLocation) {
         Actions action = new Actions(driver);
@@ -96,6 +98,24 @@ public class BasePage {
             System.out.println("CheckBox "+(elementLocation)+" is selected");
         }
     }
+    public void click2(By elementLocation) throws InterruptedException {
+        JavascriptExecutor executor = (JavascriptExecutor) driver;
+        int attempts = 0;
+        while (attempts < 2) {
+            try {
+                waitForTests.until(visibilityOfElementLocated(elementLocation));
+                driver.findElement(elementLocation).click();
+                System.out.println(" Click  "+(elementLocation));
+                break;
+            }
+            catch (Exception e){
+                System.out.println("Element is not available to click : "+elementLocation);
+                e.printStackTrace();
+            }
+            attempts++;
+        }
+    }
+
 
     /** Buttons  Methods*/
     @Step("Press Backspace")

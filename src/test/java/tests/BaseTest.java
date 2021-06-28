@@ -28,6 +28,8 @@ public class BaseTest {
     protected DeveloperConsoleWindow developerConsoleWindow;
     protected CreditNoteLine creditNoteLine;
     protected MyceQuotes myceQuotes;
+    protected Packages packages;
+    protected PackageLine packageLine;
 
     public WebDriver getDriver() {
         return driver;
@@ -49,9 +51,9 @@ public class BaseTest {
         options.addArguments("--disable-gpu");
         options.addArguments("--disable-extensions");
         options.addArguments("--disable-dev-shm-usage");
-        options.addArguments("user-data-dir=/tmp/temp_profile");
+        //options.addArguments("user-data-dir=/tmp/temp_profile");
         options.addArguments(" --whitelisted-ips=\"\"");
-        options.addArguments("--headless", "window-size=1920,1024", "--no-sandbox");
+        //options.addArguments("--headless", "window-size=1920,1024", "--no-sandbox");
         driver = new ChromeDriver(options);
         driver.manage().deleteAllCookies();
         driver.manage().window().maximize();
@@ -71,16 +73,18 @@ public class BaseTest {
         accounts = new AccountsPage(driver);
         creditNoteLine = new CreditNoteLine(driver);
         myceQuotes = new MyceQuotes(driver);
+        packages = new Packages(driver);
+        packageLine = new PackageLine(driver);
     }
 
-    @AfterClass
+    /*@AfterClass
     public void teardown(){
         driver.close();
         driver.quit();
         if (driver != null) {
             driver = null;
         }
-   }
+   }*/
 
     //Successfully set the password "PWBgjUWd26#s|" for user test-unbuxpim9tgh@example.com.
     //Successfully set the password "vt*P7[VrGp&]P" for user test-6epicstbdzhd@example.com.

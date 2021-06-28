@@ -1,1 +1,13 @@
-2021-06-24 10:41:02,027 INFO  - deleteOldData test is starting.
+2021-06-28 17:27:22,325 INFO  - testLogIn test is starting.
+2021-06-28 17:27:24,366 INFO  - settingUpValidationRules test is starting.
+2021-06-28 17:28:10,480 INFO  - testCreateNewMyceQuote1 test is starting.
+2021-06-28 17:28:20,079 INFO  - testCreateNewMyceQuote2 test is starting.
+2021-06-28 17:28:24,371 INFO  - testCreateNewMyceQuote3 test is starting.
+2021-06-28 17:28:27,388 INFO  - testCreateNewMyceQuote4 test is starting.
+2021-06-28 17:28:30,700 INFO  - testCreateNewMyceQuote5 test is starting.
+2021-06-28 17:28:34,949 INFO  - testCreateNewMyceQuote6 test is starting.
+2021-06-28 17:28:37,834 INFO  - testChangeMyceQuote1 test is starting.
+2021-06-28 17:28:45,755 INFO  - testChangeMyceQuote2 test is starting.
+2021-06-28 17:29:21,339 INFO  - testCreateNewCreditNoteLine test is starting.
+2021-06-28 17:29:31,624 INFO  - testCreateNewPackageLine test is starting.
+2021-06-28 17:29:50,124 INFO  - testCreateNewPackageLine2 test is starting.
