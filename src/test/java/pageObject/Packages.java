@@ -13,7 +13,7 @@ public class Packages extends BasePage {
         super(driver);
     }
 
-    By NEW_PACKAGE = By.xpath("//div[@class='windowViewMode-normal oneContent active lafPageHost']//div[@title='New']");
+    By NEW_PACKAGE = By.xpath("//span[text()='Packages']/following::div[@title='New']");
     By NAME_FIELD = By.xpath("//div//input[@name='Name']");
     By PROPERTY_FIELD = By.xpath("//label[text()='Property']/following-sibling::div//input");
     By PROPERTY_TYPE_DEMO = By.xpath("//div//lightning-base-combobox-formatted-text[@title='Demo']");
@@ -42,9 +42,9 @@ public class Packages extends BasePage {
     ) throws InterruptedException {
         wait1.until(ExpectedConditions.presenceOfElementLocated(NAME_FIELD));
         writeText(NAME_FIELD, (name));
-        wait1.until(ExpectedConditions.presenceOfElementLocated(PROPERTY_FIELD));
+        wait1.until(ExpectedConditions.presenceOfElementLocated(PROPERTY_FIELD)).click();
         writeText(PROPERTY_FIELD, property);
-        wait1.until(ExpectedConditions.presenceOfElementLocated(PROPERTY_TYPE_DEMO)).click();
+        wait1.until(ExpectedConditions.visibilityOfElementLocated(PROPERTY_TYPE_DEMO)).click();
         wait1.until(ExpectedConditions.presenceOfElementLocated(MULTI_DAYS_RADIO_BUTTON)).click();
         wait1.until(ExpectedConditions.elementToBeClickable(SAVE_BUTTON)).click();
     }
@@ -56,9 +56,10 @@ public class Packages extends BasePage {
     ) throws InterruptedException {
         wait1.until(ExpectedConditions.presenceOfElementLocated(NAME_FIELD));
         writeText(NAME_FIELD, (name));
-        wait1.until(ExpectedConditions.presenceOfElementLocated(PROPERTY_FIELD));
+        wait1.until(ExpectedConditions.presenceOfElementLocated(PROPERTY_FIELD)).click();
         writeText(PROPERTY_FIELD, property);
-        wait1.until(ExpectedConditions.presenceOfElementLocated(PROPERTY_TYPE_DEMO)).click();
+        click2(PROPERTY_FIELD);
+        wait1.until(ExpectedConditions.visibilityOfElementLocated(PROPERTY_TYPE_DEMO)).click();
         wait1.until(ExpectedConditions.elementToBeClickable(SAVE_BUTTON)).click();
     }
 

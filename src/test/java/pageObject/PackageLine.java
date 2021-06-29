@@ -23,7 +23,7 @@ public class PackageLine extends BasePage {
     By VAT_CATEGORY_FIELD = By.xpath("//span//label[text()='VAT Category']");
     By VAT_CATEGORY_TYPE = By.xpath("//div//span[@title='1']");
     By SAVE_BUTTON = By.xpath("//div[@class='isModal inlinePanel oneRecordActionWrapper']//button[@name='SaveEdit']");
-    By NEW_PACKAGE_LINE_BUTTON = By.xpath("//div[@class='windowViewMode-normal oneContent active lafPageHost']//article//button[@name='New']");
+    By NEW_PACKAGE_LINE_BUTTON = By.xpath("//span[text()='Package Lines']/following::button[@name='New']");
     By MESSAGE_ERROR_TEXT = By.xpath("//div[@class='container']//li");
     By CLOSE_WINDOW_BUTTON = By.xpath("//div[@class='modal-container slds-modal__container']//button[@title='Close this window']");
     By APPLIED_DAY_FIELD = By.xpath("//label[text()='Applied Day']/following-sibling::div//input");
