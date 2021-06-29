@@ -181,6 +181,7 @@ public class ValidationRuleTest extends BaseTest{
         myceQuotes.changeCloseStatus(driver);
         myceQuotes.clickSave(driver);
         String message = myceQuotes.readErrorMessage(driver);
+        System.out.println("DEBUG " + message);
         //then
         Assert.assertEquals(message, expectedMessage);
         myceQuotes.closeWindow(driver);
