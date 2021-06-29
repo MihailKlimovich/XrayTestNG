@@ -10,6 +10,8 @@ import org.testng.annotations.Test;
 import pageObject.CreditNoteLine;
 import utils.Listeners.TestListener;
 
+import java.io.IOException;
+
 @Listeners({TestListener.class})
 
 public class ValidationRuleTest extends BaseTest{
@@ -28,13 +30,10 @@ public class ValidationRuleTest extends BaseTest{
     @Severity(SeverityLevel.NORMAL)
     @Description("Setup.thn__ByPass__c.thn__ByPassVR__c == false and User.thn__ByPassVR__c == false")
     @Story("Settings")
-    public void settingUpValidationRules() throws InterruptedException {
+    public void settingUpValidationRules() throws InterruptedException, IOException {
         developerConsoleWindow.openDeveloperConsole();
         developerConsoleWindow.openExecuteAnonymousWindow();
-        developerConsoleWindow.runApexCode("  update new User(Id = UserInfo.getUserId(),thn__ByPassVR__c = false);\n" +
-                "thn__bypass__c bp = [SELECT Id, thn__bypassvr__c FROM thn__bypass__c];\n" +
-                "bp.thn__bypassvr__c = false;\n" +
-                "update bp;" );
+        developerConsoleWindow.runApexCodeFromFile("src/main/Data/ValidationRule1");
         Thread.sleep(5000);
     }
 
