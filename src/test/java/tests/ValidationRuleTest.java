@@ -183,7 +183,7 @@ public class ValidationRuleTest extends BaseTest{
         String message = myceQuotes.readErrorMessage(driver);
         //then
         Assert.assertEquals(message, expectedMessage);
-        //myceQuotes.closeWindow(driver);
+        myceQuotes.closeWindow(driver);
     }
 
     @Test(priority = 11, description = "Invoice_Line_Validation")
