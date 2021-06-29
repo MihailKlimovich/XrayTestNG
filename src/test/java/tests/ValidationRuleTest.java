@@ -203,7 +203,7 @@ public class ValidationRuleTest extends BaseTest{
         String message = creditNoteLine.readErrorMessage2(driver);
         //then
         Assert.assertEquals(message, expectedMessage);
-        //creditNoteLine.closeWindow(driver);
+        creditNoteLine.closeWindow(driver);
     }
 
     @Test(priority = 12, description = "Package_Line")
