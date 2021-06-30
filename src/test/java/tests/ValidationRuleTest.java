@@ -104,7 +104,7 @@ public class ValidationRuleTest extends BaseTest{
         //when
         myceQuotes.createNewMyceQuote(driver);
         myceQuotes.fillOutTheQuotaFormWithoutCommission
-                ("Test1508", date.generateTodayDate(), date.generateDate_ddMMyyyy(1, 1),
+                ("Test1508", date.generateTodayDate(), date.generateDate_minus(1, 1),
                         "123", "test");
         String message = myceQuotes.readErrorMessage2(driver);
         //then
@@ -251,6 +251,129 @@ public class ValidationRuleTest extends BaseTest{
         //then
         Assert.assertEquals(message, expectedMessage);
         packageLine.closeWindow(driver);
+        Thread.sleep(3000);
+    }
+
+    @Test(priority = 14, description = "Package_Line")
+    @Severity(SeverityLevel.NORMAL)
+    @Description("Create package line where Property  ‘A' for Package with Property 'B’")
+    @Story("")
+    public void testCreateNewPackageLine3() throws InterruptedException {
+        //given
+        String expectedMessage = "Product";
+        //when
+        String text = "Property";
+        packages.goToPackages();
+        Thread.sleep(3000);
+        packages.clickNewPackage(driver);
+        packages.createPackage_happyPath3("Test15", "Test");
+        packageLine.clickNewPackageLine(driver);
+        packageLine.createPackageLine_whereAppliedDateIsEmpty("Test15", "00:00", "01:00", "25");
+        String message = packageLine.readErrorMessage2(driver);
+        //then
+        Assert.assertEquals(message, expectedMessage);
+        packageLine.closeWindow(driver);
+    }
+
+    @Test(priority = 15, description = "Quote_Hotel_Room")
+    @Severity(SeverityLevel.NORMAL)
+    @Description("Add Quote hotel room on MYCE Quote where thn__Arrival_Date_Time__c > thn__Departure_Date_Time__c")
+    @Story("")
+    public void testCreateQuoteHotelRoom() throws InterruptedException {
+        String expectedMessage = "Arrival Date time cannot be after Departure Date time";
+        //when
+        String text = "MYCE Quotes";
+        homePageForScratchOrg.openAppLauncher(driver);
+        homePageForScratchOrg.sendTextInAppWindow(driver, text);
+        myceQuotes.createNewMyceQuote(driver);
+        myceQuotes.createMyceQuote_happyPath2
+                ("Test111", date.generateDate_plus(1, 3), date.generateDate_plus(1, 3), "3", "Demo");
+        myceQuotes.openHotelRooms(driver);
+        quoteHotelRoom.createHotelRoom
+                (  date.generateDate_plus(1, 3), "19:00", date.generateDate_plus(1, 3), "10:00");
+        String errormessage = quoteHotelRoom.readErrorMessage3(driver);
+        //then
+        Assert.assertEquals(errormessage, expectedMessage);
+        quoteHotelRoom.closeWindow(driver);
+    }
+
+    @Test(priority = 16, description = "Quote_Hotel_Room")
+    @Severity(SeverityLevel.NORMAL)
+    @Description("Add Quote hotel room on MYCE Quote where thn__Arrival_Date_Time__c < thn__MYCE_Quote__r.thn__Arrival_Date__c")
+    @Story("")
+    public void testCreateQuoteHotelRoom2() throws InterruptedException {
+        String expectedMessage = "Arrival and Departure date of hotel room must be within Quote arrival and departure dates";
+        //when
+        myceQuotes.openHotelRooms(driver);
+        quoteHotelRoom.createHotelRoom
+                (  date.generateDate_plus(1, 2), "10:00", date.generateDate_plus(1, 3), "19:00");
+        String errormessage = quoteHotelRoom.readErrorMessage2(driver);
+        //then
+        Assert.assertEquals(errormessage, expectedMessage);
+        quoteHotelRoom.closeWindow(driver);
+    }
+
+    @Test(priority = 17, description = "Quote_Hotel_Room")
+    @Severity(SeverityLevel.NORMAL)
+    @Description("Add Quote hotel room on MYCE Quote where thn__Arrival_Date_Time__c >  thn__MYCE_Quote__r.thn__Departure_Date__c")
+    @Story("")
+    public void testCreateQuoteHotelRoom3() throws InterruptedException {
+        String expectedMessage = "Arrival and Departure date of hotel room must be within Quote arrival and departure dates";
+        //when
+        myceQuotes.openHotelRooms(driver);
+        quoteHotelRoom.createHotelRoom
+                (  date.generateDate_plus(1, 4), "10:00", date.generateDate_plus(1, 2), "19:00");
+        String errormessage = quoteHotelRoom.readErrorMessage2(driver);
+        //then
+        Assert.assertEquals(errormessage, expectedMessage);
+        quoteHotelRoom.closeWindow(driver);
+    }
+
+    @Test(priority = 18, description = "Quote_Hotel_Room")
+    @Severity(SeverityLevel.NORMAL)
+    @Description("Add Quote hotel room on MYCE Quote where thn__Departure_Date_Time__c <  thn__MYCE_Quote__r.thn__Arrival_Date__c")
+    @Story("")
+    public void testCreateQuoteHotelRoom4() throws InterruptedException {
+        String expectedMessage = "Arrival and Departure date of hotel room must be within Quote arrival and departure dates";
+        //when
+        myceQuotes.openHotelRooms(driver);
+        quoteHotelRoom.createHotelRoom
+                (  date.generateDate_plus(1, 3), "10:00", date.generateDate_plus(1, 2), "19:00");
+        String errormessage = quoteHotelRoom.readErrorMessage2(driver);
+        //then
+        Assert.assertEquals(errormessage, expectedMessage);
+        quoteHotelRoom.closeWindow(driver);
+    }
+
+    @Test(priority = 19, description = "Quote_Hotel_Room")
+    @Severity(SeverityLevel.NORMAL)
+    @Description("Add Quote hotel room on MYCE Quote where thn__Departure_Date_Time__c > thn__MYCE_Quote__r.thn__Departure_Date__c")
+    @Story("")
+    public void testCreateQuoteHotelRoom5() throws InterruptedException {
+        String expectedMessage = "Arrival and Departure date of hotel room must be within Quote arrival and departure dates";
+        //when
+        myceQuotes.openHotelRooms(driver);
+        quoteHotelRoom.createHotelRoom
+                (  date.generateDate_plus(1, 3), "10:00", date.generateDate_plus(1, 4), "19:00");
+        String errormessage = quoteHotelRoom.readErrorMessage2(driver);
+        //then
+        Assert.assertEquals(errormessage, expectedMessage);
+        quoteHotelRoom.closeWindow(driver);
+    }
+
+    @Test(priority = 20, description = "Quote_Hotel_Room")
+    @Severity(SeverityLevel.NORMAL)
+    @Description("Add Quote hotel room on MYCE Quote where thn__Pax__c > thn__MYCE_Quote__r.thn__Pax__c")
+    @Story("")
+    public void testCreateQuoteHotelRoom6() throws InterruptedException {
+        String expectedMessage = "Number";
+        //when
+        myceQuotes.openHotelRooms(driver);
+        quoteHotelRoom.createHotelRoom2("4");
+        String errormessage = quoteHotelRoom.readErrorMessage2(driver);
+        //then
+        Assert.assertEquals(errormessage, expectedMessage);
+        quoteHotelRoom.closeWindow(driver);
     }
 
 

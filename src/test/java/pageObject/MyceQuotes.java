@@ -28,6 +28,7 @@ public class MyceQuotes extends BasePage{
     By COMMISSION_TYPE_NONE = By.xpath("//span[@title='--None--']");
     By COMMISSION_TYPE_COMPANY = By.xpath("//span[@title='Company']");
     By PROPERTY_TYPE_TEST = By.xpath("//div//lightning-base-combobox-formatted-text[@title='test']");
+    By PROPERTY_TYPE_DEMO = By.xpath("//div//lightning-base-combobox-formatted-text[@title='Demo']");
     By MESSAGE_TEXT = By.xpath("//div[@class='container']//h2");
     By CLOSE_WINDOW_BUTTON = By.xpath("//div[@class='modal-container slds-modal__container']//button[@title='Close this window']");
     By COMMISSION_TYPE_AGENT = By.xpath("//span[@title='Agent']");
@@ -44,6 +45,7 @@ public class MyceQuotes extends BasePage{
             xpath("//div[@class='isModal inlinePanel oneRecordActionWrapper']//input[@name='thn__Is_Confirmed__c']");
     By CLOSED_STATUS_FIELD = By.xpath("//span//label[text()='Closed Status']");
     By CLOSED_STATUS_TYPE_CANCELLED = By.xpath("//span[@title='Cancelled']");
+    By HOTEL_ROOM = By.xpath("//span[@title = 'Hotel Rooms']");
 
 
 
@@ -227,6 +229,30 @@ public class MyceQuotes extends BasePage{
         wait1.until(ExpectedConditions.elementToBeClickable(SAVE_BUTTON)).click();
     }
 
+    @Step("Fill out the quota form without commission")
+    public void createMyceQuote_happyPath2(
+            String nameQuote,
+            String arrivalDate,
+            String departureDate,
+            String pax,
+            String property
+    ) throws InterruptedException {
+        writeText(NAME_QUOTE_FIELD, (nameQuote));
+        click(ARRIVAL_DATA_FIELD);
+        writeText(ARRIVAL_DATA_FIELD, (arrivalDate));
+        click(DEPARTURE_DATA_FIELD);
+        writeText(DEPARTURE_DATA_FIELD, (departureDate));
+        click(PAX_FIELD);
+        writeText(PAX_FIELD, (pax));
+        scrollToElement(PROPERTY_FIELD);
+        wait1.until(ExpectedConditions.presenceOfElementLocated(PROPERTY_FIELD)).click();
+        writeText(PROPERTY_FIELD, (property));
+        click(PROPERTY_TYPE_DEMO);
+        wait1.until(ExpectedConditions.elementToBeClickable(SAVE_BUTTON)).click();
+    }
+
+
+
     @Step("Click Edit")
     public void clickEdit(WebDriver driver) throws InterruptedException {
         wait1.until(ExpectedConditions.elementToBeClickable(EDIT_BUTTON)).click();
@@ -256,6 +282,11 @@ public class MyceQuotes extends BasePage{
         wait1.until(ExpectedConditions.presenceOfElementLocated(IS_CONFIRMED_RADIO_BUTTON)).click();
     }
 
+    @Step("Click Is Confirmed radio button")
+    public void openHotelRooms(WebDriver driver){
+        wait1.until(ExpectedConditions.presenceOfElementLocated(HOTEL_ROOM)).click();
+    }
+
 
 
     @Step("Read error message 1")
@@ -272,6 +303,14 @@ public class MyceQuotes extends BasePage{
     public void closeWindow(WebDriver driver){
         wait1.until(ExpectedConditions.elementToBeClickable(CLOSE_WINDOW_BUTTON)).click();
     }
+
+    @Step("Refresh page")
+    public void refreshPage(WebDriver driver){
+        refreshPage(driver);
+    }
+
+
+
 
 
 

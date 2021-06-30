@@ -19,7 +19,7 @@ public class CreditNoteLine extends BasePage {
 
     By NEW_CREDIT_NOTE_LINE_BUTTON = By.xpath("//div[@class='windowViewMode-maximized oneContent active lafPageHost']//a[@title='New']");
     By CREDIT_NOTE_FIELD = By.xpath("//div[@class='slds-form']//label[text()='Credit Note']");
-    By NEW_CREDIT_NOTE_BUTTON = By.xpath("//div//span[@title='New Credit Note']");
+    By NEW_CREDIT_NOTE_BUTTON = By.xpath("//label[text()='Credit Note']/following-sibling::div//span[@title='New Credit Note']");
     By SAVE_BUTTON_NEW_CREDIT_NOTE = By.xpath("//div[@class='modal-footer slds-modal__footer']//span[text()='Save']");
     By VAT_FIELD = By.xpath("//div[@class='slds-form']//label[text()='VAT %']/following-sibling::div//input");
     By VAT_CATEGORY = By.xpath("//div[@class='slds-form']//label[text()='VAT Category']");

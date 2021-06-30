@@ -28,12 +28,22 @@ public class Dates {
         return todayDate2;
     }
 
-    public String generateDate_ddMMyyyy(Integer Month, Integer Day){
+    public String generateDate_minus(Integer Month, Integer Day){
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
         Calendar c = Calendar.getInstance();
         c.setTime(new Date());
         c.add(Calendar.DAY_OF_MONTH, - Month);
         c.add(Calendar.DAY_OF_WEEK, - Day);
+        String Res = format.format(c.getTime());
+        return Res;
+    }
+
+    public String generateDate_plus(Integer Month, Integer Day){
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        Calendar c = Calendar.getInstance();
+        c.setTime(new Date());
+        c.add(Calendar.DAY_OF_MONTH, + Month);
+        c.add(Calendar.DAY_OF_WEEK, + Day);
         String Res = format.format(c.getTime());
         return Res;
     }
