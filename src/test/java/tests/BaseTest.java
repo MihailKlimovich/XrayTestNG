@@ -32,6 +32,7 @@ public class BaseTest {
     protected PackageLine packageLine;
     protected Products products;
     protected QuoteHotelRoom quoteHotelRoom;
+    protected QuoteMeetingRoom quoteMeetingRoom;
 
     public WebDriver getDriver() {
         return driver;
@@ -79,6 +80,7 @@ public class BaseTest {
         packageLine = new PackageLine(driver);
         products = new Products(driver);
         quoteHotelRoom = new QuoteHotelRoom(driver);
+        quoteMeetingRoom = new QuoteMeetingRoom(driver);
 
     }
 
@@ -91,8 +93,6 @@ public class BaseTest {
         }
    }
 
-    //Successfully set the password "PWBgjUWd26#s|" for user test-unbuxpim9tgh@example.com.
-    //Successfully set the password "vt*P7[VrGp&]P" for user test-6epicstbdzhd@example.com.
 
 
 

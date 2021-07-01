@@ -46,6 +46,7 @@ public class MyceQuotes extends BasePage{
     By CLOSED_STATUS_FIELD = By.xpath("//span//label[text()='Closed Status']");
     By CLOSED_STATUS_TYPE_CANCELLED = By.xpath("//span[@title='Cancelled']");
     By HOTEL_ROOM = By.xpath("//span[@title = 'Hotel Rooms']");
+    By MEETING_ROOM = By.xpath("//span[@title = 'Meeting Rooms']");
 
 
 
@@ -282,9 +283,14 @@ public class MyceQuotes extends BasePage{
         wait1.until(ExpectedConditions.presenceOfElementLocated(IS_CONFIRMED_RADIO_BUTTON)).click();
     }
 
-    @Step("Click Is Confirmed radio button")
+    @Step("Open Hotel Rooms")
     public void openHotelRooms(WebDriver driver){
         wait1.until(ExpectedConditions.presenceOfElementLocated(HOTEL_ROOM)).click();
+    }
+
+    @Step("Open Meeting Rooms")
+    public void openMeetingRooms(WebDriver driver){
+        wait1.until(ExpectedConditions.presenceOfElementLocated(MEETING_ROOM)).click();
     }
 
 
