@@ -32,7 +32,7 @@ public class PackageLine extends BasePage {
 
     @Step("Click new Package Line")
     public void clickNewPackageLine(WebDriver driver) throws InterruptedException {
-        Thread.sleep(5000);
+        Thread.sleep(2000);
         wait1.until(ExpectedConditions.presenceOfElementLocated(NEW_PACKAGE_LINE_BUTTON));
         click2(NEW_PACKAGE_LINE_BUTTON);
     }

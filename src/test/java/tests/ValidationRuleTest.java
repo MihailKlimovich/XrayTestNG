@@ -216,7 +216,6 @@ public class ValidationRuleTest extends BaseTest{
         //given
         String expectedMessage = "Applied Day is required when a package is Multi days";
         //when
-        String text = "Packages";
         packages.goToPackages();
         Thread.sleep(3000);
         packages.clickNewPackage(driver);
@@ -239,7 +238,6 @@ public class ValidationRuleTest extends BaseTest{
         //given
         String expectedMessage = "Applied Day must be left empty when a package is Multi days";
         //when
-        String text = "Packages";
         packages.goToPackages();
         Thread.sleep(3000);
         packages.clickNewPackage(driver);
@@ -262,7 +260,6 @@ public class ValidationRuleTest extends BaseTest{
         //given
         String expectedMessage = "Product";
         //when
-        String text = "Property";
         packages.goToPackages();
         Thread.sleep(3000);
         packages.clickNewPackage(driver);

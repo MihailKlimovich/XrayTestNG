@@ -31,7 +31,7 @@ public class Packages extends BasePage {
 
     @Step("Click new Package")
     public void clickNewPackage(WebDriver driver) throws InterruptedException {
-        Thread.sleep(5000);
+        Thread.sleep(2000);
         wait1.until(ExpectedConditions.presenceOfElementLocated(NEW_PACKAGE));
         click2(NEW_PACKAGE);
     }
@@ -73,7 +73,7 @@ public class Packages extends BasePage {
         writeText(NAME_FIELD, (name));
         wait1.until(ExpectedConditions.presenceOfElementLocated(PROPERTY_FIELD)).click();
         writeText(PROPERTY_FIELD, property);
-        Thread.sleep(1000);
+        click2(PROPERTY_FIELD);
         wait1.until(ExpectedConditions.visibilityOfElementLocated(PROPERTY_TYPE_TEST)).click();
         wait1.until(ExpectedConditions.elementToBeClickable(SAVE_BUTTON)).click();
     }
