@@ -39,6 +39,7 @@ public class CreditNoteLine extends BasePage {
     @Step ("Fill out the new credit note line where Invoice Line == null & Amount == null & Quantity == null")
     public void fillOutNewCreditNoteLineForm(WebDriver driver, String vat) throws InterruptedException {
         wait1.until(ExpectedConditions.presenceOfElementLocated(CREDIT_NOTE_FIELD)).click();
+        Thread.sleep(2000);
         wait1.until(ExpectedConditions.elementToBeClickable(NEW_CREDIT_NOTE_BUTTON)).click();
          wait1.until(ExpectedConditions.elementToBeClickable(SAVE_BUTTON_NEW_CREDIT_NOTE)).click();
          wait1.until(ExpectedConditions.presenceOfElementLocated(VAT_FIELD));

@@ -73,6 +73,7 @@ public class Packages extends BasePage {
         writeText(NAME_FIELD, (name));
         wait1.until(ExpectedConditions.presenceOfElementLocated(PROPERTY_FIELD)).click();
         writeText(PROPERTY_FIELD, property);
+        Thread.sleep(1000);
         wait1.until(ExpectedConditions.visibilityOfElementLocated(PROPERTY_TYPE_TEST)).click();
         wait1.until(ExpectedConditions.elementToBeClickable(SAVE_BUTTON)).click();
     }
