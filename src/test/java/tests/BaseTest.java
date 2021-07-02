@@ -33,6 +33,7 @@ public class BaseTest {
     protected Products products;
     protected QuoteHotelRoom quoteHotelRoom;
     protected QuoteMeetingRoom quoteMeetingRoom;
+    protected QuoteMeetingPackages quoteMeetingPackages;
 
     public WebDriver getDriver() {
         return driver;
@@ -81,6 +82,7 @@ public class BaseTest {
         products = new Products(driver);
         quoteHotelRoom = new QuoteHotelRoom(driver);
         quoteMeetingRoom = new QuoteMeetingRoom(driver);
+        quoteMeetingPackages = new QuoteMeetingPackages(driver);
 
     }
 

@@ -30,9 +30,17 @@ public class QuoteMeetingRoom extends BasePage {
     By SETUP_TYPE_USHAPE = By.xpath("//span[@title='U-Shape']");
     By RESOURCE_FIELD = By.xpath("//slot//label[text()='Resource']/following-sibling::div//input");
     By RESOURCE_TYPE_TESTRES = By.xpath("//span[@title='TestRes']");
+    By MESSAGE_ERROR_TEXT = By.xpath("//div[@class='container']//li");
+    By CLOSE_WINDOW_BUTTON = By.
+            xpath("//div[@class='modal-container slds-modal__container']//button[@title='Close this window']");
+    By PAX_FIELD = By.xpath("//div//input[@name='thn__Pax__c']");
+    By EDIT_BUTTON = By.xpath("//div[text()='Quote Meetings Room']/following::button[@name='Edit']");
+    By LOCK_RESOURCE_CHECKBOX = By.
+            xpath("//div[@class='isModal inlinePanel oneRecordActionWrapper']//div//input[@name = 'thn__Lock_Resource__c']");
+
 
     @Step("Fill out the meeting room")
-    public void createMeetingRoom() throws InterruptedException {
+    public void createMeetingRoom(String pax) throws InterruptedException {
         wait1.until(ExpectedConditions.elementToBeClickable(NEW_MEETING_ROOM)).click();
         Thread.sleep(2000);
         wait1.until(ExpectedConditions.presenceOfElementLocated(PRODUCT_FIELD)).click();
@@ -41,7 +49,34 @@ public class QuoteMeetingRoom extends BasePage {
         wait1.until(ExpectedConditions.presenceOfElementLocated(RESOURCE_TYPE_TESTRES)).click();
         wait1.until(ExpectedConditions.presenceOfElementLocated(SETUP_FIELD)).click();
         wait1.until(ExpectedConditions.presenceOfElementLocated(SETUP_TYPE_BUFFET)).click();
+        wait1.until(ExpectedConditions.presenceOfElementLocated(PAX_FIELD)).click();
+        writeText(PAX_FIELD, pax);
         wait1.until(ExpectedConditions.presenceOfElementLocated(SAVE_BUTTON)).click();
+    }
+
+    @Step("Change resource when Lock Resource is true")
+    public void  changeResource(){
+        wait1.until(ExpectedConditions.presenceOfElementLocated(EDIT_BUTTON)).click();
+        wait1.until(ExpectedConditions.presenceOfElementLocated(LOCK_RESOURCE_CHECKBOX)).click();
+        wait1.until(ExpectedConditions.presenceOfElementLocated(RESOURCE_FIELD)).click();
+        delete();
+        wait1.until(ExpectedConditions.presenceOfElementLocated(SAVE_BUTTON)).click();
+    }
+
+    public void changeSetupType(String type){
+        wait1.until(ExpectedConditions.presenceOfElementLocated(SETUP_FIELD)).click();
+        wait1.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[@title='" + type + "']"))).click();
+        wait1.until(ExpectedConditions.presenceOfElementLocated(SAVE_BUTTON)).click();
+    }
+
+    @Step("Read error message 2")
+    public String readErrorMessage2(WebDriver driver) throws InterruptedException {
+        return readRecalculateMessage(MESSAGE_ERROR_TEXT);
+    }
+
+    @Step("Close window")
+    public void closeWindow(WebDriver driver){
+        wait1.until(ExpectedConditions.elementToBeClickable(CLOSE_WINDOW_BUTTON)).click();
     }
 
 

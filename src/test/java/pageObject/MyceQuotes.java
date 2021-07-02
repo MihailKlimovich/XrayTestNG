@@ -47,6 +47,7 @@ public class MyceQuotes extends BasePage{
     By CLOSED_STATUS_TYPE_CANCELLED = By.xpath("//span[@title='Cancelled']");
     By HOTEL_ROOM = By.xpath("//span[@title = 'Hotel Rooms']");
     By MEETING_ROOM = By.xpath("//span[@title = 'Meeting Rooms']");
+    By MEETING_PACKAGES = By.xpath("//span[@title = 'Meeting Packages']");
 
 
 
@@ -293,7 +294,10 @@ public class MyceQuotes extends BasePage{
         wait1.until(ExpectedConditions.presenceOfElementLocated(MEETING_ROOM)).click();
     }
 
-
+    @Step("Open Meeting Packages")
+    public void openMeetingPackages(){
+        wait1.until(ExpectedConditions.presenceOfElementLocated(MEETING_PACKAGES)).click();
+    }
 
     @Step("Read error message 1")
     public String readErrorMessage(WebDriver driver) throws InterruptedException {
