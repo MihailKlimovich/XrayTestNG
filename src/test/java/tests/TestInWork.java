@@ -8,9 +8,13 @@ import io.qameta.allure.Story;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+
+
 import java.io.IOException;
 
 public class TestInWork extends BaseTest{
+
+
 
     @Test(priority = 1, description = "Quote_Meetings_Room")
     @Severity(SeverityLevel.NORMAL)
@@ -21,9 +25,9 @@ public class TestInWork extends BaseTest{
         //when
         String text = "MYCE Quotes";
         loginPageForScratchOrg.logInOnScratchOrg(driver);
-        developerConsoleWindow.openDeveloperConsole();
-        developerConsoleWindow.openExecuteAnonymousWindow();
-        developerConsoleWindow.runApexCodeFromFile("src/main/Data/Resource");
+        //developerConsoleWindow.openDeveloperConsole();
+        //developerConsoleWindow.openExecuteAnonymousWindow();
+        //developerConsoleWindow.runApexCodeFromFile("src/main/Data/Resource");
         homePageForScratchOrg.openAppLauncher(driver);
         homePageForScratchOrg.sendTextInAppWindow(driver, text);
         myceQuotes.createNewMyceQuote(driver);
@@ -67,28 +71,32 @@ public class TestInWork extends BaseTest{
         //Then
         Assert.assertEquals(expectedMessage, myceQuotes.readErrorMessage2(driver));
         quoteMeetingRoom.closeWindow(driver);
+        Thread.sleep(2000);
     }
 
-    @Test(priority = 2, description = "Quote_Meetings_Room")
+
+    @Test(priority = 3, description = "Quote_Meetings_Room")
     @Severity(SeverityLevel.NORMAL)
-    @Description("Lock_Resource")
+    @Description("PackageDate")
     @Story("")
     public void testCreateQuoteMeetingsRoom3() throws InterruptedException, IOException {
-        String expectedMessage = "Resource";
+        String expectedMessage = "Date cannot be changed if Meeting room is part of package";
         //when
         String text = "MYCE Quotes";
-        myceQuotes.openMeetingRooms(driver);
-        quoteMeetingRoom.createMeetingRoom("4");
-        quoteMeetingRoom.changeResource();
-        //Then
-        Assert.assertEquals(expectedMessage, myceQuotes.readErrorMessage2(driver));
-        quoteMeetingRoom.closeWindow(driver);
         homePageForScratchOrg.openAppLauncher(driver);
         homePageForScratchOrg.sendTextInAppWindow(driver, text);
         myceQuotes.createNewMyceQuote(driver);
         myceQuotes.createMyceQuote_happyPath2
-                ("Test222", date.generateDate_plus(1, 3), date.generateDate_plus(1, 3), "4", "Demo");
-
+                ("Test222", date.generateTodayDate(), date.generateDate_plus(1, 3), "10", "Demo");
+        myceQuotes.openMeetingPackages(driver);
+        quoteMeetingPackages.createMeetingPackages("Package 1", date.generateTodayDate(), date.generateDate_plus(1, 3));
+        homePageForScratchOrg.goToMyceQuotePage();
+        myceQuotes.openMyceQoteRecord("Test222");
+        myceQuotes.openMeetingRooms(driver);
+        quoteMeetingRoom.editDate("DEFAULT - MEETING FULL DAY", date.generateDate_plus(1, 1));
+        //Then
+        Assert.assertEquals(expectedMessage, quoteMeetingRoom.readErrorMessage2(driver));
+        quoteMeetingRoom.closeWindow(driver);
 
     }
 

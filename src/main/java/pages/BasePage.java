@@ -37,9 +37,10 @@ public class BasePage {
 
     /**Navigation Methods*/
     @Step("Refresh Page")
-    public void refreshLoanPage() {
+    public void refreshPage() {
         driver.navigate().refresh();
     }
+
 
     /** Click Methods*/
     //Click

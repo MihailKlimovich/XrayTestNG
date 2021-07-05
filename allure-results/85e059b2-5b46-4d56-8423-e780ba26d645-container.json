@@ -1,0 +1,1 @@
+{"uuid":"85e059b2-5b46-4d56-8423-e780ba26d645","name":"tests.TestInWork","children":["3c29d122-2bd9-4de9-94df-10f8ec696277"],"befores":[{"name":"classLevelSetup","status":"passed","stage":"finished","description":"","steps":[],"attachments":[],"parameters":[],"start":1625496144797,"stop":1625496146088}],"afters":[],"links":[],"start":1625496144736,"stop":1625496167252}

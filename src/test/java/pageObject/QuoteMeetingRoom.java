@@ -37,6 +37,9 @@ public class QuoteMeetingRoom extends BasePage {
     By EDIT_BUTTON = By.xpath("//div[text()='Quote Meetings Room']/following::button[@name='Edit']");
     By LOCK_RESOURCE_CHECKBOX = By.
             xpath("//div[@class='isModal inlinePanel oneRecordActionWrapper']//div//input[@name = 'thn__Lock_Resource__c']");
+    By END_DATE_FIELD = By.xpath("//div//label[text()='Date']/following::input[@name='thn__End_Date_Time__c']");
+
+
 
 
     @Step("Fill out the meeting room")
@@ -51,6 +54,16 @@ public class QuoteMeetingRoom extends BasePage {
         wait1.until(ExpectedConditions.presenceOfElementLocated(SETUP_TYPE_BUFFET)).click();
         wait1.until(ExpectedConditions.presenceOfElementLocated(PAX_FIELD)).click();
         writeText(PAX_FIELD, pax);
+        wait1.until(ExpectedConditions.presenceOfElementLocated(SAVE_BUTTON)).click();
+    }
+
+    @Step("Edit date")
+    public void editDate(String record, String endDate){
+        wait1.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@title='" + record + "']"))).click();
+        wait1.until(ExpectedConditions.presenceOfElementLocated(EDIT_BUTTON)).click();
+        wait1.until(ExpectedConditions.presenceOfElementLocated(END_DATE_FIELD)).click();
+        clear(END_DATE_FIELD);
+        writeText(END_DATE_FIELD, endDate);
         wait1.until(ExpectedConditions.presenceOfElementLocated(SAVE_BUTTON)).click();
     }
 

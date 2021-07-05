@@ -14,7 +14,7 @@ public class MyceQuotes extends BasePage{
         super(driver);
     }
 
-    By NEW_MYCE_QUOTE_BUTTON = By.xpath("//div[@title='New']");
+    By NEW_MYCE_QUOTE_BUTTON = By.xpath("//div[@class='windowViewMode-maximized oneContent active lafPageHost']//a[@title='New']");
     By QUATE_RADIO_BUTTON = By.xpath("//div//span[text()='Quote']");
     By NEXT_BUTTON = By.xpath("//button//span[text()='Next']");
     By NAME_QUOTE_FIELD = By.xpath("//div//input[@name='Name']");
@@ -50,6 +50,10 @@ public class MyceQuotes extends BasePage{
     By MEETING_PACKAGES = By.xpath("//span[@title = 'Meeting Packages']");
 
 
+    @Step
+    public  void openMyceQoteRecord(String name){
+        wait1.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//table//a[@title='" + name + "']"))).click();
+    }
 
     @Step
     public void createNewMyceQuote(WebDriver driver){
@@ -295,7 +299,10 @@ public class MyceQuotes extends BasePage{
     }
 
     @Step("Open Meeting Packages")
-    public void openMeetingPackages(){
+    public void openMeetingPackages(WebDriver driver) throws InterruptedException {
+        Thread.sleep(2000);
+        refreshPage();
+        Thread.sleep(2000);
         wait1.until(ExpectedConditions.presenceOfElementLocated(MEETING_PACKAGES)).click();
     }
 
