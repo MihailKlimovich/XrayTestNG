@@ -241,7 +241,7 @@ public class ValidationRuleTest extends BaseTest{
         packages.goToPackages();
         Thread.sleep(3000);
         packages.clickNewPackage(driver);
-        packages.createPackage_happyPath2("Test15", "Demo");
+        packages.createPackage_happyPath2("Test15", "Demo", "15");
         packageLine.clickNewPackageLine(driver);
         packageLine.createPackageLine_whereAppliedDateIsNotEmpty
                 ("Test15", "00:00", "01:00", "25", "20");

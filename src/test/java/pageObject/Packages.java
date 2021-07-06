@@ -20,6 +20,12 @@ public class Packages extends BasePage {
     By PROPERTY_TYPE_TEST = By.xpath("//div//lightning-base-combobox-formatted-text[@title='Test']");
     By MULTI_DAYS_RADIO_BUTTON = By.xpath("//div//span[text()='Multi Days']");
     By SAVE_BUTTON = By.xpath("//div[@class='isModal inlinePanel oneRecordActionWrapper']//button[@name='SaveEdit']");
+    By CUSTOM_PRICE_RADIO_BUTTON = By.xpath("//force-record-layout-section//span[text()='Custom Price']");
+    By DISCOUNT_MAX_FIELD= By.xpath("//label[text()='Discount Max']/following-sibling::div//input");
+    By ACCOUNT_FIELD= By.xpath("//label[text()='Account']/following-sibling::div//input");
+
+
+
 
 
 
@@ -53,7 +59,8 @@ public class Packages extends BasePage {
     @Step("Fill out the package form where Multi_Days__c == false")
     public void createPackage_happyPath2(
             String name,
-            String property
+            String property,
+            String discount
     ) throws InterruptedException {
         wait1.until(ExpectedConditions.presenceOfElementLocated(NAME_FIELD));
         writeText(NAME_FIELD, (name));
@@ -61,6 +68,8 @@ public class Packages extends BasePage {
         writeText(PROPERTY_FIELD, property);
         click2(PROPERTY_FIELD);
         wait1.until(ExpectedConditions.visibilityOfElementLocated(PROPERTY_TYPE_DEMO)).click();
+        wait1.until(ExpectedConditions.presenceOfElementLocated(DISCOUNT_MAX_FIELD)).click();
+        writeText(DISCOUNT_MAX_FIELD, discount);
         wait1.until(ExpectedConditions.elementToBeClickable(SAVE_BUTTON)).click();
     }
 
@@ -77,6 +86,23 @@ public class Packages extends BasePage {
         wait1.until(ExpectedConditions.visibilityOfElementLocated(PROPERTY_TYPE_TEST)).click();
         wait1.until(ExpectedConditions.elementToBeClickable(SAVE_BUTTON)).click();
     }
+
+    @Step("Fill out the package form where Multi_Days__c == true")
+    public void createPackage_happyPath(
+            String name,
+            String property,
+            String account
+    ) throws InterruptedException {
+        wait1.until(ExpectedConditions.presenceOfElementLocated(NAME_FIELD));
+        writeText(NAME_FIELD, (name));
+        wait1.until(ExpectedConditions.presenceOfElementLocated(PROPERTY_FIELD)).click();
+        writeText(PROPERTY_FIELD, property);
+        wait1.until(ExpectedConditions.visibilityOfElementLocated(PROPERTY_TYPE_DEMO)).click();
+
+        wait1.until(ExpectedConditions.elementToBeClickable(SAVE_BUTTON)).click();
+    }
+
+
 
 
 }

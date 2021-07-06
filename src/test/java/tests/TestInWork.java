@@ -25,9 +25,9 @@ public class TestInWork extends BaseTest{
         //when
         String text = "MYCE Quotes";
         loginPageForScratchOrg.logInOnScratchOrg(driver);
-        //developerConsoleWindow.openDeveloperConsole();
-        //developerConsoleWindow.openExecuteAnonymousWindow();
-        //developerConsoleWindow.runApexCodeFromFile("src/main/Data/Resource");
+        developerConsoleWindow.openDeveloperConsole();
+        developerConsoleWindow.openExecuteAnonymousWindow();
+        developerConsoleWindow.runApexCodeFromFile("src/main/Data/Resource");
         homePageForScratchOrg.openAppLauncher(driver);
         homePageForScratchOrg.sendTextInAppWindow(driver, text);
         myceQuotes.createNewMyceQuote(driver);
@@ -85,11 +85,12 @@ public class TestInWork extends BaseTest{
         String text = "MYCE Quotes";
         homePageForScratchOrg.openAppLauncher(driver);
         homePageForScratchOrg.sendTextInAppWindow(driver, text);
+        Thread.sleep(2000);
         myceQuotes.createNewMyceQuote(driver);
         myceQuotes.createMyceQuote_happyPath2
-                ("Test222", date.generateTodayDate(), date.generateDate_plus(1, 3), "10", "Demo");
+                ("Test222", date.generateTodayDate(), date.generateDate_plus(1, 3), "4", "Demo");
         myceQuotes.openMeetingPackages(driver);
-        quoteMeetingPackages.createMeetingPackages("Package 1", date.generateTodayDate(), date.generateDate_plus(1, 3));
+        quoteMeetingPackages.createMeetingPackages("Package 1", "4", date.generateTodayDate(), date.generateDate_plus(1, 3), "30");
         homePageForScratchOrg.goToMyceQuotePage();
         myceQuotes.openMyceQoteRecord("Test222");
         myceQuotes.openMeetingRooms(driver);

@@ -27,6 +27,7 @@ public class PackageLine extends BasePage {
     By MESSAGE_ERROR_TEXT = By.xpath("//div[@class='container']//li");
     By CLOSE_WINDOW_BUTTON = By.xpath("//div[@class='modal-container slds-modal__container']//button[@title='Close this window']");
     By APPLIED_DAY_FIELD = By.xpath("//label[text()='Applied Day']/following-sibling::div//input");
+    By APPLY_DISCOUNT_RADIO_BUTTON = By.xpath("//force-record-layout-section//span[text()='Apply Discount']");
 
 
 
@@ -84,6 +85,35 @@ public class PackageLine extends BasePage {
         click2(PRODUCT_TYPE);
         wait1.until(ExpectedConditions.presenceOfElementLocated(APPLIED_DAY_FIELD)).click();
         writeText(APPLIED_DAY_FIELD, appliedDay);
+        wait1.until(ExpectedConditions.presenceOfElementLocated(START_TIME_FIELD)).click();
+        writeText(START_TIME_FIELD, start);
+        wait1.until(ExpectedConditions.presenceOfElementLocated(END_TIME_FIELD)).click();
+        writeText(END_TIME_FIELD, end);
+        wait1.until(ExpectedConditions.presenceOfElementLocated(UNIT_PRICE_FIELD));
+        click2(UNIT_PRICE_FIELD);
+        writeText(UNIT_PRICE_FIELD, unitPrice);
+        wait1.until(ExpectedConditions.presenceOfElementLocated(VAT_CATEGORY_FIELD)).click();
+        wait1.until(ExpectedConditions.presenceOfElementLocated(VAT_CATEGORY_TYPE)).click();
+        wait1.until(ExpectedConditions.elementToBeClickable(SAVE_BUTTON)).click();
+    }
+
+    @Step("Fill out the package line form where thn__Apply_Discount__c == TRUE")
+    public void createPackageLine_applyDiscountIsTrue(
+            String name,
+            String type,
+            String product,
+            String start,
+            String end,
+            String unitPrice
+    ) throws InterruptedException {
+        wait1.until(ExpectedConditions.presenceOfElementLocated(NAME_FIELD));
+        writeText(NAME_FIELD, (name));
+        wait1.until(ExpectedConditions.presenceOfElementLocated(TYPE_FIELD)).click();
+        wait1.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[@title='"+ type + "']"))).click();
+        wait1.until(ExpectedConditions.presenceOfElementLocated(PRODUCT_FIELD));
+        click2(PRODUCT_FIELD);
+        wait1.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[@title='" + product + "']"))).click();
+        wait1.until(ExpectedConditions.presenceOfElementLocated(APPLY_DISCOUNT_RADIO_BUTTON)).click();
         wait1.until(ExpectedConditions.presenceOfElementLocated(START_TIME_FIELD)).click();
         writeText(START_TIME_FIELD, start);
         wait1.until(ExpectedConditions.presenceOfElementLocated(END_TIME_FIELD)).click();
