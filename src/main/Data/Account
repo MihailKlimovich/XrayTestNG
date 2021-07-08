@@ -1,9 +1,11 @@
 /*-----Loading Account---------------------------------------------------------------------------------------------*/
-    Map<string, string> accountRecordType = new Map<string, string>();
-    for (RecordType key : [SELECT Id, Name FROM RecordType WHERE SobjectType = 'Account']) {accountRecordType.put(key.Name, key.Id);}
-    List<Account> accounts = new List<Account>();
-    accounts.add(new Account(Name = 'First Test Account', RecordTypeId = accountRecordType.get('Investee Account')));
-    try { insert accounts;
-        System.debug('1. Insert Accounts - Done');
-	}
-	catch (DmlException e) {System.debug('Error inserting accounts');}
+
+
+
+	List<Account> accounts = new  List<Account>();
+    accounts.add(new Account(Name = 'First Test Account'));
+    accounts.add(new Account(Name = 'Test Agent', thn__Type__c = 'Agent'));
+    accounts.add(new Account(Name = 'Test Company', thn__Type__c = 'Company'));
+    try {insert accounts;
+    System.debug('Insert Accounts - Done');
+    } catch (DmlException e)  {System.debug('Error');}

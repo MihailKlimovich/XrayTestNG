@@ -23,6 +23,8 @@ public class Packages extends BasePage {
     By CUSTOM_PRICE_RADIO_BUTTON = By.xpath("//force-record-layout-section//span[text()='Custom Price']");
     By DISCOUNT_MAX_FIELD= By.xpath("//label[text()='Discount Max']/following-sibling::div//input");
     By ACCOUNT_FIELD= By.xpath("//label[text()='Account']/following-sibling::div//input");
+    By START_DATE_FIELD= By.xpath("//label[text()='Start Date']/following-sibling::div//input");
+    By END_DATE_FIELD= By.xpath("//label[text()='End Date']/following-sibling::div//input");
 
 
 
@@ -87,18 +89,22 @@ public class Packages extends BasePage {
         wait1.until(ExpectedConditions.elementToBeClickable(SAVE_BUTTON)).click();
     }
 
-    @Step("Fill out the package form where Multi_Days__c == true")
-    public void createPackage_happyPath(
+    @Step("Fill out the package form where Start and end day != null")
+    public void createPackage_happyPath4(
             String name,
             String property,
-            String account
+            String startDate,
+            String endDate
     ) throws InterruptedException {
         wait1.until(ExpectedConditions.presenceOfElementLocated(NAME_FIELD));
         writeText(NAME_FIELD, (name));
         wait1.until(ExpectedConditions.presenceOfElementLocated(PROPERTY_FIELD)).click();
         writeText(PROPERTY_FIELD, property);
         wait1.until(ExpectedConditions.visibilityOfElementLocated(PROPERTY_TYPE_DEMO)).click();
-
+        wait1.until(ExpectedConditions.presenceOfElementLocated(START_DATE_FIELD)).click();
+        writeText(START_DATE_FIELD, startDate );
+        wait1.until(ExpectedConditions.presenceOfElementLocated(END_DATE_FIELD)).click();
+        writeText(END_DATE_FIELD, endDate);
         wait1.until(ExpectedConditions.elementToBeClickable(SAVE_BUTTON)).click();
     }
 

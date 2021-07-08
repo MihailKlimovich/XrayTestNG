@@ -1,0 +1,42 @@
+    thn__Package__c pack1 = new thn__Package__c();
+ pack1.Name = 'Pack a';
+ List<thn__Hotel__c> propertyID1 = [select ID from thn__Hotel__c where Name = 'Demo'];
+ pack1.thn__Hotel__c = propertyID1[0].id;
+ List<Account> accountId1 = [select ID FROM Account where Name = 'Test Company'];
+ pack1.thn__Account__c = accountId1[0].id;
+ insert pack1;
+
+ List<thn__Product__c> productID1 = [select ID from 	thn__Product__c where Name = 'DINER'];
+ thn__Package_Line__c pl1 = new thn__Package_Line__c(Name = 'PL1', thn__Package__c = pack1.id,  thn__Type__c = 'Food',
+ thn__Product__c = productID1[0].id,  thn__Start_Time__c = time.newInstance(15, 00, 00, 00),
+  thn__End_Time__c = time.newInstance(20, 00, 00, 00), thn__Unit_Price__c = 20, thn__VAT_Category__c = '2');
+ insert pl1;
+
+ thn__Package__c pack2 = new thn__Package__c();
+ pack2.Name = 'Pack b';
+ List<thn__Hotel__c> propertyID2 = [select ID from thn__Hotel__c where Name = 'Demo'];
+ pack2.thn__Hotel__c = propertyID2[0].id;
+ List<Account> accountId2 = [select ID FROM Account where Name = 'Test Agent'];
+ pack2.thn__Account__c = accountId2[0].id;
+ insert pack2;
+
+ List<thn__Product__c> productID2 = [select ID from 	thn__Product__c where Name = 'MEETING HALF DAY'];
+ thn__Package_Line__c pl2 = new thn__Package_Line__c(Name = 'PL2', thn__Package__c = pack2.id,  thn__Type__c = 'Meeting Room',
+ thn__Product__c = productID2[0].id,  thn__Start_Time__c = time.newInstance(15, 00, 00, 00),
+  thn__End_Time__c = time.newInstance(20, 00, 00, 00), thn__Unit_Price__c = 20, thn__VAT_Category__c = '2');
+ insert pl2;
+
+ /*-----Package without account--------------------------------------------------------------------------------------*/
+thn__Package__c pack3 = new thn__Package__c();
+ pack3.Name = 'Pack c';
+ List<thn__Hotel__c> propertyID3 = [select ID from thn__Hotel__c where Name = 'Demo'];
+ pack3.thn__Hotel__c = propertyID3[0].id;
+ insert pack3;
+
+ List<thn__Product__c> productID3 = [select ID from 	thn__Product__c where Name = 'MEETING HALF DAY'];
+ thn__Package_Line__c pl3 = new thn__Package_Line__c(Name = 'PL3', thn__Package__c = pack3.id,  thn__Type__c = 'Meeting Room',
+ thn__Product__c = productID3[0].id,  thn__Start_Time__c = time.newInstance(15, 00, 00, 00),
+  thn__End_Time__c = time.newInstance(20, 00, 00, 00), thn__Unit_Price__c = 20, thn__VAT_Category__c = '2');
+ insert pl3;
+
+

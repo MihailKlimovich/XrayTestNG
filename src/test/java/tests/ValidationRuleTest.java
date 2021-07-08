@@ -124,7 +124,7 @@ public class ValidationRuleTest extends BaseTest{
         myceQuotes.createNewMyceQuote(driver);
         myceQuotes.fillOutTheQuotaForm_whenCompanyIsAgentAndAgentIsCompany
                 ("Test1508", date.generateTodayDate(), date.generateTodayDate(), "123", "Test",
-                        "Agent", "Company");
+                        "Test Agent", "Test Company");
         String message = myceQuotes.readErrorMessage2(driver);
         //then
         Assert.assertEquals(message, expectedMessage);

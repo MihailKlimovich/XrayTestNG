@@ -88,13 +88,14 @@ public class TestInWork extends BaseTest{
         Thread.sleep(2000);
         myceQuotes.createNewMyceQuote(driver);
         myceQuotes.createMyceQuote_happyPath2
-                ("Test222", date.generateTodayDate(), date.generateDate_plus(1, 3), "4", "Demo");
+                ("Test333", date.generateTodayDate(), date.generateDate_plus(1, 3), "4", "Demo");
         myceQuotes.openMeetingPackages(driver);
-        quoteMeetingPackages.createMeetingPackages("Package 1", "4", date.generateTodayDate(), date.generateDate_plus(1, 3), "30");
+        Thread.sleep(2000);
+        quoteMeetingPackages.createMeetingPackages("Pack c", "4", date.generateTodayDate(), date.generateDate_plus(1, 3), "30");
         homePageForScratchOrg.goToMyceQuotePage();
-        myceQuotes.openMyceQoteRecord("Test222");
+        myceQuotes.openMyceQoteRecord("Test333");
         myceQuotes.openMeetingRooms(driver);
-        quoteMeetingRoom.editDate("DEFAULT - MEETING FULL DAY", date.generateDate_plus(1, 1));
+        quoteMeetingRoom.editDate("DEFAULT - MEETING HALF DAY", date.generateDate_plus(1, 1));
         //Then
         Assert.assertEquals(expectedMessage, quoteMeetingRoom.readErrorMessage2(driver));
         quoteMeetingRoom.closeWindow(driver);

@@ -34,9 +34,9 @@ public class MyceQuotes extends BasePage{
     By COMMISSION_TYPE_AGENT = By.xpath("//span[@title='Agent']");
     By MESSAGE_ERROR_TEXT = By.xpath("//div[@class='container']//li");
     By COMPANY_FIELD = By.xpath("//label[text()='Company']/following-sibling::div//input");
-    By COMPANY_TYPE_AGENT = By.xpath("//lightning-base-combobox-formatted-text[@title='Agent']");
+    By COMPANY_TYPE_AGENT = By.xpath("//lightning-base-combobox-formatted-text[@title='Test Agent']");
     By AGENT_FIELD = By.xpath("//label[text()='Agent']/following-sibling::div//input");
-    By AGENT_TYPE_COMPANY = By.xpath("//lightning-base-combobox-formatted-text[@title='Company']");
+    By AGENT_TYPE_COMPANY = By.xpath("//lightning-base-combobox-formatted-text[@title='Test Company']");
     By SEND_TO_MEWS_RADIO_BUTTON = By.xpath("//div//span[text()='Send To Mews']");
     By EDIT_BUTTON = By.xpath("//div//button[@name='Edit']");
     By STAGE_FIELD = By.xpath("//span//label[text()='Stage']");
@@ -256,6 +256,7 @@ public class MyceQuotes extends BasePage{
         click(PROPERTY_TYPE_DEMO);
         wait1.until(ExpectedConditions.elementToBeClickable(SAVE_BUTTON)).click();
     }
+
 
 
 
