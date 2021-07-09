@@ -48,6 +48,7 @@ public class MyceQuotes extends BasePage{
     By HOTEL_ROOM = By.xpath("//span[@title = 'Hotel Rooms']");
     By MEETING_ROOM = By.xpath("//span[@title = 'Meeting Rooms']");
     By MEETING_PACKAGES = By.xpath("//span[@title = 'Meeting Packages']");
+    By PRODUCTS = By.xpath("//span[@title = 'Products']");
 
 
     @Step
@@ -305,6 +306,14 @@ public class MyceQuotes extends BasePage{
         refreshPage();
         Thread.sleep(2000);
         wait1.until(ExpectedConditions.presenceOfElementLocated(MEETING_PACKAGES)).click();
+    }
+
+    @Step("Open Meeting Packages")
+    public void openProducts() throws InterruptedException {
+        Thread.sleep(2000);
+        refreshPage();
+        Thread.sleep(2000);
+        wait1.until(ExpectedConditions.presenceOfElementLocated(PRODUCTS)).click();
     }
 
     @Step("Read error message 1")

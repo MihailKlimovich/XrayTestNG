@@ -90,6 +90,7 @@ public class QuoteMeetingRoom extends BasePage {
     @Step("Close window")
     public void closeWindow(WebDriver driver){
         wait1.until(ExpectedConditions.elementToBeClickable(CLOSE_WINDOW_BUTTON)).click();
+
     }
 
 

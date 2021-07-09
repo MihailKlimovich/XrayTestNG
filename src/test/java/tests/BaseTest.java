@@ -30,10 +30,10 @@ public class BaseTest {
     protected MyceQuotes myceQuotes;
     protected Packages packages;
     protected PackageLine packageLine;
-    protected Products products;
     protected QuoteHotelRoom quoteHotelRoom;
     protected QuoteMeetingRoom quoteMeetingRoom;
     protected QuoteMeetingPackages quoteMeetingPackages;
+    protected QuoteProducts quoteProducts;
 
     public WebDriver getDriver() {
         return driver;
@@ -79,10 +79,10 @@ public class BaseTest {
         myceQuotes = new MyceQuotes(driver);
         packages = new Packages(driver);
         packageLine = new PackageLine(driver);
-        products = new Products(driver);
         quoteHotelRoom = new QuoteHotelRoom(driver);
         quoteMeetingRoom = new QuoteMeetingRoom(driver);
         quoteMeetingPackages = new QuoteMeetingPackages(driver);
+        quoteProducts = new QuoteProducts(driver);
 
     }
 
