@@ -73,6 +73,13 @@ public class QuoteMeetingPackages extends BasePage {
         wait1.until(ExpectedConditions.presenceOfElementLocated(SAVE_BUTTON)).click();
     }
 
+    @Step("Return to MYCE Quote")
+    public void clickQuoteName(String nameQuote) throws InterruptedException {
+        wait1.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@force-highlights2_highlights2]//span[text()='"+ nameQuote +"']"))).click();
+        refreshPage();
+        Thread.sleep(2000);
+    }
+
     @Step("Click Edit")
     public void clickEdit(){
         wait1.until(ExpectedConditions.presenceOfElementLocated(EDIT_BUTTON)).click();

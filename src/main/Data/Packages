@@ -39,4 +39,17 @@ thn__Package__c pack3 = new thn__Package__c();
   thn__End_Time__c = time.newInstance(20, 00, 00, 00), thn__Unit_Price__c = 20, thn__VAT_Category__c = '2');
  insert pl3;
 
+ /*-----Package without product DINER--------------------------------------------------------------------------------------*/
+ thn__Package__c pack4 = new thn__Package__c();
+  pack4.Name = 'Pack d';
+  List<thn__Hotel__c> propertyID4 = [select ID from thn__Hotel__c where Name = 'Demo'];
+  pack4.thn__Hotel__c = propertyID4[0].id;
+  insert pack4;
+
+  List<thn__Product__c> productID4 = [select ID from 	thn__Product__c where Name = 'Diner'];
+  thn__Package_Line__c pl4 = new thn__Package_Line__c(Name = 'PL4', thn__Package__c = pack4.id,  thn__Type__c = 'Food',
+  thn__Product__c = productID4[0].id,  thn__Start_Time__c = time.newInstance(15, 00, 00, 00),
+   thn__End_Time__c = time.newInstance(20, 00, 00, 00), thn__Unit_Price__c = 20, thn__VAT_Category__c = '2');
+  insert pl4;
+
 

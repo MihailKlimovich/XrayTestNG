@@ -256,6 +256,8 @@ public class MyceQuotes extends BasePage{
         writeText(PROPERTY_FIELD, (property));
         click(PROPERTY_TYPE_DEMO);
         wait1.until(ExpectedConditions.elementToBeClickable(SAVE_BUTTON)).click();
+        Thread.sleep(2000);
+        refreshPage();
     }
 
 
@@ -308,12 +310,19 @@ public class MyceQuotes extends BasePage{
         wait1.until(ExpectedConditions.presenceOfElementLocated(MEETING_PACKAGES)).click();
     }
 
-    @Step("Open Meeting Packages")
+    @Step("Open Meeting Product")
     public void openProducts() throws InterruptedException {
         Thread.sleep(2000);
         refreshPage();
         Thread.sleep(2000);
         wait1.until(ExpectedConditions.presenceOfElementLocated(PRODUCTS)).click();
+    }
+
+    @Step("Open first product")
+    public void openProduct(String productName) throws InterruptedException {
+        wait1.until(ExpectedConditions.presenceOfElementLocated(By.
+                xpath("//a[@title='"+ productName + "']"))).click();
+        Thread.sleep(2000);
     }
 
     @Step("Read error message 1")

@@ -38,6 +38,9 @@ public class QuoteMeetingRoom extends BasePage {
     By LOCK_RESOURCE_CHECKBOX = By.
             xpath("//div[@class='isModal inlinePanel oneRecordActionWrapper']//div//input[@name = 'thn__Lock_Resource__c']");
     By END_DATE_FIELD = By.xpath("//div//label[text()='Date']/following::input[@name='thn__End_Date_Time__c']");
+    By MYCE_QUOTE_NAME = By.xpath("//div//span[@id = 'window']");
+
+
 
 
 
@@ -54,6 +57,15 @@ public class QuoteMeetingRoom extends BasePage {
         wait1.until(ExpectedConditions.presenceOfElementLocated(SETUP_TYPE_BUFFET)).click();
         wait1.until(ExpectedConditions.presenceOfElementLocated(PAX_FIELD)).click();
         writeText(PAX_FIELD, pax);
+        wait1.until(ExpectedConditions.presenceOfElementLocated(SAVE_BUTTON)).click();
+    }
+
+    @Step("Fill out the meeting room")
+    public void createMeetingRoom2(String roomType) throws InterruptedException {
+        wait1.until(ExpectedConditions.elementToBeClickable(NEW_MEETING_ROOM)).click();
+        Thread.sleep(2000);
+        wait1.until(ExpectedConditions.presenceOfElementLocated(PRODUCT_FIELD)).click();
+        wait1.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[@title='" + roomType +"']"))).click();
         wait1.until(ExpectedConditions.presenceOfElementLocated(SAVE_BUTTON)).click();
     }
 
@@ -90,7 +102,11 @@ public class QuoteMeetingRoom extends BasePage {
     @Step("Close window")
     public void closeWindow(WebDriver driver){
         wait1.until(ExpectedConditions.elementToBeClickable(CLOSE_WINDOW_BUTTON)).click();
+    }
 
+    @Step("Return to MYCE Quote")
+    public void clickQuoteName(String nameQuote){
+        wait1.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@force-highlights2_highlights2]//span[text()='"+ nameQuote +"']"))).click();
     }
 
 

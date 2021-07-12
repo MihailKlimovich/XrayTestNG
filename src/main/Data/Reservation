@@ -1,0 +1,5 @@
+ thn__Guest__c guest1 = new thn__Guest__c();
+ guest1.thn__FirstName__c = 'John';
+insert guest1;
+ String guestName = [select Name from thn__Guest__c where thn__FirstName__c = 'John' limit 1].Name;
+System.debug(guestName);
