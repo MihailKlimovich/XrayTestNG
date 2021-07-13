@@ -1,5 +1,23 @@
  thn__Guest__c guest1 = new thn__Guest__c();
  guest1.thn__FirstName__c = 'John';
 insert guest1;
- String guestName = [select Name from thn__Guest__c where thn__FirstName__c = 'John' limit 1].Name;
-System.debug(guestName);
+
+thn__Reservation__c res1 = new thn__Reservation__c();
+List<thn__Hotel__c> propertyID1 = [select ID from thn__Hotel__c where Name = 'Demo'];
+res1.thn__Hotel__c = propertyID1[0].id;
+List<thn__Mews_Service__c> mewsSerID1 = [select ID from thn__Mews_Service__c where Name = 'ORDER'];
+res1.thn__Mews_Service__c = mewsSerID1[0].id;
+List<thn__Guest__c> guestID1 = [select ID from thn__Guest__c where thn__FirstName__c = 'John'];
+res1.thn__Customer__c = guestID1[0].id;
+System.debug(guestID1.size());
+
+res1.thn__StartUtc__c = Date.today();
+res1.thn__EndUtc__c = Date.today().addDays(5);
+res1.thn__AdultCount__c = 1;
+res1.thn__ChildCount__c = 1;
+List<thn__Space_Area__c> roomTypeID1 = [select ID from thn__Space_Area__c where Name = 'Double'];
+res1.thn__RequestedCategory__c = roomTypeID1[0].id;
+res1.thn__Pricing_Type__c = 'Rate pricing';
+List<thn__Rate__c> rateID1 = [select ID from thn__Rate__c where Name = 'DEFAULT'];
+res1.thn__Rate__c = rateID1[0].id;
+insert res1;

@@ -35,6 +35,8 @@ public class BaseTest {
     protected QuoteMeetingPackages quoteMeetingPackages;
     protected QuoteProducts quoteProducts;
     protected Guests guests;
+    protected Items items;
+    protected Reservations reservations;
 
     public WebDriver getDriver() {
         return driver;
@@ -85,6 +87,8 @@ public class BaseTest {
         quoteMeetingPackages = new QuoteMeetingPackages(driver);
         quoteProducts = new QuoteProducts(driver);
         guests = new Guests(driver);
+        items = new Items(driver);
+        reservations = new Reservations(driver);
 
     }
 

@@ -31,6 +31,8 @@ public class TestData extends BaseTest{
             developerConsoleWindow.runApexCodeFromFile("src/main/Data/Account");
             developerConsoleWindow.openExecuteAnonymousWindow();
             developerConsoleWindow.runApexCodeFromFile("src/main/Data/Packages");
+            developerConsoleWindow.openExecuteAnonymousWindow();
+            developerConsoleWindow.runApexCodeFromFile("src/main/Data/Reservation");
         }
 
 }
