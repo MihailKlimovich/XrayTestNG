@@ -15,6 +15,7 @@ public class MyceQuotes extends BasePage{
     }
 
     By NEW_MYCE_QUOTE_BUTTON = By.xpath("//div[@class='windowViewMode-maximized oneContent active lafPageHost']//a[@title='New']");
+    By MYCE_QUOTE_TAB = By.xpath("//div[@class='windowViewMode-maximized oneContent active lafPageHost']//a[@title='New']");
     By QUATE_RADIO_BUTTON = By.xpath("//div//span[text()='Quote']");
     By NEXT_BUTTON = By.xpath("//button//span[text()='Next']");
     By NAME_QUOTE_FIELD = By.xpath("//div//input[@name='Name']");
@@ -49,12 +50,15 @@ public class MyceQuotes extends BasePage{
     By MEETING_ROOM = By.xpath("//span[@title = 'Meeting Rooms']");
     By MEETING_PACKAGES = By.xpath("//span[@title = 'Meeting Packages']");
     By PRODUCTS = By.xpath("//span[@title = 'Products']");
+    By HELP_ERROR_MESSAGE = By.xpath("//div[@data-help-message]");
+    By DATA_ERROR_MESSAGE = By.xpath("//div[@data-error-message]");
 
 
     @Step
     public  void openMyceQoteRecord(String name){
         wait1.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//table//a[@title='" + name + "']"))).click();
     }
+
 
     @Step
     public void createNewMyceQuote(WebDriver driver){
@@ -335,9 +339,20 @@ public class MyceQuotes extends BasePage{
         return readRecalculateMessage(MESSAGE_ERROR_TEXT);
     }
 
+    @Step("Read data error message")
+    public String readDataErrorMessage() throws InterruptedException {
+        return readRecalculateMessage(DATA_ERROR_MESSAGE);
+    }
+
+    @Step("Read help error message")
+    public String readHelpErrorMessage() throws InterruptedException {
+        return readRecalculateMessage(HELP_ERROR_MESSAGE);
+    }
+
     @Step("Close window")
-    public void closeWindow(WebDriver driver){
+    public void closeWindow(WebDriver driver) throws InterruptedException {
         wait1.until(ExpectedConditions.elementToBeClickable(CLOSE_WINDOW_BUTTON)).click();
+        Thread.sleep(1000);
     }
 
     @Step("Refresh page")
@@ -345,6 +360,13 @@ public class MyceQuotes extends BasePage{
         refreshPage(driver);
     }
 
+
+    /**Page Methods*/
+    @Step("Open Myce Quote Page...")
+    public MyceQuotes goToMyceQuotePage() throws InterruptedException {
+        clickInvisibleElement(MYCE_QUOTE_TAB);
+        return this;
+    }
 
 
 

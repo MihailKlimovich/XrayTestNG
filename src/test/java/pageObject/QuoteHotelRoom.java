@@ -31,6 +31,7 @@ public class QuoteHotelRoom extends BasePage {
     By DATA_ERROR_MESSAGE = By.xpath("//div[@data-error-message]");
     By MESSAGE_ERROR_TEXT = By.xpath("//div[@class='container']//li");
     By CLOSE_WINDOW_BUTTON = By.xpath("//div[@class='modal-container slds-modal__container']//button[@title='Close this window']");
+    By HELP_ERROR_MESSAGE = By.xpath("//div[@data-help-message]");
 
 
     @Step("Fill out the hotel room")
@@ -87,6 +88,11 @@ public class QuoteHotelRoom extends BasePage {
     @Step("Close window")
     public void closeWindow(WebDriver driver){
         wait1.until(ExpectedConditions.elementToBeClickable(CLOSE_WINDOW_BUTTON)).click();
+    }
+
+    @Step("Read help error message")
+    public String readHelpErrorMessage() throws InterruptedException {
+        return readRecalculateMessage(HELP_ERROR_MESSAGE);
     }
 
 

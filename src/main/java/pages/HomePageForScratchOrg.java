@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import pages.BasePage;
 
 public class HomePageForScratchOrg extends BasePage {
 
@@ -29,7 +30,7 @@ public class HomePageForScratchOrg extends BasePage {
             xpath("//div[@class='appLauncher slds-context-bar__icon-action']//button");
     private static final By SEARCH_APP_WINDOW = By.
             xpath("//div[@class='container']//input[@class='slds-input']");
-    By MYCE_QUOTE_TAB = By.xpath("(//a[@title='MYCE Quotes'])[1]");
+    By MYCE_QUOTE_TAB = By.xpath("//a[@title='MYCE Quotes']");
 
     /**Page Methods*/
     @Step("Open Home Page...")
@@ -38,12 +39,7 @@ public class HomePageForScratchOrg extends BasePage {
         return this;
     }
 
-    /**Page Methods*/
-    @Step("Open Myce Quote Page...")
-    public HomePageForScratchOrg goToMyceQuotePage() {
-        clickInvisibleElement(MYCE_QUOTE_TAB);
-        return this;
-    }
+
 
     @Step("Open Investment tab...")
     public HomePageForScratchOrg goToInvestmentPage() {

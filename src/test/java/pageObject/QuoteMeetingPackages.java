@@ -26,6 +26,7 @@ public class QuoteMeetingPackages extends BasePage {
     By UNIT_PRICE_FIELD = By.xpath("//slot//label[text()='Unit Price']/following-sibling::div//input");
     By EDIT_BUTTON = By.xpath("//div[text()='Quote Package']/following::button[@name='Edit']");
     By DISCOUNT_FIELD = By.xpath("//slot//label[text()='Discount']/following-sibling::div//input");
+    By HELP_ERROR_MESSAGE = By.xpath("//div[@data-help-message]");
 
 
 
@@ -35,7 +36,8 @@ public class QuoteMeetingPackages extends BasePage {
         Thread.sleep(2000);
         wait1.until(ExpectedConditions.presenceOfElementLocated(PACKAGE_FIELD));
         click2(PACKAGE_FIELD);
-        wait1.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[@title='" + pack + "']"))).click();
+        writeText(PACKAGE_FIELD, pack);
+        wait1.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//lightning-base-combobox-formatted-text[@title='" + pack + "']"))).click();
         wait1.until(ExpectedConditions.presenceOfElementLocated(PAX_FIELD)).click();
         writeText(PAX_FIELD, pax);
         wait1.until(ExpectedConditions.presenceOfElementLocated(START_DATE_FIELD)).click();
@@ -51,6 +53,11 @@ public class QuoteMeetingPackages extends BasePage {
     @Step("Read error message 2")
     public String readErrorMessage2(WebDriver driver) throws InterruptedException {
         return readRecalculateMessage(MESSAGE_ERROR_TEXT);
+    }
+
+    @Step("Read help error message")
+    public String readHelpErrorMessage() throws InterruptedException {
+        return readRecalculateMessage(HELP_ERROR_MESSAGE);
     }
 
     @Step("Change date ")

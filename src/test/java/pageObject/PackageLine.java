@@ -28,6 +28,7 @@ public class PackageLine extends BasePage {
     By CLOSE_WINDOW_BUTTON = By.xpath("//div[@class='modal-container slds-modal__container']//button[@title='Close this window']");
     By APPLIED_DAY_FIELD = By.xpath("//label[text()='Applied Day']/following-sibling::div//input");
     By APPLY_DISCOUNT_RADIO_BUTTON = By.xpath("//force-record-layout-section//span[text()='Apply Discount']");
+    By HELP_ERROR_MESSAGE = By.xpath("//div[@data-help-message]");
 
 
 
@@ -134,6 +135,11 @@ public class PackageLine extends BasePage {
     @Step("Close window")
     public void closeWindow(WebDriver driver){
         wait1.until(ExpectedConditions.elementToBeClickable(CLOSE_WINDOW_BUTTON)).click();
+    }
+
+    @Step("Read help error message")
+    public String readHelpErrorMessage() throws InterruptedException {
+        return readRecalculateMessage(HELP_ERROR_MESSAGE);
     }
 
 

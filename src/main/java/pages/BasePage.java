@@ -28,7 +28,7 @@ public class BasePage {
     /**Constructor*/
     public BasePage(WebDriver driver){
         this.driver = driver;
-        wait1 = new WebDriverWait(driver, 60);
+        wait1 = new WebDriverWait(driver, 20);
         wait2 = new WebDriverWait(driver, 10);
         waitForTests = new FluentWait(this.driver)
                 .withTimeout(Duration.ofSeconds(2))

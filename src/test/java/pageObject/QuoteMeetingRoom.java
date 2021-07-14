@@ -88,9 +88,10 @@ public class QuoteMeetingRoom extends BasePage {
         wait1.until(ExpectedConditions.presenceOfElementLocated(SAVE_BUTTON)).click();
     }
 
-    public void changeSetupType(String type){
+    public void changeSetupType(String type) throws InterruptedException {
         wait1.until(ExpectedConditions.presenceOfElementLocated(SETUP_FIELD)).click();
-        wait1.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[@title='" + type + "']"))).click();
+        clickInvisibleElement(By.xpath("//span[@title='" + type + "']"));
+        //wait1.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[@title='" + type + "']"))).click();
         wait1.until(ExpectedConditions.presenceOfElementLocated(SAVE_BUTTON)).click();
     }
 

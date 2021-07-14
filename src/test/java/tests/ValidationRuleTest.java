@@ -131,9 +131,9 @@ public class ValidationRuleTest extends BaseTest{
         myceQuotes.closeWindow(driver);
     }
 
-    @Test(priority = 8, description = "Reservation_Guest")
+    @Test(priority = 8, description = "Myce_Quote__c.VR13_Reservation_Guest")
     @Severity(SeverityLevel.NORMAL)
-    @Description("Test Description: Create New MYСE Quote where Reservation Guest field is empty")
+    @Description("Myce_Quote__c.VR13_Reservation_Guest")
     @Story("")
     public void testCreateNewMyceQuote6() throws InterruptedException {
         //given

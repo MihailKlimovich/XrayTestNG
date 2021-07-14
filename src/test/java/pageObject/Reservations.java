@@ -59,6 +59,7 @@ public class Reservations extends BasePage {
         wait1.until(ExpectedConditions.presenceOfElementLocated(PROPERTY_FIELD)).click();
         wait1.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[@title='"+ property+"']"))).click();
         wait1.until(ExpectedConditions.presenceOfElementLocated(MEWS_SERVICE_FIELD)).click();
+        Thread.sleep(1000);
         wait1.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[@title='"+ mewsService +"']"))).click();
         wait1.until(ExpectedConditions.presenceOfElementLocated(CUSTOMER_FIELD)).click();
         Thread.sleep(1000);
@@ -96,6 +97,7 @@ public class Reservations extends BasePage {
         wait1.until(ExpectedConditions.presenceOfElementLocated(PROPERTY_FIELD)).click();
         wait1.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[@title='"+ property+"']"))).click();
         wait1.until(ExpectedConditions.presenceOfElementLocated(MEWS_SERVICE_FIELD)).click();
+        Thread.sleep(1000);
         wait1.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[@title='"+ mewsService +"']"))).click();
         wait1.until(ExpectedConditions.presenceOfElementLocated(CUSTOMER_FIELD)).click();
         Thread.sleep(1000);
