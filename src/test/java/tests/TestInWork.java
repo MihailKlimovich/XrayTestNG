@@ -92,7 +92,7 @@ public class TestInWork extends BaseTest{
         myceQuotes.openMeetingPackages(driver);
         Thread.sleep(2000);
         quoteMeetingPackages.createMeetingPackages("Pack c", "4", date.generateTodayDate(), date.generateDate_plus(1, 3), "30");
-        myceQuotes.goToMyceQuotePage();
+        myceQuotes.goToMyceQuotes();
         myceQuotes.openMyceQoteRecord("Test333");
         myceQuotes.openMeetingRooms(driver);
         quoteMeetingRoom.editDate("DEFAULT - MEETING HALF DAY", date.generateDate_plus(1, 1));

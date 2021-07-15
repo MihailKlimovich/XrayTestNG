@@ -57,6 +57,7 @@ public class Reservations extends BasePage {
                                   String pricingType,
                                   String rate) throws InterruptedException {
         wait1.until(ExpectedConditions.presenceOfElementLocated(PROPERTY_FIELD)).click();
+        writeText(PROPERTY_FIELD, property);
         wait1.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[@title='"+ property+"']"))).click();
         wait1.until(ExpectedConditions.presenceOfElementLocated(MEWS_SERVICE_FIELD)).click();
         Thread.sleep(1000);
@@ -95,6 +96,7 @@ public class Reservations extends BasePage {
                                    String rate,
                                    String mewsId) throws InterruptedException {
         wait1.until(ExpectedConditions.presenceOfElementLocated(PROPERTY_FIELD)).click();
+        writeText(PROPERTY_FIELD, property);
         wait1.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[@title='"+ property+"']"))).click();
         wait1.until(ExpectedConditions.presenceOfElementLocated(MEWS_SERVICE_FIELD)).click();
         Thread.sleep(1000);

@@ -4,6 +4,7 @@ import io.qameta.allure.Description;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.Story;
+import org.apache.poi.ss.formula.functions.T;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -47,9 +48,10 @@ public class ValidationRuleTest1 extends BaseTest {
                 "if 'Commission to' field equals 'agent', agent shouldn't be null or " +
                 "if 'Commission to' field equals 'company', company shouldn't be null or";
         //when
-        String text = "MYCE Quotes";
-        homePageForScratchOrg.openAppLauncher(driver);
-        homePageForScratchOrg.sendTextInAppWindow(driver, text);
+        //String text = "MYCE Quotes";
+        //homePageForScratchOrg.openAppLauncher(driver);
+        //homePageForScratchOrg.sendTextInAppWindow(driver, text);
+        myceQuotes.goToMyceQuotes();
         myceQuotes.createNewMyceQuote(driver);
         myceQuotes.fillOutTheQuotaForm_whenCommissionIsNone
                 ("Test1", date.generateTodayDate(), date.generateTodayDate(),
@@ -367,14 +369,14 @@ public class ValidationRuleTest1 extends BaseTest {
         String expectedMessage = "Meeting room's pax exceeds the resource's capacity for this setup";
         //when
         String text = "MYCE Quotes";
-        developerConsoleWindow.openDeveloperConsole();
-        developerConsoleWindow.openExecuteAnonymousWindow();
-        developerConsoleWindow.runApexCodeFromFile("src/main/Data/Resource");
+        //developerConsoleWindow.openDeveloperConsole();
+        //developerConsoleWindow.openExecuteAnonymousWindow();
+        //developerConsoleWindow.runApexCodeFromFile("src/main/Data/Resource");
         homePageForScratchOrg.openAppLauncher(driver);
         homePageForScratchOrg.sendTextInAppWindow(driver, text);
         myceQuotes.createNewMyceQuote(driver);
         myceQuotes.createMyceQuote_happyPath2
-                ("Test9", date.generateDate_plus(1, 3), date.generateDate_plus(1, 3), "10", "Demo");
+                ("Test10", date.generateDate_plus(1, 3), date.generateDate_plus(1, 3), "10", "Demo");
         myceQuotes.openMeetingRooms(driver);
         quoteMeetingRoom.createMeetingRoom("6");
         Assert.assertEquals(expectedMessage, myceQuotes.readErrorMessage2(driver));
@@ -427,39 +429,42 @@ public class ValidationRuleTest1 extends BaseTest {
         String expectedMessage = "Date cannot be changed if Meeting room is part of package";
         //when
         String text = "MYCE Quotes";
-        homePageForScratchOrg.openAppLauncher(driver);
-        homePageForScratchOrg.sendTextInAppWindow(driver, text);
-        Thread.sleep(2000);
+        myceQuotes.goToMyceQuotes();
+        //homePageForScratchOrg.openAppLauncher(driver);
+        //homePageForScratchOrg.sendTextInAppWindow(driver, text);
+        //Thread.sleep(2000);
         myceQuotes.createNewMyceQuote(driver);
         myceQuotes.createMyceQuote_happyPath2
-                ("Test10", date.generateTodayDate(), date.generateDate_plus(1, 3), "4", "Demo");
+                ("Test11", date.generateTodayDate(), date.generateDate_plus(1, 3), "4", "Demo");
         myceQuotes.openMeetingPackages(driver);
         Thread.sleep(2000);
         quoteMeetingPackages.createMeetingPackages("Pack c", "4", date.generateTodayDate(), date.generateDate_plus(1, 3), "30");
-        myceQuotes.goToMyceQuotePage();
-        myceQuotes.openMyceQoteRecord("Test10");
+        myceQuotes.goToMyceQuotes();
+        myceQuotes.openMyceQoteRecord("Test11");
         myceQuotes.openMeetingRooms(driver);
         quoteMeetingRoom.editDate("DEFAULT - MEETING HALF DAY", date.generateDate_plus(1, 1));
         //Then
         Assert.assertEquals(expectedMessage, quoteMeetingRoom.readErrorMessage2(driver));
         quoteMeetingRoom.closeWindow(driver);
+        Thread.sleep(1000);
     }
 
     @Test(priority = 23, description = "Quote_Package__c.VR12_Dates_within_Quote_dates")
     @Severity(SeverityLevel.NORMAL)
     @Description("Quote_Package__c.VR12_Dates_within_Quote_dates")
     @Story("")
-    public void testCreateQuotePackage() throws InterruptedException, IOException {
+    public void testCreateQuotePackage1() throws InterruptedException, IOException {
         String expectedMessage = "Start and end date of package must be within Quote arrival and departure dates";
         String expectedMessage2 = "Start Date of the package is after the Departure Date";
         String expectedMessage3 = "End Date of the package is after the Departure Date";
         //when
         String text = "MYCE Quotes";
-        homePageForScratchOrg.openAppLauncher(driver);
-        homePageForScratchOrg.sendTextInAppWindow(driver, text);
+        //homePageForScratchOrg.openAppLauncher(driver);
+        //homePageForScratchOrg.sendTextInAppWindow(driver, text);
+        myceQuotes.goToMyceQuotes();
         myceQuotes.createNewMyceQuote(driver);
         myceQuotes.createMyceQuote_happyPath2
-                ("Test11", date.generateDate_plus(1, 3), date.generateDate_plus(1, 4), "10", "Demo");
+                ("Test12", date.generateDate_plus(1, 3), date.generateDate_plus(1, 4), "10", "Demo");
         myceQuotes.openMeetingPackages(driver);
         //thn__Start_Date__c  < thn__MYCE_Quote__r.thn__Arrival_Date__c
         quoteMeetingPackages.createMeetingPackages("Pack c", "4",date.generateDate_plus(1, 2), date.generateDate_plus(1, 4), "30");
@@ -502,7 +507,7 @@ public class ValidationRuleTest1 extends BaseTest {
         Thread.sleep(2000);
         myceQuotes.createNewMyceQuote(driver);
         myceQuotes.createMyceQuote_happyPath2
-                ("Test12", date.generateTodayDate(), date.generateDate_plus(1, 3), "4", "Demo");
+                ("Test13", date.generateTodayDate(), date.generateDate_plus(1, 3), "4", "Demo");
         myceQuotes.openMeetingPackages(driver);
         quoteMeetingPackages.createMeetingPackages("Test4", "4",date.generateTodayDate(), date.generateDate_plus(1, 3), "30");
         quoteMeetingPackages.clickEdit();
@@ -526,9 +531,9 @@ public class ValidationRuleTest1 extends BaseTest {
         Thread.sleep(2000);
         myceQuotes.createNewMyceQuote(driver);
         myceQuotes.createMyceQuote_happyPath2
-                ("Test13", date.generateTodayDate(), date.generateDate_plus(1, 3), "4", "Demo");
+                ("Test14", date.generateTodayDate(), date.generateDate_plus(1, 3), "4", "Demo");
         myceQuotes.openMeetingPackages(driver);
-        quoteMeetingPackages.createMeetingPackages("Test2", "5",date.generateTodayDate(), date.generateDate_plus(1, 3), "30");
+        quoteMeetingPackages.createMeetingPackages("Test4", "5",date.generateTodayDate(), date.generateDate_plus(1, 3), "30");
         //then
         Assert.assertEquals(quoteMeetingPackages.readHelpErrorMessage(), expectedMessage);
         quoteMeetingPackages.closeWindow();
@@ -548,11 +553,12 @@ public class ValidationRuleTest1 extends BaseTest {
         Thread.sleep(2000);
         myceQuotes.createNewMyceQuote(driver);
         myceQuotes.createMyceQuote_happyPath2
-                ("Test14", date.generateTodayDate(), date.generateDate_plus(1, 3), "4", "Demo");
+                ("Test15", date.generateTodayDate(), date.generateDate_plus(1, 3), "4", "Demo");
         myceQuotes.openMeetingPackages(driver);
         quoteMeetingPackages.createMeetingPackages("Pack a", "4",date.generateTodayDate(), date.generateDate_plus(1, 3), "20");
         Assert.assertEquals(quoteMeetingPackages.readErrorMessage2(driver), expectedMessage);
         quoteMeetingPackages.closeWindow();
+        Thread.sleep(2000);
     }
 
     @Test(priority = 27, description = "Quote_Package__c.VR34_QuotePackage_Dates")
@@ -574,7 +580,7 @@ public class ValidationRuleTest1 extends BaseTest {
         Thread.sleep(2000);
         myceQuotes.createNewMyceQuote(driver);
         myceQuotes.createMyceQuote_happyPath2
-                ("Test222", date.generateTodayDate(), date.generateDate_plus(0, 5), "4", "Demo");
+                ("Test16", date.generateTodayDate(), date.generateDate_plus(0, 5), "4", "Demo");
         myceQuotes.openMeetingPackages(driver);
         quoteMeetingPackages.createMeetingPackages("Pack d", "4",date.generateDate_plus(0, 0), date.generateDate_plus(0, 3), "30");
         //then
@@ -588,6 +594,7 @@ public class ValidationRuleTest1 extends BaseTest {
         quoteMeetingPackages.createMeetingPackages("Pack d", "4",date.generateDate_plus(0, 1), date.generateDate_plus(0, 4), "30");
         Assert.assertEquals(quoteMeetingPackages.readErrorMessage2(driver), expectedMessage);
         quoteMeetingPackages.closeWindow();
+        Thread.sleep(2000);
     }
 
     @Test(priority = 28, description = "Quote_Package__c.VR37_Max_Discount")
@@ -609,12 +616,263 @@ public class ValidationRuleTest1 extends BaseTest {
         Thread.sleep(2000);
         myceQuotes.createNewMyceQuote(driver);
         myceQuotes.createMyceQuote_happyPath2
-                ("Test222", date.generateTodayDate(), date.generateDate_plus(0, 5), "4", "Demo");
+                ("Test17", date.generateTodayDate(), date.generateDate_plus(0, 5), "4", "Demo");
         myceQuotes.openMeetingPackages(driver);
         quoteMeetingPackages.createMeetingPackages("Pack e", "4",date.generateTodayDate(), date.generateDate_plus(0, 5), "100");
         quoteMeetingPackages.clickEdit();
         quoteMeetingPackages.changeDiscount("11");
         Assert.assertEquals(quoteMeetingPackages.readErrorMessage2(driver), expectedMessage);
+        quoteMeetingPackages.closeWindow();
+    }
+
+    @Test(priority = 29, description = "Quote_Product__c.VR08_Start_End_Date")
+    @Severity(SeverityLevel.NORMAL)
+    @Description("Quote_Product__c.VR08_Start_End_Date")
+    @Story("Add Quote Product to MYCE Quote: thn__Start_Date_Time__c >= thn__End_Date_Time__c")
+    public void testCreateQuoteProduct1() throws InterruptedException, IOException {
+        //given
+        String expectedMessage = "Start Date time cannot be posterior to End Date time";
+        //when
+        String text = "MYCE Quotes";
+        homePageForScratchOrg.openAppLauncher(driver);
+        homePageForScratchOrg.sendTextInAppWindow(driver, text);
+        myceQuotes.createNewMyceQuote(driver);
+        myceQuotes.createMyceQuote_happyPath2("Test18", date.generateDate_plus(0, 0),
+                date.generateDate_plus(0, 4), "10", "Demo");
+        myceQuotes.openProducts();
+        quoteProducts.createProduct("WINES", "5", date.generateDate_plus(0, 1),
+                date.generateDate_plus(0, 0));
+        //then
+        Assert.assertEquals(quoteProducts.readErrorMessage3(), expectedMessage);
+        quoteProducts.closeWindow();
+    }
+
+    @Test(priority = 30, description = "Quote_Product__c.VR11_Dates_within_Quote_dates")
+    @Severity(SeverityLevel.NORMAL)
+    @Description("Quote_Product__c.VR11_Dates_within_Quote_dates")
+    @Story("")
+    public void testCreateQuoteProduct2() throws InterruptedException, IOException {
+        //given
+        String expectedMessage = "Start and end date of product must be within Quote arrival and departure dates";
+        //when
+        String text = "MYCE Quotes";
+        homePageForScratchOrg.openAppLauncher(driver);
+        homePageForScratchOrg.sendTextInAppWindow(driver, text);
+        myceQuotes.createNewMyceQuote(driver);
+        myceQuotes.createMyceQuote_happyPath2("Test19", date.generateDate_plus(0, 1),
+                date.generateDate_plus(0, 4), "10", "Demo");
+        //thn__Start_Date_Time__c < thn__MYCE_Quote__r.thn__Arrival_Date__c
+        myceQuotes.openProducts();
+        quoteProducts.createProduct("WINES", "5", date.generateDate_plus(0, 0),
+                date.generateDate_plus(0, 4));
+        //then
+        Assert.assertEquals(quoteProducts.readErrorMessage2(), expectedMessage);
+        quoteProducts.closeWindow();
+        //thn__Start_Date_Time__c > thn__MYCE_Quote__r.thn__Departure_Date__c
+        myceQuotes.openProducts();
+        quoteProducts.createProduct("WINES", "5", date.generateDate_plus(0, 5),
+                date.generateDate_plus(0, 4));
+        Assert.assertEquals(quoteProducts.readErrorMessage2(), expectedMessage);
+        //thn__End_Date_Time__c < thn__MYCE_Quote__r.thn__Arrival_Date__c
+        quoteProducts.closeWindow();
+        myceQuotes.openProducts();
+        quoteProducts.createProduct("WINES", "5",  date.generateDate_plus(0, 1),
+                date.generateDate_plus(0, 0));
+        Assert.assertEquals(quoteProducts.readErrorMessage2(), expectedMessage);
+        quoteProducts.closeWindow();
+        //thn__End_Date_Time__c > thn__MYCE_Quote__r.thn__Departure_Date__c
+        myceQuotes.openProducts();
+        quoteProducts.createProduct("WINES", "5",  date.generateDate_plus(0, 1),
+                date.generateDate_plus(0, 5));
+        Assert.assertEquals(quoteProducts.readErrorMessage2(), expectedMessage);
+        quoteProducts.closeWindow();
+    }
+
+    @Test(priority = 31, description = "Quote_Product__c.VR17_Pax")
+    @Severity(SeverityLevel.NORMAL)
+    @Description("Quote_Product__c.VR17_Pax")
+    @Story("Add Quote product to MYCE Quote: thn__Pax__c > thn__MYCE_Quote__r.thn__Pax__c")
+    public void testCreateQuoteProduct3() throws InterruptedException, IOException {
+        //given
+        String expectedMessage = "Pax cannot be greater than quote's pax";
+        //when
+        String text = "MYCE Quotes";
+        homePageForScratchOrg.openAppLauncher(driver);
+        homePageForScratchOrg.sendTextInAppWindow(driver, text);
+        myceQuotes.createNewMyceQuote(driver);
+        myceQuotes.createMyceQuote_happyPath2("Test20", date.generateDate_plus(0, 1),
+                date.generateDate_plus(0, 4), "10", "Demo");
+        myceQuotes.openProducts();
+        quoteProducts.createProduct("WINES", "11", date.generateDate_plus(0, 1),
+                date.generateDate_plus(0, 4));
+        //then
+        Assert.assertEquals(quoteProducts.readHelpErrorMessage(), expectedMessage);
+        quoteProducts.closeWindow();
+    }
+
+    @Test(priority = 32, description = "Quote_Product__c.VR23_ServiceArea_date")
+    @Severity(SeverityLevel.NORMAL)
+    @Description("Quote_Product__c.VR23_ServiceArea_date")
+    @Story("Add Meeting room to the Myce Quote, Add Quote product to the Quote: select Meeting Room while creating" +
+            " Quote product, thn__Start_Date_Time__c != thn__Service_Area__r.thn__Start_Date_Time__c")
+    public void testCreateQuoteProduct4() throws InterruptedException, IOException {
+        //given
+        String expectedMessage = "Date of the service area must be the same as the product's";
+        //when
+        String text = "MYCE Quotes";
+        loginPageForScratchOrg.logInOnScratchOrg(driver);
+        //homePageForScratchOrg.openAppLauncher(driver);
+        //homePageForScratchOrg.sendTextInAppWindow(driver, text);
+        myceQuotes.goToMyceQuotes();
+        myceQuotes.createNewMyceQuote(driver);
+        myceQuotes.createMyceQuote_happyPath2
+                ("Test21", date.generateDate_plus(0, 1),
+                        date.generateDate_plus(0, 4), "10", "Demo");
+        Thread.sleep(2000);
+        myceQuotes.openMeetingRooms(driver);
+        quoteMeetingRoom.createMeetingRoom2("MEETING HALF DAY");
+        quoteMeetingRoom.clickQuoteName("Test21");
+        myceQuotes.openProducts();
+        quoteProducts.createProduct2("DEFAULT - MEETING HALF DAY", "DINER",
+                date.generateDate_plus(0, 2), date.generateDate_plus(0, 4));
+        //then
+        Assert.assertEquals(quoteProducts.readHelpErrorMessage(), expectedMessage);
+        quoteProducts.closeWindow();
+    }
+
+    @Test(priority = 33, description = "Quote_Product__c.VR26_PackageDate")
+    @Severity(SeverityLevel.NORMAL)
+    @Description("Quote_Product__c.VR26_PackageDate")
+    @Story("Add Package having products to the Quote, Open Quote product record, Change dates:" +
+            " thn__Start_Date_Time__c != thn__Start_Date__c, thn__End_Date_Time__c !=thn__End_Date__c")
+    public void testCreateQuoteProduct5() throws InterruptedException, IOException {
+        //given
+        String expectedMessage = "Date cannot be changed if Product is part of package";
+        //when
+        String text = "MYCE Quotes";
+        homePageForScratchOrg.openAppLauncher(driver);
+        homePageForScratchOrg.sendTextInAppWindow(driver, text);
+        myceQuotes.createNewMyceQuote(driver);
+        myceQuotes.createMyceQuote_happyPath2
+                ("Test22", date.generateDate_plus(0, 1),
+                        date.generateDate_plus(0, 4), "10", "Demo");
+        myceQuotes.openMeetingPackages(driver);
+        quoteMeetingPackages.createMeetingPackages("Pack d", "10", date.generateDate_plus(0, 2),
+                date.generateDate_plus(0, 2), "20");
+        quoteMeetingPackages.clickQuoteName("Test22");
+        myceQuotes.openProducts();
+        myceQuotes.openProduct("DINER");
+        quoteProducts.changeDate(date.generateDate_plus(0, 3), date.generateDate_plus(0, 4));
+        //then
+        Assert.assertEquals(quoteProducts.readErrorMessage2(), expectedMessage);
+        quoteProducts.closeWindow();
+    }
+
+    @Test(priority = 34, description = "Quote_Product__c.VR36_Consumption_on_Package_Line")
+    @Severity(SeverityLevel.NORMAL)
+    @Description("Quote_Product__c.VR36_Consumption_on_Package_Line")
+    @Story("Add Package having products to the Quote, Open Quote product record, Set On_Consumption__c to TRUE")
+    public void testCreateQuoteProduct6() throws InterruptedException, IOException {
+        //given
+        String expectedMessage = "In a package line quote product the on consumption option can not be used.";
+        //when
+        String text = "MYCE Quotes";
+        homePageForScratchOrg.openAppLauncher(driver);
+        homePageForScratchOrg.sendTextInAppWindow(driver, text);
+        myceQuotes.createNewMyceQuote(driver);
+        myceQuotes.createMyceQuote_happyPath2
+                ("Test23", date.generateDate_plus(0, 1),
+                        date.generateDate_plus(0, 4), "10", "Demo");
+        myceQuotes.openMeetingPackages(driver);
+        quoteMeetingPackages.createMeetingPackages("Pack d", "10", date.generateDate_plus(0, 2),
+                date.generateDate_plus(0, 2), "20");
+        quoteMeetingPackages.clickQuoteName("Test23");
+        myceQuotes.openProducts();
+        myceQuotes.openProduct("DINER");
+        quoteProducts.changeOnConsumption();
+        //then
+        Assert.assertEquals(quoteProducts.readErrorMessage2(), expectedMessage);
+        quoteProducts.closeWindow();
+    }
+
+    @Test(priority = 35, description = "Guest__c.VR01_guest_send_to_mews")
+    @Severity(SeverityLevel.NORMAL)
+    @Description("Guest__c.VR01_guest_send_to_mews")
+    @Story("Create Guest__c record, do not fill Hotel__c, Set Send_to_Mews__c to TRUE")
+    public void testCreateGuest() throws InterruptedException, IOException {
+        //given
+        String expectedMessage = "Hotel is required to create/update guest in Mews";
+        //when
+        String text = "Guests";
+        homePageForScratchOrg.openAppLauncher(driver);
+        homePageForScratchOrg.sendTextInAppWindow(driver, text);
+        guests.clickNew();
+        guests.createGuest("John");
+        //then
+        Assert.assertEquals(guests.readHelpErrorMessage(), expectedMessage);
+        guests.closeWindow();
+    }
+
+    @Test(priority = 36, description = "Item__c.VR02_item_send_to_mews")
+    @Severity(SeverityLevel.NORMAL)
+    @Description("Item__c.VR02_item_send_to_mews")
+    @Story("On Item record where thn__Mews_Id__c != null, set thn__Send_to_Mews__c to TRUE")
+    public void testCreateItem() throws InterruptedException, IOException {
+        //given
+        String expectedMessage = "The Reservation product already exists and cannot be sent twice";
+        //when
+        //String text = "Items";
+        //homePageForScratchOrg.openAppLauncher(driver);
+        //homePageForScratchOrg.sendTextInAppWindow(driver, text);
+        items.clickNew();
+        items.createItem("MEETING HALF DAY", "555");
+        //then
+        Assert.assertEquals(items.readHelpErrorMessage(), expectedMessage);
+        items.closeWindow();
+    }
+
+    @Test(priority = 37, description = "Reservation__c.VR03_Reason_update")
+    @Severity(SeverityLevel.NORMAL)
+    @Description("Reservation__c.VR03_Reason_update")
+    @Story("On thn__Reservation__c record set thn__Update_Price__c to TRUE, Leave thn__Reason_update__c empty")
+    public void testCreateReservation() throws InterruptedException, IOException {
+        //given
+        String expectedMessage = "Reason update is required when price is updated";
+        //when
+        String text = "Reservations";
+        homePageForScratchOrg.openAppLauncher(driver);
+        homePageForScratchOrg.sendTextInAppWindow(driver, text);
+        reservations.clickNew();
+        reservations.createReservation("Demo", "ORDER", date.generateDate_plus(0,0),
+                date.generateDate_plus(0, 5), "2", "1", "Double",
+                "Rate pricing", "DEFAULT");
+        //then
+        Assert.assertEquals(reservations.readHelpErrorMessage(), expectedMessage);
+        reservations.closeWindow();
+    }
+
+    @Test(priority = 38, description = "Reservation__c.VR04_Cancellation_reason")
+    @Severity(SeverityLevel.NORMAL)
+    @Description("Reservation__c.VR04_Cancellation_reason")
+    @Story("On thn__Reservation__c record where thn__Mews_Id__c != null change thn__State__c to “Canceled")
+    public void testCreateReservation2() throws InterruptedException, IOException {
+        //given
+        String expectedMessage = "Notes cannot be empty if state is canceled";
+        //when
+        String text = "Reservations";
+        homePageForScratchOrg.openAppLauncher(driver);
+        homePageForScratchOrg.sendTextInAppWindow(driver, text);
+        Thread.sleep(2000);
+        reservations.clickNew();
+        reservations.createReservation2("Demo", "ORDER", date.generateDate_plus(0,0),
+                date.generateDate_plus(0, 5), "2", "1", "Double",
+                "Rate pricing", "DEFAULT", "123");
+        reservations.clickEdit();
+        Thread.sleep(2000);
+        reservations.changeState("Canceled");
+        //then
+        Assert.assertEquals(reservations.readHelpErrorMessage(), expectedMessage);
+        reservations.closeWindow();
     }
 
 }

@@ -24,6 +24,12 @@ public class Items extends BasePage {
             xpath("//div[@class='modal-container slds-modal__container']//button[@title='Close this window']");
     By HELP_ERROR_MESSAGE = By.xpath("//div[@data-help-message]");
 
+    @Step("Open Items page")
+    public Items goToItems() throws InterruptedException {
+        driver.navigate().to("https://connect-java-4747-dev-ed.lightning.force.com/lightning/o/thn__Item__c/list?filterName=Recent");
+        return this;
+    }
+
     @Step
     public void clickNew(){
         wait1.until(ExpectedConditions.elementToBeClickable(NEW_ITEM_BUTTON)).click();

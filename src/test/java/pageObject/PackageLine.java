@@ -113,6 +113,7 @@ public class PackageLine extends BasePage {
         wait1.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[@title='"+ type + "']"))).click();
         wait1.until(ExpectedConditions.presenceOfElementLocated(PRODUCT_FIELD));
         click2(PRODUCT_FIELD);
+        Thread.sleep(1000);
         wait1.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[@title='" + product + "']"))).click();
         wait1.until(ExpectedConditions.presenceOfElementLocated(APPLY_DISCOUNT_RADIO_BUTTON)).click();
         wait1.until(ExpectedConditions.presenceOfElementLocated(START_TIME_FIELD)).click();
@@ -124,7 +125,7 @@ public class PackageLine extends BasePage {
         writeText(UNIT_PRICE_FIELD, unitPrice);
         wait1.until(ExpectedConditions.presenceOfElementLocated(VAT_CATEGORY_FIELD)).click();
         wait1.until(ExpectedConditions.presenceOfElementLocated(VAT_CATEGORY_TYPE)).click();
-        wait1.until(ExpectedConditions.elementToBeClickable(SAVE_BUTTON)).click();
+        wait1.until(ExpectedConditions.presenceOfElementLocated(SAVE_BUTTON)).click();
     }
 
     @Step("Read error message 2")

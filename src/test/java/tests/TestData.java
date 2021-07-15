@@ -26,13 +26,14 @@ public class TestData extends BaseTest{
         public void deleteData() throws InterruptedException, IOException {
             developerConsoleWindow.openDeveloperConsole();
             developerConsoleWindow.openExecuteAnonymousWindow();
-            developerConsoleWindow.runApexCodeFromFile("src/main/Data/DeleteData");
+            developerConsoleWindow.runApexCodeFromFile("src/main/Data/AllData");
+            /*developerConsoleWindow.runApexCodeFromFile("src/main/Data/DeleteData");
             developerConsoleWindow.openExecuteAnonymousWindow();
             developerConsoleWindow.runApexCodeFromFile("src/main/Data/Account");
             developerConsoleWindow.openExecuteAnonymousWindow();
             developerConsoleWindow.runApexCodeFromFile("src/main/Data/Packages");
             developerConsoleWindow.openExecuteAnonymousWindow();
-            developerConsoleWindow.runApexCodeFromFile("src/main/Data/Reservation");
+            developerConsoleWindow.runApexCodeFromFile("src/main/Data/Reservation");*/
         }
 
 }

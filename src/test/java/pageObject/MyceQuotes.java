@@ -15,7 +15,7 @@ public class MyceQuotes extends BasePage{
     }
 
     By NEW_MYCE_QUOTE_BUTTON = By.xpath("//div[@class='windowViewMode-maximized oneContent active lafPageHost']//a[@title='New']");
-    By MYCE_QUOTE_TAB = By.xpath("//div[@class='windowViewMode-maximized oneContent active lafPageHost']//a[@title='New']");
+    By MYCE_QUOTE_TAB = By.xpath("(//a[@title='MYCE Quotes'])[1]");
     By QUATE_RADIO_BUTTON = By.xpath("//div//span[text()='Quote']");
     By NEXT_BUTTON = By.xpath("//button//span[text()='Next']");
     By NAME_QUOTE_FIELD = By.xpath("//div//input[@name='Name']");
@@ -54,15 +54,22 @@ public class MyceQuotes extends BasePage{
     By DATA_ERROR_MESSAGE = By.xpath("//div[@data-error-message]");
 
 
+
     @Step
     public  void openMyceQoteRecord(String name){
         wait1.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//table//a[@title='" + name + "']"))).click();
     }
 
+    @Step("Open Myce Quote page")
+    public MyceQuotes goToMyceQuotes() throws InterruptedException {
+        driver.navigate().to("https://connect-java-4747-dev-ed.lightning.force.com/lightning/o/thn__MYCE_Quote__c/list?filterName=Recent");
+        return this;
+    }
+
 
     @Step
     public void createNewMyceQuote(WebDriver driver){
-        wait1.until(ExpectedConditions.elementToBeClickable(NEW_MYCE_QUOTE_BUTTON)).click();
+        wait1.until(ExpectedConditions.presenceOfElementLocated(NEW_MYCE_QUOTE_BUTTON)).click();
         wait1.until(ExpectedConditions.presenceOfElementLocated(QUATE_RADIO_BUTTON)).click();
         wait1.until(ExpectedConditions.elementToBeClickable(NEXT_BUTTON)).click();
     }
@@ -302,8 +309,10 @@ public class MyceQuotes extends BasePage{
     }
 
     @Step("Open Meeting Rooms")
-    public void openMeetingRooms(WebDriver driver){
-        wait1.until(ExpectedConditions.presenceOfElementLocated(MEETING_ROOM)).click();
+    public void openMeetingRooms(WebDriver driver) throws InterruptedException {
+        //scrollToElement(MEETING_ROOM);
+        wait1.until(ExpectedConditions.presenceOfElementLocated(MEETING_ROOM));
+        clickInvisibleElement(MEETING_ROOM);
     }
 
     @Step("Open Meeting Packages")
@@ -361,12 +370,7 @@ public class MyceQuotes extends BasePage{
     }
 
 
-    /**Page Methods*/
-    @Step("Open Myce Quote Page...")
-    public MyceQuotes goToMyceQuotePage() throws InterruptedException {
-        clickInvisibleElement(MYCE_QUOTE_TAB);
-        return this;
-    }
+
 
 
 

@@ -48,6 +48,7 @@ public class QuoteProducts extends BasePage {
 
     @Step("Fill out the product")
     public void createProduct2(String meetingRoom, String product, String startDate, String endDate) throws InterruptedException {
+
         wait1.until(ExpectedConditions.elementToBeClickable(NEW_PRODUCT)).click();
         Thread.sleep(2000);
         wait1.until(ExpectedConditions.presenceOfElementLocated(MEETING_ROOM_FIELD)).click();
