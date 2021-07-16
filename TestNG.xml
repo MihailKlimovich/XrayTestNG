@@ -17,7 +17,7 @@
     </test>
     <test name="ValidationRule">
         <classes>
-            <class name="tests.ValidationRuleTest"/>
+            <class name="tests.ValidationRuleTest1"/>
         </classes>
     </test>
 

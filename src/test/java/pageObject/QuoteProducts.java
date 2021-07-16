@@ -50,7 +50,7 @@ public class QuoteProducts extends BasePage {
     public void createProduct2(String meetingRoom, String product, String startDate, String endDate) throws InterruptedException {
 
         wait1.until(ExpectedConditions.elementToBeClickable(NEW_PRODUCT)).click();
-        Thread.sleep(2000);
+        Thread.sleep(4000);
         wait1.until(ExpectedConditions.presenceOfElementLocated(MEETING_ROOM_FIELD)).click();
         writeText(MEETING_ROOM_FIELD, meetingRoom);
         wait1.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//lightning-base-combobox-formatted-text[@title='"+ meetingRoom +"']"))).click();

@@ -328,7 +328,7 @@ public class MyceQuotes extends BasePage{
         Thread.sleep(2000);
         refreshPage();
         Thread.sleep(2000);
-        wait1.until(ExpectedConditions.presenceOfElementLocated(PRODUCTS)).click();
+        clickInvisibleElement(PRODUCTS);
     }
 
     @Step("Open first product")

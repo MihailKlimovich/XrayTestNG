@@ -38,7 +38,7 @@ public class Items extends BasePage {
     @Step("Fill out the Item form where Send_to_Mews__c == true")
     public void createItem(String product, String mewsId) throws InterruptedException {
         wait1.until(ExpectedConditions.presenceOfElementLocated(RESERVATION_FIELD)).click();
-        Thread.sleep(1000);
+        Thread.sleep(2000);
         wait1.until(ExpectedConditions.presenceOfElementLocated(RESERVATION_TYPE));
         click2(RESERVATION_TYPE);
         wait1.until(ExpectedConditions.presenceOfElementLocated(PRODUCT_FIELD)).click();

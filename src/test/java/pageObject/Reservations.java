@@ -36,6 +36,12 @@ public class Reservations extends BasePage {
     By MEWS_ID__FIELD = By.xpath("//label[text()='Mews Id']/following-sibling::div//input");
     By STATE__FIELD = By.xpath("//label[text()='State']/following-sibling::div//input");
 
+    @Step("Open Reservations page")
+    public Reservations goToReservations() throws InterruptedException {
+        driver.navigate().to("https://connect-java-4747-dev-ed.lightning.force.com/lightning/o/thn__Reservation__c/list?filterName=Recent");
+        return this;
+    }
+
     @Step
     public void clickNew(){
         wait1.until(ExpectedConditions.elementToBeClickable(NEW_RESERVATION_BUTTON)).click();
@@ -58,9 +64,9 @@ public class Reservations extends BasePage {
                                   String rate) throws InterruptedException {
         wait1.until(ExpectedConditions.presenceOfElementLocated(PROPERTY_FIELD)).click();
         writeText(PROPERTY_FIELD, property);
-        wait1.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[@title='"+ property+"']"))).click();
-        wait1.until(ExpectedConditions.presenceOfElementLocated(MEWS_SERVICE_FIELD)).click();
-        Thread.sleep(1000);
+        wait1.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//lightning-base-combobox-formatted-text[@title='"+ property+"']"))).click();
+        wait1.until(ExpectedConditions.presenceOfElementLocated(MEWS_SERVICE_FIELD));
+        click2(MEWS_SERVICE_FIELD);
         wait1.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[@title='"+ mewsService +"']"))).click();
         wait1.until(ExpectedConditions.presenceOfElementLocated(CUSTOMER_FIELD)).click();
         Thread.sleep(1000);
@@ -97,9 +103,9 @@ public class Reservations extends BasePage {
                                    String mewsId) throws InterruptedException {
         wait1.until(ExpectedConditions.presenceOfElementLocated(PROPERTY_FIELD)).click();
         writeText(PROPERTY_FIELD, property);
-        wait1.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[@title='"+ property+"']"))).click();
+        wait1.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//lightning-base-combobox-formatted-text[@title='"+ property+"']"))).click();
         wait1.until(ExpectedConditions.presenceOfElementLocated(MEWS_SERVICE_FIELD)).click();
-        Thread.sleep(1000);
+        Thread.sleep(2000);
         wait1.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[@title='"+ mewsService +"']"))).click();
         wait1.until(ExpectedConditions.presenceOfElementLocated(CUSTOMER_FIELD)).click();
         Thread.sleep(1000);

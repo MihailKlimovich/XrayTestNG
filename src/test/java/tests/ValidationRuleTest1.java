@@ -27,7 +27,7 @@ public class ValidationRuleTest1 extends BaseTest {
             loginPageForScratchOrg.logInOnScratchOrg(driver);
         }
 
-        /*@Test(priority = 2, description="Setting up validation rules")
+        @Test(priority = 2, description="Setting up validation rules")
         @Severity(SeverityLevel.NORMAL)
         @Description("Setup.thn__ByPass__c.thn__ByPassVR__c == false and User.thn__ByPassVR__c == false")
         @Story("Settings")
@@ -36,7 +36,7 @@ public class ValidationRuleTest1 extends BaseTest {
             developerConsoleWindow.openExecuteAnonymousWindow();
             developerConsoleWindow.runApexCodeFromFile("src/main/Data/ValidationRule1");
             Thread.sleep(5000);
-        }*/
+        }
 
     @Test(priority = 2, description = "Myce_Quote__c.Commission_Validation_Rule")
     @Severity(SeverityLevel.NORMAL)
@@ -515,6 +515,7 @@ public class ValidationRuleTest1 extends BaseTest {
         //then
         Assert.assertEquals(quoteMeetingPackages.readHelpErrorMessage(), expectedMessage);
         quoteMeetingPackages.closeWindow();
+        Thread.sleep(2000);
     }
 
     @Test(priority = 25, description = "Quote_Package__c.VR18_Pax")
@@ -526,8 +527,9 @@ public class ValidationRuleTest1 extends BaseTest {
         String expectedMessage = "Pax cannot be greater than quote's pax";
         //when
         String text = "MYCE Quotes";
-        homePageForScratchOrg.openAppLauncher(driver);
-        homePageForScratchOrg.sendTextInAppWindow(driver, text);
+        //homePageForScratchOrg.openAppLauncher(driver);
+        //homePageForScratchOrg.sendTextInAppWindow(driver, text);
+        myceQuotes.goToMyceQuotes();
         Thread.sleep(2000);
         myceQuotes.createNewMyceQuote(driver);
         myceQuotes.createMyceQuote_happyPath2
@@ -572,7 +574,7 @@ public class ValidationRuleTest1 extends BaseTest {
         String text = "MYCE Quotes";
         packages.goToPackages();
         packages.clickNewPackage(driver);
-        packages.createPackage_happyPath4("Pack d", "Demo", date.generateDate_plus(0, 1), date.generateDate_plus(0, 3));
+        packages.createPackage_happyPath4("Pack e", "Demo", date.generateDate_plus(0, 1), date.generateDate_plus(0, 3));
         packageLine.clickNewPackageLine(driver);
         packageLine.createPackageLine_applyDiscountIsTrue("Pack", "Hotel Room", "ROOM 1 NIGHT", "00:00", "01:00", "20");
         homePageForScratchOrg.openAppLauncher(driver);
@@ -582,16 +584,16 @@ public class ValidationRuleTest1 extends BaseTest {
         myceQuotes.createMyceQuote_happyPath2
                 ("Test16", date.generateTodayDate(), date.generateDate_plus(0, 5), "4", "Demo");
         myceQuotes.openMeetingPackages(driver);
-        quoteMeetingPackages.createMeetingPackages("Pack d", "4",date.generateDate_plus(0, 0), date.generateDate_plus(0, 3), "30");
+        quoteMeetingPackages.createMeetingPackages("Pack e", "4",date.generateDate_plus(0, 0), date.generateDate_plus(0, 3), "30");
         //then
         Assert.assertEquals(quoteMeetingPackages.readErrorMessage2(driver), expectedMessage);
         quoteMeetingPackages.closeWindow();
         myceQuotes.openMeetingPackages(driver);
-        quoteMeetingPackages.createMeetingPackages("Pack d", "4",date.generateDate_plus(0, 4), date.generateDate_plus(0, 3), "30");
+        quoteMeetingPackages.createMeetingPackages("Pack e", "4",date.generateDate_plus(0, 4), date.generateDate_plus(0, 3), "30");
         Assert.assertEquals(quoteMeetingPackages.readErrorMessage2(driver), expectedMessage);
         quoteMeetingPackages.closeWindow();
         myceQuotes.openMeetingPackages(driver);
-        quoteMeetingPackages.createMeetingPackages("Pack d", "4",date.generateDate_plus(0, 1), date.generateDate_plus(0, 4), "30");
+        quoteMeetingPackages.createMeetingPackages("Pack e", "4",date.generateDate_plus(0, 1), date.generateDate_plus(0, 4), "30");
         Assert.assertEquals(quoteMeetingPackages.readErrorMessage2(driver), expectedMessage);
         quoteMeetingPackages.closeWindow();
         Thread.sleep(2000);
@@ -608,7 +610,7 @@ public class ValidationRuleTest1 extends BaseTest {
         String text = "MYCE Quotes";
         packages.goToPackages();
         packages.clickNewPackage(driver);
-        packages.createPackage_happyPath2("Pack e", "Demo", "10");
+        packages.createPackage_happyPath2("Pack f", "Demo", "10");
         packageLine.clickNewPackageLine(driver);
         packageLine.createPackageLine_applyDiscountIsTrue("Pack", "Hotel Room", "ROOM 1 NIGHT", "00:00", "01:00", "100");
         homePageForScratchOrg.openAppLauncher(driver);
@@ -618,7 +620,7 @@ public class ValidationRuleTest1 extends BaseTest {
         myceQuotes.createMyceQuote_happyPath2
                 ("Test17", date.generateTodayDate(), date.generateDate_plus(0, 5), "4", "Demo");
         myceQuotes.openMeetingPackages(driver);
-        quoteMeetingPackages.createMeetingPackages("Pack e", "4",date.generateTodayDate(), date.generateDate_plus(0, 5), "100");
+        quoteMeetingPackages.createMeetingPackages("Pack f", "4",date.generateTodayDate(), date.generateDate_plus(0, 5), "100");
         quoteMeetingPackages.clickEdit();
         quoteMeetingPackages.changeDiscount("11");
         Assert.assertEquals(quoteMeetingPackages.readErrorMessage2(driver), expectedMessage);
@@ -708,6 +710,7 @@ public class ValidationRuleTest1 extends BaseTest {
         //then
         Assert.assertEquals(quoteProducts.readHelpErrorMessage(), expectedMessage);
         quoteProducts.closeWindow();
+        Thread.sleep(2000);
     }
 
     @Test(priority = 32, description = "Quote_Product__c.VR23_ServiceArea_date")
@@ -720,7 +723,6 @@ public class ValidationRuleTest1 extends BaseTest {
         String expectedMessage = "Date of the service area must be the same as the product's";
         //when
         String text = "MYCE Quotes";
-        loginPageForScratchOrg.logInOnScratchOrg(driver);
         //homePageForScratchOrg.openAppLauncher(driver);
         //homePageForScratchOrg.sendTextInAppWindow(driver, text);
         myceQuotes.goToMyceQuotes();
@@ -738,6 +740,7 @@ public class ValidationRuleTest1 extends BaseTest {
         //then
         Assert.assertEquals(quoteProducts.readHelpErrorMessage(), expectedMessage);
         quoteProducts.closeWindow();
+        Thread.sleep(2000);
     }
 
     @Test(priority = 33, description = "Quote_Product__c.VR26_PackageDate")
@@ -750,8 +753,9 @@ public class ValidationRuleTest1 extends BaseTest {
         String expectedMessage = "Date cannot be changed if Product is part of package";
         //when
         String text = "MYCE Quotes";
-        homePageForScratchOrg.openAppLauncher(driver);
-        homePageForScratchOrg.sendTextInAppWindow(driver, text);
+        //homePageForScratchOrg.openAppLauncher(driver);
+        //homePageForScratchOrg.sendTextInAppWindow(driver, text);
+        myceQuotes.goToMyceQuotes();
         myceQuotes.createNewMyceQuote(driver);
         myceQuotes.createMyceQuote_happyPath2
                 ("Test22", date.generateDate_plus(0, 1),
@@ -766,6 +770,7 @@ public class ValidationRuleTest1 extends BaseTest {
         //then
         Assert.assertEquals(quoteProducts.readErrorMessage2(), expectedMessage);
         quoteProducts.closeWindow();
+        Thread.sleep(2000);
     }
 
     @Test(priority = 34, description = "Quote_Product__c.VR36_Consumption_on_Package_Line")
@@ -777,8 +782,9 @@ public class ValidationRuleTest1 extends BaseTest {
         String expectedMessage = "In a package line quote product the on consumption option can not be used.";
         //when
         String text = "MYCE Quotes";
-        homePageForScratchOrg.openAppLauncher(driver);
-        homePageForScratchOrg.sendTextInAppWindow(driver, text);
+        //homePageForScratchOrg.openAppLauncher(driver);
+        //homePageForScratchOrg.sendTextInAppWindow(driver, text);
+        myceQuotes.goToMyceQuotes();
         myceQuotes.createNewMyceQuote(driver);
         myceQuotes.createMyceQuote_happyPath2
                 ("Test23", date.generateDate_plus(0, 1),
@@ -811,6 +817,7 @@ public class ValidationRuleTest1 extends BaseTest {
         //then
         Assert.assertEquals(guests.readHelpErrorMessage(), expectedMessage);
         guests.closeWindow();
+        Thread.sleep(2000);
     }
 
     @Test(priority = 36, description = "Item__c.VR02_item_send_to_mews")
@@ -824,11 +831,13 @@ public class ValidationRuleTest1 extends BaseTest {
         //String text = "Items";
         //homePageForScratchOrg.openAppLauncher(driver);
         //homePageForScratchOrg.sendTextInAppWindow(driver, text);
+        items.goToItems();
         items.clickNew();
         items.createItem("MEETING HALF DAY", "555");
         //then
         Assert.assertEquals(items.readHelpErrorMessage(), expectedMessage);
         items.closeWindow();
+        Thread.sleep(2000);
     }
 
     @Test(priority = 37, description = "Reservation__c.VR03_Reason_update")
@@ -840,8 +849,9 @@ public class ValidationRuleTest1 extends BaseTest {
         String expectedMessage = "Reason update is required when price is updated";
         //when
         String text = "Reservations";
-        homePageForScratchOrg.openAppLauncher(driver);
-        homePageForScratchOrg.sendTextInAppWindow(driver, text);
+        //homePageForScratchOrg.openAppLauncher(driver);
+        //homePageForScratchOrg.sendTextInAppWindow(driver, text);
+        reservations.goToReservations();
         reservations.clickNew();
         reservations.createReservation("Demo", "ORDER", date.generateDate_plus(0,0),
                 date.generateDate_plus(0, 5), "2", "1", "Double",
@@ -849,6 +859,7 @@ public class ValidationRuleTest1 extends BaseTest {
         //then
         Assert.assertEquals(reservations.readHelpErrorMessage(), expectedMessage);
         reservations.closeWindow();
+        Thread.sleep(2000);
     }
 
     @Test(priority = 38, description = "Reservation__c.VR04_Cancellation_reason")
@@ -860,8 +871,9 @@ public class ValidationRuleTest1 extends BaseTest {
         String expectedMessage = "Notes cannot be empty if state is canceled";
         //when
         String text = "Reservations";
-        homePageForScratchOrg.openAppLauncher(driver);
-        homePageForScratchOrg.sendTextInAppWindow(driver, text);
+        //homePageForScratchOrg.openAppLauncher(driver);
+        //homePageForScratchOrg.sendTextInAppWindow(driver, text);
+        reservations.goToReservations();
         Thread.sleep(2000);
         reservations.clickNew();
         reservations.createReservation2("Demo", "ORDER", date.generateDate_plus(0,0),
