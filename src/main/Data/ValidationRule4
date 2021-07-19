@@ -1,0 +1,4 @@
+  update new User(Id = UserInfo.getUserId(),thn__ByPassVR__c = true);
+                thn__bypass__c bp = [SELECT Id, thn__bypassvr__c FROM thn__bypass__c];
+                bp.thn__bypassvr__c = true;
+                update bp;

@@ -264,6 +264,7 @@ public class MyceQuotes extends BasePage{
             String pax,
             String property
     ) throws InterruptedException {
+        wait1.until(ExpectedConditions.presenceOfElementLocated(NAME_QUOTE_FIELD));
         writeText(NAME_QUOTE_FIELD, (nameQuote));
         click(ARRIVAL_DATA_FIELD);
         writeText(ARRIVAL_DATA_FIELD, (arrivalDate));

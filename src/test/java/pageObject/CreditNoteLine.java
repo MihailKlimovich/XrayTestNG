@@ -40,7 +40,8 @@ public class CreditNoteLine extends BasePage {
     public void fillOutNewCreditNoteLineForm(WebDriver driver, String vat) throws InterruptedException {
         wait1.until(ExpectedConditions.presenceOfElementLocated(CREDIT_NOTE_FIELD)).click();
         Thread.sleep(1000);
-        wait1.until(ExpectedConditions.visibilityOfElementLocated(NEW_CREDIT_NOTE_BUTTON)).click();
+        clickInvisibleElement(NEW_CREDIT_NOTE_BUTTON);
+        //wait1.until(ExpectedConditions.visibilityOfElementLocated(NEW_CREDIT_NOTE_BUTTON)).click();
          wait1.until(ExpectedConditions.elementToBeClickable(SAVE_BUTTON_NEW_CREDIT_NOTE)).click();
          wait1.until(ExpectedConditions.presenceOfElementLocated(VAT_FIELD));
          click2(VAT_FIELD);
