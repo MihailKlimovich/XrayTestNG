@@ -44,7 +44,6 @@ public class Reservations extends BasePage {
     public Reservations goToReservations() throws InterruptedException {
         driver.navigate().to("https://connect-java-4747-dev-ed.lightning.force.com/lightning/o/thn__Reservation__c/list?filterName=Recent");
         try{if(wait2.until(ExpectedConditions.alertIsPresent())!=null){
-            System.out.println("Error");
             Alert alert = wait2.until(alertIsPresent());
             alert.accept();
         }}catch (TimeoutException e){
@@ -54,7 +53,8 @@ public class Reservations extends BasePage {
 
     @Step
     public void clickNew(){
-        wait1.until(ExpectedConditions.elementToBeClickable(NEW_RESERVATION_BUTTON)).click();
+        wait1.until(ExpectedConditions.elementToBeClickable(NEW_RESERVATION_BUTTON));
+        clickInvisibleElement(NEW_RESERVATION_BUTTON);
     }
 
     @Step
@@ -77,7 +77,8 @@ public class Reservations extends BasePage {
         wait1.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//lightning-base-combobox-formatted-text[@title='"+ property+"']"))).click();
         wait1.until(ExpectedConditions.presenceOfElementLocated(MEWS_SERVICE_FIELD));
         click2(MEWS_SERVICE_FIELD);
-        wait1.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[@title='"+ mewsService +"']"))).click();
+        clickInvisibleElement(By.xpath("//span[@title='"+ mewsService +"']"));
+        //wait1.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[@title='"+ mewsService +"']"))).click();
         wait1.until(ExpectedConditions.presenceOfElementLocated(CUSTOMER_FIELD)).click();
         Thread.sleep(1000);
         enter();

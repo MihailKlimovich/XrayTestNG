@@ -68,7 +68,6 @@ public class MyceQuotes extends BasePage{
     public MyceQuotes goToMyceQuotes() throws InterruptedException {
         driver.navigate().to("https://connect-java-4747-dev-ed.lightning.force.com/lightning/o/thn__MYCE_Quote__c/list?filterName=Recent");
         try{if(wait2.until(ExpectedConditions.alertIsPresent())!=null){
-            System.out.println("Error");
             Alert alert = wait2.until(alertIsPresent());
             alert.accept();
         }}catch (TimeoutException e){
@@ -330,7 +329,8 @@ public class MyceQuotes extends BasePage{
         Thread.sleep(2000);
         refreshPage();
         Thread.sleep(2000);
-        wait1.until(ExpectedConditions.presenceOfElementLocated(MEETING_PACKAGES)).click();
+        clickInvisibleElement(MEETING_PACKAGES);
+        //wait1.until(ExpectedConditions.presenceOfElementLocated(MEETING_PACKAGES)).click();
     }
 
     @Step("Open Meeting Product")

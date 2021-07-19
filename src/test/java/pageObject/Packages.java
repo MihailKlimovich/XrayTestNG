@@ -39,7 +39,6 @@ public class Packages extends BasePage {
     public Packages goToPackages() throws InterruptedException {
         driver.navigate().to("https://connect-java-4747-dev-ed.lightning.force.com/lightning/o/thn__Package__c/list?filterName=Recent");
         try{if(wait2.until(ExpectedConditions.alertIsPresent())!=null){
-            System.out.println("Error");
             Alert alert = wait2.until(alertIsPresent());
             alert.accept();
         }}catch (TimeoutException e){
@@ -80,7 +79,8 @@ public class Packages extends BasePage {
         wait1.until(ExpectedConditions.presenceOfElementLocated(PROPERTY_FIELD)).click();
         writeText(PROPERTY_FIELD, property);
         click2(PROPERTY_FIELD);
-        wait1.until(ExpectedConditions.visibilityOfElementLocated(PROPERTY_TYPE_DEMO)).click();
+        clickInvisibleElement(PROPERTY_TYPE_DEMO);
+        //wait1.until(ExpectedConditions.visibilityOfElementLocated(PROPERTY_TYPE_DEMO)).click();
         wait1.until(ExpectedConditions.presenceOfElementLocated(DISCOUNT_MAX_FIELD)).click();
         writeText(DISCOUNT_MAX_FIELD, discount);
         wait1.until(ExpectedConditions.elementToBeClickable(SAVE_BUTTON)).click();
@@ -111,7 +111,8 @@ public class Packages extends BasePage {
         writeText(NAME_FIELD, (name));
         wait1.until(ExpectedConditions.presenceOfElementLocated(PROPERTY_FIELD)).click();
         writeText(PROPERTY_FIELD, property);
-        wait1.until(ExpectedConditions.visibilityOfElementLocated(PROPERTY_TYPE_DEMO)).click();
+        clickInvisibleElement(PROPERTY_TYPE_DEMO);
+        //wait1.until(ExpectedConditions.visibilityOfElementLocated(PROPERTY_TYPE_DEMO)).click();
         wait1.until(ExpectedConditions.presenceOfElementLocated(START_DATE_FIELD)).click();
         writeText(START_DATE_FIELD, startDate );
         wait1.until(ExpectedConditions.presenceOfElementLocated(END_DATE_FIELD)).click();

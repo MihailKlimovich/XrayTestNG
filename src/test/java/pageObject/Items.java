@@ -32,7 +32,6 @@ public class Items extends BasePage {
     public Items goToItems() throws InterruptedException {
         driver.navigate().to("https://connect-java-4747-dev-ed.lightning.force.com/lightning/o/thn__Item__c/list?filterName=Recent");
         try{if(wait2.until(ExpectedConditions.alertIsPresent())!=null){
-            System.out.println("Error");
             Alert alert = wait2.until(alertIsPresent());
             alert.accept();
         }}catch (TimeoutException e){

@@ -27,7 +27,7 @@ public class ValidationRuleTest1 extends BaseTest {
             loginPageForScratchOrg.logInOnScratchOrg(driver);
         }
 
-        @Test(priority = 2, description="Setting up validation rules")
+        /*@Test(priority = 2, description="Setting up validation rules")
         @Severity(SeverityLevel.NORMAL)
         @Description("Setup.thn__ByPass__c.thn__ByPassVR__c == false and User.thn__ByPassVR__c == false")
         @Story("Settings")
@@ -36,7 +36,7 @@ public class ValidationRuleTest1 extends BaseTest {
             developerConsoleWindow.openExecuteAnonymousWindow();
             developerConsoleWindow.runApexCodeFromFile("src/main/Data/ValidationRule1");
             Thread.sleep(5000);
-        }
+        }*/
 
     @Test(priority = 2, description = "Myce_Quote__c.Commission_Validation_Rule")
     @Severity(SeverityLevel.NORMAL)
@@ -573,9 +573,10 @@ public class ValidationRuleTest1 extends BaseTest {
         packages.createPackage_happyPath4("Pack e", "Demo", date.generateDate_plus(0, 1), date.generateDate_plus(0, 3));
         packageLine.clickNewPackageLine(driver);
         packageLine.createPackageLine_applyDiscountIsTrue("Pack", "Hotel Room", "ROOM 1 NIGHT", "00:00", "01:00", "20");
-        homePageForScratchOrg.openAppLauncher(driver);
-        homePageForScratchOrg.sendTextInAppWindow(driver, text);
-        Thread.sleep(2000);
+       // homePageForScratchOrg.openAppLauncher(driver);
+        //homePageForScratchOrg.sendTextInAppWindow(driver, text);
+        //Thread.sleep(2000);
+        myceQuotes.goToMyceQuotes();
         myceQuotes.createNewMyceQuote(driver);
         myceQuotes.createMyceQuote_happyPath2
                 ("Test16", date.generateTodayDate(), date.generateDate_plus(0, 5), "4", "Demo");
@@ -608,9 +609,10 @@ public class ValidationRuleTest1 extends BaseTest {
         packages.createPackage_happyPath2("Pack f", "Demo", "10");
         packageLine.clickNewPackageLine(driver);
         packageLine.createPackageLine_applyDiscountIsTrue("Pack", "Hotel Room", "ROOM 1 NIGHT", "00:00", "01:00", "100");
-        homePageForScratchOrg.openAppLauncher(driver);
-        homePageForScratchOrg.sendTextInAppWindow(driver, text);
-        Thread.sleep(2000);
+        //homePageForScratchOrg.openAppLauncher(driver);
+        //homePageForScratchOrg.sendTextInAppWindow(driver, text);
+        //Thread.sleep(2000);
+        myceQuotes.goToMyceQuotes();
         myceQuotes.createNewMyceQuote(driver);
         myceQuotes.createMyceQuote_happyPath2
                 ("Test17", date.generateTodayDate(), date.generateDate_plus(0, 5), "4", "Demo");

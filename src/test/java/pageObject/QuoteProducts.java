@@ -51,11 +51,6 @@ public class QuoteProducts extends BasePage {
     public void createProduct2(String meetingRoom, String product, String startDate, String endDate) throws InterruptedException {
 
         wait1.until(ExpectedConditions.elementToBeClickable(NEW_PRODUCT)).click();
-        Thread.sleep(4000);
-        wait1.until(ExpectedConditions.presenceOfElementLocated(MEETING_ROOM_FIELD)).click();
-        writeText(MEETING_ROOM_FIELD, meetingRoom);
-        clickInvisibleElement(By.xpath("//lightning-base-combobox-formatted-text[@title='"+ meetingRoom +"']"));
-        //wait1.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//lightning-base-combobox-formatted-text[@title='"+ meetingRoom +"']"))).click();
         wait1.until(ExpectedConditions.presenceOfElementLocated(PRODUCT_FIELD));
         click2(PRODUCT_FIELD);
         wait1.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[@title='"+ product +"']"))).click();
@@ -63,6 +58,13 @@ public class QuoteProducts extends BasePage {
         writeText(START_DATE_FIELD, startDate);
         wait1.until(ExpectedConditions.presenceOfElementLocated(END_DATE_FIELD)).click();
         writeText(END_DATE_FIELD, endDate);
+        wait1.until(ExpectedConditions.presenceOfElementLocated(MEETING_ROOM_FIELD)).click();
+        writeText(MEETING_ROOM_FIELD, meetingRoom);
+        Thread.sleep(2000);
+        clear(MEETING_ROOM_FIELD);
+        writeText(MEETING_ROOM_FIELD, meetingRoom);
+        clickInvisibleElement(By.xpath("//lightning-base-combobox-formatted-text[@title='"+ meetingRoom +"']"));
+        //wait1.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//lightning-base-combobox-formatted-text[@title='"+ meetingRoom +"']"))).click();
         wait1.until(ExpectedConditions.elementToBeClickable(SAVE_BUTTON)).click();
     }
 
