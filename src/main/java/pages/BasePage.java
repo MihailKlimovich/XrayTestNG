@@ -29,7 +29,7 @@ public class BasePage {
     public BasePage(WebDriver driver){
         this.driver = driver;
         wait1 = new WebDriverWait(driver, 20);
-        wait2 = new WebDriverWait(driver, 10);
+        wait2 = new WebDriverWait(driver, 3);
         waitForTests = new FluentWait(this.driver)
                 .withTimeout(Duration.ofSeconds(2))
                 .pollingEvery(Duration.ofSeconds(5));

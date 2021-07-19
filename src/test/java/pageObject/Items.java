@@ -1,10 +1,14 @@
 package pageObject;
 
 import io.qameta.allure.Step;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import pages.BasePage;
+
+import static org.openqa.selenium.support.ui.ExpectedConditions.alertIsPresent;
 
 public class Items extends BasePage {
 
@@ -27,6 +31,12 @@ public class Items extends BasePage {
     @Step("Open Items page")
     public Items goToItems() throws InterruptedException {
         driver.navigate().to("https://connect-java-4747-dev-ed.lightning.force.com/lightning/o/thn__Item__c/list?filterName=Recent");
+        try{if(wait2.until(ExpectedConditions.alertIsPresent())!=null){
+            System.out.println("Error");
+            Alert alert = wait2.until(alertIsPresent());
+            alert.accept();
+        }}catch (TimeoutException e){
+        }
         return this;
     }
 

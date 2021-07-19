@@ -33,7 +33,7 @@ public class CreditNoteLine extends BasePage {
     public void clickNewCreditNoteLineButton(WebDriver driver) throws InterruptedException {
         Thread.sleep(3000);
         wait1.until(ExpectedConditions.presenceOfElementLocated(NEW_CREDIT_NOTE_LINE_BUTTON));
-        click2(NEW_CREDIT_NOTE_LINE_BUTTON);
+        clickInvisibleElement(NEW_CREDIT_NOTE_LINE_BUTTON);
     }
 
     @Step ("Fill out the new credit note line where Invoice Line == null & Amount == null & Quantity == null")

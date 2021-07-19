@@ -89,7 +89,6 @@ public class BaseTest {
         guests = new Guests(driver);
         items = new Items(driver);
         reservations = new Reservations(driver);
-
     }
 
    @AfterClass
