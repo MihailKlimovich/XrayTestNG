@@ -63,6 +63,7 @@ public class QuoteProducts extends BasePage {
         Thread.sleep(5000);
         clear(MEETING_ROOM_FIELD);
         writeText(MEETING_ROOM_FIELD, meetingRoom);
+        Thread.sleep(3000);
         clickInvisibleElement(By.xpath("//lightning-base-combobox-formatted-text[@title='"+ meetingRoom +"']"));
         //wait1.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//lightning-base-combobox-formatted-text[@title='"+ meetingRoom +"']"))).click();
         wait1.until(ExpectedConditions.elementToBeClickable(SAVE_BUTTON)).click();

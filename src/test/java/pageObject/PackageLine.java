@@ -112,7 +112,7 @@ public class PackageLine extends BasePage {
         wait1.until(ExpectedConditions.presenceOfElementLocated(TYPE_FIELD)).click();
         wait1.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[@title='"+ type + "']"))).click();
         wait1.until(ExpectedConditions.presenceOfElementLocated(PRODUCT_FIELD));
-        click2(PRODUCT_FIELD);
+        clickInvisibleElement(PRODUCT_FIELD);
         clickInvisibleElement(By.xpath("//span[@title='" + product + "']"));
         //Thread.sleep(2000);
         //wait1.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[@title='" + product + "']"))).click();
