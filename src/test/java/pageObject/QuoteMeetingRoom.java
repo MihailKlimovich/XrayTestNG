@@ -83,8 +83,9 @@ public class QuoteMeetingRoom extends BasePage {
     public void  changeResource(){
         wait1.until(ExpectedConditions.presenceOfElementLocated(EDIT_BUTTON)).click();
         wait1.until(ExpectedConditions.presenceOfElementLocated(LOCK_RESOURCE_CHECKBOX)).click();
+        //clickInvisibleElement(RESOURCE_FIELD);
+        wait1.until(ExpectedConditions.presenceOfElementLocated(RESOURCE_FIELD));
         clickInvisibleElement(RESOURCE_FIELD);
-        //wait1.until(ExpectedConditions.presenceOfElementLocated(RESOURCE_FIELD)).click();
         delete();
         wait1.until(ExpectedConditions.presenceOfElementLocated(SAVE_BUTTON)).click();
     }

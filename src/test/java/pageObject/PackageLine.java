@@ -49,7 +49,8 @@ public class PackageLine extends BasePage {
         wait1.until(ExpectedConditions.presenceOfElementLocated(NAME_FIELD));
         writeText(NAME_FIELD, (name));
         wait1.until(ExpectedConditions.presenceOfElementLocated(TYPE_FIELD)).click();
-        wait1.until(ExpectedConditions.presenceOfElementLocated(TYPE_HOTEL_ROOM));
+        clickInvisibleElement(TYPE_HOTEL_ROOM);
+        //wait1.until(ExpectedConditions.presenceOfElementLocated(TYPE_HOTEL_ROOM));
         click2(TYPE_HOTEL_ROOM);
         wait1.until(ExpectedConditions.presenceOfElementLocated(PRODUCT_FIELD));
         click2(PRODUCT_FIELD);
@@ -113,6 +114,7 @@ public class PackageLine extends BasePage {
         wait1.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[@title='"+ type + "']"))).click();
         wait1.until(ExpectedConditions.presenceOfElementLocated(PRODUCT_FIELD));
         clickInvisibleElement(PRODUCT_FIELD);
+        Thread.sleep(2000);
         clickInvisibleElement(By.xpath("//span[@title='" + product + "']"));
         //Thread.sleep(2000);
         //wait1.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[@title='" + product + "']"))).click();

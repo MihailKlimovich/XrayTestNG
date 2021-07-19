@@ -49,7 +49,8 @@ public class Items extends BasePage {
         wait1.until(ExpectedConditions.presenceOfElementLocated(RESERVATION_FIELD)).click();
         Thread.sleep(2000);
         wait1.until(ExpectedConditions.presenceOfElementLocated(RESERVATION_TYPE));
-        click2(RESERVATION_TYPE);
+        clickInvisibleElement(RESERVATION_TYPE);
+        //click2(RESERVATION_TYPE);
         wait1.until(ExpectedConditions.presenceOfElementLocated(PRODUCT_FIELD)).click();
         writeText(PRODUCT_FIELD, product);
         Thread.sleep(2000);
