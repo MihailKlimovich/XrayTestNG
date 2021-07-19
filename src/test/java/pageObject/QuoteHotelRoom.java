@@ -45,7 +45,8 @@ public class QuoteHotelRoom extends BasePage {
         Thread.sleep(2000);
         wait1.until(ExpectedConditions.presenceOfElementLocated(PRODUCT_FIELD)).click();
         Thread.sleep(1000);
-        wait1.until(ExpectedConditions.presenceOfElementLocated(PRODUCT_TYPE_ROOM1NIGHT)).click();
+        clickInvisibleElement(PRODUCT_TYPE_ROOM1NIGHT);
+        //wait1.until(ExpectedConditions.presenceOfElementLocated(PRODUCT_TYPE_ROOM1NIGHT)).click();
         wait1.until(ExpectedConditions.presenceOfElementLocated(ROOM_TYPE_FIELD)).click();
         wait1.until(ExpectedConditions.presenceOfElementLocated(ROOM_TYPE_SINGLE)).click();
         wait1.until(ExpectedConditions.presenceOfElementLocated(ARRIVAL_DATE_FIELD)).click();

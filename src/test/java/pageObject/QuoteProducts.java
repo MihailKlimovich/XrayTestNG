@@ -60,7 +60,7 @@ public class QuoteProducts extends BasePage {
         writeText(END_DATE_FIELD, endDate);
         wait1.until(ExpectedConditions.presenceOfElementLocated(MEETING_ROOM_FIELD)).click();
         writeText(MEETING_ROOM_FIELD, meetingRoom);
-        Thread.sleep(2000);
+        Thread.sleep(5000);
         clear(MEETING_ROOM_FIELD);
         writeText(MEETING_ROOM_FIELD, meetingRoom);
         clickInvisibleElement(By.xpath("//lightning-base-combobox-formatted-text[@title='"+ meetingRoom +"']"));
