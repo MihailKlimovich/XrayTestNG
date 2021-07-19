@@ -91,7 +91,7 @@ public class BaseTest {
         reservations = new Reservations(driver);
     }
 
-   @AfterClass
+    @AfterClass
     public void teardown(){
         driver.close();
         driver.quit();

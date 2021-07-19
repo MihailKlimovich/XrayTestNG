@@ -36,7 +36,8 @@ public class QuoteProducts extends BasePage {
         Thread.sleep(2000);
         wait1.until(ExpectedConditions.presenceOfElementLocated(PRODUCT_FIELD));
         click2(PRODUCT_FIELD);
-        wait1.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[@title='"+ product +"']"))).click();
+        clickInvisibleElement(By.xpath("//span[@title='"+ product +"']"));
+        //wait1.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[@title='"+ product +"']"))).click();
         wait1.until(ExpectedConditions.presenceOfElementLocated(PAX_FIELD)).click();
         writeText(PAX_FIELD, pax);
         wait1.until(ExpectedConditions.presenceOfElementLocated(START_DATE_FIELD)).click();
@@ -53,7 +54,8 @@ public class QuoteProducts extends BasePage {
         Thread.sleep(4000);
         wait1.until(ExpectedConditions.presenceOfElementLocated(MEETING_ROOM_FIELD)).click();
         writeText(MEETING_ROOM_FIELD, meetingRoom);
-        wait1.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//lightning-base-combobox-formatted-text[@title='"+ meetingRoom +"']"))).click();
+        clickInvisibleElement(By.xpath("//lightning-base-combobox-formatted-text[@title='"+ meetingRoom +"']"));
+        //wait1.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//lightning-base-combobox-formatted-text[@title='"+ meetingRoom +"']"))).click();
         wait1.until(ExpectedConditions.presenceOfElementLocated(PRODUCT_FIELD));
         click2(PRODUCT_FIELD);
         wait1.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[@title='"+ product +"']"))).click();
