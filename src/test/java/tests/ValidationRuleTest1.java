@@ -461,7 +461,6 @@ public class ValidationRuleTest1 extends BaseTest {
         String text = "MYCE Quotes";
         //homePageForScratchOrg.openAppLauncher(driver);
         //homePageForScratchOrg.sendTextInAppWindow(driver, text);
-        loginPageForScratchOrg.logInOnScratchOrg(driver);
         myceQuotes.goToMyceQuotes();
         myceQuotes.createNewMyceQuote(driver);
         myceQuotes.createMyceQuote_happyPath2
@@ -496,7 +495,6 @@ public class ValidationRuleTest1 extends BaseTest {
         String expectedMessage = "No Discount possible, package is not configured correctly. Please contact your admin";
         //when
         String text = "MYCE Quotes";
-        loginPageForScratchOrg.logInOnScratchOrg(driver);
         packages.goToPackages();
         packages.clickNewPackage(driver);
         packages.createPackage_happyPath2("Test4", "DEMO", "15" );
