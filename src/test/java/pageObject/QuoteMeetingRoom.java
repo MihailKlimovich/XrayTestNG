@@ -80,12 +80,13 @@ public class QuoteMeetingRoom extends BasePage {
     }
 
     @Step("Change resource when Lock Resource is true")
-    public void  changeResource(){
+    public void  changeResource() throws InterruptedException {
         wait1.until(ExpectedConditions.presenceOfElementLocated(EDIT_BUTTON)).click();
         wait1.until(ExpectedConditions.presenceOfElementLocated(LOCK_RESOURCE_CHECKBOX)).click();
         //clickInvisibleElement(RESOURCE_FIELD);
         wait1.until(ExpectedConditions.presenceOfElementLocated(RESOURCE_FIELD));
         clickInvisibleElement(RESOURCE_FIELD);
+        Thread.sleep(2000);
         delete();
         wait1.until(ExpectedConditions.presenceOfElementLocated(SAVE_BUTTON)).click();
     }
