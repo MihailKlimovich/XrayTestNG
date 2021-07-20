@@ -109,9 +109,11 @@ public class Packages extends BasePage {
     ) throws InterruptedException {
         wait1.until(ExpectedConditions.presenceOfElementLocated(NAME_FIELD));
         writeText(NAME_FIELD, (name));
-        wait1.until(ExpectedConditions.presenceOfElementLocated(PROPERTY_FIELD)).click();
+        wait1.until(ExpectedConditions.presenceOfElementLocated(PROPERTY_FIELD));
+        click2(PROPERTY_FIELD);
         writeText(PROPERTY_FIELD, property);
-        clickInvisibleElement(PROPERTY_TYPE_DEMO);
+        wait1.until(ExpectedConditions.presenceOfElementLocated(PROPERTY_TYPE_DEMO));
+        click2(PROPERTY_TYPE_DEMO);
         //wait1.until(ExpectedConditions.visibilityOfElementLocated(PROPERTY_TYPE_DEMO)).click();
         wait1.until(ExpectedConditions.presenceOfElementLocated(START_DATE_FIELD)).click();
         writeText(START_DATE_FIELD, startDate );
