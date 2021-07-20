@@ -114,12 +114,12 @@ public class PackageLine extends BasePage {
         click2(TYPE_FIELD);
         wait1.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[@title='"+ type + "']"))).click();
         wait1.until(ExpectedConditions.presenceOfElementLocated(PRODUCT_FIELD));
-        click2(PRODUCT_FIELD);
+        click3(PRODUCT_FIELD);
 
         //clickInvisibleElement(By.xpath("//span[@title='" + product + "']"));
         //Thread.sleep(2000);
         wait1.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[@title='" + product + "']")));
-        click2(By.xpath("//span[@title='" + product + "']"));
+        click3(By.xpath("//span[@title='" + product + "']"));
         wait1.until(ExpectedConditions.presenceOfElementLocated(APPLY_DISCOUNT_RADIO_BUTTON)).click();
         wait1.until(ExpectedConditions.presenceOfElementLocated(START_TIME_FIELD)).click();
         writeText(START_TIME_FIELD, start);
