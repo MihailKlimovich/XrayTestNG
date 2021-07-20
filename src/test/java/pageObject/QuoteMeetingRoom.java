@@ -87,7 +87,6 @@ public class QuoteMeetingRoom extends BasePage {
         wait1.until(ExpectedConditions.presenceOfElementLocated(RESOURCE_FIELD));
         click2(RESOURCE_FIELD);
         //clickInvisibleElement(RESOURCE_FIELD);
-        Thread.sleep(2000);
         delete();
         wait1.until(ExpectedConditions.presenceOfElementLocated(SAVE_BUTTON)).click();
     }

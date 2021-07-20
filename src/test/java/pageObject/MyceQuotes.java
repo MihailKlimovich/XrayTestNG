@@ -199,10 +199,10 @@ public class MyceQuotes extends BasePage{
         writeText(PAX_FIELD, (pax));
         wait1.until(ExpectedConditions.presenceOfElementLocated(COMPANY_FIELD)).click();
         writeText(COMPANY_FIELD, company);
-        click(COMPANY_TYPE_AGENT);
+        click2(COMPANY_TYPE_AGENT);
         wait1.until(ExpectedConditions.presenceOfElementLocated(AGENT_FIELD)).click();
         writeText(AGENT_FIELD, agent);
-        click(AGENT_TYPE_COMPANY);
+        click2(AGENT_TYPE_COMPANY);
         scrollToElement(PROPERTY_FIELD);
         wait1.until(ExpectedConditions.presenceOfElementLocated(PROPERTY_FIELD)).click();
         writeText(PROPERTY_FIELD, (property));
