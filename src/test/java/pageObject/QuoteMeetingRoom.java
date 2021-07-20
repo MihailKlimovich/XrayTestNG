@@ -47,7 +47,7 @@ public class QuoteMeetingRoom extends BasePage {
 
     @Step("Fill out the meeting room")
     public void createMeetingRoom(String pax) throws InterruptedException {
-        wait1.until(ExpectedConditions.elementToBeClickable(NEW_MEETING_ROOM)).click();
+        wait1.until(ExpectedConditions.presenceOfElementLocated(NEW_MEETING_ROOM)).click();
         Thread.sleep(2000);
         wait1.until(ExpectedConditions.presenceOfElementLocated(PRODUCT_FIELD)).click();
         wait1.until(ExpectedConditions.presenceOfElementLocated(PRODUCT_TYPE_ROOM1NIGHT)).click();
