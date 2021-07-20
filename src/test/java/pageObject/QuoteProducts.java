@@ -36,8 +36,9 @@ public class QuoteProducts extends BasePage {
         Thread.sleep(2000);
         wait1.until(ExpectedConditions.presenceOfElementLocated(PRODUCT_FIELD)).click();
         Thread.sleep(1000);
-        //click2(PRODUCT_FIELD);
-        clickInvisibleElement(By.xpath("//span[@title='"+ product +"']"));
+        click2(PRODUCT_FIELD);
+        wait1.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[@title='"+ product +"']")));
+        click2(By.xpath("//span[@title='"+ product +"']"));
         //wait1.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[@title='"+ product +"']"))).click();
         wait1.until(ExpectedConditions.presenceOfElementLocated(PAX_FIELD)).click();
         writeText(PAX_FIELD, pax);
