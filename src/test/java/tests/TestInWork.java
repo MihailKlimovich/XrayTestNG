@@ -16,7 +16,7 @@ public class TestInWork extends BaseTest{
 
 
 
-    @Test(priority = 1, description = "Quote_Meetings_Room")
+    /*@Test(priority = 1, description = "Quote_Meetings_Room")
     @Severity(SeverityLevel.NORMAL)
     @Description("SetupResource")
     @Story("")
@@ -100,7 +100,9 @@ public class TestInWork extends BaseTest{
         Assert.assertEquals(expectedMessage, quoteMeetingRoom.readErrorMessage2(driver));
         quoteMeetingRoom.closeWindow(driver);
 
-    }
+    }*/
+
+
 
 
 

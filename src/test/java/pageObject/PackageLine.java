@@ -110,9 +110,11 @@ public class PackageLine extends BasePage {
     ) throws InterruptedException {
         wait1.until(ExpectedConditions.presenceOfElementLocated(NAME_FIELD));
         writeText(NAME_FIELD, (name));
-        wait1.until(ExpectedConditions.presenceOfElementLocated(TYPE_FIELD)).click();
+        wait1.until(ExpectedConditions.presenceOfElementLocated(TYPE_FIELD));
+        click2(TYPE_FIELD);
         wait1.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[@title='"+ type + "']"))).click();
-        wait1.until(ExpectedConditions.presenceOfElementLocated(PRODUCT_FIELD)).click();
+        wait1.until(ExpectedConditions.presenceOfElementLocated(PRODUCT_FIELD));
+        click2(PRODUCT_FIELD);
         Thread.sleep(3000);
         //clickInvisibleElement(By.xpath("//span[@title='" + product + "']"));
         //Thread.sleep(2000);
