@@ -491,7 +491,6 @@ public class ValidationRuleTest1 extends BaseTest {
         //given
         String expectedMessage = "No Discount possible, package is not configured correctly. Please contact your admin";
         //when
-        loginPageForScratchOrg.logInOnScratchOrg(driver);
         packages.goToPackages();
         packages.clickNewPackage(driver);
         packages.createPackage_happyPath2("Test4", "DEMO", "15" );
