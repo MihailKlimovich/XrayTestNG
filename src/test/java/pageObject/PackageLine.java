@@ -48,14 +48,14 @@ public class PackageLine extends BasePage {
     ) throws InterruptedException {
         wait1.until(ExpectedConditions.presenceOfElementLocated(NAME_FIELD));
         writeText(NAME_FIELD, (name));
-        wait1.until(ExpectedConditions.presenceOfElementLocated(TYPE_FIELD)).click();
-        clickInvisibleElement(TYPE_HOTEL_ROOM);
-        //wait1.until(ExpectedConditions.presenceOfElementLocated(TYPE_HOTEL_ROOM));
-        click2(TYPE_HOTEL_ROOM);
+        wait1.until(ExpectedConditions.presenceOfElementLocated(TYPE_FIELD));
+        click3(TYPE_FIELD);
+        wait1.until(ExpectedConditions.presenceOfElementLocated(TYPE_HOTEL_ROOM));
+        click3(TYPE_HOTEL_ROOM);
         wait1.until(ExpectedConditions.presenceOfElementLocated(PRODUCT_FIELD));
-        click2(PRODUCT_FIELD);
+        click3(PRODUCT_FIELD);
         wait1.until(ExpectedConditions.presenceOfElementLocated(PRODUCT_TYPE));
-        click2(PRODUCT_TYPE);
+        click3(PRODUCT_TYPE);
         wait1.until(ExpectedConditions.presenceOfElementLocated(START_TIME_FIELD)).click();
         writeText(START_TIME_FIELD, start);
         wait1.until(ExpectedConditions.presenceOfElementLocated(END_TIME_FIELD)).click();
@@ -111,9 +111,9 @@ public class PackageLine extends BasePage {
         wait1.until(ExpectedConditions.presenceOfElementLocated(NAME_FIELD));
         writeText(NAME_FIELD, (name));
         wait1.until(ExpectedConditions.presenceOfElementLocated(TYPE_FIELD));
-        click2(TYPE_FIELD);
+        click3(TYPE_FIELD);
         wait1.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[@title='"+ type + "']"))).click();
-        wait1.until(ExpectedConditions.presenceOfElementLocated(PRODUCT_FIELD));
+        wait1.until(ExpectedConditions.presenceOfElementLocated(PRODUCT_FIELD)).click();
         click3(PRODUCT_FIELD);
 
         //clickInvisibleElement(By.xpath("//span[@title='" + product + "']"));
