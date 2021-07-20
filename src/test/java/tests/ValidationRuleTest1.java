@@ -721,7 +721,6 @@ public class ValidationRuleTest1 extends BaseTest {
         //given
         String expectedMessage = "Date of the service area must be the same as the product's";
         //when
-        String text = "MYCE Quotes";
         //homePageForScratchOrg.openAppLauncher(driver);
         //homePageForScratchOrg.sendTextInAppWindow(driver, text);
         myceQuotes.goToMyceQuotes();

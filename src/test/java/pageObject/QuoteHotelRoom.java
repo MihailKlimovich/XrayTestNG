@@ -43,9 +43,10 @@ public class QuoteHotelRoom extends BasePage {
     ) throws InterruptedException {
         wait1.until(ExpectedConditions.elementToBeClickable(NEW_HOTEL_ROOM)).click();
         Thread.sleep(2000);
-        wait1.until(ExpectedConditions.presenceOfElementLocated(PRODUCT_FIELD)).click();
-        Thread.sleep(1000);
-        clickInvisibleElement(PRODUCT_TYPE_ROOM1NIGHT);
+        wait1.until(ExpectedConditions.presenceOfElementLocated(PRODUCT_FIELD));
+        click2(PRODUCT_FIELD);
+        wait1.until(ExpectedConditions.presenceOfElementLocated(PRODUCT_TYPE_ROOM1NIGHT));
+        click2(PRODUCT_TYPE_ROOM1NIGHT);
         //wait1.until(ExpectedConditions.presenceOfElementLocated(PRODUCT_TYPE_ROOM1NIGHT)).click();
         wait1.until(ExpectedConditions.presenceOfElementLocated(ROOM_TYPE_FIELD)).click();
         wait1.until(ExpectedConditions.presenceOfElementLocated(ROOM_TYPE_SINGLE)).click();
