@@ -749,8 +749,6 @@ public class ValidationRuleTest1 extends BaseTest {
         String expectedMessage = "Date cannot be changed if Product is part of package";
         //when
         String text = "MYCE Quotes";
-        //homePageForScratchOrg.openAppLauncher(driver);
-        //homePageForScratchOrg.sendTextInAppWindow(driver, text);
         myceQuotes.goToMyceQuotes();
         myceQuotes.createNewMyceQuote(driver);
         myceQuotes.createMyceQuote_happyPath2
@@ -777,8 +775,6 @@ public class ValidationRuleTest1 extends BaseTest {
         String expectedMessage = "In a package line quote product the on consumption option can not be used.";
         //when
         String text = "MYCE Quotes";
-        //homePageForScratchOrg.openAppLauncher(driver);
-        //homePageForScratchOrg.sendTextInAppWindow(driver, text);
         myceQuotes.goToMyceQuotes();
         myceQuotes.createNewMyceQuote(driver);
         myceQuotes.createMyceQuote_happyPath2
@@ -822,9 +818,6 @@ public class ValidationRuleTest1 extends BaseTest {
         //given
         String expectedMessage = "The Reservation product already exists and cannot be sent twice";
         //when
-        //String text = "Items";
-        //homePageForScratchOrg.openAppLauncher(driver);
-        //homePageForScratchOrg.sendTextInAppWindow(driver, text);
         items.goToItems();
         items.clickNew();
         items.createItem("MEETING HALF DAY", "555");
@@ -841,9 +834,6 @@ public class ValidationRuleTest1 extends BaseTest {
         //given
         String expectedMessage = "Reason update is required when price is updated";
         //when
-        String text = "Reservations";
-        //homePageForScratchOrg.openAppLauncher(driver);
-        //homePageForScratchOrg.sendTextInAppWindow(driver, text);
         reservations.goToReservations();
         reservations.clickNew();
         reservations.createReservation("Demo", "ORDER", date.generateDate_plus(0,0),
@@ -862,9 +852,6 @@ public class ValidationRuleTest1 extends BaseTest {
         //given
         String expectedMessage = "Notes cannot be empty if state is canceled";
         //when
-        String text = "Reservations";
-        //homePageForScratchOrg.openAppLauncher(driver);
-        //homePageForScratchOrg.sendTextInAppWindow(driver, text);
         reservations.goToReservations();
         Thread.sleep(2000);
         reservations.clickNew();

@@ -65,7 +65,9 @@ public class QuoteMeetingRoom extends BasePage {
         wait1.until(ExpectedConditions.elementToBeClickable(NEW_MEETING_ROOM)).click();
         Thread.sleep(2000);
         wait1.until(ExpectedConditions.presenceOfElementLocated(PRODUCT_FIELD)).click();
-        wait1.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[@title='" + roomType +"']"))).click();
+        click3(PRODUCT_FIELD);
+        wait1.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[@title='" + roomType +"']")));
+        click3(By.xpath("//span[@title='" + roomType +"']"));
         wait1.until(ExpectedConditions.presenceOfElementLocated(SAVE_BUTTON)).click();
     }
 
