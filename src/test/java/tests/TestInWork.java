@@ -102,19 +102,16 @@ public class TestInWork extends BaseTest{
 
     }*/
 
-    @Test(priority = 20, description = "Quote_Meetings_Room__c.VR19_SetupResource")
+    @Test(priority = 21, description = "Quote_Meetings_Room__c.VR19_SetupResource")
     @Severity(SeverityLevel.NORMAL)
     @Description("Quote_Meetings_Room__c.VR19_SetupResource")
     @Story("")
     public void testCreateQuoteMeetingsRoom1() throws InterruptedException, IOException {
         String expectedMessage = "Meeting room's pax exceeds the resource's capacity for this setup";
         //when
-        String text = "MYCE Quotes";
         //developerConsoleWindow.openDeveloperConsole();
         //developerConsoleWindow.openExecuteAnonymousWindow();
         //developerConsoleWindow.runApexCodeFromFile("src/main/Data/Resource");
-        //homePageForScratchOrg.openAppLauncher(driver);
-        //homePageForScratchOrg.sendTextInAppWindow(driver, text);
         loginPageForScratchOrg.logInOnScratchOrg(driver);
         myceQuotes.goToMyceQuotes();
         myceQuotes.createNewMyceQuote(driver);
@@ -145,7 +142,7 @@ public class TestInWork extends BaseTest{
         quoteMeetingRoom.closeWindow(driver);
     }
 
-    @Test(priority = 21, description = "Quote_Meetings_Room__c.VR21_Lock_Resource")
+    @Test(priority = 22, description = "Quote_Meetings_Room__c.VR21_Lock_Resource")
     @Severity(SeverityLevel.NORMAL)
     @Description("Quote_Meetings_Room__c.VR21_Lock_Resource")
     @Story("")

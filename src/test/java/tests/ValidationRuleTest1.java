@@ -68,6 +68,7 @@ public class ValidationRuleTest1 extends BaseTest {
                 "if 'Commission to' field equals 'agent', agent shouldn't be null or " +
                 "if 'Commission to' field equals 'company', company shouldn't be null or";
         //when
+        myceQuotes.goToMyceQuotes();
         myceQuotes.createNewMyceQuote(driver);
         myceQuotes.fillOutTheQuotaForm_whenCommissionIsAgent
                 ("Test2", date.generateTodayDate(), date.generateTodayDate(),
@@ -87,6 +88,7 @@ public class ValidationRuleTest1 extends BaseTest {
                 "if 'Commission to' field equals 'agent', agent shouldn't be null or " +
                 "if 'Commission to' field equals 'company', company shouldn't be null or";
         //when
+        myceQuotes.goToMyceQuotes();
         myceQuotes.createNewMyceQuote(driver);
         myceQuotes.fillOutTheQuotaForm_whenCommissionIsCompany
                 ("Test3", date.generateTodayDate(), date.generateTodayDate(),
@@ -104,6 +106,7 @@ public class ValidationRuleTest1 extends BaseTest {
         //given
         String expectedMessage = "Departure Date cannot be anterior to Arrival Date";
         //when
+        myceQuotes.goToMyceQuotes();
         myceQuotes.createNewMyceQuote(driver);
         myceQuotes.fillOutTheQuotaFormWithoutCommission
                 ("Test4", date.generateTodayDate(), date.generateDate_minus(1, 1),
@@ -121,6 +124,7 @@ public class ValidationRuleTest1 extends BaseTest {
         //given
         String expectedMessage = "Company cannot be of type 'Agent' and Agent must be of type 'Agent' or 'Leads'";
         //when
+        myceQuotes.goToMyceQuotes();
         myceQuotes.createNewMyceQuote(driver);
         myceQuotes.fillOutTheQuotaForm_whenCompanyIsAgentAndAgentIsCompany
                 ("Test5", date.generateTodayDate(), date.generateTodayDate(), "10", "Test",
@@ -138,6 +142,7 @@ public class ValidationRuleTest1 extends BaseTest {
         //given
         String expectedMessage = "Reservation guest is required to send reservations to Mews";
         //when
+        myceQuotes.goToMyceQuotes();
         myceQuotes.createNewMyceQuote(driver);
         myceQuotes.fillOutTheQuotaFormWhereReservationGuestIsNull
                 ("Test6", date.generateTodayDate(), date.generateTodayDate(), "10", "Test");
@@ -154,6 +159,7 @@ public class ValidationRuleTest1 extends BaseTest {
         //given
         String expectedMessage = "Closed Status is required when quote is at stage '4 - Closed'";
         //when
+        myceQuotes.goToMyceQuotes();
         myceQuotes.createNewMyceQuote(driver);
         myceQuotes.createMyceQuote_happyPath
                 ("Test7", date.generateTodayDate(), date.generateTodayDate(), "10", "Test");
@@ -173,6 +179,7 @@ public class ValidationRuleTest1 extends BaseTest {
         //given
         String expectedMessage = "Closed Status can be 'Cancelled' only if Myce quote was 'Won'";
         //when
+        myceQuotes.goToMyceQuotes();
         myceQuotes.createNewMyceQuote(driver);
         myceQuotes.createMyceQuote_happyPath
                 ("Test8", date.generateTodayDate(), date.generateTodayDate(), "10", "Test");
@@ -757,9 +764,7 @@ public class ValidationRuleTest1 extends BaseTest {
         //given
         String expectedMessage = "Hotel is required to create/update guest in Mews";
         //when
-        String text = "Guests";
-        homePageForScratchOrg.openAppLauncher(driver);
-        homePageForScratchOrg.sendTextInAppWindow(driver, text);
+        guests.goToGuests();
         guests.clickNew();
         guests.createGuest("John");
         //then

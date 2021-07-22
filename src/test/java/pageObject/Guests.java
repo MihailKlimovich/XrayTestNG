@@ -1,10 +1,14 @@
 package pageObject;
 
 import io.qameta.allure.Step;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import pages.BasePage;
+
+import static org.openqa.selenium.support.ui.ExpectedConditions.alertIsPresent;
 
 public class Guests extends BasePage {
 
@@ -20,6 +24,17 @@ public class Guests extends BasePage {
     By HELP_ERROR_MESSAGE = By.xpath("//div[@data-help-message]");
     By CLOSE_WINDOW_BUTTON = By.
             xpath("//div[@class='modal-container slds-modal__container']//button[@title='Close this window']");
+
+    @Step("Open Guests page")
+    public Guests goToGuests() throws InterruptedException {
+        driver.navigate().to("https://connect-java-4747-dev-ed.lightning.force.com/lightning/o/thn__Guest__c/list?filterName=Recent");
+        try{if(wait2.until(ExpectedConditions.alertIsPresent())!=null){
+            Alert alert = wait2.until(alertIsPresent());
+            alert.accept();
+        }}catch (TimeoutException e){
+        }
+        return this;
+    }
 
     @Step
     public void clickNew(){

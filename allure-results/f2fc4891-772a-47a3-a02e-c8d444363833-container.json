@@ -1,1 +1,0 @@
-{"uuid":"f2fc4891-772a-47a3-a02e-c8d444363833","name":"tests.ValidationRuleTest1","children":["c8e7263c-291d-4667-8d85-319a202632c8"],"befores":[{"name":"classLevelSetup","status":"passed","stage":"finished","description":"","steps":[],"attachments":[],"parameters":[],"start":1626937970443,"stop":1626937972276}],"afters":[],"links":[],"start":1626937970399,"stop":1626937976269}
