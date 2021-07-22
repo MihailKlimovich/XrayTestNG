@@ -23,7 +23,7 @@ public class QuoteProductTest extends BaseTest {
         loginPageForScratchOrg.logInOnScratchOrg(driver);
         homePageForScratchOrg.openAppLauncher(driver);
         homePageForScratchOrg.sendTextInAppWindow(driver, text);
-        myceQuotes.createNewMyceQuote(driver);
+        myceQuotes.createNewMyceQuote();
         myceQuotes.createMyceQuote_happyPath2("Test222", date.generateDate_plus(0, 0),
                 date.generateDate_plus(0, 4), "10", "Demo");
         myceQuotes.openProducts();
@@ -45,7 +45,7 @@ public class QuoteProductTest extends BaseTest {
         String text = "MYCE Quotes";
         homePageForScratchOrg.openAppLauncher(driver);
         homePageForScratchOrg.sendTextInAppWindow(driver, text);
-        myceQuotes.createNewMyceQuote(driver);
+        myceQuotes.createNewMyceQuote();
         myceQuotes.createMyceQuote_happyPath2("Test222", date.generateDate_plus(0, 1),
                 date.generateDate_plus(0, 4), "10", "Demo");
         myceQuotes.openProducts();
@@ -82,7 +82,7 @@ public class QuoteProductTest extends BaseTest {
         String text = "MYCE Quotes";
         homePageForScratchOrg.openAppLauncher(driver);
         homePageForScratchOrg.sendTextInAppWindow(driver, text);
-        myceQuotes.createNewMyceQuote(driver);
+        myceQuotes.createNewMyceQuote();
         myceQuotes.createMyceQuote_happyPath2("Test222", date.generateDate_plus(0, 1),
                 date.generateDate_plus(0, 4), "10", "Demo");
         myceQuotes.openProducts();
@@ -104,12 +104,12 @@ public class QuoteProductTest extends BaseTest {
         String text = "MYCE Quotes";
         homePageForScratchOrg.openAppLauncher(driver);
         homePageForScratchOrg.sendTextInAppWindow(driver, text);
-        myceQuotes.createNewMyceQuote(driver);
+        myceQuotes.createNewMyceQuote();
         myceQuotes.createMyceQuote_happyPath2
                 ("Test222", date.generateDate_plus(0, 1),
                         date.generateDate_plus(0, 4), "10", "Demo");
         Thread.sleep(2000);
-        myceQuotes.openMeetingRooms(driver);
+        myceQuotes.openMeetingRooms();
         quoteMeetingRoom.createMeetingRoom2("MEETING HALF DAY");
         quoteMeetingRoom.clickQuoteName("Test222");
         myceQuotes.openProducts();
@@ -131,11 +131,11 @@ public class QuoteProductTest extends BaseTest {
         String text = "MYCE Quotes";
         homePageForScratchOrg.openAppLauncher(driver);
         homePageForScratchOrg.sendTextInAppWindow(driver, text);
-        myceQuotes.createNewMyceQuote(driver);
+        myceQuotes.createNewMyceQuote();
         myceQuotes.createMyceQuote_happyPath2
                 ("Test222", date.generateDate_plus(0, 1),
                         date.generateDate_plus(0, 4), "10", "Demo");
-        myceQuotes.openMeetingPackages(driver);
+        myceQuotes.openMeetingPackages();
         quoteMeetingPackages.createMeetingPackages("Pack d", "10", date.generateDate_plus(0, 2),
                 date.generateDate_plus(0, 2), "20");
         quoteMeetingPackages.clickQuoteName("Test222");
@@ -158,11 +158,11 @@ public class QuoteProductTest extends BaseTest {
         String text = "MYCE Quotes";
         homePageForScratchOrg.openAppLauncher(driver);
         homePageForScratchOrg.sendTextInAppWindow(driver, text);
-        myceQuotes.createNewMyceQuote(driver);
+        myceQuotes.createNewMyceQuote();
         myceQuotes.createMyceQuote_happyPath2
                 ("Test222", date.generateDate_plus(0, 1),
                         date.generateDate_plus(0, 4), "10", "Demo");
-        myceQuotes.openMeetingPackages(driver);
+        myceQuotes.openMeetingPackages();
         quoteMeetingPackages.createMeetingPackages("Pack d", "10", date.generateDate_plus(0, 2),
                 date.generateDate_plus(0, 2), "20");
         quoteMeetingPackages.clickQuoteName("Test222");

@@ -30,14 +30,14 @@ public class CreditNoteLine extends BasePage {
 
 
     @Step ("Click new Credit note line")
-    public void clickNewCreditNoteLineButton(WebDriver driver) throws InterruptedException {
+    public void clickNewCreditNoteLineButton() throws InterruptedException {
         Thread.sleep(3000);
         wait1.until(ExpectedConditions.presenceOfElementLocated(NEW_CREDIT_NOTE_LINE_BUTTON));
         clickInvisibleElement(NEW_CREDIT_NOTE_LINE_BUTTON);
     }
 
     @Step ("Fill out the new credit note line where Invoice Line == null & Amount == null & Quantity == null")
-    public void fillOutNewCreditNoteLineForm(WebDriver driver, String vat) throws InterruptedException {
+    public void fillOutNewCreditNoteLineForm(String vat) throws InterruptedException {
         wait1.until(ExpectedConditions.presenceOfElementLocated(CREDIT_NOTE_FIELD)).click();
         Thread.sleep(1000);
         clickInvisibleElement(NEW_CREDIT_NOTE_BUTTON);
@@ -52,12 +52,12 @@ public class CreditNoteLine extends BasePage {
     }
 
     @Step("Read error message 2")
-    public String readErrorMessage2(WebDriver driver) throws InterruptedException {
+    public String readErrorMessage2() throws InterruptedException {
         return readRecalculateMessage(MESSAGE_ERROR_TEXT);
     }
 
     @Step("Close window")
-    public void closeWindow(WebDriver driver){
+    public void closeWindow(){
         wait1.until(ExpectedConditions.elementToBeClickable(CLOSE_WINDOW_BUTTON)).click();
     }
 

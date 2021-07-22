@@ -15,7 +15,7 @@ import java.io.IOException;
 
 public class ValidationRuleTest2 extends BaseTest {
 
-    @Test(priority = 1, description = "LogIn")
+   /* @Test(priority = 1, description = "LogIn")
     @Severity(SeverityLevel.NORMAL)
     @Description("LogIn")
     @Story("LogIn")
@@ -819,6 +819,6 @@ public class ValidationRuleTest2 extends BaseTest {
         //then
         Assert.assertEquals(reservations.readHelpErrorMessage(), expectedMessage);
         reservations.closeWindow();
-    }
+    }*/
 
 }

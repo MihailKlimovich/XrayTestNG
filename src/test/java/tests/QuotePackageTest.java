@@ -24,26 +24,26 @@ public class QuotePackageTest extends BaseTest {
         loginPageForScratchOrg.logInOnScratchOrg(driver);
         homePageForScratchOrg.openAppLauncher(driver);
         homePageForScratchOrg.sendTextInAppWindow(driver, text);
-        myceQuotes.createNewMyceQuote(driver);
+        myceQuotes.createNewMyceQuote();
         myceQuotes.createMyceQuote_happyPath2
                 ("Test222", date.generateDate_plus(1, 3), date.generateDate_plus(1, 4), "10", "Demo");
-        myceQuotes.openMeetingPackages(driver);
+        myceQuotes.openMeetingPackages();
         //thn__Start_Date__c  < thn__MYCE_Quote__r.thn__Arrival_Date__c
         quoteMeetingPackages.createMeetingPackages("Pack c", "4",date.generateDate_plus(1, 2), date.generateDate_plus(1, 4), "30");
         //then
-        Assert.assertEquals(quoteMeetingPackages.readErrorMessage2(driver),expectedMessage);
+        Assert.assertEquals(quoteMeetingPackages.readErrorMessage2(),expectedMessage);
         //thn__Start_Date__c> thn__MYCE_Quote__r.thn__Departure_Date__c
         quoteMeetingPackages.changeDate(date.generateDate_plus(1, 5), date.generateDate_plus(1, 4));
         Thread.sleep(1000);
-        Assert.assertEquals(quoteMeetingPackages.readErrorMessage2(driver), expectedMessage2);
+        Assert.assertEquals(quoteMeetingPackages.readErrorMessage2(), expectedMessage2);
         //thn__End_Date__c< thn__MYCE_Quote__r.thn__Arrival_Date__c
         quoteMeetingPackages.changeDate(date.generateDate_plus(1, 3), date.generateDate_plus(1, 2));
         Thread.sleep(1000);
-        Assert.assertEquals(quoteMeetingPackages.readErrorMessage2(driver), expectedMessage);
+        Assert.assertEquals(quoteMeetingPackages.readErrorMessage2(), expectedMessage);
         //thn__End_Date__c> thn__MYCE_Quote__r.thn__Departure_Date
         quoteMeetingPackages.changeDate(date.generateDate_plus(1, 3), date.generateDate_plus(1, 5));
         Thread.sleep(1000);
-        Assert.assertEquals(quoteMeetingPackages.readErrorMessage2(driver), expectedMessage3);
+        Assert.assertEquals(quoteMeetingPackages.readErrorMessage2(), expectedMessage3);
         quoteMeetingPackages.closeWindow();
         Thread.sleep(2000);
     }
@@ -58,24 +58,24 @@ public class QuotePackageTest extends BaseTest {
         //when
         String text = "MYCE Quotes";
         packages.goToPackages();
-        packages.clickNewPackage(driver);
+        packages.clickNewPackage();
         packages.createPackage_happyPath2("Test2", "DEMO", "15" );
-        packageLine.clickNewPackageLine(driver);
+        packageLine.clickNewPackageLine();
         packageLine.createPackageLine_applyDiscountIsTrue("Pack1", "Food", "DINER", "00:00", "01:00", "20");
-        packageLine.clickNewPackageLine(driver);
+        packageLine.clickNewPackageLine();
         packageLine.createPackageLine_applyDiscountIsTrue("Pack2", "Hotel Room", "ROOM 1 NIGHT", "00:00", "01:00", "20");
         homePageForScratchOrg.openAppLauncher(driver);
         homePageForScratchOrg.sendTextInAppWindow(driver, text);
         Thread.sleep(2000);
-        myceQuotes.createNewMyceQuote(driver);
+        myceQuotes.createNewMyceQuote();
         myceQuotes.createMyceQuote_happyPath2
                 ("Test222", date.generateTodayDate(), date.generateDate_plus(1, 3), "4", "Demo");
-        myceQuotes.openMeetingPackages(driver);
+        myceQuotes.openMeetingPackages();
         quoteMeetingPackages.createMeetingPackages("Test2", "4",date.generateTodayDate(), date.generateDate_plus(1, 3), "30");
         quoteMeetingPackages.clickEdit();
         quoteMeetingPackages.changeDiscount("70");
         //then
-        Assert.assertEquals(quoteMeetingPackages.readErrorMessage2(driver), expectedMessage);
+        Assert.assertEquals(quoteMeetingPackages.readErrorMessage2(), expectedMessage);
         quoteMeetingPackages.closeWindow();
     }
 
@@ -91,13 +91,13 @@ public class QuotePackageTest extends BaseTest {
         homePageForScratchOrg.openAppLauncher(driver);
         homePageForScratchOrg.sendTextInAppWindow(driver, text);
         Thread.sleep(2000);
-        myceQuotes.createNewMyceQuote(driver);
+        myceQuotes.createNewMyceQuote();
         myceQuotes.createMyceQuote_happyPath2
                 ("Test222", date.generateTodayDate(), date.generateDate_plus(1, 3), "4", "Demo");
-        myceQuotes.openMeetingPackages(driver);
+        myceQuotes.openMeetingPackages();
         quoteMeetingPackages.createMeetingPackages("Test2", "5",date.generateTodayDate(), date.generateDate_plus(1, 3), "30");
         //then
-        Assert.assertEquals(quoteMeetingPackages.readErrorMessage2(driver), expectedMessage);
+        Assert.assertEquals(quoteMeetingPackages.readErrorMessage2(), expectedMessage);
         quoteMeetingPackages.closeWindow();
     }
 
@@ -113,12 +113,12 @@ public class QuotePackageTest extends BaseTest {
         homePageForScratchOrg.openAppLauncher(driver);
         homePageForScratchOrg.sendTextInAppWindow(driver, text);
         Thread.sleep(2000);
-        myceQuotes.createNewMyceQuote(driver);
+        myceQuotes.createNewMyceQuote();
         myceQuotes.createMyceQuote_happyPath2
                 ("Test222", date.generateTodayDate(), date.generateDate_plus(1, 3), "4", "Demo");
-        myceQuotes.openMeetingPackages(driver);
+        myceQuotes.openMeetingPackages();
         quoteMeetingPackages.createMeetingPackages("Pack a", "4",date.generateTodayDate(), date.generateDate_plus(1, 3), "20");
-        Assert.assertEquals(quoteMeetingPackages.readErrorMessage2(driver), expectedMessage);
+        Assert.assertEquals(quoteMeetingPackages.readErrorMessage2(), expectedMessage);
         quoteMeetingPackages.closeWindow();
     }
 
@@ -132,28 +132,28 @@ public class QuotePackageTest extends BaseTest {
         //when
         String text = "MYCE Quotes";
         packages.goToPackages();
-        packages.clickNewPackage(driver);
+        packages.clickNewPackage();
         packages.createPackage_happyPath4("Pack d", "Demo", date.generateDate_plus(0, 1), date.generateDate_plus(0, 3));
-        packageLine.clickNewPackageLine(driver);
+        packageLine.clickNewPackageLine();
         packageLine.createPackageLine_applyDiscountIsTrue("Pack", "Hotel Room", "ROOM 1 NIGHT", "00:00", "01:00", "20");
         homePageForScratchOrg.openAppLauncher(driver);
         homePageForScratchOrg.sendTextInAppWindow(driver, text);
         Thread.sleep(2000);
-        myceQuotes.createNewMyceQuote(driver);
+        myceQuotes.createNewMyceQuote();
         myceQuotes.createMyceQuote_happyPath2
                 ("Test222", date.generateTodayDate(), date.generateDate_plus(0, 5), "4", "Demo");
-        myceQuotes.openMeetingPackages(driver);
+        myceQuotes.openMeetingPackages();
         quoteMeetingPackages.createMeetingPackages("Pack d", "4",date.generateDate_plus(0, 0), date.generateDate_plus(0, 3), "30");
         //then
-        Assert.assertEquals(quoteMeetingPackages.readErrorMessage2(driver), expectedMessage);
+        Assert.assertEquals(quoteMeetingPackages.readErrorMessage2(), expectedMessage);
         quoteMeetingPackages.closeWindow();
-        myceQuotes.openMeetingPackages(driver);
+        myceQuotes.openMeetingPackages();
         quoteMeetingPackages.createMeetingPackages("Pack d", "4",date.generateDate_plus(0, 4), date.generateDate_plus(0, 3), "30");
-        Assert.assertEquals(quoteMeetingPackages.readErrorMessage2(driver), expectedMessage);
+        Assert.assertEquals(quoteMeetingPackages.readErrorMessage2(), expectedMessage);
         quoteMeetingPackages.closeWindow();
-        myceQuotes.openMeetingPackages(driver);
+        myceQuotes.openMeetingPackages();
         quoteMeetingPackages.createMeetingPackages("Pack d", "4",date.generateDate_plus(0, 1), date.generateDate_plus(0, 4), "30");
-        Assert.assertEquals(quoteMeetingPackages.readErrorMessage2(driver), expectedMessage);
+        Assert.assertEquals(quoteMeetingPackages.readErrorMessage2(), expectedMessage);
         quoteMeetingPackages.closeWindow();
     }
 
@@ -167,21 +167,21 @@ public class QuotePackageTest extends BaseTest {
         //when
         String text = "MYCE Quotes";
         packages.goToPackages();
-        packages.clickNewPackage(driver);
+        packages.clickNewPackage();
         packages.createPackage_happyPath2("Pack e", "Demo", "10");
-        packageLine.clickNewPackageLine(driver);
+        packageLine.clickNewPackageLine();
         packageLine.createPackageLine_applyDiscountIsTrue("Pack", "Hotel Room", "ROOM 1 NIGHT", "00:00", "01:00", "100");
         homePageForScratchOrg.openAppLauncher(driver);
         homePageForScratchOrg.sendTextInAppWindow(driver, text);
         Thread.sleep(2000);
-        myceQuotes.createNewMyceQuote(driver);
+        myceQuotes.createNewMyceQuote();
         myceQuotes.createMyceQuote_happyPath2
                 ("Test222", date.generateTodayDate(), date.generateDate_plus(0, 5), "4", "Demo");
-        myceQuotes.openMeetingPackages(driver);
+        myceQuotes.openMeetingPackages();
         quoteMeetingPackages.createMeetingPackages("Pack e", "4",date.generateTodayDate(), date.generateDate_plus(0, 5), "100");
         quoteMeetingPackages.clickEdit();
         quoteMeetingPackages.changeDiscount("11");
-        Assert.assertEquals(quoteMeetingPackages.readErrorMessage2(driver), expectedMessage);
+        Assert.assertEquals(quoteMeetingPackages.readErrorMessage2(), expectedMessage);
     }
 
 

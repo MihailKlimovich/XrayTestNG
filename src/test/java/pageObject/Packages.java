@@ -48,7 +48,7 @@ public class Packages extends BasePage {
 
 
     @Step("Click new Package")
-    public void clickNewPackage(WebDriver driver) throws InterruptedException {
+    public void clickNewPackage() throws InterruptedException {
         Thread.sleep(2000);
         wait1.until(ExpectedConditions.presenceOfElementLocated(NEW_PACKAGE));
         click2(NEW_PACKAGE);

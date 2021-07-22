@@ -49,13 +49,13 @@ public class ValidationRuleTest1 extends BaseTest {
                 "if 'Commission to' field equals 'company', company shouldn't be null or";
         //when
         myceQuotes.goToMyceQuotes();
-        myceQuotes.createNewMyceQuote(driver);
+        myceQuotes.createNewMyceQuote();
         myceQuotes.fillOutTheQuotaForm_whenCommissionIsNone
                 ("Test1", date.generateTodayDate(), date.generateTodayDate(),
                         "10", "Test");
         //then
-        Assert.assertEquals(myceQuotes.readErrorMessage2(driver), expectedMessage);
-        myceQuotes.closeWindow(driver);
+        Assert.assertEquals(myceQuotes.readErrorMessage2(), expectedMessage);
+        myceQuotes.closeWindow();
     }
 
     @Test(priority = 4, description = "Myce_Quote__c.Commission_Validation_Rule")
@@ -69,13 +69,13 @@ public class ValidationRuleTest1 extends BaseTest {
                 "if 'Commission to' field equals 'company', company shouldn't be null or";
         //when
         myceQuotes.goToMyceQuotes();
-        myceQuotes.createNewMyceQuote(driver);
+        myceQuotes.createNewMyceQuote();
         myceQuotes.fillOutTheQuotaForm_whenCommissionIsAgent
                 ("Test2", date.generateTodayDate(), date.generateTodayDate(),
                         "10", "Test");
         //then
-        Assert.assertEquals(myceQuotes.readErrorMessage2(driver), expectedMessage);
-        myceQuotes.closeWindow(driver);
+        Assert.assertEquals(myceQuotes.readErrorMessage2(), expectedMessage);
+        myceQuotes.closeWindow();
     }
 
     @Test(priority = 5, description = "Myce_Quote__c.Commission_Validation_Rule")
@@ -89,13 +89,13 @@ public class ValidationRuleTest1 extends BaseTest {
                 "if 'Commission to' field equals 'company', company shouldn't be null or";
         //when
         myceQuotes.goToMyceQuotes();
-        myceQuotes.createNewMyceQuote(driver);
+        myceQuotes.createNewMyceQuote();
         myceQuotes.fillOutTheQuotaForm_whenCommissionIsCompany
                 ("Test3", date.generateTodayDate(), date.generateTodayDate(),
                         "10", "Test");
         //then
-        Assert.assertEquals(myceQuotes.readErrorMessage2(driver), expectedMessage);
-        myceQuotes.closeWindow(driver);
+        Assert.assertEquals(myceQuotes.readErrorMessage2(), expectedMessage);
+        myceQuotes.closeWindow();
     }
 
     @Test(priority = 6, description = "Myce_Quote__c.VR05_Dates")
@@ -107,13 +107,13 @@ public class ValidationRuleTest1 extends BaseTest {
         String expectedMessage = "Departure Date cannot be anterior to Arrival Date";
         //when
         myceQuotes.goToMyceQuotes();
-        myceQuotes.createNewMyceQuote(driver);
+        myceQuotes.createNewMyceQuote();
         myceQuotes.fillOutTheQuotaFormWithoutCommission
                 ("Test4", date.generateTodayDate(), date.generateDate_minus(1, 1),
                         "10", "Test");
         //then
         Assert.assertEquals(myceQuotes.readDataErrorMessage(), expectedMessage);
-        myceQuotes.closeWindow(driver);
+        myceQuotes.closeWindow();
     }
 
     @Test(priority = 7, description = "Myce_Quote__c.VR27_Company_Agent_Type")
@@ -125,13 +125,13 @@ public class ValidationRuleTest1 extends BaseTest {
         String expectedMessage = "Company cannot be of type 'Agent' and Agent must be of type 'Agent' or 'Leads'";
         //when
         myceQuotes.goToMyceQuotes();
-        myceQuotes.createNewMyceQuote(driver);
+        myceQuotes.createNewMyceQuote();
         myceQuotes.fillOutTheQuotaForm_whenCompanyIsAgentAndAgentIsCompany
                 ("Test5", date.generateTodayDate(), date.generateTodayDate(), "10", "Test",
                         "Test Agent", "Test Company");
         //then
-        Assert.assertEquals(myceQuotes.readErrorMessage2(driver), expectedMessage);
-        myceQuotes.closeWindow(driver);
+        Assert.assertEquals(myceQuotes.readErrorMessage2(), expectedMessage);
+        myceQuotes.closeWindow();
     }
 
     @Test(priority = 8, description = "Myce_Quote__c.VR13_Reservation_Guest")
@@ -143,12 +143,12 @@ public class ValidationRuleTest1 extends BaseTest {
         String expectedMessage = "Reservation guest is required to send reservations to Mews";
         //when
         myceQuotes.goToMyceQuotes();
-        myceQuotes.createNewMyceQuote(driver);
+        myceQuotes.createNewMyceQuote();
         myceQuotes.fillOutTheQuotaFormWhereReservationGuestIsNull
                 ("Test6", date.generateTodayDate(), date.generateTodayDate(), "10", "Test");
         //then
         Assert.assertEquals(myceQuotes.readHelpErrorMessage(), expectedMessage);
-        myceQuotes.closeWindow(driver);
+        myceQuotes.closeWindow();
     }
 
     @Test(priority = 9, description = "Myce_Quote__c.VR22_ClosedStatus")
@@ -160,15 +160,15 @@ public class ValidationRuleTest1 extends BaseTest {
         String expectedMessage = "Closed Status is required when quote is at stage '4 - Closed'";
         //when
         myceQuotes.goToMyceQuotes();
-        myceQuotes.createNewMyceQuote(driver);
+        myceQuotes.createNewMyceQuote();
         myceQuotes.createMyceQuote_happyPath
                 ("Test7", date.generateTodayDate(), date.generateTodayDate(), "10", "Test");
-        myceQuotes.clickEdit(driver);
-        myceQuotes.changeStage(driver);
-        myceQuotes.clickSave(driver);
+        myceQuotes.clickEdit();
+        myceQuotes.changeStage();
+        myceQuotes.clickSave();
         //then
-        Assert.assertEquals(myceQuotes.readErrorMessage2(driver), expectedMessage);
-        myceQuotes.closeWindow(driver);
+        Assert.assertEquals(myceQuotes.readErrorMessage2(), expectedMessage);
+        myceQuotes.closeWindow();
     }
 
     @Test(priority = 10, description = "Myce_Quote__c.VR28_Cancelled_Status")
@@ -180,16 +180,16 @@ public class ValidationRuleTest1 extends BaseTest {
         String expectedMessage = "Closed Status can be 'Cancelled' only if Myce quote was 'Won'";
         //when
         myceQuotes.goToMyceQuotes();
-        myceQuotes.createNewMyceQuote(driver);
+        myceQuotes.createNewMyceQuote();
         myceQuotes.createMyceQuote_happyPath
                 ("Test8", date.generateTodayDate(), date.generateTodayDate(), "10", "Test");
-        myceQuotes.clickEdit(driver);
-        myceQuotes.clickIsConfirmed(driver);
-        myceQuotes.changeCloseStatus(driver);
-        myceQuotes.clickSave(driver);
+        myceQuotes.clickEdit();
+        myceQuotes.clickIsConfirmed();
+        myceQuotes.changeCloseStatus();
+        myceQuotes.clickSave();
         //then
-        Assert.assertEquals(myceQuotes.readErrorMessage2(driver), expectedMessage);
-        myceQuotes.closeWindow(driver);
+        Assert.assertEquals(myceQuotes.readErrorMessage2(), expectedMessage);
+        myceQuotes.closeWindow();
     }
 
     @Test(priority = 11, description = "Credit_Note_Line__c.Invoice_Line_Validation")
@@ -203,11 +203,11 @@ public class ValidationRuleTest1 extends BaseTest {
         String text = "Credit Note Lines";
         homePageForScratchOrg.openAppLauncher(driver);
         homePageForScratchOrg.sendTextInAppWindow(driver, text);
-        creditNoteLine.clickNewCreditNoteLineButton(driver);
-        creditNoteLine.fillOutNewCreditNoteLineForm(driver, "20");
+        creditNoteLine.clickNewCreditNoteLineButton();
+        creditNoteLine.fillOutNewCreditNoteLineForm( "20");
         //then
-        Assert.assertEquals(creditNoteLine.readErrorMessage2(driver), expectedMessage);
-        creditNoteLine.closeWindow(driver);
+        Assert.assertEquals(creditNoteLine.readErrorMessage2(), expectedMessage);
+        creditNoteLine.closeWindow();
     }
 
     @Test(priority = 12, description = "Package_Line__c.VR30_IsMultidays")
@@ -220,13 +220,13 @@ public class ValidationRuleTest1 extends BaseTest {
         //when
         packages.goToPackages();
         Thread.sleep(3000);
-        packages.clickNewPackage(driver);
+        packages.clickNewPackage();
         packages.createPackage_happyPath("Test15", "Demo");
-        packageLine.clickNewPackageLine(driver);
+        packageLine.clickNewPackageLine();
         packageLine.createPackageLine_whereAppliedDateIsEmpty("Test15", "00:00", "01:00", "25");
         //then
-        Assert.assertEquals(packageLine.readErrorMessage2(driver), expectedMessage);
-        packageLine.closeWindow(driver);;
+        Assert.assertEquals(packageLine.readErrorMessage2(), expectedMessage);
+        packageLine.closeWindow();;
     }
 
     @Test(priority = 13, description = "Package_Line__c.VR31_IsNotMultidays")
@@ -239,14 +239,14 @@ public class ValidationRuleTest1 extends BaseTest {
         //when
         packages.goToPackages();
         Thread.sleep(3000);
-        packages.clickNewPackage(driver);
+        packages.clickNewPackage();
         packages.createPackage_happyPath2("Test15", "Demo", "15");
-        packageLine.clickNewPackageLine(driver);
+        packageLine.clickNewPackageLine();
         packageLine.createPackageLine_whereAppliedDateIsNotEmpty
                 ("Test15", "00:00", "01:00", "25", "20");
         //then
-        Assert.assertEquals(packageLine.readErrorMessage2(driver), expectedMessage);
-        packageLine.closeWindow(driver);
+        Assert.assertEquals(packageLine.readErrorMessage2(), expectedMessage);
+        packageLine.closeWindow();
     }
 
     @Test(priority = 14, description = "Package_Line__c.VR29_Product_property")
@@ -259,13 +259,13 @@ public class ValidationRuleTest1 extends BaseTest {
         //when
         packages.goToPackages();
         Thread.sleep(3000);
-        packages.clickNewPackage(driver);
+        packages.clickNewPackage();
         packages.createPackage_happyPath3("Test15", "Test");
-        packageLine.clickNewPackageLine(driver);
+        packageLine.clickNewPackageLine();
         packageLine.createPackageLine_whereAppliedDateIsEmpty("Test15", "00:00", "01:00", "25");
         //then
         Assert.assertEquals(packageLine.readHelpErrorMessage(), expectedMessage);
-        packageLine.closeWindow(driver);
+        packageLine.closeWindow();
     }
 
     @Test(priority = 15, description = "Quote_Hotel_Room__c.VR06_Departure_after")
@@ -276,15 +276,15 @@ public class ValidationRuleTest1 extends BaseTest {
         String expectedMessage = "Arrival Date time cannot be after Departure Date time";
         //when
         myceQuotes.goToMyceQuotes();
-        myceQuotes.createNewMyceQuote(driver);
+        myceQuotes.createNewMyceQuote();
         myceQuotes.createMyceQuote_happyPath2
                 ("Test9", date.generateDate_plus(1, 3), date.generateDate_plus(1, 3), "3", "Demo");
-        myceQuotes.openHotelRooms(driver);
+        myceQuotes.openHotelRooms();
         quoteHotelRoom.createHotelRoom
                 (  date.generateDate_plus(1, 3), "19:00", date.generateDate_plus(1, 3), "10:00");
         //then
-        Assert.assertEquals(quoteHotelRoom.readErrorMessage3(driver), expectedMessage);
-        quoteHotelRoom.closeWindow(driver);
+        Assert.assertEquals(quoteHotelRoom.readErrorMessage3(), expectedMessage);
+        quoteHotelRoom.closeWindow();
     }
 
     @Test(priority = 16, description = "Quote_Hotel_Room__c.VR09_Dates_within_Quote_dates")
@@ -294,12 +294,12 @@ public class ValidationRuleTest1 extends BaseTest {
     public void testCreateQuoteHotelRoom2() throws InterruptedException {
         String expectedMessage = "Arrival and Departure date of hotel room must be within Quote arrival and departure dates";
         //when
-        myceQuotes.openHotelRooms(driver);
+        myceQuotes.openHotelRooms();
         quoteHotelRoom.createHotelRoom
                 (  date.generateDate_plus(1, 2), "10:00", date.generateDate_plus(1, 3), "19:00");
         //then
-        Assert.assertEquals(quoteHotelRoom.readErrorMessage2(driver), expectedMessage);
-        quoteHotelRoom.closeWindow(driver);
+        Assert.assertEquals(quoteHotelRoom.readErrorMessage2(), expectedMessage);
+        quoteHotelRoom.closeWindow();
     }
 
     @Test(priority = 17, description = "Quote_Hotel_Room")
@@ -309,12 +309,12 @@ public class ValidationRuleTest1 extends BaseTest {
     public void testCreateQuoteHotelRoom3() throws InterruptedException {
         String expectedMessage = "Arrival and Departure date of hotel room must be within Quote arrival and departure dates";
         //when
-        myceQuotes.openHotelRooms(driver);
+        myceQuotes.openHotelRooms();
         quoteHotelRoom.createHotelRoom
                 (  date.generateDate_plus(1, 4), "10:00", date.generateDate_plus(1, 2), "19:00");
         //then
-        Assert.assertEquals(quoteHotelRoom.readErrorMessage2(driver), expectedMessage);
-        quoteHotelRoom.closeWindow(driver);
+        Assert.assertEquals(quoteHotelRoom.readErrorMessage2(), expectedMessage);
+        quoteHotelRoom.closeWindow();
     }
 
     @Test(priority = 18, description = "Quote_Hotel_Room")
@@ -324,12 +324,12 @@ public class ValidationRuleTest1 extends BaseTest {
     public void testCreateQuoteHotelRoom4() throws InterruptedException {
         String expectedMessage = "Arrival and Departure date of hotel room must be within Quote arrival and departure dates";
         //when
-        myceQuotes.openHotelRooms(driver);
+        myceQuotes.openHotelRooms();
         quoteHotelRoom.createHotelRoom
                 (  date.generateDate_plus(1, 3), "10:00", date.generateDate_plus(1, 2), "19:00");
         //then
-        Assert.assertEquals(quoteHotelRoom.readErrorMessage2(driver), expectedMessage);
-        quoteHotelRoom.closeWindow(driver);
+        Assert.assertEquals(quoteHotelRoom.readErrorMessage2(), expectedMessage);
+        quoteHotelRoom.closeWindow();
     }
 
     @Test(priority = 19, description = "Quote_Hotel_Room")
@@ -339,12 +339,12 @@ public class ValidationRuleTest1 extends BaseTest {
     public void testCreateQuoteHotelRoom5() throws InterruptedException {
         String expectedMessage = "Arrival and Departure date of hotel room must be within Quote arrival and departure dates";
         //when
-        myceQuotes.openHotelRooms(driver);
+        myceQuotes.openHotelRooms();
         quoteHotelRoom.createHotelRoom
                 (  date.generateDate_plus(1, 3), "10:00", date.generateDate_plus(1, 4), "19:00");
         //then
-        Assert.assertEquals(quoteHotelRoom.readErrorMessage2(driver), expectedMessage);
-        quoteHotelRoom.closeWindow(driver);
+        Assert.assertEquals(quoteHotelRoom.readErrorMessage2(), expectedMessage);
+        quoteHotelRoom.closeWindow();
     }
 
     @Test(priority = 20, description = "Quote_Hotel_Room__c.VR15_Pax")
@@ -354,11 +354,11 @@ public class ValidationRuleTest1 extends BaseTest {
     public void testCreateQuoteHotelRoom6() throws InterruptedException {
         String expectedMessage = "Pax cannot be greater than quote's pax";
         //when
-        myceQuotes.openHotelRooms(driver);
+        myceQuotes.openHotelRooms();
         quoteHotelRoom.createHotelRoom2("4");
         //then
         Assert.assertEquals(quoteHotelRoom.readHelpErrorMessage(), expectedMessage);
-        quoteHotelRoom.closeWindow(driver);
+        quoteHotelRoom.closeWindow();
     }
 
     @Test(priority = 21, description = "Quote_Meetings_Room__c.VR19_SetupResource")
@@ -372,32 +372,32 @@ public class ValidationRuleTest1 extends BaseTest {
         //developerConsoleWindow.openExecuteAnonymousWindow();
         //developerConsoleWindow.runApexCodeFromFile("src/main/Data/Resource");
         myceQuotes.goToMyceQuotes();
-        myceQuotes.createNewMyceQuote(driver);
+        myceQuotes.createNewMyceQuote();
         myceQuotes.createMyceQuote_happyPath2
                 ("Test10", date.generateDate_plus(1, 3), date.generateDate_plus(1, 3), "10", "Demo");
-        myceQuotes.openMeetingRooms(driver);
+        myceQuotes.openMeetingRooms();
         quoteMeetingRoom.createMeetingRoom("6");
-        Assert.assertEquals(expectedMessage, myceQuotes.readErrorMessage2(driver));
+        Assert.assertEquals(expectedMessage, myceQuotes.readErrorMessage2());
         quoteMeetingRoom.changeSetupType("Cabaret");
-        Assert.assertEquals(expectedMessage, myceQuotes.readErrorMessage2(driver));
+        Assert.assertEquals(expectedMessage, myceQuotes.readErrorMessage2());
         quoteMeetingRoom.changeSetupType("Circle");
-        Assert.assertEquals(expectedMessage, myceQuotes.readErrorMessage2(driver));
+        Assert.assertEquals(expectedMessage, myceQuotes.readErrorMessage2());
         quoteMeetingRoom.changeSetupType("Classroom");
-        Assert.assertEquals(expectedMessage, myceQuotes.readErrorMessage2(driver));
+        Assert.assertEquals(expectedMessage, myceQuotes.readErrorMessage2());
         quoteMeetingRoom.changeSetupType("Custom");
-        Assert.assertEquals(expectedMessage, myceQuotes.readErrorMessage2(driver));
+        Assert.assertEquals(expectedMessage, myceQuotes.readErrorMessage2());
         quoteMeetingRoom.changeSetupType("Dinner");
-        Assert.assertEquals(expectedMessage, myceQuotes.readErrorMessage2(driver));
+        Assert.assertEquals(expectedMessage, myceQuotes.readErrorMessage2());
         quoteMeetingRoom.changeSetupType("Party");
-        Assert.assertEquals(expectedMessage, myceQuotes.readErrorMessage2(driver));
+        Assert.assertEquals(expectedMessage, myceQuotes.readErrorMessage2());
         quoteMeetingRoom.changeSetupType("Square");
-        Assert.assertEquals(expectedMessage, myceQuotes.readErrorMessage2(driver));
+        Assert.assertEquals(expectedMessage, myceQuotes.readErrorMessage2());
         quoteMeetingRoom.changeSetupType("Theater");
-        Assert.assertEquals(expectedMessage, myceQuotes.readErrorMessage2(driver));
+        Assert.assertEquals(expectedMessage, myceQuotes.readErrorMessage2());
         quoteMeetingRoom.changeSetupType("U-Shape");
-        Assert.assertEquals(expectedMessage, myceQuotes.readErrorMessage2(driver));
+        Assert.assertEquals(expectedMessage, myceQuotes.readErrorMessage2());
         Thread.sleep(2);
-        quoteMeetingRoom.closeWindow(driver);
+        quoteMeetingRoom.closeWindow();
     }
 
     @Test(priority = 22, description = "Quote_Meetings_Room__c.VR21_Lock_Resource")
@@ -407,12 +407,12 @@ public class ValidationRuleTest1 extends BaseTest {
     public void testCreateQuoteMeetingsRoom2() throws InterruptedException, IOException {
         String expectedMessage = "Resource cannot be changed when meeting room is locked";
         //when
-        myceQuotes.openMeetingRooms(driver);
+        myceQuotes.openMeetingRooms();
         quoteMeetingRoom.createMeetingRoom("4");
         quoteMeetingRoom.changeResource();
         //Then
         Assert.assertEquals(myceQuotes.readHelpErrorMessage(), expectedMessage);
-        quoteMeetingRoom.closeWindow(driver);
+        quoteMeetingRoom.closeWindow();
     }
 
 
@@ -425,19 +425,19 @@ public class ValidationRuleTest1 extends BaseTest {
         String expectedMessage = "Date cannot be changed if Meeting room is part of package";
         //when
         myceQuotes.goToMyceQuotes();
-        myceQuotes.createNewMyceQuote(driver);
+        myceQuotes.createNewMyceQuote();
         myceQuotes.createMyceQuote_happyPath2
                 ("Test11", date.generateTodayDate(), date.generateDate_plus(1, 3), "4", "Demo");
-        myceQuotes.openMeetingPackages(driver);
+        myceQuotes.openMeetingPackages();
         Thread.sleep(2000);
         quoteMeetingPackages.createMeetingPackages("Pack c", "4", date.generateTodayDate(), date.generateDate_plus(1, 3), "30");
         myceQuotes.goToMyceQuotes();
         myceQuotes.openMyceQoteRecord("Test11");
-        myceQuotes.openMeetingRooms(driver);
+        myceQuotes.openMeetingRooms();
         quoteMeetingRoom.editDate("DEFAULT - MEETING HALF DAY", date.generateDate_plus(1, 1));
         //Then
-        Assert.assertEquals(expectedMessage, quoteMeetingRoom.readErrorMessage2(driver));
-        quoteMeetingRoom.closeWindow(driver);
+        Assert.assertEquals(expectedMessage, quoteMeetingRoom.readErrorMessage2());
+        quoteMeetingRoom.closeWindow();
     }
 
     @Test(priority = 24, description = "Quote_Package__c.VR12_Dates_within_Quote_dates")
@@ -450,26 +450,26 @@ public class ValidationRuleTest1 extends BaseTest {
         String expectedMessage3 = "End Date of the package is after the Departure Date";
         //when
         myceQuotes.goToMyceQuotes();
-        myceQuotes.createNewMyceQuote(driver);
+        myceQuotes.createNewMyceQuote();
         myceQuotes.createMyceQuote_happyPath2
                 ("Test12", date.generateDate_plus(1, 3), date.generateDate_plus(1, 4), "10", "Demo");
-        myceQuotes.openMeetingPackages(driver);
+        myceQuotes.openMeetingPackages();
         //thn__Start_Date__c  < thn__MYCE_Quote__r.thn__Arrival_Date__c
         quoteMeetingPackages.createMeetingPackages("Pack c", "4",date.generateDate_plus(1, 2), date.generateDate_plus(1, 4), "30");
         //then
-        Assert.assertEquals(quoteMeetingPackages.readErrorMessage2(driver),expectedMessage);
+        Assert.assertEquals(quoteMeetingPackages.readErrorMessage2(),expectedMessage);
         //thn__Start_Date__c> thn__MYCE_Quote__r.thn__Departure_Date__c
         quoteMeetingPackages.changeDate(date.generateDate_plus(1, 5), date.generateDate_plus(1, 4));
         Thread.sleep(1000);
-        Assert.assertEquals(quoteMeetingPackages.readErrorMessage2(driver), expectedMessage2);
+        Assert.assertEquals(quoteMeetingPackages.readErrorMessage2(), expectedMessage2);
         //thn__End_Date__c< thn__MYCE_Quote__r.thn__Arrival_Date__c
         quoteMeetingPackages.changeDate(date.generateDate_plus(1, 3), date.generateDate_plus(1, 2));
         Thread.sleep(1000);
-        Assert.assertEquals(quoteMeetingPackages.readErrorMessage2(driver), expectedMessage);
+        Assert.assertEquals(quoteMeetingPackages.readErrorMessage2(), expectedMessage);
         //thn__End_Date__c> thn__MYCE_Quote__r.thn__Departure_Date
         quoteMeetingPackages.changeDate(date.generateDate_plus(1, 3), date.generateDate_plus(1, 5));
         Thread.sleep(1000);
-        Assert.assertEquals(quoteMeetingPackages.readErrorMessage2(driver), expectedMessage3);
+        Assert.assertEquals(quoteMeetingPackages.readErrorMessage2(), expectedMessage3);
         quoteMeetingPackages.closeWindow();
         Thread.sleep(2000);
     }
@@ -483,20 +483,20 @@ public class ValidationRuleTest1 extends BaseTest {
         String expectedMessage = "No Discount possible, package is not configured correctly. Please contact your admin";
         //when
         packages.goToPackages();
-        packages.clickNewPackage(driver);
+        packages.clickNewPackage();
         packages.createPackage_happyPath2("Test4", "DEMO", "15" );
-        packageLine.clickNewPackageLine(driver);
+        packageLine.clickNewPackageLine();
         packageLine.createPackageLine_applyDiscountIsTrue("Pack1", "Food", "DINER", "00:00", "01:00", "20");
-        packageLine.clickNewPackageLine(driver);
+        packageLine.clickNewPackageLine();
         packageLine.createPackageLine_applyDiscountIsTrue("Pack2", "Hotel Room", "ROOM 1 NIGHT", "00:00", "01:00", "20");
         //homePageForScratchOrg.openAppLauncher(driver);
         //homePageForScratchOrg.sendTextInAppWindow(driver, text);
         //Thread.sleep(2000);
         myceQuotes.goToMyceQuotes();
-        myceQuotes.createNewMyceQuote(driver);
+        myceQuotes.createNewMyceQuote();
         myceQuotes.createMyceQuote_happyPath2
                 ("Test13", date.generateTodayDate(), date.generateDate_plus(1, 3), "4", "Demo");
-        myceQuotes.openMeetingPackages(driver);
+        myceQuotes.openMeetingPackages();
         quoteMeetingPackages.createMeetingPackages("Test4", "4",date.generateTodayDate(), date.generateDate_plus(1, 3), "30");
         quoteMeetingPackages.clickEdit();
         quoteMeetingPackages.changeDiscount("70");
@@ -515,10 +515,10 @@ public class ValidationRuleTest1 extends BaseTest {
         //when
         myceQuotes.goToMyceQuotes();
         Thread.sleep(2000);
-        myceQuotes.createNewMyceQuote(driver);
+        myceQuotes.createNewMyceQuote();
         myceQuotes.createMyceQuote_happyPath2
                 ("Test14", date.generateTodayDate(), date.generateDate_plus(1, 3), "4", "Demo");
-        myceQuotes.openMeetingPackages(driver);
+        myceQuotes.openMeetingPackages();
         quoteMeetingPackages.createMeetingPackages("Test4", "5",date.generateTodayDate(), date.generateDate_plus(1, 3), "30");
         //then
         Assert.assertEquals(quoteMeetingPackages.readHelpErrorMessage(), expectedMessage);
@@ -534,12 +534,12 @@ public class ValidationRuleTest1 extends BaseTest {
         String expectedMessage = "This Package can only be instantiated on a quote which is related to its account";
         //when
         myceQuotes.goToMyceQuotes();
-        myceQuotes.createNewMyceQuote(driver);
+        myceQuotes.createNewMyceQuote();
         myceQuotes.createMyceQuote_happyPath2
                 ("Test15", date.generateTodayDate(), date.generateDate_plus(1, 3), "4", "Demo");
-        myceQuotes.openMeetingPackages(driver);
+        myceQuotes.openMeetingPackages();
         quoteMeetingPackages.createMeetingPackages("Pack a", "4",date.generateTodayDate(), date.generateDate_plus(1, 3), "20");
-        Assert.assertEquals(quoteMeetingPackages.readErrorMessage2(driver), expectedMessage);
+        Assert.assertEquals(quoteMeetingPackages.readErrorMessage2(), expectedMessage);
         quoteMeetingPackages.closeWindow();
     }
 
@@ -552,26 +552,26 @@ public class ValidationRuleTest1 extends BaseTest {
         String expectedMessage = "Quote package start date must be within package's start and end dates";
         //when
         packages.goToPackages();
-        packages.clickNewPackage(driver);
+        packages.clickNewPackage();
         packages.createPackage_happyPath4("Pack e", "Demo", date.generateDate_plus(0, 1), date.generateDate_plus(0, 3));
-        packageLine.clickNewPackageLine(driver);
+        packageLine.clickNewPackageLine();
         packageLine.createPackageLine_applyDiscountIsTrue("Pack", "Hotel Room", "ROOM 1 NIGHT", "00:00", "01:00", "20");
         myceQuotes.goToMyceQuotes();
-        myceQuotes.createNewMyceQuote(driver);
+        myceQuotes.createNewMyceQuote();
         myceQuotes.createMyceQuote_happyPath2
                 ("Test16", date.generateTodayDate(), date.generateDate_plus(0, 5), "4", "Demo");
-        myceQuotes.openMeetingPackages(driver);
+        myceQuotes.openMeetingPackages();
         quoteMeetingPackages.createMeetingPackages("Pack e", "4",date.generateDate_plus(0, 0), date.generateDate_plus(0, 3), "30");
         //then
-        Assert.assertEquals(quoteMeetingPackages.readErrorMessage2(driver), expectedMessage);
+        Assert.assertEquals(quoteMeetingPackages.readErrorMessage2(), expectedMessage);
         quoteMeetingPackages.closeWindow();
-        myceQuotes.openMeetingPackages(driver);
+        myceQuotes.openMeetingPackages();
         quoteMeetingPackages.createMeetingPackages("Pack e", "4",date.generateDate_plus(0, 4), date.generateDate_plus(0, 3), "30");
-        Assert.assertEquals(quoteMeetingPackages.readErrorMessage2(driver), expectedMessage);
+        Assert.assertEquals(quoteMeetingPackages.readErrorMessage2(), expectedMessage);
         quoteMeetingPackages.closeWindow();
-        myceQuotes.openMeetingPackages(driver);
+        myceQuotes.openMeetingPackages();
         quoteMeetingPackages.createMeetingPackages("Pack e", "4",date.generateDate_plus(0, 1), date.generateDate_plus(0, 4), "30");
-        Assert.assertEquals(quoteMeetingPackages.readErrorMessage2(driver), expectedMessage);
+        Assert.assertEquals(quoteMeetingPackages.readErrorMessage2(), expectedMessage);
         quoteMeetingPackages.closeWindow();
     }
 
@@ -584,19 +584,19 @@ public class ValidationRuleTest1 extends BaseTest {
         String expectedMessage = "Discount on quote package cannot be greater than discount max.";
         //when
         packages.goToPackages();
-        packages.clickNewPackage(driver);
+        packages.clickNewPackage();
         packages.createPackage_happyPath2("Pack f", "Demo", "10");
-        packageLine.clickNewPackageLine(driver);
+        packageLine.clickNewPackageLine();
         packageLine.createPackageLine_applyDiscountIsTrue("Pack", "Hotel Room", "ROOM 1 NIGHT", "00:00", "01:00", "100");
         myceQuotes.goToMyceQuotes();
-        myceQuotes.createNewMyceQuote(driver);
+        myceQuotes.createNewMyceQuote();
         myceQuotes.createMyceQuote_happyPath2
                 ("Test17", date.generateTodayDate(), date.generateDate_plus(0, 5), "4", "Demo");
-        myceQuotes.openMeetingPackages(driver);
+        myceQuotes.openMeetingPackages();
         quoteMeetingPackages.createMeetingPackages("Pack f", "4",date.generateTodayDate(), date.generateDate_plus(0, 5), "100");
         quoteMeetingPackages.clickEdit();
         quoteMeetingPackages.changeDiscount("11");
-        Assert.assertEquals(quoteMeetingPackages.readErrorMessage2(driver), expectedMessage);
+        Assert.assertEquals(quoteMeetingPackages.readErrorMessage2(), expectedMessage);
         quoteMeetingPackages.closeWindow();
     }
 
@@ -609,7 +609,7 @@ public class ValidationRuleTest1 extends BaseTest {
         String expectedMessage = "Start Date time cannot be posterior to End Date time";
         //when
         myceQuotes.goToMyceQuotes();
-        myceQuotes.createNewMyceQuote(driver);
+        myceQuotes.createNewMyceQuote();
         myceQuotes.createMyceQuote_happyPath2("Test18", date.generateDate_plus(0, 0),
                 date.generateDate_plus(0, 4), "10", "Demo");
         myceQuotes.openProducts();
@@ -629,7 +629,7 @@ public class ValidationRuleTest1 extends BaseTest {
         String expectedMessage = "Start and end date of product must be within Quote arrival and departure dates";
         //when
         myceQuotes.goToMyceQuotes();
-        myceQuotes.createNewMyceQuote(driver);
+        myceQuotes.createNewMyceQuote();
         myceQuotes.createMyceQuote_happyPath2("Test19", date.generateDate_plus(0, 1),
                 date.generateDate_plus(0, 4), "10", "Demo");
         //thn__Start_Date_Time__c < thn__MYCE_Quote__r.thn__Arrival_Date__c
@@ -668,7 +668,7 @@ public class ValidationRuleTest1 extends BaseTest {
         String expectedMessage = "Pax cannot be greater than quote's pax";
         //when
         myceQuotes.goToMyceQuotes();
-        myceQuotes.createNewMyceQuote(driver);
+        myceQuotes.createNewMyceQuote();
         myceQuotes.createMyceQuote_happyPath2("Test20", date.generateDate_plus(0, 1),
                 date.generateDate_plus(0, 4), "10", "Demo");
         myceQuotes.openProducts();
@@ -689,12 +689,12 @@ public class ValidationRuleTest1 extends BaseTest {
         String expectedMessage = "Date of the service area must be the same as the product's";
         //when
         myceQuotes.goToMyceQuotes();
-        myceQuotes.createNewMyceQuote(driver);
+        myceQuotes.createNewMyceQuote();
         myceQuotes.createMyceQuote_happyPath2
                 ("Test21", date.generateDate_plus(0, 1),
                         date.generateDate_plus(0, 4), "10", "Demo");
         Thread.sleep(2000);
-        myceQuotes.openMeetingRooms(driver);
+        myceQuotes.openMeetingRooms();
         quoteMeetingRoom.createMeetingRoom2("MEETING HALF DAY");
         quoteMeetingRoom.clickQuoteName("Test21");
         myceQuotes.openProducts();
@@ -715,11 +715,11 @@ public class ValidationRuleTest1 extends BaseTest {
         String expectedMessage = "Date cannot be changed if Product is part of package";
         //when
         myceQuotes.goToMyceQuotes();
-        myceQuotes.createNewMyceQuote(driver);
+        myceQuotes.createNewMyceQuote();
         myceQuotes.createMyceQuote_happyPath2
                 ("Test22", date.generateDate_plus(0, 1),
                         date.generateDate_plus(0, 4), "10", "Demo");
-        myceQuotes.openMeetingPackages(driver);
+        myceQuotes.openMeetingPackages();
         quoteMeetingPackages.createMeetingPackages("Pack d", "10", date.generateDate_plus(0, 2),
                 date.generateDate_plus(0, 2), "20");
         quoteMeetingPackages.clickQuoteName("Test22");
@@ -740,11 +740,11 @@ public class ValidationRuleTest1 extends BaseTest {
         String expectedMessage = "In a package line quote product the on consumption option can not be used.";
         //when
         myceQuotes.goToMyceQuotes();
-        myceQuotes.createNewMyceQuote(driver);
+        myceQuotes.createNewMyceQuote();
         myceQuotes.createMyceQuote_happyPath2
                 ("Test23", date.generateDate_plus(0, 1),
                         date.generateDate_plus(0, 4), "10", "Demo");
-        myceQuotes.openMeetingPackages(driver);
+        myceQuotes.openMeetingPackages();
         quoteMeetingPackages.createMeetingPackages("Pack d", "10", date.generateDate_plus(0, 2),
                 date.generateDate_plus(0, 2), "20");
         quoteMeetingPackages.clickQuoteName("Test23");

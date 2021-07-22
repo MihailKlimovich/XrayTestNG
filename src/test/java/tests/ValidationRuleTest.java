@@ -48,14 +48,14 @@ public class ValidationRuleTest extends BaseTest{
         String text = "MYCE Quotes";
         homePageForScratchOrg.openAppLauncher(driver);
         homePageForScratchOrg.sendTextInAppWindow(driver, text);
-        myceQuotes.createNewMyceQuote(driver);
+        myceQuotes.createNewMyceQuote();
         myceQuotes.fillOutTheQuotaForm_whenCommissionIsNone
                 ("Test1508", date.generateTodayDate(), date.generateTodayDate(),
                 "123", "test");
-        String message = myceQuotes.readErrorMessage(driver);
+        String message = myceQuotes.readErrorMessage();
         //then
         Assert.assertEquals(message, expectedMessage);
-        myceQuotes.closeWindow(driver);
+        myceQuotes.closeWindow();
     }
 
     @Test(priority = 4, description = "Commission_Validation_Rule")
@@ -66,14 +66,14 @@ public class ValidationRuleTest extends BaseTest{
         //given
         String expectedMessage = "We hit a snag.";
         //when
-        myceQuotes.createNewMyceQuote(driver);
+        myceQuotes.createNewMyceQuote();
         myceQuotes.fillOutTheQuotaForm_whenCommissionIsAgent
                 ("Test1508", date.generateTodayDate(), date.generateTodayDate(),
                         "123", "test");
-        String message = myceQuotes.readErrorMessage(driver);
+        String message = myceQuotes.readErrorMessage();
         //then
         Assert.assertEquals(message, expectedMessage);
-        myceQuotes.closeWindow(driver);
+        myceQuotes.closeWindow();
     }
 
     @Test(priority = 5, description = "Commission_Validation_Rule")
@@ -84,14 +84,14 @@ public class ValidationRuleTest extends BaseTest{
         //given
         String expectedMessage = "We hit a snag.";
         //when
-        myceQuotes.createNewMyceQuote(driver);
+        myceQuotes.createNewMyceQuote();
         myceQuotes.fillOutTheQuotaForm_whenCommissionIsCompany
                 ("Test1508", date.generateTodayDate(), date.generateTodayDate(),
                         "123", "test");
-        String message = myceQuotes.readErrorMessage(driver);
+        String message = myceQuotes.readErrorMessage();
         //then
         Assert.assertEquals(message, expectedMessage);
-        myceQuotes.closeWindow(driver);
+        myceQuotes.closeWindow();
     }
 
     @Test(priority = 6, description = "Dates")
@@ -102,14 +102,14 @@ public class ValidationRuleTest extends BaseTest{
         //given
         String expectedMessage = "Departure Date";
         //when
-        myceQuotes.createNewMyceQuote(driver);
+        myceQuotes.createNewMyceQuote();
         myceQuotes.fillOutTheQuotaFormWithoutCommission
                 ("Test1508", date.generateTodayDate(), date.generateDate_minus(1, 1),
                         "123", "test");
-        String message = myceQuotes.readErrorMessage2(driver);
+        String message = myceQuotes.readErrorMessage2();
         //then
         Assert.assertEquals(message, expectedMessage);
-        myceQuotes.closeWindow(driver);
+        myceQuotes.closeWindow();
     }
 
     @Test(priority = 7, description = "Company_Agent_Type")
@@ -121,14 +121,14 @@ public class ValidationRuleTest extends BaseTest{
         //given
         String expectedMessage = "Company cannot be of type 'Agent' and Agent must be of type 'Agent' or 'Leads'";
         //when
-        myceQuotes.createNewMyceQuote(driver);
+        myceQuotes.createNewMyceQuote();
         myceQuotes.fillOutTheQuotaForm_whenCompanyIsAgentAndAgentIsCompany
                 ("Test1508", date.generateTodayDate(), date.generateTodayDate(), "123", "Test",
                         "Test Agent", "Test Company");
-        String message = myceQuotes.readErrorMessage2(driver);
+        String message = myceQuotes.readErrorMessage2();
         //then
         Assert.assertEquals(message, expectedMessage);
-        myceQuotes.closeWindow(driver);
+        myceQuotes.closeWindow();
     }
 
     @Test(priority = 8, description = "Myce_Quote__c.VR13_Reservation_Guest")
@@ -139,13 +139,13 @@ public class ValidationRuleTest extends BaseTest{
         //given
         String expectedMessage = "Reservation Guest";
         //when
-        myceQuotes.createNewMyceQuote(driver);
+        myceQuotes.createNewMyceQuote();
         myceQuotes.fillOutTheQuotaFormWhereReservationGuestIsNull
                 ("Test1508", date.generateTodayDate(), date.generateTodayDate(), "123", "Test");
-        String message = myceQuotes.readErrorMessage2(driver);
+        String message = myceQuotes.readErrorMessage2();
         //then
         Assert.assertEquals(message, expectedMessage);
-        myceQuotes.closeWindow(driver);
+        myceQuotes.closeWindow();
     }
 
     @Test(priority = 9, description = "Closed_Status")
@@ -156,16 +156,16 @@ public class ValidationRuleTest extends BaseTest{
         //given
         String expectedMessage = "Closed Status is required when quote is at stage '4 - Closed'";
         //when
-        myceQuotes.createNewMyceQuote(driver);
+        myceQuotes.createNewMyceQuote();
         myceQuotes.createMyceQuote_happyPath
                 ("Test1508", date.generateTodayDate(), date.generateTodayDate(), "123", "Test");
-        myceQuotes.clickEdit(driver);
-        myceQuotes.changeStage(driver);
-        myceQuotes.clickSave(driver);
-        String message = myceQuotes.readErrorMessage2(driver);
+        myceQuotes.clickEdit();
+        myceQuotes.changeStage();
+        myceQuotes.clickSave();
+        String message = myceQuotes.readErrorMessage2();
         //then
         Assert.assertEquals(message, expectedMessage);
-        myceQuotes.closeWindow(driver);
+        myceQuotes.closeWindow();
     }
 
     @Test(priority = 10, description = "Cancelled_Status")
@@ -176,15 +176,15 @@ public class ValidationRuleTest extends BaseTest{
         //given
         String expectedMessage = "We hit a snag.";
         //when
-        myceQuotes.clickEdit(driver);
-        myceQuotes.clickIsConfirmed(driver);
-        myceQuotes.changeCloseStatus(driver);
-        myceQuotes.clickSave(driver);
-        String message = myceQuotes.readErrorMessage(driver);
+        myceQuotes.clickEdit();
+        myceQuotes.clickIsConfirmed();
+        myceQuotes.changeCloseStatus();
+        myceQuotes.clickSave();
+        String message = myceQuotes.readErrorMessage();
         System.out.println("DEBUG " + message);
         //then
         Assert.assertEquals(message, expectedMessage);
-        myceQuotes.closeWindow(driver);
+        myceQuotes.closeWindow();
     }
 
     @Test(priority = 11, description = "Invoice_Line_Validation")
@@ -199,12 +199,12 @@ public class ValidationRuleTest extends BaseTest{
         String text = "Credit Note Lines";
         homePageForScratchOrg.openAppLauncher(driver);
         homePageForScratchOrg.sendTextInAppWindow(driver, text);
-        creditNoteLine.clickNewCreditNoteLineButton(driver);
-        creditNoteLine.fillOutNewCreditNoteLineForm(driver, "20");
-        String message = creditNoteLine.readErrorMessage2(driver);
+        creditNoteLine.clickNewCreditNoteLineButton();
+        creditNoteLine.fillOutNewCreditNoteLineForm( "20");
+        String message = creditNoteLine.readErrorMessage2();
         //then
         Assert.assertEquals(message, expectedMessage);
-        creditNoteLine.closeWindow(driver);
+        creditNoteLine.closeWindow();
     }
 
     @Test(priority = 12, description = "Package_Line")
@@ -218,14 +218,14 @@ public class ValidationRuleTest extends BaseTest{
         //when
         packages.goToPackages();
         Thread.sleep(3000);
-        packages.clickNewPackage(driver);
+        packages.clickNewPackage();
         packages.createPackage_happyPath("Test15", "Demo");
-        packageLine.clickNewPackageLine(driver);
+        packageLine.clickNewPackageLine();
         packageLine.createPackageLine_whereAppliedDateIsEmpty("Test15", "00:00", "01:00", "25");
-        String message = packageLine.readErrorMessage2(driver);
+        String message = packageLine.readErrorMessage2();
         //then
         Assert.assertEquals(message, expectedMessage);
-        packageLine.closeWindow(driver);
+        packageLine.closeWindow();
         Thread.sleep(3000);
     }
 
@@ -240,15 +240,15 @@ public class ValidationRuleTest extends BaseTest{
         //when
         packages.goToPackages();
         Thread.sleep(3000);
-        packages.clickNewPackage(driver);
+        packages.clickNewPackage();
         packages.createPackage_happyPath2("Test15", "Demo", "15");
-        packageLine.clickNewPackageLine(driver);
+        packageLine.clickNewPackageLine();
         packageLine.createPackageLine_whereAppliedDateIsNotEmpty
                 ("Test15", "00:00", "01:00", "25", "20");
-        String message = packageLine.readErrorMessage2(driver);
+        String message = packageLine.readErrorMessage2();
         //then
         Assert.assertEquals(message, expectedMessage);
-        packageLine.closeWindow(driver);
+        packageLine.closeWindow();
         Thread.sleep(3000);
     }
 
@@ -262,14 +262,14 @@ public class ValidationRuleTest extends BaseTest{
         //when
         packages.goToPackages();
         Thread.sleep(3000);
-        packages.clickNewPackage(driver);
+        packages.clickNewPackage();
         packages.createPackage_happyPath3("Test15", "Test");
-        packageLine.clickNewPackageLine(driver);
+        packageLine.clickNewPackageLine();
         packageLine.createPackageLine_whereAppliedDateIsEmpty("Test15", "00:00", "01:00", "25");
-        String message = packageLine.readErrorMessage2(driver);
+        String message = packageLine.readErrorMessage2();
         //then
         Assert.assertEquals(message, expectedMessage);
-        packageLine.closeWindow(driver);
+        packageLine.closeWindow();
     }
 
     @Test(priority = 15, description = "Quote_Hotel_Room")
@@ -282,16 +282,16 @@ public class ValidationRuleTest extends BaseTest{
         String text = "MYCE Quotes";
         homePageForScratchOrg.openAppLauncher(driver);
         homePageForScratchOrg.sendTextInAppWindow(driver, text);
-        myceQuotes.createNewMyceQuote(driver);
+        myceQuotes.createNewMyceQuote();
         myceQuotes.createMyceQuote_happyPath2
                 ("Test111", date.generateDate_plus(1, 3), date.generateDate_plus(1, 3), "3", "Demo");
-        myceQuotes.openHotelRooms(driver);
+        myceQuotes.openHotelRooms();
         quoteHotelRoom.createHotelRoom
                 (  date.generateDate_plus(1, 3), "19:00", date.generateDate_plus(1, 3), "10:00");
-        String errormessage = quoteHotelRoom.readErrorMessage3(driver);
+        String errormessage = quoteHotelRoom.readErrorMessage3();
         //then
         Assert.assertEquals(errormessage, expectedMessage);
-        quoteHotelRoom.closeWindow(driver);
+        quoteHotelRoom.closeWindow();
     }
 
     @Test(priority = 16, description = "Quote_Hotel_Room")
@@ -301,13 +301,13 @@ public class ValidationRuleTest extends BaseTest{
     public void testCreateQuoteHotelRoom2() throws InterruptedException {
         String expectedMessage = "Arrival and Departure date of hotel room must be within Quote arrival and departure dates";
         //when
-        myceQuotes.openHotelRooms(driver);
+        myceQuotes.openHotelRooms();
         quoteHotelRoom.createHotelRoom
                 (  date.generateDate_plus(1, 2), "10:00", date.generateDate_plus(1, 3), "19:00");
-        String errormessage = quoteHotelRoom.readErrorMessage2(driver);
+        String errormessage = quoteHotelRoom.readErrorMessage2();
         //then
         Assert.assertEquals(errormessage, expectedMessage);
-        quoteHotelRoom.closeWindow(driver);
+        quoteHotelRoom.closeWindow();
     }
 
     @Test(priority = 17, description = "Quote_Hotel_Room")
@@ -317,13 +317,13 @@ public class ValidationRuleTest extends BaseTest{
     public void testCreateQuoteHotelRoom3() throws InterruptedException {
         String expectedMessage = "Arrival and Departure date of hotel room must be within Quote arrival and departure dates";
         //when
-        myceQuotes.openHotelRooms(driver);
+        myceQuotes.openHotelRooms();
         quoteHotelRoom.createHotelRoom
                 (  date.generateDate_plus(1, 4), "10:00", date.generateDate_plus(1, 2), "19:00");
-        String errormessage = quoteHotelRoom.readErrorMessage2(driver);
+        String errormessage = quoteHotelRoom.readErrorMessage2();
         //then
         Assert.assertEquals(errormessage, expectedMessage);
-        quoteHotelRoom.closeWindow(driver);
+        quoteHotelRoom.closeWindow();
     }
 
     @Test(priority = 18, description = "Quote_Hotel_Room")
@@ -333,13 +333,13 @@ public class ValidationRuleTest extends BaseTest{
     public void testCreateQuoteHotelRoom4() throws InterruptedException {
         String expectedMessage = "Arrival and Departure date of hotel room must be within Quote arrival and departure dates";
         //when
-        myceQuotes.openHotelRooms(driver);
+        myceQuotes.openHotelRooms();
         quoteHotelRoom.createHotelRoom
                 (  date.generateDate_plus(1, 3), "10:00", date.generateDate_plus(1, 2), "19:00");
-        String errormessage = quoteHotelRoom.readErrorMessage2(driver);
+        String errormessage = quoteHotelRoom.readErrorMessage2();
         //then
         Assert.assertEquals(errormessage, expectedMessage);
-        quoteHotelRoom.closeWindow(driver);
+        quoteHotelRoom.closeWindow();
     }
 
     @Test(priority = 19, description = "Quote_Hotel_Room")
@@ -349,13 +349,13 @@ public class ValidationRuleTest extends BaseTest{
     public void testCreateQuoteHotelRoom5() throws InterruptedException {
         String expectedMessage = "Arrival and Departure date of hotel room must be within Quote arrival and departure dates";
         //when
-        myceQuotes.openHotelRooms(driver);
+        myceQuotes.openHotelRooms();
         quoteHotelRoom.createHotelRoom
                 (  date.generateDate_plus(1, 3), "10:00", date.generateDate_plus(1, 4), "19:00");
-        String errormessage = quoteHotelRoom.readErrorMessage2(driver);
+        String errormessage = quoteHotelRoom.readErrorMessage2();
         //then
         Assert.assertEquals(errormessage, expectedMessage);
-        quoteHotelRoom.closeWindow(driver);
+        quoteHotelRoom.closeWindow();
     }
 
     @Test(priority = 20, description = "Quote_Hotel_Room")
@@ -365,12 +365,12 @@ public class ValidationRuleTest extends BaseTest{
     public void testCreateQuoteHotelRoom6() throws InterruptedException {
         String expectedMessage = "Number";
         //when
-        myceQuotes.openHotelRooms(driver);
+        myceQuotes.openHotelRooms();
         quoteHotelRoom.createHotelRoom2("4");
-        String errormessage = quoteHotelRoom.readErrorMessage2(driver);
+        String errormessage = quoteHotelRoom.readErrorMessage2();
         //then
         Assert.assertEquals(errormessage, expectedMessage);
-        quoteHotelRoom.closeWindow(driver);
+        quoteHotelRoom.closeWindow();
     }
 
 

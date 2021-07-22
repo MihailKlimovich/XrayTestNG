@@ -103,12 +103,12 @@ public class QuoteMeetingRoom extends BasePage {
     }
 
     @Step("Read error message 2")
-    public String readErrorMessage2(WebDriver driver) throws InterruptedException {
+    public String readErrorMessage2() throws InterruptedException {
         return readRecalculateMessage(MESSAGE_ERROR_TEXT);
     }
 
     @Step("Close window")
-    public void closeWindow(WebDriver driver){
+    public void closeWindow(){
         wait1.until(ExpectedConditions.elementToBeClickable(CLOSE_WINDOW_BUTTON)).click();
     }
 

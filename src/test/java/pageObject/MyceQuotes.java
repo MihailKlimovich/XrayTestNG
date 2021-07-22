@@ -78,7 +78,7 @@ public class MyceQuotes extends BasePage{
 
 
     @Step
-    public void createNewMyceQuote(WebDriver driver){
+    public void createNewMyceQuote(){
         wait1.until(ExpectedConditions.presenceOfElementLocated(NEW_MYCE_QUOTE_BUTTON)).click();
         wait1.until(ExpectedConditions.presenceOfElementLocated(QUATE_RADIO_BUTTON)).click();
         wait1.until(ExpectedConditions.elementToBeClickable(NEXT_BUTTON)).click();
@@ -286,48 +286,48 @@ public class MyceQuotes extends BasePage{
 
 
     @Step("Click Edit")
-    public void clickEdit(WebDriver driver) throws InterruptedException {
+    public void clickEdit() throws InterruptedException {
         wait1.until(ExpectedConditions.elementToBeClickable(EDIT_BUTTON)).click();
         Thread.sleep(3000);
     }
 
     @Step("Change Stage type on Closed")
-    public void changeStage(WebDriver driver) throws InterruptedException {
+    public void changeStage() throws InterruptedException {
         scrollToElement(STAGE_FIELD);
         click(STAGE_FIELD);
         wait1.until(ExpectedConditions.presenceOfElementLocated(STAGE_TYPE_CLOSED)).click();
     }
 
     @Step("Change Close status type on Cancelled")
-    public void changeCloseStatus(WebDriver driver) throws InterruptedException {
+    public void changeCloseStatus() throws InterruptedException {
         click(CLOSED_STATUS_FIELD);
         wait1.until(ExpectedConditions.presenceOfElementLocated(CLOSED_STATUS_TYPE_CANCELLED)).click();
     }
 
     @Step("Click Save")
-    public void clickSave(WebDriver driver){
+    public void clickSave(){
         wait1.until(ExpectedConditions.elementToBeClickable(SAVE_BUTTON)).click();
     }
 
     @Step("Click Is Confirmed radio button")
-    public void clickIsConfirmed(WebDriver driver){
+    public void clickIsConfirmed(){
         wait1.until(ExpectedConditions.presenceOfElementLocated(IS_CONFIRMED_RADIO_BUTTON)).click();
     }
 
     @Step("Open Hotel Rooms")
-    public void openHotelRooms(WebDriver driver){
+    public void openHotelRooms(){
         wait1.until(ExpectedConditions.presenceOfElementLocated(HOTEL_ROOM)).click();
     }
 
     @Step("Open Meeting Rooms")
-    public void openMeetingRooms(WebDriver driver) throws InterruptedException {
+    public void openMeetingRooms() throws InterruptedException {
         //scrollToElement(MEETING_ROOM);
         wait1.until(ExpectedConditions.presenceOfElementLocated(MEETING_ROOM));
         clickInvisibleElement(MEETING_ROOM);
     }
 
     @Step("Open Meeting Packages")
-    public void openMeetingPackages(WebDriver driver) throws InterruptedException {
+    public void openMeetingPackages() throws InterruptedException {
         Thread.sleep(2000);
         refreshPage();
         Thread.sleep(2000);
@@ -351,12 +351,12 @@ public class MyceQuotes extends BasePage{
     }
 
     @Step("Read error message 1")
-    public String readErrorMessage(WebDriver driver) throws InterruptedException {
+    public String readErrorMessage() throws InterruptedException {
         return readRecalculateMessage(MESSAGE_TEXT);
     }
 
     @Step("Read error message 2")
-    public String readErrorMessage2(WebDriver driver) throws InterruptedException {
+    public String readErrorMessage2() throws InterruptedException {
         return readRecalculateMessage(MESSAGE_ERROR_TEXT);
     }
 
@@ -376,7 +376,7 @@ public class MyceQuotes extends BasePage{
     }
 
     @Step("Close window")
-    public void closeWindow(WebDriver driver) throws InterruptedException {
+    public void closeWindow() throws InterruptedException {
         wait1.until(ExpectedConditions.elementToBeClickable(CLOSE_WINDOW_BUTTON)).click();
         Thread.sleep(1000);
     }

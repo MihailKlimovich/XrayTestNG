@@ -33,7 +33,7 @@ public class PackageLine extends BasePage {
 
 
     @Step("Click new Package Line")
-    public void clickNewPackageLine(WebDriver driver) throws InterruptedException {
+    public void clickNewPackageLine() throws InterruptedException {
         Thread.sleep(2000);
         wait1.until(ExpectedConditions.presenceOfElementLocated(NEW_PACKAGE_LINE_BUTTON));
         click2(NEW_PACKAGE_LINE_BUTTON);
@@ -135,12 +135,12 @@ public class PackageLine extends BasePage {
     }
 
     @Step("Read error message 2")
-    public String readErrorMessage2(WebDriver driver) throws InterruptedException {
+    public String readErrorMessage2() throws InterruptedException {
         return readRecalculateMessage(MESSAGE_ERROR_TEXT);
     }
 
     @Step("Close window")
-    public void closeWindow(WebDriver driver){
+    public void closeWindow(){
         wait1.until(ExpectedConditions.elementToBeClickable(CLOSE_WINDOW_BUTTON)).click();
     }
 
