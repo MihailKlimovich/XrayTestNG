@@ -56,6 +56,7 @@ public class MyceQuotes extends BasePage{
     By PRODUCTS = By.xpath("//span[@title = 'Products']");
     By HELP_ERROR_MESSAGE = By.xpath("//div[@data-help-message]");
     By DATA_ERROR_MESSAGE = By.xpath("//div[@data-error-message]");
+    By QUOTE_NAME = By.xpath("//div[@data-error-message]");
 
 
 
@@ -367,6 +368,11 @@ public class MyceQuotes extends BasePage{
     @Step("Read help error message")
     public String readHelpErrorMessage() throws InterruptedException {
         return readRecalculateMessage(HELP_ERROR_MESSAGE);
+    }
+
+    @Step("Read help error message")
+    public String readQuoteName() throws InterruptedException {
+        return readRecalculateMessage(QUOTE_NAME);
     }
 
     @Step("Close window")

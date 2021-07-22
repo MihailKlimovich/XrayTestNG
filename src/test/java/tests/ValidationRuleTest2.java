@@ -4,7 +4,6 @@ import io.qameta.allure.Description;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.Story;
-import org.apache.poi.ss.formula.functions.T;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -14,29 +13,28 @@ import java.io.IOException;
 
 @Listeners({TestListener.class})
 
-public class ValidationRuleTest1 extends BaseTest {
+public class ValidationRuleTest2 extends BaseTest {
 
+    @Test(priority = 1, description = "LogIn")
+    @Severity(SeverityLevel.NORMAL)
+    @Description("LogIn")
+    @Story("LogIn")
+    public void testLogIn() {
+        //given
+        //when
+        loginPageForScratchOrg.logInOnScratchOrg(driver);
+    }
 
-        @Test(priority = 1, description = "LogIn")
-        @Severity(SeverityLevel.NORMAL)
-        @Description("LogIn")
-        @Story("LogIn")
-        public void testLogIn() {
-            //given
-            //when
-            loginPageForScratchOrg.logInOnScratchOrg(driver);
-        }
-
-        @Test(priority = 2, description="Setting up validation rules")
-        @Severity(SeverityLevel.NORMAL)
-        @Description("Setup.thn__ByPass__c.thn__ByPassVR__c == false and User.thn__ByPassVR__c == false")
-        @Story("Settings")
-        public void settingUpValidationRules() throws InterruptedException, IOException {
-            developerConsoleWindow.openDeveloperConsole();
-            developerConsoleWindow.openExecuteAnonymousWindow();
-            developerConsoleWindow.runApexCodeFromFile("src/main/Data/ValidationRule1");
-            Thread.sleep(5000);
-        }
+    @Test(priority = 2, description="Setting up validation rules")
+    @Severity(SeverityLevel.NORMAL)
+    @Description("Setup.thn__ByPass__c.thn__ByPassVR__c == false and User.thn__ByPassVR__c == false")
+    @Story("Settings")
+    public void settingUpValidationRules() throws InterruptedException, IOException {
+        developerConsoleWindow.openDeveloperConsole();
+        developerConsoleWindow.openExecuteAnonymousWindow();
+        developerConsoleWindow.runApexCodeFromFile("src/main/Data/ValidationRule2");
+        Thread.sleep(5000);
+    }
 
     @Test(priority = 3, description = "Myce_Quote__c.Commission_Validation_Rule")
     @Severity(SeverityLevel.NORMAL)
@@ -48,14 +46,14 @@ public class ValidationRuleTest1 extends BaseTest {
                 "if 'Commission to' field equals 'agent', agent shouldn't be null or " +
                 "if 'Commission to' field equals 'company', company shouldn't be null or";
         //when
+        loginPageForScratchOrg.logInOnScratchOrg(driver);
         myceQuotes.goToMyceQuotes();
         myceQuotes.createNewMyceQuote(driver);
         myceQuotes.fillOutTheQuotaForm_whenCommissionIsNone
-                ("Test1", date.generateTodayDate(), date.generateTodayDate(),
+                ("Test24", date.generateTodayDate(), date.generateTodayDate(),
                         "10", "Test");
         //then
-        Assert.assertEquals(myceQuotes.readErrorMessage2(driver), expectedMessage);
-        myceQuotes.closeWindow(driver);
+
     }
 
     @Test(priority = 4, description = "Myce_Quote__c.Commission_Validation_Rule")
