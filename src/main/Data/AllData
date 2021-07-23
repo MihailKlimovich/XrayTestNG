@@ -1,9 +1,14 @@
    delete [select name from thn__MYCE_Quote__c];
-  delete [select name from thn__Package__c];
-  delete [select thn__FirstName__c from thn__Guest__c];
-  delete [select name from thn__Reservation__c];
-  delete [select name from thn__Resource__c where name='TestRes'];
-  delete [select name from Account where name = 'First Test Account' or name = 'Test Agent' or name = 'Test Company'];
+   delete [select name from thn__Hotel__c where name = 'Test'];
+   delete [select name from thn__Package__c];
+   delete [select thn__FirstName__c from thn__Guest__c];
+   delete [select name from thn__Reservation__c];
+   delete [select name from thn__Resource__c where name='TestRes' or name='TestRes2'];
+   delete [select name from Account where name = 'First Test Account' or name = 'Test Agent' or name = 'Test Company'];
+
+  thn__Hotel__c prop1 = new thn__Hotel__c();
+     prop1.Name = 'Test';
+     insert prop1;
 
   List<Account> accounts = new  List<Account>();
       accounts.add(new Account(Name = 'First Test Account'));
@@ -92,19 +97,26 @@
         res1.thn__Rate__c = rateID1[0].id;
         insert res1;
 
-        thn__Resource__c res = new thn__Resource__c();
-        res.Name = 'TestRes';
-        res.thn__Bookable__c = true;
-        res.thn__Hotel__c = 'a0Y3N000000zlnIUAQ';
-        res.thn__U_Shape_pax__c = 5;
-        res.thn__Theater_pax__c = 5;
-        res.thn__Square_pax__c = 5;
-        res.thn__Circle_pax__c = 5;
-        res.thn__Cabaret_pax__c = 5;
-        res.thn__Classroom_pax__c = 5;
-        res.thn__Dinner_pax__c = 5;
-        res.thn__Buffet_pax__c = 5;
-        res.thn__Boardroom_pax__c = 5;
-        res.thn__Party_pax__c = 5;
-        res.thn__Custom_pax__c = 5;
-        insert res;
+        thn__Resource__c resource1 = new thn__Resource__c();
+        resource1.Name = 'TestRes';
+        resource1.thn__Bookable__c = true;
+        id propId1 = [select id from thn__Hotel__c where Name = 'Demo'].id;
+        resource1.thn__Hotel__c = propId1;
+        resource1.thn__U_Shape_pax__c = 5;
+        resource1.thn__Theater_pax__c = 5;
+        resource1.thn__Square_pax__c = 5;
+        resource1.thn__Circle_pax__c = 5;
+        resource1.thn__Cabaret_pax__c = 5;
+        resource1.thn__Classroom_pax__c = 5;
+        resource1.thn__Dinner_pax__c = 5;
+        resource1.thn__Buffet_pax__c = 5;
+        resource1.thn__Boardroom_pax__c = 5;
+        resource1.thn__Party_pax__c = 5;
+        resource1.thn__Custom_pax__c = 5;
+        insert resource1;
+
+        thn__Resource__c resource2 = new thn__Resource__c();
+        resource2.Name = 'TestRes2';
+        id propId2 = [select id from thn__Hotel__c where Name = 'Test'].id;
+        resource2.thn__Hotel__c = propId2;
+        insert resource2;

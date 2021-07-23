@@ -67,7 +67,7 @@ public class MyceQuotes extends BasePage{
 
     @Step("Open Myce Quote page")
     public MyceQuotes goToMyceQuotes() throws InterruptedException {
-        driver.navigate().to("https://connect-java-4747-dev-ed.lightning.force.com/lightning/o/thn__MYCE_Quote__c/list?filterName=Recent");
+        driver.navigate().to("https://agility-efficiency-64-dev-ed.lightning.force.com/lightning/o/thn__MYCE_Quote__c/list?filterName=Recent");
         try{if(wait2.until(ExpectedConditions.alertIsPresent())!=null){
             Alert alert = wait2.until(alertIsPresent());
             alert.accept();
@@ -105,7 +105,7 @@ public class MyceQuotes extends BasePage{
         scrollToElement(PROPERTY_FIELD);
         wait1.until(ExpectedConditions.presenceOfElementLocated(PROPERTY_FIELD)).click();
         writeText(PROPERTY_FIELD, (property));
-        click(PROPERTY_TYPE_TEST);
+        click(PROPERTY_TYPE_DEMO);
         wait1.until(ExpectedConditions.elementToBeClickable(SAVE_BUTTON)).click();
     }
 
@@ -130,7 +130,7 @@ public class MyceQuotes extends BasePage{
         scrollToElement(PROPERTY_FIELD);
         wait1.until(ExpectedConditions.presenceOfElementLocated(PROPERTY_FIELD)).click();
         writeText(PROPERTY_FIELD, (property));
-        click(PROPERTY_TYPE_TEST);
+        click(PROPERTY_TYPE_DEMO);
         wait1.until(ExpectedConditions.elementToBeClickable(SAVE_BUTTON)).click();
     }
 
@@ -155,7 +155,7 @@ public class MyceQuotes extends BasePage{
         scrollToElement(PROPERTY_FIELD);
         wait1.until(ExpectedConditions.presenceOfElementLocated(PROPERTY_FIELD)).click();
         writeText(PROPERTY_FIELD, (property));
-        click(PROPERTY_TYPE_TEST);
+        click(PROPERTY_TYPE_DEMO);
         wait1.until(ExpectedConditions.elementToBeClickable(SAVE_BUTTON)).click();
     }
 
@@ -177,7 +177,7 @@ public class MyceQuotes extends BasePage{
         scrollToElement(PROPERTY_FIELD);
         wait1.until(ExpectedConditions.presenceOfElementLocated(PROPERTY_FIELD)).click();
         writeText(PROPERTY_FIELD, (property));
-        click(PROPERTY_TYPE_TEST);
+        click(PROPERTY_TYPE_DEMO);
         wait1.until(ExpectedConditions.elementToBeClickable(SAVE_BUTTON)).click();
     }
 
@@ -207,7 +207,7 @@ public class MyceQuotes extends BasePage{
         scrollToElement(PROPERTY_FIELD);
         wait1.until(ExpectedConditions.presenceOfElementLocated(PROPERTY_FIELD)).click();
         writeText(PROPERTY_FIELD, (property));
-        click(PROPERTY_TYPE_TEST);
+        click(PROPERTY_TYPE_DEMO);
         wait1.until(ExpectedConditions.elementToBeClickable(SAVE_BUTTON)).click();
     }
 
@@ -229,7 +229,7 @@ public class MyceQuotes extends BasePage{
         scrollToElement(PROPERTY_FIELD);
         wait1.until(ExpectedConditions.presenceOfElementLocated(PROPERTY_FIELD)).click();
         writeText(PROPERTY_FIELD, (property));
-        click(PROPERTY_TYPE_TEST);
+        click(PROPERTY_TYPE_DEMO);
         scrollToElement(SEND_TO_MEWS_RADIO_BUTTON);
         click(SEND_TO_MEWS_RADIO_BUTTON);
         wait1.until(ExpectedConditions.elementToBeClickable(SAVE_BUTTON)).click();
@@ -253,7 +253,7 @@ public class MyceQuotes extends BasePage{
         scrollToElement(PROPERTY_FIELD);
         wait1.until(ExpectedConditions.presenceOfElementLocated(PROPERTY_FIELD)).click();
         writeText(PROPERTY_FIELD, (property));
-        click(PROPERTY_TYPE_TEST);
+        click(PROPERTY_TYPE_DEMO);
         wait1.until(ExpectedConditions.elementToBeClickable(SAVE_BUTTON)).click();
     }
 

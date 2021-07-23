@@ -15,93 +15,60 @@ import java.io.IOException;
 public class TestInWork extends BaseTest{
 
 
-
-    /*@Test(priority = 1, description = "Quote_Meetings_Room")
+    @Test(priority = 21, description = "Quote_Meetings_Room__c.VR19_SetupResource")
     @Severity(SeverityLevel.NORMAL)
-    @Description("SetupResource")
+    @Description("Quote_Meetings_Room__c.VR19_SetupResource")
     @Story("")
-    public void testCreateQuoteMeetingsRoom() throws InterruptedException, IOException {
+    public void testCreateQuoteMeetingsRoom1() throws InterruptedException, IOException {
         String expectedMessage = "Meeting room's pax exceeds the resource's capacity for this setup";
         //when
-        String text = "MYCE Quotes";
+        //developerConsoleWindow.openDeveloperConsole();
+        //developerConsoleWindow.openExecuteAnonymousWindow();
+        //developerConsoleWindow.runApexCodeFromFile("src/main/Data/Resource");
         loginPageForScratchOrg.logInOnScratchOrg(driver);
-        developerConsoleWindow.openDeveloperConsole();
-        developerConsoleWindow.openExecuteAnonymousWindow();
-        developerConsoleWindow.runApexCodeFromFile("src/main/Data/Resource");
-        homePageForScratchOrg.openAppLauncher(driver);
-        homePageForScratchOrg.sendTextInAppWindow(driver, text);
-        myceQuotes.createNewMyceQuote(driver);
+        myceQuotes.goToMyceQuotes();
+        myceQuotes.createNewMyceQuote();
         myceQuotes.createMyceQuote_happyPath2
-                ("Test222", date.generateDate_plus(1, 3), date.generateDate_plus(1, 3), "10", "Demo");
-        myceQuotes.openMeetingRooms(driver);
+                ("Test10", date.generateDate_plus(1, 3), date.generateDate_plus(1, 3), "10", "Demo");
+        myceQuotes.openMeetingRooms();
         quoteMeetingRoom.createMeetingRoom("6");
-        Assert.assertEquals(expectedMessage, myceQuotes.readErrorMessage2(driver));
+        Assert.assertEquals(expectedMessage, myceQuotes.readErrorMessage2());
         quoteMeetingRoom.changeSetupType("Cabaret");
-        Assert.assertEquals(expectedMessage, myceQuotes.readErrorMessage2(driver));
+        Assert.assertEquals(expectedMessage, myceQuotes.readErrorMessage2());
         quoteMeetingRoom.changeSetupType("Circle");
-        Assert.assertEquals(expectedMessage, myceQuotes.readErrorMessage2(driver));
+        Assert.assertEquals(expectedMessage, myceQuotes.readErrorMessage2());
         quoteMeetingRoom.changeSetupType("Classroom");
-        Assert.assertEquals(expectedMessage, myceQuotes.readErrorMessage2(driver));
+        Assert.assertEquals(expectedMessage, myceQuotes.readErrorMessage2());
         quoteMeetingRoom.changeSetupType("Custom");
-        Assert.assertEquals(expectedMessage, myceQuotes.readErrorMessage2(driver));
+        Assert.assertEquals(expectedMessage, myceQuotes.readErrorMessage2());
         quoteMeetingRoom.changeSetupType("Dinner");
-        Assert.assertEquals(expectedMessage, myceQuotes.readErrorMessage2(driver));
+        Assert.assertEquals(expectedMessage, myceQuotes.readErrorMessage2());
         quoteMeetingRoom.changeSetupType("Party");
-        Assert.assertEquals(expectedMessage, myceQuotes.readErrorMessage2(driver));
+        Assert.assertEquals(expectedMessage, myceQuotes.readErrorMessage2());
         quoteMeetingRoom.changeSetupType("Square");
-        Assert.assertEquals(expectedMessage, myceQuotes.readErrorMessage2(driver));
+        Assert.assertEquals(expectedMessage, myceQuotes.readErrorMessage2());
         quoteMeetingRoom.changeSetupType("Theater");
-        Assert.assertEquals(expectedMessage, myceQuotes.readErrorMessage2(driver));
+        Assert.assertEquals(expectedMessage, myceQuotes.readErrorMessage2());
         quoteMeetingRoom.changeSetupType("U-Shape");
-        Assert.assertEquals(expectedMessage, myceQuotes.readErrorMessage2(driver));
+        Assert.assertEquals(expectedMessage, myceQuotes.readErrorMessage2());
         Thread.sleep(2);
-        quoteMeetingRoom.closeWindow(driver);
+        quoteMeetingRoom.closeWindow();
     }
 
-    @Test(priority = 2, description = "Quote_Meetings_Room")
+    @Test(priority = 22, description = "Quote_Meetings_Room__c.VR21_Lock_Resource")
     @Severity(SeverityLevel.NORMAL)
-    @Description("Lock_Resource")
+    @Description("Quote_Meetings_Room__c.VR21_Lock_Resource")
     @Story("")
     public void testCreateQuoteMeetingsRoom2() throws InterruptedException, IOException {
-        String expectedMessage = "Resource";
+        String expectedMessage = "Resource cannot be changed when meeting room is locked";
         //when
-        myceQuotes.openMeetingRooms(driver);
+        myceQuotes.openMeetingRooms();
         quoteMeetingRoom.createMeetingRoom("4");
         quoteMeetingRoom.changeResource();
         //Then
-        Assert.assertEquals(expectedMessage, myceQuotes.readErrorMessage2(driver));
-        quoteMeetingRoom.closeWindow(driver);
-        Thread.sleep(2000);
+        Assert.assertEquals(myceQuotes.readHelpErrorMessage(), expectedMessage);
+        quoteMeetingRoom.closeWindow();
     }
-
-
-    @Test(priority = 3, description = "Quote_Meetings_Room")
-    @Severity(SeverityLevel.NORMAL)
-    @Description("PackageDate")
-    @Story("")
-    public void testCreateQuoteMeetingsRoom3() throws InterruptedException, IOException {
-        String expectedMessage = "Date cannot be changed if Meeting room is part of package";
-        //when
-        String text = "MYCE Quotes";
-        homePageForScratchOrg.openAppLauncher(driver);
-        homePageForScratchOrg.sendTextInAppWindow(driver, text);
-        Thread.sleep(2000);
-        myceQuotes.createNewMyceQuote(driver);
-        myceQuotes.createMyceQuote_happyPath2
-                ("Test333", date.generateTodayDate(), date.generateDate_plus(1, 3), "4", "Demo");
-        myceQuotes.openMeetingPackages(driver);
-        Thread.sleep(2000);
-        quoteMeetingPackages.createMeetingPackages("Pack c", "4", date.generateTodayDate(), date.generateDate_plus(1, 3), "30");
-        myceQuotes.goToMyceQuotes();
-        myceQuotes.openMyceQoteRecord("Test333");
-        myceQuotes.openMeetingRooms(driver);
-        quoteMeetingRoom.editDate("DEFAULT - MEETING HALF DAY", date.generateDate_plus(1, 1));
-        //Then
-        Assert.assertEquals(expectedMessage, quoteMeetingRoom.readErrorMessage2(driver));
-        quoteMeetingRoom.closeWindow(driver);
-
-    }*/
-
 
 
 

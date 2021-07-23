@@ -46,13 +46,13 @@ public class ValidationRuleTest1 extends BaseTest {
         //given
         String expectedMessage = "If commissionable = true, 'Commission to' field shouldn't be null or " +
                 "if 'Commission to' field equals 'agent', agent shouldn't be null or " +
-                "if 'Commission to' field equals 'company', company shouldn't be null or";
+                "if 'Commission to' field equals 'company', company shouldn't be null";
         //when
         myceQuotes.goToMyceQuotes();
         myceQuotes.createNewMyceQuote();
         myceQuotes.fillOutTheQuotaForm_whenCommissionIsNone
                 ("Test1", date.generateTodayDate(), date.generateTodayDate(),
-                        "10", "Test");
+                        "10", "Demo");
         //then
         Assert.assertEquals(myceQuotes.readErrorMessage2(), expectedMessage);
         myceQuotes.closeWindow();
@@ -66,13 +66,13 @@ public class ValidationRuleTest1 extends BaseTest {
         //given
         String expectedMessage = "If commissionable = true, 'Commission to' field shouldn't be null or " +
                 "if 'Commission to' field equals 'agent', agent shouldn't be null or " +
-                "if 'Commission to' field equals 'company', company shouldn't be null or";
+                "if 'Commission to' field equals 'company', company shouldn't be null";
         //when
         myceQuotes.goToMyceQuotes();
         myceQuotes.createNewMyceQuote();
         myceQuotes.fillOutTheQuotaForm_whenCommissionIsAgent
                 ("Test2", date.generateTodayDate(), date.generateTodayDate(),
-                        "10", "Test");
+                        "10", "Demo");
         //then
         Assert.assertEquals(myceQuotes.readErrorMessage2(), expectedMessage);
         myceQuotes.closeWindow();
@@ -86,13 +86,13 @@ public class ValidationRuleTest1 extends BaseTest {
         //given
         String expectedMessage = "If commissionable = true, 'Commission to' field shouldn't be null or " +
                 "if 'Commission to' field equals 'agent', agent shouldn't be null or " +
-                "if 'Commission to' field equals 'company', company shouldn't be null or";
+                "if 'Commission to' field equals 'company', company shouldn't be null";
         //when
         myceQuotes.goToMyceQuotes();
         myceQuotes.createNewMyceQuote();
         myceQuotes.fillOutTheQuotaForm_whenCommissionIsCompany
                 ("Test3", date.generateTodayDate(), date.generateTodayDate(),
-                        "10", "Test");
+                        "10", "Demo");
         //then
         Assert.assertEquals(myceQuotes.readErrorMessage2(), expectedMessage);
         myceQuotes.closeWindow();
@@ -110,7 +110,7 @@ public class ValidationRuleTest1 extends BaseTest {
         myceQuotes.createNewMyceQuote();
         myceQuotes.fillOutTheQuotaFormWithoutCommission
                 ("Test4", date.generateTodayDate(), date.generateDate_minus(1, 1),
-                        "10", "Test");
+                        "10", "Demo");
         //then
         Assert.assertEquals(myceQuotes.readDataErrorMessage(), expectedMessage);
         myceQuotes.closeWindow();
@@ -127,7 +127,7 @@ public class ValidationRuleTest1 extends BaseTest {
         myceQuotes.goToMyceQuotes();
         myceQuotes.createNewMyceQuote();
         myceQuotes.fillOutTheQuotaForm_whenCompanyIsAgentAndAgentIsCompany
-                ("Test5", date.generateTodayDate(), date.generateTodayDate(), "10", "Test",
+                ("Test5", date.generateTodayDate(), date.generateTodayDate(), "10", "Demo",
                         "Test Agent", "Test Company");
         //then
         Assert.assertEquals(myceQuotes.readErrorMessage2(), expectedMessage);
@@ -145,7 +145,7 @@ public class ValidationRuleTest1 extends BaseTest {
         myceQuotes.goToMyceQuotes();
         myceQuotes.createNewMyceQuote();
         myceQuotes.fillOutTheQuotaFormWhereReservationGuestIsNull
-                ("Test6", date.generateTodayDate(), date.generateTodayDate(), "10", "Test");
+                ("Test6", date.generateTodayDate(), date.generateTodayDate(), "10", "Demo");
         //then
         Assert.assertEquals(myceQuotes.readHelpErrorMessage(), expectedMessage);
         myceQuotes.closeWindow();
@@ -162,7 +162,7 @@ public class ValidationRuleTest1 extends BaseTest {
         myceQuotes.goToMyceQuotes();
         myceQuotes.createNewMyceQuote();
         myceQuotes.createMyceQuote_happyPath
-                ("Test7", date.generateTodayDate(), date.generateTodayDate(), "10", "Test");
+                ("Test7", date.generateTodayDate(), date.generateTodayDate(), "10", "Demo");
         myceQuotes.clickEdit();
         myceQuotes.changeStage();
         myceQuotes.clickSave();
@@ -174,7 +174,7 @@ public class ValidationRuleTest1 extends BaseTest {
     @Test(priority = 10, description = "Myce_Quote__c.VR28_Cancelled_Status")
     @Severity(SeverityLevel.NORMAL)
     @Description("Myce_Quote__c.VR28_Cancelled_Status")
-    @Story("Set thn__Is_Confirmed__c to true, Change MYCE Quote Closed Status to ‘Cancelled’")
+    @Story("Set thn__Is_Confirmed__c to false, Change MYCE Quote Closed Status to ‘Cancelled’")
     public void testCreateNewMyceQuote8() throws InterruptedException {
         //given
         String expectedMessage = "Closed Status can be 'Cancelled' only if Myce quote was 'Won'";
@@ -182,9 +182,8 @@ public class ValidationRuleTest1 extends BaseTest {
         myceQuotes.goToMyceQuotes();
         myceQuotes.createNewMyceQuote();
         myceQuotes.createMyceQuote_happyPath
-                ("Test8", date.generateTodayDate(), date.generateTodayDate(), "10", "Test");
+                ("Test8", date.generateTodayDate(), date.generateTodayDate(), "10", "Demo");
         myceQuotes.clickEdit();
-        myceQuotes.clickIsConfirmed();
         myceQuotes.changeCloseStatus();
         myceQuotes.clickSave();
         //then
@@ -826,6 +825,23 @@ public class ValidationRuleTest1 extends BaseTest {
         //then
         Assert.assertEquals(reservations.readHelpErrorMessage(), expectedMessage);
         reservations.closeWindow();
+    }
+
+    @Test(priority = 40, description = "VR38_Resource_Grouping")
+    @Severity(SeverityLevel.NORMAL)
+    @Description("VR38_Resource_Grouping")
+    @Story("Create Resource Grouping record, try to add Resources with different Properties")
+    public void testCreateResourceGrouping() throws InterruptedException, IOException {
+        //given
+        String expectedMessage = "Property of both resources must be the same";
+        //when
+        loginPageForScratchOrg.logInOnScratchOrg(driver);
+        resourceGrouping.goToResourceGrouping();
+        resourceGrouping.clickNew();
+        resourceGrouping.createResourceGrouping("TestRes", "TestRes2");
+        //then
+        Assert.assertEquals(resourceGrouping.readErrorMessage2(), expectedMessage);
+        resourceGrouping.closeWindow();
     }
 
 }

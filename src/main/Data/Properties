@@ -1,0 +1,3 @@
+  thn__Hotel__c prop1 = new thn__Hotel__c();
+   prop1.Name = 'Test';
+   insert prop1;
