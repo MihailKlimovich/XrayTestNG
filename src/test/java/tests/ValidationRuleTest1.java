@@ -835,7 +835,6 @@ public class ValidationRuleTest1 extends BaseTest {
         //given
         String expectedMessage = "Property of both resources must be the same";
         //when
-        loginPageForScratchOrg.logInOnScratchOrg(driver);
         resourceGrouping.goToResourceGrouping();
         resourceGrouping.clickNew();
         resourceGrouping.createResourceGrouping("TestRes", "TestRes2");
