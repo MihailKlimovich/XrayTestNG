@@ -93,6 +93,8 @@ public class BaseTest {
         resourceGrouping = new ResourceGrouping(driver);
     }
 
+
+
     @AfterClass
     public void teardown(){
         driver.close();

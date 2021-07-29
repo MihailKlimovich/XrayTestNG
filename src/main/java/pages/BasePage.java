@@ -30,7 +30,7 @@ public class BasePage {
     public BasePage(WebDriver driver){
         this.driver = driver;
         wait1 = new WebDriverWait(driver, 10);
-        wait2 = new WebDriverWait(driver, 1);
+        wait2 = new WebDriverWait(driver, 5);
         waitForTests = new FluentWait(this.driver)
                 .withTimeout(Duration.ofSeconds(2))
                 .pollingEvery(Duration.ofSeconds(5));
@@ -268,6 +268,11 @@ public class BasePage {
 
     public String readRecalculateMessage(By elementLocation){
         wait2.until(visibilityOfElementLocated(elementLocation));
+        return driver.findElement(elementLocation).getText();
+    }
+
+    public String readRecalculateMessage2(By elementLocation){
+        wait1.until(presenceOfElementLocated(elementLocation));
         return driver.findElement(elementLocation).getText();
     }
 

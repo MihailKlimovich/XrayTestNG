@@ -8,12 +8,11 @@ import org.openqa.selenium.WebDriver;
 import pages.BasePage;
 import tests.BaseTest;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.Iterator;
 import java.util.Set;
+
+
 
 public class DeveloperConsoleWindow extends BasePage {
 
@@ -43,6 +42,17 @@ public class DeveloperConsoleWindow extends BasePage {
     By executeButton = By.xpath("//div[@id='ExecAnon']//span[text()='Execute']");
 
     By logDeletedOkButton = By.xpath("//span[@class='x-btn-inner'][text()='OK']");
+
+    By queryEditorButton = By.xpath("//button//span[text()='Query Editor']");
+
+    By executeQueryButton = By.xpath("//span[@id = 'queryExecuteButton-btnInnerEl']");
+
+    By queryEditorTextArea = By.xpath("//textarea[@id = 'queryEditorText-inputEl']");
+
+    By queryResult = By.xpath("//tbody//tr[@class='x-grid-row']");
+
+
+
 
     /**Methods*/
 
@@ -88,6 +98,23 @@ public class DeveloperConsoleWindow extends BasePage {
         return this;
     }
 
+    @Step("Run SOQL request")
+    public DeveloperConsoleWindow runSoqlRequest (String request) throws InterruptedException {
+        Set<String> handles = driver.getWindowHandles();
+        Iterator<String> itr = handles.iterator();
+        String parentWindow = itr.next();
+        String newWindow = itr.next();
+        driver.switchTo().window(newWindow);
+        click(queryEditorButton);
+        click(queryEditorTextArea);
+        ctrlA();
+        delete();
+        sendText(request);
+        click(executeQueryButton);
+        Thread.sleep(3000);
+        return this;
+    }
+
     public DeveloperConsoleWindow runApexCodeFromFile (String filePATH) throws InterruptedException, IOException {
         Set<String> handles = driver.getWindowHandles();
         Iterator<String> itr = handles.iterator();
@@ -117,4 +144,79 @@ public class DeveloperConsoleWindow extends BasePage {
         driver.switchTo().window(parentWindow);
         return this;
     }
+
+    @Step("Read query result")
+    public String readQueryResult() throws InterruptedException {
+        return readRecalculateMessage2(queryResult);
+    }
+
+    @Step("Run Apex Code")
+    public DeveloperConsoleWindow goToParentWindow() throws InterruptedException {
+        Set<String> handles = driver.getWindowHandles();
+        Iterator<String> itr = handles.iterator();
+        String parentWindow = itr.next();
+        String newWindow = itr.next();
+        driver.switchTo().window(parentWindow);
+        return this;
+    }
+
+
+    public static void main(String[] args) throws InterruptedException, IOException {
+        String cmd = "/home/minsk-sc/sfdx/bin/sfdx force:org:list";
+        Runtime run = Runtime.getRuntime();
+        Process pr = run.exec(cmd);
+        pr.waitFor();
+        BufferedReader buf = new BufferedReader(new InputStreamReader(pr.getInputStream()));
+        String line = "";
+        while ((line = buf.readLine()) != null) {
+            System.out.println(line);
+        }
+    }
+
+     public StringBuilder  runLinuxCommand2(String cmd) throws InterruptedException, IOException {
+        StringBuilder strB = new StringBuilder();
+        Runtime run = Runtime.getRuntime();
+        Process pr = run.exec(cmd);
+        pr.waitFor();
+        BufferedReader buf = new BufferedReader(new InputStreamReader(pr.getInputStream()));
+        String line = "";
+        while ((line = buf.readLine()) != null) {
+            strB.append(line);
+            strB.append("\n");
+        }
+        buf.close();
+        return strB;
+    }
+
+
+    public String RunLinuxCommand(String cmd) throws IOException {
+
+        String linuxCommandResult = "";
+        Process p = Runtime.getRuntime().exec(cmd);
+
+        BufferedReader stdInput = new BufferedReader(new InputStreamReader(p.getInputStream()));
+
+        BufferedReader stdError = new BufferedReader(new InputStreamReader(p.getErrorStream()));
+
+        try {
+            while ((linuxCommandResult = stdInput.readLine()) != null) {
+
+                return linuxCommandResult;
+            }
+            while ((linuxCommandResult = stdError.readLine()) != null) {
+                return "";
+            }
+        } catch (Exception e) {
+            return "";
+        }
+
+        return null;
+    }
+
+
+
+
+
+
+
 }

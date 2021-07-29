@@ -100,6 +100,7 @@ public class QuoteMeetingRoom extends BasePage {
         clickInvisibleElement(By.xpath("//span[@title='" + type + "']"));
         //wait1.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[@title='" + type + "']"))).click();
         wait1.until(ExpectedConditions.presenceOfElementLocated(SAVE_BUTTON)).click();
+
     }
 
     @Step("Read error message 2")

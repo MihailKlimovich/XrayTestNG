@@ -56,7 +56,7 @@ public class MyceQuotes extends BasePage{
     By PRODUCTS = By.xpath("//span[@title = 'Products']");
     By HELP_ERROR_MESSAGE = By.xpath("//div[@data-help-message]");
     By DATA_ERROR_MESSAGE = By.xpath("//div[@data-error-message]");
-    By QUOTE_NAME = By.xpath("//div[@data-error-message]");
+    By QUOTE_NAME = By.xpath("//slot[@slot='primaryField']//lightning-formatted-text");
 
 
 
@@ -375,6 +375,8 @@ public class MyceQuotes extends BasePage{
         return readRecalculateMessage(QUOTE_NAME);
     }
 
+
+
     @Step("Close window")
     public void closeWindow() throws InterruptedException {
         wait1.until(ExpectedConditions.elementToBeClickable(CLOSE_WINDOW_BUTTON)).click();
@@ -385,6 +387,8 @@ public class MyceQuotes extends BasePage{
     public void refreshPage(WebDriver driver){
         refreshPage(driver);
     }
+
+
 
 
 

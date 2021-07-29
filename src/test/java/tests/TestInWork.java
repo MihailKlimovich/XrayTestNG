@@ -20,56 +20,15 @@ public class TestInWork extends BaseTest{
     @Description("Quote_Meetings_Room__c.VR19_SetupResource")
     @Story("")
     public void testCreateQuoteMeetingsRoom1() throws InterruptedException, IOException {
-        String expectedMessage = "Meeting room's pax exceeds the resource's capacity for this setup";
-        //when
-        //developerConsoleWindow.openDeveloperConsole();
-        //developerConsoleWindow.openExecuteAnonymousWindow();
-        //developerConsoleWindow.runApexCodeFromFile("src/main/Data/Resource");
-        loginPageForScratchOrg.logInOnScratchOrg(driver);
-        myceQuotes.goToMyceQuotes();
-        myceQuotes.createNewMyceQuote();
-        myceQuotes.createMyceQuote_happyPath2
-                ("Test10", date.generateDate_plus(1, 3), date.generateDate_plus(1, 3), "10", "Demo");
-        myceQuotes.openMeetingRooms();
-        quoteMeetingRoom.createMeetingRoom("6");
-        Assert.assertEquals(expectedMessage, myceQuotes.readErrorMessage2());
-        quoteMeetingRoom.changeSetupType("Cabaret");
-        Assert.assertEquals(expectedMessage, myceQuotes.readErrorMessage2());
-        quoteMeetingRoom.changeSetupType("Circle");
-        Assert.assertEquals(expectedMessage, myceQuotes.readErrorMessage2());
-        quoteMeetingRoom.changeSetupType("Classroom");
-        Assert.assertEquals(expectedMessage, myceQuotes.readErrorMessage2());
-        quoteMeetingRoom.changeSetupType("Custom");
-        Assert.assertEquals(expectedMessage, myceQuotes.readErrorMessage2());
-        quoteMeetingRoom.changeSetupType("Dinner");
-        Assert.assertEquals(expectedMessage, myceQuotes.readErrorMessage2());
-        quoteMeetingRoom.changeSetupType("Party");
-        Assert.assertEquals(expectedMessage, myceQuotes.readErrorMessage2());
-        quoteMeetingRoom.changeSetupType("Square");
-        Assert.assertEquals(expectedMessage, myceQuotes.readErrorMessage2());
-        quoteMeetingRoom.changeSetupType("Theater");
-        Assert.assertEquals(expectedMessage, myceQuotes.readErrorMessage2());
-        quoteMeetingRoom.changeSetupType("U-Shape");
-        Assert.assertEquals(expectedMessage, myceQuotes.readErrorMessage2());
-        Thread.sleep(2);
-        quoteMeetingRoom.closeWindow();
-    }
+        ///home/minsk-sc/sfdx/bin/sfdx
+        //force:data:record:get -s thn__MYCE_Quote__c -w "Name=Test24" -u THYNK-VR --json
+        //force:data:soql:query -q "SELECT thn__Commissionable__c, thn__Commission_to__c FROM thn__MYCE_Quote__c where Name='Test24'" -u THYNK-VR --json
+        System.out.println("/home/minsk-sc/sfdx/bin/sfdx force:data:soql:query -q \"SELECT thn__Commissionable__c, thn__Commission_to__c FROM thn__MYCE_Quote__c where Name='Test24'\" -u THYNK-VR --json");
+        StringBuilder res = developerConsoleWindow.runLinuxCommand2("/home/minsk-sc/sfdx/bin/sfdx" +
+                " force:data:soql:query -q \"SELECT thn__Commissionable__c, thn__Commission_to__c FROM thn__MYCE_Quote__c where Name='Test24'\" -u THYNK-VR --json" );
+        System.out.println(res.toString());
 
-    @Test(priority = 22, description = "Quote_Meetings_Room__c.VR21_Lock_Resource")
-    @Severity(SeverityLevel.NORMAL)
-    @Description("Quote_Meetings_Room__c.VR21_Lock_Resource")
-    @Story("")
-    public void testCreateQuoteMeetingsRoom2() throws InterruptedException, IOException {
-        String expectedMessage = "Resource cannot be changed when meeting room is locked";
-        //when
-        myceQuotes.openMeetingRooms();
-        quoteMeetingRoom.createMeetingRoom("4");
-        quoteMeetingRoom.changeResource();
-        //Then
-        Assert.assertEquals(myceQuotes.readHelpErrorMessage(), expectedMessage);
-        quoteMeetingRoom.closeWindow();
     }
-
 
 
 
