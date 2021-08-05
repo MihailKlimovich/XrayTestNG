@@ -162,9 +162,10 @@ public class DeveloperConsoleWindow extends BasePage {
 
 
     public static void main(String[] args) throws InterruptedException, IOException {
-        String cmd = "/home/minsk-sc/sfdx/bin/sfdx force:org:list";
+        String[] command = { "/home/minsk-sc/sfdx/bin/sfdx", "force:data:record:create",  "-s thn__MYCE_Quote__c", "-v \"Name='SFDXTEST556'\"",  "-u THYNK-VR", "--json" };
+        String cmd = "/home/minsk-sc/sfdx/bin/sfdx force:data:record:create -s thn__MYCE_Quote__c -v \"Name='SFDXTEST556' thn__Commissionable__c=true\" -u THYNK-VR --json";
         Runtime run = Runtime.getRuntime();
-        Process pr = run.exec(cmd);
+        Process pr = run.exec(command);
         pr.waitFor();
         BufferedReader buf = new BufferedReader(new InputStreamReader(pr.getInputStream()));
         String line = "";
@@ -173,7 +174,25 @@ public class DeveloperConsoleWindow extends BasePage {
         }
     }
 
-     public StringBuilder  runLinuxCommand2(String cmd) throws InterruptedException, IOException {
+     /*public StringBuilder  runLinuxCommand(String cmd) throws InterruptedException, IOException {
+        StringBuilder strB = new StringBuilder();
+         System.out.println(cmd);
+        Runtime run = Runtime.getRuntime();
+        String [] d = {"/home/minsk-sc/sfdx/bin/sfdx", "force:data:soql:query", "-q 'SELECT thn__Commissionable__c, thn__Commission_to__c FROM thn__MYCE_Quote__c where Name=\'Test22\''", "-u test-qcud2ypdbztz@example.com", "--json"};
+        Process pr = run.exec( d,null);
+        pr.waitFor();
+         System.out.println(pr);
+        BufferedReader buf = new BufferedReader(new InputStreamReader(pr.getInputStream()));
+        String line = "";
+        while ((line = buf.readLine()) != null) {
+            strB.append(line);
+            strB.append("\n");
+        }
+        buf.close();
+        return strB;
+    }
+
+    public StringBuilder  runLinuxCommand2(String cmd) throws InterruptedException, IOException {
         StringBuilder strB = new StringBuilder();
         Runtime run = Runtime.getRuntime();
         Process pr = run.exec(cmd);
@@ -186,32 +205,12 @@ public class DeveloperConsoleWindow extends BasePage {
         }
         buf.close();
         return strB;
-    }
+    }*/
 
 
-    public String RunLinuxCommand(String cmd) throws IOException {
 
-        String linuxCommandResult = "";
-        Process p = Runtime.getRuntime().exec(cmd);
 
-        BufferedReader stdInput = new BufferedReader(new InputStreamReader(p.getInputStream()));
 
-        BufferedReader stdError = new BufferedReader(new InputStreamReader(p.getErrorStream()));
-
-        try {
-            while ((linuxCommandResult = stdInput.readLine()) != null) {
-
-                return linuxCommandResult;
-            }
-            while ((linuxCommandResult = stdError.readLine()) != null) {
-                return "";
-            }
-        } catch (Exception e) {
-            return "";
-        }
-
-        return null;
-    }
 
 
 

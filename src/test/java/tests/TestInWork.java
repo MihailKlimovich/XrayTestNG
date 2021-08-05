@@ -7,7 +7,8 @@ import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.Story;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
+import pageObject.JsonParser;
+import pageObject.SfdxCommand;
 
 
 import java.io.IOException;
@@ -23,11 +24,11 @@ public class TestInWork extends BaseTest{
         ///home/minsk-sc/sfdx/bin/sfdx
         //force:data:record:get -s thn__MYCE_Quote__c -w "Name=Test24" -u THYNK-VR --json
         //force:data:soql:query -q "SELECT thn__Commissionable__c, thn__Commission_to__c FROM thn__MYCE_Quote__c where Name='Test24'" -u THYNK-VR --json
-        System.out.println("/home/minsk-sc/sfdx/bin/sfdx force:data:soql:query -q \"SELECT thn__Commissionable__c, thn__Commission_to__c FROM thn__MYCE_Quote__c where Name='Test24'\" -u THYNK-VR --json");
-        StringBuilder res = developerConsoleWindow.runLinuxCommand2("/home/minsk-sc/sfdx/bin/sfdx" +
-                " force:data:soql:query -q \"SELECT thn__Commissionable__c, thn__Commission_to__c FROM thn__MYCE_Quote__c where Name='Test24'\" -u THYNK-VR --json" );
-        System.out.println(res.toString());
-
+        //System.out.println("/home/minsk-sc/sfdx/bin/sfdx force:data:soql:query -q \"SELECT thn__Commissionable__c, thn__Commission_to__c FROM thn__MYCE_Quote__c where Name='Test24'\" -u THYNK-VR --json");
+        StringBuilder res = SfdxCommand.runLinuxCommand2("/home/minsk-sc/sfdx/bin/sfdx force:data:record:create -s thn__MYCE_Quote__c -v 'Name='SFDXTEST556', thn__Commissionable__c=true' -u THYNK-VR --json");
+        System.out.println(res);
+        //String val = JsonParser.getFieldValue(res.toString(), "thn__Arrival_Date__c");
+        //System.out.println(val);
     }
 
 
