@@ -5,13 +5,16 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.ElementNotInteractableException;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
+import org.zeroturnaround.exec.ProcessExecutor;
 import pages.BasePage;
 import tests.BaseTest;
 
 import java.io.*;
+import java.util.Arrays;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
-
+import java.util.concurrent.TimeoutException;
 
 
 public class DeveloperConsoleWindow extends BasePage {
@@ -161,51 +164,8 @@ public class DeveloperConsoleWindow extends BasePage {
     }
 
 
-    public static void main(String[] args) throws InterruptedException, IOException {
-        String[] command = { "/home/minsk-sc/sfdx/bin/sfdx", "force:data:record:create",  "-s thn__MYCE_Quote__c", "-v \"Name='SFDXTEST556'\"",  "-u THYNK-VR", "--json" };
-        String cmd = "/home/minsk-sc/sfdx/bin/sfdx force:data:record:create -s thn__MYCE_Quote__c -v \"Name='SFDXTEST556' thn__Commissionable__c=true\" -u THYNK-VR --json";
-        Runtime run = Runtime.getRuntime();
-        Process pr = run.exec(command);
-        pr.waitFor();
-        BufferedReader buf = new BufferedReader(new InputStreamReader(pr.getInputStream()));
-        String line = "";
-        while ((line = buf.readLine()) != null) {
-            System.out.println(line);
-        }
-    }
 
-     /*public StringBuilder  runLinuxCommand(String cmd) throws InterruptedException, IOException {
-        StringBuilder strB = new StringBuilder();
-         System.out.println(cmd);
-        Runtime run = Runtime.getRuntime();
-        String [] d = {"/home/minsk-sc/sfdx/bin/sfdx", "force:data:soql:query", "-q 'SELECT thn__Commissionable__c, thn__Commission_to__c FROM thn__MYCE_Quote__c where Name=\'Test22\''", "-u test-qcud2ypdbztz@example.com", "--json"};
-        Process pr = run.exec( d,null);
-        pr.waitFor();
-         System.out.println(pr);
-        BufferedReader buf = new BufferedReader(new InputStreamReader(pr.getInputStream()));
-        String line = "";
-        while ((line = buf.readLine()) != null) {
-            strB.append(line);
-            strB.append("\n");
-        }
-        buf.close();
-        return strB;
-    }
 
-    public StringBuilder  runLinuxCommand2(String cmd) throws InterruptedException, IOException {
-        StringBuilder strB = new StringBuilder();
-        Runtime run = Runtime.getRuntime();
-        Process pr = run.exec(cmd);
-        pr.waitFor();
-        BufferedReader buf = new BufferedReader(new InputStreamReader(pr.getInputStream()));
-        String line = "";
-        while ((line = buf.readLine()) != null) {
-            strB.append(line);
-            strB.append("\n");
-        }
-        buf.close();
-        return strB;
-    }*/
 
 
 

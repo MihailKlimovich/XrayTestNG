@@ -1,13 +1,12 @@
 package tests;
 
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import io.qameta.allure.Description;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.Story;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pageObject.JsonParser;
+import pageObject.JsonParser2;
 import pageObject.SfdxCommand;
 
 
@@ -25,10 +24,31 @@ public class TestInWork extends BaseTest{
         //force:data:record:get -s thn__MYCE_Quote__c -w "Name=Test24" -u THYNK-VR --json
         //force:data:soql:query -q "SELECT thn__Commissionable__c, thn__Commission_to__c FROM thn__MYCE_Quote__c where Name='Test24'" -u THYNK-VR --json
         //System.out.println("/home/minsk-sc/sfdx/bin/sfdx force:data:soql:query -q \"SELECT thn__Commissionable__c, thn__Commission_to__c FROM thn__MYCE_Quote__c where Name='Test24'\" -u THYNK-VR --json");
-        StringBuilder res = SfdxCommand.runLinuxCommand2("/home/minsk-sc/sfdx/bin/sfdx force:data:record:create -s thn__MYCE_Quote__c -v 'Name='SFDXTEST556', thn__Commissionable__c=true' -u THYNK-VR --json");
+        SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:record:create",
+                "-s",
+                "thn__MYCE_Quote__c",
+                "-v",
+                "Name='Test24' thn__Commissionable__c=true",
+                "-u",
+                "THYNK-VR",
+                "--json"});
+        StringBuilder res = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        "force:data:record:get",
+        "-s",
+        "thn__MYCE_Quote__c",
+        "-w",
+        "Name=Test24",
+        "-u",
+        "THYNK-VR",
+        "--json"});
         System.out.println(res);
-        //String val = JsonParser.getFieldValue(res.toString(), "thn__Arrival_Date__c");
-        //System.out.println(val);
+        String name = JsonParser2.getFieldValue(res.toString(), "Name");
+        String commissionable = JsonParser2.getFieldValue(res.toString(), "thn__Commissionable__c");
+        //String commission_to =  JsonParser2.getFieldValue(res.toString(), "thn__Commission_to__c");
+        Assert.assertEquals(name, "Test24");
+        Assert.assertEquals(commissionable, "true");
+        //Assert.assertEquals(commission_to, null);
     }
 
 

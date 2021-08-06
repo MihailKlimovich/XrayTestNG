@@ -92,19 +92,28 @@ public class MyceQuotes extends BasePage{
             String pax,
             String property
     ) throws InterruptedException {
+        Thread.sleep(500);
         writeText(NAME_QUOTE_FIELD, (nameQuote));
         click(ARRIVAL_DATA_FIELD);
+        Thread.sleep(500);
         writeText(ARRIVAL_DATA_FIELD, (arrivalDate));
         click(DEPARTURE_DATA_FIELD);
+        Thread.sleep(500);
         writeText(DEPARTURE_DATA_FIELD, (departureDate));
         click(PAX_FIELD);
+        Thread.sleep(500);
         writeText(PAX_FIELD, (pax));
         wait1.until(ExpectedConditions.elementToBeClickable(COMMISSIONABLE_RADIO_BUTTON)).click();
+        Thread.sleep(500);
         wait1.until(ExpectedConditions.presenceOfElementLocated(COMMISSION_FIELD)).click();
+        Thread.sleep(500);
         wait1.until(ExpectedConditions.presenceOfElementLocated(COMMISSION_TYPE_NONE)).click();
+        Thread.sleep(500);
         scrollToElement(PROPERTY_FIELD);
         wait1.until(ExpectedConditions.presenceOfElementLocated(PROPERTY_FIELD)).click();
+        Thread.sleep(500);
         writeText(PROPERTY_FIELD, (property));
+        Thread.sleep(500);
         click(PROPERTY_TYPE_DEMO);
         wait1.until(ExpectedConditions.elementToBeClickable(SAVE_BUTTON)).click();
     }
@@ -117,19 +126,28 @@ public class MyceQuotes extends BasePage{
             String pax,
             String property
     ) throws InterruptedException {
+        Thread.sleep(500);
         writeText(NAME_QUOTE_FIELD, (nameQuote));
         click(ARRIVAL_DATA_FIELD);
+        Thread.sleep(500);
         writeText(ARRIVAL_DATA_FIELD, (arrivalDate));
         click(DEPARTURE_DATA_FIELD);
+        Thread.sleep(500);
         writeText(DEPARTURE_DATA_FIELD, (departureDate));
         click(PAX_FIELD);
+        Thread.sleep(500);
         writeText(PAX_FIELD, (pax));
         wait1.until(ExpectedConditions.elementToBeClickable(COMMISSIONABLE_RADIO_BUTTON)).click();
+        Thread.sleep(500);
         wait1.until(ExpectedConditions.presenceOfElementLocated(COMMISSION_FIELD)).click();
+        Thread.sleep(500);
         wait1.until(ExpectedConditions.presenceOfElementLocated(COMMISSION_TYPE_AGENT)).click();
+        Thread.sleep(500);
         scrollToElement(PROPERTY_FIELD);
         wait1.until(ExpectedConditions.presenceOfElementLocated(PROPERTY_FIELD)).click();
+        Thread.sleep(500);
         writeText(PROPERTY_FIELD, (property));
+        Thread.sleep(500);
         click(PROPERTY_TYPE_DEMO);
         wait1.until(ExpectedConditions.elementToBeClickable(SAVE_BUTTON)).click();
     }
