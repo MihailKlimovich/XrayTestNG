@@ -137,7 +137,7 @@ public class ValidationRuleTest1 extends BaseTest {
     @Test(priority = 8, description = "Myce_Quote__c.VR13_Reservation_Guest")
     @Severity(SeverityLevel.NORMAL)
     @Description("Myce_Quote__c.VR13_Reservation_Guest")
-    @Story("On thn__Reservation__c record where thn__Mews_Id__c != null change thn__State__c to “Canceled”")
+    @Story("Create MYCE Quote: leave thn__Reservation_Guest__c empty, Set thn__Send_to_Mews__c to TRUE")
     public void testCreateNewMyceQuote6() throws InterruptedException {
         //given
         String expectedMessage = "Reservation guest is required to send reservations to Mews";
