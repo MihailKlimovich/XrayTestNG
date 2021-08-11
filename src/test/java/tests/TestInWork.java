@@ -603,7 +603,7 @@ public class TestInWork extends BaseTest{
                 "-s",
                 "thn__Product__c",
                 "-w",
-                "Name='ROOM 1 NIGHT'",
+                "Name='ROOM 2 NIGHTS'",
                 "-u",
                 "THYNK-VR",
                 "--json"});
@@ -630,36 +630,47 @@ public class TestInWork extends BaseTest{
                 "THYNK-VR",
                 "--json"});
         String myceQuoteID = JsonParser2.getFieldValue(res3.toString(), "Id");
-        StringBuilder ttt =SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder res4 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:record:get",
+                "-s",
+                "thn__Space_Area__c",
+                "-w",
+                "Name='Queen'",
+                "-u",
+                "THYNK-VR",
+                "--json"});
+        String roomTypeID = JsonParser2.getFieldValue(res4.toString(), "Id");
+        SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:create",
                 "-s",
                 "thn__Quote_Hotel_Room__c",
                 "-v",
-                "Name='Test Hotel Room 2' thn__MYCE_Quote__c='" + myceQuoteID + "' thn__Product__c='" + productID +
-                        "' thn__Space_Area__c='Queen' thn__Arrival_Date_Time__c=" +
+                "thn__MYCE_Quote__c='" + myceQuoteID + "' thn__Product__c='" + productID +
+                        "' thn__Space_Area__c='" + roomTypeID + "' thn__Arrival_Date_Time__c=" +
                         date.generateTodayDate2() + "T10:00:00.000+0000 thn__Departure_Date_Time__c=" +
-                        date.generateTodayDate2_plus(0, 2) + "T10:00:00.000+0000 thn__Pax__c=10",
+                        date.generateTodayDate2_plus(0, 2) + "T19:00:00.000+0000 thn__Pax__c=10",
                 "-u",
                 "THYNK-VR",
                 "--json"});
-        System.out.println(ttt);
-        /*StringBuilder res3 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder res5 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:get",
                 "-s",
                 "thn__Quote_Hotel_Room__c",
                 "-w",
-                "Name='Test Hotel Room 2'",
+                "thn__MYCE_Quote__c='" + myceQuoteID,
                 "-u",
                 "THYNK-VR",
                 "--json"});
-        String nameHotelRoom = JsonParser2.getFieldValue(res3.toString(), "Name");
-        String nameMyceQuote = JsonParser2.getFieldValue(res3.toString(), "thn__MYCE_Quote__c");
-        String arrivalDateTime = JsonParser2.getFieldValue(res3.toString(), "thn__Arrival_Date_Time__c");
-        String departureDateTime = JsonParser2.getFieldValue(res3.toString(), "thn__Departure_Date_Time__c");
-        Assert.assertEquals(nameHotelRoom, "Test Hotel Room 1");
-        Assert.assertEquals(nameMyceQuote, myceQuoteID);
-        Assert.assertEquals(arrivalDateTime, "2021-08-10T19:00:00.000+0000");
-        Assert.assertEquals(departureDateTime, "2021-08-10T10:00:00.000+0000");*/
+        String myceQuote = JsonParser2.getFieldValue(res5.toString(), "thn__MYCE_Quote__c");
+        String arrivalDateMyceQuote = JsonParser2.getFieldValue(res3.toString(), "thn__Arrival_Date__c");
+        String departureDateMyceQuote = JsonParser2.getFieldValue(res3.toString(), "thn__Departure_Date__c");
+        String arrivalDateTime = JsonParser2.getFieldValue(res5.toString(), "thn__Arrival_Date_Time__c");
+        String departureDateTime = JsonParser2.getFieldValue(res5.toString(), "thn__Departure_Date_Time__c");
+        Assert.assertEquals(myceQuote, myceQuoteID);
+        Assert.assertEquals(arrivalDateMyceQuote, date.generateTodayDate2_plus(0, 1));
+        Assert.assertEquals(departureDateMyceQuote, date.generateTodayDate2_plus(0, 2));
+        Assert.assertTrue(arrivalDateTime.contains(date.generateTodayDate2()));
+        Assert.assertTrue(departureDateTime.contains(date.generateTodayDate2_plus(0, 2)));
     }
 
 
