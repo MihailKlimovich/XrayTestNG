@@ -1,6 +1,7 @@
 package pageObject;
 
 import org.zeroturnaround.exec.ProcessExecutor;
+import pages.BasePage;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -41,7 +42,7 @@ public class SfdxCommand {
         return strB;
     }
 
-    public static void main(String[] args) throws InterruptedException, IOException, TimeoutException {
+    /*public static void main(String[] args) throws InterruptedException, IOException, TimeoutException {
         List<String> commands = Arrays.asList("/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:create",
                 "-s",
@@ -57,6 +58,12 @@ public class SfdxCommand {
                 .execute()
                 .outputUTF8();
         System.out.println(output);
-    }
+    }*/
+
+
+
+
+
+
 
 }

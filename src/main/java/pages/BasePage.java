@@ -11,6 +11,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.asserts.SoftAssert;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.time.Duration;
 
 import static org.openqa.selenium.support.ui.ExpectedConditions.presenceOfElementLocated;
@@ -420,6 +423,21 @@ public class BasePage {
 
     public void presentAssert(By elementLocation, String Message) {
         Assert.assertTrue(isDisplayed(elementLocation), Message);
+    }
+
+    public static StringBuilder  runLinuxCommand1(String[] cmd) throws InterruptedException, IOException {
+        StringBuilder strB = new StringBuilder();
+        Runtime run = Runtime.getRuntime();
+        Process pr = run.exec(cmd);
+        pr.waitFor();
+        BufferedReader buf = new BufferedReader(new InputStreamReader(pr.getInputStream()));
+        String line = "";
+        while ((line = buf.readLine()) != null) {
+            strB.append(line);
+            strB.append("\n");
+        }
+        buf.close();
+        return strB;
     }
 
 

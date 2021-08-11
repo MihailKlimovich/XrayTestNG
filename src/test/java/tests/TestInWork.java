@@ -673,6 +673,443 @@ public class TestInWork extends BaseTest{
         Assert.assertTrue(departureDateTime.contains(date.generateTodayDate2_plus(0, 2)));
     }
 
+    @Test(priority = 16, description = "Quote_Hotel_Room")
+    @Severity(SeverityLevel.NORMAL)
+    @Description("Add Quote hotel room on MYCE Quote where thn__Arrival_Date_Time__c >  thn__MYCE_Quote__r.thn__Departure_Date__c")
+    @Story("thn__Arrival_Date_Time__c >  thn__MYCE_Quote__r.thn__Departure_Date__c")
+    public void testCreateQuoteHotelRoom3() throws InterruptedException, IOException {
+        StringBuilder res1 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:record:get",
+                "-s",
+                "thn__Hotel__c",
+                "-w",
+                "Name='Demo'",
+                "-u",
+                "THYNK-VR",
+                "--json"});
+        StringBuilder res2 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:record:get",
+                "-s",
+                "thn__Product__c",
+                "-w",
+                "Name='ROOM 2 NIGHTS'",
+                "-u",
+                "THYNK-VR",
+                "--json"});
+        String productID = JsonParser2.getFieldValue(res2.toString(), "Id");
+        String propertyID = JsonParser2.getFieldValue(res1.toString(), "Id");
+        SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:record:create",
+                "-s",
+                "thn__MYCE_Quote__c",
+                "-v",
+                "Name='Test34' thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
+                        date.generateTodayDate2_plus(0, 1) + " thn__Departure_Date__c=" +
+                        date.generateTodayDate2_plus(0, 3),
+                "-u",
+                "THYNK-VR",
+                "--json"});
+        StringBuilder res3 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:record:get",
+                "-s",
+                "thn__MYCE_Quote__c",
+                "-w",
+                "Name='Test34'",
+                "-u",
+                "THYNK-VR",
+                "--json"});
+        String myceQuoteID = JsonParser2.getFieldValue(res3.toString(), "Id");
+        StringBuilder res4 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:record:get",
+                "-s",
+                "thn__Space_Area__c",
+                "-w",
+                "Name='Queen'",
+                "-u",
+                "THYNK-VR",
+                "--json"});
+        String roomTypeID = JsonParser2.getFieldValue(res4.toString(), "Id");
+        SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:record:create",
+                "-s",
+                "thn__Quote_Hotel_Room__c",
+                "-v",
+                "thn__MYCE_Quote__c='" + myceQuoteID + "' thn__Product__c='" + productID +
+                        "' thn__Space_Area__c='" + roomTypeID + "' thn__Arrival_Date_Time__c=" +
+                        date.generateTodayDate2_plus(0, 4) + "T10:00:00.000+0000 thn__Departure_Date_Time__c=" +
+                        date.generateTodayDate2_plus(0, 3) + "T19:00:00.000+0000 thn__Pax__c=10",
+                "-u",
+                "THYNK-VR",
+                "--json"});
+        StringBuilder res5 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:record:get",
+                "-s",
+                "thn__Quote_Hotel_Room__c",
+                "-w",
+                "thn__MYCE_Quote__c='" + myceQuoteID,
+                "-u",
+                "THYNK-VR",
+                "--json"});
+        String myceQuote = JsonParser2.getFieldValue(res5.toString(), "thn__MYCE_Quote__c");
+        String arrivalDateMyceQuote = JsonParser2.getFieldValue(res3.toString(), "thn__Arrival_Date__c");
+        String departureDateMyceQuote = JsonParser2.getFieldValue(res3.toString(), "thn__Departure_Date__c");
+        String arrivalDateTime = JsonParser2.getFieldValue(res5.toString(), "thn__Arrival_Date_Time__c");
+        String departureDateTime = JsonParser2.getFieldValue(res5.toString(), "thn__Departure_Date_Time__c");
+        Assert.assertEquals(myceQuote, myceQuoteID);
+        Assert.assertEquals(arrivalDateMyceQuote, date.generateTodayDate2_plus(0, 1));
+        Assert.assertEquals(departureDateMyceQuote, date.generateTodayDate2_plus(0, 3));
+        Assert.assertTrue(arrivalDateTime.contains(date.generateTodayDate2_plus(0, 4)));
+        Assert.assertTrue(departureDateTime.contains(date.generateTodayDate2_plus(0, 3)));
+    }
+
+    @Test(priority = 17, description = "Quote_Hotel_Room")
+    @Severity(SeverityLevel.NORMAL)
+    @Description("Add Quote hotel room on MYCE Quote where thn__Departure_Date_Time__c <  thn__MYCE_Quote__r.thn__Arrival_Date__c")
+    @Story("thn__Departure_Date_Time__c <  thn__MYCE_Quote__r.thn__Arrival_Date__c")
+    public void testCreateQuoteHotelRoom4() throws InterruptedException, IOException {
+        StringBuilder res1 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:record:get",
+                "-s",
+                "thn__Hotel__c",
+                "-w",
+                "Name='Demo'",
+                "-u",
+                "THYNK-VR",
+                "--json"});
+        StringBuilder res2 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:record:get",
+                "-s",
+                "thn__Product__c",
+                "-w",
+                "Name='ROOM 2 NIGHTS'",
+                "-u",
+                "THYNK-VR",
+                "--json"});
+        String productID = JsonParser2.getFieldValue(res2.toString(), "Id");
+        String propertyID = JsonParser2.getFieldValue(res1.toString(), "Id");
+        SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:record:create",
+                "-s",
+                "thn__MYCE_Quote__c",
+                "-v",
+                "Name='Test35' thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
+                        date.generateTodayDate2_plus(0, 1) + " thn__Departure_Date__c=" +
+                        date.generateTodayDate2_plus(0, 3),
+                "-u",
+                "THYNK-VR",
+                "--json"});
+        StringBuilder res3 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:record:get",
+                "-s",
+                "thn__MYCE_Quote__c",
+                "-w",
+                "Name='Test35'",
+                "-u",
+                "THYNK-VR",
+                "--json"});
+        String myceQuoteID = JsonParser2.getFieldValue(res3.toString(), "Id");
+        StringBuilder res4 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:record:get",
+                "-s",
+                "thn__Space_Area__c",
+                "-w",
+                "Name='Queen'",
+                "-u",
+                "THYNK-VR",
+                "--json"});
+        String roomTypeID = JsonParser2.getFieldValue(res4.toString(), "Id");
+        SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:record:create",
+                "-s",
+                "thn__Quote_Hotel_Room__c",
+                "-v",
+                "thn__MYCE_Quote__c='" + myceQuoteID + "' thn__Product__c='" + productID +
+                        "' thn__Space_Area__c='" + roomTypeID + "' thn__Arrival_Date_Time__c=" +
+                        date.generateTodayDate2_plus(0, 1) + "T10:00:00.000+0000 thn__Departure_Date_Time__c=" +
+                        date.generateTodayDate2() + "T19:00:00.000+0000 thn__Pax__c=10",
+                "-u",
+                "THYNK-VR",
+                "--json"});
+        StringBuilder res5 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:record:get",
+                "-s",
+                "thn__Quote_Hotel_Room__c",
+                "-w",
+                "thn__MYCE_Quote__c='" + myceQuoteID,
+                "-u",
+                "THYNK-VR",
+                "--json"});
+        String myceQuote = JsonParser2.getFieldValue(res5.toString(), "thn__MYCE_Quote__c");
+        String arrivalDateMyceQuote = JsonParser2.getFieldValue(res3.toString(), "thn__Arrival_Date__c");
+        String departureDateMyceQuote = JsonParser2.getFieldValue(res3.toString(), "thn__Departure_Date__c");
+        String arrivalDateTime = JsonParser2.getFieldValue(res5.toString(), "thn__Arrival_Date_Time__c");
+        String departureDateTime = JsonParser2.getFieldValue(res5.toString(), "thn__Departure_Date_Time__c");
+        Assert.assertEquals(myceQuote, myceQuoteID);
+        Assert.assertEquals(arrivalDateMyceQuote, date.generateTodayDate2_plus(0, 1));
+        Assert.assertEquals(departureDateMyceQuote, date.generateTodayDate2_plus(0, 3));
+        Assert.assertTrue(arrivalDateTime.contains(date.generateTodayDate2_plus(0, 1)));
+        Assert.assertTrue(departureDateTime.contains(date.generateTodayDate2()));
+    }
+
+    @Test(priority = 18, description = "Quote_Hotel_Room")
+    @Severity(SeverityLevel.NORMAL)
+    @Description("Add Quote hotel room on MYCE Quote where thn__Departure_Date_Time__c > thn__MYCE_Quote__r.thn__Departure_Date__c")
+    @Story("thn__Departure_Date_Time__c > thn__MYCE_Quote__r.thn__Departure_Date__c")
+    public void testCreateQuoteHotelRoom5() throws InterruptedException, IOException {
+        StringBuilder res1 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:record:get",
+                "-s",
+                "thn__Hotel__c",
+                "-w",
+                "Name='Demo'",
+                "-u",
+                "THYNK-VR",
+                "--json"});
+        StringBuilder res2 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:record:get",
+                "-s",
+                "thn__Product__c",
+                "-w",
+                "Name='ROOM 2 NIGHTS'",
+                "-u",
+                "THYNK-VR",
+                "--json"});
+        String productID = JsonParser2.getFieldValue(res2.toString(), "Id");
+        String propertyID = JsonParser2.getFieldValue(res1.toString(), "Id");
+        SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:record:create",
+                "-s",
+                "thn__MYCE_Quote__c",
+                "-v",
+                "Name='Test36' thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
+                        date.generateTodayDate2_plus(0, 1) + " thn__Departure_Date__c=" +
+                        date.generateTodayDate2_plus(0, 3),
+                "-u",
+                "THYNK-VR",
+                "--json"});
+        StringBuilder res3 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:record:get",
+                "-s",
+                "thn__MYCE_Quote__c",
+                "-w",
+                "Name='Test36'",
+                "-u",
+                "THYNK-VR",
+                "--json"});
+        String myceQuoteID = JsonParser2.getFieldValue(res3.toString(), "Id");
+        StringBuilder res4 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:record:get",
+                "-s",
+                "thn__Space_Area__c",
+                "-w",
+                "Name='Queen'",
+                "-u",
+                "THYNK-VR",
+                "--json"});
+        String roomTypeID = JsonParser2.getFieldValue(res4.toString(), "Id");
+        SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:record:create",
+                "-s",
+                "thn__Quote_Hotel_Room__c",
+                "-v",
+                "thn__MYCE_Quote__c='" + myceQuoteID + "' thn__Product__c='" + productID +
+                        "' thn__Space_Area__c='" + roomTypeID + "' thn__Arrival_Date_Time__c=" +
+                        date.generateTodayDate2_plus(0, 1) + "T10:00:00.000+0000 thn__Departure_Date_Time__c=" +
+                        date.generateTodayDate2_plus(0, 4) + "T19:00:00.000+0000 thn__Pax__c=10",
+                "-u",
+                "THYNK-VR",
+                "--json"});
+        StringBuilder res5 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:record:get",
+                "-s",
+                "thn__Quote_Hotel_Room__c",
+                "-w",
+                "thn__MYCE_Quote__c='" + myceQuoteID,
+                "-u",
+                "THYNK-VR",
+                "--json"});
+        String myceQuote = JsonParser2.getFieldValue(res5.toString(), "thn__MYCE_Quote__c");
+        String arrivalDateMyceQuote = JsonParser2.getFieldValue(res3.toString(), "thn__Arrival_Date__c");
+        String departureDateMyceQuote = JsonParser2.getFieldValue(res3.toString(), "thn__Departure_Date__c");
+        String arrivalDateTime = JsonParser2.getFieldValue(res5.toString(), "thn__Arrival_Date_Time__c");
+        String departureDateTime = JsonParser2.getFieldValue(res5.toString(), "thn__Departure_Date_Time__c");
+        Assert.assertEquals(myceQuote, myceQuoteID);
+        Assert.assertEquals(arrivalDateMyceQuote, date.generateTodayDate2_plus(0, 1));
+        Assert.assertEquals(departureDateMyceQuote, date.generateTodayDate2_plus(0, 3));
+        Assert.assertTrue(arrivalDateTime.contains(date.generateTodayDate2_plus(0, 1)));
+        Assert.assertTrue(departureDateTime.contains(date.generateTodayDate2_plus(0, 4)));
+    }
+
+    @Test(priority = 19, description = "Quote_Hotel_Room__c.VR15_Pax")
+    @Severity(SeverityLevel.NORMAL)
+    @Description("Quote_Hotel_Room__c.VR15_Pax")
+    @Story("Add Quote hotel room on MYCE Quote: thn__Pax__c > thn__MYCE_Quote__r.thn__Pax__c")
+    public void testCreateQuoteHotelRoom6() throws InterruptedException, IOException {
+        StringBuilder res1 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:record:get",
+                "-s",
+                "thn__Hotel__c",
+                "-w",
+                "Name='Demo'",
+                "-u",
+                "THYNK-VR",
+                "--json"});
+        StringBuilder res2 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:record:get",
+                "-s",
+                "thn__Product__c",
+                "-w",
+                "Name='ROOM 2 NIGHTS'",
+                "-u",
+                "THYNK-VR",
+                "--json"});
+        String productID = JsonParser2.getFieldValue(res2.toString(), "Id");
+        String propertyID = JsonParser2.getFieldValue(res1.toString(), "Id");
+        SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:record:create",
+                "-s",
+                "thn__MYCE_Quote__c",
+                "-v",
+                "Name='Test37' thn__Pax__c=5 thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
+                        date.generateTodayDate2_plus(0, 1) + " thn__Departure_Date__c=" +
+                        date.generateTodayDate2_plus(0, 3),
+                "-u",
+                "THYNK-VR",
+                "--json"});
+        StringBuilder res3 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:record:get",
+                "-s",
+                "thn__MYCE_Quote__c",
+                "-w",
+                "Name='Test37'",
+                "-u",
+                "THYNK-VR",
+                "--json"});
+        String myceQuoteID = JsonParser2.getFieldValue(res3.toString(), "Id");
+        StringBuilder res4 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:record:get",
+                "-s",
+                "thn__Space_Area__c",
+                "-w",
+                "Name='Queen'",
+                "-u",
+                "THYNK-VR",
+                "--json"});
+        String roomTypeID = JsonParser2.getFieldValue(res4.toString(), "Id");
+        SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:record:create",
+                "-s",
+                "thn__Quote_Hotel_Room__c",
+                "-v",
+                "thn__MYCE_Quote__c='" + myceQuoteID + "' thn__Product__c='" + productID +
+                        "' thn__Space_Area__c='" + roomTypeID + "' thn__Arrival_Date_Time__c=" +
+                        date.generateTodayDate2_plus(0, 1) + "T10:00:00.000+0000 thn__Departure_Date_Time__c=" +
+                        date.generateTodayDate2_plus(0, 3) + "T19:00:00.000+0000 thn__Pax__c=6",
+                "-u",
+                "THYNK-VR",
+                "--json"});
+        StringBuilder res5 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:record:get",
+                "-s",
+                "thn__Quote_Hotel_Room__c",
+                "-w",
+                "thn__MYCE_Quote__c='" + myceQuoteID,
+                "-u",
+                "THYNK-VR",
+                "--json"});
+        String myceQuote = JsonParser2.getFieldValue(res5.toString(), "thn__MYCE_Quote__c");
+        String myceQuotePax= JsonParser2.getFieldValue(res3.toString(), "thn__Pax__c");
+        String hotelRoomPax= JsonParser2.getFieldValue(res5.toString(), "thn__Pax__c");
+        Assert.assertEquals(myceQuote, myceQuoteID);
+        Assert.assertEquals(myceQuotePax, "5");
+        Assert.assertEquals(hotelRoomPax, "6");
+    }
+
+    @Test(priority = 21, description = "Quote_Meetings_Room__c.VR19_SetupResource")
+    @Severity(SeverityLevel.NORMAL)
+    @Description("Quote_Meetings_Room__c.VR19_SetupResource")
+    @Story("")
+    public void testCreateQuoteMeetingsRoom1() throws InterruptedException, IOException {
+        StringBuilder res1 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:record:get",
+                "-s",
+                "thn__Hotel__c",
+                "-w",
+                "Name='Demo'",
+                "-u",
+                "THYNK-VR",
+                "--json"});
+        StringBuilder res2 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:record:get",
+                "-s",
+                "thn__Product__c",
+                "-w",
+                "Name='MEETING HALF DAY'",
+                "-u",
+                "THYNK-VR",
+                "--json"});
+        StringBuilder res3 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:record:get",
+                "-s",
+                "thn__Resource__c",
+                "-w",
+                "Name='TestRes'",
+                "-u",
+                "THYNK-VR",
+                "--json"});
+        String propertyID = JsonParser2.getFieldValue(res1.toString(), "Id");
+        String productID = JsonParser2.getFieldValue(res2.toString(), "Id");
+        String resourceID = JsonParser2.getFieldValue(res3.toString(), "Id");
+        SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:record:create",
+                "-s",
+                "thn__MYCE_Quote__c",
+                "-v",
+                "Name='Test38' thn__Pax__c=10 thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
+                        date.generateTodayDate2_plus(0, 1) + " thn__Departure_Date__c=" +
+                        date.generateTodayDate2_plus(0, 3),
+                "-u",
+                "THYNK-VR",
+                "--json"});
+        StringBuilder res4= SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:record:get",
+                "-s",
+                "thn__MYCE_Quote__c",
+                "-w",
+                "Name='Test38'",
+                "-u",
+                "THYNK-VR",
+                "--json"});
+        String myceQuoteID = JsonParser2.getFieldValue(res4.toString(), "Id");
+        StringBuilder res5 =SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:record:create",
+                "-s",
+                "thn__Quote_Meeting_Room__c",
+                "-v",
+                "thn__MYCE_Quote__c='" + myceQuoteID + "' thn__Product__c='" + productID + "' thn__Resource__c='" +
+                        resourceID + "' thn__Pax__c=6 thn__Setup__c='Buffet'",
+                "-u",
+                "THYNK-VR",
+                "--json"});
+        System.out.println(res5);
+        StringBuilder res6 =SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:record:create",
+                "-s",
+                "thn__Quote_Meeting_Room__c",
+                "-v",
+                "thn__MYCE_Quote__c='" + myceQuoteID + "' thn__Product__c='" + productID + "' thn__Resource__c='" +
+                        resourceID + "' thn__Pax__c=6 thn__Setup__c='Cabaret'",
+                "-u",
+                "THYNK-VR",
+                "--json"});
+        System.out.println(res6);
+
+
+
+    }
+
+
+
 
 
 
