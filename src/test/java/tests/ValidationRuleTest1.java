@@ -429,7 +429,8 @@ public class ValidationRuleTest1 extends BaseTest {
                 ("Test11", date.generateTodayDate(), date.generateDate_plus(1, 3), "4", "Demo");
         myceQuotes.openMeetingPackages();
         Thread.sleep(2000);
-        quoteMeetingPackages.createMeetingPackages("Pack c", "4", date.generateTodayDate(), date.generateDate_plus(1, 3), "30");
+        quoteMeetingPackages.createMeetingPackages("Pack c", "4", date.generateTodayDate(),
+                date.generateDate_plus(1, 3), "30");
         myceQuotes.goToMyceQuotes();
         myceQuotes.openMyceQoteRecord("Test11");
         myceQuotes.openMeetingRooms();
