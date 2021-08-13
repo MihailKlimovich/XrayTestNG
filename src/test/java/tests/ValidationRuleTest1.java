@@ -480,6 +480,7 @@ public class ValidationRuleTest1 extends BaseTest {
     @Story("")
     public void testCreateQuotePackage2() throws InterruptedException {
         //given
+        loginPageForScratchOrg.logInOnScratchOrg(driver);
         String expectedMessage = "No Discount possible, package is not configured correctly. Please contact your admin";
         //when
         packages.goToPackages();
