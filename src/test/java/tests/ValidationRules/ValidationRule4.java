@@ -1,18 +1,75 @@
-package tests;
+package tests.ValidationRules;
 
 import io.qameta.allure.Description;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.Story;
 import org.testng.Assert;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import pageObject.JsonParser2;
 import pageObject.SfdxCommand;
-
+import tests.BaseTest;
+import utils.Listeners.TestListener;
 
 import java.io.IOException;
 
-public class TestInWork extends BaseTest{
+@Listeners({TestListener.class})
+
+public class ValidationRule4 extends BaseTest {
+
+
+    @Test(priority = 1, description="Setting up validation rules")
+    @Severity(SeverityLevel.NORMAL)
+    @Description("Setup.thn__ByPass__c.thn__ByPassVR__c == true User.thn__ByPassVR__c == true")
+    @Story("Settings")
+    public void settingUpValidationRules() throws InterruptedException, IOException {
+        SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:record:update",
+                "-s",
+                "User",
+                "-w",
+                "Name='User User'",
+                "-v",
+                "thn__ByPassVR__c=true",
+                "-u",
+                "THYNK-VR",
+                "--json"});
+        StringBuilder res = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:record:update",
+                "-s",
+                "thn__bypass__c",
+                "-w",
+                "Id='a063N000004hU1bQAE'",
+                "-v",
+                "thn__bypassvr__c=true",
+                "-u",
+                "THYNK-VR",
+                "--json"});
+        StringBuilder userRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:record:get",
+                "-s",
+                "User",
+                "-w",
+                "Name='User User'",
+                "-u",
+                "THYNK-VR",
+                "--json"});
+        String userByPass = JsonParser2.getFieldValue(userRecord.toString(), "thn__ByPassVR__c");
+        StringBuilder byPassRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:record:get",
+                "-s",
+                "thn__bypass__c",
+                "-w",
+                "Id='a063N000004hU1bQAE'",
+                "-u",
+                "THYNK-VR",
+                "--json"});
+        System.out.println(byPassRecord);
+        String byPassVr = JsonParser2.getFieldValue(byPassRecord.toString(), "thn__ByPassVR__c");
+        Assert.assertEquals(userByPass, "true");
+        Assert.assertEquals(byPassVr, "true");
+    }
 
 
     @Test(priority = 2, description = "Myce_Quote__c.Commission_Validation_Rule")
@@ -31,14 +88,14 @@ public class TestInWork extends BaseTest{
                 "THYNK-VR",
                 "--json"});
         StringBuilder res = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
-        "force:data:record:get",
-        "-s",
-        "thn__MYCE_Quote__c",
-        "-w",
-        "Name=Test24",
-        "-u",
-        "THYNK-VR",
-        "--json"});
+                "force:data:record:get",
+                "-s",
+                "thn__MYCE_Quote__c",
+                "-w",
+                "Name=Test24",
+                "-u",
+                "THYNK-VR",
+                "--json"});
         String name = JsonParser2.getFieldValue(res.toString(), "Name");
         String commissionable = JsonParser2.getFieldValue(res.toString(), "thn__Commissionable__c");
         String commission_to =  JsonParser2.getFieldValue(res.toString(), "thn__Commission_to__c");
@@ -336,7 +393,7 @@ public class TestInWork extends BaseTest{
                 "--json"});
         String propertyID = JsonParser2.getFieldValue(res1.toString(), "Id");
         SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
-        "force:data:record:create",
+                "force:data:record:create",
                 "-s",
                 "thn__Package__c",
                 "-v",
@@ -2648,16 +2705,5 @@ public class TestInWork extends BaseTest{
         String resourceGroupingID = JsonParser2.getFieldValue(resourceGroupingResult.toString(), "id");
         Assert.assertNotNull(resourceGroupingID);
     }
-
-
-
-
-
-
-
-
-
-
-
 
 }

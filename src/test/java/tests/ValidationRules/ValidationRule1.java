@@ -1,50 +1,95 @@
-package tests;
+package tests.ValidationRules;
 
+import com.google.gson.JsonObject;
 import io.qameta.allure.Description;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.Story;
 import org.testng.Assert;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import pageObject.JsonParser2;
 import pageObject.SfdxCommand;
-
+import tests.BaseTest;
+import utils.Listeners.TestListener;
 
 import java.io.IOException;
 
-public class TestInWork extends BaseTest{
+@Listeners({TestListener.class})
 
+public class ValidationRule1 extends BaseTest {
+
+    @Test(priority = 1, description="Setting up validation rules")
+    @Severity(SeverityLevel.NORMAL)
+    @Description("Setup.thn__ByPass__c.thn__ByPassVR__c == false and User.thn__ByPassVR__c == false")
+    @Story("Settings")
+    public void settingUpValidationRules() throws InterruptedException, IOException {
+        SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:record:update",
+                "-s",
+                "User",
+                "-w",
+                "Name='User User'",
+                "-v",
+                "thn__ByPassVR__c=false",
+                "-u",
+                "THYNK-VR",
+                "--json"});
+        StringBuilder res = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:record:update",
+                "-s",
+                "thn__bypass__c",
+                "-w",
+                "Id='a063N000004hU1bQAE'",
+                "-v",
+                "thn__bypassvr__c=false",
+                "-u",
+                "THYNK-VR",
+                "--json"});
+        StringBuilder userRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:record:get",
+                "-s",
+                "User",
+                "-w",
+                "Name='User User'",
+                "-u",
+                "THYNK-VR",
+                "--json"});
+        String userByPass = JsonParser2.getFieldValue(userRecord.toString(), "thn__ByPassVR__c");
+        StringBuilder byPassRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:record:get",
+                "-s",
+                "thn__bypass__c",
+                "-w",
+                "Id='a063N000004hU1bQAE'",
+                "-u",
+                "THYNK-VR",
+                "--json"});
+        System.out.println(byPassRecord);
+        String byPassVr = JsonParser2.getFieldValue(byPassRecord.toString(), "thn__ByPassVR__c");
+        Assert.assertEquals(userByPass, "false");
+        Assert.assertEquals(byPassVr, "false");
+    }
 
     @Test(priority = 2, description = "Myce_Quote__c.Commission_Validation_Rule")
     @Severity(SeverityLevel.NORMAL)
     @Description("Myce_Quote__c.Commission_Validation_Rule")
     @Story("Commissionable == true & thn__Commission_to__c == null")
     public void testCreateNewMyceQuote1() throws InterruptedException, IOException {
-        //force:data:soql:query -q "SELECT thn__Commissionable__c, thn__Commission_to__c FROM thn__MYCE_Quote__c where Name='Test24'" -u THYNK-VR --json
-        SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        String expectedMessage = "If commissionable = true, 'Commission to' field shouldn't be null or \n" +
+                "if  'Commission to' field equals 'agent', agent shouldn't be null or\n" +
+                "if  'Commission to' field equals 'company', company shouldn't be null";
+        StringBuilder result =SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:create",
                 "-s",
                 "thn__MYCE_Quote__c",
                 "-v",
-                "Name='Test24' thn__Commissionable__c=true",
+                "Name='Test1' thn__Commissionable__c=true",
                 "-u",
                 "THYNK-VR",
-                "--json"});
-        StringBuilder res = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
-        "force:data:record:get",
-        "-s",
-        "thn__MYCE_Quote__c",
-        "-w",
-        "Name=Test24",
-        "-u",
-        "THYNK-VR",
-        "--json"});
-        String name = JsonParser2.getFieldValue(res.toString(), "Name");
-        String commissionable = JsonParser2.getFieldValue(res.toString(), "thn__Commissionable__c");
-        String commission_to =  JsonParser2.getFieldValue(res.toString(), "thn__Commission_to__c");
-        Assert.assertEquals(name, "Test24");
-        Assert.assertEquals(commissionable, "true");
-        Assert.assertEquals(commission_to, null);
+                "--json"});;
+        String message = JsonParser2.getFieldValue2(result.toString(), "message");
+        Assert.assertEquals(message, expectedMessage);
 
     }
 
@@ -53,33 +98,20 @@ public class TestInWork extends BaseTest{
     @Description("Myce_Quote__c.Commission_Validation_Rule")
     @Story("Commissionable == true & thn__Commission_to__c != Agent & thn__Agent__c == null")
     public void testCreateNewMyceQuote2() throws InterruptedException, IOException {
-
-        SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        String expectedMessage = "If commissionable = true, 'Commission to' field shouldn't be null or \n" +
+                "if  'Commission to' field equals 'agent', agent shouldn't be null or\n" +
+                "if  'Commission to' field equals 'company', company shouldn't be null";
+        StringBuilder result = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:create",
                 "-s",
                 "thn__MYCE_Quote__c",
                 "-v",
-                "Name='Test25' thn__Commissionable__c=true thn__Commission_to__c='Agent'",
+                "Name='Test2' thn__Commissionable__c=true thn__Commission_to__c='Agent'",
                 "-u",
                 "THYNK-VR",
                 "--json"});
-        StringBuilder res = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
-                "force:data:record:get",
-                "-s",
-                "thn__MYCE_Quote__c",
-                "-w",
-                "Name=Test25",
-                "-u",
-                "THYNK-VR",
-                "--json"});
-        String name = JsonParser2.getFieldValue(res.toString(), "Name");
-        String commissionable = JsonParser2.getFieldValue(res.toString(), "thn__Commissionable__c");
-        String commission_to =  JsonParser2.getFieldValue(res.toString(), "thn__Commission_to__c");
-        String agent =  JsonParser2.getFieldValue(res.toString(), "thn__Agent__c");
-        Assert.assertEquals(name, "Test25");
-        Assert.assertEquals(commissionable, "true");
-        Assert.assertEquals(commission_to, "Agent");
-        Assert.assertEquals(agent, null);
+        String message = JsonParser2.getFieldValue2(result.toString(), "message");
+        Assert.assertEquals(message, expectedMessage);
     }
 
     @Test(priority = 4, description = "Myce_Quote__c.Commission_Validation_Rule")
@@ -87,33 +119,20 @@ public class TestInWork extends BaseTest{
     @Description("Myce_Quote__c.Commission_Validation_Rule")
     @Story("Commissionable == true & thn__Commission_to__c == Company & thn__Company__c == null")
     public void testCreateNewMyceQuote3() throws InterruptedException, IOException {
-
-        SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        String expectedMessage = "If commissionable = true, 'Commission to' field shouldn't be null or \n" +
+                "if  'Commission to' field equals 'agent', agent shouldn't be null or\n" +
+                "if  'Commission to' field equals 'company', company shouldn't be null";
+        StringBuilder result = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:create",
                 "-s",
                 "thn__MYCE_Quote__c",
                 "-v",
-                "Name='Test26' thn__Commissionable__c=true thn__Commission_to__c='Company'",
+                "Name='Test3' thn__Commissionable__c=true thn__Commission_to__c='Company'",
                 "-u",
                 "THYNK-VR",
                 "--json"});
-        StringBuilder res = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
-                "force:data:record:get",
-                "-s",
-                "thn__MYCE_Quote__c",
-                "-w",
-                "Name=Test26",
-                "-u",
-                "THYNK-VR",
-                "--json"});
-        String name = JsonParser2.getFieldValue(res.toString(), "Name");
-        String commissionable = JsonParser2.getFieldValue(res.toString(), "thn__Commissionable__c");
-        String commission_to =  JsonParser2.getFieldValue(res.toString(), "thn__Commission_to__c");
-        String company =  JsonParser2.getFieldValue(res.toString(), "thn__Company__c");
-        Assert.assertEquals(name, "Test26");
-        Assert.assertEquals(commissionable, "true");
-        Assert.assertEquals(commission_to, "Company");
-        Assert.assertEquals(company, null);
+        String message = JsonParser2.getFieldValue2(result.toString(), "message");
+        Assert.assertEquals(message, expectedMessage);
     }
 
     @Test(priority = 5, description = "Myce_Quote__c.VR05_Dates")
@@ -121,32 +140,19 @@ public class TestInWork extends BaseTest{
     @Description("Myce_Quote__c.VR05_Dates")
     @Story("thn__Departure_Date__c < thn__Arrival_Date__c")
     public void testCreateNewMyceQuote4() throws InterruptedException, IOException {
-
-        SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        String expectedMessage = "Departure Date cannot be anterior to Arrival Date";
+        StringBuilder result = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:create",
                 "-s",
                 "thn__MYCE_Quote__c",
                 "-v",
-                "Name='Test27' thn__Arrival_Date__c=" + date.generateTodayDate2() + " thn__Departure_Date__c=" +
+                "Name='Test4' thn__Arrival_Date__c=" + date.generateTodayDate2() + " thn__Departure_Date__c=" +
                         date.generateTodayDate2_minus(0, 5),
                 "-u",
                 "THYNK-VR",
                 "--json"});
-        StringBuilder res = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
-                "force:data:record:get",
-                "-s",
-                "thn__MYCE_Quote__c",
-                "-w",
-                "Name=Test27",
-                "-u",
-                "THYNK-VR",
-                "--json"});
-        String name = JsonParser2.getFieldValue(res.toString(), "Name");
-        String arrivalDay = JsonParser2.getFieldValue(res.toString(), "thn__Arrival_Date__c");
-        String departureDay =  JsonParser2.getFieldValue(res.toString(), "thn__Departure_Date__c");
-        Assert.assertEquals(name, "Test27");
-        Assert.assertEquals(arrivalDay, date.generateTodayDate2());
-        Assert.assertEquals(departureDay, date.generateTodayDate2_minus(0, 5));
+        String message = JsonParser2.getFieldValue2(result.toString(), "message");
+        Assert.assertEquals(message, expectedMessage);
     }
 
     @Test(priority = 6, description = "Myce_Quote__c.VR27_Company_Agent_Type")
@@ -154,7 +160,7 @@ public class TestInWork extends BaseTest{
     @Description("Myce_Quote__c.VR27_Company_Agent_Type")
     @Story("Create MYCE Quote: Select Company for Agent field ,Select Agent for Company field")
     public void testCreateNewMyceQuote5() throws InterruptedException, IOException {
-
+        String expectedMessage = "Company cannot be of type 'Agent'  and Agent must be of type 'Agent' or 'Leads'";
         StringBuilder res1 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:get",
                 "-s",
@@ -175,30 +181,17 @@ public class TestInWork extends BaseTest{
                 "THYNK-VR",
                 "--json"});
         String testAgentID = JsonParser2.getFieldValue(res2.toString(), "Id");
-        SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder result = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:create",
                 "-s",
                 "thn__MYCE_Quote__c",
                 "-v",
-                "Name='Test28' thn__Company__c='" + testAgentID + "' thn__Agent__c='" + testCompanyID + "'",
+                "Name='Test5' thn__Company__c='" + testAgentID + "' thn__Agent__c='" + testCompanyID + "'",
                 "-u",
                 "THYNK-VR",
                 "--json"});
-        StringBuilder res = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
-                "force:data:record:get",
-                "-s",
-                "thn__MYCE_Quote__c",
-                "-w",
-                "Name=Test28",
-                "-u",
-                "THYNK-VR",
-                "--json"});
-        String name = JsonParser2.getFieldValue(res.toString(), "Name");
-        String company = JsonParser2.getFieldValue(res.toString(), "thn__Company__c");
-        String agent =  JsonParser2.getFieldValue(res.toString(), "thn__Agent__c");
-        Assert.assertEquals(name, "Test28");
-        Assert.assertEquals(company, testAgentID);
-        Assert.assertEquals(agent, testCompanyID);
+        String message = JsonParser2.getFieldValue2(result.toString(), "message");
+        Assert.assertEquals(message, expectedMessage);
     }
 
     @Test(priority = 7, description = "Myce_Quote__c.VR13_Reservation_Guest")
@@ -206,30 +199,18 @@ public class TestInWork extends BaseTest{
     @Description("Myce_Quote__c.VR13_Reservation_Guest")
     @Story("Create MYCE Quote: leave thn__Reservation_Guest__c empty, Set thn__Send_to_Mews__c to TRUE")
     public void testCreateNewMyceQuote6() throws InterruptedException, IOException {
-        SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        String expectedMessage = "Reservation guest is required to send reservations to Mews";
+        StringBuilder result = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:create",
                 "-s",
                 "thn__MYCE_Quote__c",
                 "-v",
-                "Name='Test29' thn__SendToMews__c=true",
+                "Name='Test6' thn__SendToMews__c=true",
                 "-u",
                 "THYNK-VR",
                 "--json"});
-        StringBuilder res = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
-                "force:data:record:get",
-                "-s",
-                "thn__MYCE_Quote__c",
-                "-w",
-                "Name=Test29",
-                "-u",
-                "THYNK-VR",
-                "--json"});
-        String name = JsonParser2.getFieldValue(res.toString(), "Name");
-        String sendToMews = JsonParser2.getFieldValue(res.toString(), "thn__SendToMews__c");
-        String reservationGuest =  JsonParser2.getFieldValue(res.toString(), "thn__Reservation_Guest__c");
-        Assert.assertEquals(name, "Test29");
-        Assert.assertEquals(sendToMews, "true");
-        Assert.assertEquals(reservationGuest, null);
+        String message = JsonParser2.getFieldValue2(result.toString(), "message");
+        Assert.assertEquals(message, expectedMessage);
     }
 
     @Test(priority = 8, description = "Myce_Quote__c.VR22_ClosedStatus")
@@ -237,28 +218,18 @@ public class TestInWork extends BaseTest{
     @Description("Myce_Quote__c.VR22_ClosedStatus")
     @Story("Change Stage om MYCE Quote to '4 - Closed'")
     public void testCreateNewMyceQuote7() throws InterruptedException, IOException {
-        SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        String expectedMessage = "Closed Status is required when quote is at stage '4 - Closed'";
+        StringBuilder result = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:create",
                 "-s",
                 "thn__MYCE_Quote__c",
                 "-v",
-                "Name='Test30' thn__Stage__c='4 - Closed'",
+                "Name='Test7' thn__Stage__c='4 - Closed'",
                 "-u",
                 "THYNK-VR",
                 "--json"});
-        StringBuilder res = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
-                "force:data:record:get",
-                "-s",
-                "thn__MYCE_Quote__c",
-                "-w",
-                "Name=Test30",
-                "-u",
-                "THYNK-VR",
-                "--json"});
-        String name = JsonParser2.getFieldValue(res.toString(), "Name");
-        String stageStatus = JsonParser2.getFieldValue(res.toString(), "thn__Stage__c");
-        Assert.assertEquals(name, "Test30");
-        Assert.assertEquals(stageStatus, "4 - Closed");
+        String message = JsonParser2.getFieldValue2(result.toString(), "message");
+        Assert.assertEquals(message, expectedMessage);
     }
 
     @Test(priority = 9, description = "Myce_Quote__c.VR28_Cancelled_Status")
@@ -266,37 +237,26 @@ public class TestInWork extends BaseTest{
     @Description("Myce_Quote__c.VR28_Cancelled_Status")
     @Story("Set thn__Is_Confirmed__c to false, Change MYCE Quote Closed Status to ‘Cancelled’")
     public void testCreateNewMyceQuote8() throws InterruptedException, IOException {
-        SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        String expectedMessage = "Closed Status can be 'Cancelled' only if Myce quote was 'Won'";
+        StringBuilder result = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:create",
                 "-s",
                 "thn__MYCE_Quote__c",
                 "-v",
-                "Name='Test31' thn__Closed_Status__c='Cancelled'",
+                "Name='Test8' thn__Closed_Status__c='Cancelled'",
                 "-u",
                 "THYNK-VR",
                 "--json"});
-        StringBuilder res = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
-                "force:data:record:get",
-                "-s",
-                "thn__MYCE_Quote__c",
-                "-w",
-                "Name=Test31",
-                "-u",
-                "THYNK-VR",
-                "--json"});
-        String name = JsonParser2.getFieldValue(res.toString(), "Name");
-        String closedStatus = JsonParser2.getFieldValue(res.toString(), "thn__Closed_Status__c");
-        String isConfirmed = JsonParser2.getFieldValue(res.toString(), "thn__Is_Confirmed__c");
-        Assert.assertEquals(name, "Test31");
-        Assert.assertEquals(closedStatus, "Cancelled");
-        Assert.assertEquals(isConfirmed, "false");
+        String message = JsonParser2.getFieldValue2(result.toString(), "message");
+        Assert.assertEquals(message, expectedMessage);
     }
 
-    /*@Test(priority = 10, description = "Credit_Note_Line__c.Invoice_Line_Validation")
+    @Test(priority = 10, description = "Credit_Note_Line__c.Invoice_Line_Validation")
     @Severity(SeverityLevel.NORMAL)
     @Description("Credit_Note_Line__c.Invoice_Line_Validation")
     @Story("Create Credit Note Line record: thn__Invoice_Line__c == null & thn__Amount__c == null & thn__Quantity__c == null")
     public void testCreateNewCreditNoteLine() throws InterruptedException, IOException {
+        String expectedMessage = "When a credit note line isn't linked to an Invoice line then the Amount and VAT is required.";
         StringBuilder res1 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:get",
                 "-s",
@@ -307,8 +267,7 @@ public class TestInWork extends BaseTest{
                 "THYNK-VR",
                 "--json"});
         String creditNoteID = JsonParser2.getFieldValue(res1.toString(), "Id");
-        System.out.println(creditNoteID);
-        StringBuilder res = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder result = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:create",
                 "-s",
                 "thn__Credit_Note_Line__c",
@@ -317,14 +276,26 @@ public class TestInWork extends BaseTest{
                 "-u",
                 "THYNK-VR",
                 "--json"});
-        System.out.println(res);
-    }*/
+        String message = JsonParser2.getFieldValue2(result.toString(), "message");
+        Assert.assertEquals(message, expectedMessage);
+    }
 
     @Test(priority = 11, description = "Package_Line__c.VR30_IsMultidays")
     @Severity(SeverityLevel.NORMAL)
     @Description("Package_Line__c.VR30_IsMultidays")
     @Story("For Package where thn__Multi_Days__c == true, create Package line: thn__AppliedDay__c == null")
     public void testCreateNewPackageLine1() throws InterruptedException, IOException {
+        String expectedMessage = "Applied Day is required when a package is Multi days";
+        StringBuilder productRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:record:get",
+                "-s",
+                "thn__Product__c",
+                "-w",
+                "Name='ROOM 1 NIGHT'",
+                "-u",
+                "THYNK-VR",
+                "--json"});
+        String productID = JsonParser2.getFieldValue(productRecord.toString(), "Id");
         StringBuilder res1 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:get",
                 "-s",
@@ -336,11 +307,11 @@ public class TestInWork extends BaseTest{
                 "--json"});
         String propertyID = JsonParser2.getFieldValue(res1.toString(), "Id");
         SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
-        "force:data:record:create",
+                "force:data:record:create",
                 "-s",
                 "thn__Package__c",
                 "-v",
-                "Name='Test Package' thn__Multi_Days__c=true thn__Hotel__c='" + propertyID + "'",
+                "Name='Test Package 11' thn__Multi_Days__c=true thn__Hotel__c='" + propertyID + "'",
                 "-u",
                 "THYNK-VR",
                 "--json"});
@@ -349,37 +320,22 @@ public class TestInWork extends BaseTest{
                 "-s",
                 "thn__Package__c",
                 "-w",
-                "Name='Test Package''",
+                "Name='Test Package 11''",
                 "-u",
                 "THYNK-VR",
                 "--json"});
         String packageID = JsonParser2.getFieldValue(res2.toString(), "Id");
-        SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder result = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:create",
                 "-s",
                 "thn__Package_Line__c",
                 "-v",
-                "Name='Test Pack Line' thn__Package__c='" + packageID + "'",
+                "Name='Test Pack Line' thn__Package__c='" + packageID + "' thn__Type__c='Hotel Room' thn__Product__c='" + productID + "'",
                 "-u",
                 "THYNK-VR",
                 "--json"});
-        StringBuilder res = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
-                "force:data:record:get",
-                "-s",
-                "thn__Package_Line__c",
-                "-w",
-                "Name='Test Pack Line'",
-                "-u",
-                "THYNK-VR",
-                "--json"});
-        String namePackage = JsonParser2.getFieldValue(res2.toString(), "Name");
-        String multiDays = JsonParser2.getFieldValue(res2.toString(), "thn__Multi_Days__c");
-        String namePackageLine = JsonParser2.getFieldValue(res.toString(), "Name");
-        String appliedDay = JsonParser2.getFieldValue(res.toString(), "thn__AppliedDay__c");
-        Assert.assertEquals(namePackageLine, "Test Pack Line");
-        Assert.assertEquals(appliedDay, null);
-        Assert.assertEquals(namePackage, "Test Package");
-        Assert.assertEquals(multiDays, "true");
+        String message = JsonParser2.getFieldValue2(result.toString(), "message");
+        Assert.assertEquals(message, expectedMessage);
     }
 
     @Test(priority = 12, description = "Package_Line__c.VR31_IsNotMultidays")
@@ -387,6 +343,17 @@ public class TestInWork extends BaseTest{
     @Description("Package_Line__c.VR31_IsNotMultidays")
     @Story("For Package where hn__Multi_Days__c == false, create Package line: thn__AppliedDay__c != null")
     public void testCreateNewPackageLine2() throws InterruptedException, IOException {
+        String expectedMessage = "Applied Day must be left empty when a package is Multi days";
+        StringBuilder productRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:record:get",
+                "-s",
+                "thn__Product__c",
+                "-w",
+                "Name='ROOM 1 NIGHT'",
+                "-u",
+                "THYNK-VR",
+                "--json"});
+        String productID = JsonParser2.getFieldValue(productRecord.toString(), "Id");
         StringBuilder res1 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:get",
                 "-s",
@@ -402,7 +369,7 @@ public class TestInWork extends BaseTest{
                 "-s",
                 "thn__Package__c",
                 "-v",
-                "Name='Test Package 2' thn__Multi_Days__c=false thn__Hotel__c='" + propertyID + "'",
+                "Name='Test Package 22' thn__Multi_Days__c=false thn__Hotel__c='" + propertyID + "'",
                 "-u",
                 "THYNK-VR",
                 "--json"});
@@ -411,37 +378,23 @@ public class TestInWork extends BaseTest{
                 "-s",
                 "thn__Package__c",
                 "-w",
-                "Name='Test Package 2'",
+                "Name='Test Package 22'",
                 "-u",
                 "THYNK-VR",
                 "--json"});
         String packageID = JsonParser2.getFieldValue(res2.toString(), "Id");
-        SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder result = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:create",
                 "-s",
                 "thn__Package_Line__c",
                 "-v",
-                "Name='Test Pack Line 2' thn__Package__c='" + packageID + "' thn__AppliedDay__c=25",
+                "Name='Test Pack Line 2' thn__Package__c='" + packageID + "' thn__AppliedDay__c=25 " +
+                        "thn__Type__c='Hotel Room' thn__Product__c='" + productID + "'" ,
                 "-u",
                 "THYNK-VR",
                 "--json"});
-        StringBuilder res = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
-                "force:data:record:get",
-                "-s",
-                "thn__Package_Line__c",
-                "-w",
-                "Name='Test Pack Line 2'",
-                "-u",
-                "THYNK-VR",
-                "--json"});
-        String namePackage = JsonParser2.getFieldValue(res2.toString(), "Name");
-        String multiDays = JsonParser2.getFieldValue(res2.toString(), "thn__Multi_Days__c");
-        String namePackageLine = JsonParser2.getFieldValue(res.toString(), "Name");
-        String appliedDay = JsonParser2.getFieldValue(res.toString(), "thn__AppliedDay__c");
-        Assert.assertEquals(namePackageLine, "Test Pack Line 2");
-        Assert.assertEquals(appliedDay, "25");
-        Assert.assertEquals(namePackage, "Test Package 2");
-        Assert.assertEquals(multiDays, "false");
+        String message = JsonParser2.getFieldValue2(result.toString(), "message");
+        Assert.assertEquals(message, expectedMessage);
     }
 
     @Test(priority = 13, description = "Package_Line__c.VR29_Product_property")
@@ -467,7 +420,7 @@ public class TestInWork extends BaseTest{
                 "-s",
                 "thn__Package__c",
                 "-v",
-                "Name='Test Package 3' thn__Hotel__c='" + propertyID + "'",
+                "Name='Test Package 33' thn__Hotel__c='" + propertyID + "'",
                 "-u",
                 "THYNK-VR",
                 "--json"});
@@ -486,12 +439,12 @@ public class TestInWork extends BaseTest{
                 "-s",
                 "thn__Package__c",
                 "-w",
-                "Name='Test Package 3'",
+                "Name='Test Package 33'",
                 "-u",
                 "THYNK-VR",
                 "--json"});
         String packageID = JsonParser2.getFieldValue(res3.toString(), "Id");
-        SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder result = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:create",
                 "-s",
                 "thn__Package_Line__c",
@@ -500,23 +453,9 @@ public class TestInWork extends BaseTest{
                 "-u",
                 "THYNK-VR",
                 "--json"});
-        StringBuilder res = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
-                "force:data:record:get",
-                "-s",
-                "thn__Package_Line__c",
-                "-w",
-                "Name='Test Pack Line 3'",
-                "-u",
-                "THYNK-VR",
-                "--json"});
-        String namePackage = JsonParser2.getFieldValue(res3.toString(), "Name");
-        String property = JsonParser2.getFieldValue(res3.toString(), "thn__Hotel__c");
-        String namePackageLine = JsonParser2.getFieldValue(res.toString(), "Name");
-        String product = JsonParser2.getFieldValue(res.toString(), "thn__Product__c");
-        Assert.assertEquals(namePackageLine, "Test Pack Line 3");
-        Assert.assertEquals(product, productID);
-        Assert.assertEquals(namePackage, "Test Package 3");
-        Assert.assertEquals(property, propertyID);
+        System.out.println(result);
+        String message = JsonParser2.getFieldValue2(result.toString(), "message");
+        Assert.assertEquals(message, expectedMessage);
     }
 
     @Test(priority = 14, description = "Quote_Hotel_Room__c.VR06_Departure_after")
@@ -2648,16 +2587,4 @@ public class TestInWork extends BaseTest{
         String resourceGroupingID = JsonParser2.getFieldValue(resourceGroupingResult.toString(), "id");
         Assert.assertNotNull(resourceGroupingID);
     }
-
-
-
-
-
-
-
-
-
-
-
-
 }

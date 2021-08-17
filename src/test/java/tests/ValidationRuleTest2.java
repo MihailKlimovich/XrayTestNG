@@ -71,7 +71,6 @@ public class ValidationRuleTest2 extends BaseTest {
                 "if 'Commission to' field equals 'agent', agent shouldn't be null or " +
                 "if 'Commission to' field equals 'company', company shouldn't be null";
         //when
-        loginPageForScratchOrg.logInOnScratchOrg(driver);
         myceQuotes.goToMyceQuotes();
         myceQuotes.createNewMyceQuote();
         myceQuotes.fillOutTheQuotaForm_whenCommissionIsAgent

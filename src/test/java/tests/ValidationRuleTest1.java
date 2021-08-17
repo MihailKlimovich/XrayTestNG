@@ -779,6 +779,7 @@ public class ValidationRuleTest1 extends BaseTest {
     @Story("On Item record where thn__Mews_Id__c != null, set thn__Send_to_Mews__c to TRUE")
     public void testCreateItem() throws InterruptedException, IOException {
         //given
+        loginPageForScratchOrg.logInOnScratchOrg(driver);
         String expectedMessage = "The Reservation product already exists and cannot be sent twice";
         //when
         items.goToItems();
