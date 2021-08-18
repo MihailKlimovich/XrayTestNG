@@ -17,7 +17,22 @@
     </test>
     <test name="ValidationRule">
         <classes>
-            <class name="tests.ValidationRuleTest1"/>
+            <class name="tests.ValidationRules.ValidationRule1"/>
+        </classes>
+    </test>
+    <test name="ValidationRule">
+        <classes>
+            <class name="tests.ValidationRules.ValidationRule2"/>
+        </classes>
+    </test>
+    <test name="ValidationRule">
+        <classes>
+            <class name="tests.ValidationRules.ValidationRule3"/>
+        </classes>
+    </test>
+    <test name="ValidationRule">
+        <classes>
+            <class name="tests.ValidationRules.ValidationRule4"/>
         </classes>
     </test>
 
