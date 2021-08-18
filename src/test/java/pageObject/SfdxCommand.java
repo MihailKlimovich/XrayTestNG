@@ -1,5 +1,6 @@
 package pageObject;
 
+import io.qameta.allure.Step;
 import org.zeroturnaround.exec.ProcessExecutor;
 import pages.BasePage;
 
@@ -12,6 +13,7 @@ import java.util.concurrent.TimeoutException;
 
 public class SfdxCommand {
 
+    @Step("Run SFDX command")
     public static StringBuilder  runLinuxCommand1(String[] cmd) throws InterruptedException, IOException {
         StringBuilder strB = new StringBuilder();
         Runtime run = Runtime.getRuntime();

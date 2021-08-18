@@ -1,11 +1,13 @@
 package pageObject;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import io.qameta.allure.Step;
 import org.json.JSONObject;
 import org.json.*;
 
 public class JsonParser2 {
 
+    @Step("Get value")
     public static String getFieldValue(String json, String key) throws UnsupportedOperationException {
         try {
         JsonObject jsonObject = new JsonParser().parse(json).getAsJsonObject();
@@ -15,6 +17,7 @@ public class JsonParser2 {
         return null;}
     }
 
+    @Step("Get value")
     public static String getFieldValue2(String json, String key) throws UnsupportedOperationException {
         try {
             JsonObject jsonObject = new JsonParser().parse(json).getAsJsonObject();
