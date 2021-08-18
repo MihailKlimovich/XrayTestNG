@@ -81,7 +81,7 @@ public class ValidationRule3 extends BaseTest {
                 "-s",
                 "thn__MYCE_Quote__c",
                 "-v",
-                "Name='Test24' thn__Commissionable__c=true",
+                "Name='Test59' thn__Commissionable__c=true",
                 "-u",
                 "THYNK-VR",
                 "--json"});
@@ -90,14 +90,14 @@ public class ValidationRule3 extends BaseTest {
                 "-s",
                 "thn__MYCE_Quote__c",
                 "-w",
-                "Name=Test24",
+                "Name=Test59",
                 "-u",
                 "THYNK-VR",
                 "--json"});
         String name = JsonParser2.getFieldValue(res.toString(), "Name");
         String commissionable = JsonParser2.getFieldValue(res.toString(), "thn__Commissionable__c");
         String commission_to =  JsonParser2.getFieldValue(res.toString(), "thn__Commission_to__c");
-        Assert.assertEquals(name, "Test24");
+        Assert.assertEquals(name, "Test59");
         Assert.assertEquals(commissionable, "true");
         Assert.assertEquals(commission_to, null);
 
@@ -114,7 +114,7 @@ public class ValidationRule3 extends BaseTest {
                 "-s",
                 "thn__MYCE_Quote__c",
                 "-v",
-                "Name='Test25' thn__Commissionable__c=true thn__Commission_to__c='Agent'",
+                "Name='Test60' thn__Commissionable__c=true thn__Commission_to__c='Agent'",
                 "-u",
                 "THYNK-VR",
                 "--json"});
@@ -123,7 +123,7 @@ public class ValidationRule3 extends BaseTest {
                 "-s",
                 "thn__MYCE_Quote__c",
                 "-w",
-                "Name=Test25",
+                "Name=Test60",
                 "-u",
                 "THYNK-VR",
                 "--json"});
@@ -131,7 +131,7 @@ public class ValidationRule3 extends BaseTest {
         String commissionable = JsonParser2.getFieldValue(res.toString(), "thn__Commissionable__c");
         String commission_to =  JsonParser2.getFieldValue(res.toString(), "thn__Commission_to__c");
         String agent =  JsonParser2.getFieldValue(res.toString(), "thn__Agent__c");
-        Assert.assertEquals(name, "Test25");
+        Assert.assertEquals(name, "Test60");
         Assert.assertEquals(commissionable, "true");
         Assert.assertEquals(commission_to, "Agent");
         Assert.assertEquals(agent, null);
@@ -148,7 +148,7 @@ public class ValidationRule3 extends BaseTest {
                 "-s",
                 "thn__MYCE_Quote__c",
                 "-v",
-                "Name='Test26' thn__Commissionable__c=true thn__Commission_to__c='Company'",
+                "Name='Test61' thn__Commissionable__c=true thn__Commission_to__c='Company'",
                 "-u",
                 "THYNK-VR",
                 "--json"});
@@ -157,7 +157,7 @@ public class ValidationRule3 extends BaseTest {
                 "-s",
                 "thn__MYCE_Quote__c",
                 "-w",
-                "Name=Test26",
+                "Name=Test61",
                 "-u",
                 "THYNK-VR",
                 "--json"});
@@ -165,7 +165,7 @@ public class ValidationRule3 extends BaseTest {
         String commissionable = JsonParser2.getFieldValue(res.toString(), "thn__Commissionable__c");
         String commission_to =  JsonParser2.getFieldValue(res.toString(), "thn__Commission_to__c");
         String company =  JsonParser2.getFieldValue(res.toString(), "thn__Company__c");
-        Assert.assertEquals(name, "Test26");
+        Assert.assertEquals(name, "Test61");
         Assert.assertEquals(commissionable, "true");
         Assert.assertEquals(commission_to, "Company");
         Assert.assertEquals(company, null);
@@ -182,7 +182,7 @@ public class ValidationRule3 extends BaseTest {
                 "-s",
                 "thn__MYCE_Quote__c",
                 "-v",
-                "Name='Test27' thn__Arrival_Date__c=" + date.generateTodayDate2() + " thn__Departure_Date__c=" +
+                "Name='Test62' thn__Arrival_Date__c=" + date.generateTodayDate2() + " thn__Departure_Date__c=" +
                         date.generateTodayDate2_minus(0, 5),
                 "-u",
                 "THYNK-VR",
@@ -192,14 +192,14 @@ public class ValidationRule3 extends BaseTest {
                 "-s",
                 "thn__MYCE_Quote__c",
                 "-w",
-                "Name=Test27",
+                "Name=Test62",
                 "-u",
                 "THYNK-VR",
                 "--json"});
         String name = JsonParser2.getFieldValue(res.toString(), "Name");
         String arrivalDay = JsonParser2.getFieldValue(res.toString(), "thn__Arrival_Date__c");
         String departureDay =  JsonParser2.getFieldValue(res.toString(), "thn__Departure_Date__c");
-        Assert.assertEquals(name, "Test27");
+        Assert.assertEquals(name, "Test62");
         Assert.assertEquals(arrivalDay, date.generateTodayDate2());
         Assert.assertEquals(departureDay, date.generateTodayDate2_minus(0, 5));
     }
@@ -235,7 +235,7 @@ public class ValidationRule3 extends BaseTest {
                 "-s",
                 "thn__MYCE_Quote__c",
                 "-v",
-                "Name='Test28' thn__Company__c='" + testAgentID + "' thn__Agent__c='" + testCompanyID + "'",
+                "Name='Test63' thn__Company__c='" + testAgentID + "' thn__Agent__c='" + testCompanyID + "'",
                 "-u",
                 "THYNK-VR",
                 "--json"});
@@ -244,14 +244,14 @@ public class ValidationRule3 extends BaseTest {
                 "-s",
                 "thn__MYCE_Quote__c",
                 "-w",
-                "Name=Test28",
+                "Name=Test63",
                 "-u",
                 "THYNK-VR",
                 "--json"});
         String name = JsonParser2.getFieldValue(res.toString(), "Name");
         String company = JsonParser2.getFieldValue(res.toString(), "thn__Company__c");
         String agent =  JsonParser2.getFieldValue(res.toString(), "thn__Agent__c");
-        Assert.assertEquals(name, "Test28");
+        Assert.assertEquals(name, "Test63");
         Assert.assertEquals(company, testAgentID);
         Assert.assertEquals(agent, testCompanyID);
     }
@@ -266,7 +266,7 @@ public class ValidationRule3 extends BaseTest {
                 "-s",
                 "thn__MYCE_Quote__c",
                 "-v",
-                "Name='Test29' thn__SendToMews__c=true",
+                "Name='Test64' thn__SendToMews__c=true",
                 "-u",
                 "THYNK-VR",
                 "--json"});
@@ -275,14 +275,14 @@ public class ValidationRule3 extends BaseTest {
                 "-s",
                 "thn__MYCE_Quote__c",
                 "-w",
-                "Name=Test29",
+                "Name=Test64",
                 "-u",
                 "THYNK-VR",
                 "--json"});
         String name = JsonParser2.getFieldValue(res.toString(), "Name");
         String sendToMews = JsonParser2.getFieldValue(res.toString(), "thn__SendToMews__c");
         String reservationGuest =  JsonParser2.getFieldValue(res.toString(), "thn__Reservation_Guest__c");
-        Assert.assertEquals(name, "Test29");
+        Assert.assertEquals(name, "Test64");
         Assert.assertEquals(sendToMews, "true");
         Assert.assertEquals(reservationGuest, null);
     }
@@ -297,7 +297,7 @@ public class ValidationRule3 extends BaseTest {
                 "-s",
                 "thn__MYCE_Quote__c",
                 "-v",
-                "Name='Test30' thn__Stage__c='4 - Closed'",
+                "Name='Test65' thn__Stage__c='4 - Closed'",
                 "-u",
                 "THYNK-VR",
                 "--json"});
@@ -306,13 +306,13 @@ public class ValidationRule3 extends BaseTest {
                 "-s",
                 "thn__MYCE_Quote__c",
                 "-w",
-                "Name=Test30",
+                "Name=Test65",
                 "-u",
                 "THYNK-VR",
                 "--json"});
         String name = JsonParser2.getFieldValue(res.toString(), "Name");
         String stageStatus = JsonParser2.getFieldValue(res.toString(), "thn__Stage__c");
-        Assert.assertEquals(name, "Test30");
+        Assert.assertEquals(name, "Test65");
         Assert.assertEquals(stageStatus, "4 - Closed");
     }
 
@@ -326,7 +326,7 @@ public class ValidationRule3 extends BaseTest {
                 "-s",
                 "thn__MYCE_Quote__c",
                 "-v",
-                "Name='Test31' thn__Closed_Status__c='Cancelled'",
+                "Name='Test66' thn__Closed_Status__c='Cancelled'",
                 "-u",
                 "THYNK-VR",
                 "--json"});
@@ -335,14 +335,14 @@ public class ValidationRule3 extends BaseTest {
                 "-s",
                 "thn__MYCE_Quote__c",
                 "-w",
-                "Name=Test31",
+                "Name=Test66",
                 "-u",
                 "THYNK-VR",
                 "--json"});
         String name = JsonParser2.getFieldValue(res.toString(), "Name");
         String closedStatus = JsonParser2.getFieldValue(res.toString(), "thn__Closed_Status__c");
         String isConfirmed = JsonParser2.getFieldValue(res.toString(), "thn__Is_Confirmed__c");
-        Assert.assertEquals(name, "Test31");
+        Assert.assertEquals(name, "Test66");
         Assert.assertEquals(closedStatus, "Cancelled");
         Assert.assertEquals(isConfirmed, "false");
     }
@@ -395,7 +395,7 @@ public class ValidationRule3 extends BaseTest {
                 "-s",
                 "thn__Package__c",
                 "-v",
-                "Name='Test Package' thn__Multi_Days__c=true thn__Hotel__c='" + propertyID + "'",
+                "Name='Test Package 7' thn__Multi_Days__c=true thn__Hotel__c='" + propertyID + "'",
                 "-u",
                 "THYNK-VR",
                 "--json"});
@@ -404,7 +404,7 @@ public class ValidationRule3 extends BaseTest {
                 "-s",
                 "thn__Package__c",
                 "-w",
-                "Name='Test Package''",
+                "Name='Test Package 7''",
                 "-u",
                 "THYNK-VR",
                 "--json"});
@@ -414,7 +414,7 @@ public class ValidationRule3 extends BaseTest {
                 "-s",
                 "thn__Package_Line__c",
                 "-v",
-                "Name='Test Pack Line' thn__Package__c='" + packageID + "'",
+                "Name='Test Pack Line 8' thn__Package__c='" + packageID + "'",
                 "-u",
                 "THYNK-VR",
                 "--json"});
@@ -423,7 +423,7 @@ public class ValidationRule3 extends BaseTest {
                 "-s",
                 "thn__Package_Line__c",
                 "-w",
-                "Name='Test Pack Line'",
+                "Name='Test Pack Line 8'",
                 "-u",
                 "THYNK-VR",
                 "--json"});
@@ -431,9 +431,9 @@ public class ValidationRule3 extends BaseTest {
         String multiDays = JsonParser2.getFieldValue(res2.toString(), "thn__Multi_Days__c");
         String namePackageLine = JsonParser2.getFieldValue(res.toString(), "Name");
         String appliedDay = JsonParser2.getFieldValue(res.toString(), "thn__AppliedDay__c");
-        Assert.assertEquals(namePackageLine, "Test Pack Line");
+        Assert.assertEquals(namePackageLine, "Test Pack Line 8");
         Assert.assertEquals(appliedDay, null);
-        Assert.assertEquals(namePackage, "Test Package");
+        Assert.assertEquals(namePackage, "Test Package 7");
         Assert.assertEquals(multiDays, "true");
     }
 
@@ -457,7 +457,7 @@ public class ValidationRule3 extends BaseTest {
                 "-s",
                 "thn__Package__c",
                 "-v",
-                "Name='Test Package 2' thn__Multi_Days__c=false thn__Hotel__c='" + propertyID + "'",
+                "Name='Test Package 8' thn__Multi_Days__c=false thn__Hotel__c='" + propertyID + "'",
                 "-u",
                 "THYNK-VR",
                 "--json"});
@@ -466,7 +466,7 @@ public class ValidationRule3 extends BaseTest {
                 "-s",
                 "thn__Package__c",
                 "-w",
-                "Name='Test Package 2'",
+                "Name='Test Package 8'",
                 "-u",
                 "THYNK-VR",
                 "--json"});
@@ -476,7 +476,7 @@ public class ValidationRule3 extends BaseTest {
                 "-s",
                 "thn__Package_Line__c",
                 "-v",
-                "Name='Test Pack Line 2' thn__Package__c='" + packageID + "' thn__AppliedDay__c=25",
+                "Name='Test Pack Line 9' thn__Package__c='" + packageID + "' thn__AppliedDay__c=25",
                 "-u",
                 "THYNK-VR",
                 "--json"});
@@ -485,7 +485,7 @@ public class ValidationRule3 extends BaseTest {
                 "-s",
                 "thn__Package_Line__c",
                 "-w",
-                "Name='Test Pack Line 2'",
+                "Name='Test Pack Line 9'",
                 "-u",
                 "THYNK-VR",
                 "--json"});
@@ -493,9 +493,9 @@ public class ValidationRule3 extends BaseTest {
         String multiDays = JsonParser2.getFieldValue(res2.toString(), "thn__Multi_Days__c");
         String namePackageLine = JsonParser2.getFieldValue(res.toString(), "Name");
         String appliedDay = JsonParser2.getFieldValue(res.toString(), "thn__AppliedDay__c");
-        Assert.assertEquals(namePackageLine, "Test Pack Line 2");
+        Assert.assertEquals(namePackageLine, "Test Pack Line 9");
         Assert.assertEquals(appliedDay, "25");
-        Assert.assertEquals(namePackage, "Test Package 2");
+        Assert.assertEquals(namePackage, "Test Package 8");
         Assert.assertEquals(multiDays, "false");
     }
 
@@ -522,7 +522,7 @@ public class ValidationRule3 extends BaseTest {
                 "-s",
                 "thn__Package__c",
                 "-v",
-                "Name='Test Package 3' thn__Hotel__c='" + propertyID + "'",
+                "Name='Test Package 9' thn__Hotel__c='" + propertyID + "'",
                 "-u",
                 "THYNK-VR",
                 "--json"});
@@ -541,7 +541,7 @@ public class ValidationRule3 extends BaseTest {
                 "-s",
                 "thn__Package__c",
                 "-w",
-                "Name='Test Package 3'",
+                "Name='Test Package 9'",
                 "-u",
                 "THYNK-VR",
                 "--json"});
@@ -551,7 +551,7 @@ public class ValidationRule3 extends BaseTest {
                 "-s",
                 "thn__Package_Line__c",
                 "-v",
-                "Name='Test Pack Line 3' thn__Package__c='" + packageID + "' thn__Type__c='Hotel Room' thn__Product__c='" + productID + "'",
+                "Name='Test Pack Line 10' thn__Package__c='" + packageID + "' thn__Type__c='Hotel Room' thn__Product__c='" + productID + "'",
                 "-u",
                 "THYNK-VR",
                 "--json"});
@@ -560,7 +560,7 @@ public class ValidationRule3 extends BaseTest {
                 "-s",
                 "thn__Package_Line__c",
                 "-w",
-                "Name='Test Pack Line 3'",
+                "Name='Test Pack Line 10'",
                 "-u",
                 "THYNK-VR",
                 "--json"});
@@ -568,9 +568,9 @@ public class ValidationRule3 extends BaseTest {
         String property = JsonParser2.getFieldValue(res3.toString(), "thn__Hotel__c");
         String namePackageLine = JsonParser2.getFieldValue(res.toString(), "Name");
         String product = JsonParser2.getFieldValue(res.toString(), "thn__Product__c");
-        Assert.assertEquals(namePackageLine, "Test Pack Line 3");
+        Assert.assertEquals(namePackageLine, "Test Pack Line 10");
         Assert.assertEquals(product, productID);
-        Assert.assertEquals(namePackage, "Test Package 3");
+        Assert.assertEquals(namePackage, "Test Package 9");
         Assert.assertEquals(property, propertyID);
     }
 
@@ -594,7 +594,7 @@ public class ValidationRule3 extends BaseTest {
                 "-s",
                 "thn__MYCE_Quote__c",
                 "-v",
-                "Name='Test32' thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" + date.generateTodayDate2() +
+                "Name='Test67' thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" + date.generateTodayDate2() +
                         " thn__Departure_Date__c=" + date.generateTodayDate2(),
                 "-u",
                 "THYNK-VR",
@@ -604,7 +604,7 @@ public class ValidationRule3 extends BaseTest {
                 "-s",
                 "thn__MYCE_Quote__c",
                 "-w",
-                "Name='Test32'",
+                "Name='Test67'",
                 "-u",
                 "THYNK-VR",
                 "--json"});
@@ -614,7 +614,7 @@ public class ValidationRule3 extends BaseTest {
                 "-s",
                 "thn__Quote_Hotel_Room__c",
                 "-v",
-                "Name='Test Hotel Room 1' thn__MYCE_Quote__c='" + myceQuoteID + "' thn__Arrival_Date_Time__c=" +
+                "Name='Test Hotel Room 2' thn__MYCE_Quote__c='" + myceQuoteID + "' thn__Arrival_Date_Time__c=" +
                         date.generateTodayDate2() + "T19:00:00.000+0000 thn__Departure_Date_Time__c=" +
                         date.generateTodayDate2() + "T10:00:00.000+0000",
                 "-u",
@@ -625,7 +625,7 @@ public class ValidationRule3 extends BaseTest {
                 "-s",
                 "thn__Quote_Hotel_Room__c",
                 "-w",
-                "Name='Test Hotel Room 1'",
+                "Name='Test Hotel Room 2'",
                 "-u",
                 "THYNK-VR",
                 "--json"});
@@ -633,7 +633,7 @@ public class ValidationRule3 extends BaseTest {
         String nameMyceQuote = JsonParser2.getFieldValue(res3.toString(), "thn__MYCE_Quote__c");
         String arrivalDateTime = JsonParser2.getFieldValue(res3.toString(), "thn__Arrival_Date_Time__c");
         String departureDateTime = JsonParser2.getFieldValue(res3.toString(), "thn__Departure_Date_Time__c");
-        Assert.assertEquals(nameHotelRoom, "Test Hotel Room 1");
+        Assert.assertEquals(nameHotelRoom, "Test Hotel Room 2");
         Assert.assertEquals(nameMyceQuote, myceQuoteID);
         Assert.assertEquals(arrivalDateTime, date.generateTodayDate2() + "T19:00:00.000+0000");
         Assert.assertEquals(departureDateTime, date.generateTodayDate2() + "T10:00:00.000+0000");
@@ -669,7 +669,7 @@ public class ValidationRule3 extends BaseTest {
                 "-s",
                 "thn__MYCE_Quote__c",
                 "-v",
-                "Name='Test33' thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
+                "Name='Test68' thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
                         date.generateTodayDate2_plus(0, 1) + " thn__Departure_Date__c=" +
                         date.generateTodayDate2_plus(0, 2),
                 "-u",
@@ -680,7 +680,7 @@ public class ValidationRule3 extends BaseTest {
                 "-s",
                 "thn__MYCE_Quote__c",
                 "-w",
-                "Name='Test33'",
+                "Name='Test68'",
                 "-u",
                 "THYNK-VR",
                 "--json"});
@@ -758,7 +758,7 @@ public class ValidationRule3 extends BaseTest {
                 "-s",
                 "thn__MYCE_Quote__c",
                 "-v",
-                "Name='Test34' thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
+                "Name='Test69' thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
                         date.generateTodayDate2_plus(0, 1) + " thn__Departure_Date__c=" +
                         date.generateTodayDate2_plus(0, 3),
                 "-u",
@@ -769,7 +769,7 @@ public class ValidationRule3 extends BaseTest {
                 "-s",
                 "thn__MYCE_Quote__c",
                 "-w",
-                "Name='Test34'",
+                "Name='Test69'",
                 "-u",
                 "THYNK-VR",
                 "--json"});
@@ -847,7 +847,7 @@ public class ValidationRule3 extends BaseTest {
                 "-s",
                 "thn__MYCE_Quote__c",
                 "-v",
-                "Name='Test35' thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
+                "Name='Test70' thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
                         date.generateTodayDate2_plus(0, 1) + " thn__Departure_Date__c=" +
                         date.generateTodayDate2_plus(0, 3),
                 "-u",
@@ -858,7 +858,7 @@ public class ValidationRule3 extends BaseTest {
                 "-s",
                 "thn__MYCE_Quote__c",
                 "-w",
-                "Name='Test35'",
+                "Name='Test70'",
                 "-u",
                 "THYNK-VR",
                 "--json"});
@@ -936,7 +936,7 @@ public class ValidationRule3 extends BaseTest {
                 "-s",
                 "thn__MYCE_Quote__c",
                 "-v",
-                "Name='Test36' thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
+                "Name='Test71' thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
                         date.generateTodayDate2_plus(0, 1) + " thn__Departure_Date__c=" +
                         date.generateTodayDate2_plus(0, 3),
                 "-u",
@@ -947,7 +947,7 @@ public class ValidationRule3 extends BaseTest {
                 "-s",
                 "thn__MYCE_Quote__c",
                 "-w",
-                "Name='Test36'",
+                "Name='Test71'",
                 "-u",
                 "THYNK-VR",
                 "--json"});
@@ -1025,7 +1025,7 @@ public class ValidationRule3 extends BaseTest {
                 "-s",
                 "thn__MYCE_Quote__c",
                 "-v",
-                "Name='Test37' thn__Pax__c=5 thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
+                "Name='Test72' thn__Pax__c=5 thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
                         date.generateTodayDate2_plus(0, 1) + " thn__Departure_Date__c=" +
                         date.generateTodayDate2_plus(0, 3),
                 "-u",
@@ -1036,7 +1036,7 @@ public class ValidationRule3 extends BaseTest {
                 "-s",
                 "thn__MYCE_Quote__c",
                 "-w",
-                "Name='Test37'",
+                "Name='Test72'",
                 "-u",
                 "THYNK-VR",
                 "--json"});
@@ -1120,7 +1120,7 @@ public class ValidationRule3 extends BaseTest {
                 "-s",
                 "thn__MYCE_Quote__c",
                 "-v",
-                "Name='Test38' thn__Pax__c=10 thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
+                "Name='Test73' thn__Pax__c=10 thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
                         date.generateTodayDate2_plus(0, 1) + " thn__Departure_Date__c=" +
                         date.generateTodayDate2_plus(0, 3),
                 "-u",
@@ -1131,7 +1131,7 @@ public class ValidationRule3 extends BaseTest {
                 "-s",
                 "thn__MYCE_Quote__c",
                 "-w",
-                "Name='Test38'",
+                "Name='Test73'",
                 "-u",
                 "THYNK-VR",
                 "--json"});
@@ -1146,6 +1146,7 @@ public class ValidationRule3 extends BaseTest {
                 "-u",
                 "THYNK-VR",
                 "--json"});
+        System.out.println(res5);
         String meetingRoomID1 = JsonParser2.getFieldValue(res5.toString(), "id");
         Assert.assertNotNull(meetingRoomID1);
         StringBuilder res6 =SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
@@ -1308,7 +1309,7 @@ public class ValidationRule3 extends BaseTest {
                 "-s",
                 "thn__MYCE_Quote__c",
                 "-v",
-                "Name='Test39' thn__Pax__c=10 thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
+                "Name='Test74' thn__Pax__c=10 thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
                         date.generateTodayDate2_plus(0, 1) + " thn__Departure_Date__c=" +
                         date.generateTodayDate2_plus(0, 3),
                 "-u",
@@ -1319,7 +1320,7 @@ public class ValidationRule3 extends BaseTest {
                 "-s",
                 "thn__MYCE_Quote__c",
                 "-w",
-                "Name='Test39'",
+                "Name='Test74'",
                 "-u",
                 "THYNK-VR",
                 "--json"});
@@ -1392,7 +1393,7 @@ public class ValidationRule3 extends BaseTest {
                 "-s",
                 "thn__MYCE_Quote__c",
                 "-v",
-                "Name='Test40' thn__Pax__c=4 thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
+                "Name='Test75' thn__Pax__c=4 thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
                         date.generateTodayDate2() + " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 3),
                 "-u",
                 "THYNK-VR",
@@ -1465,7 +1466,7 @@ public class ValidationRule3 extends BaseTest {
                 "-s",
                 "thn__MYCE_Quote__c",
                 "-v",
-                "Name='Test41' thn__Pax__c=10 thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
+                "Name='Test76' thn__Pax__c=10 thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
                         date.generateTodayDate2() + " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 3),
                 "-u",
                 "THYNK-VR",
@@ -1569,7 +1570,7 @@ public class ValidationRule3 extends BaseTest {
                 "-s",
                 "thn__Package__c",
                 "-v",
-                "Name='Test Package 4'  thn__Hotel__c='" + propertyID + "' thn__Discount_Max__c=15",
+                "Name='Test Package 10'  thn__Hotel__c='" + propertyID + "' thn__Discount_Max__c=15",
                 "-u",
                 "THYNK-VR",
                 "--json"});
@@ -1601,7 +1602,7 @@ public class ValidationRule3 extends BaseTest {
                 "-s",
                 "thn__MYCE_Quote__c",
                 "-v",
-                "Name='Test42' thn__Pax__c=10 thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
+                "Name='Test77' thn__Pax__c=10 thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
                         date.generateTodayDate2() + " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 3),
                 "-u",
                 "THYNK-VR",
@@ -1665,7 +1666,7 @@ public class ValidationRule3 extends BaseTest {
                 "-s",
                 "thn__Package__c",
                 "-w",
-                "Name='Test Package 4'",
+                "Name='Test Package 12'",
                 "-u",
                 "THYNK-VR",
                 "--json"});
@@ -1675,7 +1676,7 @@ public class ValidationRule3 extends BaseTest {
                 "-s",
                 "thn__MYCE_Quote__c",
                 "-v",
-                "Name='Test43' thn__Pax__c=10 thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
+                "Name='Test78' thn__Pax__c=10 thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
                         date.generateTodayDate2() + " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 3),
                 "-u",
                 "THYNK-VR",
@@ -1738,7 +1739,7 @@ public class ValidationRule3 extends BaseTest {
                 "-s",
                 "thn__MYCE_Quote__c",
                 "-v",
-                "Name='Test44' thn__Pax__c=10 thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
+                "Name='Test79' thn__Pax__c=10 thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
                         date.generateTodayDate2() + " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 3),
                 "-u",
                 "THYNK-VR",
@@ -1790,7 +1791,7 @@ public class ValidationRule3 extends BaseTest {
                 "-s",
                 "thn__Package__c",
                 "-v",
-                "Name='Test Package 5'  thn__Hotel__c='" + propertyID + "' thn__Start_Date__c=" +
+                "Name='Test Package 11'  thn__Hotel__c='" + propertyID + "' thn__Start_Date__c=" +
                         date.generateTodayDate2_plus(0, 1) +
                         " thn__End_Date__c=" + date.generateTodayDate2_plus(0, 3),
                 "-u",
@@ -1813,7 +1814,7 @@ public class ValidationRule3 extends BaseTest {
                 "-s",
                 "thn__MYCE_Quote__c",
                 "-v",
-                "Name='Test45' thn__Pax__c=10 thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
+                "Name='Test80' thn__Pax__c=10 thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
                         date.generateTodayDate2() + " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 5),
                 "-u",
                 "THYNK-VR",
@@ -1890,7 +1891,7 @@ public class ValidationRule3 extends BaseTest {
                 "-s",
                 "thn__Package__c",
                 "-v",
-                "Name='Test Package 6'  thn__Discount_Max__c=10 thn__Hotel__c='" + propertyID + "' thn__Start_Date__c=" +
+                "Name='Test Package 12'  thn__Discount_Max__c=10 thn__Hotel__c='" + propertyID + "' thn__Start_Date__c=" +
                         date.generateTodayDate2() +
                         " thn__End_Date__c=" + date.generateTodayDate2_plus(0, 5),
                 "-u",
@@ -1913,7 +1914,7 @@ public class ValidationRule3 extends BaseTest {
                 "-s",
                 "thn__MYCE_Quote__c",
                 "-v",
-                "Name='Test46' thn__Pax__c=10 thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
+                "Name='Test81' thn__Pax__c=10 thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
                         date.generateTodayDate2() + " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 5),
                 "-u",
                 "THYNK-VR",
@@ -1985,7 +1986,7 @@ public class ValidationRule3 extends BaseTest {
                 "-s",
                 "thn__MYCE_Quote__c",
                 "-v",
-                "Name='Test47' thn__Pax__c=10 thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
+                "Name='Test82' thn__Pax__c=10 thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
                         date.generateTodayDate2() + " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 5),
                 "-u",
                 "THYNK-VR",
@@ -2036,7 +2037,7 @@ public class ValidationRule3 extends BaseTest {
                 "-s",
                 "thn__MYCE_Quote__c",
                 "-v",
-                "Name='Test48' thn__Pax__c=10 thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
+                "Name='Test83' thn__Pax__c=10 thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
                         date.generateTodayDate2_plus(0, 1) + " thn__Departure_Date__c=" +
                         date.generateTodayDate2_plus(0, 5),
                 "-u",
@@ -2131,7 +2132,7 @@ public class ValidationRule3 extends BaseTest {
                 "-s",
                 "thn__MYCE_Quote__c",
                 "-v",
-                "Name='Test49' thn__Pax__c=10 thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
+                "Name='Test84' thn__Pax__c=10 thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
                         date.generateTodayDate2_plus(0, 1) + " thn__Departure_Date__c=" +
                         date.generateTodayDate2_plus(0, 5),
                 "-u",
@@ -2194,7 +2195,7 @@ public class ValidationRule3 extends BaseTest {
                 "-s",
                 "thn__MYCE_Quote__c",
                 "-v",
-                "Name='Test50' thn__Pax__c=10 thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
+                "Name='Test85' thn__Pax__c=10 thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
                         date.generateTodayDate2_plus(0, 1) + " thn__Departure_Date__c=" +
                         date.generateTodayDate2_plus(0, 5),
                 "-u",
@@ -2257,7 +2258,7 @@ public class ValidationRule3 extends BaseTest {
                 "-s",
                 "thn__MYCE_Quote__c",
                 "-v",
-                "Name='Test51' thn__Pax__c=10 thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
+                "Name='Test86' thn__Pax__c=10 thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
                         date.generateTodayDate2() + " thn__Departure_Date__c=" +
                         date.generateTodayDate2_plus(0, 5),
                 "-u",
@@ -2333,7 +2334,7 @@ public class ValidationRule3 extends BaseTest {
                 "-s",
                 "thn__MYCE_Quote__c",
                 "-v",
-                "Name='Test52' thn__Pax__c=10 thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
+                "Name='Test87' thn__Pax__c=10 thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
                         date.generateTodayDate2() + " thn__Departure_Date__c=" +
                         date.generateTodayDate2_plus(0, 5),
                 "-u",
@@ -2479,7 +2480,7 @@ public class ValidationRule3 extends BaseTest {
                 "-s",
                 "thn__Item__c",
                 "-v",
-                "thn__Reservation__c='" + reservationID + "' thn__Product__c='" + productRoom1NightID + "' thn__Mews_Id__c=555 thn__Send_to_Mews__c=true",
+                "thn__Reservation__c='" + reservationID + "' thn__Product__c='" + productRoom1NightID + "' thn__Mews_Id__c=556 thn__Send_to_Mews__c=true",
                 "-u",
                 "THYNK-VR",
                 "--json"});
@@ -2635,7 +2636,7 @@ public class ValidationRule3 extends BaseTest {
                         "' thn__Customer__c='" + guestID + "' thn__StartUtc__c=" + date.generateTodayDate2() +
                         " thn__EndUtc__c=" + date.generateTodayDate2_plus(0, 5) +
                         " thn__AdultCount__c=2 thn__ChildCount__c=1 thn__RequestedCategory__c='" + roomTypeID +
-                        "' thn__Pricing_Type__c='Rate pricing' thn__Rate__c='" + rateID + "' thn__Mews_Id__c=''123",
+                        "' thn__Pricing_Type__c='Rate pricing' thn__Rate__c='" + rateID + "' thn__Mews_Id__c=''12345",
                 "-u",
                 "THYNK-VR",
                 "--json"});
@@ -2686,7 +2687,7 @@ public class ValidationRule3 extends BaseTest {
                 "-s",
                 "thn__Resource__c",
                 "-w",
-                "Name='TestRes'",
+                "Name='TestRes2'",
                 "-u",
                 "THYNK-VR",
                 "--json"});
@@ -2702,6 +2703,15 @@ public class ValidationRule3 extends BaseTest {
                 "--json"});
         String resourceGroupingID = JsonParser2.getFieldValue(resourceGroupingResult.toString(), "id");
         Assert.assertNotNull(resourceGroupingID);
+        StringBuilder deleteGroupingResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:record:delete",
+                "-s",
+                "thn__Resource_Grouping__c",
+                "-w",
+                "id='" + resourceGroupingID + "'",
+                "-u",
+                "THYNK-VR",
+                "--json"});
     }
 
 }

@@ -463,6 +463,7 @@ public class ValidationRule1 extends BaseTest {
     @Description("Quote_Hotel_Room__c.VR06_Departure_after")
     @Story("Add Quote hotel room on MYCE Quote: thn__Arrival_Date_Time__c > thn__Departure_Date_Time__c")
     public void testCreateQuoteHotelRoom() throws InterruptedException, IOException {
+        String expectedMessage = "Arrival Date time cannot be after Departure Date time";
         StringBuilder res1 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:get",
                 "-s",
@@ -478,7 +479,7 @@ public class ValidationRule1 extends BaseTest {
                 "-s",
                 "thn__MYCE_Quote__c",
                 "-v",
-                "Name='Test32' thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" + date.generateTodayDate2() +
+                "Name='Test9' thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" + date.generateTodayDate2() +
                         " thn__Departure_Date__c=" + date.generateTodayDate2(),
                 "-u",
                 "THYNK-VR",
@@ -488,12 +489,12 @@ public class ValidationRule1 extends BaseTest {
                 "-s",
                 "thn__MYCE_Quote__c",
                 "-w",
-                "Name='Test32'",
+                "Name='Test9'",
                 "-u",
                 "THYNK-VR",
                 "--json"});
         String myceQuoteID = JsonParser2.getFieldValue(res2.toString(), "Id");
-        SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder result = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:create",
                 "-s",
                 "thn__Quote_Hotel_Room__c",
@@ -504,23 +505,8 @@ public class ValidationRule1 extends BaseTest {
                 "-u",
                 "THYNK-VR",
                 "--json"});
-        StringBuilder res3 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
-                "force:data:record:get",
-                "-s",
-                "thn__Quote_Hotel_Room__c",
-                "-w",
-                "Name='Test Hotel Room 1'",
-                "-u",
-                "THYNK-VR",
-                "--json"});
-        String nameHotelRoom = JsonParser2.getFieldValue(res3.toString(), "Name");
-        String nameMyceQuote = JsonParser2.getFieldValue(res3.toString(), "thn__MYCE_Quote__c");
-        String arrivalDateTime = JsonParser2.getFieldValue(res3.toString(), "thn__Arrival_Date_Time__c");
-        String departureDateTime = JsonParser2.getFieldValue(res3.toString(), "thn__Departure_Date_Time__c");
-        Assert.assertEquals(nameHotelRoom, "Test Hotel Room 1");
-        Assert.assertEquals(nameMyceQuote, myceQuoteID);
-        Assert.assertEquals(arrivalDateTime, date.generateTodayDate2() + "T19:00:00.000+0000");
-        Assert.assertEquals(departureDateTime, date.generateTodayDate2() + "T10:00:00.000+0000");
+        String message = JsonParser2.getFieldValue2(result.toString(), "message");
+        Assert.assertEquals(message, expectedMessage);
     }
 
     @Test(priority = 15, description = "Quote_Hotel_Room__c.VR09_Dates_within_Quote_dates")
@@ -528,6 +514,7 @@ public class ValidationRule1 extends BaseTest {
     @Description("Quote_Hotel_Room__c.VR09_Dates_within_Quote_dates")
     @Story("thn__Arrival_Date_Time__c < thn__MYCE_Quote__r.thn__Arrival_Date__c")
     public void testCreateQuoteHotelRoom2() throws InterruptedException, IOException {
+        String expectedMessage = "Arrival and Departure date of hotel room must be within Quote arrival and departure dates";
         StringBuilder res1 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:get",
                 "-s",
@@ -553,7 +540,7 @@ public class ValidationRule1 extends BaseTest {
                 "-s",
                 "thn__MYCE_Quote__c",
                 "-v",
-                "Name='Test33' thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
+                "Name='Test10' thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
                         date.generateTodayDate2_plus(0, 1) + " thn__Departure_Date__c=" +
                         date.generateTodayDate2_plus(0, 2),
                 "-u",
@@ -564,7 +551,7 @@ public class ValidationRule1 extends BaseTest {
                 "-s",
                 "thn__MYCE_Quote__c",
                 "-w",
-                "Name='Test33'",
+                "Name='Test10'",
                 "-u",
                 "THYNK-VR",
                 "--json"});
@@ -579,7 +566,7 @@ public class ValidationRule1 extends BaseTest {
                 "THYNK-VR",
                 "--json"});
         String roomTypeID = JsonParser2.getFieldValue(res4.toString(), "Id");
-        SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder result = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:create",
                 "-s",
                 "thn__Quote_Hotel_Room__c",
@@ -591,25 +578,8 @@ public class ValidationRule1 extends BaseTest {
                 "-u",
                 "THYNK-VR",
                 "--json"});
-        StringBuilder res5 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
-                "force:data:record:get",
-                "-s",
-                "thn__Quote_Hotel_Room__c",
-                "-w",
-                "thn__MYCE_Quote__c='" + myceQuoteID,
-                "-u",
-                "THYNK-VR",
-                "--json"});
-        String myceQuote = JsonParser2.getFieldValue(res5.toString(), "thn__MYCE_Quote__c");
-        String arrivalDateMyceQuote = JsonParser2.getFieldValue(res3.toString(), "thn__Arrival_Date__c");
-        String departureDateMyceQuote = JsonParser2.getFieldValue(res3.toString(), "thn__Departure_Date__c");
-        String arrivalDateTime = JsonParser2.getFieldValue(res5.toString(), "thn__Arrival_Date_Time__c");
-        String departureDateTime = JsonParser2.getFieldValue(res5.toString(), "thn__Departure_Date_Time__c");
-        Assert.assertEquals(myceQuote, myceQuoteID);
-        Assert.assertEquals(arrivalDateMyceQuote, date.generateTodayDate2_plus(0, 1));
-        Assert.assertEquals(departureDateMyceQuote, date.generateTodayDate2_plus(0, 2));
-        Assert.assertTrue(arrivalDateTime.contains(date.generateTodayDate2()));
-        Assert.assertTrue(departureDateTime.contains(date.generateTodayDate2_plus(0, 2)));
+        String message = JsonParser2.getFieldValue2(result.toString(), "message");
+        Assert.assertEquals(message, expectedMessage);
     }
 
     @Test(priority = 16, description = "Quote_Hotel_Room__c.VR09_Dates_within_Quote_dates")
@@ -617,6 +587,7 @@ public class ValidationRule1 extends BaseTest {
     @Description("Add Quote hotel room on MYCE Quote where thn__Arrival_Date_Time__c >  thn__MYCE_Quote__r.thn__Departure_Date__c")
     @Story("thn__Arrival_Date_Time__c >  thn__MYCE_Quote__r.thn__Departure_Date__c")
     public void testCreateQuoteHotelRoom3() throws InterruptedException, IOException {
+        String expectedMessage = "Arrival Date time cannot be after Departure Date time";
         StringBuilder res1 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:get",
                 "-s",
@@ -642,7 +613,7 @@ public class ValidationRule1 extends BaseTest {
                 "-s",
                 "thn__MYCE_Quote__c",
                 "-v",
-                "Name='Test34' thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
+                "Name='Test11' thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
                         date.generateTodayDate2_plus(0, 1) + " thn__Departure_Date__c=" +
                         date.generateTodayDate2_plus(0, 3),
                 "-u",
@@ -653,7 +624,7 @@ public class ValidationRule1 extends BaseTest {
                 "-s",
                 "thn__MYCE_Quote__c",
                 "-w",
-                "Name='Test34'",
+                "Name='Test11'",
                 "-u",
                 "THYNK-VR",
                 "--json"});
@@ -668,7 +639,7 @@ public class ValidationRule1 extends BaseTest {
                 "THYNK-VR",
                 "--json"});
         String roomTypeID = JsonParser2.getFieldValue(res4.toString(), "Id");
-        SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder result = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:create",
                 "-s",
                 "thn__Quote_Hotel_Room__c",
@@ -680,25 +651,8 @@ public class ValidationRule1 extends BaseTest {
                 "-u",
                 "THYNK-VR",
                 "--json"});
-        StringBuilder res5 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
-                "force:data:record:get",
-                "-s",
-                "thn__Quote_Hotel_Room__c",
-                "-w",
-                "thn__MYCE_Quote__c='" + myceQuoteID,
-                "-u",
-                "THYNK-VR",
-                "--json"});
-        String myceQuote = JsonParser2.getFieldValue(res5.toString(), "thn__MYCE_Quote__c");
-        String arrivalDateMyceQuote = JsonParser2.getFieldValue(res3.toString(), "thn__Arrival_Date__c");
-        String departureDateMyceQuote = JsonParser2.getFieldValue(res3.toString(), "thn__Departure_Date__c");
-        String arrivalDateTime = JsonParser2.getFieldValue(res5.toString(), "thn__Arrival_Date_Time__c");
-        String departureDateTime = JsonParser2.getFieldValue(res5.toString(), "thn__Departure_Date_Time__c");
-        Assert.assertEquals(myceQuote, myceQuoteID);
-        Assert.assertEquals(arrivalDateMyceQuote, date.generateTodayDate2_plus(0, 1));
-        Assert.assertEquals(departureDateMyceQuote, date.generateTodayDate2_plus(0, 3));
-        Assert.assertTrue(arrivalDateTime.contains(date.generateTodayDate2_plus(0, 4)));
-        Assert.assertTrue(departureDateTime.contains(date.generateTodayDate2_plus(0, 3)));
+        String message = JsonParser2.getFieldValue2(result.toString(), "message");
+        Assert.assertEquals(message, expectedMessage);
     }
 
     @Test(priority = 17, description = "Quote_Hotel_Room__c.VR09_Dates_within_Quote_dates")
@@ -706,6 +660,7 @@ public class ValidationRule1 extends BaseTest {
     @Description("Add Quote hotel room on MYCE Quote where thn__Departure_Date_Time__c <  thn__MYCE_Quote__r.thn__Arrival_Date__c")
     @Story("thn__Departure_Date_Time__c <  thn__MYCE_Quote__r.thn__Arrival_Date__c")
     public void testCreateQuoteHotelRoom4() throws InterruptedException, IOException {
+        String expectedMessage = "Arrival Date time cannot be after Departure Date time";
         StringBuilder res1 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:get",
                 "-s",
@@ -731,7 +686,7 @@ public class ValidationRule1 extends BaseTest {
                 "-s",
                 "thn__MYCE_Quote__c",
                 "-v",
-                "Name='Test35' thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
+                "Name='Test12' thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
                         date.generateTodayDate2_plus(0, 1) + " thn__Departure_Date__c=" +
                         date.generateTodayDate2_plus(0, 3),
                 "-u",
@@ -742,7 +697,7 @@ public class ValidationRule1 extends BaseTest {
                 "-s",
                 "thn__MYCE_Quote__c",
                 "-w",
-                "Name='Test35'",
+                "Name='Test12'",
                 "-u",
                 "THYNK-VR",
                 "--json"});
@@ -757,7 +712,7 @@ public class ValidationRule1 extends BaseTest {
                 "THYNK-VR",
                 "--json"});
         String roomTypeID = JsonParser2.getFieldValue(res4.toString(), "Id");
-        SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder result = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:create",
                 "-s",
                 "thn__Quote_Hotel_Room__c",
@@ -769,25 +724,8 @@ public class ValidationRule1 extends BaseTest {
                 "-u",
                 "THYNK-VR",
                 "--json"});
-        StringBuilder res5 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
-                "force:data:record:get",
-                "-s",
-                "thn__Quote_Hotel_Room__c",
-                "-w",
-                "thn__MYCE_Quote__c='" + myceQuoteID,
-                "-u",
-                "THYNK-VR",
-                "--json"});
-        String myceQuote = JsonParser2.getFieldValue(res5.toString(), "thn__MYCE_Quote__c");
-        String arrivalDateMyceQuote = JsonParser2.getFieldValue(res3.toString(), "thn__Arrival_Date__c");
-        String departureDateMyceQuote = JsonParser2.getFieldValue(res3.toString(), "thn__Departure_Date__c");
-        String arrivalDateTime = JsonParser2.getFieldValue(res5.toString(), "thn__Arrival_Date_Time__c");
-        String departureDateTime = JsonParser2.getFieldValue(res5.toString(), "thn__Departure_Date_Time__c");
-        Assert.assertEquals(myceQuote, myceQuoteID);
-        Assert.assertEquals(arrivalDateMyceQuote, date.generateTodayDate2_plus(0, 1));
-        Assert.assertEquals(departureDateMyceQuote, date.generateTodayDate2_plus(0, 3));
-        Assert.assertTrue(arrivalDateTime.contains(date.generateTodayDate2_plus(0, 1)));
-        Assert.assertTrue(departureDateTime.contains(date.generateTodayDate2()));
+        String message = JsonParser2.getFieldValue2(result.toString(), "message");
+        Assert.assertEquals(message, expectedMessage);
     }
 
     @Test(priority = 18, description = "Quote_Hotel_Room__c.VR09_Dates_within_Quote_dates")
@@ -795,6 +733,7 @@ public class ValidationRule1 extends BaseTest {
     @Description("Add Quote hotel room on MYCE Quote where thn__Departure_Date_Time__c > thn__MYCE_Quote__r.thn__Departure_Date__c")
     @Story("thn__Departure_Date_Time__c > thn__MYCE_Quote__r.thn__Departure_Date__c")
     public void testCreateQuoteHotelRoom5() throws InterruptedException, IOException {
+        String expectedMessage = "Arrival and Departure date of hotel room must be within Quote arrival and departure dates";
         StringBuilder res1 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:get",
                 "-s",
@@ -820,7 +759,7 @@ public class ValidationRule1 extends BaseTest {
                 "-s",
                 "thn__MYCE_Quote__c",
                 "-v",
-                "Name='Test36' thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
+                "Name='Test13' thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
                         date.generateTodayDate2_plus(0, 1) + " thn__Departure_Date__c=" +
                         date.generateTodayDate2_plus(0, 3),
                 "-u",
@@ -831,7 +770,7 @@ public class ValidationRule1 extends BaseTest {
                 "-s",
                 "thn__MYCE_Quote__c",
                 "-w",
-                "Name='Test36'",
+                "Name='Test13'",
                 "-u",
                 "THYNK-VR",
                 "--json"});
@@ -846,7 +785,7 @@ public class ValidationRule1 extends BaseTest {
                 "THYNK-VR",
                 "--json"});
         String roomTypeID = JsonParser2.getFieldValue(res4.toString(), "Id");
-        SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder result = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:create",
                 "-s",
                 "thn__Quote_Hotel_Room__c",
@@ -858,25 +797,9 @@ public class ValidationRule1 extends BaseTest {
                 "-u",
                 "THYNK-VR",
                 "--json"});
-        StringBuilder res5 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
-                "force:data:record:get",
-                "-s",
-                "thn__Quote_Hotel_Room__c",
-                "-w",
-                "thn__MYCE_Quote__c='" + myceQuoteID,
-                "-u",
-                "THYNK-VR",
-                "--json"});
-        String myceQuote = JsonParser2.getFieldValue(res5.toString(), "thn__MYCE_Quote__c");
-        String arrivalDateMyceQuote = JsonParser2.getFieldValue(res3.toString(), "thn__Arrival_Date__c");
-        String departureDateMyceQuote = JsonParser2.getFieldValue(res3.toString(), "thn__Departure_Date__c");
-        String arrivalDateTime = JsonParser2.getFieldValue(res5.toString(), "thn__Arrival_Date_Time__c");
-        String departureDateTime = JsonParser2.getFieldValue(res5.toString(), "thn__Departure_Date_Time__c");
-        Assert.assertEquals(myceQuote, myceQuoteID);
-        Assert.assertEquals(arrivalDateMyceQuote, date.generateTodayDate2_plus(0, 1));
-        Assert.assertEquals(departureDateMyceQuote, date.generateTodayDate2_plus(0, 3));
-        Assert.assertTrue(arrivalDateTime.contains(date.generateTodayDate2_plus(0, 1)));
-        Assert.assertTrue(departureDateTime.contains(date.generateTodayDate2_plus(0, 4)));
+        System.out.println(result);
+        String message = JsonParser2.getFieldValue2(result.toString(), "message");
+        Assert.assertEquals(message, expectedMessage);
     }
 
     @Test(priority = 19, description = "Quote_Hotel_Room__c.VR15_Pax")
@@ -884,6 +807,7 @@ public class ValidationRule1 extends BaseTest {
     @Description("Quote_Hotel_Room__c.VR15_Pax")
     @Story("Add Quote hotel room on MYCE Quote: thn__Pax__c > thn__MYCE_Quote__r.thn__Pax__c")
     public void testCreateQuoteHotelRoom6() throws InterruptedException, IOException {
+        String expectedMessage = "Pax cannot be greater than quote's pax";
         StringBuilder res1 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:get",
                 "-s",
@@ -909,7 +833,7 @@ public class ValidationRule1 extends BaseTest {
                 "-s",
                 "thn__MYCE_Quote__c",
                 "-v",
-                "Name='Test37' thn__Pax__c=5 thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
+                "Name='Test14' thn__Pax__c=5 thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
                         date.generateTodayDate2_plus(0, 1) + " thn__Departure_Date__c=" +
                         date.generateTodayDate2_plus(0, 3),
                 "-u",
@@ -920,7 +844,7 @@ public class ValidationRule1 extends BaseTest {
                 "-s",
                 "thn__MYCE_Quote__c",
                 "-w",
-                "Name='Test37'",
+                "Name='Test14'",
                 "-u",
                 "THYNK-VR",
                 "--json"});
@@ -935,7 +859,7 @@ public class ValidationRule1 extends BaseTest {
                 "THYNK-VR",
                 "--json"});
         String roomTypeID = JsonParser2.getFieldValue(res4.toString(), "Id");
-        SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder result = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:create",
                 "-s",
                 "thn__Quote_Hotel_Room__c",
@@ -947,21 +871,8 @@ public class ValidationRule1 extends BaseTest {
                 "-u",
                 "THYNK-VR",
                 "--json"});
-        StringBuilder res5 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
-                "force:data:record:get",
-                "-s",
-                "thn__Quote_Hotel_Room__c",
-                "-w",
-                "thn__MYCE_Quote__c='" + myceQuoteID,
-                "-u",
-                "THYNK-VR",
-                "--json"});
-        String myceQuote = JsonParser2.getFieldValue(res5.toString(), "thn__MYCE_Quote__c");
-        String myceQuotePax= JsonParser2.getFieldValue(res3.toString(), "thn__Pax__c");
-        String hotelRoomPax= JsonParser2.getFieldValue(res5.toString(), "thn__Pax__c");
-        Assert.assertEquals(myceQuote, myceQuoteID);
-        Assert.assertEquals(myceQuotePax, "5");
-        Assert.assertEquals(hotelRoomPax, "6");
+        String message = JsonParser2.getFieldValue2(result.toString(), "message");
+        Assert.assertEquals(message, expectedMessage);
     }
 
     @Test(priority = 20, description = "Quote_Meetings_Room__c.VR19_SetupResource")
@@ -969,6 +880,7 @@ public class ValidationRule1 extends BaseTest {
     @Description("Quote_Meetings_Room__c.VR19_SetupResource")
     @Story("")
     public void testCreateQuoteMeetingsRoom1() throws InterruptedException, IOException {
+        String expectedMessage = "Meeting room's pax exceeds the resource's capacity for this setup";
         StringBuilder res1 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:get",
                 "-s",
@@ -1004,7 +916,7 @@ public class ValidationRule1 extends BaseTest {
                 "-s",
                 "thn__MYCE_Quote__c",
                 "-v",
-                "Name='Test38' thn__Pax__c=10 thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
+                "Name='Test15' thn__Pax__c=10 thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
                         date.generateTodayDate2_plus(0, 1) + " thn__Departure_Date__c=" +
                         date.generateTodayDate2_plus(0, 3),
                 "-u",
@@ -1015,12 +927,12 @@ public class ValidationRule1 extends BaseTest {
                 "-s",
                 "thn__MYCE_Quote__c",
                 "-w",
-                "Name='Test38'",
+                "Name='Test15'",
                 "-u",
                 "THYNK-VR",
                 "--json"});
         String myceQuoteID = JsonParser2.getFieldValue(res4.toString(), "Id");
-        StringBuilder res5 =SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder result1 =SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:create",
                 "-s",
                 "thn__Quote_Meeting_Room__c",
@@ -1030,9 +942,9 @@ public class ValidationRule1 extends BaseTest {
                 "-u",
                 "THYNK-VR",
                 "--json"});
-        String meetingRoomID1 = JsonParser2.getFieldValue(res5.toString(), "id");
-        Assert.assertNotNull(meetingRoomID1);
-        StringBuilder res6 =SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        String message1 = JsonParser2.getFieldValue2(result1.toString(), "message");
+        Assert.assertEquals(message1, expectedMessage);
+        StringBuilder result2 =SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:create",
                 "-s",
                 "thn__Quote_Meeting_Room__c",
@@ -1042,9 +954,9 @@ public class ValidationRule1 extends BaseTest {
                 "-u",
                 "THYNK-VR",
                 "--json"});
-        String meetingRoomID2 = JsonParser2.getFieldValue(res6.toString(), "id");
-        Assert.assertNotNull(meetingRoomID2);
-        StringBuilder res7 =SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        String message2 = JsonParser2.getFieldValue2(result2.toString(), "message");
+        Assert.assertEquals(message2, expectedMessage);
+        StringBuilder result3 =SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:create",
                 "-s",
                 "thn__Quote_Meeting_Room__c",
@@ -1054,9 +966,9 @@ public class ValidationRule1 extends BaseTest {
                 "-u",
                 "THYNK-VR",
                 "--json"});
-        String meetingRoomID3 = JsonParser2.getFieldValue(res7.toString(), "id");
-        Assert.assertNotNull(meetingRoomID3);
-        StringBuilder res8 =SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        String message3 = JsonParser2.getFieldValue2(result3.toString(), "message");
+        Assert.assertEquals(message3, expectedMessage);
+        StringBuilder result4 =SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:create",
                 "-s",
                 "thn__Quote_Meeting_Room__c",
@@ -1066,9 +978,9 @@ public class ValidationRule1 extends BaseTest {
                 "-u",
                 "THYNK-VR",
                 "--json"});
-        String meetingRoomID4 = JsonParser2.getFieldValue(res8.toString(), "id");
-        Assert.assertNotNull(meetingRoomID4);
-        StringBuilder res9 =SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        String message4 = JsonParser2.getFieldValue2(result4.toString(), "message");
+        Assert.assertEquals(message4, expectedMessage);
+        StringBuilder result5 =SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:create",
                 "-s",
                 "thn__Quote_Meeting_Room__c",
@@ -1078,9 +990,9 @@ public class ValidationRule1 extends BaseTest {
                 "-u",
                 "THYNK-VR",
                 "--json"});
-        String meetingRoomID5 = JsonParser2.getFieldValue(res9.toString(), "id");
-        Assert.assertNotNull(meetingRoomID5);
-        StringBuilder res10 =SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        String message5 = JsonParser2.getFieldValue2(result5.toString(), "message");
+        Assert.assertEquals(message5, expectedMessage);
+        StringBuilder result6 =SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:create",
                 "-s",
                 "thn__Quote_Meeting_Room__c",
@@ -1090,9 +1002,9 @@ public class ValidationRule1 extends BaseTest {
                 "-u",
                 "THYNK-VR",
                 "--json"});
-        String meetingRoomID6 = JsonParser2.getFieldValue(res10.toString(), "id");
-        Assert.assertNotNull(meetingRoomID6);
-        StringBuilder res11 =SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        String message6 = JsonParser2.getFieldValue2(result6.toString(), "message");
+        Assert.assertEquals(message6, expectedMessage);
+        StringBuilder result7 =SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:create",
                 "-s",
                 "thn__Quote_Meeting_Room__c",
@@ -1102,9 +1014,9 @@ public class ValidationRule1 extends BaseTest {
                 "-u",
                 "THYNK-VR",
                 "--json"});
-        String meetingRoomID7 = JsonParser2.getFieldValue(res11.toString(), "id");
-        Assert.assertNotNull(meetingRoomID7);
-        StringBuilder res12 =SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        String message7 = JsonParser2.getFieldValue2(result7.toString(), "message");
+        Assert.assertEquals(message7, expectedMessage);
+        StringBuilder result8 =SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:create",
                 "-s",
                 "thn__Quote_Meeting_Room__c",
@@ -1114,9 +1026,9 @@ public class ValidationRule1 extends BaseTest {
                 "-u",
                 "THYNK-VR",
                 "--json"});
-        String meetingRoomID8 = JsonParser2.getFieldValue(res12.toString(), "id");
-        Assert.assertNotNull(meetingRoomID8);
-        StringBuilder res13 =SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        String message8 = JsonParser2.getFieldValue2(result8.toString(), "message");
+        Assert.assertEquals(message8, expectedMessage);
+        StringBuilder result9 =SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:create",
                 "-s",
                 "thn__Quote_Meeting_Room__c",
@@ -1126,9 +1038,9 @@ public class ValidationRule1 extends BaseTest {
                 "-u",
                 "THYNK-VR",
                 "--json"});
-        String meetingRoomID9 = JsonParser2.getFieldValue(res13.toString(), "id");
-        Assert.assertNotNull(meetingRoomID9);
-        StringBuilder res14 =SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        String message9 = JsonParser2.getFieldValue2(result9.toString(), "message");
+        Assert.assertEquals(message9, expectedMessage);
+        StringBuilder result10 =SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:create",
                 "-s",
                 "thn__Quote_Meeting_Room__c",
@@ -1138,8 +1050,8 @@ public class ValidationRule1 extends BaseTest {
                 "-u",
                 "THYNK-VR",
                 "--json"});
-        String meetingRoomID10 = JsonParser2.getFieldValue(res14.toString(), "id");
-        Assert.assertNotNull(meetingRoomID10);
+        String message10 = JsonParser2.getFieldValue2(result10.toString(), "message");
+        Assert.assertEquals(message10, expectedMessage);
     }
 
     @Test(priority = 21, description = "Quote_Meetings_Room__c.VR21_Lock_Resource")
@@ -1147,6 +1059,7 @@ public class ValidationRule1 extends BaseTest {
     @Description("Quote_Meetings_Room__c.VR21_Lock_Resource")
     @Story("")
     public void testCreateQuoteMeetingsRoom2() throws InterruptedException, IOException {
+        String expectedMessage = "Failed to update record with code FIELD_CUSTOM_VALIDATION_EXCEPTION. Fields: [ 'thn__Resource__c' ]";
         StringBuilder res1 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:get",
                 "-s",
@@ -1192,7 +1105,7 @@ public class ValidationRule1 extends BaseTest {
                 "-s",
                 "thn__MYCE_Quote__c",
                 "-v",
-                "Name='Test39' thn__Pax__c=10 thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
+                "Name='Test16' thn__Pax__c=10 thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
                         date.generateTodayDate2_plus(0, 1) + " thn__Departure_Date__c=" +
                         date.generateTodayDate2_plus(0, 3),
                 "-u",
@@ -1203,7 +1116,7 @@ public class ValidationRule1 extends BaseTest {
                 "-s",
                 "thn__MYCE_Quote__c",
                 "-w",
-                "Name='Test39'",
+                "Name='Test16'",
                 "-u",
                 "THYNK-VR",
                 "--json"});
@@ -1214,12 +1127,12 @@ public class ValidationRule1 extends BaseTest {
                 "thn__Quote_Meeting_Room__c",
                 "-v",
                 "thn__MYCE_Quote__c='" + myceQuoteID + "' thn__Product__c='" + productID + "' thn__Resource__c='" +
-                        resourceID + "' thn__Pax__c=6 thn__Setup__c='Buffet'",
+                        resourceID + "' thn__Pax__c=2 thn__Setup__c='Buffet'",
                 "-u",
                 "THYNK-VR",
                 "--json"});
         String meetingRoomID = JsonParser2.getFieldValue(res5.toString(), "id");
-        SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder result = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:update",
                 "-s",
                 "thn__Quote_Meeting_Room__c",
@@ -1230,19 +1143,8 @@ public class ValidationRule1 extends BaseTest {
                 "-u",
                 "THYNK-VR",
                 "--json"});
-        StringBuilder res6 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
-                "force:data:record:get",
-                "-s",
-                "thn__Quote_Meeting_Room__c",
-                "-w",
-                "id='" + meetingRoomID + "'",
-                "-u",
-                "THYNK-VR",
-                "--json"});
-        String lockResource = JsonParser2.getFieldValue(res6.toString(), "thn__Lock_Resource__c");
-        String resource = JsonParser2.getFieldValue(res6.toString(), "thn__Resource__c");
-        Assert.assertEquals(lockResource, "true");
-        Assert.assertNull(resource);
+        String message = JsonParser2.getFieldValue2(result.toString(), "message");
+        Assert.assertEquals(message, expectedMessage);
     }
 
     @Test(priority = 22, description = "Quote_Meetings_Room__c.VR25_PackageDate")
@@ -1251,6 +1153,7 @@ public class ValidationRule1 extends BaseTest {
     @Story("Add meeting room to the package, Add package on MYCE Quote, Open Quote meeting room record," +
             " thn__Shadow__c == FALSE, Change thn__Start_Date_Time__c, thn__End_Date_Time__c")
     public void testCreateQuoteMeetingsRoom3() throws InterruptedException, IOException {
+        String expectedMessage = "Failed to update record with code FIELD_CUSTOM_VALIDATION_EXCEPTION. Fields: [ 'thn__Start_Date_Time__c' ]";
         StringBuilder propertyRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:get",
                 "-s",
@@ -1276,7 +1179,7 @@ public class ValidationRule1 extends BaseTest {
                 "-s",
                 "thn__MYCE_Quote__c",
                 "-v",
-                "Name='Test40' thn__Pax__c=4 thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
+                "Name='Test17' thn__Pax__c=4 thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
                         date.generateTodayDate2() + " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 3),
                 "-u",
                 "THYNK-VR",
@@ -1315,8 +1218,8 @@ public class ValidationRule1 extends BaseTest {
                 "-u",
                 "THYNK-VR",
                 "--json"});
-        String success = JsonParser2.getFieldValue(updateResult.toString(), "success");
-        Assert.assertEquals(success, "true");
+        String message = JsonParser2.getFieldValue2(updateResult.toString(), "message");
+        Assert.assertEquals(message, expectedMessage);
     }
 
     @Test(priority = 23, description = "Quote_Package__c.VR12_Dates_within_Quote_dates")
@@ -1324,6 +1227,9 @@ public class ValidationRule1 extends BaseTest {
     @Description("Quote_Package__c.VR12_Dates_within_Quote_dates")
     @Story("")
     public void testCreateQuotePackage1() throws InterruptedException, IOException {
+        String expectedMessage = "Start and end date of package must be within Quote arrival and departure dates";
+        String expectedMessage2 = "Start Date of the package is after the Departure Date";
+        String expectedMessage3 = "End Date of the package is after the Departure Date";
         StringBuilder propertyRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:get",
                 "-s",
@@ -1349,7 +1255,7 @@ public class ValidationRule1 extends BaseTest {
                 "-s",
                 "thn__MYCE_Quote__c",
                 "-v",
-                "Name='Test41' thn__Pax__c=10 thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
+                "Name='Test18' thn__Pax__c=10 thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
                         date.generateTodayDate2() + " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 3),
                 "-u",
                 "THYNK-VR",
@@ -1367,10 +1273,10 @@ public class ValidationRule1 extends BaseTest {
                 "-u",
                 "THYNK-VR",
                 "--json"});
-        String quotePackageID1 = JsonParser2.getFieldValue(quotePackageResult1.toString(), "id");
-        Assert.assertNotNull(quotePackageID1);
+        String message = JsonParser2.getFieldValue2(quotePackageResult1.toString(), "message");
+        Assert.assertEquals(message, expectedMessage);
         //thn__Start_Date__c> thn__MYCE_Quote__r.thn__Departure_Date__c
-        /*StringBuilder quotePackageResult2 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quotePackageResult2 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:create",
                 "-s",
                 "thn__Quote_Package__c",
@@ -1381,8 +1287,8 @@ public class ValidationRule1 extends BaseTest {
                 "-u",
                 "THYNK-VR",
                 "--json"});
-        String quotePackageID2 = JsonParser2.getFieldValue(quotePackageResult2.toString(), "id");
-        Assert.assertNotNull(quotePackageID2);*/
+        String message2 = JsonParser2.getFieldValue2(quotePackageResult2.toString(), "message");
+        Assert.assertEquals(message2, expectedMessage2);
         //thn__End_Date__c< thn__MYCE_Quote__r.thn__Arrival_Date__c
         StringBuilder quotePackageResult3 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:create",
@@ -1395,10 +1301,10 @@ public class ValidationRule1 extends BaseTest {
                 "-u",
                 "THYNK-VR",
                 "--json"});
-        String quotePackageID3 = JsonParser2.getFieldValue(quotePackageResult3.toString(), "id");
-        Assert.assertNotNull(quotePackageID3);
+        String message3 = JsonParser2.getFieldValue2(quotePackageResult3.toString(), "message");
+        Assert.assertEquals(message3, expectedMessage);
         //thn__End_Date__c> thn__MYCE_Quote__r.thn__Departure_Date
-        /*StringBuilder quotePackageResult4 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quotePackageResult4 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:create",
                 "-s",
                 "thn__Quote_Package__c",
@@ -1409,8 +1315,8 @@ public class ValidationRule1 extends BaseTest {
                 "-u",
                 "THYNK-VR",
                 "--json"});
-        String quotePackageID4 = JsonParser2.getFieldValue(quotePackageResult4.toString(), "id");
-        Assert.assertNotNull(quotePackageID4);*/
+        String message4 = JsonParser2.getFieldValue2(quotePackageResult4.toString(), "message");
+        Assert.assertEquals(message4, expectedMessage3);
     }
 
     @Test(priority = 24, description = "Quote_Package__c.VR14_Discount")
@@ -1418,6 +1324,7 @@ public class ValidationRule1 extends BaseTest {
     @Description("Quote_Package__c.VR14_Discount")
     @Story("")
     public void testCreateQuotePackage2() throws InterruptedException, IOException {
+        String expectedMessage = "Failed to update record with code FIELD_CUSTOM_VALIDATION_EXCEPTION. Fields: [ 'thn__Unit_Price__c' ]";
         StringBuilder propertyRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:get",
                 "-s",
@@ -1453,7 +1360,7 @@ public class ValidationRule1 extends BaseTest {
                 "-s",
                 "thn__Package__c",
                 "-v",
-                "Name='Test Package 4'  thn__Hotel__c='" + propertyID + "' thn__Discount_Max__c=15",
+                "Name='Test Package 44'  thn__Hotel__c='" + propertyID + "' thn__Discount_Max__c=15",
                 "-u",
                 "THYNK-VR",
                 "--json"});
@@ -1485,7 +1392,7 @@ public class ValidationRule1 extends BaseTest {
                 "-s",
                 "thn__MYCE_Quote__c",
                 "-v",
-                "Name='Test42' thn__Pax__c=10 thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
+                "Name='Test19' thn__Pax__c=10 thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
                         date.generateTodayDate2() + " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 3),
                 "-u",
                 "THYNK-VR",
@@ -1514,19 +1421,8 @@ public class ValidationRule1 extends BaseTest {
                 "-u",
                 "THYNK-VR",
                 "--json"});
-        StringBuilder quotePackageRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
-                "force:data:record:get",
-                "-s",
-                "thn__Quote_Package__c",
-                "-w",
-                "id='" + quotePackageID + "'",
-                "-u",
-                "THYNK-VR",
-                "--json"});
-        String discount = JsonParser2.getFieldValue(quotePackageRecord.toString(), "thn__Discount__c");
-        String myceQuote = JsonParser2.getFieldValue(quotePackageRecord.toString(), "thn__MYCE_Quote__c");
-        Assert.assertEquals(discount, "70");
-        Assert.assertEquals(myceQuote, myceQuoteID);
+        String message = JsonParser2.getFieldValue2(updateResult.toString(), "message");
+        Assert.assertEquals(message, expectedMessage);
     }
 
     @Test(priority = 25, description = "Quote_Package__c.VR18_Pax")
@@ -1534,6 +1430,7 @@ public class ValidationRule1 extends BaseTest {
     @Description("Quote_Package__c.VR18_Pax")
     @Story("Add Quote package to the MYCE Quote: thn__Pax__c > thn__MYCE_Quote__r.thn__Pax__c")
     public void testCreateQuotePackage3() throws InterruptedException, IOException {
+        String expectedMessage = "Pax cannot be greater than quote's pax";
         StringBuilder propertyRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:get",
                 "-s",
@@ -1549,7 +1446,7 @@ public class ValidationRule1 extends BaseTest {
                 "-s",
                 "thn__Package__c",
                 "-w",
-                "Name='Test Package 4'",
+                "Name='Test Package 44'",
                 "-u",
                 "THYNK-VR",
                 "--json"});
@@ -1559,7 +1456,7 @@ public class ValidationRule1 extends BaseTest {
                 "-s",
                 "thn__MYCE_Quote__c",
                 "-v",
-                "Name='Test43' thn__Pax__c=10 thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
+                "Name='Test20' thn__Pax__c=10 thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
                         date.generateTodayDate2() + " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 3),
                 "-u",
                 "THYNK-VR",
@@ -1576,20 +1473,8 @@ public class ValidationRule1 extends BaseTest {
                 "-u",
                 "THYNK-VR",
                 "--json"});
-        String quotePackageID = JsonParser2.getFieldValue(quotePackageResult.toString(), "id");
-        StringBuilder quotePackageRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
-                "force:data:record:get",
-                "-s",
-                "thn__Quote_Package__c",
-                "-w",
-                "id='" + quotePackageID + "'",
-                "-u",
-                "THYNK-VR",
-                "--json"});
-        String paxPackage = JsonParser2.getFieldValue(quotePackageRecord.toString(), "thn__Pax__c");
-        String myceQuote = JsonParser2.getFieldValue(quotePackageRecord.toString(), "thn__MYCE_Quote__c");
-        Assert.assertEquals(paxPackage, "15");
-        Assert.assertEquals(myceQuote, myceQuoteID);
+        String message = JsonParser2.getFieldValue2(quotePackageResult.toString(), "message");
+        Assert.assertEquals(message, expectedMessage);
     }
 
     @Test(priority = 26, description = "Quote_Package__c.VR33_QuotePackage_Account")
@@ -1597,6 +1482,7 @@ public class ValidationRule1 extends BaseTest {
     @Description("Quote_Package__c.VR33_QuotePackage_Account")
     @Story("")
     public void testCreateQuotePackage4() throws InterruptedException, IOException {
+        String expectedMessage = "This Package can only be instantiated on a quote which is related to its account";
         StringBuilder propertyRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:get",
                 "-s",
@@ -1622,7 +1508,7 @@ public class ValidationRule1 extends BaseTest {
                 "-s",
                 "thn__MYCE_Quote__c",
                 "-v",
-                "Name='Test44' thn__Pax__c=10 thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
+                "Name='Test21' thn__Pax__c=10 thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
                         date.generateTodayDate2() + " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 3),
                 "-u",
                 "THYNK-VR",
@@ -1639,9 +1525,8 @@ public class ValidationRule1 extends BaseTest {
                 "-u",
                 "THYNK-VR",
                 "--json"});
-        System.out.println(quotePackageResult);
-        String quotePackageID = JsonParser2.getFieldValue(quotePackageResult.toString(), "id");
-        Assert.assertNotNull(quotePackageID);
+        String message = JsonParser2.getFieldValue2(quotePackageResult.toString(), "message");
+        Assert.assertEquals(message, expectedMessage);
     }
 
     @Test(priority = 27, description = "Quote_Package__c.VR34_QuotePackage_Dates")
@@ -1649,6 +1534,7 @@ public class ValidationRule1 extends BaseTest {
     @Description("Quote_Package__c.VR34_QuotePackage_Dates")
     @Story("")
     public void testCreateQuotePackage5() throws InterruptedException, IOException {
+        String expectedMessage = "Quote package start date must be within package's start and end dates";
         StringBuilder propertyRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:get",
                 "-s",
@@ -1674,7 +1560,7 @@ public class ValidationRule1 extends BaseTest {
                 "-s",
                 "thn__Package__c",
                 "-v",
-                "Name='Test Package 5'  thn__Hotel__c='" + propertyID + "' thn__Start_Date__c=" +
+                "Name='Test Package 55'  thn__Hotel__c='" + propertyID + "' thn__Start_Date__c=" +
                         date.generateTodayDate2_plus(0, 1) +
                         " thn__End_Date__c=" + date.generateTodayDate2_plus(0, 3),
                 "-u",
@@ -1697,7 +1583,7 @@ public class ValidationRule1 extends BaseTest {
                 "-s",
                 "thn__MYCE_Quote__c",
                 "-v",
-                "Name='Test45' thn__Pax__c=10 thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
+                "Name='Test22' thn__Pax__c=10 thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
                         date.generateTodayDate2() + " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 5),
                 "-u",
                 "THYNK-VR",
@@ -1714,8 +1600,8 @@ public class ValidationRule1 extends BaseTest {
                 "-u",
                 "THYNK-VR",
                 "--json"});
-        String quotePackageID1 = JsonParser2.getFieldValue(quotePackageResult1.toString(), "id");
-        Assert.assertNotNull(quotePackageID1);
+        String message1 = JsonParser2.getFieldValue2(quotePackageResult1.toString(), "message");
+        Assert.assertEquals(message1, expectedMessage);
         StringBuilder quotePackageResult2 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:create",
                 "-s",
@@ -1727,8 +1613,8 @@ public class ValidationRule1 extends BaseTest {
                 "-u",
                 "THYNK-VR",
                 "--json"});
-        String quotePackageID2 = JsonParser2.getFieldValue(quotePackageResult2.toString(), "id");
-        Assert.assertNotNull(quotePackageID2);
+        String message2 = JsonParser2.getFieldValue2(quotePackageResult2.toString(), "message");
+        Assert.assertEquals(message2, expectedMessage);
         StringBuilder quotePackageResult3 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:create",
                 "-s",
@@ -1740,8 +1626,8 @@ public class ValidationRule1 extends BaseTest {
                 "-u",
                 "THYNK-VR",
                 "--json"});
-        String quotePackageID3 = JsonParser2.getFieldValue(quotePackageResult3.toString(), "id");
-        Assert.assertNotNull(quotePackageID3);
+        String message3 = JsonParser2.getFieldValue2(quotePackageResult3.toString(), "message");
+        Assert.assertEquals(message3, expectedMessage);
     }
 
     @Test(priority = 28, description = "Quote_Package__c.VR37_Max_Discount")
@@ -1749,6 +1635,7 @@ public class ValidationRule1 extends BaseTest {
     @Description("Quote_Package__c.VR37_Max_Discount")
     @Story("Add Quote Package to MYCE Quote: set Discount on quote package > Discount max on Package")
     public void testCreateQuotePackage6() throws InterruptedException, IOException {
+        String expectedMessage = "Failed to update record with code FIELD_CUSTOM_VALIDATION_EXCEPTION. Fields: []";
         StringBuilder propertyRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:get",
                 "-s",
@@ -1774,7 +1661,7 @@ public class ValidationRule1 extends BaseTest {
                 "-s",
                 "thn__Package__c",
                 "-v",
-                "Name='Test Package 6'  thn__Discount_Max__c=10 thn__Hotel__c='" + propertyID + "' thn__Start_Date__c=" +
+                "Name='Test Package 66'  thn__Discount_Max__c=10 thn__Hotel__c='" + propertyID + "' thn__Start_Date__c=" +
                         date.generateTodayDate2() +
                         " thn__End_Date__c=" + date.generateTodayDate2_plus(0, 5),
                 "-u",
@@ -1797,7 +1684,7 @@ public class ValidationRule1 extends BaseTest {
                 "-s",
                 "thn__MYCE_Quote__c",
                 "-v",
-                "Name='Test46' thn__Pax__c=10 thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
+                "Name='Test23' thn__Pax__c=10 thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
                         date.generateTodayDate2() + " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 5),
                 "-u",
                 "THYNK-VR",
@@ -1826,17 +1713,8 @@ public class ValidationRule1 extends BaseTest {
                 "-u",
                 "THYNK-VR",
                 "--json"});
-        StringBuilder quotePackageRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
-                "force:data:record:get",
-                "-s",
-                "thn__Quote_Package__c",
-                "-w",
-                "id='" + quotePackageID + "'",
-                "-u",
-                "THYNK-VR",
-                "--json"});
-        String discountQuotePackage = JsonParser2.getFieldValue(quotePackageRecord.toString(), "thn__Discount__c");
-        Assert.assertEquals(discountQuotePackage, "11");
+        String message = JsonParser2.getFieldValue2(updateQuotePackageResult.toString(), "message");
+        Assert.assertEquals(message, expectedMessage);
     }
 
     @Test(priority = 29, description = "Quote_Product__c.VR08_Start_End_Date")
@@ -1844,6 +1722,7 @@ public class ValidationRule1 extends BaseTest {
     @Description("Quote_Product__c.VR08_Start_End_Date")
     @Story("Add Quote Product to MYCE Quote: thn__Start_Date_Time__c >= thn__End_Date_Time__c")
     public void testCreateQuoteProduct1() throws InterruptedException, IOException {
+        String expectedMessage = "Start Date time cannot be posterior to End Date time";
         StringBuilder propertyRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:get",
                 "-s",
@@ -1869,7 +1748,7 @@ public class ValidationRule1 extends BaseTest {
                 "-s",
                 "thn__MYCE_Quote__c",
                 "-v",
-                "Name='Test47' thn__Pax__c=10 thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
+                "Name='Test24' thn__Pax__c=10 thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
                         date.generateTodayDate2() + " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 5),
                 "-u",
                 "THYNK-VR",
@@ -1886,8 +1765,8 @@ public class ValidationRule1 extends BaseTest {
                 "-u",
                 "THYNK-VR",
                 "--json"});
-        String quoteProductID = JsonParser2.getFieldValue(quoteProductResult.toString(), "id");
-        Assert.assertNotNull(quoteProductID);
+        String message = JsonParser2.getFieldValue2(quoteProductResult.toString(), "message");
+        Assert.assertEquals(message, expectedMessage);
     }
 
     @Test(priority = 30, description = "Quote_Product__c.VR11_Dates_within_Quote_dates")
@@ -1895,6 +1774,8 @@ public class ValidationRule1 extends BaseTest {
     @Description("Quote_Product__c.VR11_Dates_within_Quote_dates")
     @Story("")
     public void testCreateQuoteProduct2() throws InterruptedException, IOException {
+        String expectedMessage1 = "Start and end date of product must be within Quote arrival and departure dates";
+        String expectedMessage2 = "Start Date time cannot be posterior to End Date time";
         StringBuilder propertyRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:get",
                 "-s",
@@ -1920,7 +1801,7 @@ public class ValidationRule1 extends BaseTest {
                 "-s",
                 "thn__MYCE_Quote__c",
                 "-v",
-                "Name='Test48' thn__Pax__c=10 thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
+                "Name='Test25' thn__Pax__c=10 thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
                         date.generateTodayDate2_plus(0, 1) + " thn__Departure_Date__c=" +
                         date.generateTodayDate2_plus(0, 5),
                 "-u",
@@ -1939,8 +1820,8 @@ public class ValidationRule1 extends BaseTest {
                 "-u",
                 "THYNK-VR",
                 "--json"});
-        String quoteProductID1 = JsonParser2.getFieldValue(quoteProductResult1.toString(), "id");
-        Assert.assertNotNull(quoteProductID1);
+        String message1 = JsonParser2.getFieldValue2(quoteProductResult1.toString(), "message");
+        Assert.assertEquals(message1, expectedMessage1);
         //thn__Start_Date_Time__c > thn__MYCE_Quote__r.thn__Departure_Date__c
         StringBuilder quoteProductResult2 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:create",
@@ -1953,8 +1834,8 @@ public class ValidationRule1 extends BaseTest {
                 "-u",
                 "THYNK-VR",
                 "--json"});
-        String quoteProductID2 = JsonParser2.getFieldValue(quoteProductResult2.toString(), "id");
-        Assert.assertNotNull(quoteProductID2);
+        String message2 = JsonParser2.getFieldValue2(quoteProductResult2.toString(), "message");
+        Assert.assertEquals(message2, expectedMessage2);
         //thn__End_Date_Time__c < thn__MYCE_Quote__r.thn__Arrival_Date__c
         StringBuilder quoteProductResult3 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:create",
@@ -1967,8 +1848,8 @@ public class ValidationRule1 extends BaseTest {
                 "-u",
                 "THYNK-VR",
                 "--json"});
-        String quoteProductID3 = JsonParser2.getFieldValue(quoteProductResult3.toString(), "id");
-        Assert.assertNotNull(quoteProductID3);
+        String message3 = JsonParser2.getFieldValue2(quoteProductResult3.toString(), "message");
+        Assert.assertEquals(message3, expectedMessage2);
         //thn__End_Date_Time__c > thn__MYCE_Quote__r.thn__Departure_Date__c
         StringBuilder quoteProductResult4 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:create",
@@ -1981,8 +1862,8 @@ public class ValidationRule1 extends BaseTest {
                 "-u",
                 "THYNK-VR",
                 "--json"});
-        String quoteProductID4 = JsonParser2.getFieldValue(quoteProductResult4.toString(), "id");
-        Assert.assertNotNull(quoteProductID4);
+        String message4 = JsonParser2.getFieldValue2(quoteProductResult4.toString(), "message");
+        Assert.assertEquals(message4, expectedMessage1);
     }
 
     @Test(priority = 31, description = "Quote_Product__c.VR17_Pax")
@@ -1990,6 +1871,7 @@ public class ValidationRule1 extends BaseTest {
     @Description("Quote_Product__c.VR17_Pax")
     @Story("Add Quote product to MYCE Quote: thn__Pax__c > thn__MYCE_Quote__r.thn__Pax__c")
     public void testCreateQuoteProduct3() throws InterruptedException, IOException {
+        String expectedMessage = "Pax cannot be greater than quote's pax";
         StringBuilder propertyRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:get",
                 "-s",
@@ -2015,7 +1897,7 @@ public class ValidationRule1 extends BaseTest {
                 "-s",
                 "thn__MYCE_Quote__c",
                 "-v",
-                "Name='Test49' thn__Pax__c=10 thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
+                "Name='Test26' thn__Pax__c=10 thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
                         date.generateTodayDate2_plus(0, 1) + " thn__Departure_Date__c=" +
                         date.generateTodayDate2_plus(0, 5),
                 "-u",
@@ -2033,8 +1915,8 @@ public class ValidationRule1 extends BaseTest {
                 "-u",
                 "THYNK-VR",
                 "--json"});
-        String quoteProductID = JsonParser2.getFieldValue(quoteProductResult.toString(), "id");
-        Assert.assertNotNull(quoteProductID);
+        String message = JsonParser2.getFieldValue2(quoteProductResult.toString(), "message");
+        Assert.assertEquals(message, expectedMessage);
     }
 
     @Test(priority = 32, description = "Quote_Product__c.VR23_ServiceArea_date")
@@ -2043,6 +1925,7 @@ public class ValidationRule1 extends BaseTest {
     @Story("Add Meeting room to the Myce Quote, Add Quote product to the Quote: select Meeting Room while creating" +
             " Quote product, thn__Start_Date_Time__c != thn__Service_Area__r.thn__Start_Date_Time__c")
     public void testCreateQuoteProduct4() throws InterruptedException, IOException {
+        String expectedMessage = "Date of the service area must be the same as the product's";
         StringBuilder propertyRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:get",
                 "-s",
@@ -2078,7 +1961,7 @@ public class ValidationRule1 extends BaseTest {
                 "-s",
                 "thn__MYCE_Quote__c",
                 "-v",
-                "Name='Test50' thn__Pax__c=10 thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
+                "Name='Test27' thn__Pax__c=10 thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
                         date.generateTodayDate2_plus(0, 1) + " thn__Departure_Date__c=" +
                         date.generateTodayDate2_plus(0, 5),
                 "-u",
@@ -2106,8 +1989,8 @@ public class ValidationRule1 extends BaseTest {
                 "-u",
                 "THYNK-VR",
                 "--json"});
-        String quoteProductID = JsonParser2.getFieldValue(quoteProductResult.toString(), "id");
-        Assert.assertNotNull(quoteProductID);
+        String message = JsonParser2.getFieldValue2(quoteProductResult.toString(), "message");
+        Assert.assertEquals(message, expectedMessage);
     }
 
     @Test(priority = 33, description = "Quote_Product__c.VR26_PackageDate")
@@ -2116,6 +1999,7 @@ public class ValidationRule1 extends BaseTest {
     @Story("Add Package having products to the Quote, Open Quote product record, Change dates:" +
             " thn__Start_Date_Time__c != thn__Start_Date__c, thn__End_Date_Time__c !=thn__End_Date__c")
     public void testCreateQuoteProduct5() throws InterruptedException, IOException {
+        String expectedMessage = "Failed to update record with code FIELD_CUSTOM_VALIDATION_EXCEPTION. Fields: []";
         StringBuilder propertyRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:get",
                 "-s",
@@ -2141,7 +2025,7 @@ public class ValidationRule1 extends BaseTest {
                 "-s",
                 "thn__MYCE_Quote__c",
                 "-v",
-                "Name='Test51' thn__Pax__c=10 thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
+                "Name='Test28' thn__Pax__c=10 thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
                         date.generateTodayDate2() + " thn__Departure_Date__c=" +
                         date.generateTodayDate2_plus(0, 5),
                 "-u",
@@ -2182,8 +2066,8 @@ public class ValidationRule1 extends BaseTest {
                 "-u",
                 "THYNK-VR",
                 "--json"});
-        String success = JsonParser2.getFieldValue(updateResult.toString(), "success");
-        Assert.assertEquals(success, "true");
+        String message = JsonParser2.getFieldValue2(updateResult.toString(), "message");
+        Assert.assertEquals(message, expectedMessage);
     }
 
 
@@ -2192,6 +2076,7 @@ public class ValidationRule1 extends BaseTest {
     @Description("Quote_Product__c.VR36_Consumption_on_Package_Line")
     @Story("Add Package having products to the Quote, Open Quote product record, Set On_Consumption__c to TRUE")
     public void testCreateQuoteProduct6() throws InterruptedException, IOException {
+        String expectedMessage = "Failed to update record with code FIELD_CUSTOM_VALIDATION_EXCEPTION. Fields: []";
         StringBuilder propertyRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:get",
                 "-s",
@@ -2217,7 +2102,7 @@ public class ValidationRule1 extends BaseTest {
                 "-s",
                 "thn__MYCE_Quote__c",
                 "-v",
-                "Name='Test52' thn__Pax__c=10 thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
+                "Name='Test29' thn__Pax__c=10 thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
                         date.generateTodayDate2() + " thn__Departure_Date__c=" +
                         date.generateTodayDate2_plus(0, 5),
                 "-u",
@@ -2257,8 +2142,8 @@ public class ValidationRule1 extends BaseTest {
                 "-u",
                 "THYNK-VR",
                 "--json"});
-        String success = JsonParser2.getFieldValue(updateResult.toString(), "success");
-        Assert.assertEquals(success, "true");
+        String message = JsonParser2.getFieldValue2(updateResult.toString(), "message");
+        Assert.assertEquals(message, expectedMessage);
     }
 
     @Test(priority = 35, description = "Guest__c.VR01_guest_send_to_mews")
@@ -2266,6 +2151,7 @@ public class ValidationRule1 extends BaseTest {
     @Description("Guest__c.VR01_guest_send_to_mews")
     @Story("Create Guest__c record, do not fill Hotel__c, Set Send_to_Mews__c to TRUE")
     public void testCreateGuest() throws InterruptedException, IOException {
+        String expectedMessage = "Hotel is required to create/update guest in Mews";
         StringBuilder guestResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:create",
                 "-s",
@@ -2275,8 +2161,8 @@ public class ValidationRule1 extends BaseTest {
                 "-u",
                 "THYNK-VR",
                 "--json"});
-        String guestID = JsonParser2.getFieldValue(guestResult.toString(), "id");
-        Assert.assertNotNull(guestID);
+        String message = JsonParser2.getFieldValue2(guestResult.toString(), "message");
+        Assert.assertEquals(message, expectedMessage);
     }
 
     @Test(priority = 36, description = "Item__c.VR02_item_send_to_mews")
@@ -2284,6 +2170,7 @@ public class ValidationRule1 extends BaseTest {
     @Description("Item__c.VR02_item_send_to_mews")
     @Story("On Item record where thn__Mews_Id__c != null, set thn__Send_to_Mews__c to TRUE")
     public void testCreateItem() throws InterruptedException, IOException {
+        String expectedMessage = "The Reservation product already exists and cannot be sent twice";
         StringBuilder propertyRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:get",
                 "-s",
@@ -2367,8 +2254,8 @@ public class ValidationRule1 extends BaseTest {
                 "-u",
                 "THYNK-VR",
                 "--json"});
-        String itemID = JsonParser2.getFieldValue(itemResult.toString(), "id");
-        Assert.assertNotNull(itemID);
+        String message = JsonParser2.getFieldValue2(itemResult.toString(), "message");
+        Assert.assertEquals(message, expectedMessage);
     }
 
     @Test(priority = 37, description = "Reservation__c.VR03_Reason_update")
@@ -2376,6 +2263,7 @@ public class ValidationRule1 extends BaseTest {
     @Description("Reservation__c.VR03_Reason_update")
     @Story("On thn__Reservation__c record set thn__Update_Price__c to TRUE, Leave thn__Reason_update__c empty")
     public void testCreateReservation() throws InterruptedException, IOException {
+        String expectedMessage = "Reason update is required when price is updated";
         StringBuilder propertyRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:get",
                 "-s",
@@ -2439,20 +2327,8 @@ public class ValidationRule1 extends BaseTest {
                 "-u",
                 "THYNK-VR",
                 "--json"});
-        String reservationID = JsonParser2.getFieldValue(reservationResult.toString(), "id");
-        StringBuilder  reservationRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
-                "force:data:record:get",
-                "-s",
-                "thn__Reservation__c",
-                "-w",
-                "id='" + reservationID + "'",
-                "-u",
-                "THYNK-VR",
-                "--json"});
-        String updatePrice = JsonParser2.getFieldValue(reservationRecord.toString(), "thn__Update_Price__c");
-        String reasonUpdate = JsonParser2.getFieldValue(reservationRecord.toString(), "thn__Reason_update__c");
-        Assert.assertEquals(updatePrice, "true");
-        Assert.assertEquals(reasonUpdate, null);
+        String message = JsonParser2.getFieldValue2(reservationResult.toString(), "message");
+        Assert.assertEquals(message, expectedMessage);
     }
 
     @Test(priority = 38, description = "Reservation__c.VR04_Cancellation_reason")
@@ -2460,6 +2336,7 @@ public class ValidationRule1 extends BaseTest {
     @Description("Reservation__c.VR04_Cancellation_reason")
     @Story("On thn__Reservation__c record where thn__Mews_Id__c != null change thn__State__c to “Canceled")
     public void testCreateReservation2() throws InterruptedException, IOException {
+        String expectedMessage = "Failed to update record with code FIELD_CUSTOM_VALIDATION_EXCEPTION. Fields: [ 'thn__Notes__c' ]";
         StringBuilder propertyRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:get",
                 "-s",
@@ -2535,19 +2412,8 @@ public class ValidationRule1 extends BaseTest {
                 "-u",
                 "THYNK-VR",
                 "--json"});
-        StringBuilder  reservationRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
-                "force:data:record:get",
-                "-s",
-                "thn__Reservation__c",
-                "-w",
-                "id='" + reservationID + "'",
-                "-u",
-                "THYNK-VR",
-                "--json"});
-        String mewsId = JsonParser2.getFieldValue(reservationRecord.toString(), "thn__Mews_Id__c");
-        String state = JsonParser2.getFieldValue(reservationRecord.toString(), "thn__State__c");
-        Assert.assertNotNull(mewsId);
-        Assert.assertEquals(state, "Canceled");
+        String message = JsonParser2.getFieldValue2(updateResult.toString(), "message");
+        Assert.assertEquals(message, expectedMessage);
     }
 
     @Test(priority = 40, description = "VR38_Resource_Grouping")
@@ -2555,6 +2421,7 @@ public class ValidationRule1 extends BaseTest {
     @Description("VR38_Resource_Grouping")
     @Story("Create Resource Grouping record, try to add Resources with different Properties")
     public void testCreateResourceGrouping() throws InterruptedException, IOException {
+        String expectedMessage = "Property of both resources must be the same";
         StringBuilder resourceRecord1 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:get",
                 "-s",
@@ -2570,7 +2437,7 @@ public class ValidationRule1 extends BaseTest {
                 "-s",
                 "thn__Resource__c",
                 "-w",
-                "Name='TestRes'",
+                "Name='TestRes2'",
                 "-u",
                 "THYNK-VR",
                 "--json"});
@@ -2584,7 +2451,7 @@ public class ValidationRule1 extends BaseTest {
                 "-u",
                 "THYNK-VR",
                 "--json"});
-        String resourceGroupingID = JsonParser2.getFieldValue(resourceGroupingResult.toString(), "id");
-        Assert.assertNotNull(resourceGroupingID);
+        String message = JsonParser2.getFieldValue2(resourceGroupingResult.toString(), "message");
+        Assert.assertEquals(message, expectedMessage);
     }
 }

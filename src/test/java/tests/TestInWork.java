@@ -45,7 +45,6 @@ public class TestInWork extends BaseTest{
         Assert.assertEquals(name, "Test24");
         Assert.assertEquals(commissionable, "true");
         Assert.assertEquals(commission_to, null);
-
     }
 
     @Test(priority = 3, description = "Myce_Quote__c.Commission_Validation_Rule")
