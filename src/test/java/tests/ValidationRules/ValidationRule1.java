@@ -88,6 +88,7 @@ public class ValidationRule1 extends BaseTest {
                 "-u",
                 "THYNK-VR",
                 "--json"});
+        System.out.println(result);
         String message = JsonParser2.getFieldValue2(result.toString(), "message");
         Assert.assertEquals(message, expectedMessage);
 
