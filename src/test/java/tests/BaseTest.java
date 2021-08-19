@@ -38,6 +38,8 @@ public class BaseTest {
     protected Items items;
     protected Reservations reservations;
     protected ResourceGrouping resourceGrouping;
+    protected SfdxCommand sfdxCommand;
+    protected JsonParser2 jsonParser2;
 
     public WebDriver getDriver() {
         return driver;
@@ -91,6 +93,8 @@ public class BaseTest {
         items = new Items(driver);
         reservations = new Reservations(driver);
         resourceGrouping = new ResourceGrouping(driver);
+        sfdxCommand = new SfdxCommand(driver);
+        jsonParser2 = new JsonParser2(driver);
     }
 
 

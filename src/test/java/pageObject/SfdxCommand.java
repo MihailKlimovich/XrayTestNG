@@ -1,6 +1,7 @@
 package pageObject;
 
 import io.qameta.allure.Step;
+import org.openqa.selenium.WebDriver;
 import org.zeroturnaround.exec.ProcessExecutor;
 import pages.BasePage;
 
@@ -11,9 +12,13 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeoutException;
 
-public class SfdxCommand {
+public class SfdxCommand extends  BasePage{
 
-    @Step("Run SFDX command")
+    /**Constructor*/
+    public SfdxCommand(WebDriver driver) {
+        super(driver);
+    }
+
     public static StringBuilder  runLinuxCommand1(String[] cmd) throws InterruptedException, IOException {
         StringBuilder strB = new StringBuilder();
         Runtime run = Runtime.getRuntime();

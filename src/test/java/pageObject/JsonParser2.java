@@ -4,10 +4,17 @@ import com.google.gson.JsonParser;
 import io.qameta.allure.Step;
 import org.json.JSONObject;
 import org.json.*;
+import org.openqa.selenium.WebDriver;
+import pages.BasePage;
 
-public class JsonParser2 {
+public class JsonParser2 extends BasePage {
 
-    @Step("Get value")
+    /**Constructor*/
+    public JsonParser2(WebDriver driver) {
+        super(driver);
+    }
+
+
     public static String getFieldValue(String json, String key) throws UnsupportedOperationException {
         try {
         JsonObject jsonObject = new JsonParser().parse(json).getAsJsonObject();
@@ -17,7 +24,7 @@ public class JsonParser2 {
         return null;}
     }
 
-    @Step("Get value")
+
     public static String getFieldValue2(String json, String key) throws UnsupportedOperationException {
         try {
             JsonObject jsonObject = new JsonParser().parse(json).getAsJsonObject();
