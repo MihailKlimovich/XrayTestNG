@@ -24,7 +24,7 @@ public class ValidationRule1 extends BaseTest {
     @Description("Setup.thn__ByPass__c.thn__ByPassVR__c == false and User.thn__ByPassVR__c == false")
     @Story("Settings")
     public void settingUpValidationRules() throws InterruptedException, IOException {
-        SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        SfdxCommand.runLinuxCommand1(new String[]{"sudo /home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:update",
                 "-s",
                 "User",
@@ -35,7 +35,7 @@ public class ValidationRule1 extends BaseTest {
                 "-u",
                 "THYNK-VR",
                 "--json"});
-        StringBuilder res = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder res = SfdxCommand.runLinuxCommand1(new String[]{"sudo /home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:update",
                 "-s",
                 "thn__bypass__c",
@@ -46,7 +46,7 @@ public class ValidationRule1 extends BaseTest {
                 "-u",
                 "THYNK-VR",
                 "--json"});
-        StringBuilder userRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder userRecord = SfdxCommand.runLinuxCommand1(new String[]{"sudo /home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:get",
                 "-s",
                 "User",
@@ -56,7 +56,7 @@ public class ValidationRule1 extends BaseTest {
                 "THYNK-VR",
                 "--json"});
         String userByPass = JsonParser2.getFieldValue(userRecord.toString(), "thn__ByPassVR__c");
-        StringBuilder byPassRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder byPassRecord = SfdxCommand.runLinuxCommand1(new String[]{"sudo /home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:get",
                 "-s",
                 "thn__bypass__c",
@@ -79,7 +79,7 @@ public class ValidationRule1 extends BaseTest {
         String expectedMessage = "If commissionable = true, 'Commission to' field shouldn't be null or \n" +
                 "if  'Commission to' field equals 'agent', agent shouldn't be null or\n" +
                 "if  'Commission to' field equals 'company', company shouldn't be null";
-        StringBuilder result =SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder result =SfdxCommand.runLinuxCommand1(new String[]{"sudo /home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:create",
                 "-s",
                 "thn__MYCE_Quote__c",
@@ -87,7 +87,7 @@ public class ValidationRule1 extends BaseTest {
                 "Name='Test1' thn__Commissionable__c=true",
                 "-u",
                 "THYNK-VR",
-                "--json"});;
+                "--json"});
         String message = JsonParser2.getFieldValue2(result.toString(), "message");
         Assert.assertEquals(message, expectedMessage);
 
@@ -2416,7 +2416,7 @@ public class ValidationRule1 extends BaseTest {
         Assert.assertEquals(message, expectedMessage);
     }
 
-    @Test(priority = 40, description = "VR38_Resource_Grouping")
+    @Test(priority = 39, description = "VR38_Resource_Grouping")
     @Severity(SeverityLevel.NORMAL)
     @Description("VR38_Resource_Grouping")
     @Story("Create Resource Grouping record, try to add Resources with different Properties")

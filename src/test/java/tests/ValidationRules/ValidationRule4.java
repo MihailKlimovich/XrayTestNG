@@ -2668,7 +2668,7 @@ public class ValidationRule4 extends BaseTest {
         Assert.assertEquals(state, "Canceled");
     }
 
-    @Test(priority = 40, description = "VR38_Resource_Grouping")
+    @Test(priority = 39, description = "VR38_Resource_Grouping")
     @Severity(SeverityLevel.NORMAL)
     @Description("VR38_Resource_Grouping")
     @Story("Create Resource Grouping record, try to add Resources with different Properties")

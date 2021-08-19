@@ -1666,7 +1666,7 @@ public class ValidationRule3 extends BaseTest {
                 "-s",
                 "thn__Package__c",
                 "-w",
-                "Name='Test Package 12'",
+                "Name='Test Package 10'",
                 "-u",
                 "THYNK-VR",
                 "--json"});
@@ -2667,7 +2667,7 @@ public class ValidationRule3 extends BaseTest {
         Assert.assertEquals(state, "Canceled");
     }
 
-    @Test(priority = 40, description = "VR38_Resource_Grouping")
+    @Test(priority = 39, description = "VR38_Resource_Grouping")
     @Severity(SeverityLevel.NORMAL)
     @Description("VR38_Resource_Grouping")
     @Story("Create Resource Grouping record, try to add Resources with different Properties")
