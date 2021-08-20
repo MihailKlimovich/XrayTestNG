@@ -84,7 +84,7 @@ public class ValidationRule1 extends BaseTest {
                 "-s",
                 "thn__MYCE_Quote__c",
                 "-v",
-                "\"Name='Test1' thn__Commissionable__c=true\"",
+                "Name='Test1' thn__Commissionable__c=true",
                 "-u",
                 "THYNK-VR",
                 "--json"});
