@@ -14,7 +14,7 @@ public class JsonParser2 extends BasePage {
         super(driver);
     }
 
-
+    @Step("Get value")
     public static String getFieldValue(String json, String key) throws UnsupportedOperationException {
         try {
         JsonObject jsonObject = new JsonParser().parse(json).getAsJsonObject();
@@ -25,6 +25,7 @@ public class JsonParser2 extends BasePage {
     }
 
 
+    @Step("Get value2")
     public static String getFieldValue2(String json, String key) throws UnsupportedOperationException {
         try {
             JsonObject jsonObject = new JsonParser().parse(json).getAsJsonObject();

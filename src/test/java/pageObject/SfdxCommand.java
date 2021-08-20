@@ -19,6 +19,7 @@ public class SfdxCommand extends  BasePage{
         super(driver);
     }
 
+    @Step("Run SFDX command")
     public static StringBuilder  runLinuxCommand1(String[] cmd) throws InterruptedException, IOException {
         StringBuilder strB = new StringBuilder();
         Runtime run = Runtime.getRuntime();
