@@ -24,7 +24,9 @@ public class ValidationRule1 extends BaseTest{
     @Description("Setup.thn__ByPass__c.thn__ByPassVR__c == false and User.thn__ByPassVR__c == false")
     @Story("Settings")
     public void settingUpValidationRules() throws InterruptedException, IOException {
-        StringBuilder result = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder result = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx auth:list"});
+        System.out.println(result);
+        SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:update",
                 "-s",
                 "User",
@@ -35,7 +37,6 @@ public class ValidationRule1 extends BaseTest{
                 "-u",
                 "THYNK-VR",
                 "--json"});
-        System.out.println(result);
         StringBuilder res = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:update",
                 "-s",
