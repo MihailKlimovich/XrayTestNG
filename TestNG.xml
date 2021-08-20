@@ -10,11 +10,6 @@
             <class name="clearCache.ClearCache"/>
         </classes>
     </test>
-    <test name="DeleteData">
-        <classes>
-            <class name="tests.TestData"/>
-        </classes>
-    </test>
     <test name="ValidationRule1">
         <classes>
             <class name="tests.ValidationRules.ValidationRule1"/>
