@@ -17,7 +17,7 @@ import java.io.IOException;
 
 @Listeners({TestListener.class})
 
-public class ValidationRule1 {
+public class ValidationRule1 extends BaseTest{
 
     @Test(priority = 1, description="Setting up validation rules")
     @Severity(SeverityLevel.NORMAL)
@@ -115,7 +115,7 @@ public class ValidationRule1 {
         Assert.assertEquals(message, expectedMessage);
     }
 
-    /*@Test(priority = 4, description = "Myce_Quote__c.Commission_Validation_Rule")
+    @Test(priority = 4, description = "Myce_Quote__c.Commission_Validation_Rule")
     @Severity(SeverityLevel.NORMAL)
     @Description("Myce_Quote__c.Commission_Validation_Rule")
     @Story("Commissionable == true & thn__Commission_to__c == Company & thn__Company__c == null")
@@ -2454,5 +2454,5 @@ public class ValidationRule1 {
                 "--json"});
         String message = JsonParser2.getFieldValue2(resourceGroupingResult.toString(), "message");
         Assert.assertEquals(message, expectedMessage);
-    }*/
+    }
 }
