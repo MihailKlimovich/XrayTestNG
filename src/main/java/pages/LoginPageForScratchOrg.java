@@ -12,8 +12,8 @@ public class LoginPageForScratchOrg {
 
     //private static final String USERNAME = "test-unbuxpim9tgh@example.com";//test-qcud2ypdbztz@example.com
     //private static final String PASSWORD = "PWBgjUWd26#s|";//4EcH4cUgF)(9s
-    private static final String USERNAME = "test-qcud2ypdbztz@example.com";//test-qcud2ypdbztz@example.com
-    private static final String PASSWORD = "4EcH4cUgF)(9s";//4EcH4cUgF)(9s
+    private static final String USERNAME = "test-lbafgbxunsgq@example.com";//test-qcud2ypdbztz@example.com
+    private static final String PASSWORD = "9EU3j&PDvJ@1l";//4EcH4cUgF)(9s
     private static final String URL_LOGIN_PAGE = "https://test.salesforce.com/";
     private static final By USER_NAME_SELECTOR = By.
             xpath("//div[@id='theloginform']//input[@class='input r4 wide mb16 mt8 username']");

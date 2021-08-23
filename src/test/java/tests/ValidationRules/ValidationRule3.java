@@ -32,18 +32,18 @@ public class ValidationRule3 extends BaseTest {
                 "-v",
                 "thn__ByPassVR__c=true",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         StringBuilder res = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:update",
                 "-s",
                 "thn__bypass__c",
                 "-w",
-                "Id='a063N000004hU1bQAE'",
+                "Id='a061j000003e6IcAAI'",
                 "-v",
                 "thn__bypassvr__c=false",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         StringBuilder userRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:get",
@@ -52,7 +52,7 @@ public class ValidationRule3 extends BaseTest {
                 "-w",
                 "Name='User User'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String userByPass = JsonParser2.getFieldValue(userRecord.toString(), "thn__ByPassVR__c");
         StringBuilder byPassRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
@@ -60,9 +60,9 @@ public class ValidationRule3 extends BaseTest {
                 "-s",
                 "thn__bypass__c",
                 "-w",
-                "Id='a063N000004hU1bQAE'",
+                "Id='a061j000003e6IcAAI'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         System.out.println(byPassRecord);
         String byPassVr = JsonParser2.getFieldValue(byPassRecord.toString(), "thn__ByPassVR__c");
@@ -83,7 +83,7 @@ public class ValidationRule3 extends BaseTest {
                 "-v",
                 "Name='Test59' thn__Commissionable__c=true",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         StringBuilder res = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:get",
@@ -92,7 +92,7 @@ public class ValidationRule3 extends BaseTest {
                 "-w",
                 "Name=Test59",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String name = JsonParser2.getFieldValue(res.toString(), "Name");
         String commissionable = JsonParser2.getFieldValue(res.toString(), "thn__Commissionable__c");
@@ -116,7 +116,7 @@ public class ValidationRule3 extends BaseTest {
                 "-v",
                 "Name='Test60' thn__Commissionable__c=true thn__Commission_to__c='Agent'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         StringBuilder res = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:get",
@@ -125,7 +125,7 @@ public class ValidationRule3 extends BaseTest {
                 "-w",
                 "Name=Test60",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String name = JsonParser2.getFieldValue(res.toString(), "Name");
         String commissionable = JsonParser2.getFieldValue(res.toString(), "thn__Commissionable__c");
@@ -150,7 +150,7 @@ public class ValidationRule3 extends BaseTest {
                 "-v",
                 "Name='Test61' thn__Commissionable__c=true thn__Commission_to__c='Company'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         StringBuilder res = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:get",
@@ -159,7 +159,7 @@ public class ValidationRule3 extends BaseTest {
                 "-w",
                 "Name=Test61",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String name = JsonParser2.getFieldValue(res.toString(), "Name");
         String commissionable = JsonParser2.getFieldValue(res.toString(), "thn__Commissionable__c");
@@ -185,7 +185,7 @@ public class ValidationRule3 extends BaseTest {
                 "Name='Test62' thn__Arrival_Date__c=" + date.generateTodayDate2() + " thn__Departure_Date__c=" +
                         date.generateTodayDate2_minus(0, 5),
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         StringBuilder res = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:get",
@@ -194,7 +194,7 @@ public class ValidationRule3 extends BaseTest {
                 "-w",
                 "Name=Test62",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String name = JsonParser2.getFieldValue(res.toString(), "Name");
         String arrivalDay = JsonParser2.getFieldValue(res.toString(), "thn__Arrival_Date__c");
@@ -217,7 +217,7 @@ public class ValidationRule3 extends BaseTest {
                 "-w",
                 "Name='Test Company'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String testCompanyID = JsonParser2.getFieldValue(res1.toString(), "Id");
         StringBuilder res2 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
@@ -227,7 +227,7 @@ public class ValidationRule3 extends BaseTest {
                 "-w",
                 "Name='Test Agent'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String testAgentID = JsonParser2.getFieldValue(res2.toString(), "Id");
         SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
@@ -237,7 +237,7 @@ public class ValidationRule3 extends BaseTest {
                 "-v",
                 "Name='Test63' thn__Company__c='" + testAgentID + "' thn__Agent__c='" + testCompanyID + "'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         StringBuilder res = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:get",
@@ -246,7 +246,7 @@ public class ValidationRule3 extends BaseTest {
                 "-w",
                 "Name=Test63",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String name = JsonParser2.getFieldValue(res.toString(), "Name");
         String company = JsonParser2.getFieldValue(res.toString(), "thn__Company__c");
@@ -268,7 +268,7 @@ public class ValidationRule3 extends BaseTest {
                 "-v",
                 "Name='Test64' thn__SendToMews__c=true",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         StringBuilder res = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:get",
@@ -277,7 +277,7 @@ public class ValidationRule3 extends BaseTest {
                 "-w",
                 "Name=Test64",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String name = JsonParser2.getFieldValue(res.toString(), "Name");
         String sendToMews = JsonParser2.getFieldValue(res.toString(), "thn__SendToMews__c");
@@ -299,7 +299,7 @@ public class ValidationRule3 extends BaseTest {
                 "-v",
                 "Name='Test65' thn__Stage__c='4 - Closed'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         StringBuilder res = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:get",
@@ -308,7 +308,7 @@ public class ValidationRule3 extends BaseTest {
                 "-w",
                 "Name=Test65",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String name = JsonParser2.getFieldValue(res.toString(), "Name");
         String stageStatus = JsonParser2.getFieldValue(res.toString(), "thn__Stage__c");
@@ -328,7 +328,7 @@ public class ValidationRule3 extends BaseTest {
                 "-v",
                 "Name='Test66' thn__Closed_Status__c='Cancelled'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         StringBuilder res = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:get",
@@ -337,7 +337,7 @@ public class ValidationRule3 extends BaseTest {
                 "-w",
                 "Name=Test66",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String name = JsonParser2.getFieldValue(res.toString(), "Name");
         String closedStatus = JsonParser2.getFieldValue(res.toString(), "thn__Closed_Status__c");
@@ -359,7 +359,7 @@ public class ValidationRule3 extends BaseTest {
                 "-w",
                 "Name='CN-0001'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String creditNoteID = JsonParser2.getFieldValue(res1.toString(), "Id");
         System.out.println(creditNoteID);
@@ -370,7 +370,7 @@ public class ValidationRule3 extends BaseTest {
                 "-v",
                 "thn__Credit_Note__c='" + creditNoteID + "' thn__VAT_Category__c='1'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         System.out.println(res);
     }*/
@@ -387,7 +387,7 @@ public class ValidationRule3 extends BaseTest {
                 "-w",
                 "Name='Demo'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String propertyID = JsonParser2.getFieldValue(res1.toString(), "Id");
         SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
@@ -397,7 +397,7 @@ public class ValidationRule3 extends BaseTest {
                 "-v",
                 "Name='Test Package 7' thn__Multi_Days__c=true thn__Hotel__c='" + propertyID + "'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         StringBuilder res2 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:get",
@@ -406,7 +406,7 @@ public class ValidationRule3 extends BaseTest {
                 "-w",
                 "Name='Test Package 7''",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String packageID = JsonParser2.getFieldValue(res2.toString(), "Id");
         SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
@@ -416,7 +416,7 @@ public class ValidationRule3 extends BaseTest {
                 "-v",
                 "Name='Test Pack Line 8' thn__Package__c='" + packageID + "'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         StringBuilder res = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:get",
@@ -425,7 +425,7 @@ public class ValidationRule3 extends BaseTest {
                 "-w",
                 "Name='Test Pack Line 8'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String namePackage = JsonParser2.getFieldValue(res2.toString(), "Name");
         String multiDays = JsonParser2.getFieldValue(res2.toString(), "thn__Multi_Days__c");
@@ -449,7 +449,7 @@ public class ValidationRule3 extends BaseTest {
                 "-w",
                 "Name='Demo'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String propertyID = JsonParser2.getFieldValue(res1.toString(), "Id");
         SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
@@ -459,7 +459,7 @@ public class ValidationRule3 extends BaseTest {
                 "-v",
                 "Name='Test Package 8' thn__Multi_Days__c=false thn__Hotel__c='" + propertyID + "'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         StringBuilder res2 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:get",
@@ -468,7 +468,7 @@ public class ValidationRule3 extends BaseTest {
                 "-w",
                 "Name='Test Package 8'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String packageID = JsonParser2.getFieldValue(res2.toString(), "Id");
         SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
@@ -478,7 +478,7 @@ public class ValidationRule3 extends BaseTest {
                 "-v",
                 "Name='Test Pack Line 9' thn__Package__c='" + packageID + "' thn__AppliedDay__c=25",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         StringBuilder res = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:get",
@@ -487,7 +487,7 @@ public class ValidationRule3 extends BaseTest {
                 "-w",
                 "Name='Test Pack Line 9'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String namePackage = JsonParser2.getFieldValue(res2.toString(), "Name");
         String multiDays = JsonParser2.getFieldValue(res2.toString(), "thn__Multi_Days__c");
@@ -514,7 +514,7 @@ public class ValidationRule3 extends BaseTest {
                 "-w",
                 "Name='Test'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String propertyID = JsonParser2.getFieldValue(res1.toString(), "Id");
         SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
@@ -524,7 +524,7 @@ public class ValidationRule3 extends BaseTest {
                 "-v",
                 "Name='Test Package 9' thn__Hotel__c='" + propertyID + "'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         StringBuilder res2 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:get",
@@ -533,7 +533,7 @@ public class ValidationRule3 extends BaseTest {
                 "-w",
                 "Name='ROOM 1 NIGHT'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String productID = JsonParser2.getFieldValue(res2.toString(), "Id");
         StringBuilder res3 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
@@ -543,7 +543,7 @@ public class ValidationRule3 extends BaseTest {
                 "-w",
                 "Name='Test Package 9'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String packageID = JsonParser2.getFieldValue(res3.toString(), "Id");
         SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
@@ -553,7 +553,7 @@ public class ValidationRule3 extends BaseTest {
                 "-v",
                 "Name='Test Pack Line 10' thn__Package__c='" + packageID + "' thn__Type__c='Hotel Room' thn__Product__c='" + productID + "'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         StringBuilder res = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:get",
@@ -562,7 +562,7 @@ public class ValidationRule3 extends BaseTest {
                 "-w",
                 "Name='Test Pack Line 10'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String namePackage = JsonParser2.getFieldValue(res3.toString(), "Name");
         String property = JsonParser2.getFieldValue(res3.toString(), "thn__Hotel__c");
@@ -586,7 +586,7 @@ public class ValidationRule3 extends BaseTest {
                 "-w",
                 "Name='Demo'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String propertyID = JsonParser2.getFieldValue(res1.toString(), "Id");
         SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
@@ -597,7 +597,7 @@ public class ValidationRule3 extends BaseTest {
                 "Name='Test67' thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" + date.generateTodayDate2() +
                         " thn__Departure_Date__c=" + date.generateTodayDate2(),
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         StringBuilder res2 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:get",
@@ -606,7 +606,7 @@ public class ValidationRule3 extends BaseTest {
                 "-w",
                 "Name='Test67'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String myceQuoteID = JsonParser2.getFieldValue(res2.toString(), "Id");
         SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
@@ -618,7 +618,7 @@ public class ValidationRule3 extends BaseTest {
                         date.generateTodayDate2() + "T19:00:00.000+0000 thn__Departure_Date_Time__c=" +
                         date.generateTodayDate2() + "T10:00:00.000+0000",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         StringBuilder res3 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:get",
@@ -627,7 +627,7 @@ public class ValidationRule3 extends BaseTest {
                 "-w",
                 "Name='Test Hotel Room 2'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String nameHotelRoom = JsonParser2.getFieldValue(res3.toString(), "Name");
         String nameMyceQuote = JsonParser2.getFieldValue(res3.toString(), "thn__MYCE_Quote__c");
@@ -651,7 +651,7 @@ public class ValidationRule3 extends BaseTest {
                 "-w",
                 "Name='Demo'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         StringBuilder res2 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:get",
@@ -660,7 +660,7 @@ public class ValidationRule3 extends BaseTest {
                 "-w",
                 "Name='ROOM 2 NIGHTS'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String productID = JsonParser2.getFieldValue(res2.toString(), "Id");
         String propertyID = JsonParser2.getFieldValue(res1.toString(), "Id");
@@ -673,7 +673,7 @@ public class ValidationRule3 extends BaseTest {
                         date.generateTodayDate2_plus(0, 1) + " thn__Departure_Date__c=" +
                         date.generateTodayDate2_plus(0, 2),
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         StringBuilder res3 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:get",
@@ -682,7 +682,7 @@ public class ValidationRule3 extends BaseTest {
                 "-w",
                 "Name='Test68'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String myceQuoteID = JsonParser2.getFieldValue(res3.toString(), "Id");
         StringBuilder res4 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
@@ -692,7 +692,7 @@ public class ValidationRule3 extends BaseTest {
                 "-w",
                 "Name='Queen'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String roomTypeID = JsonParser2.getFieldValue(res4.toString(), "Id");
         SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
@@ -705,7 +705,7 @@ public class ValidationRule3 extends BaseTest {
                         date.generateTodayDate2() + "T10:00:00.000+0000 thn__Departure_Date_Time__c=" +
                         date.generateTodayDate2_plus(0, 2) + "T19:00:00.000+0000 thn__Pax__c=10",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         StringBuilder res5 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:get",
@@ -714,7 +714,7 @@ public class ValidationRule3 extends BaseTest {
                 "-w",
                 "thn__MYCE_Quote__c='" + myceQuoteID,
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String myceQuote = JsonParser2.getFieldValue(res5.toString(), "thn__MYCE_Quote__c");
         String arrivalDateMyceQuote = JsonParser2.getFieldValue(res3.toString(), "thn__Arrival_Date__c");
@@ -740,7 +740,7 @@ public class ValidationRule3 extends BaseTest {
                 "-w",
                 "Name='Demo'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         StringBuilder res2 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:get",
@@ -749,7 +749,7 @@ public class ValidationRule3 extends BaseTest {
                 "-w",
                 "Name='ROOM 2 NIGHTS'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String productID = JsonParser2.getFieldValue(res2.toString(), "Id");
         String propertyID = JsonParser2.getFieldValue(res1.toString(), "Id");
@@ -762,7 +762,7 @@ public class ValidationRule3 extends BaseTest {
                         date.generateTodayDate2_plus(0, 1) + " thn__Departure_Date__c=" +
                         date.generateTodayDate2_plus(0, 3),
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         StringBuilder res3 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:get",
@@ -771,7 +771,7 @@ public class ValidationRule3 extends BaseTest {
                 "-w",
                 "Name='Test69'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String myceQuoteID = JsonParser2.getFieldValue(res3.toString(), "Id");
         StringBuilder res4 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
@@ -781,7 +781,7 @@ public class ValidationRule3 extends BaseTest {
                 "-w",
                 "Name='Queen'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String roomTypeID = JsonParser2.getFieldValue(res4.toString(), "Id");
         SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
@@ -794,7 +794,7 @@ public class ValidationRule3 extends BaseTest {
                         date.generateTodayDate2_plus(0, 4) + "T10:00:00.000+0000 thn__Departure_Date_Time__c=" +
                         date.generateTodayDate2_plus(0, 3) + "T19:00:00.000+0000 thn__Pax__c=10",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         StringBuilder res5 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:get",
@@ -803,7 +803,7 @@ public class ValidationRule3 extends BaseTest {
                 "-w",
                 "thn__MYCE_Quote__c='" + myceQuoteID,
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String myceQuote = JsonParser2.getFieldValue(res5.toString(), "thn__MYCE_Quote__c");
         String arrivalDateMyceQuote = JsonParser2.getFieldValue(res3.toString(), "thn__Arrival_Date__c");
@@ -829,7 +829,7 @@ public class ValidationRule3 extends BaseTest {
                 "-w",
                 "Name='Demo'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         StringBuilder res2 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:get",
@@ -838,7 +838,7 @@ public class ValidationRule3 extends BaseTest {
                 "-w",
                 "Name='ROOM 2 NIGHTS'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String productID = JsonParser2.getFieldValue(res2.toString(), "Id");
         String propertyID = JsonParser2.getFieldValue(res1.toString(), "Id");
@@ -851,7 +851,7 @@ public class ValidationRule3 extends BaseTest {
                         date.generateTodayDate2_plus(0, 1) + " thn__Departure_Date__c=" +
                         date.generateTodayDate2_plus(0, 3),
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         StringBuilder res3 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:get",
@@ -860,7 +860,7 @@ public class ValidationRule3 extends BaseTest {
                 "-w",
                 "Name='Test70'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String myceQuoteID = JsonParser2.getFieldValue(res3.toString(), "Id");
         StringBuilder res4 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
@@ -870,7 +870,7 @@ public class ValidationRule3 extends BaseTest {
                 "-w",
                 "Name='Queen'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String roomTypeID = JsonParser2.getFieldValue(res4.toString(), "Id");
         SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
@@ -883,7 +883,7 @@ public class ValidationRule3 extends BaseTest {
                         date.generateTodayDate2_plus(0, 1) + "T10:00:00.000+0000 thn__Departure_Date_Time__c=" +
                         date.generateTodayDate2() + "T19:00:00.000+0000 thn__Pax__c=10",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         StringBuilder res5 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:get",
@@ -892,7 +892,7 @@ public class ValidationRule3 extends BaseTest {
                 "-w",
                 "thn__MYCE_Quote__c='" + myceQuoteID,
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String myceQuote = JsonParser2.getFieldValue(res5.toString(), "thn__MYCE_Quote__c");
         String arrivalDateMyceQuote = JsonParser2.getFieldValue(res3.toString(), "thn__Arrival_Date__c");
@@ -918,7 +918,7 @@ public class ValidationRule3 extends BaseTest {
                 "-w",
                 "Name='Demo'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         StringBuilder res2 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:get",
@@ -927,7 +927,7 @@ public class ValidationRule3 extends BaseTest {
                 "-w",
                 "Name='ROOM 2 NIGHTS'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String productID = JsonParser2.getFieldValue(res2.toString(), "Id");
         String propertyID = JsonParser2.getFieldValue(res1.toString(), "Id");
@@ -940,7 +940,7 @@ public class ValidationRule3 extends BaseTest {
                         date.generateTodayDate2_plus(0, 1) + " thn__Departure_Date__c=" +
                         date.generateTodayDate2_plus(0, 3),
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         StringBuilder res3 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:get",
@@ -949,7 +949,7 @@ public class ValidationRule3 extends BaseTest {
                 "-w",
                 "Name='Test71'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String myceQuoteID = JsonParser2.getFieldValue(res3.toString(), "Id");
         StringBuilder res4 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
@@ -959,7 +959,7 @@ public class ValidationRule3 extends BaseTest {
                 "-w",
                 "Name='Queen'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String roomTypeID = JsonParser2.getFieldValue(res4.toString(), "Id");
         SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
@@ -972,7 +972,7 @@ public class ValidationRule3 extends BaseTest {
                         date.generateTodayDate2_plus(0, 1) + "T10:00:00.000+0000 thn__Departure_Date_Time__c=" +
                         date.generateTodayDate2_plus(0, 4) + "T19:00:00.000+0000 thn__Pax__c=10",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         StringBuilder res5 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:get",
@@ -981,7 +981,7 @@ public class ValidationRule3 extends BaseTest {
                 "-w",
                 "thn__MYCE_Quote__c='" + myceQuoteID,
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String myceQuote = JsonParser2.getFieldValue(res5.toString(), "thn__MYCE_Quote__c");
         String arrivalDateMyceQuote = JsonParser2.getFieldValue(res3.toString(), "thn__Arrival_Date__c");
@@ -1007,7 +1007,7 @@ public class ValidationRule3 extends BaseTest {
                 "-w",
                 "Name='Demo'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         StringBuilder res2 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:get",
@@ -1016,7 +1016,7 @@ public class ValidationRule3 extends BaseTest {
                 "-w",
                 "Name='ROOM 2 NIGHTS'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String productID = JsonParser2.getFieldValue(res2.toString(), "Id");
         String propertyID = JsonParser2.getFieldValue(res1.toString(), "Id");
@@ -1029,7 +1029,7 @@ public class ValidationRule3 extends BaseTest {
                         date.generateTodayDate2_plus(0, 1) + " thn__Departure_Date__c=" +
                         date.generateTodayDate2_plus(0, 3),
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         StringBuilder res3 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:get",
@@ -1038,7 +1038,7 @@ public class ValidationRule3 extends BaseTest {
                 "-w",
                 "Name='Test72'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String myceQuoteID = JsonParser2.getFieldValue(res3.toString(), "Id");
         StringBuilder res4 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
@@ -1048,7 +1048,7 @@ public class ValidationRule3 extends BaseTest {
                 "-w",
                 "Name='Queen'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String roomTypeID = JsonParser2.getFieldValue(res4.toString(), "Id");
         SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
@@ -1061,7 +1061,7 @@ public class ValidationRule3 extends BaseTest {
                         date.generateTodayDate2_plus(0, 1) + "T10:00:00.000+0000 thn__Departure_Date_Time__c=" +
                         date.generateTodayDate2_plus(0, 3) + "T19:00:00.000+0000 thn__Pax__c=6",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         StringBuilder res5 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:get",
@@ -1070,7 +1070,7 @@ public class ValidationRule3 extends BaseTest {
                 "-w",
                 "thn__MYCE_Quote__c='" + myceQuoteID,
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String myceQuote = JsonParser2.getFieldValue(res5.toString(), "thn__MYCE_Quote__c");
         String myceQuotePax= JsonParser2.getFieldValue(res3.toString(), "thn__Pax__c");
@@ -1092,7 +1092,7 @@ public class ValidationRule3 extends BaseTest {
                 "-w",
                 "Name='Demo'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         StringBuilder res2 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:get",
@@ -1101,7 +1101,7 @@ public class ValidationRule3 extends BaseTest {
                 "-w",
                 "Name='MEETING HALF DAY'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         StringBuilder res3 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:get",
@@ -1110,7 +1110,7 @@ public class ValidationRule3 extends BaseTest {
                 "-w",
                 "Name='TestRes'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String propertyID = JsonParser2.getFieldValue(res1.toString(), "Id");
         String productID = JsonParser2.getFieldValue(res2.toString(), "Id");
@@ -1124,7 +1124,7 @@ public class ValidationRule3 extends BaseTest {
                         date.generateTodayDate2_plus(0, 1) + " thn__Departure_Date__c=" +
                         date.generateTodayDate2_plus(0, 3),
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         StringBuilder res4= SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:get",
@@ -1133,7 +1133,7 @@ public class ValidationRule3 extends BaseTest {
                 "-w",
                 "Name='Test73'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String myceQuoteID = JsonParser2.getFieldValue(res4.toString(), "Id");
         StringBuilder res5 =SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
@@ -1144,7 +1144,7 @@ public class ValidationRule3 extends BaseTest {
                 "thn__MYCE_Quote__c='" + myceQuoteID + "' thn__Product__c='" + productID + "' thn__Resource__c='" +
                         resourceID + "' thn__Pax__c=6 thn__Setup__c='Buffet'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         System.out.println(res5);
         String meetingRoomID1 = JsonParser2.getFieldValue(res5.toString(), "id");
@@ -1157,7 +1157,7 @@ public class ValidationRule3 extends BaseTest {
                 "thn__MYCE_Quote__c='" + myceQuoteID + "' thn__Product__c='" + productID + "' thn__Resource__c='" +
                         resourceID + "' thn__Pax__c=6 thn__Setup__c='Cabaret'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String meetingRoomID2 = JsonParser2.getFieldValue(res6.toString(), "id");
         Assert.assertNotNull(meetingRoomID2);
@@ -1169,7 +1169,7 @@ public class ValidationRule3 extends BaseTest {
                 "thn__MYCE_Quote__c='" + myceQuoteID + "' thn__Product__c='" + productID + "' thn__Resource__c='" +
                         resourceID + "' thn__Pax__c=6 thn__Setup__c='Circle'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String meetingRoomID3 = JsonParser2.getFieldValue(res7.toString(), "id");
         Assert.assertNotNull(meetingRoomID3);
@@ -1181,7 +1181,7 @@ public class ValidationRule3 extends BaseTest {
                 "thn__MYCE_Quote__c='" + myceQuoteID + "' thn__Product__c='" + productID + "' thn__Resource__c='" +
                         resourceID + "' thn__Pax__c=6 thn__Setup__c='Classroom'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String meetingRoomID4 = JsonParser2.getFieldValue(res8.toString(), "id");
         Assert.assertNotNull(meetingRoomID4);
@@ -1193,7 +1193,7 @@ public class ValidationRule3 extends BaseTest {
                 "thn__MYCE_Quote__c='" + myceQuoteID + "' thn__Product__c='" + productID + "' thn__Resource__c='" +
                         resourceID + "' thn__Pax__c=6 thn__Setup__c='Custom'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String meetingRoomID5 = JsonParser2.getFieldValue(res9.toString(), "id");
         Assert.assertNotNull(meetingRoomID5);
@@ -1205,7 +1205,7 @@ public class ValidationRule3 extends BaseTest {
                 "thn__MYCE_Quote__c='" + myceQuoteID + "' thn__Product__c='" + productID + "' thn__Resource__c='" +
                         resourceID + "' thn__Pax__c=6 thn__Setup__c='Dinner'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String meetingRoomID6 = JsonParser2.getFieldValue(res10.toString(), "id");
         Assert.assertNotNull(meetingRoomID6);
@@ -1217,7 +1217,7 @@ public class ValidationRule3 extends BaseTest {
                 "thn__MYCE_Quote__c='" + myceQuoteID + "' thn__Product__c='" + productID + "' thn__Resource__c='" +
                         resourceID + "' thn__Pax__c=6 thn__Setup__c='Party'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String meetingRoomID7 = JsonParser2.getFieldValue(res11.toString(), "id");
         Assert.assertNotNull(meetingRoomID7);
@@ -1229,7 +1229,7 @@ public class ValidationRule3 extends BaseTest {
                 "thn__MYCE_Quote__c='" + myceQuoteID + "' thn__Product__c='" + productID + "' thn__Resource__c='" +
                         resourceID + "' thn__Pax__c=6 thn__Setup__c='Square'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String meetingRoomID8 = JsonParser2.getFieldValue(res12.toString(), "id");
         Assert.assertNotNull(meetingRoomID8);
@@ -1241,7 +1241,7 @@ public class ValidationRule3 extends BaseTest {
                 "thn__MYCE_Quote__c='" + myceQuoteID + "' thn__Product__c='" + productID + "' thn__Resource__c='" +
                         resourceID + "' thn__Pax__c=6 thn__Setup__c='Theater'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String meetingRoomID9 = JsonParser2.getFieldValue(res13.toString(), "id");
         Assert.assertNotNull(meetingRoomID9);
@@ -1253,7 +1253,7 @@ public class ValidationRule3 extends BaseTest {
                 "thn__MYCE_Quote__c='" + myceQuoteID + "' thn__Product__c='" + productID + "' thn__Resource__c='" +
                         resourceID + "' thn__Pax__c=6 thn__Setup__c='U-Shape'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String meetingRoomID10 = JsonParser2.getFieldValue(res14.toString(), "id");
         Assert.assertNotNull(meetingRoomID10);
@@ -1271,7 +1271,7 @@ public class ValidationRule3 extends BaseTest {
                 "-w",
                 "Name='Demo'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         StringBuilder res2 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:get",
@@ -1280,7 +1280,7 @@ public class ValidationRule3 extends BaseTest {
                 "-w",
                 "Name='MEETING HALF DAY'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         StringBuilder res3 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:get",
@@ -1289,7 +1289,7 @@ public class ValidationRule3 extends BaseTest {
                 "-w",
                 "Name='TestRes'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         StringBuilder res = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:get",
@@ -1298,7 +1298,7 @@ public class ValidationRule3 extends BaseTest {
                 "-w",
                 "Name='TestRes2'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String resourceID2 = JsonParser2.getFieldValue(res.toString(), "Id");
         String propertyID = JsonParser2.getFieldValue(res1.toString(), "Id");
@@ -1313,7 +1313,7 @@ public class ValidationRule3 extends BaseTest {
                         date.generateTodayDate2_plus(0, 1) + " thn__Departure_Date__c=" +
                         date.generateTodayDate2_plus(0, 3),
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         StringBuilder res4= SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:get",
@@ -1322,7 +1322,7 @@ public class ValidationRule3 extends BaseTest {
                 "-w",
                 "Name='Test74'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String myceQuoteID = JsonParser2.getFieldValue(res4.toString(), "Id");
         StringBuilder res5 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
@@ -1333,7 +1333,7 @@ public class ValidationRule3 extends BaseTest {
                 "thn__MYCE_Quote__c='" + myceQuoteID + "' thn__Product__c='" + productID + "' thn__Resource__c='" +
                         resourceID + "' thn__Pax__c=6 thn__Setup__c='Buffet'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String meetingRoomID = JsonParser2.getFieldValue(res5.toString(), "id");
         SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
@@ -1345,7 +1345,7 @@ public class ValidationRule3 extends BaseTest {
                 "-v",
                 "thn__Lock_Resource__c=true thn__Resource__c=''",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         StringBuilder res6 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:get",
@@ -1354,7 +1354,7 @@ public class ValidationRule3 extends BaseTest {
                 "-w",
                 "id='" + meetingRoomID + "'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String lockResource = JsonParser2.getFieldValue(res6.toString(), "thn__Lock_Resource__c");
         String resource = JsonParser2.getFieldValue(res6.toString(), "thn__Resource__c");
@@ -1375,7 +1375,7 @@ public class ValidationRule3 extends BaseTest {
                 "-w",
                 "Name='Demo'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String propertyID = JsonParser2.getFieldValue(propertyRecord.toString(), "Id");
         StringBuilder packageRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
@@ -1385,7 +1385,7 @@ public class ValidationRule3 extends BaseTest {
                 "-w",
                 "Name='Pack c'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String packageID = JsonParser2.getFieldValue(packageRecord.toString(), "Id");
         StringBuilder myseQuoteResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
@@ -1396,7 +1396,7 @@ public class ValidationRule3 extends BaseTest {
                 "Name='Test75' thn__Pax__c=4 thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
                         date.generateTodayDate2() + " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 3),
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String myceQuoteID = JsonParser2.getFieldValue(myseQuoteResult.toString(), "id");
         SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
@@ -1408,7 +1408,7 @@ public class ValidationRule3 extends BaseTest {
                         "' thn__Pax__c=4 thn__Start_Date__c=" + date.generateTodayDate2() + " thn__End_Date__c=" +
                         date.generateTodayDate2() + " thn__Unit_Price__c=30",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         StringBuilder meetingRoomRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:get",
@@ -1417,7 +1417,7 @@ public class ValidationRule3 extends BaseTest {
                 "-w",
                 "thn__MYCE_Quote__c='" + myceQuoteID + "'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String meetingRoomID = JsonParser2.getFieldValue(meetingRoomRecord.toString(), "Id");
         StringBuilder updateResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
@@ -1430,7 +1430,7 @@ public class ValidationRule3 extends BaseTest {
                 "thn__Start_Date_Time__c=" + date.generateTodayDate2_plus(0, 1) +
                         " thn__End_Date_Time__c=" + date.generateTodayDate2_plus(0, 1),
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String success = JsonParser2.getFieldValue(updateResult.toString(), "success");
         Assert.assertEquals(success, "true");
@@ -1448,7 +1448,7 @@ public class ValidationRule3 extends BaseTest {
                 "-w",
                 "Name='Demo'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String propertyID = JsonParser2.getFieldValue(propertyRecord.toString(), "Id");
         StringBuilder packageRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
@@ -1458,7 +1458,7 @@ public class ValidationRule3 extends BaseTest {
                 "-w",
                 "Name='Pack c'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String packageID = JsonParser2.getFieldValue(packageRecord.toString(), "Id");
         StringBuilder myseQuoteResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
@@ -1469,7 +1469,7 @@ public class ValidationRule3 extends BaseTest {
                 "Name='Test76' thn__Pax__c=10 thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
                         date.generateTodayDate2() + " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 3),
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String myceQuoteID = JsonParser2.getFieldValue(myseQuoteResult.toString(), "id");
         //thn__Start_Date__c  < thn__MYCE_Quote__r.thn__Arrival_Date__c
@@ -1482,7 +1482,7 @@ public class ValidationRule3 extends BaseTest {
                         "' thn__Pax__c=10 thn__Start_Date__c=" + date.generateTodayDate2_minus(0, 1) + " thn__End_Date__c=" +
                         date.generateTodayDate2_plus(0, 3) + " thn__Unit_Price__c=30",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String quotePackageID1 = JsonParser2.getFieldValue(quotePackageResult1.toString(), "id");
         Assert.assertNotNull(quotePackageID1);
@@ -1496,7 +1496,7 @@ public class ValidationRule3 extends BaseTest {
                         "' thn__Pax__c=10 thn__Start_Date__c=" + date.generateTodayDate2_plus(0, 4) + " thn__End_Date__c=" +
                         date.generateTodayDate2_plus(0, 3) + " thn__Unit_Price__c=30",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String quotePackageID2 = JsonParser2.getFieldValue(quotePackageResult2.toString(), "id");
         Assert.assertNotNull(quotePackageID2);*/
@@ -1510,7 +1510,7 @@ public class ValidationRule3 extends BaseTest {
                         "' thn__Pax__c=10 thn__Start_Date__c=" + date.generateTodayDate2() + " thn__End_Date__c=" +
                         date.generateTodayDate2_minus(0, 1) + " thn__Unit_Price__c=30",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String quotePackageID3 = JsonParser2.getFieldValue(quotePackageResult3.toString(), "id");
         Assert.assertNotNull(quotePackageID3);
@@ -1524,7 +1524,7 @@ public class ValidationRule3 extends BaseTest {
                         "' thn__Pax__c=10 thn__Start_Date__c=" + date.generateTodayDate2() + " thn__End_Date__c=" +
                         date.generateTodayDate2_plus(0, 4) + " thn__Unit_Price__c=30",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String quotePackageID4 = JsonParser2.getFieldValue(quotePackageResult4.toString(), "id");
         Assert.assertNotNull(quotePackageID4);*/
@@ -1542,7 +1542,7 @@ public class ValidationRule3 extends BaseTest {
                 "-w",
                 "Name='Demo'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String propertyID = JsonParser2.getFieldValue(propertyRecord.toString(), "Id");
         StringBuilder productRecord1 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
@@ -1552,7 +1552,7 @@ public class ValidationRule3 extends BaseTest {
                 "-w",
                 "Name='DINER'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String productDinerID = JsonParser2.getFieldValue(productRecord1.toString(), "Id");
         StringBuilder productRecord2 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
@@ -1562,7 +1562,7 @@ public class ValidationRule3 extends BaseTest {
                 "-w",
                 "Name='ROOM 1 NIGHT'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String productRoom1NightID = JsonParser2.getFieldValue(productRecord2.toString(), "Id");
         StringBuilder packageResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
@@ -1572,7 +1572,7 @@ public class ValidationRule3 extends BaseTest {
                 "-v",
                 "Name='Test Package 10'  thn__Hotel__c='" + propertyID + "' thn__Discount_Max__c=15",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String packageID = JsonParser2.getFieldValue(packageResult.toString(), "id");
         SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
@@ -1584,7 +1584,7 @@ public class ValidationRule3 extends BaseTest {
                         productDinerID + "' thn__Apply_Discount__c=true thn__Start_Time__c=12:00 thn__End_Time__c=15:00 " +
                         "thn__Unit_Price__c=20 thn__VAT_Category__c='1'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:create",
@@ -1595,7 +1595,7 @@ public class ValidationRule3 extends BaseTest {
                         productRoom1NightID + "' thn__Apply_Discount__c=true thn__Start_Time__c=12:00 thn__End_Time__c=15:00 " +
                         "thn__Unit_Price__c=20 thn__VAT_Category__c='1'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         StringBuilder myseQuoteResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:create",
@@ -1605,7 +1605,7 @@ public class ValidationRule3 extends BaseTest {
                 "Name='Test77' thn__Pax__c=10 thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
                         date.generateTodayDate2() + " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 3),
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String myceQuoteID = JsonParser2.getFieldValue(myseQuoteResult.toString(), "id");
         StringBuilder quotePackageResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
@@ -1617,7 +1617,7 @@ public class ValidationRule3 extends BaseTest {
                         "' thn__Pax__c=4 thn__Start_Date__c=" + date.generateTodayDate2() + " thn__End_Date__c=" +
                         date.generateTodayDate2_plus(0, 0) + " thn__Unit_Price__c=30",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String quotePackageID = JsonParser2.getFieldValue(quotePackageResult.toString(), "id");
         StringBuilder updateResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
@@ -1629,7 +1629,7 @@ public class ValidationRule3 extends BaseTest {
                 "-v",
                 "thn__Discount__c=70",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         StringBuilder quotePackageRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:get",
@@ -1638,7 +1638,7 @@ public class ValidationRule3 extends BaseTest {
                 "-w",
                 "id='" + quotePackageID + "'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String discount = JsonParser2.getFieldValue(quotePackageRecord.toString(), "thn__Discount__c");
         String myceQuote = JsonParser2.getFieldValue(quotePackageRecord.toString(), "thn__MYCE_Quote__c");
@@ -1658,7 +1658,7 @@ public class ValidationRule3 extends BaseTest {
                 "-w",
                 "Name='Demo'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String propertyID = JsonParser2.getFieldValue(propertyRecord.toString(), "Id");
         StringBuilder  packageRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
@@ -1668,7 +1668,7 @@ public class ValidationRule3 extends BaseTest {
                 "-w",
                 "Name='Test Package 10'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String packageID = JsonParser2.getFieldValue(packageRecord.toString(), "Id");
         StringBuilder myseQuoteResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
@@ -1679,7 +1679,7 @@ public class ValidationRule3 extends BaseTest {
                 "Name='Test78' thn__Pax__c=10 thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
                         date.generateTodayDate2() + " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 3),
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String myceQuoteID = JsonParser2.getFieldValue(myseQuoteResult.toString(), "id");
         StringBuilder quotePackageResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
@@ -1691,7 +1691,7 @@ public class ValidationRule3 extends BaseTest {
                         "' thn__Pax__c=15 thn__Start_Date__c=" + date.generateTodayDate2() + " thn__End_Date__c=" +
                         date.generateTodayDate2_plus(0, 0) + " thn__Unit_Price__c=30",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String quotePackageID = JsonParser2.getFieldValue(quotePackageResult.toString(), "id");
         StringBuilder quotePackageRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
@@ -1701,7 +1701,7 @@ public class ValidationRule3 extends BaseTest {
                 "-w",
                 "id='" + quotePackageID + "'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String paxPackage = JsonParser2.getFieldValue(quotePackageRecord.toString(), "thn__Pax__c");
         String myceQuote = JsonParser2.getFieldValue(quotePackageRecord.toString(), "thn__MYCE_Quote__c");
@@ -1721,7 +1721,7 @@ public class ValidationRule3 extends BaseTest {
                 "-w",
                 "Name='Demo'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String propertyID = JsonParser2.getFieldValue(propertyRecord.toString(), "Id");
         StringBuilder  packageRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
@@ -1731,7 +1731,7 @@ public class ValidationRule3 extends BaseTest {
                 "-w",
                 "Name='Pack a'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String packageID = JsonParser2.getFieldValue(packageRecord.toString(), "Id");
         StringBuilder myseQuoteResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
@@ -1742,7 +1742,7 @@ public class ValidationRule3 extends BaseTest {
                 "Name='Test79' thn__Pax__c=10 thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
                         date.generateTodayDate2() + " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 3),
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String myceQuoteID = JsonParser2.getFieldValue(myseQuoteResult.toString(), "id");
         StringBuilder quotePackageResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
@@ -1754,7 +1754,7 @@ public class ValidationRule3 extends BaseTest {
                         "' thn__Pax__c=10 thn__Start_Date__c=" + date.generateTodayDate2() + " thn__End_Date__c=" +
                         date.generateTodayDate2_plus(0, 0) + " thn__Unit_Price__c=20",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         System.out.println(quotePackageResult);
         String quotePackageID = JsonParser2.getFieldValue(quotePackageResult.toString(), "id");
@@ -1773,7 +1773,7 @@ public class ValidationRule3 extends BaseTest {
                 "-w",
                 "Name='Demo'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String propertyID = JsonParser2.getFieldValue(propertyRecord.toString(), "Id");
         StringBuilder productRecord2 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
@@ -1783,7 +1783,7 @@ public class ValidationRule3 extends BaseTest {
                 "-w",
                 "Name='ROOM 1 NIGHT'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String productRoom1NightID = JsonParser2.getFieldValue(productRecord2.toString(), "Id");
         StringBuilder packageResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
@@ -1795,7 +1795,7 @@ public class ValidationRule3 extends BaseTest {
                         date.generateTodayDate2_plus(0, 1) +
                         " thn__End_Date__c=" + date.generateTodayDate2_plus(0, 3),
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String packageID = JsonParser2.getFieldValue(packageResult.toString(), "id");
         SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
@@ -1807,7 +1807,7 @@ public class ValidationRule3 extends BaseTest {
                         productRoom1NightID + "' thn__Apply_Discount__c=true thn__Start_Time__c=12:00 thn__End_Time__c=15:00 " +
                         "thn__Unit_Price__c=20 thn__VAT_Category__c='1'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         StringBuilder myseQuoteResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:create",
@@ -1817,7 +1817,7 @@ public class ValidationRule3 extends BaseTest {
                 "Name='Test80' thn__Pax__c=10 thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
                         date.generateTodayDate2() + " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 5),
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String myceQuoteID = JsonParser2.getFieldValue(myseQuoteResult.toString(), "id");
         StringBuilder quotePackageResult1 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
@@ -1829,7 +1829,7 @@ public class ValidationRule3 extends BaseTest {
                         "' thn__Pax__c=10 thn__Start_Date__c=" + date.generateTodayDate2() + " thn__End_Date__c=" +
                         date.generateTodayDate2_plus(0, 3) + " thn__Unit_Price__c=20",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String quotePackageID1 = JsonParser2.getFieldValue(quotePackageResult1.toString(), "id");
         Assert.assertNotNull(quotePackageID1);
@@ -1842,7 +1842,7 @@ public class ValidationRule3 extends BaseTest {
                         "' thn__Pax__c=10 thn__Start_Date__c=" + date.generateTodayDate2_plus(0, 4) + " thn__End_Date__c=" +
                         date.generateTodayDate2_plus(0, 3) + " thn__Unit_Price__c=20",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String quotePackageID2 = JsonParser2.getFieldValue(quotePackageResult2.toString(), "id");
         Assert.assertNotNull(quotePackageID2);
@@ -1855,7 +1855,7 @@ public class ValidationRule3 extends BaseTest {
                         "' thn__Pax__c=10 thn__Start_Date__c=" + date.generateTodayDate2_plus(0, 1) + " thn__End_Date__c=" +
                         date.generateTodayDate2_plus(0, 4) + " thn__Unit_Price__c=20",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String quotePackageID3 = JsonParser2.getFieldValue(quotePackageResult3.toString(), "id");
         Assert.assertNotNull(quotePackageID3);
@@ -1873,7 +1873,7 @@ public class ValidationRule3 extends BaseTest {
                 "-w",
                 "Name='Demo'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String propertyID = JsonParser2.getFieldValue(propertyRecord.toString(), "Id");
         StringBuilder productRecord2 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
@@ -1883,7 +1883,7 @@ public class ValidationRule3 extends BaseTest {
                 "-w",
                 "Name='ROOM 1 NIGHT'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String productRoom1NightID = JsonParser2.getFieldValue(productRecord2.toString(), "Id");
         StringBuilder packageResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
@@ -1895,7 +1895,7 @@ public class ValidationRule3 extends BaseTest {
                         date.generateTodayDate2() +
                         " thn__End_Date__c=" + date.generateTodayDate2_plus(0, 5),
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String packageID = JsonParser2.getFieldValue(packageResult.toString(), "id");
         SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
@@ -1907,7 +1907,7 @@ public class ValidationRule3 extends BaseTest {
                         productRoom1NightID + "' thn__Apply_Discount__c=true thn__Start_Time__c=12:00 thn__End_Time__c=15:00 " +
                         "thn__Unit_Price__c=100 thn__VAT_Category__c='1'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         StringBuilder myseQuoteResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:create",
@@ -1917,7 +1917,7 @@ public class ValidationRule3 extends BaseTest {
                 "Name='Test81' thn__Pax__c=10 thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
                         date.generateTodayDate2() + " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 5),
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String myceQuoteID = JsonParser2.getFieldValue(myseQuoteResult.toString(), "id");
         StringBuilder quotePackageResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
@@ -1929,7 +1929,7 @@ public class ValidationRule3 extends BaseTest {
                         "' thn__Pax__c=10 thn__Start_Date__c=" + date.generateTodayDate2() + " thn__End_Date__c=" +
                         date.generateTodayDate2_plus(0, 3) + " thn__Unit_Price__c=100",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String quotePackageID = JsonParser2.getFieldValue(quotePackageResult.toString(), "id");
         StringBuilder updateQuotePackageResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
@@ -1941,7 +1941,7 @@ public class ValidationRule3 extends BaseTest {
                 "-v",
                 "thn__Discount__c=11",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         StringBuilder quotePackageRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:get",
@@ -1950,7 +1950,7 @@ public class ValidationRule3 extends BaseTest {
                 "-w",
                 "id='" + quotePackageID + "'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String discountQuotePackage = JsonParser2.getFieldValue(quotePackageRecord.toString(), "thn__Discount__c");
         Assert.assertEquals(discountQuotePackage, "11");
@@ -1968,7 +1968,7 @@ public class ValidationRule3 extends BaseTest {
                 "-w",
                 "Name='Demo'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String propertyID = JsonParser2.getFieldValue(propertyRecord.toString(), "Id");
         StringBuilder productRecord2 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
@@ -1978,7 +1978,7 @@ public class ValidationRule3 extends BaseTest {
                 "-w",
                 "Name='WINES'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String productWinesID = JsonParser2.getFieldValue(productRecord2.toString(), "Id");
         StringBuilder myseQuoteResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
@@ -1989,7 +1989,7 @@ public class ValidationRule3 extends BaseTest {
                 "Name='Test82' thn__Pax__c=10 thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
                         date.generateTodayDate2() + " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 5),
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String myceQuoteID = JsonParser2.getFieldValue(myseQuoteResult.toString(), "id");
         StringBuilder quoteProductResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
@@ -2001,7 +2001,7 @@ public class ValidationRule3 extends BaseTest {
                         "' thn__Pax__c=10 thn__Start_Date_Time__c=" + date.generateTodayDate2_plus(0, 1) +
                         " thn__End_Date_Time__c=" + date.generateTodayDate2(),
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String quoteProductID = JsonParser2.getFieldValue(quoteProductResult.toString(), "id");
         Assert.assertNotNull(quoteProductID);
@@ -2019,7 +2019,7 @@ public class ValidationRule3 extends BaseTest {
                 "-w",
                 "Name='Demo'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String propertyID = JsonParser2.getFieldValue(propertyRecord.toString(), "Id");
         StringBuilder productRecord2 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
@@ -2029,7 +2029,7 @@ public class ValidationRule3 extends BaseTest {
                 "-w",
                 "Name='WINES'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String productWinesID = JsonParser2.getFieldValue(productRecord2.toString(), "Id");
         StringBuilder myseQuoteResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
@@ -2041,7 +2041,7 @@ public class ValidationRule3 extends BaseTest {
                         date.generateTodayDate2_plus(0, 1) + " thn__Departure_Date__c=" +
                         date.generateTodayDate2_plus(0, 5),
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String myceQuoteID = JsonParser2.getFieldValue(myseQuoteResult.toString(), "id");
         //thn__Start_Date_Time__c < thn__MYCE_Quote__r.thn__Arrival_Date__c
@@ -2054,7 +2054,7 @@ public class ValidationRule3 extends BaseTest {
                         "' thn__Pax__c=10 thn__Start_Date_Time__c=" + date.generateTodayDate2_plus(0, 0) +
                         " thn__End_Date_Time__c=" + date.generateTodayDate2_plus(0, 5),
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String quoteProductID1 = JsonParser2.getFieldValue(quoteProductResult1.toString(), "id");
         Assert.assertNotNull(quoteProductID1);
@@ -2068,7 +2068,7 @@ public class ValidationRule3 extends BaseTest {
                         "' thn__Pax__c=10 thn__Start_Date_Time__c=" + date.generateTodayDate2_plus(0, 6) +
                         " thn__End_Date_Time__c=" + date.generateTodayDate2_plus(0, 5),
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String quoteProductID2 = JsonParser2.getFieldValue(quoteProductResult2.toString(), "id");
         Assert.assertNotNull(quoteProductID2);
@@ -2082,7 +2082,7 @@ public class ValidationRule3 extends BaseTest {
                         "' thn__Pax__c=10 thn__Start_Date_Time__c=" + date.generateTodayDate2_plus(0, 1) +
                         " thn__End_Date_Time__c=" + date.generateTodayDate2_plus(0, 0),
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String quoteProductID3 = JsonParser2.getFieldValue(quoteProductResult3.toString(), "id");
         Assert.assertNotNull(quoteProductID3);
@@ -2096,7 +2096,7 @@ public class ValidationRule3 extends BaseTest {
                         "' thn__Pax__c=10 thn__Start_Date_Time__c=" + date.generateTodayDate2_plus(0, 1) +
                         " thn__End_Date_Time__c=" + date.generateTodayDate2_plus(0, 6),
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String quoteProductID4 = JsonParser2.getFieldValue(quoteProductResult4.toString(), "id");
         Assert.assertNotNull(quoteProductID4);
@@ -2114,7 +2114,7 @@ public class ValidationRule3 extends BaseTest {
                 "-w",
                 "Name='Demo'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String propertyID = JsonParser2.getFieldValue(propertyRecord.toString(), "Id");
         StringBuilder productRecord2 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
@@ -2124,7 +2124,7 @@ public class ValidationRule3 extends BaseTest {
                 "-w",
                 "Name='WINES'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String productWinesID = JsonParser2.getFieldValue(productRecord2.toString(), "Id");
         StringBuilder myseQuoteResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
@@ -2136,7 +2136,7 @@ public class ValidationRule3 extends BaseTest {
                         date.generateTodayDate2_plus(0, 1) + " thn__Departure_Date__c=" +
                         date.generateTodayDate2_plus(0, 5),
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String myceQuoteID = JsonParser2.getFieldValue(myseQuoteResult.toString(), "id");
         StringBuilder quoteProductResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
@@ -2148,7 +2148,7 @@ public class ValidationRule3 extends BaseTest {
                         "' thn__Pax__c=11 thn__Start_Date_Time__c=" + date.generateTodayDate2_plus(0, 1) +
                         " thn__End_Date_Time__c=" + date.generateTodayDate2_plus(0, 5),
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String quoteProductID = JsonParser2.getFieldValue(quoteProductResult.toString(), "id");
         Assert.assertNotNull(quoteProductID);
@@ -2167,7 +2167,7 @@ public class ValidationRule3 extends BaseTest {
                 "-w",
                 "Name='Demo'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String propertyID = JsonParser2.getFieldValue(propertyRecord.toString(), "Id");
         StringBuilder productRecord1 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
@@ -2177,7 +2177,7 @@ public class ValidationRule3 extends BaseTest {
                 "-w",
                 "Name='DINER'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String productID1 = JsonParser2.getFieldValue(productRecord1.toString(), "Id");
         StringBuilder productRecord2 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
@@ -2187,7 +2187,7 @@ public class ValidationRule3 extends BaseTest {
                 "-w",
                 "Name='MEETING HALF DAY'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String productID2 = JsonParser2.getFieldValue(productRecord2.toString(), "Id");
         StringBuilder myseQuoteResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
@@ -2199,7 +2199,7 @@ public class ValidationRule3 extends BaseTest {
                         date.generateTodayDate2_plus(0, 1) + " thn__Departure_Date__c=" +
                         date.generateTodayDate2_plus(0, 5),
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String myceQuoteID = JsonParser2.getFieldValue(myseQuoteResult.toString(), "id");
         StringBuilder meetingRoomResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
@@ -2209,7 +2209,7 @@ public class ValidationRule3 extends BaseTest {
                 "-v",
                 "thn__MYCE_Quote__c='" + myceQuoteID + "' thn__Product__c='" + productID2 + "'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String quoteMeetingRoomID = JsonParser2.getFieldValue(meetingRoomResult.toString(), "id");
         StringBuilder quoteProductResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
@@ -2221,7 +2221,7 @@ public class ValidationRule3 extends BaseTest {
                         "' thn__Pax__c=10 thn__Start_Date_Time__c=" + date.generateTodayDate2_plus(0, 2) +
                         " thn__End_Date_Time__c=" + date.generateTodayDate2_plus(0, 5),
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String quoteProductID = JsonParser2.getFieldValue(quoteProductResult.toString(), "id");
         Assert.assertNotNull(quoteProductID);
@@ -2240,7 +2240,7 @@ public class ValidationRule3 extends BaseTest {
                 "-w",
                 "Name='Demo'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String propertyID = JsonParser2.getFieldValue(propertyRecord.toString(), "Id");
         StringBuilder  packageRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
@@ -2250,7 +2250,7 @@ public class ValidationRule3 extends BaseTest {
                 "-w",
                 "Name='Pack d'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String packageID = JsonParser2.getFieldValue(packageRecord.toString(), "Id");
         StringBuilder myseQuoteResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
@@ -2262,7 +2262,7 @@ public class ValidationRule3 extends BaseTest {
                         date.generateTodayDate2() + " thn__Departure_Date__c=" +
                         date.generateTodayDate2_plus(0, 5),
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String myceQuoteID = JsonParser2.getFieldValue(myseQuoteResult.toString(), "id");
         StringBuilder quotePackageResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
@@ -2274,7 +2274,7 @@ public class ValidationRule3 extends BaseTest {
                         "' thn__Pax__c=10 thn__Start_Date__c=" + date.generateTodayDate2() + " thn__End_Date__c=" +
                         date.generateTodayDate2() + " thn__Unit_Price__c=20",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String quotePackageID = JsonParser2.getFieldValue(quotePackageResult.toString(), "id");
         StringBuilder  quoteProductRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
@@ -2284,7 +2284,7 @@ public class ValidationRule3 extends BaseTest {
                 "-w",
                 "thn__MYCE_Quote__c='" + myceQuoteID + "'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String quoteProductID = JsonParser2.getFieldValue(quoteProductRecord.toString(), "Id");
         StringBuilder updateResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
@@ -2297,7 +2297,7 @@ public class ValidationRule3 extends BaseTest {
                 "thn__Start_Date_Time__c=" + date.generateTodayDate2_plus(0, 3) +
                         " thn__End_Date_Time__c=" + date.generateTodayDate2_plus(0, 4),
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String success = JsonParser2.getFieldValue(updateResult.toString(), "success");
         Assert.assertEquals(success, "true");
@@ -2316,7 +2316,7 @@ public class ValidationRule3 extends BaseTest {
                 "-w",
                 "Name='Demo'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String propertyID = JsonParser2.getFieldValue(propertyRecord.toString(), "Id");
         StringBuilder  packageRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
@@ -2326,7 +2326,7 @@ public class ValidationRule3 extends BaseTest {
                 "-w",
                 "Name='Pack d'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String packageID = JsonParser2.getFieldValue(packageRecord.toString(), "Id");
         StringBuilder myseQuoteResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
@@ -2338,7 +2338,7 @@ public class ValidationRule3 extends BaseTest {
                         date.generateTodayDate2() + " thn__Departure_Date__c=" +
                         date.generateTodayDate2_plus(0, 5),
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String myceQuoteID = JsonParser2.getFieldValue(myseQuoteResult.toString(), "id");
         StringBuilder quotePackageResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
@@ -2350,7 +2350,7 @@ public class ValidationRule3 extends BaseTest {
                         "' thn__Pax__c=10 thn__Start_Date__c=" + date.generateTodayDate2() + " thn__End_Date__c=" +
                         date.generateTodayDate2() + " thn__Unit_Price__c=20",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String quotePackageID = JsonParser2.getFieldValue(quotePackageResult.toString(), "id");
         StringBuilder  quoteProductRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
@@ -2360,7 +2360,7 @@ public class ValidationRule3 extends BaseTest {
                 "-w",
                 "thn__MYCE_Quote__c='" + myceQuoteID + "'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String quoteProductID = JsonParser2.getFieldValue(quoteProductRecord.toString(), "Id");
         StringBuilder updateResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
@@ -2372,7 +2372,7 @@ public class ValidationRule3 extends BaseTest {
                 "-v",
                 "thn__On_Consumption__c=true",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String success = JsonParser2.getFieldValue(updateResult.toString(), "success");
         Assert.assertEquals(success, "true");
@@ -2390,7 +2390,7 @@ public class ValidationRule3 extends BaseTest {
                 "-v",
                 "thn__FirstName__c='John' thn__Send_to_Mews__c=true",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String guestID = JsonParser2.getFieldValue(guestResult.toString(), "id");
         Assert.assertNotNull(guestID);
@@ -2408,7 +2408,7 @@ public class ValidationRule3 extends BaseTest {
                 "-w",
                 "Name='Demo'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String propertyID = JsonParser2.getFieldValue(propertyRecord.toString(), "Id");
         StringBuilder productRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
@@ -2418,7 +2418,7 @@ public class ValidationRule3 extends BaseTest {
                 "-w",
                 "Name='ROOM 1 NIGHT'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String productRoom1NightID = JsonParser2.getFieldValue(productRecord.toString(), "Id");
         StringBuilder mewsServiceRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
@@ -2428,7 +2428,7 @@ public class ValidationRule3 extends BaseTest {
                 "-w",
                 "Name='ORDER'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String serviceID = JsonParser2.getFieldValue(mewsServiceRecord.toString(), "Id");
         StringBuilder roomTypeRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
@@ -2438,7 +2438,7 @@ public class ValidationRule3 extends BaseTest {
                 "-w",
                 "Name='Queen'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String roomTypeID = JsonParser2.getFieldValue(roomTypeRecord.toString(), "Id");
         StringBuilder rateRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
@@ -2448,7 +2448,7 @@ public class ValidationRule3 extends BaseTest {
                 "-w",
                 "Name='DEFAULT'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String rateID = JsonParser2.getFieldValue(rateRecord.toString(), "Id");
         StringBuilder guestResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
@@ -2458,7 +2458,7 @@ public class ValidationRule3 extends BaseTest {
                 "-v",
                 "thn__FirstName__c='Test'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String guestID = JsonParser2.getFieldValue(guestResult.toString(), "id");
         StringBuilder reservationResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
@@ -2472,7 +2472,7 @@ public class ValidationRule3 extends BaseTest {
                         " thn__AdultCount__c=2 thn__ChildCount__c=1 thn__RequestedCategory__c='" + roomTypeID +
                         "' thn__Pricing_Type__c='Rate pricing' thn__Rate__c='" + rateID + "'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String reservationID = JsonParser2.getFieldValue(reservationResult.toString(), "id");
         StringBuilder itemResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
@@ -2482,7 +2482,7 @@ public class ValidationRule3 extends BaseTest {
                 "-v",
                 "thn__Reservation__c='" + reservationID + "' thn__Product__c='" + productRoom1NightID + "' thn__Mews_Id__c=556 thn__Send_to_Mews__c=true",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String itemID = JsonParser2.getFieldValue(itemResult.toString(), "id");
         Assert.assertNotNull(itemID);
@@ -2500,7 +2500,7 @@ public class ValidationRule3 extends BaseTest {
                 "-w",
                 "Name='Demo'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String propertyID = JsonParser2.getFieldValue(propertyRecord.toString(), "Id");
         StringBuilder mewsServiceRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
@@ -2510,7 +2510,7 @@ public class ValidationRule3 extends BaseTest {
                 "-w",
                 "Name='ORDER'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String serviceID = JsonParser2.getFieldValue(mewsServiceRecord.toString(), "Id");
         StringBuilder roomTypeRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
@@ -2520,7 +2520,7 @@ public class ValidationRule3 extends BaseTest {
                 "-w",
                 "Name='Queen'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String roomTypeID = JsonParser2.getFieldValue(roomTypeRecord.toString(), "Id");
         StringBuilder rateRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
@@ -2530,7 +2530,7 @@ public class ValidationRule3 extends BaseTest {
                 "-w",
                 "Name='DEFAULT'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String rateID = JsonParser2.getFieldValue(rateRecord.toString(), "Id");
         StringBuilder guestResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
@@ -2540,7 +2540,7 @@ public class ValidationRule3 extends BaseTest {
                 "-v",
                 "thn__FirstName__c='Test2'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String guestID = JsonParser2.getFieldValue(guestResult.toString(), "id");
         StringBuilder reservationResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
@@ -2554,7 +2554,7 @@ public class ValidationRule3 extends BaseTest {
                         " thn__AdultCount__c=2 thn__ChildCount__c=1 thn__RequestedCategory__c='" + roomTypeID +
                         "' thn__Pricing_Type__c='Rate pricing' thn__Rate__c='" + rateID + "' thn__Update_Price__c=true",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String reservationID = JsonParser2.getFieldValue(reservationResult.toString(), "id");
         StringBuilder  reservationRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
@@ -2564,7 +2564,7 @@ public class ValidationRule3 extends BaseTest {
                 "-w",
                 "id='" + reservationID + "'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String updatePrice = JsonParser2.getFieldValue(reservationRecord.toString(), "thn__Update_Price__c");
         String reasonUpdate = JsonParser2.getFieldValue(reservationRecord.toString(), "thn__Reason_update__c");
@@ -2584,7 +2584,7 @@ public class ValidationRule3 extends BaseTest {
                 "-w",
                 "Name='Demo'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String propertyID = JsonParser2.getFieldValue(propertyRecord.toString(), "Id");
         StringBuilder mewsServiceRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
@@ -2594,7 +2594,7 @@ public class ValidationRule3 extends BaseTest {
                 "-w",
                 "Name='ORDER'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String serviceID = JsonParser2.getFieldValue(mewsServiceRecord.toString(), "Id");
         StringBuilder roomTypeRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
@@ -2604,7 +2604,7 @@ public class ValidationRule3 extends BaseTest {
                 "-w",
                 "Name='Queen'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String roomTypeID = JsonParser2.getFieldValue(roomTypeRecord.toString(), "Id");
         StringBuilder rateRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
@@ -2614,7 +2614,7 @@ public class ValidationRule3 extends BaseTest {
                 "-w",
                 "Name='DEFAULT'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String rateID = JsonParser2.getFieldValue(rateRecord.toString(), "Id");
         StringBuilder guestResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
@@ -2624,7 +2624,7 @@ public class ValidationRule3 extends BaseTest {
                 "-v",
                 "thn__FirstName__c='Test2'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String guestID = JsonParser2.getFieldValue(guestResult.toString(), "id");
         StringBuilder reservationResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
@@ -2638,7 +2638,7 @@ public class ValidationRule3 extends BaseTest {
                         " thn__AdultCount__c=2 thn__ChildCount__c=1 thn__RequestedCategory__c='" + roomTypeID +
                         "' thn__Pricing_Type__c='Rate pricing' thn__Rate__c='" + rateID + "' thn__Mews_Id__c=''12345",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String reservationID = JsonParser2.getFieldValue(reservationResult.toString(), "id");
         StringBuilder updateResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
@@ -2650,7 +2650,7 @@ public class ValidationRule3 extends BaseTest {
                 "-v",
                 "thn__State__c='Canceled'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         StringBuilder  reservationRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:get",
@@ -2659,7 +2659,7 @@ public class ValidationRule3 extends BaseTest {
                 "-w",
                 "id='" + reservationID + "'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String mewsId = JsonParser2.getFieldValue(reservationRecord.toString(), "thn__Mews_Id__c");
         String state = JsonParser2.getFieldValue(reservationRecord.toString(), "thn__State__c");
@@ -2679,7 +2679,7 @@ public class ValidationRule3 extends BaseTest {
                 "-w",
                 "Name='TestRes'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String resourceID1 = JsonParser2.getFieldValue(resourceRecord1.toString(), "Id");
         StringBuilder resourceRecord2 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
@@ -2689,7 +2689,7 @@ public class ValidationRule3 extends BaseTest {
                 "-w",
                 "Name='TestRes2'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String resourceID2 = JsonParser2.getFieldValue(resourceRecord2.toString(), "Id");
         StringBuilder resourceGroupingResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
@@ -2699,7 +2699,7 @@ public class ValidationRule3 extends BaseTest {
                 "-v",
                 "thn__Grouped_Resource__c='" + resourceID1 + "' thn__Resource_Group__c='" + resourceID2 + "'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
         String resourceGroupingID = JsonParser2.getFieldValue(resourceGroupingResult.toString(), "id");
         Assert.assertNotNull(resourceGroupingID);
@@ -2710,7 +2710,7 @@ public class ValidationRule3 extends BaseTest {
                 "-w",
                 "id='" + resourceGroupingID + "'",
                 "-u",
-                "THYNK-VR",
+                ALIAS,
                 "--json"});
     }
 

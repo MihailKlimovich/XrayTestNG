@@ -47,8 +47,10 @@ public class BaseTest {
 
     public static final String testDataExcelFileName = "testdata.xlsx";
 
+    final protected String ALIAS = "THYNK-VR2";
     public String SCRATCHORGUSERNAME = "test-wixjue9le3v0@example.com";
     public String SCRATCHORGPASSWORD = "mEA3VqI_*OUSw";
+
 
     @BeforeClass
     public void classLevelSetup(){
@@ -61,7 +63,7 @@ public class BaseTest {
         options.addArguments("--disable-gpu");
         options.addArguments("--disable-extensions");
         options.addArguments("--disable-dev-shm-usage");
-        //options.addArguments("user-data-dir=/tmp/temp_profile");
+        options.addArguments("user-data-dir=/tmp/temp_profile");
         options.addArguments(" --whitelisted-ips=\"\"");
         options.addArguments("--headless", "window-size=1920,1024", "--no-sandbox");
         driver = new ChromeDriver(options);
