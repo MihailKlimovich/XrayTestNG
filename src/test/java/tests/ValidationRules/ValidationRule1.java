@@ -24,7 +24,9 @@ public class ValidationRule1 extends BaseTest{
     @Description("Setup.thn__ByPass__c.thn__ByPassVR__c == false and User.thn__ByPassVR__c == false")
     @Story("Settings")
     public void settingUpValidationRules() throws InterruptedException, IOException {
-        StringBuilder result1 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder result3 = SfdxCommand.runLinuxCommand2("/home/minsk-sc/sfdx/bin/sfdx force:data:record:update -s 'User' -w Name='User User' -v thn__ByPassVR__c=false -u THYNK-VR2 --json");
+        System.out.println(result3);
+        /*StringBuilder result1 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:org:list"
                 });
         System.out.println(result1);
@@ -73,7 +75,7 @@ public class ValidationRule1 extends BaseTest{
         System.out.println(byPassRecord);
         String byPassVr = JsonParser2.getFieldValue(byPassRecord.toString(), "thn__ByPassVR__c");
         Assert.assertEquals(userByPass, "false");
-        Assert.assertEquals(byPassVr, "false");
+        Assert.assertEquals(byPassVr, "false");*/
     }
 
     @Test(priority = 2, description = "Myce_Quote__c.Commission_Validation_Rule")
