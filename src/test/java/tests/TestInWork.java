@@ -86,7 +86,6 @@ public class TestInWork extends BaseTest{
     @Description("Myce_Quote__c.Commission_Validation_Rule")
     @Story("Commissionable == true & thn__Commission_to__c == Company & thn__Company__c == null")
     public void testCreateNewMyceQuote3() throws InterruptedException, IOException {
-
         SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:create",
                 "-s",
@@ -120,7 +119,6 @@ public class TestInWork extends BaseTest{
     @Description("Myce_Quote__c.VR05_Dates")
     @Story("thn__Departure_Date__c < thn__Arrival_Date__c")
     public void testCreateNewMyceQuote4() throws InterruptedException, IOException {
-
         SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:create",
                 "-s",
@@ -153,7 +151,6 @@ public class TestInWork extends BaseTest{
     @Description("Myce_Quote__c.VR27_Company_Agent_Type")
     @Story("Create MYCE Quote: Select Company for Agent field ,Select Agent for Company field")
     public void testCreateNewMyceQuote5() throws InterruptedException, IOException {
-
         StringBuilder res1 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:get",
                 "-s",
