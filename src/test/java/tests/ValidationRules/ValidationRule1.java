@@ -35,7 +35,7 @@ public class ValidationRule1 extends BaseTest{
                 "-s",
                 "User",
                 "-w",
-                "\"Name='User User'\"",
+                "Name='User User'",
                 "-v",
                 "thn__ByPassVR__c=false",
                 "-u",
