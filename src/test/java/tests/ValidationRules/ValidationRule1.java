@@ -30,6 +30,10 @@ public class ValidationRule1 extends BaseTest{
                 "force:org:list"
                 });
         System.out.println(result1);*/
+        StringBuilder result3 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:org:list",
+                });
+        System.out.println(result3);
         StringBuilder result2 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:update",
                 "-s",
