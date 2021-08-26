@@ -47,7 +47,7 @@ public class BaseTest {
 
     public static final String testDataExcelFileName = "testdata.xlsx";
 
-    final protected String ALIAS = "THYNK-VR2";
+    final protected String ALIAS = "test-6gjvejbnst2h@example.com";
     public String SCRATCHORGUSERNAME = "test-wixjue9le3v0@example.com";
     public String SCRATCHORGPASSWORD = "mEA3VqI_*OUSw";
 
