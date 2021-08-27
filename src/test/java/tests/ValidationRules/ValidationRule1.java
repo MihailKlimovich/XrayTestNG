@@ -30,10 +30,18 @@ public class ValidationRule1 extends BaseTest{
                 "force:org:list"
                 });
         System.out.println(result1);*/
-        StringBuilder result3 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
-                "force:org:list",
-                });
-        System.out.println(result3);
+        StringBuilder authorise = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:auth:jwt:grant",
+                "--clientid",
+                "3MVG95AcBeaB55lWwG_jM4S.hHHrR_i9uJUnD_XBhRAqn3B6BZxjS82q3A2.o16sDpIqZIOL2lpOxXysstk8R",
+                "--jwtkeyfile",
+                "/home/user/jdoe/JWT/server.key",
+                "--username",
+                "test-lbafgbxunsgq@example.com",
+                "--instanceurl",
+                "https://test.salesforce.com",
+                "--setdefaultdevhubusername"});
+        System.out.println(authorise);
         StringBuilder result2 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:update",
                 "-s",
