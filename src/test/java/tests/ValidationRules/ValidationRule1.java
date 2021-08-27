@@ -33,14 +33,14 @@ public class ValidationRule1 extends BaseTest{
         StringBuilder authorise = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:auth:jwt:grant",
                 "--clientid",
-                "3MVG95AcBeaB55lWwG_jM4S.hHHrR_i9uJUnD_XBhRAqn3B6BZxjS82q3A2.o16sDpIqZIOL2lpOxXysstk8R",
+                key,
                 "--jwtkeyfile",
                 "/home/user/jdoe/JWT/server.key",
                 "--username",
                 "test-lbafgbxunsgq@example.com",
                 "--instanceurl",
-                "https://test.salesforce.com",
-                "--setdefaultdevhubusername"});
+                "https://test.salesforce.com"
+                });
         System.out.println(authorise);
         StringBuilder result2 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:update",
@@ -59,7 +59,7 @@ public class ValidationRule1 extends BaseTest{
                 "-s",
                 "thn__bypass__c",
                 "-w",
-                "Id='a065E000009cIReQAM'",
+                "Id='a061j000003e6IcAAI'",
                 "-v",
                 "thn__bypassvr__c=false",
                 "-u",
@@ -80,7 +80,7 @@ public class ValidationRule1 extends BaseTest{
                 "-s",
                 "thn__bypass__c",
                 "-w",
-                "Id='a065E000009cIReQAM'",
+                "Id='a061j000003e6IcAAI'",
                 "-u",
                 ALIAS,
                 "--json"});

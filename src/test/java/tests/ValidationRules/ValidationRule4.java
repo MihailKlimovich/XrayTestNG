@@ -40,7 +40,7 @@ public class ValidationRule4 extends BaseTest {
                 "-s",
                 "thn__bypass__c",
                 "-w",
-                "Id='a065E000009cIReQAM'",
+                "Id='a061j000003e6IcAAI'",
                 "-v",
                 "thn__bypassvr__c=true",
                 "-u",
@@ -61,7 +61,7 @@ public class ValidationRule4 extends BaseTest {
                 "-s",
                 "thn__bypass__c",
                 "-w",
-                "Id='a065E000009cIReQAM'",
+                "Id='a061j000003e6IcAAI'",
                 "-u",
                 ALIAS,
                 "--json"});
