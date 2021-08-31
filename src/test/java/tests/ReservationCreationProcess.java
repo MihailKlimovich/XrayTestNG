@@ -9,10 +9,9 @@ import org.testng.annotations.Test;
 import pageObject.JsonParser2;
 import pageObject.SfdxCommand;
 
-
 import java.io.IOException;
 
-public class TestInWork extends BaseTest{
+public class ReservationCreationProcess extends BaseTest {
 
     @Test(priority = 1, description = "THY-487 Reservation creation process")
     @Severity(SeverityLevel.NORMAL)
@@ -289,7 +288,5 @@ public class TestInWork extends BaseTest{
         String message4= JsonParser2.getFieldValue2(reservationPricesRecords4.toString(), "message");
         Assert.assertTrue(message4.contains("3 records were retrieved"));
     }
-
-
 
 }
