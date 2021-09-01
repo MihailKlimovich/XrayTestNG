@@ -35,6 +35,16 @@ public class JsonParser2 extends BasePage {
             return null;}
     }
 
+    @Step("Get value3")
+    public static Integer getFieldValueLikeInteger(StringBuilder json, String key1, String key2) throws UnsupportedOperationException {
+        try {
+            JsonObject jsonObject = new JsonParser().parse(String.valueOf(json)).getAsJsonObject();
+            int result = jsonObject.getAsJsonObject(key1).get(key2).getAsInt();
+            return result;
+        }catch (UnsupportedOperationException e){
+            return null;}
+    }
+
     public static void getFieldValue3(StringBuilder json, String key) throws UnsupportedOperationException {
 
         System.out.println(json);
@@ -47,9 +57,9 @@ public class JsonParser2 extends BasePage {
             System.out.println(result);
 
         }
-
-
     }
+
+
 
     /*public static String getFieldValue(String json, String key) {
         JSONObject obj = new JSONObject(json);

@@ -9,10 +9,9 @@ import org.testng.annotations.Test;
 import pageObject.JsonParser2;
 import pageObject.SfdxCommand;
 
-
 import java.io.IOException;
 
-public class TestInWork extends BaseTest{
+public class QuoteHotelRoomTimeFields extends BaseTest {
 
     @Test(priority = 1, description = "THY-512 Quote hotel room - time fields")
     @Severity(SeverityLevel.NORMAL)
@@ -542,4 +541,5 @@ public class TestInWork extends BaseTest{
         Assert.assertTrue(arrivalDateTimeQuoteHotelRoom.contains(arrivalDateQuoteHotelRoom));
         Assert.assertTrue(departureDateTimeQuoteHotelRoom.contains(departureDateQuoteHotelRoom));
     }
+
 }
