@@ -2447,7 +2447,7 @@ public class ValidationRule4 extends BaseTest {
                 "-s",
                 "thn__Rate__c",
                 "-w",
-                "Name='DEFAULT'",
+                "Name='TestRate'",
                 "-u",
                 ALIAS,
                 "--json"});
@@ -2529,7 +2529,7 @@ public class ValidationRule4 extends BaseTest {
                 "-s",
                 "thn__Rate__c",
                 "-w",
-                "Name='DEFAULT'",
+                "Name='TestRate'",
                 "-u",
                 ALIAS,
                 "--json"});
@@ -2613,7 +2613,7 @@ public class ValidationRule4 extends BaseTest {
                 "-s",
                 "thn__Rate__c",
                 "-w",
-                "Name='DEFAULT'",
+                "Name='TestRate'",
                 "-u",
                 ALIAS,
                 "--json"});
@@ -2713,6 +2713,59 @@ public class ValidationRule4 extends BaseTest {
                 "-u",
                 ALIAS,
                 "--json"});
+    }
+
+    @Test(priority = 40, description="Setting up validation rules")
+    @Severity(SeverityLevel.NORMAL)
+    @Description("Setup.thn__ByPass__c.thn__ByPassVR__c == false and User.thn__ByPassVR__c == false")
+    @Story("Settings")
+    public void returnValidationRules() throws InterruptedException, IOException {
+        StringBuilder result2 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:record:update",
+                "-s",
+                "User",
+                "-w",
+                "Name='User User'",
+                "-v",
+                "thn__ByPassVR__c=false",
+                "-u",
+                ALIAS,
+                "--json"});
+        System.out.println(result2);
+        StringBuilder res = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:record:update",
+                "-s",
+                "thn__bypass__c",
+                "-w",
+                "Id='a061j000003e6IcAAI'",
+                "-v",
+                "thn__bypassvr__c=false",
+                "-u",
+                ALIAS,
+                "--json"});
+        StringBuilder userRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:record:get",
+                "-s",
+                "User",
+                "-w",
+                "Name='User User'",
+                "-u",
+                ALIAS,
+                "--json"});
+        String userByPass = JsonParser2.getFieldValue(userRecord.toString(), "thn__ByPassVR__c");
+        StringBuilder byPassRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:record:get",
+                "-s",
+                "thn__bypass__c",
+                "-w",
+                "Id='a061j000003e6IcAAI'",
+                "-u",
+                ALIAS,
+                "--json"});
+        System.out.println(byPassRecord);
+        String byPassVr = JsonParser2.getFieldValue(byPassRecord.toString(), "thn__ByPassVR__c");
+        Assert.assertEquals(userByPass, "false");
+        Assert.assertEquals(byPassVr, "false");
     }
 
 }

@@ -2231,12 +2231,21 @@ public class ValidationRule1 extends BaseTest{
                 ALIAS,
                 "--json"});
         String roomTypeID = JsonParser2.getFieldValue(roomTypeRecord.toString(), "Id");
+        StringBuilder rateResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:record:create",
+                "-s",
+                "thn__Rate__c",
+                "-w",
+                "Name='TestRate' thn__IsActive__c=true thn__IsPublic__c=true thn__Hotel__c='" + propertyID + "'",
+                "-u",
+                ALIAS,
+                "--json"});
         StringBuilder rateRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:get",
                 "-s",
                 "thn__Rate__c",
                 "-w",
-                "Name='DEFAULT'",
+                "Name='TestRate'",
                 "-u",
                 ALIAS,
                 "--json"});
@@ -2319,7 +2328,7 @@ public class ValidationRule1 extends BaseTest{
                 "-s",
                 "thn__Rate__c",
                 "-w",
-                "Name='DEFAULT'",
+                "Name='TestRate'",
                 "-u",
                 ALIAS,
                 "--json"});
@@ -2392,7 +2401,7 @@ public class ValidationRule1 extends BaseTest{
                 "-s",
                 "thn__Rate__c",
                 "-w",
-                "Name='DEFAULT'",
+                "Name='TestRate'",
                 "-u",
                 ALIAS,
                 "--json"});

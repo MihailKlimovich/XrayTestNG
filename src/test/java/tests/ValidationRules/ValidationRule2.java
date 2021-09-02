@@ -2445,7 +2445,7 @@ public class ValidationRule2 extends BaseTest {
                 "-s",
                 "thn__Rate__c",
                 "-w",
-                "Name='DEFAULT'",
+                "Name='TestRate'",
                 "-u",
                 ALIAS,
                 "--json"});
@@ -2527,7 +2527,7 @@ public class ValidationRule2 extends BaseTest {
                 "-s",
                 "thn__Rate__c",
                 "-w",
-                "Name='DEFAULT'",
+                "Name='TestRate'",
                 "-u",
                 ALIAS,
                 "--json"});
@@ -2611,7 +2611,7 @@ public class ValidationRule2 extends BaseTest {
                 "-s",
                 "thn__Rate__c",
                 "-w",
-                "Name='DEFAULT'",
+                "Name='TestRate'",
                 "-u",
                 ALIAS,
                 "--json"});

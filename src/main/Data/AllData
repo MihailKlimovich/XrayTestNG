@@ -121,3 +121,4 @@
         id propId2 = [select id from thn__Hotel__c where Name = 'Test'].id;
         resource2.thn__Hotel__c = propId2;
         insert resource2;
+
