@@ -1,4 +1,4 @@
-package tests;
+package tests.UI;
 
 import io.qameta.allure.Description;
 import io.qameta.allure.Severity;
@@ -7,35 +7,36 @@ import io.qameta.allure.Story;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
+import tests.BaseTest;
 import utils.Listeners.TestListener;
 
 import java.io.IOException;
 
 @Listeners({TestListener.class})
 
-public class ValidationRuleTest2 extends BaseTest {
+public class ValidationRuleTest1 extends BaseTest {
 
-    @Test(priority = 1, description = "LogIn")
-    @Severity(SeverityLevel.NORMAL)
-    @Description("LogIn")
-    @Story("LogIn")
-    public void testLogIn() {
-        //given
-        //when
-        loginPageForScratchOrg.logInOnScratchOrg(driver);
-    }
 
-    @Test(priority = 2, description="Setting up validation rules")
-    @Severity(SeverityLevel.NORMAL)
-    @Description("Setup.thn__ByPass__c.thn__ByPassVR__c == true and User.thn__ByPassVR__c == false")
-    @Story("Settings")
-    public void settingUpValidationRules() throws InterruptedException, IOException {
-        loginPageForScratchOrg.logInOnScratchOrg(driver);
-        developerConsoleWindow.openDeveloperConsole();
-        developerConsoleWindow.openExecuteAnonymousWindow();
-        developerConsoleWindow.runApexCodeFromFile("src/main/Data/ValidationRule2");
-        Thread.sleep(5000);
-    }
+        @Test(priority = 1, description = "LogIn")
+        @Severity(SeverityLevel.NORMAL)
+        @Description("LogIn")
+        @Story("LogIn")
+        public void testLogIn() {
+            //given
+            //when
+            loginPageForScratchOrg.logInOnScratchOrg(driver);
+        }
+
+        @Test(priority = 2, description="Setting up validation rules")
+        @Severity(SeverityLevel.NORMAL)
+        @Description("Setup.thn__ByPass__c.thn__ByPassVR__c == false and User.thn__ByPassVR__c == false")
+        @Story("Settings")
+        public void settingUpValidationRules() throws InterruptedException, IOException {
+            developerConsoleWindow.openDeveloperConsole();
+            developerConsoleWindow.openExecuteAnonymousWindow();
+            developerConsoleWindow.runApexCodeFromFile("src/main/Data/ValidationRule1");
+            Thread.sleep(5000);
+        }
 
     @Test(priority = 3, description = "Myce_Quote__c.Commission_Validation_Rule")
     @Severity(SeverityLevel.NORMAL)
@@ -43,22 +44,18 @@ public class ValidationRuleTest2 extends BaseTest {
     @Story("Commissionable == true & thn__Commission_to__c == null")
     public void testCreateNewMyceQuote1() throws InterruptedException {
         //given
-        String expectedResult = "true";
+        String expectedMessage = "If commissionable = true, 'Commission to' field shouldn't be null or " +
+                "if 'Commission to' field equals 'agent', agent shouldn't be null or " +
+                "if 'Commission to' field equals 'company', company shouldn't be null";
         //when
-        loginPageForScratchOrg.logInOnScratchOrg(driver);
         myceQuotes.goToMyceQuotes();
         myceQuotes.createNewMyceQuote();
         myceQuotes.fillOutTheQuotaForm_whenCommissionIsNone
-                ("Test24", date.generateTodayDate(), date.generateTodayDate(),
+                ("Test1", date.generateTodayDate(), date.generateTodayDate(),
                         "10", "Demo");
-        myceQuotes.readQuoteName();
-        String result = developerConsoleWindow.readQueryResult();
-        System.out.println(result);
         //then
-        Assert.assertEquals(result, expectedResult);
-        developerConsoleWindow.goToParentWindow();
-
-
+        Assert.assertEquals(myceQuotes.readErrorMessage2(), expectedMessage);
+        myceQuotes.closeWindow();
     }
 
     @Test(priority = 4, description = "Myce_Quote__c.Commission_Validation_Rule")
@@ -77,8 +74,8 @@ public class ValidationRuleTest2 extends BaseTest {
                 ("Test2", date.generateTodayDate(), date.generateTodayDate(),
                         "10", "Demo");
         //then
-        //Assert.assertEquals(myceQuotes.readErrorMessage2(), expectedMessage);
-        //myceQuotes.closeWindow();
+        Assert.assertEquals(myceQuotes.readErrorMessage2(), expectedMessage);
+        myceQuotes.closeWindow();
     }
 
     @Test(priority = 5, description = "Myce_Quote__c.Commission_Validation_Rule")
@@ -140,7 +137,7 @@ public class ValidationRuleTest2 extends BaseTest {
     @Test(priority = 8, description = "Myce_Quote__c.VR13_Reservation_Guest")
     @Severity(SeverityLevel.NORMAL)
     @Description("Myce_Quote__c.VR13_Reservation_Guest")
-    @Story("On thn__Reservation__c record where thn__Mews_Id__c != null change thn__State__c to “Canceled”")
+    @Story("Create MYCE Quote: leave thn__Reservation_Guest__c empty, Set thn__Send_to_Mews__c to TRUE")
     public void testCreateNewMyceQuote6() throws InterruptedException {
         //given
         String expectedMessage = "Reservation guest is required to send reservations to Mews";
@@ -432,7 +429,8 @@ public class ValidationRuleTest2 extends BaseTest {
                 ("Test11", date.generateTodayDate(), date.generateDate_plus(1, 3), "4", "Demo");
         myceQuotes.openMeetingPackages();
         Thread.sleep(2000);
-        quoteMeetingPackages.createMeetingPackages("Pack c", "4", date.generateTodayDate(), date.generateDate_plus(1, 3), "30");
+        quoteMeetingPackages.createMeetingPackages("Pack c", "4", date.generateTodayDate(),
+                date.generateDate_plus(1, 3), "30");
         myceQuotes.goToMyceQuotes();
         myceQuotes.openMyceQoteRecord("Test11");
         myceQuotes.openMeetingRooms();
@@ -845,7 +843,5 @@ public class ValidationRuleTest2 extends BaseTest {
         Assert.assertEquals(resourceGrouping.readErrorMessage2(), expectedMessage);
         resourceGrouping.closeWindow();
     }
-
-
 
 }

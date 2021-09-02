@@ -10,25 +10,44 @@
             <class name="clearCache.ClearCache"/>
         </classes>
     </test>
-
-    <test name="ValidationRule1">
+    <test name="Delete and create data">
+        <classes>
+            <class name="tests.TestData"/>
+        </classes>
+    </test>
+    <test name="THY-510: ValidationRule1">
         <classes>
             <class name="tests.ValidationRules.ValidationRule1"/>
         </classes>
     </test>
-    <test name="ValidationRule2">
+    <test name="THY-510: ValidationRule2">
         <classes>
             <class name="tests.ValidationRules.ValidationRule2"/>
         </classes>
     </test>
-    <test name="ValidationRule3">
+    <test name="THY-510: ValidationRule3">
         <classes>
             <class name="tests.ValidationRules.ValidationRule3"/>
         </classes>
     </test>
-    <test name="ValidationRule4">
+    <test name="THY-510: ValidationRule4">
         <classes>
             <class name="tests.ValidationRules.ValidationRule4"/>
+        </classes>
+    </test>
+    <test name="THY-487: Reservation creation process">
+        <classes>
+            <class name="tests.ReservationCreationProcess"/>
+        </classes>
+    </test>
+    <test name="THY-523: Total_amount_incl_Tax__c">
+        <classes>
+            <class name="tests.TotalAmountInclTax"/>
+        </classes>
+    </test>
+    <test name="THY-512: Quote hotel room - time fields">
+        <classes>
+            <class name="tests.QuoteHotelRoomTimeFields"/>
         </classes>
     </test>
 

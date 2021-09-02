@@ -1,10 +1,11 @@
-package tests ;
+package tests.UI;
 
 import io.qameta.allure.Description;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.Story;
 import org.testng.annotations.Test;
+import tests.BaseTest;
 
 public class LogInOnScratchOrgTest extends BaseTest{
 
