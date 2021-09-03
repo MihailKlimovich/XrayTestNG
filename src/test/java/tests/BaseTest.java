@@ -40,6 +40,8 @@ public class BaseTest {
     protected ResourceGrouping resourceGrouping;
     protected SfdxCommand sfdxCommand;
     protected JsonParser2 jsonParser2;
+    protected Requests requests;
+    protected ConvertWindow convertWindow;
 
     public WebDriver getDriver() {
         return driver;
@@ -64,9 +66,9 @@ public class BaseTest {
         options.addArguments("--disable-gpu");
         options.addArguments("--disable-extensions");
         options.addArguments("--disable-dev-shm-usage");
-        options.addArguments("user-data-dir=/tmp/temp_profile");
+        //options.addArguments("user-data-dir=/tmp/temp_profile");
         options.addArguments(" --whitelisted-ips=\"\"");
-        options.addArguments("--headless", "window-size=1920,1024", "--no-sandbox");
+        //options.addArguments("--headless", "window-size=1920,1024", "--no-sandbox");
         driver = new ChromeDriver(options);
         driver.manage().deleteAllCookies();
         driver.manage().window().maximize();
@@ -98,18 +100,20 @@ public class BaseTest {
         resourceGrouping = new ResourceGrouping(driver);
         sfdxCommand = new SfdxCommand(driver);
         jsonParser2 = new JsonParser2(driver);
+        requests = new Requests(driver);
+        convertWindow = new ConvertWindow(driver);
     }
 
 
 
-    @AfterClass
+    /*@AfterClass
     public void teardown(){
         driver.close();
         driver.quit();
         if (driver != null) {
             driver = null;
         }
-   }
+   }*/
 
 
 

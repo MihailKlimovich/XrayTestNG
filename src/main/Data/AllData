@@ -4,8 +4,10 @@
    delete [select thn__FirstName__c from thn__Guest__c];
    delete [select name from thn__Reservation__c];
    delete [select name from thn__Resource__c where name='TestRes' or name='TestRes2'];
-   delete [select name from Account where name = 'First Test Account' or name = 'Test Agent' or name = 'Test Company'];
-   delete [select 	thn__Name__c from thn__Item__c];
+   delete [select name from Contact];
+   delete [select name from Account where name = 'First Test Account' or name = 'Test Agent' or name = 'Test Company' or name = 'TestRequest'];
+   delete [select thn__Name__c from thn__Item__c];
+   delete [select Name from thn__Request__c];
 
   thn__Hotel__c prop1 = new thn__Hotel__c();
      prop1.Name = 'Test';
