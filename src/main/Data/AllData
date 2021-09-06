@@ -5,7 +5,7 @@
    delete [select name from thn__Reservation__c];
    delete [select name from thn__Resource__c where name='TestRes' or name='TestRes2'];
    delete [select name from Contact];
-   delete [select name from Account where name = 'First Test Account' or name = 'Test Agent' or name = 'Test Company' or name = 'TestRequest'];
+   delete [select name from Account where name != 'Sample Account for Entitlements'];
    delete [select thn__Name__c from thn__Item__c];
    delete [select Name from thn__Request__c];
 

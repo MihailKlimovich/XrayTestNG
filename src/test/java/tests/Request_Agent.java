@@ -9,10 +9,9 @@ import org.testng.annotations.Test;
 import pageObject.JsonParser2;
 import pageObject.SfdxCommand;
 
-
 import java.io.IOException;
 
-public class TestInWork extends BaseTest{
+public class Request_Agent extends BaseTest{
 
     @Test(priority = 1, description = "THY-506: Request - Agent")
     @Severity(SeverityLevel.NORMAL)
@@ -133,7 +132,6 @@ public class TestInWork extends BaseTest{
     @Description("THY-506: Request - Agent")
     @Story("THY-506: Request - Agent")
     public void RequestAgent_case3() throws InterruptedException, IOException {
-        loginPageForScratchOrg.logInOnScratchOrg(driver);
         StringBuilder requestResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:create",
                 "-s",
@@ -180,4 +178,5 @@ public class TestInWork extends BaseTest{
         Assert.assertEquals(myceQuoteCompanyId, requestAccountId);
         Assert.assertEquals(myceQuoteCompanyContactId, requestContactId);
     }
+
 }

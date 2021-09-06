@@ -50,6 +50,16 @@
             <class name="tests.QuoteHotelRoomTimeFields"/>
         </classes>
     </test>
+    <test name="THY-570: On Consumption">
+        <classes>
+            <class name="tests.OnConsumption"/>
+        </classes>
+    </test>
+    <test name="THY-506: Request - Agent">
+        <classes>
+            <class name="tests.Request_Agent"/>
+        </classes>
+    </test>
 
 
 </suite>
