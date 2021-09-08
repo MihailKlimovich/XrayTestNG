@@ -401,7 +401,8 @@ public class PackagesCustomPrice extends BaseTest {
                 "thn__Quote_Package_Line__c",
                 "-v",
                 "Name='Meat' thn__Quote_Package__c='" + quotePackageId + "' thn__MYCE_Quote__c='" + myceQuoteID +
-                        "' thn__Product__c='" + foodID + "' thn__Type__c='Food' thn__Unit_Price__c=20",
+                        "' thn__Product__c='" + foodID + "' thn__Type__c='Food' thn__Unit_Price__c=20" +
+                        " thn__Start_Time__c='01:00' thn__End_Time__c='02:00'",
                 "-u",
                 ALIAS,
                 "--json"});
@@ -689,7 +690,8 @@ public class PackagesCustomPrice extends BaseTest {
                 "thn__Quote_Package_Line__c",
                 "-v",
                 "Name='Meat' thn__Quote_Package__c='" + quotePackageId + "' thn__MYCE_Quote__c='" + myceQuoteID +
-                        "' thn__Product__c='" + foodID + "' thn__Type__c='Food' thn__Unit_Price__c=20 thn__Apply_Discount__c=true",
+                        "' thn__Product__c='" + foodID + "' thn__Type__c='Food' thn__Unit_Price__c=20 " +
+                        "thn__Apply_Discount__c=true thn__Start_Time__c='01:00' thn__End_Time__c='02:00",
                 "-u",
                 ALIAS,
                 "--json"});
@@ -701,7 +703,8 @@ public class PackagesCustomPrice extends BaseTest {
                 "thn__Quote_Package_Line__c",
                 "-v",
                 "Name='Bicycle' thn__Quote_Package__c='" + quotePackageId + "' thn__MYCE_Quote__c='" + myceQuoteID +
-                        "' thn__Product__c='" + equipmentID + "' thn__Type__c='Equipment' thn__Unit_Price__c=50 thn__Apply_Discount__c=true",
+                        "' thn__Product__c='" + equipmentID + "' thn__Type__c='Equipment' thn__Unit_Price__c=50 " +
+                        "thn__Apply_Discount__c=true thn__Start_Time__c='01:00' thn__End_Time__c='02:00",
                 "-u",
                 ALIAS,
                 "--json"});
