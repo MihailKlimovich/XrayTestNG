@@ -40,7 +40,7 @@ public class ValidationRule4 extends BaseTest {
                 "-s",
                 "thn__bypass__c",
                 "-w",
-                "Id='a061j000003e6IcAAI'",
+                "Id='" + byPassId + "'",
                 "-v",
                 "thn__bypassvr__c=true",
                 "-u",
@@ -61,7 +61,7 @@ public class ValidationRule4 extends BaseTest {
                 "-s",
                 "thn__bypass__c",
                 "-w",
-                "Id='a061j000003e6IcAAI'",
+                "Id='" + byPassId + "'",
                 "-u",
                 ALIAS,
                 "--json"});
@@ -354,18 +354,18 @@ public class ValidationRule4 extends BaseTest {
     @Description("Credit_Note_Line__c.Invoice_Line_Validation")
     @Story("Create Credit Note Line record: thn__Invoice_Line__c == null & thn__Amount__c == null & thn__Quantity__c == null")
     public void testCreateNewCreditNoteLine() throws InterruptedException, IOException {
+        String expectedMessage = "When a credit note line isn't linked to an Invoice line then the Amount and VAT is required.";
         StringBuilder res1 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
-                "force:data:record:get",
+                "force:data:record:create",
                 "-s",
                 "thn__Credit_Note__c",
-                "-w",
-                "Name='CN-0001'",
+                "-v",
+                "thn__Status__c='Draft'",
                 "-u",
                 ALIAS,
                 "--json"});
-        String creditNoteID = JsonParser2.getFieldValue(res1.toString(), "Id");
-        System.out.println(creditNoteID);
-        StringBuilder res = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        String creditNoteID = JsonParser2.getFieldValue(res1.toString(), "id");
+        StringBuilder result = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:create",
                 "-s",
                 "thn__Credit_Note_Line__c",
@@ -374,7 +374,8 @@ public class ValidationRule4 extends BaseTest {
                 "-u",
                 ALIAS,
                 "--json"});
-        System.out.println(res);
+        String message = JsonParser2.getFieldValue2(result.toString(), "message");
+        Assert.assertEquals(message, expectedMessage);
     }*/
 
     @Test(priority = 11, description = "Package_Line__c.VR30_IsMultidays")
@@ -2737,7 +2738,7 @@ public class ValidationRule4 extends BaseTest {
                 "-s",
                 "thn__bypass__c",
                 "-w",
-                "Id='a061j000003e6IcAAI'",
+                "Id='" + byPassId + "'",
                 "-v",
                 "thn__bypassvr__c=false",
                 "-u",
@@ -2758,7 +2759,7 @@ public class ValidationRule4 extends BaseTest {
                 "-s",
                 "thn__bypass__c",
                 "-w",
-                "Id='a061j000003e6IcAAI'",
+                "Id='" + byPassId + "'",
                 "-u",
                 ALIAS,
                 "--json"});

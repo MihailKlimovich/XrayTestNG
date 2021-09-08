@@ -24,12 +24,6 @@ public class ValidationRule1 extends BaseTest{
     @Description("Setup.thn__ByPass__c.thn__ByPassVR__c == false and User.thn__ByPassVR__c == false")
     @Story("Settings")
     public void settingUpValidationRules() throws InterruptedException, IOException {
-        //StringBuilder result3 = SfdxCommand.runLinuxCommand2("/home/minsk-sc/sfdx/bin/sfdx force:data:record:update -s  User -w Name='User User' -v thn__ByPassVR__c=false -u THYNK-VR2 --json");
-        //System.out.println(result3);
-        /*StringBuilder result1 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
-                "force:org:list"
-                });
-        System.out.println(result1);*/
         StringBuilder authorise = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:auth:jwt:grant",
                 "--clientid",
@@ -37,7 +31,7 @@ public class ValidationRule1 extends BaseTest{
                 "--jwtkeyfile",
                 "/home/user/jdoe/JWT/server.key",
                 "--username",
-                "test-lbafgbxunsgq@example.com",
+                ALIAS,
                 "--instanceurl",
                 "https://test.salesforce.com"
                 });
@@ -59,7 +53,7 @@ public class ValidationRule1 extends BaseTest{
                 "-s",
                 "thn__bypass__c",
                 "-w",
-                "Id='a061j000003e6IcAAI'",
+                "Id='" + byPassId + "'",
                 "-v",
                 "thn__bypassvr__c=false",
                 "-u",
@@ -80,7 +74,7 @@ public class ValidationRule1 extends BaseTest{
                 "-s",
                 "thn__bypass__c",
                 "-w",
-                "Id='a061j000003e6IcAAI'",
+                "Id='" + byPassId + "'",
                 "-u",
                 ALIAS,
                 "--json"});
@@ -278,15 +272,15 @@ public class ValidationRule1 extends BaseTest{
     public void testCreateNewCreditNoteLine() throws InterruptedException, IOException {
         String expectedMessage = "When a credit note line isn't linked to an Invoice line then the Amount and VAT is required.";
         StringBuilder res1 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
-                "force:data:record:get",
+                "force:data:record:create",
                 "-s",
                 "thn__Credit_Note__c",
-                "-w",
-                "Name='CN-0000'",
+                "-v",
+                "thn__Status__c='Draft'",
                 "-u",
                 ALIAS,
                 "--json"});
-        String creditNoteID = JsonParser2.getFieldValue(res1.toString(), "Id");
+        String creditNoteID = JsonParser2.getFieldValue(res1.toString(), "id");
         StringBuilder result = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:create",
                 "-s",

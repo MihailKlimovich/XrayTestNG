@@ -10,10 +10,9 @@ import java.time.Duration;
 
 public class LoginPageForScratchOrg {
 
-    //private static final String USERNAME = "test-unbuxpim9tgh@example.com";//test-qcud2ypdbztz@example.com
-    //private static final String PASSWORD = "PWBgjUWd26#s|";//4EcH4cUgF)(9s
-    private static final String USERNAME = "test-lbafgbxunsgq@example.com";// test-6gjvejbnst2h@example.com
-    private static final String PASSWORD = "9EU3j&PDvJ@1l";// vZhz3q97V!C*2
+
+    private static final String USERNAME = "test-fzyag1rn0itm@example.com";
+    private static final String PASSWORD = "9EU3j&PDvJ@1l";
     private static final String URL_LOGIN_PAGE = "https://test.salesforce.com/";
     private static final By USER_NAME_SELECTOR = By.
             xpath("//div[@id='theloginform']//input[@class='input r4 wide mb16 mt8 username']");

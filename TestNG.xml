@@ -60,6 +60,11 @@
             <class name="tests.Request_Agent"/>
         </classes>
     </test>
+    <test name="THY-588: Packages - custom price">
+        <classes>
+            <class name="tests.PackagesCustomPrice"/>
+        </classes>
+    </test>
 
 
 </suite>

@@ -45,6 +45,16 @@ public class JsonParser2 extends BasePage {
             return null;}
     }
 
+    @Step("Get value like double")
+    public static Double getFieldValueLikeDouble(StringBuilder json, String key1, String key2) throws UnsupportedOperationException {
+        try {
+            JsonObject jsonObject = new JsonParser().parse(String.valueOf(json)).getAsJsonObject();
+            double result = jsonObject.getAsJsonObject(key1).get(key2).getAsDouble();
+            return result;
+        }catch (UnsupportedOperationException e){
+            return null;}
+    }
+
     public static void getFieldValue3(StringBuilder json, String key) throws UnsupportedOperationException {
 
         System.out.println(json);

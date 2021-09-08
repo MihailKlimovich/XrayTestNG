@@ -8,6 +8,7 @@
    delete [select name from Account where name != 'Sample Account for Entitlements'];
    delete [select thn__Name__c from thn__Item__c];
    delete [select Name from thn__Request__c];
+   delete [select Name from thn__Credit_Note__c];
 
   thn__Hotel__c prop1 = new thn__Hotel__c();
      prop1.Name = 'Test';

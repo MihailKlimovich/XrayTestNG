@@ -74,7 +74,7 @@ public class HomePageForScratchOrg extends BasePage {
     }
 
     @Step("OpenAppLauncher")
-    public void openAppLauncher(WebDriver driver){
+    public void openAppLauncher(){
         WebDriverWait = new WebDriverWait(driver, 30);
         WebElement appLauncherButton = wait1.until(ExpectedConditions.presenceOfElementLocated(APP_LAUNCHER_BUTTON));
         appLauncherButton.click();
@@ -83,7 +83,7 @@ public class HomePageForScratchOrg extends BasePage {
     }
 
     @Step("SendText")
-    public void  sendTextInAppWindow(WebDriver driver, String text) throws InterruptedException {
+    public void  sendTextInAppWindow(String text) throws InterruptedException {
         WebDriverWait = new WebDriverWait(driver, 30);
         WebElement searchAppWindow = wait1.until(ExpectedConditions.visibilityOfElementLocated(SEARCH_APP_WINDOW));
         searchAppWindow.findElement(By.xpath("//input[@placeholder='Search apps and items...']")).sendKeys(text);

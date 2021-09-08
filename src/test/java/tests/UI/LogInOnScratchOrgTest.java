@@ -19,8 +19,8 @@ public class LogInOnScratchOrgTest extends BaseTest{
 
         //when
         loginPageForScratchOrg.logInOnScratchOrg(driver);
-        homePageForScratchOrg.openAppLauncher(driver);
-        homePageForScratchOrg.sendTextInAppWindow(driver, text);
+        homePageForScratchOrg.openAppLauncher();
+        homePageForScratchOrg.sendTextInAppWindow(text);
         String AccountName = accounts.getAccountName(driver);
         System.out.println(AccountName);
 

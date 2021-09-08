@@ -28,6 +28,8 @@ public class QuoteProducts extends BasePage {
     By HELP_ERROR_MESSAGE = By.xpath("//div[@data-help-message]");
     By EDIT_BUTTON = By.xpath("//div[text()='Quote Product']/following::button[@name='Edit']");
     By ON_CONSUMPTION_CHECKBOX = By.xpath("//div[@class='isModal inlinePanel oneRecordActionWrapper']//lightning-input//span[text()='On Consumption']");
+    By MULTIEDIT_BUTTON = By.xpath("//h1[text()='Products']/following::div[@title='Multiedit']");
+
 
 
     @Step("Fill out the product")
@@ -47,6 +49,11 @@ public class QuoteProducts extends BasePage {
         wait1.until(ExpectedConditions.presenceOfElementLocated(END_DATE_FIELD)).click();
         writeText(END_DATE_FIELD, endDate);
         wait1.until(ExpectedConditions.elementToBeClickable(SAVE_BUTTON)).click();
+    }
+
+    @Step("Click Multiedit")
+    public void clickMultiedit(){
+        wait1.until(ExpectedConditions.presenceOfElementLocated(MULTIEDIT_BUTTON)).click();
     }
 
     @Step("Fill out the product")
@@ -108,6 +115,11 @@ public class QuoteProducts extends BasePage {
     @Step("Close window")
     public void closeWindow(){
         wait1.until(ExpectedConditions.elementToBeClickable(CLOSE_WINDOW_BUTTON)).click();
+    }
+
+    @Step("Select all items")
+    public  void selectAllItems(String items){
+        wait1.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[@class='slds-assistive-text' and starts-with(text(),'Select " + items + " items')]/preceding-sibling::span"))).click();
     }
 
 

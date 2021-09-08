@@ -200,8 +200,8 @@ public class ValidationRuleTest1 extends BaseTest {
         String expectedMessage = "When a credit note line isn't linked to an Invoice line then the Amount and VAT is required.";
         //when
         String text = "Credit Note Lines";
-        homePageForScratchOrg.openAppLauncher(driver);
-        homePageForScratchOrg.sendTextInAppWindow(driver, text);
+        homePageForScratchOrg.openAppLauncher();
+        homePageForScratchOrg.sendTextInAppWindow(text);
         creditNoteLine.clickNewCreditNoteLineButton();
         creditNoteLine.fillOutNewCreditNoteLineForm( "20");
         //then
