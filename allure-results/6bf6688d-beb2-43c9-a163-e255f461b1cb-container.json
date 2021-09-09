@@ -1,1 +1,0 @@
-{"uuid":"6bf6688d-beb2-43c9-a163-e255f461b1cb","name":"tests.PackagesCustomPrice","children":["bc7f90bf-5a91-4212-848f-14ed08f9c317"],"befores":[{"name":"classLevelSetup","status":"passed","stage":"finished","description":"","steps":[],"attachments":[],"parameters":[],"start":1631114502125,"stop":1631114503296}],"afters":[],"links":[],"start":1631114502085,"stop":1631114528363}

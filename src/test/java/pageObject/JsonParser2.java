@@ -55,6 +55,16 @@ public class JsonParser2 extends BasePage {
             return null;}
     }
 
+    @Step("Get value")
+    public static String getFieldValue111(String json, String key) throws UnsupportedOperationException {
+        try {
+            JsonObject jsonObject = new JsonParser().parse(json).getAsJsonObject();
+            String result = jsonObject.getAsJsonObject("result").get(key).getAsString();
+            return result;
+        }catch (UnsupportedOperationException e){
+            return null;}
+    }
+
     public static void getFieldValue3(StringBuilder json, String key) throws UnsupportedOperationException {
 
         System.out.println(json);

@@ -19,6 +19,27 @@ public class Request_Agent extends BaseTest{
     @Story("THY-506: Request - Agent")
     public void RequestAgent_case1() throws InterruptedException, IOException {
         loginPageForScratchOrg.logInOnScratchOrg(driver);
+        StringBuilder propertyRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:record:get",
+                "-s",
+                "thn__Hotel__c",
+                "-w",
+                "Name='Demo'",
+                "-u",
+                ALIAS,
+                "--json"});
+        String propertyID = JsonParser2.getFieldValue(propertyRecord.toString(), "Id");
+        StringBuilder result = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:record:update",
+                "-s",
+                "thn__Hotel__c",
+                "-w",
+                "id='" + propertyID + "'",
+                "-v",
+                "thn__Request_Name__c='Demo'",
+                "-u",
+                ALIAS,
+                "--json"});
         StringBuilder accountResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:create",
                 "-s",

@@ -1471,6 +1471,7 @@ public class ValidationRule2 extends BaseTest {
                 "-u",
                 ALIAS,
                 "--json"});
+        System.out.println(myseQuoteResult);
         String myceQuoteID = JsonParser2.getFieldValue(myseQuoteResult.toString(), "id");
         //thn__Start_Date__c  < thn__MYCE_Quote__r.thn__Arrival_Date__c
         StringBuilder quotePackageResult1 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
