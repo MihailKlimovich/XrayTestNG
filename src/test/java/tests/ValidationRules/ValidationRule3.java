@@ -1437,7 +1437,7 @@ public class ValidationRule3 extends BaseTest {
         Assert.assertEquals(success, "true");
     }
 
-    @Test(priority = 23, description = "Quote_Package__c.VR12_Dates_within_Quote_dates")
+    /*@Test(priority = 23, description = "Quote_Package__c.VR12_Dates_within_Quote_dates")
     @Severity(SeverityLevel.NORMAL)
     @Description("Quote_Package__c.VR12_Dates_within_Quote_dates")
     @Story("")
@@ -1502,7 +1502,7 @@ public class ValidationRule3 extends BaseTest {
         String quotePackageID2 = JsonParser2.getFieldValue(quotePackageResult2.toString(), "id");
         Assert.assertNotNull(quotePackageID2);*/
         //thn__End_Date__c< thn__MYCE_Quote__r.thn__Arrival_Date__c
-        StringBuilder quotePackageResult3 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        /*StringBuilder quotePackageResult3 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:create",
                 "-s",
                 "thn__Quote_Package__c",
@@ -1528,8 +1528,8 @@ public class ValidationRule3 extends BaseTest {
                 ALIAS,
                 "--json"});
         String quotePackageID4 = JsonParser2.getFieldValue(quotePackageResult4.toString(), "id");
-        Assert.assertNotNull(quotePackageID4);*/
-    }
+        Assert.assertNotNull(quotePackageID4);
+    }*/
 
     @Test(priority = 24, description = "Quote_Package__c.VR14_Discount")
     @Severity(SeverityLevel.NORMAL)
@@ -1762,7 +1762,7 @@ public class ValidationRule3 extends BaseTest {
         Assert.assertNotNull(quotePackageID);
     }
 
-    @Test(priority = 27, description = "Quote_Package__c.VR34_QuotePackage_Dates")
+    /*@Test(priority = 27, description = "Quote_Package__c.VR34_QuotePackage_Dates")
     @Severity(SeverityLevel.NORMAL)
     @Description("Quote_Package__c.VR34_QuotePackage_Dates")
     @Story("")
@@ -1860,7 +1860,7 @@ public class ValidationRule3 extends BaseTest {
                 "--json"});
         String quotePackageID3 = JsonParser2.getFieldValue(quotePackageResult3.toString(), "id");
         Assert.assertNotNull(quotePackageID3);
-    }
+    }*/
 
     @Test(priority = 28, description = "Quote_Package__c.VR37_Max_Discount")
     @Severity(SeverityLevel.NORMAL)
