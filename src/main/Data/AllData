@@ -84,7 +84,7 @@
         thn__Reservation__c res1 = new thn__Reservation__c();
         List<thn__Hotel__c> propertyID5 = [select ID from thn__Hotel__c where Name = 'Demo'];
         res1.thn__Hotel__c = propertyID5[0].id;
-        List<thn__Mews_Service__c> mewsSerID1 = [select ID from thn__Mews_Service__c where Name = 'ORDER'];
+        List<thn__Mews_Service__c> mewsSerID1 = [select ID from thn__Mews_Service__c where Name = 'Stay'];
         res1.thn__Mews_Service__c = mewsSerID1[0].id;
         List<thn__Guest__c> guestID1 = [select ID from thn__Guest__c where thn__FirstName__c = 'John'];
         res1.thn__Customer__c = guestID1[0].id;
