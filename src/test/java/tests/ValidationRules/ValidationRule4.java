@@ -2428,7 +2428,7 @@ public class ValidationRule4 extends BaseTest {
                 "-s",
                 "thn__Mews_Service__c",
                 "-w",
-                "Name='ORDER'",
+                "Name='Stay'",
                 "-u",
                 ALIAS,
                 "--json"});
@@ -2510,7 +2510,7 @@ public class ValidationRule4 extends BaseTest {
                 "-s",
                 "thn__Mews_Service__c",
                 "-w",
-                "Name='ORDER'",
+                "Name='Stay'",
                 "-u",
                 ALIAS,
                 "--json"});
@@ -2594,7 +2594,7 @@ public class ValidationRule4 extends BaseTest {
                 "-s",
                 "thn__Mews_Service__c",
                 "-w",
-                "Name='ORDER'",
+                "Name='Stay'",
                 "-u",
                 ALIAS,
                 "--json"});
