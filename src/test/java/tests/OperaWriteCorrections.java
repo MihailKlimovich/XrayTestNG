@@ -36,7 +36,7 @@ public class OperaWriteCorrections extends BaseTest {
                 "-s",
                 "thn__PMS_Account__c",
                 "-w",
-                "Name='TestOperaWrite'",
+                "Name='TestOperaWriteAuto'",
                 "-u",
                 thynkPackUserName,
                 "--json"});
@@ -46,7 +46,7 @@ public class OperaWriteCorrections extends BaseTest {
                 "-s",
                 "thn__PMS_Account__c",
                 "-v",
-                "Name='TestOperaWrite' thn__PropertyDetailsCode__c='ESDH' thn__PropertyDetailsChainCode__c='THYNK' thn__Type__c='GROUP'",
+                "Name='TestOperaWriteAuto' thn__PropertyDetailsCode__c='ESDH' thn__PropertyDetailsChainCode__c='THYNK' thn__Type__c='GROUP'",
                 "-u",
                 thynkPackUserName,
                 "--json"});
@@ -87,7 +87,7 @@ public class OperaWriteCorrections extends BaseTest {
                 "-s",
                 "thn__Guest__c",
                 "-w",
-                "thn__FirstName__c='TestOperaWrite'",
+                "thn__FirstName__c='TestOperaWriteAuto'",
                 "-u",
                 thynkPackUserName,
                 "--json"});
@@ -98,7 +98,7 @@ public class OperaWriteCorrections extends BaseTest {
                 "-s",
                 "thn__Guest__c",
                 "-v",
-                "thn__FirstName__c='TestOperaWrite' thn__LastName__c='TestOperaWrite' thn__PropertyDetailsCode__c='ESDH'" +
+                "thn__FirstName__c='TestOperaWriteAuto' thn__LastName__c='TestOperaWrite' thn__PropertyDetailsCode__c='ESDH'" +
                         " thn__PropertyDetailsChainCode__c='THYNK' thn__Type__c='GUEST' thn__Source__c='Myce'",
                 "-u",
                 thynkPackUserName,
@@ -140,7 +140,7 @@ public class OperaWriteCorrections extends BaseTest {
                 "-s",
                 "thn__Guest__c",
                 "-w",
-                "thn__FirstName__c='TestOperaWrite2'",
+                "thn__FirstName__c='TestOperaWriteAuto2'",
                 "-u",
                 thynkPackUserName,
                 "--json"});
@@ -222,7 +222,7 @@ public class OperaWriteCorrections extends BaseTest {
                 "-s",
                 "thn__Guest__c",
                 "-v",
-                "thn__FirstName__c='TestOperaWrite2' thn__LastName__c='TestOperaWrite2' " +
+                "thn__FirstName__c='TestOperaWriteAuto2' thn__LastName__c='TestOperaWrite2' " +
                         "thn__PropertyDetailsCode__c='ESDH' thn__PropertyDetailsChainCode__c='THYNK'" +
                         " thn__Type__c='GUEST' thn__Source__c='Myce'",
                 "-u",
@@ -287,7 +287,7 @@ public class OperaWriteCorrections extends BaseTest {
                 "-s",
                 "thn__PMS_Block__c",
                 "-w",
-                "Name='TestPMSBlock'",
+                "Name='TestPMSBlockAuto'",
                 "-u",
                 thynkPackUserName,
                 "--json"});
@@ -297,9 +297,12 @@ public class OperaWriteCorrections extends BaseTest {
                 "-s",
                 "thn__PMS_Block__c",
                 "-v",
-                "Name='TestPMSBlock' thn__PropertyDetailsCode__c='ESDH' thn__PropertyDetailsChainCode__c='THYNK'" +
+                "Name='TestPMSBlockAuto' thn__PropertyDetailsCode__c='ESDH' thn__PropertyDetailsChainCode__c='THYNK'" +
                         " thn__InventoryBlockType__c='NONELASTIC' thn__Start__c=" + date.generateTodayDate2() +
-                        " thn__End__c=" + date.generateTodayDate2_plus(0, 1),
+                        " thn__End__c=" + date.generateTodayDate2_plus(0, 1) + " CurrencyIsoCode='EUR'" +
+                        " thn__CurrencyCode__c='USD' thn__PaymentMethodCode__c='CC' thn__SegmentationMarket__c='GROUP'" +
+                        " thn__SegmentationSource__c='CD' thn__SegmentationChannel__c='CRO' thn__PMS_Block_Status__c='DEF'" +
+                        " thn__Code__c='a1g3X00000Py7rxQAB'",
                 "-u",
                 thynkPackUserName,
                 "--json"});
