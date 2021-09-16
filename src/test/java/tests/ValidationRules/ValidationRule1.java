@@ -19,10 +19,10 @@ import java.io.IOException;
 
 public class ValidationRule1 extends BaseTest{
 
-    @Test(priority = 1, description="Setting up validation rules")
+
+    @Test(priority = 1, description="Setting up validation rules: Setup.thn__ByPass__c.thn__ByPassVR__c == false and User.thn__ByPassVR__c == false ")
     @Severity(SeverityLevel.NORMAL)
-    @Description("Setup.thn__ByPass__c.thn__ByPassVR__c == false and User.thn__ByPassVR__c == false")
-    @Story("Settings")
+    @Story("THY-510: Validation rule updated")
     public void settingUpValidationRules() throws InterruptedException, IOException {
         StringBuilder authorise = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:auth:jwt:grant",
@@ -84,10 +84,10 @@ public class ValidationRule1 extends BaseTest{
         Assert.assertEquals(byPassVr, "false");
     }
 
-    @Test(priority = 2, description = "Myce_Quote__c.Commission_Validation_Rule")
+
+    @Test(priority = 2, description = "Myce_Quote__c.Commission_Validation_Rule: Commissionable == true & thn__Commission_to__c == null ")
     @Severity(SeverityLevel.NORMAL)
-    @Description("Myce_Quote__c.Commission_Validation_Rule")
-    @Story("Commissionable == true & thn__Commission_to__c == null")
+    @Story("THY-510: Validation rule updated")
     public void testCreateNewMyceQuote1() throws InterruptedException, IOException {
         String expectedMessage = "If commissionable = true, 'Commission to' field shouldn't be null or \n" +
                 "if  'Commission to' field equals 'agent', agent shouldn't be null or\n" +

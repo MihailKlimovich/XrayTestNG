@@ -54,8 +54,11 @@ public class BaseTest {
     final protected String ALIAS = "test-fzyag1rn0itm@example.com"; //test-lbafgbxunsgq@example.com 9EU3j&PDvJ@1l
     final protected String thynkPackDevOrg = "https://thynkpack-dev-ed.my.salesforce.com/";
     final protected String thynkPackUserName = "rostislav.orel@succraft.com";
-    final protected String thynkPackPassword = "Rost1508";
     final protected String thynkPackKey = "3MVG91BJr_0ZDQ4ta_ZwN1EEnfj.OQSJWOBWMPFXclJ22A8oaKqM9KTLdsoSupXX0idQnMIdsI3IweGbsJx6t";
+    final protected String thynkPackPassword = "Rost1508";
+    final protected String THY589UserName = "test-n7jjlpiaq9kj@example.com";
+    final protected String THY589Password = "p*np5rhMajgeb";
+    final protected String THY589Key = "3MVG95AcBeaB55lVSyX0xnbzXm5b6aiaDLu8j_2HTcL9YWLCYX.qiyxDynWwnc7Dw.EeL8E30Oru6L85llCiv";
     public String SCRATCHORGUSERNAME = "test-wixjue9le3v0@example.com";
     public String SCRATCHORGPASSWORD = "mEA3VqI_*OUSw";
     public String byPassId = "a0B1X000002HTPWUA4"; //a061j000003e6IcAAI

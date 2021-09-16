@@ -128,7 +128,6 @@ public class Request_Agent extends BaseTest{
         String agentId = JsonParser2.getFieldValue(requestRecord.toString(), "thn__Agent__c");
         String requestContactId = JsonParser2.getFieldValue(requestRecord.toString(), "thn__Contact__c");
         String requestAccountId = JsonParser2.getFieldValue(requestRecord.toString(), "thn__Account__c");
-
         StringBuilder myceQuoteRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:get",
                 "-s",
