@@ -40,6 +40,26 @@ public class TestInWork extends BaseTest{
                 "--json"});
         System.out.println(byPassRecord);*/
 
+        /*StringBuilder propertyDemoRecord2 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                    "force:data:record:get",
+                    "-s",
+                    "thn__Hotel__c",
+                    "-w",
+                    "Id='" + propertyDemoID + "'",
+                    "-u",
+                    THY589UserName,
+                    "--json"});
+
+            String pmsBlockID= JsonParser2.getFieldValue(pmsBlockRecord.toString(), "Id");
+            Object rates = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                    "force:data:soql:query",
+                    "-q",
+                    "SELECT Id FROM thn__BlockRate__c WHERE thn__PMS_Block__c='" + pmsBlockID + "'",
+                    "-u",
+                    THY589UserName,
+                    "--json"});
+            System.out.println(rates);*/
+
 
     }
 }
