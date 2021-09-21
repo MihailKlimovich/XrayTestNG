@@ -1,5 +1,5 @@
    delete [select name from thn__MYCE_Quote__c];
-   delete [select name from thn__Hotel__c where name = 'Test'];
+   delete [select name from thn__Hotel__c where name != 'Demo' or name!='Property Auto'];
    delete [select name from thn__Package__c];
    delete [select thn__FirstName__c from thn__Guest__c];
    delete [select name from thn__Reservation__c];
@@ -10,9 +10,12 @@
    delete [select Name from thn__Request__c];
    delete [select Name from thn__Credit_Note__c];
 
+
   thn__Hotel__c prop1 = new thn__Hotel__c();
      prop1.Name = 'Test';
      insert prop1;
+
+
 
   List<Account> accounts = new  List<Account>();
       accounts.add(new Account(Name = 'First Test Account'));
@@ -124,4 +127,6 @@
         id propId2 = [select id from thn__Hotel__c where Name = 'Test'].id;
         resource2.thn__Hotel__c = propId2;
         insert resource2;
+
+
 

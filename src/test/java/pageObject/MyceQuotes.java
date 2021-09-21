@@ -57,6 +57,16 @@ public class MyceQuotes extends BasePage{
     By HELP_ERROR_MESSAGE = By.xpath("//div[@data-help-message]");
     By DATA_ERROR_MESSAGE = By.xpath("//div[@data-error-message]");
     By QUOTE_NAME = By.xpath("//slot[@slot='primaryField']//lightning-formatted-text");
+    By CLONE_MYCE_QUOTE_BUTTON = By.xpath("//div//runtime_platform_actions-action-renderer[@title='Clone MYCE Quote']");
+    By DROP_DOWN_BUTTON = By.xpath("//records-lwc-highlights-panel//lightning-button-menu[@class='menu-button-item slds-dropdown-trigger slds-dropdown-trigger_click']//button");
+    By KEEP_ALL_PAX_CHECKBOX = By.xpath("//span//input[@name='Keep all Pax']/following-sibling::label//span");
+    By KEEP_ROOMS_PAX_CHECKBOX = By.xpath("//input[@name='Keep all Pax']/following-sibling::label//span");
+    By SAVE_BUTTON_FOR_CLONE = By.xpath("//footer//button[text()='Save']");
+    By CHANGE_DATE_BUTTON = By.xpath("//button[@name='thn__MYCE_Quote__c.thn__Change_Date']");
+    By NEW_ARRIVAL_DATE_FIELD = By.xpath("//input[@name='New_arrival_date']");
+    By NEXT_BUTTON_CHANGE_DATE_WINDOW = By.xpath("//button[@title='Next']");
+    By FINISH_BUTTON_CHANGE_DATE_WINDOW = By.xpath("//button[@title='Finish']");
+
 
 
 
@@ -82,6 +92,21 @@ public class MyceQuotes extends BasePage{
         wait1.until(ExpectedConditions.presenceOfElementLocated(NEW_MYCE_QUOTE_BUTTON)).click();
         wait1.until(ExpectedConditions.presenceOfElementLocated(QUATE_RADIO_BUTTON)).click();
         wait1.until(ExpectedConditions.elementToBeClickable(NEXT_BUTTON)).click();
+    }
+
+    @Step("Change date")
+    public void changeDate(String date) throws InterruptedException {
+        wait1.until(ExpectedConditions.presenceOfElementLocated(CHANGE_DATE_BUTTON)).click();
+        wait1.until(ExpectedConditions.presenceOfElementLocated(NEW_ARRIVAL_DATE_FIELD)).click();
+        clear(NEW_ARRIVAL_DATE_FIELD);
+        writeText(NEW_ARRIVAL_DATE_FIELD, date);
+        wait1.until(ExpectedConditions.elementToBeClickable(NEXT_BUTTON_CHANGE_DATE_WINDOW)).click();
+        wait1.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//p[text()='All the dates of the quote will be updated. Click Next to confirm.']")));
+        wait1.until(ExpectedConditions.elementToBeClickable(NEXT_BUTTON_CHANGE_DATE_WINDOW)).click();
+        wait1.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//p[text()='Quote date has been updated.']")));
+        wait1.until(ExpectedConditions.elementToBeClickable(FINISH_BUTTON_CHANGE_DATE_WINDOW)).click();
+        Thread.sleep(2000);
+
     }
 
     @Step("Fill out the quota form when Commission is None")
@@ -332,6 +357,18 @@ public class MyceQuotes extends BasePage{
         wait1.until(ExpectedConditions.presenceOfElementLocated(IS_CONFIRMED_RADIO_BUTTON)).click();
     }
 
+    @Step("Clone Myce Quote")
+    public void cloneMyceQuote(String name){
+        wait1.until(ExpectedConditions.presenceOfElementLocated(DROP_DOWN_BUTTON)).click();
+        enter();
+        wait1.until(ExpectedConditions.presenceOfElementLocated(NAME_QUOTE_FIELD)).click();
+        writeText(NAME_QUOTE_FIELD, name);
+        wait1.until(ExpectedConditions.presenceOfElementLocated(KEEP_ALL_PAX_CHECKBOX)).click();
+        wait1.until(ExpectedConditions.presenceOfElementLocated(KEEP_ROOMS_PAX_CHECKBOX)).click();
+        wait1.until(ExpectedConditions.presenceOfElementLocated(SAVE_BUTTON_FOR_CLONE)).click();
+        wait1.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//slot[@slot='header']//slot[@slot='primaryField']//lightning-formatted-text[text()='" + name + "']")));
+    }
+
     @Step("Open Hotel Rooms")
     public void openHotelRooms(){
         wait1.until(ExpectedConditions.presenceOfElementLocated(HOTEL_ROOM)).click();
@@ -392,7 +429,6 @@ public class MyceQuotes extends BasePage{
     public String readQuoteName() throws InterruptedException {
         return readRecalculateMessage(QUOTE_NAME);
     }
-
 
 
     @Step("Close window")

@@ -61,5 +61,18 @@ public class LoginPageForScratchOrg {
         logInButton.click();
     }
 
+    public void logInOnScratchOrg2(WebDriver driver, String URL, String username, String password){
+        driver.get(URL);
+        WebDriverWait wait = new WebDriverWait(driver, 30);
+        WebElement userNameField = wait.until(ExpectedConditions.presenceOfElementLocated(USER_NAME_SELECTOR));
+        userNameField.click();
+        userNameField.sendKeys(username);
+        WebElement passwordNameField = wait.until(ExpectedConditions.presenceOfElementLocated(PASSWORD_SELECTOR));
+        passwordNameField.click();
+        passwordNameField.sendKeys(password);
+        WebElement logInButton = wait.until(ExpectedConditions.elementToBeClickable(LOGIN_BUTTON_SELECTOR));
+        logInButton.click();
+    }
+
 
 }

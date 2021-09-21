@@ -1,0 +1,37 @@
+ String propertyID = [select ID from thn__Hotel__c where Name = 'Property Auto' limit 1].ID;
+  String resourceID = [select ID from thn__Resource__c where Name = 'DEFAULT PA' limit 1].ID;
+
+  Metadata.DeployContainer mdContainer = new Metadata.DeployContainer();
+
+  Metadata.CustomMetadata cmd = new Metadata.CustomMetadata();
+  cmd.fullName = 'thn__Hapi_Connector__mdt.thn__Property_Auto';
+  cmd.label = 'Property Auto';
+
+  Metadata.CustomMetadataValue customField1 = new Metadata.CustomMetadataValue();
+  customField1.field = 'thn__AvailabilityInterval__c';
+  customField1.value = 99;
+  cmd.values.add(customField1);
+
+  Metadata.CustomMetadataValue customField2 = new Metadata.CustomMetadataValue();
+   customField2.field = 'thn__Chain_code__c';
+   customField2.value = 'PROPERTY_AUTO_CHAIN';
+   cmd.values.add(customField2);
+
+   Metadata.CustomMetadataValue customField3 = new Metadata.CustomMetadataValue();
+    customField3.field = 'thn__Endpoint__c';
+    customField3.value = 'https://test.com';
+    cmd.values.add(customField3);
+
+  Metadata.CustomMetadataValue customField4 = new Metadata.CustomMetadataValue();
+     customField4.field = 'thn__PriceInterval__c';
+     customField4.value = 120;
+     cmd.values.add(customField4);
+
+  Metadata.CustomMetadataValue customField5 = new Metadata.CustomMetadataValue();
+        customField5.field = 'thn__Property_Id__c';
+        customField5.value = propertyID;
+        cmd.values.add(customField5);
+
+  mdContainer.addMetadata(cmd);
+  Id job = Metadata.Operations.enqueueDeployment(mdContainer, null);
+  System.debug(job);

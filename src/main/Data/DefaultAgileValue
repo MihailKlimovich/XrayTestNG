@@ -1,0 +1,94 @@
+
+thn__Hotel__c prop2 = new thn__Hotel__c();
+          prop2.Name = 'Property Auto';
+          prop2.thn__HotelCode__c='PROPERTY_AUTO_HOTEL_CODE'
+          prop2.thn__HotelBrand__c='PROPERTY_AUTO_BRAND_CODE'
+          prop2.thn__Unique_Id__c='Property_Auto'
+          insert prop2;
+
+          String propertyIDAuto = [select ID from thn__Hotel__c where Name = 'Property Auto' limit 1].ID;
+
+          thn__Space_Area__c roomType1 = new thn__Space_Area__c();
+          roomType1.Name='Queen Property Auto';
+          roomType1.thn__Hotel__c=propertyIDAuto;
+          insert roomType1;
+
+          thn__Product__c productAuto = new thn__Product__c();
+          productAuto.Name='ROOM 1 NIGHT PROPERTY AUTO';
+          productAuto.thn__Hotel__c=propertyIDAuto;
+          productAuto.thn__Hotel__c=thn__VAT_Category__c='1';
+          productAuto.thn__Price_Gross_Value__c=132;
+          productAuto.thn__Price_Net_Value__c=120;
+          productAuto.thn__Start_Time__c='12:00';
+          productAuto.thn__End_Time__c='14:30';
+          productAuto.thn__MYCE_Product_Type__c='Hotel Room'";
+          insert productAuto;
+
+          thn__Resource__c resAuto = new thn__Resource__c();
+          resAuto.Name='DEFAULT PA';
+          resAuto.thn__Hotel__c=propertyIDAuto;
+
+
+ String propertyID = [select ID from thn__Hotel__c where Name = 'Property Auto' limit 1].ID;
+ String resourceID = [select ID from thn__Resource__c where Name = 'DEFAULT PA' limit 1].ID;
+
+ Metadata.DeployContainer mdContainer = new Metadata.DeployContainer();
+
+ Metadata.CustomMetadata cmd = new Metadata.CustomMetadata();
+ cmd.fullName = 'thn__Default_Agile_Value__mdt.thn__Property_Auto';
+ cmd.label = 'Property Auto';
+
+ Metadata.CustomMetadataValue customField1 = new Metadata.CustomMetadataValue();
+ customField1.field = 'thn__Hotel_Id__c';
+ customField1.value = propertyID;
+ cmd.values.add(customField1);
+
+ Metadata.CustomMetadataValue customField2 = new Metadata.CustomMetadataValue();
+  customField2.field = 'thn__Connector__c';
+  customField2.value = 'Opera';
+  cmd.values.add(customField2);
+
+  Metadata.CustomMetadataValue customField3 = new Metadata.CustomMetadataValue();
+   customField3.field = 'thn__Hotel_Room_VAT_Cat__c';
+   customField3.value = '1';
+   cmd.values.add(customField3);
+
+ Metadata.CustomMetadataValue customField4 = new Metadata.CustomMetadataValue();
+    customField4.field = 'thn__Meeting_Room_VAT_Cat__c';
+    customField4.value = '2';
+    cmd.values.add(customField4);
+
+ Metadata.CustomMetadataValue customField5 = new Metadata.CustomMetadataValue();
+       customField5.field = 'thn__Product_VAT_Cat__c';
+       customField5.value = '2';
+       cmd.values.add(customField5);
+
+ Metadata.CustomMetadataValue customField6 = new Metadata.CustomMetadataValue();
+          customField6.field = 'thn__Default_Start_hour__c';
+          customField6.value = '8';
+          cmd.values.add(customField6);
+
+ Metadata.CustomMetadataValue customField7 = new Metadata.CustomMetadataValue();
+           customField7.field = 'thn__Default_End_hour__c';
+           customField7.value = '9';
+           cmd.values.add(customField7);
+
+ Metadata.CustomMetadataValue customField8 = new Metadata.CustomMetadataValue();
+           customField8.field = 'thn__Create_PM_Guest__c';
+           customField8.value = true;
+           cmd.values.add(customField8);
+
+ Metadata.CustomMetadataValue customField9 = new Metadata.CustomMetadataValue();
+           customField9.field = 'thn__Name_Field__c';
+           customField9.value = 'thn__Reservation_Guest_Name__c';
+           cmd.values.add(customField9);
+
+ Metadata.CustomMetadataValue customField10 = new Metadata.CustomMetadataValue();
+            customField10.field = 'thn__Resource_Id__c';
+            customField10.value = resourceID;
+            cmd.values.add(customField10);
+
+ mdContainer.addMetadata(cmd);
+ Id job = Metadata.Operations.enqueueDeployment(mdContainer, null);
+ System.debug(job);
+

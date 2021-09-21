@@ -7,6 +7,9 @@ import org.json.*;
 import org.openqa.selenium.WebDriver;
 import pages.BasePage;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class JsonParser2 extends BasePage {
 
     /**Constructor*/
@@ -54,6 +57,21 @@ public class JsonParser2 extends BasePage {
         }catch (UnsupportedOperationException e){
             return null;}
     }
+    @Step("Get value from SOQL")
+    public static List<String> getFieldValueSoql(String json, String... keys) throws UnsupportedOperationException {
+        JSONObject obj = new JSONObject(json);
+        JSONArray array = obj.getJSONObject("result").getJSONArray("records");
+        ArrayList <String> records = new ArrayList<>();
+        for (int i = 0; i < array.length(); i++) {
+            for (String key: keys) {
+                String result = array.getJSONObject(i).getString(key);
+                records.add(result);
+            }
+        }
+        return records;
+    }
+
+
 
     @Step("Get value")
     public static String getFieldValue111(String json, String key) throws UnsupportedOperationException {

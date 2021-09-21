@@ -4,12 +4,16 @@ import io.qameta.allure.Description;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.Story;
+import org.json.simple.parser.ParseException;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import pageObject.JsonParser;
 import pageObject.JsonParser2;
 import pageObject.SfdxCommand;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MyceToOpera extends BaseTest {
 
@@ -17,7 +21,8 @@ public class MyceToOpera extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     @Story("THY-589: MYCE to Opera")
     public void testMyceToOpera_WhereOneHotelRoom() throws InterruptedException, IOException {
-        StringBuilder authorise = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder authorise = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:auth:jwt:grant",
                 "--clientid",
                 THY589Key,
@@ -28,7 +33,8 @@ public class MyceToOpera extends BaseTest {
                 "--instanceurl",
                 "https://test.salesforce.com"
         });
-        SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:delete",
                 "-s",
                 "thn__MYCE_Quote__c",
@@ -37,7 +43,8 @@ public class MyceToOpera extends BaseTest {
                 "-u",
                 THY589UserName,
                 "--json"});
-        StringBuilder propertyDemoRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder propertyDemoRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Hotel__c",
@@ -47,7 +54,8 @@ public class MyceToOpera extends BaseTest {
                 THY589UserName,
                 "--json"});
         String propertyDemoID = JsonParser2.getFieldValue(propertyDemoRecord.toString(), "Id");
-        StringBuilder updateResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder updateResult = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:update",
                 "-s",
                 "thn__Hotel__c",
@@ -59,7 +67,8 @@ public class MyceToOpera extends BaseTest {
                 THY589UserName,
                 "--json"});
         System.out.println(updateResult);
-        StringBuilder productRoom1NightRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder productRoom1NightRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Product__c",
@@ -69,7 +78,8 @@ public class MyceToOpera extends BaseTest {
                 THY589UserName,
                 "--json"});
         String productRoom1NightID = JsonParser2.getFieldValue(productRoom1NightRecord.toString(), "Id");
-        StringBuilder roomTypeSingleRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder roomTypeSingleRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Space_Area__c",
@@ -79,7 +89,8 @@ public class MyceToOpera extends BaseTest {
                 THY589UserName,
                 "--json"});
         String roomTypeSingleID = JsonParser2.getFieldValue(roomTypeSingleRecord.toString(), "Id");
-        StringBuilder myseQuoteResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder myseQuoteResult = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:create",
                 "-s",
                 "thn__MYCE_Quote__c",
@@ -94,7 +105,8 @@ public class MyceToOpera extends BaseTest {
                 THY589UserName,
                 "--json"});
         String myceQuoteID = JsonParser2.getFieldValue(myseQuoteResult.toString(), "id");
-        StringBuilder quoteHotelRoomResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quoteHotelRoomResult = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:create",
                 "-s",
                 "thn__Quote_Hotel_Room__c",
@@ -104,7 +116,8 @@ public class MyceToOpera extends BaseTest {
                 "-u",
                 THY589UserName,
                 "--json"});
-        SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:update",
                 "-s",
                 "thn__MYCE_Quote__c",
@@ -115,7 +128,8 @@ public class MyceToOpera extends BaseTest {
                 "-u",
                 THY589UserName,
                 "--json"});
-        StringBuilder myceQuoteRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder myceQuoteRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__MYCE_Quote__c",
@@ -125,7 +139,8 @@ public class MyceToOpera extends BaseTest {
                 THY589UserName,
                 "--json"});
         System.out.println(myceQuoteRecord);
-        StringBuilder pmsBlockRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder pmsBlockRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__PMS_Block__c",
@@ -135,7 +150,8 @@ public class MyceToOpera extends BaseTest {
                 THY589UserName,
                 "--json"});
         System.out.println(pmsBlockRecord);
-        StringBuilder propertyDemoRecord2 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder propertyDemoRecord2 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Hotel__c",
@@ -145,7 +161,8 @@ public class MyceToOpera extends BaseTest {
                 THY589UserName,
                 "--json"});
         String pmsBlockID= JsonParser2.getFieldValue(pmsBlockRecord.toString(), "Id");
-        StringBuilder pmsBlockInventoryRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder pmsBlockInventoryRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__PMS_Block_Inventory__c",
@@ -154,7 +171,8 @@ public class MyceToOpera extends BaseTest {
                 "-u",
                 THY589UserName,
                 "--json"});
-        StringBuilder pmsBlockRateRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder pmsBlockRateRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__BlockRate__c",
@@ -201,8 +219,9 @@ public class MyceToOpera extends BaseTest {
         @Test(priority = 2, description = "Add new quote hotel room after sending to PMS")
         @Severity(SeverityLevel.NORMAL)
         @Story("THY-589: MYCE to Opera")
-        public void testMyceToOpera_addQuoteHotelRoom() throws InterruptedException, IOException {
-            SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        public void testMyceToOpera_addQuoteHotelRoom() throws InterruptedException, IOException, ParseException {
+            SfdxCommand.runLinuxCommand1(new String[]{
+                    SFDX,
                     "force:data:record:delete",
                     "-s",
                     "thn__MYCE_Quote__c",
@@ -211,7 +230,8 @@ public class MyceToOpera extends BaseTest {
                     "-u",
                     THY589UserName,
                     "--json"});
-            StringBuilder propertyDemoRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+            StringBuilder propertyDemoRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                    SFDX,
                     "force:data:record:get",
                     "-s",
                     "thn__Hotel__c",
@@ -221,7 +241,8 @@ public class MyceToOpera extends BaseTest {
                     THY589UserName,
                     "--json"});
             String propertyDemoID = JsonParser2.getFieldValue(propertyDemoRecord.toString(), "Id");
-            StringBuilder updateResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+            StringBuilder updateResult = SfdxCommand.runLinuxCommand1(new String[]{
+                    SFDX,
                     "force:data:record:update",
                     "-s",
                     "thn__Hotel__c",
@@ -232,8 +253,8 @@ public class MyceToOpera extends BaseTest {
                     "-u",
                     THY589UserName,
                     "--json"});
-            System.out.println(updateResult);
-            StringBuilder productRoom1NightRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+            StringBuilder productRoom1NightRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                    SFDX,
                     "force:data:record:get",
                     "-s",
                     "thn__Product__c",
@@ -243,7 +264,8 @@ public class MyceToOpera extends BaseTest {
                     THY589UserName,
                     "--json"});
             String productRoom1NightID = JsonParser2.getFieldValue(productRoom1NightRecord.toString(), "Id");
-            StringBuilder productRoom2NightsRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+            StringBuilder productRoom2NightsRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                    SFDX,
                     "force:data:record:get",
                     "-s",
                     "thn__Product__c",
@@ -253,7 +275,8 @@ public class MyceToOpera extends BaseTest {
                     THY589UserName,
                     "--json"});
             String productRoom2NightsID = JsonParser2.getFieldValue(productRoom2NightsRecord.toString(), "Id");
-            StringBuilder roomTypeSingleRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+            StringBuilder roomTypeSingleRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                    SFDX,
                     "force:data:record:get",
                     "-s",
                     "thn__Space_Area__c",
@@ -263,7 +286,8 @@ public class MyceToOpera extends BaseTest {
                     THY589UserName,
                     "--json"});
             String roomTypeSingleID = JsonParser2.getFieldValue(roomTypeSingleRecord.toString(), "Id");
-            StringBuilder roomTypeQueenRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+            StringBuilder roomTypeQueenRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                    SFDX,
                     "force:data:record:get",
                     "-s",
                     "thn__Space_Area__c",
@@ -273,7 +297,8 @@ public class MyceToOpera extends BaseTest {
                     THY589UserName,
                     "--json"});
             String roomTypeQueenID = JsonParser2.getFieldValue(roomTypeQueenRecord.toString(), "Id");
-            StringBuilder myseQuoteResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+            StringBuilder myseQuoteResult = SfdxCommand.runLinuxCommand1(new String[]{
+                    SFDX,
                     "force:data:record:create",
                     "-s",
                     "thn__MYCE_Quote__c",
@@ -288,7 +313,8 @@ public class MyceToOpera extends BaseTest {
                     THY589UserName,
                     "--json"});
             String myceQuoteID = JsonParser2.getFieldValue(myseQuoteResult.toString(), "id");
-            StringBuilder quoteHotelRoomResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+            StringBuilder quoteHotelRoomResult = SfdxCommand.runLinuxCommand1(new String[]{
+                    SFDX,
                     "force:data:record:create",
                     "-s",
                     "thn__Quote_Hotel_Room__c",
@@ -298,7 +324,8 @@ public class MyceToOpera extends BaseTest {
                     "-u",
                     THY589UserName,
                     "--json"});
-            SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+            SfdxCommand.runLinuxCommand1(new String[]{
+                    SFDX,
                     "force:data:record:update",
                     "-s",
                     "thn__MYCE_Quote__c",
@@ -309,7 +336,8 @@ public class MyceToOpera extends BaseTest {
                     "-u",
                     THY589UserName,
                     "--json"});
-            StringBuilder quoteHotelRoomResult2 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+            StringBuilder quoteHotelRoomResult2 = SfdxCommand.runLinuxCommand1(new String[]{
+                    SFDX,
                     "force:data:record:create",
                     "-s",
                     "thn__Quote_Hotel_Room__c",
@@ -319,7 +347,8 @@ public class MyceToOpera extends BaseTest {
                     "-u",
                     THY589UserName,
                     "--json"});
-            StringBuilder myceQuoteRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+            StringBuilder myceQuoteRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                    SFDX,
                     "force:data:record:get",
                     "-s",
                     "thn__MYCE_Quote__c",
@@ -328,8 +357,8 @@ public class MyceToOpera extends BaseTest {
                     "-u",
                     THY589UserName,
                     "--json"});
-            System.out.println(myceQuoteRecord);
-            StringBuilder pmsBlockRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+            StringBuilder pmsBlockRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                    SFDX,
                     "force:data:record:get",
                     "-s",
                     "thn__PMS_Block__c",
@@ -338,9 +367,9 @@ public class MyceToOpera extends BaseTest {
                     "-u",
                     THY589UserName,
                     "--json"});
-            System.out.println(pmsBlockRecord);
             String pmsBlockID= JsonParser2.getFieldValue(pmsBlockRecord.toString(), "Id");
-            StringBuilder pmsBlockInventoryRecord1 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+            StringBuilder pmsBlockInventoryRecord1 = SfdxCommand.runLinuxCommand1(new String[]{
+                    SFDX,
                     "force:data:record:get",
                     "-s",
                     "thn__PMS_Block_Inventory__c",
@@ -349,9 +378,9 @@ public class MyceToOpera extends BaseTest {
                     "-u",
                     THY589UserName,
                     "--json"});
-            System.out.println(pmsBlockInventoryRecord1);
             String pmsBlockInventoryID1= JsonParser2.getFieldValue(pmsBlockInventoryRecord1.toString(), "Id");
-            StringBuilder pmsBlockInventoryRecord2 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+            StringBuilder pmsBlockInventoryRecord2 = SfdxCommand.runLinuxCommand1(new String[]{
+                    SFDX,
                     "force:data:record:get",
                     "-s",
                     "thn__PMS_Block_Inventory__c",
@@ -360,9 +389,9 @@ public class MyceToOpera extends BaseTest {
                     "-u",
                     THY589UserName,
                     "--json"});
-            System.out.println(pmsBlockInventoryRecord1);
             String pmsBlockInventoryID2= JsonParser2.getFieldValue(pmsBlockInventoryRecord2.toString(), "Id");
-            StringBuilder pmsBlockRateRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+            StringBuilder pmsBlockRateRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                    SFDX,
                     "force:data:record:get",
                     "-s",
                     "thn__BlockRate__c",
@@ -371,18 +400,32 @@ public class MyceToOpera extends BaseTest {
                     "-u",
                     THY589UserName,
                     "--json"});
-            System.out.println(pmsBlockRateRecord);
             String pmsBlockRateMessage= JsonParser2.getFieldValue2(pmsBlockRateRecord.toString(), "message");
             Assert.assertNotNull(pmsBlockInventoryID1);
             Assert.assertNotNull(pmsBlockInventoryID2);
             Assert.assertTrue(pmsBlockRateMessage.contains("6 records were retrieved"));
+
+
+            Object rates = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                    "force:data:soql:query",
+                    "-q",
+                    "SELECT Id, thn__Start__c, thn__End__c FROM thn__BlockRate__c WHERE thn__PMS_Block__c='" + pmsBlockID + "'",
+                    "-u",
+                    THY589UserName,
+                    "--json"});
+            System.out.println(rates);
+            List<String> values= JsonParser2.getFieldValueSoql(rates.toString(), "thn__Start__c" , "thn__End__c");
+            System.out.println(values);
+            String date1 = values.get(0);
+
     }
 
     @Test(priority = 3, description = "Delete quote hotel room after sending to PMS")
     @Severity(SeverityLevel.NORMAL)
     @Story("THY-589: MYCE to Opera")
     public void testMyceToOpera_deleteQuoteHotelRoom() throws InterruptedException, IOException {
-        SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:delete",
                 "-s",
                 "thn__MYCE_Quote__c",
@@ -391,7 +434,8 @@ public class MyceToOpera extends BaseTest {
                 "-u",
                 THY589UserName,
                 "--json"});
-        StringBuilder propertyDemoRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder propertyDemoRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Hotel__c",
@@ -401,7 +445,8 @@ public class MyceToOpera extends BaseTest {
                 THY589UserName,
                 "--json"});
         String propertyDemoID = JsonParser2.getFieldValue(propertyDemoRecord.toString(), "Id");
-        StringBuilder updateResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder updateResult = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:update",
                 "-s",
                 "thn__Hotel__c",
@@ -413,7 +458,8 @@ public class MyceToOpera extends BaseTest {
                 THY589UserName,
                 "--json"});
         System.out.println(updateResult);
-        StringBuilder productRoom1NightRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder productRoom1NightRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Product__c",
@@ -433,7 +479,8 @@ public class MyceToOpera extends BaseTest {
                 THY589UserName,
                 "--json"});
         String productRoom2NightsID = JsonParser2.getFieldValue(productRoom2NightsRecord.toString(), "Id");
-        StringBuilder roomTypeSingleRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder roomTypeSingleRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Space_Area__c",
@@ -443,7 +490,8 @@ public class MyceToOpera extends BaseTest {
                 THY589UserName,
                 "--json"});
         String roomTypeSingleID = JsonParser2.getFieldValue(roomTypeSingleRecord.toString(), "Id");
-        StringBuilder roomTypeQueenRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder roomTypeQueenRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Space_Area__c",
@@ -453,7 +501,8 @@ public class MyceToOpera extends BaseTest {
                 THY589UserName,
                 "--json"});
         String roomTypeQueenID = JsonParser2.getFieldValue(roomTypeQueenRecord.toString(), "Id");
-        StringBuilder myseQuoteResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder myseQuoteResult = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:create",
                 "-s",
                 "thn__MYCE_Quote__c",
@@ -468,7 +517,8 @@ public class MyceToOpera extends BaseTest {
                 THY589UserName,
                 "--json"});
         String myceQuoteID = JsonParser2.getFieldValue(myseQuoteResult.toString(), "id");
-        StringBuilder quoteHotelRoomResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quoteHotelRoomResult = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:create",
                 "-s",
                 "thn__Quote_Hotel_Room__c",
@@ -479,7 +529,8 @@ public class MyceToOpera extends BaseTest {
                 THY589UserName,
                 "--json"});
         String quoteHotelRoomID = JsonParser2.getFieldValue(quoteHotelRoomResult.toString(), "id");
-        StringBuilder quoteHotelRoomResult2 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quoteHotelRoomResult2 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:create",
                 "-s",
                 "thn__Quote_Hotel_Room__c",
@@ -489,7 +540,8 @@ public class MyceToOpera extends BaseTest {
                 "-u",
                 THY589UserName,
                 "--json"});
-        SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:update",
                 "-s",
                 "thn__MYCE_Quote__c",
@@ -500,7 +552,8 @@ public class MyceToOpera extends BaseTest {
                 "-u",
                 THY589UserName,
                 "--json"});
-        StringBuilder deleteResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder deleteResult = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:delete",
                 "-s",
                 "thn__Quote_Hotel_Room__c",
@@ -510,7 +563,8 @@ public class MyceToOpera extends BaseTest {
                 THY589UserName,
                 "--json"});
         System.out.println(deleteResult);
-        StringBuilder myceQuoteRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder myceQuoteRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__MYCE_Quote__c",
@@ -519,7 +573,8 @@ public class MyceToOpera extends BaseTest {
                 "-u",
                 THY589UserName,
                 "--json"});
-        StringBuilder pmsBlockRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder pmsBlockRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__PMS_Block__c",
@@ -530,7 +585,8 @@ public class MyceToOpera extends BaseTest {
                 "--json"});
         String pmsBlockID = JsonParser2.getFieldValue(pmsBlockRecord.toString(), "Id");
 
-        StringBuilder pmsBlockInventoryRecord1 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder pmsBlockInventoryRecord1 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__PMS_Block_Inventory__c",
@@ -542,7 +598,8 @@ public class MyceToOpera extends BaseTest {
         System.out.println(pmsBlockInventoryRecord1);
         String pmsBlockInventoryID1 = JsonParser2.getFieldValue2(pmsBlockInventoryRecord1.toString(), "message");
         System.out.println(pmsBlockInventoryID1);
-        StringBuilder pmsBlockInventoryRecord2 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder pmsBlockInventoryRecord2 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__PMS_Block_Inventory__c",
@@ -552,7 +609,8 @@ public class MyceToOpera extends BaseTest {
                 THY589UserName,
                 "--json"});
         String pmsBlockInventoryID2 = JsonParser2.getFieldValue(pmsBlockInventoryRecord2.toString(), "Id");
-        StringBuilder pmsBlockRateRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder pmsBlockRateRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__BlockRate__c",
@@ -571,7 +629,8 @@ public class MyceToOpera extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     @Story("THY-589: MYCE to Opera")
     public void testMyceToOpera_changeQuoteDepartureDate() throws InterruptedException, IOException {
-        SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:delete",
                 "-s",
                 "thn__MYCE_Quote__c",
@@ -580,7 +639,8 @@ public class MyceToOpera extends BaseTest {
                 "-u",
                 THY589UserName,
                 "--json"});
-        StringBuilder propertyDemoRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder propertyDemoRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Hotel__c",
@@ -590,7 +650,8 @@ public class MyceToOpera extends BaseTest {
                 THY589UserName,
                 "--json"});
         String propertyDemoID = JsonParser2.getFieldValue(propertyDemoRecord.toString(), "Id");
-        StringBuilder updateResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder updateResult = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:update",
                 "-s",
                 "thn__Hotel__c",
@@ -602,7 +663,8 @@ public class MyceToOpera extends BaseTest {
                 THY589UserName,
                 "--json"});
         System.out.println(updateResult);
-        StringBuilder productRoom1NightRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder productRoom1NightRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Product__c",
@@ -612,7 +674,8 @@ public class MyceToOpera extends BaseTest {
                 THY589UserName,
                 "--json"});
         String productRoom1NightID = JsonParser2.getFieldValue(productRoom1NightRecord.toString(), "Id");
-        StringBuilder roomTypeSingleRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder roomTypeSingleRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Space_Area__c",
@@ -622,7 +685,8 @@ public class MyceToOpera extends BaseTest {
                 THY589UserName,
                 "--json"});
         String roomTypeSingleID = JsonParser2.getFieldValue(roomTypeSingleRecord.toString(), "Id");
-        StringBuilder myseQuoteResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder myseQuoteResult = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:create",
                 "-s",
                 "thn__MYCE_Quote__c",
@@ -637,7 +701,8 @@ public class MyceToOpera extends BaseTest {
                 THY589UserName,
                 "--json"});
         String myceQuoteID = JsonParser2.getFieldValue(myseQuoteResult.toString(), "id");
-        StringBuilder quoteHotelRoomResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quoteHotelRoomResult = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:create",
                 "-s",
                 "thn__Quote_Hotel_Room__c",
@@ -648,7 +713,8 @@ public class MyceToOpera extends BaseTest {
                 THY589UserName,
                 "--json"});
         String quoteHotelRoomID = JsonParser2.getFieldValue(quoteHotelRoomResult.toString(), "id");
-        SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:update",
                 "-s",
                 "thn__MYCE_Quote__c",
@@ -659,7 +725,8 @@ public class MyceToOpera extends BaseTest {
                 "-u",
                 THY589UserName,
                 "--json"});
-        StringBuilder updateResult11 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder updateResult11 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:update",
                 "-s",
                 "thn__Quote_Hotel_Room__c",
@@ -671,7 +738,8 @@ public class MyceToOpera extends BaseTest {
                 THY589UserName,
                 "--json"});
         System.out.println(updateResult11);
-        StringBuilder quoteHotelRoomRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quoteHotelRoomRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Quote_Hotel_Room__c",
@@ -680,7 +748,8 @@ public class MyceToOpera extends BaseTest {
                 "-u",
                 THY589UserName,
                 "--json"});
-        StringBuilder pmsBlockRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder pmsBlockRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__PMS_Block__c",
@@ -691,7 +760,8 @@ public class MyceToOpera extends BaseTest {
                 "--json"});
         System.out.println(pmsBlockRecord);
         String pmsBlockID= JsonParser2.getFieldValue(pmsBlockRecord.toString(), "Id");
-        StringBuilder pmsBlockInventoryRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder pmsBlockInventoryRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__PMS_Block_Inventory__c",
@@ -700,7 +770,8 @@ public class MyceToOpera extends BaseTest {
                 "-u",
                 THY589UserName,
                 "--json"});
-        StringBuilder pmsBlockRateRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder pmsBlockRateRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__BlockRate__c",
@@ -721,4 +792,823 @@ public class MyceToOpera extends BaseTest {
         Assert.assertTrue(pmsBlockRateMessage.contains("2 records were retrieved"));
     }
 
+    @Test(priority = 5, description = "Add Quote Hotel Room from another Property")
+    @Severity(SeverityLevel.NORMAL)
+    @Story("THY-589: MYCE to Opera")
+    public void addQuoteHotelRoomFromAnotherProperty() throws InterruptedException, IOException {
+        SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:delete",
+                "-s",
+                "thn__MYCE_Quote__c",
+                "-w",
+                "Name='TestMyceToOperaAuto5'",
+                "-u",
+                THY589UserName,
+                "--json"});
+        StringBuilder propertyDemoRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:get",
+                "-s",
+                "thn__Hotel__c",
+                "-w",
+                "Name='Demo'",
+                "-u",
+                THY589UserName,
+                "--json"});
+        String propertyDemoID = JsonParser2.getFieldValue(propertyDemoRecord.toString(), "Id");
+        StringBuilder propertyAutoRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:get",
+                "-s",
+                "thn__Hotel__c",
+                "-w",
+                "Name='Property Auto'",
+                "-u",
+                THY589UserName,
+                "--json"});
+        String propertyAuroID = JsonParser2.getFieldValue(propertyAutoRecord.toString(), "Id");
+        StringBuilder productRoom1NightRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:get",
+                "-s",
+                "thn__Product__c",
+                "-w",
+                "Name='ROOM 1 NIGHT'",
+                "-u",
+                THY589UserName,
+                "--json"});
+        String productRoom1NightID = JsonParser2.getFieldValue(productRoom1NightRecord.toString(), "Id");
+        StringBuilder productRoom1NightAutoRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:get",
+                "-s",
+                "thn__Product__c",
+                "-w",
+                "Name='ROOM 1 NIGHT PROPERTY AUTO' thn__Hotel__c='" + propertyAuroID + "'",
+                "-u",
+                THY589UserName,
+                "--json"});
+        String productRoom1NightAutoID = JsonParser2.getFieldValue(productRoom1NightAutoRecord.toString(), "Id");
+        StringBuilder roomTypeSingleRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:get",
+                "-s",
+                "thn__Space_Area__c",
+                "-w",
+                "Name='Single'",
+                "-u",
+                THY589UserName,
+                "--json"});
+        String roomTypeSingleID = JsonParser2.getFieldValue(roomTypeSingleRecord.toString(), "Id");
+        StringBuilder roomTypeQueenAutoRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:get",
+                "-s",
+                "thn__Space_Area__c",
+                "-w",
+                "Name='Queen Property Auto'",
+                "-u",
+                THY589UserName,
+                "--json"});
+        String roomTypeQueenAutoID = JsonParser2.getFieldValue(roomTypeQueenAutoRecord.toString(), "Id");
+        StringBuilder rateDefaultRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:get",
+                "-s",
+                "thn__Rate__c",
+                "-w",
+                "Name='DEFAULT'",
+                "-u",
+                THY589UserName,
+                "--json"});
+        String rateDefaultID = JsonParser2.getFieldValue(rateDefaultRecord.toString(), "Id");
+        StringBuilder myseQuoteResult = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:create",
+                "-s",
+                "thn__MYCE_Quote__c",
+                "-v",
+                "Name='TestMyceToOperaAuto5' thn__Pax__c=1  thn__Hotel__c='" + propertyDemoID +
+                        "' thn__Arrival_Date__c=" + date.generateTodayDate2() + " thn__Departure_Date__c=" +
+                        date.generateTodayDate2_plus(0, 3) + " thn__SendToPMS__c=true" +
+                        " thn__InventoryBlockType__c='ELASTIC' ",
+                "-u",
+                THY589UserName,
+                "--json"});
+        String myceQuoteID = JsonParser2.getFieldValue(myseQuoteResult.toString(), "id");
+        StringBuilder quoteHotelRoomResult1 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:create",
+                "-s",
+                "thn__Quote_Hotel_Room__c",
+                "-v",
+                "thn__MYCE_Quote__c='" + myceQuoteID + "' thn__Product__c='" + productRoom1NightID +
+                        "' thn__Property__c='" + propertyDemoID + "' thn__Space_Area__c='" + roomTypeSingleID +
+                        "' thn__Rate_Plan__c=" + rateDefaultID + "'" ,
+                "-u",
+                THY589UserName,
+                "--json"});
+        String quoteHotelRoomID1 = JsonParser2.getFieldValue(quoteHotelRoomResult1.toString(), "id");
+        StringBuilder quoteHotelRoomResult2 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:create",
+                "-s",
+                "thn__Quote_Hotel_Room__c",
+                "-v",
+                "thn__MYCE_Quote__c='" + myceQuoteID + "' thn__Product__c='" + productRoom1NightAutoID +
+                        "' thn__Property__c='" + propertyAuroID + "' thn__Space_Area__c='" + roomTypeQueenAutoID +
+                        "'",
+                "-u",
+                THY589UserName,
+                "--json"});
+        String quoteHotelRoomID2 = JsonParser2.getFieldValue(quoteHotelRoomResult2.toString(), "id");
+        Object pmsBlock = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:soql:query",
+                "-q",
+                "SELECT Id, thn__Property__c, thn__Start__c, thn__End__c FROM thn__PMS_Block__c WHERE thn__MYCE_Quote__c='" + myceQuoteID + "'",
+                "-u",
+                THY589UserName,
+                "--json"});
+        System.out.println(pmsBlock);
+        List<String> values= JsonParser2.getFieldValueSoql(pmsBlock.toString(), "Id");
+        String pmsBlockID1 = values.get(0);
+        String pmsBlockID2 = values.get(1);
+        StringBuilder pmsBlockInventoryRecord1 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:get",
+                "-s",
+                "thn__PMS_Block_Inventory__c",
+                "-w",
+                "thn__PMS_Block__c='" + pmsBlockID1 + "'",
+                "-u",
+                THY589UserName,
+                "--json"});
+        String pmsBlockInventoryID1 = JsonParser2.getFieldValue(pmsBlockInventoryRecord1.toString(), "Id");
+        StringBuilder pmsBlockInventoryRecord2 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:get",
+                "-s",
+                "thn__PMS_Block_Inventory__c",
+                "-w",
+                "thn__PMS_Block__c='" + pmsBlockID2 + "'",
+                "-u",
+                THY589UserName,
+                "--json"});
+        String pmsBlockInventoryID2 = JsonParser2.getFieldValue(pmsBlockInventoryRecord2.toString(), "Id");
+        Object pmsBlockRates1 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:soql:query",
+                "-q",
+                "SELECT Id, thn__Start__c, thn__End__c, thn__Rate__c, thn__RateCode__c, thn__RoomType__c  FROM" +
+                        " thn__BlockRate__c WHERE thn__PMS_Block__c='" + pmsBlockID1 + "'",
+                "-u",
+                THY589UserName,
+                "--json"});
+        System.out.println(pmsBlockRates1);
+        List<String> pmsBlockRatesID1= JsonParser2.getFieldValueSoql(pmsBlockRates1.toString(), "Id");
+        Object pmsBlockRates2 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:soql:query",
+                "-q",
+                "SELECT Id, thn__Start__c, thn__End__c, thn__Rate__c, thn__RateCode__c, thn__RoomType__c  FROM" +
+                        " thn__BlockRate__c WHERE thn__PMS_Block__c='" + pmsBlockID2 + "'",
+                "-u",
+                THY589UserName,
+                "--json"});
+        System.out.println(pmsBlockRates2);
+        List<String> pmsBlockRatesID2= JsonParser2.getFieldValueSoql(pmsBlockRates2.toString(), "Id");
+        StringBuilder pmsBlockRate1 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:get",
+                "-s",
+                "thn__BlockRate__c",
+                "-w",
+                "Id='" + pmsBlockRatesID1.get(0) + "'",
+                "-u",
+                THY589UserName,
+                "--json"});
+        System.out.println(pmsBlockRate1);
+        StringBuilder pmsBlockRate2 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:get",
+                "-s",
+                "thn__BlockRate__c",
+                "-w",
+                "Id='" + pmsBlockRatesID1.get(1) + "'",
+                "-u",
+                THY589UserName,
+                "--json"});
+        System.out.println(pmsBlockRate2);
+        StringBuilder pmsBlockRate3 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:get",
+                "-s",
+                "thn__BlockRate__c",
+                "-w",
+                "Id='" + pmsBlockRatesID1.get(2) + "'",
+                "-u",
+                THY589UserName,
+                "--json"});
+        System.out.println(pmsBlockRate3);
+        StringBuilder pmsBlockRate4 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:get",
+                "-s",
+                "thn__BlockRate__c",
+                "-w",
+                "Id='" + pmsBlockRatesID2.get(0) + "'",
+                "-u",
+                THY589UserName,
+                "--json"});
+        System.out.println(pmsBlockRate4);
+        StringBuilder pmsBlockRate5 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:get",
+                "-s",
+                "thn__BlockRate__c",
+                "-w",
+                "Id='" + pmsBlockRatesID2.get(1) + "'",
+                "-u",
+                THY589UserName,
+                "--json"});
+        System.out.println(pmsBlockRate5);
+        StringBuilder pmsBlockRate6 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:get",
+                "-s",
+                "thn__BlockRate__c",
+                "-w",
+                "Id='" + pmsBlockRatesID2.get(2) + "'",
+                "-u",
+                THY589UserName,
+                "--json"});
+        String rate1 = JsonParser2.getFieldValue(pmsBlockRate1.toString(), "thn__Rate__c");
+        String rate2 = JsonParser2.getFieldValue(pmsBlockRate2.toString(), "thn__Rate__c");
+        String rate3 = JsonParser2.getFieldValue(pmsBlockRate3.toString(), "thn__Rate__c");
+        String rate4 = JsonParser2.getFieldValue(pmsBlockRate4.toString(), "thn__Rate__c");
+        String rate5 = JsonParser2.getFieldValue(pmsBlockRate5.toString(), "thn__Rate__c");
+        String rate6 = JsonParser2.getFieldValue(pmsBlockRate6.toString(), "thn__Rate__c");
+        String roomTypeBlockRate1 = JsonParser2.getFieldValue(pmsBlockRate1.toString(), "thn__RoomType__c");
+        String roomTypeBlockRate2 = JsonParser2.getFieldValue(pmsBlockRate2.toString(), "thn__RoomType__c");
+        String roomTypeBlockRate3 = JsonParser2.getFieldValue(pmsBlockRate3.toString(), "thn__RoomType__c");
+        String roomTypeBlockRate4 = JsonParser2.getFieldValue(pmsBlockRate4.toString(), "thn__RoomType__c");
+        String roomTypeBlockRate5 = JsonParser2.getFieldValue(pmsBlockRate5.toString(), "thn__RoomType__c");
+        String roomTypeBlockRate6 = JsonParser2.getFieldValue(pmsBlockRate6.toString(), "thn__RoomType__c");
+        Assert.assertEquals(rate1, rateDefaultID );
+        Assert.assertEquals(rate2, rateDefaultID );
+        Assert.assertEquals(rate3, rateDefaultID );
+        Assert.assertEquals(rate4, null );
+        Assert.assertEquals(rate5, null);
+        Assert.assertEquals(rate6, null );
+        Assert.assertNotNull(pmsBlockInventoryID1);
+        Assert.assertNotNull(pmsBlockInventoryID2);
+        Assert.assertEquals(pmsBlockRatesID1.size(), 3);
+        Assert.assertEquals(pmsBlockRatesID2.size(), 3);
+        Assert.assertEquals(roomTypeBlockRate1, roomTypeSingleID);
+        Assert.assertEquals(roomTypeBlockRate2, roomTypeSingleID);
+        Assert.assertEquals(roomTypeBlockRate3, roomTypeSingleID);
+        Assert.assertEquals(roomTypeBlockRate4, roomTypeQueenAutoID);
+        Assert.assertEquals(roomTypeBlockRate5, roomTypeQueenAutoID);
+        Assert.assertEquals(roomTypeBlockRate6, roomTypeQueenAutoID);
+        List<String> pmsBlockRatesStartEndDates1= JsonParser2.getFieldValueSoql(pmsBlockRates1.toString(), "thn__Start__c", "thn__End__c");
+        List<String> pmsBlockRatesStartEndDates2= JsonParser2.getFieldValueSoql(pmsBlockRates2.toString(), "thn__Start__c", "thn__End__c");
+        Assert.assertEquals(pmsBlockRatesStartEndDates1.get(0), date.generateTodayDate2() );
+        Assert.assertEquals(pmsBlockRatesStartEndDates1.get(1), date.generateTodayDate2_plus(0, 1));
+        Assert.assertEquals(pmsBlockRatesStartEndDates1.get(2), date.generateTodayDate2_plus(0, 1));
+        Assert.assertEquals(pmsBlockRatesStartEndDates1.get(3), date.generateTodayDate2_plus(0, 2));
+        Assert.assertEquals(pmsBlockRatesStartEndDates1.get(4), date.generateTodayDate2_plus(0, 2));
+        Assert.assertEquals(pmsBlockRatesStartEndDates1.get(5), date.generateTodayDate2_plus(0, 3));
+        Assert.assertEquals(pmsBlockRatesStartEndDates2.get(0), date.generateTodayDate2() );
+        Assert.assertEquals(pmsBlockRatesStartEndDates2.get(1), date.generateTodayDate2_plus(0, 1));
+        Assert.assertEquals(pmsBlockRatesStartEndDates2.get(2), date.generateTodayDate2_plus(0, 1));
+        Assert.assertEquals(pmsBlockRatesStartEndDates2.get(3), date.generateTodayDate2_plus(0, 2));
+        Assert.assertEquals(pmsBlockRatesStartEndDates2.get(4), date.generateTodayDate2_plus(0, 2));
+        Assert.assertEquals(pmsBlockRatesStartEndDates2.get(5), date.generateTodayDate2_plus(0, 3));
+    }
+
+    @Test(priority = 6, description = "Add Quote Hotel Room from another Property")
+    @Severity(SeverityLevel.NORMAL)
+    @Story("THY-589: MYCE to Opera")
+    public void cloneMyceQuote() throws InterruptedException, IOException {
+        SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:delete",
+                "-s",
+                "thn__MYCE_Quote__c",
+                "-w",
+                "Name='TestMyceToOperaAuto6'",
+                "-u",
+                THY589UserName,
+                "--json"});
+        SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:delete",
+                "-s",
+                "thn__MYCE_Quote__c",
+                "-w",
+                "Name='CloneTestMyceToOperaAuto6'",
+                "-u",
+                THY589UserName,
+                "--json"});
+        StringBuilder propertyDemoRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:get",
+                "-s",
+                "thn__Hotel__c",
+                "-w",
+                "Name='Demo'",
+                "-u",
+                THY589UserName,
+                "--json"});
+        String propertyDemoID = JsonParser2.getFieldValue(propertyDemoRecord.toString(), "Id");
+        StringBuilder propertyAutoRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:get",
+                "-s",
+                "thn__Hotel__c",
+                "-w",
+                "Name='Property Auto'",
+                "-u",
+                THY589UserName,
+                "--json"});
+        String propertyAuroID = JsonParser2.getFieldValue(propertyAutoRecord.toString(), "Id");
+        StringBuilder productRoom1NightRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:get",
+                "-s",
+                "thn__Product__c",
+                "-w",
+                "Name='ROOM 1 NIGHT'",
+                "-u",
+                THY589UserName,
+                "--json"});
+        String productRoom1NightID = JsonParser2.getFieldValue(productRoom1NightRecord.toString(), "Id");
+        StringBuilder productRoom1NightAutoRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:get",
+                "-s",
+                "thn__Product__c",
+                "-w",
+                "Name='ROOM 1 NIGHT PROPERTY AUTO' thn__Hotel__c='" + propertyAuroID + "'",
+                "-u",
+                THY589UserName,
+                "--json"});
+        String productRoom1NightAutoID = JsonParser2.getFieldValue(productRoom1NightAutoRecord.toString(), "Id");
+        StringBuilder roomTypeSingleRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:get",
+                "-s",
+                "thn__Space_Area__c",
+                "-w",
+                "Name='Single'",
+                "-u",
+                THY589UserName,
+                "--json"});
+        String roomTypeSingleID = JsonParser2.getFieldValue(roomTypeSingleRecord.toString(), "Id");
+        StringBuilder roomTypeQueenAutoRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:get",
+                "-s",
+                "thn__Space_Area__c",
+                "-w",
+                "Name='Queen Property Auto'",
+                "-u",
+                THY589UserName,
+                "--json"});
+        String roomTypeQueenAutoID = JsonParser2.getFieldValue(roomTypeQueenAutoRecord.toString(), "Id");
+        StringBuilder rateDefaultRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:get",
+                "-s",
+                "thn__Rate__c",
+                "-w",
+                "Name='DEFAULT'",
+                "-u",
+                THY589UserName,
+                "--json"});
+        String rateDefaultID = JsonParser2.getFieldValue(rateDefaultRecord.toString(), "Id");
+        StringBuilder myseQuoteResult = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:create",
+                "-s",
+                "thn__MYCE_Quote__c",
+                "-v",
+                "Name='TestMyceToOperaAuto6' thn__Pax__c=1  thn__Hotel__c='" + propertyDemoID +
+                        "' thn__Arrival_Date__c=" + date.generateTodayDate2() + " thn__Departure_Date__c=" +
+                        date.generateTodayDate2_plus(0, 3) + " thn__SendToPMS__c=true" +
+                        " thn__InventoryBlockType__c='ELASTIC' ",
+                "-u",
+                THY589UserName,
+                "--json"});
+        String myceQuoteID = JsonParser2.getFieldValue(myseQuoteResult.toString(), "id");
+        StringBuilder quoteHotelRoomResult1 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:create",
+                "-s",
+                "thn__Quote_Hotel_Room__c",
+                "-v",
+                "thn__MYCE_Quote__c='" + myceQuoteID + "' thn__Product__c='" + productRoom1NightID +
+                        "' thn__Property__c='" + propertyDemoID + "' thn__Space_Area__c='" + roomTypeSingleID +
+                        "' thn__Rate_Plan__c=" + rateDefaultID + "'" ,
+                "-u",
+                THY589UserName,
+                "--json"});
+        String quoteHotelRoomID1 = JsonParser2.getFieldValue(quoteHotelRoomResult1.toString(), "id");
+        StringBuilder quoteHotelRoomResult2 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:create",
+                "-s",
+                "thn__Quote_Hotel_Room__c",
+                "-v",
+                "thn__MYCE_Quote__c='" + myceQuoteID + "' thn__Product__c='" + productRoom1NightAutoID +
+                        "' thn__Property__c='" + propertyAuroID + "' thn__Space_Area__c='" + roomTypeQueenAutoID +
+                        "'",
+                "-u",
+                THY589UserName,
+                "--json"});
+        String quoteHotelRoomID2 = JsonParser2.getFieldValue(quoteHotelRoomResult2.toString(), "id");
+        Object pmsBlock = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:soql:query",
+                "-q",
+                "SELECT Id, thn__Property__c, thn__Start__c, thn__End__c FROM thn__PMS_Block__c WHERE thn__MYCE_Quote__c='" + myceQuoteID + "'",
+                "-u",
+                THY589UserName,
+                "--json"});
+        System.out.println(pmsBlock);
+        List<String> values= JsonParser2.getFieldValueSoql(pmsBlock.toString(), "Id");
+        String pmsBlockID1 = values.get(0);
+        String pmsBlockID2 = values.get(1);
+        StringBuilder pmsBlockInventoryRecord1 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:get",
+                "-s",
+                "thn__PMS_Block_Inventory__c",
+                "-w",
+                "thn__PMS_Block__c='" + pmsBlockID1 + "'",
+                "-u",
+                THY589UserName,
+                "--json"});
+        String pmsBlockInventoryID1 = JsonParser2.getFieldValue(pmsBlockInventoryRecord1.toString(), "Id");
+        StringBuilder pmsBlockInventoryRecord2 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:get",
+                "-s",
+                "thn__PMS_Block_Inventory__c",
+                "-w",
+                "thn__PMS_Block__c='" + pmsBlockID2 + "'",
+                "-u",
+                THY589UserName,
+                "--json"});
+        String pmsBlockInventoryID2 = JsonParser2.getFieldValue(pmsBlockInventoryRecord2.toString(), "Id");
+        Object pmsBlockRates1 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:soql:query",
+                "-q",
+                "SELECT Id, thn__Start__c, thn__End__c, thn__Rate__c, thn__RateCode__c, thn__RoomType__c  FROM" +
+                        " thn__BlockRate__c WHERE thn__PMS_Block__c='" + pmsBlockID1 + "'",
+                "-u",
+                THY589UserName,
+                "--json"});
+        System.out.println(pmsBlockRates1);
+        List<String> pmsBlockRatesID1= JsonParser2.getFieldValueSoql(pmsBlockRates1.toString(), "Id");
+        Object pmsBlockRates2 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:soql:query",
+                "-q",
+                "SELECT Id, thn__Start__c, thn__End__c, thn__Rate__c, thn__RateCode__c, thn__RoomType__c  FROM" +
+                        " thn__BlockRate__c WHERE thn__PMS_Block__c='" + pmsBlockID2 + "'",
+                "-u",
+                THY589UserName,
+                "--json"});
+        System.out.println(pmsBlockRates2);
+        List<String> pmsBlockRatesID2= JsonParser2.getFieldValueSoql(pmsBlockRates2.toString(), "Id");
+        StringBuilder pmsBlockRate1 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:get",
+                "-s",
+                "thn__BlockRate__c",
+                "-w",
+                "Id='" + pmsBlockRatesID1.get(0) + "'",
+                "-u",
+                THY589UserName,
+                "--json"});
+        System.out.println(pmsBlockRate1);
+        StringBuilder pmsBlockRate2 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:get",
+                "-s",
+                "thn__BlockRate__c",
+                "-w",
+                "Id='" + pmsBlockRatesID1.get(1) + "'",
+                "-u",
+                THY589UserName,
+                "--json"});
+        System.out.println(pmsBlockRate2);
+        StringBuilder pmsBlockRate3 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:get",
+                "-s",
+                "thn__BlockRate__c",
+                "-w",
+                "Id='" + pmsBlockRatesID1.get(2) + "'",
+                "-u",
+                THY589UserName,
+                "--json"});
+        System.out.println(pmsBlockRate3);
+        StringBuilder pmsBlockRate4 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:get",
+                "-s",
+                "thn__BlockRate__c",
+                "-w",
+                "Id='" + pmsBlockRatesID2.get(0) + "'",
+                "-u",
+                THY589UserName,
+                "--json"});
+        System.out.println(pmsBlockRate4);
+        StringBuilder pmsBlockRate5 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:get",
+                "-s",
+                "thn__BlockRate__c",
+                "-w",
+                "Id='" + pmsBlockRatesID2.get(1) + "'",
+                "-u",
+                THY589UserName,
+                "--json"});
+        System.out.println(pmsBlockRate5);
+        StringBuilder pmsBlockRate6 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:get",
+                "-s",
+                "thn__BlockRate__c",
+                "-w",
+                "Id='" + pmsBlockRatesID2.get(2) + "'",
+                "-u",
+                THY589UserName,
+                "--json"});
+        loginPageForScratchOrg.logInOnScratchOrg2(driver, "https://test.salesforce.com/", THY589UserName, THY589Password);
+        homePageForScratchOrg.openAppLauncher();
+        homePageForScratchOrg.sendTextInAppWindow("MYCE Quotes");
+        myceQuotes.openMyceQoteRecord("TestMyceToOperaAuto6");
+        myceQuotes.cloneMyceQuote("CloneTestMyceToOperaAuto6");
+        StringBuilder cloneMyceQuoteRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:get",
+                "-s",
+                "thn__MYCE_Quote__c",
+                "-w",
+                "Name='CloneTestMyceToOperaAuto6'",
+                "-u",
+                THY589UserName,
+                "--json"});
+        String cloneMyceQuoteID = JsonParser2.getFieldValue(cloneMyceQuoteRecord.toString(), "Id");
+        Object pmsBlockClone = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:soql:query",
+                "-q",
+                "SELECT Id, thn__Property__c, thn__Start__c, thn__End__c FROM thn__PMS_Block__c WHERE thn__MYCE_Quote__c='" + cloneMyceQuoteID + "'",
+                "-u",
+                THY589UserName,
+                "--json"});
+        List<String> values2= JsonParser2.getFieldValueSoql(pmsBlock.toString(), "Id");
+        String pmsBlockCloneID1 = values2.get(0);
+        String pmsBlockCloneID2 = values2.get(1);
+        Object pmsBlockRatesClone1 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:soql:query",
+                "-q",
+                "SELECT Id, thn__Start__c, thn__End__c, thn__Rate__c, thn__RateCode__c, thn__RoomType__c  FROM" +
+                        " thn__BlockRate__c WHERE thn__PMS_Block__c='" + pmsBlockCloneID1 + "'",
+                "-u",
+                THY589UserName,
+                "--json"});
+        List<String> pmsBlockRatesCloneID1= JsonParser2.getFieldValueSoql(pmsBlockRatesClone1.toString(), "Id");
+        Object pmsBlockRatesClone2 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:soql:query",
+                "-q",
+                "SELECT Id, thn__Start__c, thn__End__c, thn__Rate__c, thn__RateCode__c, thn__RoomType__c  FROM" +
+                        " thn__BlockRate__c WHERE thn__PMS_Block__c='" + pmsBlockCloneID2 + "'",
+                "-u",
+                THY589UserName,
+                "--json"});
+        List<String> pmsBlockRatesCloneID2= JsonParser2.getFieldValueSoql(pmsBlockRatesClone2.toString(), "Id");
+        StringBuilder pmsBlockRateClone1 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:get",
+                "-s",
+                "thn__BlockRate__c",
+                "-w",
+                "Id='" + pmsBlockRatesCloneID1.get(0) + "'",
+                "-u",
+                THY589UserName,
+                "--json"});
+        System.out.println(pmsBlockRate1);
+        StringBuilder pmsBlockRateClone2 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:get",
+                "-s",
+                "thn__BlockRate__c",
+                "-w",
+                "Id='" + pmsBlockRatesCloneID1.get(1) + "'",
+                "-u",
+                THY589UserName,
+                "--json"});
+        System.out.println(pmsBlockRate2);
+        StringBuilder pmsBlockRateClone3 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:get",
+                "-s",
+                "thn__BlockRate__c",
+                "-w",
+                "Id='" + pmsBlockRatesCloneID1.get(2) + "'",
+                "-u",
+                THY589UserName,
+                "--json"});
+        System.out.println(pmsBlockRate3);
+        StringBuilder pmsBlockRateClone4 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:get",
+                "-s",
+                "thn__BlockRate__c",
+                "-w",
+                "Id='" + pmsBlockRatesCloneID2.get(0) + "'",
+                "-u",
+                THY589UserName,
+                "--json"});
+        System.out.println(pmsBlockRate4);
+        StringBuilder pmsBlockRateClone5 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:get",
+                "-s",
+                "thn__BlockRate__c",
+                "-w",
+                "Id='" + pmsBlockRatesCloneID2.get(1) + "'",
+                "-u",
+                THY589UserName,
+                "--json"});
+        System.out.println(pmsBlockRate5);
+        StringBuilder pmsBlockRateClone6 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:get",
+                "-s",
+                "thn__BlockRate__c",
+                "-w",
+                "Id='" + pmsBlockRatesCloneID2.get(2) + "'",
+                "-u",
+                THY589UserName,
+                "--json"});
+        String rate1 = JsonParser2.getFieldValue(pmsBlockRate1.toString(), "thn__Rate__c");
+        String rate2 = JsonParser2.getFieldValue(pmsBlockRate2.toString(), "thn__Rate__c");
+        String rate3 = JsonParser2.getFieldValue(pmsBlockRate3.toString(), "thn__Rate__c");
+        String rate4 = JsonParser2.getFieldValue(pmsBlockRate4.toString(), "thn__Rate__c");
+        String rate5 = JsonParser2.getFieldValue(pmsBlockRate5.toString(), "thn__Rate__c");
+        String rate6 = JsonParser2.getFieldValue(pmsBlockRate6.toString(), "thn__Rate__c");
+        String roomTypeBlockRate1 = JsonParser2.getFieldValue(pmsBlockRate1.toString(), "thn__RoomType__c");
+        String roomTypeBlockRate2 = JsonParser2.getFieldValue(pmsBlockRate2.toString(), "thn__RoomType__c");
+        String roomTypeBlockRate3 = JsonParser2.getFieldValue(pmsBlockRate3.toString(), "thn__RoomType__c");
+        String roomTypeBlockRate4 = JsonParser2.getFieldValue(pmsBlockRate4.toString(), "thn__RoomType__c");
+        String roomTypeBlockRate5 = JsonParser2.getFieldValue(pmsBlockRate5.toString(), "thn__RoomType__c");
+        String roomTypeBlockRate6 = JsonParser2.getFieldValue(pmsBlockRate6.toString(), "thn__RoomType__c");
+        String rateClone1 = JsonParser2.getFieldValue(pmsBlockRateClone1.toString(), "thn__Rate__c");
+        String rateClone2 = JsonParser2.getFieldValue(pmsBlockRateClone2.toString(), "thn__Rate__c");
+        String rateClone3 = JsonParser2.getFieldValue(pmsBlockRateClone3.toString(), "thn__Rate__c");
+        String rateClone4 = JsonParser2.getFieldValue(pmsBlockRateClone4.toString(), "thn__Rate__c");
+        String rateClone5 = JsonParser2.getFieldValue(pmsBlockRateClone5.toString(), "thn__Rate__c");
+        String rateClone6 = JsonParser2.getFieldValue(pmsBlockRateClone6.toString(), "thn__Rate__c");
+        String roomTypeBlockRateClone1 = JsonParser2.getFieldValue(pmsBlockRateClone1.toString(), "thn__RoomType__c");
+        String roomTypeBlockRateClone2 = JsonParser2.getFieldValue(pmsBlockRateClone2.toString(), "thn__RoomType__c");
+        String roomTypeBlockRateClone3 = JsonParser2.getFieldValue(pmsBlockRateClone3.toString(), "thn__RoomType__c");
+        String roomTypeBlockRateClone4 = JsonParser2.getFieldValue(pmsBlockRateClone4.toString(), "thn__RoomType__c");
+        String roomTypeBlockRateClone5 = JsonParser2.getFieldValue(pmsBlockRateClone5.toString(), "thn__RoomType__c");
+        String roomTypeBlockRateClone6 = JsonParser2.getFieldValue(pmsBlockRateClone6.toString(), "thn__RoomType__c");
+        Assert.assertEquals(rateClone1, rate1);
+        Assert.assertEquals(rateClone2, rate2);
+        Assert.assertEquals(rateClone3, rate3);
+        Assert.assertEquals(rateClone4, rate4);
+        Assert.assertEquals(rateClone5, rate5);
+        Assert.assertEquals(rateClone6, rate6);
+        Assert.assertEquals(roomTypeBlockRateClone1, roomTypeBlockRate1);
+        Assert.assertEquals(roomTypeBlockRateClone2, roomTypeBlockRate2);
+        Assert.assertEquals(roomTypeBlockRateClone3, roomTypeBlockRate3);
+        Assert.assertEquals(roomTypeBlockRateClone4, roomTypeBlockRate4);
+        Assert.assertEquals(roomTypeBlockRateClone5, roomTypeBlockRate5);
+        Assert.assertEquals(roomTypeBlockRateClone6, roomTypeBlockRate6);
+    }
+
+    @Test(priority = 7, description = "Change the date of the Quote")
+    @Severity(SeverityLevel.NORMAL)
+    @Story("THY-589: MYCE to Opera")
+    public void changeDateMyceQuote() throws InterruptedException, IOException {
+        SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:delete",
+                "-s",
+                "thn__MYCE_Quote__c",
+                "-w",
+                "Name='TestMyceToOperaAuto7'",
+                "-u",
+                THY589UserName,
+                "--json"});
+        StringBuilder propertyDemoRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:get",
+                "-s",
+                "thn__Hotel__c",
+                "-w",
+                "Name='Demo'",
+                "-u",
+                THY589UserName,
+                "--json"});
+        String propertyDemoID = JsonParser2.getFieldValue(propertyDemoRecord.toString(), "Id");
+        StringBuilder productRoom1NightRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:get",
+                "-s",
+                "thn__Product__c",
+                "-w",
+                "Name='ROOM 1 NIGHT'",
+                "-u",
+                THY589UserName,
+                "--json"});
+        String productRoom1NightID = JsonParser2.getFieldValue(productRoom1NightRecord.toString(), "Id");
+
+        StringBuilder roomTypeSingleRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:get",
+                "-s",
+                "thn__Space_Area__c",
+                "-w",
+                "Name='Single'",
+                "-u",
+                THY589UserName,
+                "--json"});
+        String roomTypeSingleID = JsonParser2.getFieldValue(roomTypeSingleRecord.toString(), "Id");
+        StringBuilder rateDefaultRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:get",
+                "-s",
+                "thn__Rate__c",
+                "-w",
+                "Name='DEFAULT'",
+                "-u",
+                THY589UserName,
+                "--json"});
+        String rateDefaultID = JsonParser2.getFieldValue(rateDefaultRecord.toString(), "Id");
+        StringBuilder myseQuoteResult = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:create",
+                "-s",
+                "thn__MYCE_Quote__c",
+                "-v",
+                "Name='TestMyceToOperaAuto7' thn__Pax__c=1  thn__Hotel__c='" + propertyDemoID +
+                        "' thn__Arrival_Date__c=" + date.generateTodayDate2() + " thn__Departure_Date__c=" +
+                        date.generateTodayDate2_plus(0, 3) + " thn__SendToPMS__c=true" +
+                        " thn__InventoryBlockType__c='ELASTIC' ",
+                "-u",
+                THY589UserName,
+                "--json"});
+        String myceQuoteID = JsonParser2.getFieldValue(myseQuoteResult.toString(), "id");
+        StringBuilder quoteHotelRoomResult1 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:create",
+                "-s",
+                "thn__Quote_Hotel_Room__c",
+                "-v",
+                "thn__MYCE_Quote__c='" + myceQuoteID + "' thn__Product__c='" + productRoom1NightID +
+                        "' thn__Property__c='" + propertyDemoID + "' thn__Space_Area__c='" + roomTypeSingleID +
+                        "' thn__Rate_Plan__c=" + rateDefaultID + "'" ,
+                "-u",
+                THY589UserName,
+                "--json"});
+        String quoteHotelRoomID1 = JsonParser2.getFieldValue(quoteHotelRoomResult1.toString(), "id");
+        loginPageForScratchOrg.logInOnScratchOrg2(driver, "https://test.salesforce.com/", THY589UserName, THY589Password);
+        homePageForScratchOrg.openAppLauncher();
+        homePageForScratchOrg.sendTextInAppWindow("MYCE Quotes");
+        myceQuotes.openMyceQoteRecord("TestMyceToOperaAuto7");
+        Thread.sleep(2000);
+        myceQuotes.changeDate(date.generateTodayDate3_plus(0, 1));
+        StringBuilder pmsBlockRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:get",
+                "-s",
+                "thn__PMS_Block__c",
+                "-w",
+                "thn__MYCE_Quote__c='" + myceQuoteID + "'",
+                "-u",
+                THY589UserName,
+                "--json"});
+        String pmsBlockID = JsonParser2.getFieldValue(pmsBlockRecord.toString(), "Id");
+
+        Object pmsBlockRates = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:soql:query",
+                "-q",
+                "SELECT Id, thn__Start__c, thn__End__c, thn__Rate__c, thn__RateCode__c, thn__RoomType__c  FROM" +
+                        " thn__BlockRate__c WHERE thn__PMS_Block__c='" + pmsBlockID + "'",
+                "-u",
+                THY589UserName,
+                "--json"});
+        List<String> pmsBlockRatesStartEndDates= JsonParser2.getFieldValueSoql(pmsBlockRates.toString(), "thn__Start__c", "thn__End__c");
+        Assert.assertEquals(pmsBlockRatesStartEndDates.get(0), date.generateTodayDate2_plus(0, 1) );
+        Assert.assertEquals(pmsBlockRatesStartEndDates.get(1), date.generateTodayDate2_plus(0, 2));
+        Assert.assertEquals(pmsBlockRatesStartEndDates.get(2), date.generateTodayDate2_plus(0, 2));
+        Assert.assertEquals(pmsBlockRatesStartEndDates.get(3), date.generateTodayDate2_plus(0, 3));
+        Assert.assertEquals(pmsBlockRatesStartEndDates.get(4), date.generateTodayDate2_plus(0, 3));
+        Assert.assertEquals(pmsBlockRatesStartEndDates.get(5), date.generateTodayDate2_plus(0, 4));
+    }
 }

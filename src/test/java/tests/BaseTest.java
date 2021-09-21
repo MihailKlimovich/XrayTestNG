@@ -39,6 +39,7 @@ public class BaseTest {
     protected Reservations reservations;
     protected ResourceGrouping resourceGrouping;
     protected SfdxCommand sfdxCommand;
+    protected JsonParser jsonParser;
     protected JsonParser2 jsonParser2;
     protected Requests requests;
     protected ConvertWindow convertWindow;
@@ -50,6 +51,7 @@ public class BaseTest {
 
     public static final String testDataExcelFileName = "testdata.xlsx";
 
+    final protected String SFDX = "/home/minsk-sc/sfdx/bin/sfdx";
     final protected String key = "3MVG9KlmwBKoC7U1K.F4bMX_vdidE2jS4dzw0IVO5Qc.gxBNMN7jTMYSIziN3N6wxsoF9sxPmgmBcRHxtzt6h";//3MVG95AcBeaB55lWwG_jM4S.hHHrR_i9uJUnD_XBhRAqn3B6BZxjS82q3A2.o16sDpIqZIOL2lpOxXysstk8R
     final protected String ALIAS = "test-fzyag1rn0itm@example.com"; //test-lbafgbxunsgq@example.com 9EU3j&PDvJ@1l
     final protected String thynkPackDevOrg = "https://thynkpack-dev-ed.my.salesforce.com/";
