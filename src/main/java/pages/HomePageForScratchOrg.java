@@ -74,10 +74,11 @@ public class HomePageForScratchOrg extends BasePage {
     }
 
     @Step("OpenAppLauncher")
-    public void openAppLauncher(){
+    public void openAppLauncher() throws InterruptedException {
         WebDriverWait = new WebDriverWait(driver, 30);
-        WebElement appLauncherButton = wait1.until(ExpectedConditions.presenceOfElementLocated(APP_LAUNCHER_BUTTON));
-        appLauncherButton.click();
+        wait1.until(ExpectedConditions.visibilityOfElementLocated(APP_LAUNCHER_BUTTON));
+        click3(APP_LAUNCHER_BUTTON);
+
 
 
     }

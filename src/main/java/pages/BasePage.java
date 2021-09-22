@@ -69,6 +69,24 @@ public class BasePage {
         }
     }
 
+    public void click2(By elementLocation) throws InterruptedException {
+        JavascriptExecutor executor = (JavascriptExecutor) driver;
+        int attempts = 0;
+        while (attempts < 2) {
+            try {
+                waitForTests.until(visibilityOfElementLocated(elementLocation));
+                driver.findElement(elementLocation).click();
+                System.out.println(" Click  "+(elementLocation));
+                break;
+            }
+            catch (Exception e){
+                System.out.println("Element is not available to click : "+elementLocation);
+                e.printStackTrace();
+            }
+            attempts++;
+        }
+    }
+
     public void click3(By elementLocation) throws InterruptedException {
         int attempts = 0;
         WebElement element = wait1.until(presenceOfElementLocated(elementLocation));
@@ -124,23 +142,7 @@ public class BasePage {
             System.out.println("CheckBox "+(elementLocation)+" is selected");
         }
     }
-    public void click2(By elementLocation) throws InterruptedException {
-        JavascriptExecutor executor = (JavascriptExecutor) driver;
-        int attempts = 0;
-        while (attempts < 2) {
-            try {
-                waitForTests.until(visibilityOfElementLocated(elementLocation));
-                driver.findElement(elementLocation).click();
-                System.out.println(" Click  "+(elementLocation));
-                break;
-            }
-            catch (Exception e){
-                System.out.println("Element is not available to click : "+elementLocation);
-                e.printStackTrace();
-            }
-            attempts++;
-        }
-    }
+
 
 
     /** Buttons  Methods*/

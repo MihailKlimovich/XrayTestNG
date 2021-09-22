@@ -66,6 +66,10 @@ public class MyceQuotes extends BasePage{
     By NEW_ARRIVAL_DATE_FIELD = By.xpath("//input[@name='New_arrival_date']");
     By NEXT_BUTTON_CHANGE_DATE_WINDOW = By.xpath("//button[@title='Next']");
     By FINISH_BUTTON_CHANGE_DATE_WINDOW = By.xpath("//button[@title='Finish']");
+    By UPDATE_ORDER_BUTTON = By.xpath("//button[@name='thn__MYCE_Quote__c.thn__Order_Update']");
+    By CLONE_TO_DATE_FIELD = By.xpath("//thn-clone-multi-select-component//input[@name='cloneTo']");
+    By CREATE_CLONE_BUTTON = By.xpath("//thn-clone-multi-select-component//button[text()='Create']");
+
 
 
 
@@ -86,6 +90,32 @@ public class MyceQuotes extends BasePage{
         return this;
     }
 
+    @Step("Clone Myce Quote")
+    public void cloneMyceQuote(String name) throws InterruptedException {
+        wait1.until(ExpectedConditions.presenceOfElementLocated(DROP_DOWN_BUTTON)).click();
+        enter();
+        wait1.until(ExpectedConditions.presenceOfElementLocated(NAME_QUOTE_FIELD)).click();
+        writeText(NAME_QUOTE_FIELD, name);
+        wait1.until(ExpectedConditions.presenceOfElementLocated(KEEP_ALL_PAX_CHECKBOX)).click();
+        wait1.until(ExpectedConditions.presenceOfElementLocated(KEEP_ROOMS_PAX_CHECKBOX)).click();
+        wait1.until(ExpectedConditions.presenceOfElementLocated(SAVE_BUTTON_FOR_CLONE)).click();
+        wait1.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//slot[@slot='header']//slot[@slot='primaryField']//lightning-formatted-text[text()='" + name + "']")));
+        Thread.sleep(5000);
+    }
+
+    @Step("Clone related record")
+    public void cloneRelatedRecord(String date, String nameRecord) throws InterruptedException {
+        wait1.until(ExpectedConditions.presenceOfElementLocated(CLONE_TO_DATE_FIELD)).click();
+        ctrlA();
+        delete();
+        Thread.sleep(1000);
+        writeText(CLONE_TO_DATE_FIELD, date);
+        wait1.until(ExpectedConditions.presenceOfElementLocated(By.
+                xpath("//div//label[text()='Components to clone']/following::select//option[text()='" + nameRecord + "']"))).click();
+        Thread.sleep(1000);
+        wait1.until(ExpectedConditions.elementToBeClickable(CREATE_CLONE_BUTTON)).click();
+        Thread.sleep(10000);
+    }
 
     @Step
     public void createNewMyceQuote(){
@@ -357,17 +387,7 @@ public class MyceQuotes extends BasePage{
         wait1.until(ExpectedConditions.presenceOfElementLocated(IS_CONFIRMED_RADIO_BUTTON)).click();
     }
 
-    @Step("Clone Myce Quote")
-    public void cloneMyceQuote(String name){
-        wait1.until(ExpectedConditions.presenceOfElementLocated(DROP_DOWN_BUTTON)).click();
-        enter();
-        wait1.until(ExpectedConditions.presenceOfElementLocated(NAME_QUOTE_FIELD)).click();
-        writeText(NAME_QUOTE_FIELD, name);
-        wait1.until(ExpectedConditions.presenceOfElementLocated(KEEP_ALL_PAX_CHECKBOX)).click();
-        wait1.until(ExpectedConditions.presenceOfElementLocated(KEEP_ROOMS_PAX_CHECKBOX)).click();
-        wait1.until(ExpectedConditions.presenceOfElementLocated(SAVE_BUTTON_FOR_CLONE)).click();
-        wait1.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//slot[@slot='header']//slot[@slot='primaryField']//lightning-formatted-text[text()='" + name + "']")));
-    }
+
 
     @Step("Open Hotel Rooms")
     public void openHotelRooms(){
@@ -440,6 +460,12 @@ public class MyceQuotes extends BasePage{
     @Step("Refresh page")
     public void refreshPage(WebDriver driver){
         refreshPage(driver);
+    }
+
+    @Step("Update order")
+    public void updateOrder() throws InterruptedException {
+        wait1.until(ExpectedConditions.elementToBeClickable(UPDATE_ORDER_BUTTON)).click();
+        Thread.sleep(3000);
     }
 
 
