@@ -77,6 +77,7 @@ public class HomePageForScratchOrg extends BasePage {
     public void openAppLauncher() throws InterruptedException {
         WebDriverWait = new WebDriverWait(driver, 30);
         wait1.until(ExpectedConditions.visibilityOfElementLocated(APP_LAUNCHER_BUTTON));
+        Thread.sleep(1000);
         click3(APP_LAUNCHER_BUTTON);
 
 

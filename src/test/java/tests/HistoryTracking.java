@@ -14,10 +14,13 @@ import java.util.List;
 
 public class HistoryTracking extends BaseTest {
 
-    @Test(priority = 1, description = "Add Quote Meeting Room, Quote Product, Quote Hotel Room, Quote Package")
+    @Test(priority = 1, description = "LogIn")
     @Severity(SeverityLevel.NORMAL)
     @Story("THY-519: History tracking")
-    public void testHistoryTracking() throws InterruptedException, IOException {
+    public void logIn() throws InterruptedException, IOException {
+        loginPageForScratchOrg.logInOnScratchOrg2(driver, "https://test.salesforce.com/", THY519_578_UserName, THY519_578_Password);
+        homePageForScratchOrg.openAppLauncher();
+        homePageForScratchOrg.sendTextInAppWindow("MYCE");
         StringBuilder authorise = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:auth:jwt:grant",
@@ -50,6 +53,262 @@ public class HistoryTracking extends BaseTest {
                 "-u",
                 THY519_578_UserName,
                 "--json"});
+        SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:delete",
+                "-s",
+                "thn__MYCE_Quote__c",
+                "-w",
+                "Name='TestHistoryTrackingAuto2'",
+                "-u",
+                THY519_578_UserName,
+                "--json"});
+        SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:delete",
+                "-s",
+                "thn__Guest__c",
+                "-w",
+                "thn__FirstName__c='JohnAuto'",
+                "-u",
+                THY519_578_UserName,
+                "--json"});
+        SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:delete",
+                "-s",
+                "thn__Invoice__c",
+                "-w",
+                "thn__Commentaires__c='TestAuto'",
+                "-u",
+                THY519_578_UserName,
+                "--json"});
+        SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:delete",
+                "-s",
+                "thn__MYCE_Quote__c",
+                "-w",
+                "Name='TestHistoryTrackingAuto3'",
+                "-u",
+                THY519_578_UserName,
+                "--json"});
+        SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:delete",
+                "-s",
+                "thn__MYCE_Quote__c",
+                "-w",
+                "Name='TestHistoryTrackingAuto4'",
+                "-u",
+                THY519_578_UserName,
+                "--json"});
+        SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:delete",
+                "-s",
+                "thn__MYCE_Quote__c",
+                "-w",
+                "Name='TestHistoryTrackingAuto5'",
+                "-u",
+                THY519_578_UserName,
+                "--json"});
+        SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:delete",
+                "-s",
+                "thn__MYCE_Quote__c",
+                "-w",
+                "Name='TestHistoryTrackingAuto6'",
+                "-u",
+                THY519_578_UserName,
+                "--json"});
+        SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:delete",
+                "-s",
+                "thn__Guest__c",
+                "-w",
+                "thn__FirstName__c='JohnAuto1'",
+                "-u",
+                THY519_578_UserName,
+                "--json"});
+        SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:delete",
+                "-s",
+                "thn__Guest__c",
+                "-w",
+                "thn__FirstName__c='JohnAuto2'",
+                "-u",
+                THY519_578_UserName,
+                "--json"});
+        SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:delete",
+                "-s",
+                "thn__Invoice__c",
+                "-w",
+                "thn__Commentaires__c='TestAuto2'",
+                "-u",
+                THY519_578_UserName,
+                "--json"});
+        SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:delete",
+                "-s",
+                "thn__MYCE_Quote__c",
+                "-w",
+                "Name='TestHistoryTrackingAuto8'",
+                "-u",
+                THY519_578_UserName,
+                "--json"});
+        SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:delete",
+                "-s",
+                "thn__MYCE_Quote__c",
+                "-w",
+                "Name='CloneTestHistoryTrackingAuto8'",
+                "-u",
+                THY519_578_UserName,
+                "--json"});
+        SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:delete",
+                "-s",
+                "thn__MYCE_Quote__c",
+                "-w",
+                "Name='TestHistoryTrackingAuto9'",
+                "-u",
+                THY519_578_UserName,
+                "--json"});
+        SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:delete",
+                "-s",
+                "thn__Package__c",
+                "-w",
+                "Name='TestHistoryTrackingAuto2'",
+                "-u",
+                THY519_578_UserName,
+                "--json"});
+        SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:delete",
+                "-s",
+                "thn__MYCE_Quote__c",
+                "-w",
+                "Name='TestHistoryTrackingAuto10'",
+                "-u",
+                THY519_578_UserName,
+                "--json"});
+        SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:delete",
+                "-s",
+                "thn__MYCE_Quote__c",
+                "-w",
+                "Name='TestHistoryTrackingAuto11'",
+                "-u",
+                THY519_578_UserName,
+                "--json"});
+        SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:delete",
+                "-s",
+                "thn__MYCE_Quote__c",
+                "-w",
+                "Name='TestHistoryTrackingAuto12'",
+                "-u",
+                THY519_578_UserName,
+                "--json"});
+        SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:delete",
+                "-s",
+                "thn__MYCE_Quote__c",
+                "-w",
+                "Name='TestHistoryTrackingAuto13'",
+                "-u",
+                THY519_578_UserName,
+                "--json"});
+        SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:delete",
+                "-s",
+                "thn__MYCE_Quote__c",
+                "-w",
+                "Name='TestHistoryTrackingAuto14'",
+                "-u",
+                THY519_578_UserName,
+                "--json"});
+        SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:delete",
+                "-s",
+                "thn__MYCE_Quote__c",
+                "-w",
+                "Name='TestHistoryTrackingAuto15'",
+                "-u",
+                THY519_578_UserName,
+                "--json"});
+        SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:delete",
+                "-s",
+                "thn__Package__c",
+                "-w",
+                "Name='TestHistoryTrackingAuto3'",
+                "-u",
+                THY519_578_UserName,
+                "--json"});
+        SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:delete",
+                "-s",
+                "thn__MYCE_Quote__c",
+                "-w",
+                "Name='TestHistoryTrackingAuto16'",
+                "-u",
+                THY519_578_UserName,
+                "--json"});
+        SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:delete",
+                "-s",
+                "thn__Guest__c",
+                "-w",
+                "thn__FirstName__c='JohnAuto3'",
+                "-u",
+                THY519_578_UserName,
+                "--json"});
+        SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:delete",
+                "-s",
+                "thn__Invoice__c",
+                "-w",
+                "thn__Commentaires__c='TestAuto3'",
+                "-u",
+                THY519_578_UserName,
+                "--json"});
+        SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:delete",
+                "-s",
+                "thn__MYCE_Quote__c",
+                "-w",
+                "Name='TestHistoryTrackingAuto17'",
+                "-u",
+                THY519_578_UserName,
+                "--json"});
+    }
+
+    @Test(priority = 1, description = "Add Quote Meeting Room, Quote Product, Quote Hotel Room, Quote Package")
+    @Severity(SeverityLevel.NORMAL)
+    @Story("THY-519: History tracking")
+    public void testHistoryTracking() throws InterruptedException, IOException {
         StringBuilder propertyDemoRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:get",
@@ -255,26 +514,7 @@ public class HistoryTracking extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     @Story("THY-519: History tracking")
     public void testHistoryTracking2() throws InterruptedException, IOException {
-        SfdxCommand.runLinuxCommand1(new String[]{
-                SFDX,
-                "force:data:record:delete",
-                "-s",
-                "thn__MYCE_Quote__c",
-                "-w",
-                "Name='TestHistoryTrackingAuto2'",
-                "-u",
-                THY519_578_UserName,
-                "--json"});
-        SfdxCommand.runLinuxCommand1(new String[]{
-                SFDX,
-                "force:data:record:delete",
-                "-s",
-                "thn__Guest__c",
-                "-w",
-                "thn__FirstName__c='JohnAuto'",
-                "-u",
-                THY519_578_UserName,
-                "--json"});
+
         StringBuilder propertyDemoRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:get",
@@ -341,27 +581,7 @@ public class HistoryTracking extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     @Story("THY-519: History tracking")
     public void testHistoryTracking3() throws InterruptedException, IOException {
-        StringBuilder res= SfdxCommand.runLinuxCommand1(new String[]{
-                SFDX,
-                "force:data:record:delete",
-                "-s",
-                "thn__Invoice__c",
-                "-w",
-                "thn__Commentaires__c='TestAuto'",
-                "-u",
-                THY519_578_UserName,
-                "--json"});
-        System.out.println(res);
-        SfdxCommand.runLinuxCommand1(new String[]{
-                SFDX,
-                "force:data:record:delete",
-                "-s",
-                "thn__MYCE_Quote__c",
-                "-w",
-                "Name='TestHistoryTrackingAuto3'",
-                "-u",
-                THY519_578_UserName,
-                "--json"});
+
         StringBuilder propertyDemoRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:get",
@@ -416,16 +636,7 @@ public class HistoryTracking extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     @Story("THY-519: History tracking")
     public void testHistoryTracking4() throws InterruptedException, IOException {
-        SfdxCommand.runLinuxCommand1(new String[]{
-                SFDX,
-                "force:data:record:delete",
-                "-s",
-                "thn__MYCE_Quote__c",
-                "-w",
-                "Name='TestHistoryTrackingAuto4'",
-                "-u",
-                THY519_578_UserName,
-                "--json"});
+
         StringBuilder propertyDemoRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:get",
@@ -611,16 +822,7 @@ public class HistoryTracking extends BaseTest {
     @Story("THY-519: History tracking")
     //Create new action on Myce Quote object. Action type - lighting component, thn:ProductModification "Order update"
     public void testHistoryTracking5() throws InterruptedException, IOException {
-        SfdxCommand.runLinuxCommand1(new String[]{
-                SFDX,
-                "force:data:record:delete",
-                "-s",
-                "thn__MYCE_Quote__c",
-                "-w",
-                "Name='TestHistoryTrackingAuto5'",
-                "-u",
-                THY519_578_UserName,
-                "--json"});
+
         StringBuilder propertyDemoRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:get",
@@ -668,9 +870,8 @@ public class HistoryTracking extends BaseTest {
                 "-u",
                 THY519_578_UserName,
                 "--json"});
-        loginPageForScratchOrg.logInOnScratchOrg2(driver, "https://test.salesforce.com/", THY519_578_UserName, THY519_578_Password);
-        homePageForScratchOrg.openAppLauncher();
-        homePageForScratchOrg.sendTextInAppWindow("MYCE Quotes");
+
+        myceQuotes.clickMyceQuoteTab();
         myceQuotes.openMyceQoteRecord("TestHistoryTrackingAuto5");
         myceQuotes.updateOrder();
         StringBuilder historyRecord1 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
@@ -686,40 +887,11 @@ public class HistoryTracking extends BaseTest {
         Assert.assertNotNull(historyID1);
     }
 
-    @Test(priority = 6, description = "Update Invoices")
+    @Test(priority = 6, description = "Update Payment")
     @Severity(SeverityLevel.NORMAL)
     @Story("THY-519: History tracking")
     public void testHistoryTracking6() throws InterruptedException, IOException {
-        SfdxCommand.runLinuxCommand1(new String[]{
-                SFDX,
-                "force:data:record:delete",
-                "-s",
-                "thn__MYCE_Quote__c",
-                "-w",
-                "Name='TestHistoryTrackingAuto6'",
-                "-u",
-                THY519_578_UserName,
-                "--json"});
-        SfdxCommand.runLinuxCommand1(new String[]{
-                SFDX,
-                "force:data:record:delete",
-                "-s",
-                "thn__Guest__c",
-                "-w",
-                "thn__FirstName__c='JohnAuto1'",
-                "-u",
-                THY519_578_UserName,
-                "--json"});
-        SfdxCommand.runLinuxCommand1(new String[]{
-                SFDX,
-                "force:data:record:delete",
-                "-s",
-                "thn__Guest__c",
-                "-w",
-                "thn__FirstName__c='JohnAuto2'",
-                "-u",
-                THY519_578_UserName,
-                "--json"});
+
         StringBuilder propertyDemoRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:get",
@@ -810,17 +982,7 @@ public class HistoryTracking extends BaseTest {
     @Story("THY-519: History tracking")
     //take out in Field Sets thn__Amount_to_invoice__c
     public void testHistoryTracking7() throws InterruptedException, IOException {
-        StringBuilder res= SfdxCommand.runLinuxCommand1(new String[]{
-                SFDX,
-                "force:data:record:delete",
-                "-s",
-                "thn__Invoice__c",
-                "-w",
-                "thn__Commentaires__c='TestAuto2'",
-                "-u",
-                THY519_578_UserName,
-                "--json"});
-        System.out.println(res);
+
         StringBuilder invoiceResult = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:create",
@@ -866,26 +1028,6 @@ public class HistoryTracking extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     @Story("THY-519: History tracking")
     public void testHistoryTracking8() throws InterruptedException, IOException {
-        SfdxCommand.runLinuxCommand1(new String[]{
-                SFDX,
-                "force:data:record:delete",
-                "-s",
-                "thn__MYCE_Quote__c",
-                "-w",
-                "Name='TestHistoryTrackingAuto8'",
-                "-u",
-                THY519_578_UserName,
-                "--json"});
-        SfdxCommand.runLinuxCommand1(new String[]{
-                SFDX,
-                "force:data:record:delete",
-                "-s",
-                "thn__MYCE_Quote__c",
-                "-w",
-                "Name='CloneTestHistoryTrackingAuto8'",
-                "-u",
-                THY519_578_UserName,
-                "--json"});
         StringBuilder propertyDemoRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:get",
@@ -910,10 +1052,7 @@ public class HistoryTracking extends BaseTest {
                 THY519_578_UserName,
                 "--json"});
         String myceQuoteID = JsonParser2.getFieldValue(myseQuoteResult.toString(), "id");
-        loginPageForScratchOrg.logInOnScratchOrg2(driver, "https://test.salesforce.com/", THY519_578_UserName, THY519_578_Password);
-        Thread.sleep(2000);
-        homePageForScratchOrg.openAppLauncher();
-        homePageForScratchOrg.sendTextInAppWindow("MYCE Quotes");
+        myceQuotes.clickMyceQuoteTab();
         myceQuotes.openMyceQoteRecord("TestHistoryTrackingAuto8");
         myceQuotes.cloneMyceQuote("CloneTestHistoryTrackingAuto8");
         StringBuilder cloneMyceQuoteRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
@@ -944,26 +1083,7 @@ public class HistoryTracking extends BaseTest {
     @Story("THY-519: History tracking")
     //Add a component for cloning to the page
     public void testHistoryTracking9() throws InterruptedException, IOException {
-        SfdxCommand.runLinuxCommand1(new String[]{
-                SFDX,
-                "force:data:record:delete",
-                "-s",
-                "thn__MYCE_Quote__c",
-                "-w",
-                "Name='TestHistoryTrackingAuto9'",
-                "-u",
-                THY519_578_UserName,
-                "--json"});
-        SfdxCommand.runLinuxCommand1(new String[]{
-                SFDX,
-                "force:data:record:delete",
-                "-s",
-                "thn__Package__c",
-                "-w",
-                "Name='TestHistoryTrackingAuto2'",
-                "-u",
-                THY519_578_UserName,
-                "--json"});
+
         StringBuilder propertyDemoRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:get",
@@ -985,6 +1105,441 @@ public class HistoryTracking extends BaseTest {
                 THY519_578_UserName,
                 "--json"});
         String foodID = JsonParser2.getFieldValue(productRecordFood.toString(), "Id");
+        StringBuilder myseQuoteResult = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:create",
+                "-s",
+                "thn__MYCE_Quote__c",
+                "-v",
+                "Name='TestHistoryTrackingAuto9' thn__Pax__c=10 thn__Hotel__c='" + propertyDemoID +
+                        "' thn__Arrival_Date__c=" + date.generateTodayDate2() + " thn__Departure_Date__c=" +
+                        date.generateTodayDate2_plus(0, 3),
+                "-u",
+                THY519_578_UserName,
+                "--json"});
+        String myceQuoteID = JsonParser2.getFieldValue(myseQuoteResult.toString(), "id");
+        StringBuilder packageResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:record:create",
+                "-s",
+                "thn__Package__c",
+                "-v",
+                "Name='TestHistoryTrackingAuto2' thn__Hotel__c='" + propertyDemoID + "'",
+                "-u",
+                THY519_578_UserName,
+                "--json"});
+        String packageId = JsonParser2.getFieldValue(packageResult.toString(), "id");
+        StringBuilder packageLineResult1 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:record:create",
+                "-s",
+                "thn__Package_Line__c",
+                "-v",
+                "Name='Fish and cheeps' thn__Package__c='" + packageId + "' thn__Type__c='Food'" +
+                        " thn__Product__c='" + foodID + "' thn__Start_Time__c=12:00 thn__End_Time__c=13:00" +
+                        " thn__Unit_Price__c=20 thn__VAT_Category__c=1",
+                "-u",
+                THY519_578_UserName,
+                "--json"});
+        String packageLineId1 = JsonParser2.getFieldValue(packageLineResult1.toString(), "id");
+        StringBuilder quotePackageResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:record:create",
+                "-s",
+                "thn__Quote_Package__c",
+                "-v",
+                "thn__MYCE_Quote__c='" + myceQuoteID + "' thn__Package__c='" + packageId +
+                        "'",
+                "-u",
+                THY519_578_UserName,
+                "--json"});
+        String quotePackageId = JsonParser2.getFieldValue(quotePackageResult.toString(), "id");
+        myceQuotes.clickMyceQuoteTab();
+        myceQuotes.openMyceQoteRecord("TestHistoryTrackingAuto9");
+        myceQuotes.cloneRelatedRecord(date.generateTodayDate3_plus(0 , 0), "Quote Package");
+        StringBuilder quotePackageSoql = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:soql:query",
+                "-q",
+                "SELECT Id FROM thn__Quote_Package__c WHERE thn__MYCE_Quote__c='" + myceQuoteID + "'",
+                "-u",
+                THY519_578_UserName,
+                "--json"});
+        List<String> quotesPackageID= JsonParser2.getFieldValueSoql(quotePackageSoql.toString(), "Id");
+        String quotePackageID1 = quotesPackageID.get(0);
+        String quotePackageID2 = quotesPackageID.get(1);
+        System.out.println(quotePackageID1);
+        System.out.println(quotePackageID2);
+        StringBuilder historyRecord1 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:record:get",
+                "-s",
+                "thn__History__c",
+                "-w",
+                "thn__MYCE_Quote__c='" + myceQuoteID + "' thn__Object__c='thn__Quote_Package__c'" +
+                        " thn__Operation__c='Created' thn__Record_Id__c=" + quotePackageID1 + "'",
+                "-u",
+                THY519_578_UserName,
+                "--json"});
+        String historyID1 = JsonParser2.getFieldValue(historyRecord1.toString(), "Id");
+        StringBuilder historyRecord2 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:record:get",
+                "-s",
+                "thn__History__c",
+                "-w",
+                "thn__MYCE_Quote__c='" + myceQuoteID + "' thn__Object__c='thn__Quote_Package__c'" +
+                        " thn__Operation__c='Created' thn__Record_Id__c=" + quotePackageID2 + "'",
+                "-u",
+                THY519_578_UserName,
+                "--json"});
+        String historyID2 = JsonParser2.getFieldValue(historyRecord2.toString(), "Id");
+        Assert.assertNotNull(historyID1);
+        Assert.assertNotNull(historyID2);
+    }
+
+    @Test(priority = 10, description = "Clone Quote hotel room")
+    @Severity(SeverityLevel.NORMAL)
+    @Story("THY-519: History tracking")
+    //Add a component for cloning to the page
+    public void testHistoryTracking10() throws InterruptedException, IOException {
+
+        StringBuilder propertyDemoRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:get",
+                "-s",
+                "thn__Hotel__c",
+                "-w",
+                "Name='Demo'",
+                "-u",
+                THY519_578_UserName,
+                "--json"});
+        String propertyDemoID = JsonParser2.getFieldValue(propertyDemoRecord.toString(), "Id");
+        StringBuilder productRecordRoom1Night = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:record:get",
+                "-s",
+                "thn__Product__c",
+                "-w",
+                "Name='ROOM 1 NIGHT'",
+                "-u",
+                THY519_578_UserName,
+                "--json"});
+        String room1NightID = JsonParser2.getFieldValue(productRecordRoom1Night.toString(), "Id");
+        StringBuilder roomTypeSingleRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:get",
+                "-s",
+                "thn__Space_Area__c",
+                "-w",
+                "Name='Single'",
+                "-u",
+                THY519_578_UserName,
+                "--json"});
+        String roomTypeSingleID = JsonParser2.getFieldValue(roomTypeSingleRecord.toString(), "Id");
+        StringBuilder myseQuoteResult = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:create",
+                "-s",
+                "thn__MYCE_Quote__c",
+                "-v",
+                "Name='TestHistoryTrackingAuto10' thn__Pax__c=10 thn__Hotel__c='" + propertyDemoID +
+                        "' thn__Arrival_Date__c=" + date.generateTodayDate2() + " thn__Departure_Date__c=" +
+                        date.generateTodayDate2_plus(0, 3),
+                "-u",
+                THY519_578_UserName,
+                "--json"});
+        String myceQuoteID = JsonParser2.getFieldValue(myseQuoteResult.toString(), "id");
+        StringBuilder quoteHotelRoomResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:record:create",
+                "-s",
+                "thn__Quote_Hotel_Room__c",
+                "-v",
+                "thn__MYCE_Quote__c='" + myceQuoteID + "' thn__Product__c='" + room1NightID + "' thn__Space_Area__c='"
+                        + roomTypeSingleID + "'",
+                "-u",
+                THY519_578_UserName,
+                "--json"});
+        //String quoteHotelRoomId = JsonParser2.getFieldValue(quoteHotelRoomResult.toString(), "id");
+        myceQuotes.clickMyceQuoteTab();
+        myceQuotes.openMyceQoteRecord("TestHistoryTrackingAuto10");
+        myceQuotes.cloneRelatedRecord(date.generateTodayDate3_plus(0 , 0), "Quote Hotel Room");
+        StringBuilder quoteHotelRoomsSoql = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:soql:query",
+                "-q",
+                "SELECT Id FROM thn__Quote_Hotel_Room__c WHERE thn__MYCE_Quote__c='" + myceQuoteID + "'",
+                "-u",
+                THY519_578_UserName,
+                "--json"});
+        List<String> quotesHotelRoomsID= JsonParser2.getFieldValueSoql(quoteHotelRoomsSoql.toString(), "Id");
+        String quoteHotelRoomID1 = quotesHotelRoomsID.get(0);
+        String quoteHotelRoomID2 = quotesHotelRoomsID.get(1);
+        System.out.println(quoteHotelRoomID1);
+        System.out.println(quoteHotelRoomID2);
+        StringBuilder historyRecord1 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:record:get",
+                "-s",
+                "thn__History__c",
+                "-w",
+                "thn__MYCE_Quote__c='" + myceQuoteID + "' thn__Object__c='thn__Quote_Hotel_Room__c'" +
+                        " thn__Operation__c='Created' thn__Record_Id__c=" + quoteHotelRoomID1 + "'",
+                "-u",
+                THY519_578_UserName,
+                "--json"});
+        String historyID1 = JsonParser2.getFieldValue(historyRecord1.toString(), "Id");
+        StringBuilder historyRecord2 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:record:get",
+                "-s",
+                "thn__History__c",
+                "-w",
+                "thn__MYCE_Quote__c='" + myceQuoteID + "' thn__Object__c='thn__Quote_Hotel_Room__c'" +
+                        " thn__Operation__c='Created' thn__Record_Id__c=" + quoteHotelRoomID2 + "'",
+                "-u",
+                THY519_578_UserName,
+                "--json"});
+        String historyID2 = JsonParser2.getFieldValue(historyRecord2.toString(), "Id");
+        Assert.assertNotNull(historyID1);
+        Assert.assertNotNull(historyID2);
+    }
+
+    @Test(priority = 11, description = "Clone Quote product")
+    @Severity(SeverityLevel.NORMAL)
+    @Story("THY-519: History tracking")
+    //Add a component for cloning to the page
+    public void testHistoryTracking11() throws InterruptedException, IOException {
+
+        StringBuilder propertyDemoRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:get",
+                "-s",
+                "thn__Hotel__c",
+                "-w",
+                "Name='Demo'",
+                "-u",
+                THY519_578_UserName,
+                "--json"});
+        String propertyDemoID = JsonParser2.getFieldValue(propertyDemoRecord.toString(), "Id");
+        StringBuilder productRecordWines = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:record:get",
+                "-s",
+                "thn__Product__c",
+                "-w",
+                "Name='WINES'",
+                "-u",
+                THY519_578_UserName,
+                "--json"});
+        String winesID = JsonParser2.getFieldValue(productRecordWines.toString(), "Id");
+        StringBuilder myseQuoteResult = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:create",
+                "-s",
+                "thn__MYCE_Quote__c",
+                "-v",
+                "Name='TestHistoryTrackingAuto11' thn__Pax__c=10 thn__Hotel__c='" + propertyDemoID +
+                        "' thn__Arrival_Date__c=" + date.generateTodayDate2() + " thn__Departure_Date__c=" +
+                        date.generateTodayDate2_plus(0, 3),
+                "-u",
+                THY519_578_UserName,
+                "--json"});
+        String myceQuoteID = JsonParser2.getFieldValue(myseQuoteResult.toString(), "id");
+        StringBuilder quoteProductResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:record:create",
+                "-s",
+                "thn__Quote_Product__c",
+                "-v",
+                "thn__MYCE_Quote__c='" + myceQuoteID + "' thn__Product__c='" + winesID + "'",
+                "-u",
+                THY519_578_UserName,
+                "--json"});
+        myceQuotes.clickMyceQuoteTab();
+        myceQuotes.openMyceQoteRecord("TestHistoryTrackingAuto11");
+        myceQuotes.cloneRelatedRecord(date.generateTodayDate3_plus(0, 0), "Quote Product");
+        StringBuilder quoteProductsSoql = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:soql:query",
+                "-q",
+                "SELECT Id FROM thn__Quote_Product__c WHERE thn__MYCE_Quote__c='" + myceQuoteID + "'",
+                "-u",
+                THY519_578_UserName,
+                "--json"});
+        List<String> quotesProductsID = JsonParser2.getFieldValueSoql(quoteProductsSoql.toString(), "Id");
+        String quoteProductID1 = quotesProductsID.get(0);
+        String quoteProductID2 = quotesProductsID.get(1);
+        System.out.println(quoteProductID1);
+        System.out.println(quoteProductID2);
+        StringBuilder historyRecord1 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:record:get",
+                "-s",
+                "thn__History__c",
+                "-w",
+                "thn__MYCE_Quote__c='" + myceQuoteID + "' thn__Object__c='thn__Quote_Product__c'" +
+                        " thn__Operation__c='Created' thn__Record_Id__c=" + quoteProductID1 + "'",
+                "-u",
+                THY519_578_UserName,
+                "--json"});
+        String historyID1 = JsonParser2.getFieldValue(historyRecord1.toString(), "Id");
+        StringBuilder historyRecord2 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:record:get",
+                "-s",
+                "thn__History__c",
+                "-w",
+                "thn__MYCE_Quote__c='" + myceQuoteID + "' thn__Object__c='thn__Quote_Product__c'" +
+                        " thn__Operation__c='Created' thn__Record_Id__c=" + quoteProductID2 + "'",
+                "-u",
+                THY519_578_UserName,
+                "--json"});
+        String historyID2 = JsonParser2.getFieldValue(historyRecord2.toString(), "Id");
+        Assert.assertNotNull(historyID1);
+        Assert.assertNotNull(historyID2);
+    }
+
+    @Test(priority = 12, description = "Clone Quote meeting room")
+    @Severity(SeverityLevel.NORMAL)
+    @Story("THY-519: History tracking")
+    //Add a component for cloning to the page
+    public void testHistoryTracking12() throws InterruptedException, IOException {
+
+        StringBuilder propertyDemoRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:get",
+                "-s",
+                "thn__Hotel__c",
+                "-w",
+                "Name='Demo'",
+                "-u",
+                THY519_578_UserName,
+                "--json"});
+        String propertyDemoID = JsonParser2.getFieldValue(propertyDemoRecord.toString(), "Id");
+        StringBuilder productRecordMHD = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:record:get",
+                "-s",
+                "thn__Product__c",
+                "-w",
+                "Name='MEETING HALF DAY'",
+                "-u",
+                THY519_578_UserName,
+                "--json"});
+        String meetingHalfDayID = JsonParser2.getFieldValue(productRecordMHD.toString(), "Id");
+        StringBuilder myseQuoteResult = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:create",
+                "-s",
+                "thn__MYCE_Quote__c",
+                "-v",
+                "Name='TestHistoryTrackingAuto12' thn__Pax__c=10 thn__Hotel__c='" + propertyDemoID +
+                        "' thn__Arrival_Date__c=" + date.generateTodayDate2() + " thn__Departure_Date__c=" +
+                        date.generateTodayDate2_plus(0, 3),
+                "-u",
+                THY519_578_UserName,
+                "--json"});
+        String myceQuoteID = JsonParser2.getFieldValue(myseQuoteResult.toString(), "id");
+        StringBuilder quoteMeetingRoomResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:record:create",
+                "-s",
+                "thn__Quote_Meeting_Room__c",
+                "-v",
+                "thn__MYCE_Quote__c='" + myceQuoteID + "' thn__Product__c='" + meetingHalfDayID +
+                        "'",
+                "-u",
+                THY519_578_UserName,
+                "--json"});
+
+        myceQuotes.clickMyceQuoteTab();
+        myceQuotes.openMyceQoteRecord("TestHistoryTrackingAuto12");
+        myceQuotes.cloneRelatedRecord(date.generateTodayDate3_plus(0, 0), "Quote Meetings Room");
+        StringBuilder quoteMeetingRoomsSoql = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:soql:query",
+                "-q",
+                "SELECT Id FROM thn__Quote_Meeting_Room__c WHERE thn__MYCE_Quote__c='" + myceQuoteID + "'",
+                "-u",
+                THY519_578_UserName,
+                "--json"});
+        List<String> quotesMeetingRoomsID = JsonParser2.getFieldValueSoql(quoteMeetingRoomsSoql.toString(), "Id");
+        String quoteMeetingRoomID1 = quotesMeetingRoomsID.get(0);
+        String quoteMeetingRoomID2 = quotesMeetingRoomsID.get(1);
+        System.out.println(quoteMeetingRoomID1);
+        System.out.println(quoteMeetingRoomID2);
+        StringBuilder historyRecord1 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:record:get",
+                "-s",
+                "thn__History__c",
+                "-w",
+                "thn__MYCE_Quote__c='" + myceQuoteID + "' thn__Object__c='thn__Quote_Meeting_Room__c'" +
+                        " thn__Operation__c='Created' thn__Record_Id__c=" + quoteMeetingRoomID1 + "'",
+                "-u",
+                THY519_578_UserName,
+                "--json"});
+        String historyID1 = JsonParser2.getFieldValue(historyRecord1.toString(), "Id");
+        StringBuilder historyRecord2 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:record:get",
+                "-s",
+                "thn__History__c",
+                "-w",
+                "thn__MYCE_Quote__c='" + myceQuoteID + "' thn__Object__c='thn__Quote_Meeting_Room__c'" +
+                        " thn__Operation__c='Created' thn__Record_Id__c=" + quoteMeetingRoomID2 + "'",
+                "-u",
+                THY519_578_UserName,
+                "--json"});
+        String historyID2 = JsonParser2.getFieldValue(historyRecord2.toString(), "Id");
+        Assert.assertNotNull(historyID1);
+        Assert.assertNotNull(historyID2);
+    }
+
+    @Test(priority = 13, description = "Change dates")
+    @Severity(SeverityLevel.NORMAL)
+    @Story("THY-519: History tracking")
+    //Add a component for cloning to the page
+    public void testHistoryTracking13() throws InterruptedException, IOException {
+
+        StringBuilder propertyDemoRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:get",
+                "-s",
+                "thn__Hotel__c",
+                "-w",
+                "Name='Demo'",
+                "-u",
+                THY519_578_UserName,
+                "--json"});
+        String propertyDemoID = JsonParser2.getFieldValue(propertyDemoRecord.toString(), "Id");
+        StringBuilder myseQuoteResult = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:create",
+                "-s",
+                "thn__MYCE_Quote__c",
+                "-v",
+                "Name='TestHistoryTrackingAuto13' thn__Pax__c=10 thn__Hotel__c='" + propertyDemoID +
+                        "' thn__Arrival_Date__c=" + date.generateTodayDate2() + " thn__Departure_Date__c=" +
+                        date.generateTodayDate2_plus(0, 3),
+                "-u",
+                THY519_578_UserName,
+                "--json"});
+        String myceQuoteID = JsonParser2.getFieldValue(myseQuoteResult.toString(), "id");
+        myceQuotes.clickMyceQuoteTab();
+        myceQuotes.openMyceQoteRecord("TestHistoryTrackingAuto13");
+        myceQuotes.changeDate(date.generateTodayDate3_plus(0, 1));
+        StringBuilder historyRecord1 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:record:get",
+                "-s",
+                "thn__History__c",
+                "-w",
+                "thn__MYCE_Quote__c='" + myceQuoteID + "' thn__Object__c='thn__MYCE_Quote__c'" +
+                        " thn__Operation__c='Flow' thn__Flow_Name__c='Quote change date'",
+                "-u",
+                THY519_578_UserName,
+                "--json"});
+        String historyID1 = JsonParser2.getFieldValue(historyRecord1.toString(), "Id");
+        Assert.assertNotNull(historyID1);
+    }
+
+    @Test(priority = 14, description = "Delete Quote meeting room / Quote hotel room / Quote product records")
+    @Severity(SeverityLevel.NORMAL)
+    @Story("THY-519: History tracking")
+    public void testHistoryTracking14() throws InterruptedException, IOException {
+
+        StringBuilder propertyDemoRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:get",
+                "-s",
+                "thn__Hotel__c",
+                "-w",
+                "Name='Demo'",
+                "-u",
+                THY519_578_UserName,
+                "--json"});
+        String propertyDemoID = JsonParser2.getFieldValue(propertyDemoRecord.toString(), "Id");
         StringBuilder productRecordWines = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:get",
                 "-s",
@@ -1032,7 +1587,150 @@ public class HistoryTracking extends BaseTest {
                 "-s",
                 "thn__MYCE_Quote__c",
                 "-v",
-                "Name='TestHistoryTrackingAuto9' thn__Pax__c=10 thn__Hotel__c='" + propertyDemoID +
+                "Name='TestHistoryTrackingAuto14' thn__Pax__c=10 thn__Hotel__c='" + propertyDemoID +
+                        "' thn__Arrival_Date__c=" + date.generateTodayDate2() + " thn__Departure_Date__c=" +
+                        date.generateTodayDate2_plus(0, 3),
+                "-u",
+                THY519_578_UserName,
+                "--json"});
+        String myceQuoteID = JsonParser2.getFieldValue(myseQuoteResult.toString(), "id");
+        StringBuilder quoteMeetingRoomResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:record:create",
+                "-s",
+                "thn__Quote_Meeting_Room__c",
+                "-v",
+                "thn__MYCE_Quote__c='" + myceQuoteID + "' thn__Product__c='" + meetingHalfDayID +
+                        "'",
+                "-u",
+                THY519_578_UserName,
+                "--json"});
+        System.out.println(quoteMeetingRoomResult);
+        String quoteMeetingRoomId = JsonParser2.getFieldValue(quoteMeetingRoomResult.toString(), "id");
+        StringBuilder quoteProductResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:record:create",
+                "-s",
+                "thn__Quote_Product__c",
+                "-v",
+                "thn__MYCE_Quote__c='" + myceQuoteID + "' thn__Product__c='" + winesID + "'",
+                "-u",
+                THY519_578_UserName,
+                "--json"});
+        String quoteProductId = JsonParser2.getFieldValue(quoteProductResult.toString(), "id");
+        StringBuilder quoteHotelRoomResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:record:create",
+                "-s",
+                "thn__Quote_Hotel_Room__c",
+                "-v",
+                "thn__MYCE_Quote__c='" + myceQuoteID + "' thn__Product__c='" + room1NightID + "' thn__Space_Area__c='"
+                        + roomTypeSingleID + "'",
+                "-u",
+                THY519_578_UserName,
+                "--json"});
+        String quoteHotelRoomId = JsonParser2.getFieldValue(quoteHotelRoomResult.toString(), "id");
+        SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:delete",
+                "-s",
+                "thn__Quote_Meeting_Room__c",
+                "-w",
+                "Id='" + quoteMeetingRoomId + "'",
+                "-u",
+                THY519_578_UserName,
+                "--json"});
+        SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:delete",
+                "-s",
+                "thn__Quote_Product__c",
+                "-w",
+                "Id='" + quoteProductId + "'",
+                "-u",
+                THY519_578_UserName,
+                "--json"});
+        SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:delete",
+                "-s",
+                "thn__Quote_Hotel_Room__c",
+                "-w",
+                "Id='" + quoteHotelRoomId + "'",
+                "-u",
+                THY519_578_UserName,
+                "--json"});
+        StringBuilder historyRecord1 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:record:get",
+                "-s",
+                "thn__History__c",
+                "-w",
+                "thn__MYCE_Quote__c='" + myceQuoteID + "' thn__Object__c='thn__Quote_Meeting_Room__c'" +
+                        " thn__Operation__c='Deleted' thn__Record_Name__c='DEFAULT - MEETING HALF DAY'" +
+                        " thn__Record_Id__c='" + quoteMeetingRoomId + "'",
+                "-u",
+                THY519_578_UserName,
+                "--json"});
+        String historyID1 = JsonParser2.getFieldValue(historyRecord1.toString(), "Id");
+        StringBuilder historyRecord2 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:record:get",
+                "-s",
+                "thn__History__c",
+                "-w",
+                "thn__MYCE_Quote__c='" + myceQuoteID + "' thn__Object__c='thn__Quote_Product__c'" +
+                        " thn__Operation__c='Deleted' thn__Record_Name__c='WINES'" +
+                        " thn__Record_Id__c='" + quoteProductId + "'",
+                "-u",
+                THY519_578_UserName,
+                "--json"});
+        String historyID2 = JsonParser2.getFieldValue(historyRecord2.toString(), "Id");
+        StringBuilder historyRecord3 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:record:get",
+                "-s",
+                "thn__History__c",
+                "-w",
+                "thn__MYCE_Quote__c='" + myceQuoteID + "' thn__Object__c='thn__Quote_Hotel_Room__c'" +
+                        " thn__Operation__c='Deleted' thn__Record_Name__c='ROOM 1 NIGHT'" +
+                        " thn__Record_Id__c='" + quoteHotelRoomId + "'",
+                "-u",
+                THY519_578_UserName,
+                "--json"});
+        String historyID3 = JsonParser2.getFieldValue(historyRecord3.toString(), "Id");
+        Assert.assertNotNull(historyID1);
+        Assert.assertNotNull(historyID2);
+        Assert.assertNotNull(historyID3);
+    }
+
+    @Test(priority = 15, description = "Delete Quote meeting package")
+    @Severity(SeverityLevel.NORMAL)
+    @Story("THY-519: History tracking")
+    public void testHistoryTracking15() throws InterruptedException, IOException {
+
+        StringBuilder propertyDemoRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:get",
+                "-s",
+                "thn__Hotel__c",
+                "-w",
+                "Name='Demo'",
+                "-u",
+                THY519_578_UserName,
+                "--json"});
+        String propertyDemoID = JsonParser2.getFieldValue(propertyDemoRecord.toString(), "Id");
+        StringBuilder productRecordFood = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:record:get",
+                "-s",
+                "thn__Product__c",
+                "-w",
+                "Name='FOOD'",
+                "-u",
+                THY519_578_UserName,
+                "--json"});
+        String foodID = JsonParser2.getFieldValue(productRecordFood.toString(), "Id");
+        StringBuilder myseQuoteResult = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:create",
+                "-s",
+                "thn__MYCE_Quote__c",
+                "-v",
+                "Name='TestHistoryTrackingAuto15' thn__Pax__c=10 thn__Hotel__c='" + propertyDemoID +
                         "' thn__Arrival_Date__c=" + date.generateTodayDate2() + " thn__Departure_Date__c=" +
                         date.generateTodayDate2_plus(0, 3),
                 "-u",
@@ -1044,7 +1742,7 @@ public class HistoryTracking extends BaseTest {
                 "-s",
                 "thn__Package__c",
                 "-v",
-                "Name='TestHistoryTrackingAuto2' thn__Hotel__c='" + propertyDemoID + "'",
+                "Name='TestHistoryTrackingAuto3' thn__Hotel__c='" + propertyDemoID + "'",
                 "-u",
                 THY519_578_UserName,
                 "--json"});
@@ -1072,25 +1770,203 @@ public class HistoryTracking extends BaseTest {
                 THY519_578_UserName,
                 "--json"});
         String quotePackageId = JsonParser2.getFieldValue(quotePackageResult.toString(), "id");
-        loginPageForScratchOrg.logInOnScratchOrg2(driver, "https://test.salesforce.com/", THY519_578_UserName, THY519_578_Password);
-        Thread.sleep(2000);
-        homePageForScratchOrg.openAppLauncher();
-        homePageForScratchOrg.sendTextInAppWindow("MYCE Quotes");
-        myceQuotes.openMyceQoteRecord("TestHistoryTrackingAuto9");
-        myceQuotes.cloneRelatedRecord(date.generateTodayDate3_plus(0 , 0), "Quote Package");
-        StringBuilder quotePackageSoql = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
-                "force:data:soql:query",
-                "-q",
-                "SELECT Id FROM thn__Quote_Package__c WHERE thn__MYCE_Quote__c='" + myceQuoteID + "'",
+        SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:delete",
+                "-s",
+                "thn__Quote_Package__c",
+                "-w",
+                "Id='" + quotePackageId + "'",
                 "-u",
                 THY519_578_UserName,
                 "--json"});
-        List<String> quotesPackageID= JsonParser2.getFieldValueSoql(quotePackageSoql.toString(), "Id");
-        String quotePackageID1 = quotesPackageID.get(0);
-        String quotePackageID2 = quotesPackageID.get(1);
-        System.out.println(quotePackageID1);
-        System.out.println(quotePackageID2);
-
+        StringBuilder historyRecord1 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:record:get",
+                "-s",
+                "thn__History__c",
+                "-w",
+                "thn__MYCE_Quote__c='" + myceQuoteID + "' thn__Object__c='thn__Quote_Package__c'" +
+                        " thn__Operation__c='Deleted' thn__Record_Name__c='TestHistoryTrackingAuto3'" +
+                        " thn__Record_Id__c='" + quotePackageId + "'",
+                "-u",
+                THY519_578_UserName,
+                "--json"});
+        String historyID1 = JsonParser2.getFieldValue(historyRecord1.toString(), "Id");
+        StringBuilder historyRecord2 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:record:get",
+                "-s",
+                "thn__History__c",
+                "-w",
+                "thn__MYCE_Quote__c='" + myceQuoteID + "' thn__Object__c='thn__Quote_Product__c'" +
+                        " thn__Operation__c='Deleted' thn__Record_Name__c='FOOD'",
+                "-u",
+                THY519_578_UserName,
+                "--json"});
+        String historyID2 = JsonParser2.getFieldValue(historyRecord2.toString(), "Id");
+        Assert.assertNotNull(historyID1);
+        Assert.assertNotNull(historyID2);
     }
 
+    @Test(priority = 16, description = "Delete Payment record")
+    @Severity(SeverityLevel.NORMAL)
+    @Story("THY-519: History tracking")
+    public void testHistoryTracking16() throws InterruptedException, IOException {
+
+        StringBuilder propertyDemoRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:get",
+                "-s",
+                "thn__Hotel__c",
+                "-w",
+                "Name='Demo'",
+                "-u",
+                THY519_578_UserName,
+                "--json"});
+        String propertyDemoID = JsonParser2.getFieldValue(propertyDemoRecord.toString(), "Id");
+        StringBuilder guestResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:record:create",
+                "-s",
+                "thn__Guest__c",
+                "-v",
+                "thn__FirstName__c='JohnAuto3' thn__Email__c='werty3@tut.by' thn__Hotel__c='" + propertyDemoID + "'",
+                "-u",
+                THY519_578_UserName,
+                "--json"});
+        System.out.println(guestResult);
+        String guestID = JsonParser2.getFieldValue(guestResult.toString(), "id");
+        StringBuilder myseQuoteResult = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:create",
+                "-s",
+                "thn__MYCE_Quote__c",
+                "-v",
+                "Name='TestHistoryTrackingAuto16' thn__Pax__c=10 thn__Hotel__c='" + propertyDemoID +
+                        "' thn__Arrival_Date__c=" + date.generateTodayDate2() + " thn__Departure_Date__c=" +
+                        date.generateTodayDate2_plus(0, 3) + " thn__Reservation_Guest__c='" + guestID + "'",
+                "-u",
+                THY519_578_UserName,
+                "--json"});
+        String myceQuoteID = JsonParser2.getFieldValue(myseQuoteResult.toString(), "id");
+        StringBuilder paymentResult = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:create",
+                "-s",
+                "thn__Payment__c",
+                "-v",
+                "thn__MYCE_Quote__c='" + myceQuoteID + "' thn__Guest__c='" + guestID + "' thn__Gross_Value__c=200" +
+                        " thn__Type__c='Cash'",
+                "-u",
+                THY519_578_UserName,
+                "--json"});;
+        String paymentID = JsonParser2.getFieldValue(paymentResult.toString(), "id");
+        StringBuilder paymentRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:record:get",
+                "-s",
+                "thn__Payment__c",
+                "-w",
+                "Id='" + paymentID + "'",
+                "-u",
+                THY519_578_UserName,
+                "--json"});
+        String paymentName = JsonParser2.getFieldValue(paymentRecord.toString(), "Name");
+        SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:delete",
+                "-s",
+                "thn__Payment__c",
+                "-w",
+                "Id='" + paymentID + "'",
+                "-u",
+                THY519_578_UserName,
+                "--json"});
+        StringBuilder historyRecord1 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:record:get",
+                "-s",
+                "thn__History__c",
+                "-w",
+                "thn__MYCE_Quote__c='" + myceQuoteID + "' thn__Object__c='Payment__c'" +
+                        " thn__Operation__c='Deleted' thn__Record_Name__c='" + paymentName + "'" +
+                        " thn__Record_Id__c='" + paymentID + "'",
+                "-u",
+                THY519_578_UserName,
+                "--json"});
+        String historyID1 = JsonParser2.getFieldValue(historyRecord1.toString(), "Id");
+        Assert.assertNotNull(historyID1);
+    }
+
+    @Test(priority = 17, description = "Delete Invoice record")
+    @Severity(SeverityLevel.NORMAL)
+    @Story("THY-519: History tracking")
+    public void testHistoryTracking17() throws InterruptedException, IOException {
+
+        StringBuilder propertyDemoRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:get",
+                "-s",
+                "thn__Hotel__c",
+                "-w",
+                "Name='Demo'",
+                "-u",
+                THY519_578_UserName,
+                "--json"});
+        String propertyDemoID = JsonParser2.getFieldValue(propertyDemoRecord.toString(), "Id");
+        StringBuilder myseQuoteResult = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:create",
+                "-s",
+                "thn__MYCE_Quote__c",
+                "-v",
+                "Name='TestHistoryTrackingAuto17' thn__Pax__c=10 thn__Hotel__c='" + propertyDemoID +
+                        "' thn__Arrival_Date__c=" + date.generateTodayDate2() + " thn__Departure_Date__c=" +
+                        date.generateTodayDate2_plus(0, 3),
+                "-u",
+                THY519_578_UserName,
+                "--json"});
+        String myceQuoteID = JsonParser2.getFieldValue(myseQuoteResult.toString(), "id");
+        StringBuilder invoiceResult = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:create",
+                "-s",
+                "thn__Invoice__c",
+                "-v",
+                "thn__MYCE_Quote__c='" + myceQuoteID + "' thn__Original_To_Invoice__c=50 thn__to_invoice__c=50" +
+                        " thn__Commentaires__c='TestAuto3'",
+                "-u",
+                THY519_578_UserName,
+                "--json"});
+        String invoiceID = JsonParser2.getFieldValue(invoiceResult.toString(), "id");
+        StringBuilder invoiceRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:record:get",
+                "-s",
+                "thn__Invoice__c",
+                "-w",
+                "Id='" + invoiceID + "'",
+                "-u",
+                THY519_578_UserName,
+                "--json"});
+        String invoiceName = JsonParser2.getFieldValue(invoiceRecord.toString(), "Name");
+        SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:delete",
+                "-s",
+                "thn__Invoice__c",
+                "-w",
+                "Id='" + invoiceID + "'",
+                "-u",
+                THY519_578_UserName,
+                "--json"});
+        StringBuilder historyRecord1 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:record:get",
+                "-s",
+                "thn__History__c",
+                "-w",
+                "thn__MYCE_Quote__c='" + myceQuoteID + "' thn__Object__c='thn__Invoice__c'" +
+                        " thn__Operation__c='Deleted' thn__Record_Name__c='" + invoiceName + "'" +
+                        " thn__Record_Id__c='" + invoiceID + "'",
+                "-u",
+                THY519_578_UserName,
+                "--json"});
+        String historyID1 = JsonParser2.getFieldValue(historyRecord1.toString(), "Id");
+        Assert.assertNotNull(historyID1);
+    }
 }

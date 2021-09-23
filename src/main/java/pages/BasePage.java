@@ -96,14 +96,14 @@ public class BasePage {
                 System.out.println(" Click  "+(elementLocation));
                 break;
             }
-            catch (JavascriptException | ElementClickInterceptedException e) {
+            catch (JavascriptException | ElementClickInterceptedException | StaleElementReferenceException e) {
                 JavascriptExecutor executor = (JavascriptExecutor) driver;
                 executor.executeScript("arguments[0].click();", element);
                 System.out.println("JavascriptException. Action click "+(elementLocation));
                 break;
             }
-            catch (StaleElementReferenceException e) {
-                System.out.println("StaleElementReferenceException "+(elementLocation));
+            catch (Exception e) {
+                System.out.println("Something wrong "+(elementLocation));
             }
             attempts++;
         }

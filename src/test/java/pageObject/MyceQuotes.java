@@ -19,7 +19,7 @@ public class MyceQuotes extends BasePage{
     }
 
     By NEW_MYCE_QUOTE_BUTTON = By.xpath("//div[@class='windowViewMode-maximized oneContent active lafPageHost']//a[@title='New']");
-    By MYCE_QUOTE_TAB = By.xpath("(//a[@title='MYCE Quotes'])[1]");
+    By MYCE_QUOTE_TAB = By.xpath("//span[text()='MYCE Quotes']");
     By QUATE_RADIO_BUTTON = By.xpath("//div//span[text()='Quote']");
     By NEXT_BUTTON = By.xpath("//button//span[text()='Next']");
     By NAME_QUOTE_FIELD = By.xpath("//div//input[@name='Name']");
@@ -74,9 +74,12 @@ public class MyceQuotes extends BasePage{
 
 
 
-    @Step
-    public  void openMyceQoteRecord(String name){
-        wait1.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//table//a[@title='" + name + "']"))).click();
+
+
+    @Step("Open MYCE Quote record")
+    public void openMyceQoteRecord(String name) throws InterruptedException {
+        wait1.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//table//a[@title='" + name + "']")));
+        click3(By.xpath("//table//a[@title='" + name + "']"));
     }
 
     @Step("Open Myce Quote page")
@@ -90,9 +93,20 @@ public class MyceQuotes extends BasePage{
         return this;
     }
 
+    @Step("Click MYCE Quote tab")
+    public void clickMyceQuoteTab() throws InterruptedException {
+        wait1.until(ExpectedConditions.presenceOfElementLocated(MYCE_QUOTE_TAB));
+        Thread.sleep(1000);
+        click3(MYCE_QUOTE_TAB);
+    }
+
+
+
     @Step("Clone Myce Quote")
     public void cloneMyceQuote(String name) throws InterruptedException {
-        wait1.until(ExpectedConditions.presenceOfElementLocated(DROP_DOWN_BUTTON)).click();
+        wait1.until(ExpectedConditions.presenceOfElementLocated(DROP_DOWN_BUTTON));
+        Thread.sleep(2000);
+        click3(DROP_DOWN_BUTTON);
         enter();
         wait1.until(ExpectedConditions.presenceOfElementLocated(NAME_QUOTE_FIELD)).click();
         writeText(NAME_QUOTE_FIELD, name);
@@ -105,7 +119,10 @@ public class MyceQuotes extends BasePage{
 
     @Step("Clone related record")
     public void cloneRelatedRecord(String date, String nameRecord) throws InterruptedException {
-        wait1.until(ExpectedConditions.presenceOfElementLocated(CLONE_TO_DATE_FIELD)).click();
+        refreshPage();
+        wait1.until(ExpectedConditions.presenceOfElementLocated(CLONE_TO_DATE_FIELD));
+        Thread.sleep(2000);
+        click(CLONE_TO_DATE_FIELD);
         ctrlA();
         delete();
         Thread.sleep(1000);
@@ -126,7 +143,9 @@ public class MyceQuotes extends BasePage{
 
     @Step("Change date")
     public void changeDate(String date) throws InterruptedException {
-        wait1.until(ExpectedConditions.presenceOfElementLocated(CHANGE_DATE_BUTTON)).click();
+        wait1.until(ExpectedConditions.presenceOfElementLocated(CHANGE_DATE_BUTTON));
+        Thread.sleep(2000);
+        click3(CHANGE_DATE_BUTTON);
         wait1.until(ExpectedConditions.presenceOfElementLocated(NEW_ARRIVAL_DATE_FIELD)).click();
         clear(NEW_ARRIVAL_DATE_FIELD);
         writeText(NEW_ARRIVAL_DATE_FIELD, date);
@@ -464,7 +483,9 @@ public class MyceQuotes extends BasePage{
 
     @Step("Update order")
     public void updateOrder() throws InterruptedException {
-        wait1.until(ExpectedConditions.elementToBeClickable(UPDATE_ORDER_BUTTON)).click();
+        wait1.until(ExpectedConditions.elementToBeClickable(UPDATE_ORDER_BUTTON));
+        Thread.sleep(2000);
+        click3(UPDATE_ORDER_BUTTON);
         Thread.sleep(3000);
     }
 
