@@ -367,7 +367,7 @@ public class ValidationRule1 extends BaseTest{
     @Description("Package_Line__c.VR31_IsNotMultidays")
     @Story("For Package where hn__Multi_Days__c == false, create Package line: thn__AppliedDay__c != null")
     public void testCreateNewPackageLine2() throws InterruptedException, IOException {
-        String expectedMessage = "Applied Day must be left empty when a package is Multi days";
+        String expectedMessage = "Applied Day must be left empty when a package is not Multi days";
         StringBuilder productRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:get",
                 "-s",
@@ -388,7 +388,7 @@ public class ValidationRule1 extends BaseTest{
                 ALIAS,
                 "--json"});
         String propertyID = JsonParser2.getFieldValue(res1.toString(), "Id");
-        SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder packageResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:create",
                 "-s",
                 "thn__Package__c",
@@ -397,23 +397,15 @@ public class ValidationRule1 extends BaseTest{
                 "-u",
                 ALIAS,
                 "--json"});
-        StringBuilder res2 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
-                "force:data:record:get",
-                "-s",
-                "thn__Package__c",
-                "-w",
-                "Name='Test Package 22'",
-                "-u",
-                ALIAS,
-                "--json"});
-        String packageID = JsonParser2.getFieldValue(res2.toString(), "Id");
+        String packageID = JsonParser2.getFieldValue(packageResult.toString(), "id");
         StringBuilder result = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:create",
                 "-s",
                 "thn__Package_Line__c",
                 "-v",
                 "Name='Test Pack Line 2' thn__Package__c='" + packageID + "' thn__AppliedDay__c=25 " +
-                        "thn__Type__c='Hotel Room' thn__Product__c='" + productID + "'" ,
+                        "thn__Type__c='Hotel Room' thn__Product__c='" + productID + "' thn__Start_Time__c='12:00'" +
+                        " thn__End_Time__c='15:00' thn__Unit_Price__c=25 thn__VAT_Category__c='1'" ,
                 "-u",
                 ALIAS,
                 "--json"});
@@ -2195,6 +2187,16 @@ public class ValidationRule1 extends BaseTest{
     @Story("On Item record where thn__Mews_Id__c != null, set thn__Send_to_Mews__c to TRUE")
     public void testCreateItem() throws InterruptedException, IOException {
         String expectedMessage = "The Reservation product already exists and cannot be sent twice";
+        SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:delete",
+                "-s",
+                "thn__Rate__c",
+                "-w",
+                "Name='TestRateAuto1'",
+                "-u",
+                ALIAS,
+                "--json"});
         StringBuilder propertyRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:get",
                 "-s",
@@ -2239,21 +2241,13 @@ public class ValidationRule1 extends BaseTest{
                 "force:data:record:create",
                 "-s",
                 "thn__Rate__c",
-                "-w",
-                "Name='TestRate' thn__IsActive__c=true thn__IsPublic__c=true thn__Hotel__c='" + propertyID + "'",
+                "-v",
+                "Name='TestRateAuto1' thn__IsActive__c=true thn__IsPublic__c=true thn__Hotel__c='" + propertyID + "'",
                 "-u",
                 ALIAS,
                 "--json"});
-        StringBuilder rateRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
-                "force:data:record:get",
-                "-s",
-                "thn__Rate__c",
-                "-w",
-                "Name='TestRate'",
-                "-u",
-                ALIAS,
-                "--json"});
-        String rateID = JsonParser2.getFieldValue(rateRecord.toString(), "Id");
+        System.out.println(rateResult);
+        String rateID = JsonParser2.getFieldValue(rateResult.toString(), "id");
         StringBuilder guestResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:create",
                 "-s",
@@ -2332,7 +2326,7 @@ public class ValidationRule1 extends BaseTest{
                 "-s",
                 "thn__Rate__c",
                 "-w",
-                "Name='TestRate'",
+                "Name='BAR'",
                 "-u",
                 ALIAS,
                 "--json"});
@@ -2405,7 +2399,7 @@ public class ValidationRule1 extends BaseTest{
                 "-s",
                 "thn__Rate__c",
                 "-w",
-                "Name='TestRate'",
+                "Name='BAR'",
                 "-u",
                 ALIAS,
                 "--json"});

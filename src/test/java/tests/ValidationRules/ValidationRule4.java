@@ -2413,6 +2413,16 @@ public class ValidationRule4 extends BaseTest {
     @Description("Item__c.VR02_item_send_to_mews")
     @Story("On Item record where thn__Mews_Id__c != null, set thn__Send_to_Mews__c to TRUE")
     public void testCreateItem() throws InterruptedException, IOException {
+        SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:delete",
+                "-s",
+                "thn__Rate__c",
+                "-w",
+                "Name='TestRateAuto4'",
+                "-u",
+                ALIAS,
+                "--json"});
         StringBuilder propertyRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:get",
                 "-s",
@@ -2453,16 +2463,17 @@ public class ValidationRule4 extends BaseTest {
                 ALIAS,
                 "--json"});
         String roomTypeID = JsonParser2.getFieldValue(roomTypeRecord.toString(), "Id");
-        StringBuilder rateRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
-                "force:data:record:get",
+        StringBuilder rateResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:record:create",
                 "-s",
                 "thn__Rate__c",
-                "-w",
-                "Name='TestRate'",
+                "-v",
+                "Name='TestRateAuto4' thn__IsActive__c=true thn__IsPublic__c=true thn__Hotel__c='" + propertyID + "'",
                 "-u",
                 ALIAS,
                 "--json"});
-        String rateID = JsonParser2.getFieldValue(rateRecord.toString(), "Id");
+        System.out.println(rateResult);
+        String rateID = JsonParser2.getFieldValue(rateResult.toString(), "id");
         StringBuilder guestResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:create",
                 "-s",
@@ -2540,7 +2551,7 @@ public class ValidationRule4 extends BaseTest {
                 "-s",
                 "thn__Rate__c",
                 "-w",
-                "Name='TestRate'",
+                "Name='BAR'",
                 "-u",
                 ALIAS,
                 "--json"});
@@ -2624,7 +2635,7 @@ public class ValidationRule4 extends BaseTest {
                 "-s",
                 "thn__Rate__c",
                 "-w",
-                "Name='TestRate'",
+                "Name='BAR'",
                 "-u",
                 ALIAS,
                 "--json"});
