@@ -64,6 +64,10 @@ public class BaseTest {
     final protected String THY519_578_UserName = "qa-thy578@succraft.com";
     final protected String THY519_578_Password = "hellohello11";
     final protected String THY519_578_Key = "3MVG9uAc45HBYUrgK5jelFPsWf8UMF9f.UKtPdqS7v6nU6UuMO1_.ui1fcop_0CuXcWQiJzo.OQ7EXDpkkUe_";
+
+    final protected String TB_132_UserName = "qa-tb132@succraft.com";
+    final protected String TB_132_Password = "hellohello11";
+    final protected String TB_132_Key = "3MVG9KlmwBKoC7U1VPo9DFXPFCXbXwoWfj6kiKYYtlrRrWo19PnY72_xv2DEHNlurwVHgtmnbLyV.YjWhl5g1";
     public String SCRATCHORGUSERNAME = "test-wixjue9le3v0@example.com";
     public String SCRATCHORGPASSWORD = "mEA3VqI_*OUSw";
     public String byPassId = "a0B1X000002HTPWUA4"; //a061j000003e6IcAAI
