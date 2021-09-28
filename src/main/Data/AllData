@@ -1,5 +1,5 @@
    delete [select name from thn__MYCE_Quote__c];
-   delete [select name from thn__Hotel__c where name != 'Demo' or name!='Property Auto'];
+   delete [select name from thn__Hotel__c where name != 'Demo' and name!='Property Auto'];
    delete [select name from thn__Package__c];
    delete [select thn__FirstName__c from thn__Guest__c];
    delete [select name from thn__Reservation__c];
@@ -100,7 +100,7 @@
         List<thn__Space_Area__c> roomTypeID1 = [select ID from thn__Space_Area__c where Name = 'Double'];
         res1.thn__RequestedCategory__c = roomTypeID1[0].id;
         res1.thn__Pricing_Type__c = 'Rate pricing';
-        List<thn__Rate__c> rateID1 = [select ID from thn__Rate__c where Name = 'DEFAULT'];
+        List<thn__Rate__c> rateID1 = [select ID from thn__Rate__c where Name = 'BAR'];
         res1.thn__Rate__c = rateID1[0].id;
         insert res1;
 

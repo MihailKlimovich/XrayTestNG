@@ -64,7 +64,7 @@ public class ReservationCreationProcess extends BaseTest {
                 "-s",
                 "thn__Space_Area__c",
                 "-w",
-                "Name='a1s1X000000Ny9x'",
+                "Name='a1t1j000000xJ7F'",
                 "-u",
                 ALIAS,
                 "--json"});
@@ -166,7 +166,7 @@ public class ReservationCreationProcess extends BaseTest {
                 "-s",
                 "thn__Space_Area__c",
                 "-w",
-                "Name='a1s1X000000Ny9x'",
+                "Name='a1t1j000000xJ7F'",
                 "-u",
                 ALIAS,
                 "--json"});

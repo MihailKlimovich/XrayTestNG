@@ -14,6 +14,7 @@ import tests.BaseTest;
 import utils.Listeners.TestListener;
 
 import java.io.IOException;
+import java.util.List;
 
 @Listeners({TestListener.class})
 
@@ -48,6 +49,15 @@ public class ValidationRule1 extends BaseTest{
                 ALIAS,
                 "--json"});
         System.out.println(result2);
+        Object byPass = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:soql:query",
+                "-q",
+                "SELECT Id FROM thn__bypass__c",
+                "-u",
+                ALIAS,
+                "--json"});
+        List<String> byPassID= JsonParser2.getFieldValueSoql(byPass.toString(), "Id");
+        String byPassId = byPassID.get(0);
         StringBuilder res = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:update",
                 "-s",

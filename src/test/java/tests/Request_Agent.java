@@ -18,6 +18,18 @@ public class Request_Agent extends BaseTest{
     @Description("THY-506: Request - Agent")
     @Story("THY-506: Request - Agent")
     public void RequestAgent_case1() throws InterruptedException, IOException {
+        StringBuilder authorise = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:auth:jwt:grant",
+                "--clientid",
+                key,
+                "--jwtkeyfile",
+                "/home/user/jdoe/JWT/server.key",
+                "--username",
+                ALIAS,
+                "--instanceurl",
+                "https://test.salesforce.com"
+        });
+        System.out.println(authorise);
         loginPageForScratchOrg.logInOnScratchOrg(driver);
         StringBuilder propertyRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:get",

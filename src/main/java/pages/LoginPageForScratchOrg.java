@@ -11,8 +11,8 @@ import java.time.Duration;
 public class LoginPageForScratchOrg {
 
 
-    private static final String USERNAME = "test-fzyag1rn0itm@example.com";
-    private static final String PASSWORD = "FI%e7%Nb*u9Ro";
+    private static final String USERNAME = "test-q4olefzyjh6b@example.com";
+    private static final String PASSWORD = "xSELy*CD|6Y%Y";
     private static final String URL_LOGIN_PAGE = "https://test.salesforce.com/";
     private static final By USER_NAME_SELECTOR = By.
             xpath("//div[@id='theloginform']//input[@class='input r4 wide mb16 mt8 username']");
