@@ -14,7 +14,7 @@ public class MultiDaysPackages extends BaseTest {
 
     @Test(priority = 1, description = "LogIn")
     @Severity(SeverityLevel.NORMAL)
-    @Story("THY-607: Multi days packages")
+    @Story("THY-607-608: Multi days packages")
     public void logIn() throws InterruptedException, IOException {
         StringBuilder authorise = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
@@ -33,7 +33,7 @@ public class MultiDaysPackages extends BaseTest {
 
     @Test(priority = 2, description = "Preconditions")
     @Severity(SeverityLevel.NORMAL)
-    @Story("THY-607: Multi days packages")
+    @Story("THY-607-608: Multi days packages")
     public void preconditions() throws InterruptedException, IOException {
         SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
@@ -216,7 +216,8 @@ public class MultiDaysPackages extends BaseTest {
                 "-v",
                 "Name='TestQuoteMultiDaysPackageAuto' thn__Pax__c=1 thn__Hotel__c='" + propertyID +
                         "' thn__Arrival_Date__c=" + date.generateTodayDate2() + " thn__Departure_Date__c=" +
-                        date.generateTodayDate2_plus(0, 3),
+                        date.generateTodayDate2_plus(0, 3) + " thn__Stage__c='4 - Closed'" +
+                        " thn__Closed_Status__c='Won'",
                 "-u",
                 THY607_608_UserName,
                 "--json"});
@@ -236,7 +237,7 @@ public class MultiDaysPackages extends BaseTest {
 
     @Test(priority = 3, description = "Edit the ‘Quote Package Line' with type ‘Activity’ on the Quote.")
     @Severity(SeverityLevel.NORMAL)
-    @Story("THY-607: Multi days packages")
+    @Story("THY-607-608: Multi days packages")
     public void testMultiDaysPackages1() throws InterruptedException, IOException {
         StringBuilder quoteRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:get",
@@ -292,17 +293,30 @@ public class MultiDaysPackages extends BaseTest {
                 THY607_608_UserName,
                 "--json"});
         System.out.println(quoteProductRecord);
+        String fsDateId =JsonParser2.getFieldValue(quoteProductRecord.toString(), "thn__FS_Date__c");
+        StringBuilder fsDateRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:record:get",
+                "-s",
+                "thn__FS_Date__c",
+                "-w",
+                "Id='" + fsDateId + "'",
+                "-u",
+                THY607_608_UserName,
+                "--json"});
+        System.out.println(quoteProductRecord);
+        String fsDateDate =JsonParser2.getFieldValue(fsDateRecord.toString(), "thn__Date__c");
         String quoteProductStartDate = JsonParser2.getFieldValue(quoteProductRecord.toString(), "thn__Start_Date__c");
         String quoteProductEndDate = JsonParser2.getFieldValue(quoteProductRecord.toString(), "thn__End_Date__c");
         Assert.assertEquals(quotePackageLineFromDate, date.generateTodayDate2_plus(0, 1));
         Assert.assertEquals(quotePackageLineToDate, date.generateTodayDate2_plus(0, 1));
         Assert.assertEquals(quoteProductStartDate, date.generateTodayDate2_plus(0, 1));
         Assert.assertEquals(quoteProductEndDate, date.generateTodayDate2_plus(0, 1));
+        Assert.assertEquals(fsDateDate, quoteProductStartDate);
     }
 
     @Test(priority = 4, description = "Edit the ‘Quote Package Line' with type ‘Equipment’ on the Quote.")
     @Severity(SeverityLevel.NORMAL)
-    @Story("THY-607: Multi days packages")
+    @Story("THY-607-608: Multi days packages")
     public void testMultiDaysPackages2() throws InterruptedException, IOException {
         StringBuilder quoteRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:get",
@@ -358,17 +372,29 @@ public class MultiDaysPackages extends BaseTest {
                 THY607_608_UserName,
                 "--json"});
         System.out.println(quoteProductRecord);
+        String fsDateId =JsonParser2.getFieldValue(quoteProductRecord.toString(), "thn__FS_Date__c");
+        StringBuilder fsDateRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:record:get",
+                "-s",
+                "thn__FS_Date__c",
+                "-w",
+                "Id='" + fsDateId + "'",
+                "-u",
+                THY607_608_UserName,
+                "--json"});
+        String fsDateDate =JsonParser2.getFieldValue(fsDateRecord.toString(), "thn__Date__c");
         String quoteProductStartDate = JsonParser2.getFieldValue(quoteProductRecord.toString(), "thn__Start_Date__c");
         String quoteProductEndDate = JsonParser2.getFieldValue(quoteProductRecord.toString(), "thn__End_Date__c");
         Assert.assertEquals(quotePackageLineFromDate, date.generateTodayDate2_plus(0, 1));
         Assert.assertEquals(quotePackageLineToDate, date.generateTodayDate2_plus(0, 1));
         Assert.assertEquals(quoteProductStartDate, date.generateTodayDate2_plus(0, 1));
         Assert.assertEquals(quoteProductEndDate, date.generateTodayDate2_plus(0, 1));
+        Assert.assertEquals(fsDateDate, quoteProductStartDate);
     }
 
     @Test(priority = 5, description = "Edit the ‘Quote Package Line' with type ‘Beverage’ on the Quote.")
     @Severity(SeverityLevel.NORMAL)
-    @Story("THY-607: Multi days packages")
+    @Story("THY-607-608: Multi days packages")
     public void testMultiDaysPackages3() throws InterruptedException, IOException {
         StringBuilder quoteRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:get",
@@ -424,17 +450,29 @@ public class MultiDaysPackages extends BaseTest {
                 THY607_608_UserName,
                 "--json"});
         System.out.println(quoteProductRecord);
+        String fsDateId =JsonParser2.getFieldValue(quoteProductRecord.toString(), "thn__FS_Date__c");
+        StringBuilder fsDateRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:record:get",
+                "-s",
+                "thn__FS_Date__c",
+                "-w",
+                "Id='" + fsDateId + "'",
+                "-u",
+                THY607_608_UserName,
+                "--json"});
+        String fsDateDate =JsonParser2.getFieldValue(fsDateRecord.toString(), "thn__Date__c");
         String quoteProductStartDate = JsonParser2.getFieldValue(quoteProductRecord.toString(), "thn__Start_Date__c");
         String quoteProductEndDate = JsonParser2.getFieldValue(quoteProductRecord.toString(), "thn__End_Date__c");
         Assert.assertEquals(quotePackageLineFromDate, date.generateTodayDate2_plus(0, 1));
         Assert.assertEquals(quotePackageLineToDate, date.generateTodayDate2_plus(0, 1));
         Assert.assertEquals(quoteProductStartDate, date.generateTodayDate2_plus(0, 1));
         Assert.assertEquals(quoteProductEndDate, date.generateTodayDate2_plus(0, 1));
+        Assert.assertEquals(fsDateDate, quoteProductStartDate);
     }
 
     @Test(priority = 6, description = "Edit the ‘Quote Package Line' with type ‘Food’ on the Quote.")
     @Severity(SeverityLevel.NORMAL)
-    @Story("THY-607: Multi days packages")
+    @Story("THY-607-608: Multi days packages")
     public void testMultiDaysPackages4() throws InterruptedException, IOException {
         StringBuilder quoteRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:get",
@@ -490,17 +528,29 @@ public class MultiDaysPackages extends BaseTest {
                 THY607_608_UserName,
                 "--json"});
         System.out.println(quoteProductRecord);
+        String fsDateId =JsonParser2.getFieldValue(quoteProductRecord.toString(), "thn__FS_Date__c");
+        StringBuilder fsDateRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:record:get",
+                "-s",
+                "thn__FS_Date__c",
+                "-w",
+                "Id='" + fsDateId + "'",
+                "-u",
+                THY607_608_UserName,
+                "--json"});
+        String fsDateDate =JsonParser2.getFieldValue(fsDateRecord.toString(), "thn__Date__c");
         String quoteProductStartDate = JsonParser2.getFieldValue(quoteProductRecord.toString(), "thn__Start_Date__c");
         String quoteProductEndDate = JsonParser2.getFieldValue(quoteProductRecord.toString(), "thn__End_Date__c");
         Assert.assertEquals(quotePackageLineFromDate, date.generateTodayDate2_plus(0, 1));
         Assert.assertEquals(quotePackageLineToDate, date.generateTodayDate2_plus(0, 1));
         Assert.assertEquals(quoteProductStartDate, date.generateTodayDate2_plus(0, 1));
         Assert.assertEquals(quoteProductEndDate, date.generateTodayDate2_plus(0, 1));
+        Assert.assertEquals(fsDateDate, quoteProductStartDate);
     }
 
     @Test(priority = 7, description = "Edit the ‘Quote Package Line' with type ‘Hotel Room’ on the Quote.")
     @Severity(SeverityLevel.NORMAL)
-    @Story("THY-607: Multi days packages")
+    @Story("THY-607-608: Multi days packages")
     public void testMultiDaysPackages5() throws InterruptedException, IOException {
         StringBuilder quoteRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:get",
@@ -566,7 +616,7 @@ public class MultiDaysPackages extends BaseTest {
 
     @Test(priority = 8, description = "Edit the ‘Quote Package Line' with type ‘Hotel Room’ on the Quote.")
     @Severity(SeverityLevel.NORMAL)
-    @Story("THY-607: Multi days packages")
+    @Story("THY-607-608: Multi days packages")
     public void testMultiDaysPackages6() throws InterruptedException, IOException {
         StringBuilder quoteRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:get",
@@ -622,17 +672,29 @@ public class MultiDaysPackages extends BaseTest {
                 THY607_608_UserName,
                 "--json"});
         System.out.println(quoteMeetingRoomRecord);
+        String fsDateId =JsonParser2.getFieldValue(quoteMeetingRoomRecord.toString(), "thn__FS_Date__c");
+        StringBuilder fsDateRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:record:get",
+                "-s",
+                "thn__FS_Date__c",
+                "-w",
+                "Id='" + fsDateId + "'",
+                "-u",
+                THY607_608_UserName,
+                "--json"});
+        String fsDateDate =JsonParser2.getFieldValue(fsDateRecord.toString(), "thn__Date__c");
         String quoteMeetingRoomStartDate = JsonParser2.getFieldValue(quoteMeetingRoomRecord.toString(), "thn__Start_Date__c");
         String quoteMeetingRoomEndDate = JsonParser2.getFieldValue(quoteMeetingRoomRecord.toString(), "thn__End_Date__c");
         Assert.assertEquals(quotePackageLineFromDate, date.generateTodayDate2_plus(0, 1));
         Assert.assertEquals(quotePackageLineToDate, date.generateTodayDate2_plus(0, 1));
         Assert.assertEquals(quoteMeetingRoomStartDate, date.generateTodayDate2_plus(0, 1));
         Assert.assertEquals(quoteMeetingRoomEndDate, date.generateTodayDate2_plus(0, 1));
+        Assert.assertEquals(fsDateDate, quoteMeetingRoomStartDate);
     }
 
     @Test(priority = 9, description = "Edit the ‘Quote Package Line' with type ‘Hotel Room’ on the Quote.")
     @Severity(SeverityLevel.NORMAL)
-    @Story("THY-607: Multi days packages")
+    @Story("THY-607-608: Multi days packages")
     public void testMultiDaysPackages7() throws InterruptedException, IOException {
         String expectedMessage = "Failed to update record with code FIELD_CUSTOM_VALIDATION_EXCEPTION.";
         StringBuilder quoteRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",

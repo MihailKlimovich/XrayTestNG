@@ -69,7 +69,7 @@ public class BaseTest {
     final protected String TB_132_Password = "hellohello11";
     final protected String TB_132_Key = "3MVG9KlmwBKoC7U1VPo9DFXPFCXbXwoWfj6kiKYYtlrRrWo19PnY72_xv2DEHNlurwVHgtmnbLyV.YjWhl5g1";
     final protected String THY607_608_UserName = "test-vlmcaeytw8ao@example.com";
-    final protected String THY607_608_Password = " %y1eiZkdxobyj";
+    final protected String THY607_608_Password = "%y1eiZkdxobyj";
     final protected String THY607_608_Key = "3MVG9KlmwBKoC7U1NKHChcRTAfNkoCVy4BFXaEw6yqD1e.pcwniSS2.Ken0QlhPjjw2UFVvB2QAOeHQNO9cFw";
 
 
