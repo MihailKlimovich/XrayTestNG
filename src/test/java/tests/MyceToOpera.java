@@ -1577,7 +1577,6 @@ public class MyceToOpera extends BaseTest {
                 THY589UserName,
                 "--json"});
         String quoteHotelRoomID1 = JsonParser2.getFieldValue(quoteHotelRoomResult1.toString(), "id");
-        loginPageForScratchOrg.logInOnScratchOrg2(driver, "https://test.salesforce.com/", THY589UserName, THY589Password);
         homePageForScratchOrg.openAppLauncher();
         homePageForScratchOrg.sendTextInAppWindow("MYCE Quotes");
         myceQuotes.openMyceQoteRecord("TestMyceToOperaAuto7");

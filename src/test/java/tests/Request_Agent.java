@@ -13,11 +13,10 @@ import java.io.IOException;
 
 public class Request_Agent extends BaseTest{
 
-    @Test(priority = 1, description = "Fill Agent contact Email, make sure Contact with matching email exists in the" +
-            " system and is linked to Account, convert the record")
+    @Test(priority = 1, description = "LogIn")
     @Severity(SeverityLevel.NORMAL)
     @Story("THY-506: Request - Agent")
-    public void RequestAgent_case1() throws InterruptedException, IOException {
+    public void logIn() throws InterruptedException, IOException {
         StringBuilder authorise = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:auth:jwt:grant",
                 "--clientid",
@@ -31,6 +30,103 @@ public class Request_Agent extends BaseTest{
         });
         System.out.println(authorise);
         loginPageForScratchOrg.logInOnScratchOrg(driver);
+
+    }
+
+    @Test(priority = 2, description = "Delete old data")
+    @Severity(SeverityLevel.NORMAL)
+    @Story("THY-506: Request - Agent")
+    public void deleteOldData() throws InterruptedException, IOException {
+        StringBuilder res = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:record:delete",
+                "-s",
+                "Account",
+                "-w",
+                "Name='TestRequest",
+                "-u",
+                ALIAS,
+                "--json"});
+        System.out.println(res);
+        SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:record:delete",
+                "-s",
+                "Account",
+                "-w",
+                "Name='Sandman",
+                "-u",
+                ALIAS,
+                "--json"});
+        SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:record:delete",
+                "-s",
+                "Account",
+                "-w",
+                "Name='Sandman2",
+                "-u",
+                ALIAS,
+                "--json"});
+        SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:record:delete",
+                "-s",
+                "Account",
+                "-w",
+                "Name='TestAccount",
+                "-u",
+                ALIAS,
+                "--json"});
+        SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:record:delete",
+                "-s",
+                "Account",
+                "-w",
+                "Name='Sandman2",
+                "-u",
+                ALIAS,
+                "--json"});
+        SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:record:delete",
+                "-s",
+                "Contact",
+                "-w",
+                "LastName='Shepard'",
+                "-u",
+                ALIAS,
+                "--json"});
+        SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:record:delete",
+                "-s",
+                "Contact",
+                "-w",
+                "LastName='Anderson'",
+                "-u",
+                ALIAS,
+                "--json"});
+        SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:record:delete",
+                "-s",
+                "TestAgentContact",
+                "-w",
+                "LastName='Anderson'",
+                "-u",
+                ALIAS,
+                "--json"});
+        SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:record:delete",
+                "-s",
+                "TestContact",
+                "-w",
+                "LastName='Anderson'",
+                "-u",
+                ALIAS,
+                "--json"});
+
+    }
+
+    @Test(priority = 3, description = "Fill Agent contact Email, make sure Contact with matching email exists in the" +
+            " system and is linked to Account, convert the record")
+    @Severity(SeverityLevel.NORMAL)
+    @Story("THY-506: Request - Agent")
+    public void RequestAgent_case1() throws InterruptedException, IOException {
         StringBuilder propertyRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:data:record:get",
                 "-s",
@@ -98,7 +194,7 @@ public class Request_Agent extends BaseTest{
         Assert.assertEquals(agent, accountId);
     }
 
-    @Test(priority = 2, description = "    Fill Agent contact Email, make sure Contact with matching email exists" +
+    @Test(priority = 4, description = "    Fill Agent contact Email, make sure Contact with matching email exists" +
             " in the system, fill Agent Name, make sure such an account doesn’t exist, convert the record")
     @Severity(SeverityLevel.NORMAL)
     @Story("THY-506: Request - Agent")
@@ -159,7 +255,7 @@ public class Request_Agent extends BaseTest{
         Assert.assertEquals(myceQuoteCompanyContactId, requestContactId);
     }
 
-    @Test(priority = 3, description = "Fill Agent contact Email, Contact with matching email doesn’t exist in the" +
+    @Test(priority = 5, description = "Fill Agent contact Email, Contact with matching email doesn’t exist in the" +
             " system, fill Agent Name, convert record")
     @Severity(SeverityLevel.NORMAL)
     @Story("THY-506: Request - Agent")
