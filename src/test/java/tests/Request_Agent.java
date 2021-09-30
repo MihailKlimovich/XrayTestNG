@@ -13,9 +13,9 @@ import java.io.IOException;
 
 public class Request_Agent extends BaseTest{
 
-    @Test(priority = 1, description = "THY-506: Request - Agent")
+    @Test(priority = 1, description = "Fill Agent contact Email, make sure Contact with matching email exists in the" +
+            " system and is linked to Account, convert the record")
     @Severity(SeverityLevel.NORMAL)
-    @Description("THY-506: Request - Agent")
     @Story("THY-506: Request - Agent")
     public void RequestAgent_case1() throws InterruptedException, IOException {
         StringBuilder authorise = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
@@ -98,9 +98,9 @@ public class Request_Agent extends BaseTest{
         Assert.assertEquals(agent, accountId);
     }
 
-    @Test(priority = 2, description = "THY-506: Request - Agent")
+    @Test(priority = 2, description = "    Fill Agent contact Email, make sure Contact with matching email exists" +
+            " in the system, fill Agent Name, make sure such an account doesn’t exist, convert the record")
     @Severity(SeverityLevel.NORMAL)
-    @Description("THY-506: Request - Agent")
     @Story("THY-506: Request - Agent")
     public void RequestAgent_case2() throws InterruptedException, IOException {
         StringBuilder contactResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
@@ -159,9 +159,9 @@ public class Request_Agent extends BaseTest{
         Assert.assertEquals(myceQuoteCompanyContactId, requestContactId);
     }
 
-    @Test(priority = 3, description = "THY-506: Request - Agent")
+    @Test(priority = 3, description = "Fill Agent contact Email, Contact with matching email doesn’t exist in the" +
+            " system, fill Agent Name, convert record")
     @Severity(SeverityLevel.NORMAL)
-    @Description("THY-506: Request - Agent")
     @Story("THY-506: Request - Agent")
     public void RequestAgent_case3() throws InterruptedException, IOException {
         StringBuilder requestResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",

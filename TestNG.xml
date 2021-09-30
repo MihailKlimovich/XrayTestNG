@@ -15,6 +15,11 @@
             <class name="tests.OperaWriteCorrections"/>
         </classes>
     </test>
+    <test name="Delete and create data">
+        <classes>
+            <class name="tests.TestData"/>
+        </classes>
+    </test>
     <test name="THY-510: ValidationRule1">
         <classes>
             <class name="tests.ValidationRules.ValidationRule1"/>

@@ -51,7 +51,7 @@ public class BaseTest {
 
     public static final String testDataExcelFileName = "testdata.xlsx";
 
-    /*final protected String SFDX = "/home/minsk-sc/sfdx/bin/sfdx";
+    final protected String SFDX = "/home/minsk-sc/sfdx/bin/sfdx";
     final protected String key = "3MVG95AcBeaB55lX_jCjFVkfzdw6wxICwnFoSHHrqqR1rFJ8Pj5Jnu3nPLBrCMCv4diYS63i5N4yP3tvP.LJm";//3MVG95AcBeaB55lWwG_jM4S.hHHrR_i9uJUnD_XBhRAqn3B6BZxjS82q3A2.o16sDpIqZIOL2lpOxXysstk8R
     final protected String ALIAS = "test-q4olefzyjh6b@example.com"; //test-lbafgbxunsgq@example.com 9EU3j&PDvJ@1l
     final protected String urlForScratch = "https://test.salesforce.com";
@@ -71,14 +71,9 @@ public class BaseTest {
     final protected String THY607_608_UserName = "test-vlmcaeytw8ao@example.com";
     final protected String THY607_608_Password = " %y1eiZkdxobyj";
     final protected String THY607_608_Key = "3MVG9KlmwBKoC7U1NKHChcRTAfNkoCVy4BFXaEw6yqD1e.pcwniSS2.Ken0QlhPjjw2UFVvB2QAOeHQNO9cFw";
-    <test name="Delete and create data">
-        <classes>
-            <class name="tests.TestData"/>
-        </classes>
-    </test>
-    */
 
-    final protected String urlForScratch = "https://test.salesforce.com";
+
+    /*final protected String urlForScratch = "https://test.salesforce.com";
     final protected String thynkPackDevOrg = "https://thynkpack-dev-ed.my.salesforce.com/";
     final protected String thynkPackUserName = "rostislav.orel@succraft.com";
     final protected String thynkPackKey = "3MVG91BJr_0ZDQ4ta_ZwN1EEnfj.OQSJWOBWMPFXclJ22A8oaKqM9KTLdsoSupXX0idQnMIdsI3IweGbsJx6t";
@@ -86,8 +81,8 @@ public class BaseTest {
     final protected String SFDX = "/home/minsk-sc/sfdx/bin/sfdx";
 
     final protected String key = "3MVG9KlmwBKoC7U13f3dBKdwrpeVJmU4xkpDgywAH_NMf8B0S.B2iOHg_ajPoBs5BQqeH7Wkz6aLRrgZF1NaR";
-    final protected String ALIAS = "test-l9ie0hebqmlr@example.com";
-    final protected String THY589UserName = "test-l9ie0hebqmlr@example.com";
+    final protected String ALIAS = "test-sy9dufviyszi@example.com";
+    final protected String THY589UserName = "test-sy9dufviyszi@example.com";
     final protected String THY589Password = "Hello2021";
     final protected String THY589Key = "3MVG9KlmwBKoC7U13f3dBKdwrpeVJmU4xkpDgywAH_NMf8B0S.B2iOHg_ajPoBs5BQqeH7Wkz6aLRrgZF1NaR";
     final protected String THY519_578_UserName = "test-l9ie0hebqmlr@example.com";
@@ -98,7 +93,7 @@ public class BaseTest {
     final protected String TB_132_Key = "3MVG9KlmwBKoC7U13f3dBKdwrpeVJmU4xkpDgywAH_NMf8B0S.B2iOHg_ajPoBs5BQqeH7Wkz6aLRrgZF1NaR";
     final protected String THY607_608_UserName = "test-l9ie0hebqmlr@example.com";
     final protected String THY607_608_Password = "Hello2021";
-    final protected String THY607_608_Key = "3MVG9KlmwBKoC7U13f3dBKdwrpeVJmU4xkpDgywAH_NMf8B0S.B2iOHg_ajPoBs5BQqeH7Wkz6aLRrgZF1NaR";
+    final protected String THY607_608_Key = "3MVG9KlmwBKoC7U13f3dBKdwrpeVJmU4xkpDgywAH_NMf8B0S.B2iOHg_ajPoBs5BQqeH7Wkz6aLRrgZF1NaR";*/
 
 
 
