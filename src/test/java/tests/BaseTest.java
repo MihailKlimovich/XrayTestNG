@@ -53,7 +53,8 @@ public class BaseTest {
 
     final protected String SFDX = "/home/minsk-sc/sfdx/bin/sfdx";
     final protected String key = "3MVG95AcBeaB55lX_jCjFVkfzdw6wxICwnFoSHHrqqR1rFJ8Pj5Jnu3nPLBrCMCv4diYS63i5N4yP3tvP.LJm";//3MVG95AcBeaB55lWwG_jM4S.hHHrR_i9uJUnD_XBhRAqn3B6BZxjS82q3A2.o16sDpIqZIOL2lpOxXysstk8R
-    final protected String ALIAS = "test-q4olefzyjh6b@example.com"; //test-lbafgbxunsgq@example.com 9EU3j&PDvJ@1l
+    final protected String ALIAS = "test-q4olefzyjh6b@example.com";
+    final protected String passwordForScratch = "xSELy*CD|6Y%Y";
     final protected String urlForScratch = "https://test.salesforce.com";
     final protected String thynkPackDevOrg = "https://thynkpack-dev-ed.my.salesforce.com/";
     final protected String thynkPackUserName = "rostislav.orel@succraft.com";
