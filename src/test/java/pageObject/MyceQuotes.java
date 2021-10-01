@@ -66,7 +66,7 @@ public class MyceQuotes extends BasePage{
     By NEW_ARRIVAL_DATE_FIELD = By.xpath("//input[@name='New_arrival_date']");
     By NEXT_BUTTON_CHANGE_DATE_WINDOW = By.xpath("//button[@title='Next']");
     By FINISH_BUTTON_CHANGE_DATE_WINDOW = By.xpath("//button[@title='Finish']");
-    By UPDATE_ORDER_BUTTON = By.xpath("//button[@name='thn__MYCE_Quote__c.thn__Order_Update']");
+    By UPDATE_ORDER_BUTTON = By.xpath("//button[@name='thn__MYCE_Quote__c.thn__Product_Modification']");
     By CLONE_TO_DATE_FIELD = By.xpath("//thn-clone-multi-select-component//input[@name='cloneTo']");
     By CREATE_CLONE_BUTTON = By.xpath("//thn-clone-multi-select-component//button[text()='Create']");
 

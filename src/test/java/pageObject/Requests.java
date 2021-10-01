@@ -22,9 +22,8 @@ public class Requests extends BasePage {
 
     @Step("Open request record")
     public Requests openRequestRecord(String id){
-        //https://java-computing-4021-dev-ed.lightning.force.com/lightning/r/thn__Request__c/
         //https://ability-dream-3253-dev-ed.lightning.force.com/lightning/r/thn__Request__c/" + id + "/view
-        driver.navigate().to("https://ability-dream-3253-dev-ed.lightning.force.com/lightning/r/thn__Request__c/" + id + "/view");
+        driver.navigate().to("https://energy-force-9393-dev-ed.lightning.force.com/lightning/r/thn__Request__c/" + id + "/view");
         try{if(wait2.until(ExpectedConditions.alertIsPresent())!=null){
             Alert alert = wait2.until(alertIsPresent());
             alert.accept();
