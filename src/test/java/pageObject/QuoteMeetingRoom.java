@@ -39,6 +39,7 @@ public class QuoteMeetingRoom extends BasePage {
             xpath("//div[@class='isModal inlinePanel oneRecordActionWrapper']//div//input[@name = 'thn__Lock_Resource__c']");
     By END_DATE_FIELD = By.xpath("//div//label[text()='Date']/following::input[@name='thn__End_Date_Time__c']");
     By MYCE_QUOTE_NAME = By.xpath("//div//span[@id = 'window']");
+    By MULTI_DELETE_BUTTON = By.xpath("//a[@title='Multidelete']");
 
 
 
@@ -116,6 +117,25 @@ public class QuoteMeetingRoom extends BasePage {
     @Step("Return to MYCE Quote")
     public void clickQuoteName(String nameQuote){
         wait1.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@force-highlights2_highlights2]//span[text()='"+ nameQuote +"']"))).click();
+    }
+
+    @Step("Select all items")
+    public  void selectItems(String numberOfElements){
+        wait1.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='Select " + numberOfElements +
+                " items']/preceding-sibling::span"))).click();
+    }
+
+    @Step("Click multi delete button")
+    public  void multiDeleteRecords() throws InterruptedException {
+        wait1.until(ExpectedConditions.presenceOfElementLocated(MULTI_DELETE_BUTTON));
+        click3(MULTI_DELETE_BUTTON);
+        Thread.sleep(5000);
+        down();
+        down();
+        tab();
+        enter();
+        Thread.sleep(2000);
+        enter();
     }
 
 

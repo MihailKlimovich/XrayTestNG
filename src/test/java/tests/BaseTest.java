@@ -83,6 +83,7 @@ public class BaseTest {
 
     final protected String key = "3MVG9sSN_PMn8tjQ_i1zH6SFiiRiWU8a6A0ccIA8pgi6PtKmTcevqRVhFkbTw9WjqjcylgNcp6WfR7tCRz1Z5";
     final protected String ALIAS = "test-sy9dufviyszi@example.com";
+    final protected String passwordForScratch = "3k#eyhtorFvbj";
     final protected String THY589UserName = "test-sy9dufviyszi@example.com";
     final protected String THY589Password = "3k#eyhtorFvbj";
     final protected String THY589Key = "3MVG9sSN_PMn8tjQ_i1zH6SFiiRiWU8a6A0ccIA8pgi6PtKmTcevqRVhFkbTw9WjqjcylgNcp6WfR7tCRz1Z5";
@@ -102,7 +103,7 @@ public class BaseTest {
     @BeforeClass
     public void classLevelSetup(){
         ChromeOptions options= new ChromeOptions();
-        options.addArguments("--incognito");
+        //options.addArguments("--incognito");
         options.addArguments("--disable-cache");
         options.addArguments("--disk-cache-size=1");
         options.addArguments("--disable-infobars");

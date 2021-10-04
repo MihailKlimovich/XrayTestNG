@@ -84,7 +84,7 @@ public class MyceQuotes extends BasePage{
 
     @Step("Open Myce Quote page")
     public MyceQuotes goToMyceQuotes() throws InterruptedException {
-        driver.navigate().to("https://agility-efficiency-64-dev-ed.lightning.force.com/lightning/o/thn__MYCE_Quote__c/list?filterName=Recent");
+        driver.navigate().to("https://energy-force-9393-dev-ed.lightning.force.com/lightning/o/thn__MYCE_Quote__c/list?filterName=Recent");
         try{if(wait2.until(ExpectedConditions.alertIsPresent())!=null){
             Alert alert = wait2.until(alertIsPresent());
             alert.accept();
@@ -415,7 +415,8 @@ public class MyceQuotes extends BasePage{
 
     @Step("Open Meeting Rooms")
     public void openMeetingRooms() throws InterruptedException {
-        //scrollToElement(MEETING_ROOM);
+        scrollDownToTheEnd();
+        scrollToElement(MEETING_ROOM);
         wait1.until(ExpectedConditions.presenceOfElementLocated(MEETING_ROOM));
         clickInvisibleElement(MEETING_ROOM);
     }
@@ -429,11 +430,11 @@ public class MyceQuotes extends BasePage{
         //wait1.until(ExpectedConditions.presenceOfElementLocated(MEETING_PACKAGES)).click();
     }
 
-    @Step("Open Meeting Product")
+    @Step("Open quote Product")
     public void openProducts() throws InterruptedException {
-        Thread.sleep(2000);
-        refreshPage();
-        Thread.sleep(2000);
+        //Thread.sleep(2000);
+        //refreshPage();
+        //Thread.sleep(2000);
         clickInvisibleElement(PRODUCTS);
     }
 

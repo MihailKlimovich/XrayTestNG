@@ -29,7 +29,7 @@ public class Request_Agent extends BaseTest{
                 "https://test.salesforce.com"
         });
         System.out.println(authorise);
-        loginPageForScratchOrg.logInOnScratchOrg(driver);
+        loginPageForScratchOrg.logInOnScratchOrg2(driver, urlForScratch, ALIAS, passwordForScratch);
 
     }
 

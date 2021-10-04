@@ -32,6 +32,8 @@ public class QuoteHotelRoom extends BasePage {
     By MESSAGE_ERROR_TEXT = By.xpath("//div[@class='container']//li");
     By CLOSE_WINDOW_BUTTON = By.xpath("//div[@class='modal-container slds-modal__container']//button[@title='Close this window']");
     By HELP_ERROR_MESSAGE = By.xpath("//div[@data-help-message]");
+    By SELECT_ALL_ITEMS_CHECKBOX = By.xpath("//span[text()='Select 2 items']");
+    By MULTI_DELETE_BUTTON = By.xpath("//a[@title='Multidelete']");
 
 
     @Step("Fill out the hotel room")
@@ -88,6 +90,19 @@ public class QuoteHotelRoom extends BasePage {
         return readRecalculateMessage(DATA_ERROR_MESSAGE);
     }
 
+    @Step("Click multi delete button")
+    public  void multiDeleteRecords() throws InterruptedException {
+        wait1.until(ExpectedConditions.presenceOfElementLocated(MULTI_DELETE_BUTTON));
+        click3(MULTI_DELETE_BUTTON);
+        Thread.sleep(5000);
+        down();
+        down();
+        tab();
+        enter();
+        Thread.sleep(2000);
+        enter();
+    }
+
     @Step("Close window")
     public void closeWindow(){
         wait1.until(ExpectedConditions.elementToBeClickable(CLOSE_WINDOW_BUTTON)).click();
@@ -97,6 +112,14 @@ public class QuoteHotelRoom extends BasePage {
     public String readHelpErrorMessage() throws InterruptedException {
         return readRecalculateMessage(HELP_ERROR_MESSAGE);
     }
+
+    @Step("Select all items")
+    public  void selectItems(String numberOfElements){
+        wait1.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='Select " + numberOfElements +
+                " items']/preceding-sibling::span"))).click();
+    }
+
+
 
 
 

@@ -18,7 +18,7 @@ public class HistoryTracking extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     @Story("THY-519: History tracking")
     public void logIn() throws InterruptedException, IOException {
-        loginPageForScratchOrg.logInOnScratchOrg2(driver, "https://test.salesforce.com/", THY519_578_UserName, THY519_578_Password);
+        loginPageForScratchOrg.logInOnScratchOrg2(driver, urlForScratch, THY519_578_UserName, THY519_578_Password);
         homePageForScratchOrg.openAppLauncher();
         homePageForScratchOrg.sendTextInAppWindow("MYCE");
         StringBuilder authorise = SfdxCommand.runLinuxCommand1(new String[]{

@@ -29,6 +29,7 @@ public class QuoteProducts extends BasePage {
     By EDIT_BUTTON = By.xpath("//div[text()='Quote Product']/following::button[@name='Edit']");
     By ON_CONSUMPTION_CHECKBOX = By.xpath("//div[@class='isModal inlinePanel oneRecordActionWrapper']//lightning-input//span[text()='On Consumption']");
     By MULTIEDIT_BUTTON = By.xpath("//h1[text()='Products']/following::div[@title='Multiedit']");
+    By MULTI_DELETE_BUTTON = By.xpath("//a[@title='Multidelete']");
 
 
 
@@ -121,6 +122,20 @@ public class QuoteProducts extends BasePage {
     public  void selectAllItems(String items){
         wait1.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[@class='slds-assistive-text' and starts-with(text(),'Select " + items + " items')]/preceding-sibling::span"))).click();
     }
+
+    @Step("Click multi delete button")
+    public  void multiDeleteRecords() throws InterruptedException {
+        wait1.until(ExpectedConditions.presenceOfElementLocated(MULTI_DELETE_BUTTON));
+        click3(MULTI_DELETE_BUTTON);
+        Thread.sleep(5000);
+        down();
+        down();
+        tab();
+        enter();
+        Thread.sleep(2000);
+        enter();
+    }
+
 
 
 }
