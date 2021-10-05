@@ -18,6 +18,7 @@ public class MyceQuotes extends BasePage{
         super(driver);
     }
 
+    By NAME_PAGE = By.xpath("//div[text()='MYCE Quote']");
     By NEW_MYCE_QUOTE_BUTTON = By.xpath("//div[@class='windowViewMode-maximized oneContent active lafPageHost']//a[@title='New']");
     By MYCE_QUOTE_TAB = By.xpath("//span[text()='MYCE Quotes']");
     By QUATE_RADIO_BUTTON = By.xpath("//div//span[text()='Quote']");
@@ -409,8 +410,10 @@ public class MyceQuotes extends BasePage{
 
 
     @Step("Open Hotel Rooms")
-    public void openHotelRooms(){
-        wait1.until(ExpectedConditions.presenceOfElementLocated(HOTEL_ROOM)).click();
+    public void openHotelRooms() throws InterruptedException {
+        wait1.until(ExpectedConditions.presenceOfElementLocated(NAME_PAGE));
+        scrollToElement(HOTEL_ROOM);
+        clickInvisibleElement(HOTEL_ROOM);
     }
 
     @Step("Open Meeting Rooms")
@@ -423,18 +426,19 @@ public class MyceQuotes extends BasePage{
 
     @Step("Open Meeting Packages")
     public void openMeetingPackages() throws InterruptedException {
-        Thread.sleep(2000);
-        refreshPage();
-        Thread.sleep(2000);
+        wait1.until(ExpectedConditions.presenceOfElementLocated(NAME_PAGE));
+        scrollDownToTheEnd();
+        scrollToElement(MEETING_PACKAGES);
+        wait1.until(ExpectedConditions.presenceOfElementLocated(MEETING_PACKAGES));
         clickInvisibleElement(MEETING_PACKAGES);
-        //wait1.until(ExpectedConditions.presenceOfElementLocated(MEETING_PACKAGES)).click();
     }
 
     @Step("Open quote Product")
     public void openProducts() throws InterruptedException {
-        //Thread.sleep(2000);
-        //refreshPage();
-        //Thread.sleep(2000);
+        wait1.until(ExpectedConditions.presenceOfElementLocated(NAME_PAGE));
+        scrollDownToTheEnd();
+        scrollToElement(PRODUCTS);
+        wait1.until(ExpectedConditions.presenceOfElementLocated(PRODUCTS));
         clickInvisibleElement(PRODUCTS);
     }
 

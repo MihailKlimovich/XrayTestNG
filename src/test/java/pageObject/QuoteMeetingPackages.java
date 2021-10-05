@@ -27,6 +27,7 @@ public class QuoteMeetingPackages extends BasePage {
     By EDIT_BUTTON = By.xpath("//div[text()='Quote Package']/following::button[@name='Edit']");
     By DISCOUNT_FIELD = By.xpath("//slot//label[text()='Discount']/following-sibling::div//input");
     By HELP_ERROR_MESSAGE = By.xpath("//div[@data-help-message]");
+    By MULTI_DELETE_BUTTON = By.xpath("//a[@title='Multidelete']");
 
 
 
@@ -95,6 +96,27 @@ public class QuoteMeetingPackages extends BasePage {
     @Step("Close window")
     public void closeWindow(){
         wait1.until(ExpectedConditions.elementToBeClickable(CLOSE_WINDOW_BUTTON)).click();
+    }
+
+    @Step("Click multi delete button")
+    public  void multiDeleteRecords() throws InterruptedException {
+        wait1.until(ExpectedConditions.presenceOfElementLocated(MULTI_DELETE_BUTTON));
+        click3(MULTI_DELETE_BUTTON);
+        Thread.sleep(5000);
+        down();
+        down();
+        tab();
+        enter();
+        Thread.sleep(10000);
+        enter();
+    }
+
+    @Step("Select item number")
+    public  void selectItemNumber(String numberOfElements) throws InterruptedException {
+        refreshPage();
+        By SELECT_NUMBer_ITEM_CHECKBOX = By.xpath("//span[text()='Select item "+ numberOfElements + "']/preceding-sibling::span");
+        wait1.until(ExpectedConditions.presenceOfElementLocated(SELECT_NUMBer_ITEM_CHECKBOX));
+        click3(SELECT_NUMBer_ITEM_CHECKBOX);
     }
 
 

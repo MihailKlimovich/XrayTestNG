@@ -3,11 +3,13 @@ package tests;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.Story;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 import pageObject.JsonParser2;
 import pageObject.SfdxCommand;
 
 import java.io.IOException;
+import java.util.List;
 
 public class MultiDeleteTesting extends BaseTest {
 
@@ -15,6 +17,7 @@ public class MultiDeleteTesting extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     @Story("Multi delete testing")
     public void logIn() throws InterruptedException, IOException {
+
         StringBuilder authorise = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:auth:jwt:grant",
                 "--clientid",
@@ -27,7 +30,7 @@ public class MultiDeleteTesting extends BaseTest {
                 "https://test.salesforce.com"
         });
         System.out.println(authorise);
-        //loginPageForScratchOrg.logInOnScratchOrg2(driver, urlForScratch, ALIAS, passwordForScratch);
+        loginPageForScratchOrg.logInOnScratchOrg2(driver, urlForScratch, ALIAS, passwordForScratch);
     }
 
     @Test(priority = 2, description = "Preconditions")
@@ -381,7 +384,7 @@ public class MultiDeleteTesting extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     @Story("Multi delete testing")
     public void multiDeleteTest1() throws InterruptedException, IOException {
-        loginPageForScratchOrg.logInOnScratchOrg2(driver, urlForScratch, ALIAS, passwordForScratch);
+        //loginPageForScratchOrg.logInOnScratchOrg2(driver, urlForScratch, ALIAS, passwordForScratch);
         myceQuotes.goToMyceQuotes();
         myceQuotes.openMyceQoteRecord("QuoteTestMultiDeleteAuto1");
         myceQuotes.openHotelRooms();
@@ -393,7 +396,179 @@ public class MultiDeleteTesting extends BaseTest {
         myceQuotes.openProducts();
         quoteProducts.selectAllItems("2");
         quoteProducts.multiDeleteRecords();
+        StringBuilder quoteRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:record:get",
+                "-s",
+                "thn__MYCE_Quote__c",
+                "-w",
+                "Name='QuoteTestMultiDeleteAuto1'",
+                "-u",
+                ALIAS,
+                "--json"});
+        String quoteID = JsonParser2.getFieldValue(quoteRecord.toString(), "Id");
+        StringBuilder quoteProductsSoql = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:soql:query",
+                "-q",
+                "SELECT Id FROM thn__Quote_Product__c WHERE thn__MYCE_Quote__c='" + quoteID + "'",
+                "-u",
+                ALIAS,
+                "--json"});
+        List<String> quotesProductsID = JsonParser2.getFieldValueSoql(quoteProductsSoql.toString(), "Id");
+        StringBuilder quoteHotelRoomsSoql = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:soql:query",
+                "-q",
+                "SELECT Id FROM thn__Quote_Hotel_Room__c WHERE thn__MYCE_Quote__c='" + quoteID + "'",
+                "-u",
+                ALIAS,
+                "--json"});
+        List<String> quotesHotelRoomsID = JsonParser2.getFieldValueSoql(quoteHotelRoomsSoql.toString(), "Id");
+        StringBuilder quoteMeetingRoomsSoql = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:soql:query",
+                "-q",
+                "SELECT Id FROM thn__Quote_Meeting_Room__c WHERE thn__MYCE_Quote__c='" + quoteID + "'",
+                "-u",
+                ALIAS,
+                "--json"});
+        List<String> quotesMeetingRoomsID = JsonParser2.getFieldValueSoql(quoteMeetingRoomsSoql.toString(), "Id");
+        Assert.assertEquals(quotesProductsID.size(), 2);
+        Assert.assertEquals(quotesHotelRoomsID.size(), 2);
+        Assert.assertEquals(quotesMeetingRoomsID.size(), 2);
+    }
 
+    @Test(priority = 4, description = "Delete quote package")
+    @Severity(SeverityLevel.NORMAL)
+    @Story("Multi delete testing")
+    public void multiDeleteTest2() throws InterruptedException, IOException {
+        //loginPageForScratchOrg.logInOnScratchOrg2(driver, urlForScratch, ALIAS, passwordForScratch);
+        myceQuotes.goToMyceQuotes();
+        myceQuotes.openMyceQoteRecord("QuoteTestMultiDeleteAuto1");
+        myceQuotes.openMeetingPackages();
+        quoteMeetingPackages.selectItemNumber("1");
+        quoteMeetingPackages.multiDeleteRecords();
+        StringBuilder quoteRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:record:get",
+                "-s",
+                "thn__MYCE_Quote__c",
+                "-w",
+                "Name='QuoteTestMultiDeleteAuto1'",
+                "-u",
+                ALIAS,
+                "--json"});
+        String quoteID = JsonParser2.getFieldValue(quoteRecord.toString(), "Id");
+        StringBuilder quoteProductsSoql = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:soql:query",
+                "-q",
+                "SELECT Id FROM thn__Quote_Product__c WHERE thn__MYCE_Quote__c='" + quoteID + "'",
+                "-u",
+                ALIAS,
+                "--json"});
+        List<String> quotesProductsID = JsonParser2.getFieldValueSoql(quoteProductsSoql.toString(), "Id");
+        StringBuilder quoteHotelRoomsSoql = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:soql:query",
+                "-q",
+                "SELECT Id FROM thn__Quote_Hotel_Room__c WHERE thn__MYCE_Quote__c='" + quoteID + "'",
+                "-u",
+                ALIAS,
+                "--json"});
+        List<String> quotesHotelRoomsID = JsonParser2.getFieldValueSoql(quoteHotelRoomsSoql.toString(), "Id");
+        StringBuilder quoteMeetingRoomsSoql = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:soql:query",
+                "-q",
+                "SELECT Id FROM thn__Quote_Meeting_Room__c WHERE thn__MYCE_Quote__c='" + quoteID + "'",
+                "-u",
+                ALIAS,
+                "--json"});
+        List<String> quotesMeetingRoomsID = JsonParser2.getFieldValueSoql(quoteMeetingRoomsSoql.toString(), "Id");
+        Assert.assertEquals(quotesProductsID.size(), 0);
+        Assert.assertEquals(quotesHotelRoomsID.size(), 0);
+        Assert.assertEquals(quotesMeetingRoomsID.size(), 0);
+    }
+
+    @Test(priority = 5, description = "Delete quote products, meeting rooms, hotel rooms which are not part of the package")
+    @Severity(SeverityLevel.NORMAL)
+    @Story("Multi delete testing")
+    public void multiDeleteTest3() throws InterruptedException, IOException {
+        //loginPageForScratchOrg.logInOnScratchOrg2(driver, urlForScratch, ALIAS, passwordForScratch);
+        myceQuotes.goToMyceQuotes();
+        myceQuotes.openMyceQoteRecord("QuoteTestMultiDeleteAuto2");
+        myceQuotes.openHotelRooms();
+        quoteHotelRoom.selectItems("2");
+        quoteHotelRoom.multiDeleteRecords();
+        myceQuotes.openMeetingRooms();
+        quoteMeetingRoom.selectItems("2");
+        quoteMeetingRoom.multiDeleteRecords();
+        myceQuotes.openProducts();
+        quoteProducts.selectAllItems("2");
+        quoteProducts.multiDeleteRecords();
+        StringBuilder quoteRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:record:get",
+                "-s",
+                "thn__MYCE_Quote__c",
+                "-w",
+                "Name='QuoteTestMultiDeleteAuto2'",
+                "-u",
+                ALIAS,
+                "--json"});
+        String quoteID = JsonParser2.getFieldValue(quoteRecord.toString(), "Id");
+        StringBuilder quoteProductsSoql = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:soql:query",
+                "-q",
+                "SELECT Id FROM thn__Quote_Product__c WHERE thn__MYCE_Quote__c='" + quoteID + "'",
+                "-u",
+                ALIAS,
+                "--json"});
+        List<String> quotesProductsID = JsonParser2.getFieldValueSoql(quoteProductsSoql.toString(), "Id");
+        StringBuilder quoteHotelRoomsSoql = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:soql:query",
+                "-q",
+                "SELECT Id FROM thn__Quote_Hotel_Room__c WHERE thn__MYCE_Quote__c='" + quoteID + "'",
+                "-u",
+                ALIAS,
+                "--json"});
+        List<String> quotesHotelRoomsID = JsonParser2.getFieldValueSoql(quoteHotelRoomsSoql.toString(), "Id");
+        StringBuilder quoteMeetingRoomsSoql = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:soql:query",
+                "-q",
+                "SELECT Id FROM thn__Quote_Meeting_Room__c WHERE thn__MYCE_Quote__c='" + quoteID + "'",
+                "-u",
+                ALIAS,
+                "--json"});
+        List<String> quotesMeetingRoomsID = JsonParser2.getFieldValueSoql(quoteMeetingRoomsSoql.toString(), "Id");
+        Assert.assertEquals(quotesProductsID.size(), 0);
+        Assert.assertEquals(quotesHotelRoomsID.size(), 0);
+        Assert.assertEquals(quotesMeetingRoomsID.size(), 0);
+    }
+
+    @Test(priority = 6, description = "Delete quote hotel rooms Quote_Hotel_Room__c records If in one of them" +
+            " reserved__c == true and Mews_State__c != Cancelled")
+    @Severity(SeverityLevel.NORMAL)
+    @Story("Multi delete testing")
+    public void multiDeleteTest4() throws InterruptedException, IOException {
+        //loginPageForScratchOrg.logInOnScratchOrg2(driver, urlForScratch, ALIAS, passwordForScratch);
+        myceQuotes.goToMyceQuotes();
+        myceQuotes.openMyceQoteRecord("QuoteTestMultiDeleteAuto3");
+        myceQuotes.openHotelRooms();
+        quoteHotelRoom.selectItems("2");
+        quoteHotelRoom.multiDeleteRecords();
+        StringBuilder quoteRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:record:get",
+                "-s",
+                "thn__MYCE_Quote__c",
+                "-w",
+                "Name='QuoteTestMultiDeleteAuto3'",
+                "-u",
+                ALIAS,
+                "--json"});
+        String quoteID = JsonParser2.getFieldValue(quoteRecord.toString(), "Id");
+        StringBuilder quoteHotelRoomsSoql = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+                "force:data:soql:query",
+                "-q",
+                "SELECT Id FROM thn__Quote_Hotel_Room__c WHERE thn__MYCE_Quote__c='" + quoteID + "'",
+                "-u",
+                ALIAS,
+                "--json"});
+        List<String> quotesHotelRoomsID = JsonParser2.getFieldValueSoql(quoteHotelRoomsSoql.toString(), "Id");
+        Assert.assertEquals(quotesHotelRoomsID.size(), 2);
     }
 
 }

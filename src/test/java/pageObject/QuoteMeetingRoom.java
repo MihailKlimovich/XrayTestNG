@@ -120,9 +120,11 @@ public class QuoteMeetingRoom extends BasePage {
     }
 
     @Step("Select all items")
-    public  void selectItems(String numberOfElements){
-        wait1.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='Select " + numberOfElements +
-                " items']/preceding-sibling::span"))).click();
+    public  void selectItems(String numberOfElements) throws InterruptedException {
+        refreshPage();
+        By SELECT_ALL_ITEMS_CHECKBOX = By.xpath("//span[text()='Select " + numberOfElements + " items']/preceding-sibling::span");
+        wait1.until(ExpectedConditions.presenceOfElementLocated(SELECT_ALL_ITEMS_CHECKBOX));
+        click3(SELECT_ALL_ITEMS_CHECKBOX);
     }
 
     @Step("Click multi delete button")
@@ -134,7 +136,7 @@ public class QuoteMeetingRoom extends BasePage {
         down();
         tab();
         enter();
-        Thread.sleep(2000);
+        Thread.sleep(5000);
         enter();
     }
 

@@ -85,6 +85,11 @@
             <class name="tests.MultiDaysPackages"/>
         </classes>
     </test>
+    <test name="Multi delete testing">
+        <classes>
+            <class name="tests.MultiDeleteTesting"/>
+        </classes>
+    </test>
 
 
 </suite>
