@@ -51,6 +51,9 @@ public class BaseTest {
 
     public static final String testDataExcelFileName = "testdata.xlsx";
 
+
+    public String ORGUSERNAME = System.getenv("JAVAUSERNAME");
+    public String ORGPASSWORD = System.getenv("JAVAPASSWORD");
     /*final protected String SFDX = "/home/minsk-sc/sfdx/bin/sfdx";
     final protected String key = "3MVG95AcBeaB55lX_jCjFVkfzdw6wxICwnFoSHHrqqR1rFJ8Pj5Jnu3nPLBrCMCv4diYS63i5N4yP3tvP.LJm";//3MVG95AcBeaB55lWwG_jM4S.hHHrR_i9uJUnD_XBhRAqn3B6BZxjS82q3A2.o16sDpIqZIOL2lpOxXysstk8R
     final protected String ALIAS = "test-q4olefzyjh6b@example.com";
@@ -72,6 +75,8 @@ public class BaseTest {
     final protected String THY607_608_UserName = "test-vlmcaeytw8ao@example.com";
     final protected String THY607_608_Password = "%y1eiZkdxobyj";
     final protected String THY607_608_Key = "3MVG9KlmwBKoC7U1NKHChcRTAfNkoCVy4BFXaEw6yqD1e.pcwniSS2.Ken0QlhPjjw2UFVvB2QAOeHQNO9cFw";*/
+
+
 
 
     final protected String urlForScratch = "https://test.salesforce.com";
@@ -103,7 +108,7 @@ public class BaseTest {
     @BeforeClass
     public void classLevelSetup(){
         ChromeOptions options= new ChromeOptions();
-        //options.addArguments("--incognito");
+        options.addArguments("--incognito");
         options.addArguments("--disable-cache");
         options.addArguments("--disk-cache-size=1");
         options.addArguments("--disable-infobars");

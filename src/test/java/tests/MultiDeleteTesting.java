@@ -3,21 +3,60 @@ package tests;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.Story;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import pageObject.JsonParser2;
 import pageObject.SfdxCommand;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class MultiDeleteTesting extends BaseTest {
+
+
+    @BeforeClass
+    @Override
+    public void classLevelSetup() {
+        super.classLevelSetup();
+        ChromeOptions options= new ChromeOptions();
+        options.addArguments("--disable-cache");
+        options.addArguments("--disk-cache-size=1");
+        options.addArguments("--disable-infobars");
+        options.addArguments("--disable-notifications");
+        options.addArguments("--disable-gpu");
+        options.addArguments("--disable-extensions");
+        options.addArguments("--disable-dev-shm-usage");
+        options.addArguments("user-data-dir=/tmp/temp_profile");
+        options.addArguments(" --whitelisted-ips=\"\"");
+        options.addArguments("--headless", "window-size=1920,1024", "--no-sandbox");
+        driver = new ChromeDriver(options);
+        driver.manage().deleteAllCookies();
+        driver.manage().window().maximize();
+        driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+    }
+
+    @AfterClass
+    @Override
+    public void teardown() {
+        super.teardown();
+        driver.close();
+        driver.quit();
+        if (driver != null) {
+            driver = null;
+        }
+    }
 
     @Test(priority = 1, description = "LogIn")
     @Severity(SeverityLevel.NORMAL)
     @Story("Multi delete testing")
     public void logIn() throws InterruptedException, IOException {
-
         StringBuilder authorise = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
                 "force:auth:jwt:grant",
                 "--clientid",
