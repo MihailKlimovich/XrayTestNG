@@ -55,6 +55,7 @@ public class BaseTest {
 
     public String ORG_USERNAME = System.getenv("JAVAUSERNAME");
     public String ORG_PASSWORD = System.getenv("JAVAPASSWORD");
+
     /*final protected String SFDX = "/home/minsk-sc/sfdx/bin/sfdx";
     final protected String key = "3MVG95AcBeaB55lX_jCjFVkfzdw6wxICwnFoSHHrqqR1rFJ8Pj5Jnu3nPLBrCMCv4diYS63i5N4yP3tvP.LJm";//3MVG95AcBeaB55lWwG_jM4S.hHHrR_i9uJUnD_XBhRAqn3B6BZxjS82q3A2.o16sDpIqZIOL2lpOxXysstk8R
     final protected String ALIAS = "test-q4olefzyjh6b@example.com";
@@ -117,9 +118,9 @@ public class BaseTest {
         options.addArguments("--disable-gpu");
         options.addArguments("--disable-extensions");
         options.addArguments("--disable-dev-shm-usage");
-        options.addArguments("user-data-dir=/tmp/temp_profile");
+        //options.addArguments("user-data-dir=/tmp/temp_profile");
         options.addArguments(" --whitelisted-ips=\"\"");
-        options.addArguments("--headless", "window-size=1920,1024", "--no-sandbox");
+        //options.addArguments("--headless", "window-size=1920,1024", "--no-sandbox");
         driver = new ChromeDriver(options);
         driver.manage().deleteAllCookies();
         driver.manage().window().maximize();
@@ -155,8 +156,6 @@ public class BaseTest {
         convertWindow = new ConvertWindow(driver);
         multiEditProducts = new MultiEditProducts(driver);
     }
-
-
 
     @AfterClass
     public void teardown(){

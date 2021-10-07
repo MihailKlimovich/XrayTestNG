@@ -14,8 +14,6 @@ public class TestData extends BaseTest{
         @Description("LogIn")
         @Story("LogIn")
         public void testLogIn() {
-            //given
-            //when
             loginPageForScratchOrg.logInOnScratchOrg(driver);
         }
 
@@ -27,13 +25,7 @@ public class TestData extends BaseTest{
             developerConsoleWindow.openDeveloperConsole();
             developerConsoleWindow.openExecuteAnonymousWindow();
             developerConsoleWindow.runApexCodeFromFile("src/main/Data/AllData");
-            /*developerConsoleWindow.runApexCodeFromFile("src/main/Data/DeleteData");
-            developerConsoleWindow.openExecuteAnonymousWindow();
-            developerConsoleWindow.runApexCodeFromFile("src/main/Data/Account");
-            developerConsoleWindow.openExecuteAnonymousWindow();
-            developerConsoleWindow.runApexCodeFromFile("src/main/Data/Packages");
-            developerConsoleWindow.openExecuteAnonymousWindow();
-            developerConsoleWindow.runApexCodeFromFile("src/main/Data/Reservation");*/
+            developerConsoleWindow.runApexCodeFromFile("src/main/Data/OccupancyTypeMetadata");
         }
 
 }
