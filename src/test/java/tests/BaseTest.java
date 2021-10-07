@@ -17,6 +17,7 @@ import java.util.concurrent.TimeUnit;
 
 public class BaseTest {
 
+
     protected Dates date;
     protected WebDriver driver;
     protected HomePageForPackageOrg homePage;
@@ -52,8 +53,8 @@ public class BaseTest {
     public static final String testDataExcelFileName = "testdata.xlsx";
 
 
-    public String ORGUSERNAME = System.getenv("JAVAUSERNAME");
-    public String ORGPASSWORD = System.getenv("JAVAPASSWORD");
+    public String ORG_USERNAME = System.getenv("JAVAUSERNAME");
+    public String ORG_PASSWORD = System.getenv("JAVAPASSWORD");
     /*final protected String SFDX = "/home/minsk-sc/sfdx/bin/sfdx";
     final protected String key = "3MVG95AcBeaB55lX_jCjFVkfzdw6wxICwnFoSHHrqqR1rFJ8Pj5Jnu3nPLBrCMCv4diYS63i5N4yP3tvP.LJm";//3MVG95AcBeaB55lWwG_jM4S.hHHrR_i9uJUnD_XBhRAqn3B6BZxjS82q3A2.o16sDpIqZIOL2lpOxXysstk8R
     final protected String ALIAS = "test-q4olefzyjh6b@example.com";
@@ -131,7 +132,7 @@ public class BaseTest {
         date = new Dates();
         homePage = new HomePageForPackageOrg();
         homePageForScratchOrg = new HomePageForScratchOrg(driver);
-        loginPage = new LoginPageForPackageOrg();
+        loginPage = new LoginPageForPackageOrg(driver);
         loginPageForScratchOrg = new LoginPageForScratchOrg();
         developerConsoleWindow = new DeveloperConsoleWindow(driver);
         account = new AccountPage(driver);

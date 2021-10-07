@@ -30,7 +30,6 @@ public class Request_Agent extends BaseTest{
         });
         System.out.println(authorise);
         loginPageForScratchOrg.logInOnScratchOrg2(driver, urlForScratch, ALIAS, passwordForScratch);
-
     }
 
     @Test(priority = 2, description = "Delete old data")
