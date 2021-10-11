@@ -406,7 +406,7 @@ public class MyceToOpera extends BaseTest {
             Assert.assertTrue(pmsBlockRateMessage.contains("6 records were retrieved"));
 
 
-            Object rates = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+            Object rates = SfdxCommand.runLinuxCommand1(new String[]{SFDX,
                     "force:data:soql:query",
                     "-q",
                     "SELECT Id, thn__Start__c, thn__End__c FROM thn__BlockRate__c WHERE thn__PMS_Block__c='" + pmsBlockID + "'",
@@ -469,7 +469,8 @@ public class MyceToOpera extends BaseTest {
                 THY589UserName,
                 "--json"});
         String productRoom1NightID = JsonParser2.getFieldValue(productRoom1NightRecord.toString(), "Id");
-        StringBuilder productRoom2NightsRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder productRoom2NightsRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Product__c",
@@ -923,7 +924,8 @@ public class MyceToOpera extends BaseTest {
                 THY589UserName,
                 "--json"});
         String quoteHotelRoomID2 = JsonParser2.getFieldValue(quoteHotelRoomResult2.toString(), "id");
-        Object pmsBlock = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        Object pmsBlock = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:soql:query",
                 "-q",
                 "SELECT Id, thn__Property__c, thn__Start__c, thn__End__c FROM thn__PMS_Block__c WHERE thn__MYCE_Quote__c='" + myceQuoteID + "'",
@@ -956,7 +958,8 @@ public class MyceToOpera extends BaseTest {
                 THY589UserName,
                 "--json"});
         String pmsBlockInventoryID2 = JsonParser2.getFieldValue(pmsBlockInventoryRecord2.toString(), "Id");
-        Object pmsBlockRates1 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        Object pmsBlockRates1 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:soql:query",
                 "-q",
                 "SELECT Id, thn__Start__c, thn__End__c, thn__Rate__c, thn__RateCode__c, thn__RoomType__c  FROM" +
@@ -966,7 +969,8 @@ public class MyceToOpera extends BaseTest {
                 "--json"});
         System.out.println(pmsBlockRates1);
         List<String> pmsBlockRatesID1= JsonParser2.getFieldValueSoql(pmsBlockRates1.toString(), "Id");
-        Object pmsBlockRates2 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        Object pmsBlockRates2 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:soql:query",
                 "-q",
                 "SELECT Id, thn__Start__c, thn__End__c, thn__Rate__c, thn__RateCode__c, thn__RoomType__c  FROM" +
@@ -1226,7 +1230,8 @@ public class MyceToOpera extends BaseTest {
                 THY589UserName,
                 "--json"});
         String quoteHotelRoomID2 = JsonParser2.getFieldValue(quoteHotelRoomResult2.toString(), "id");
-        Object pmsBlock = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        Object pmsBlock = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:soql:query",
                 "-q",
                 "SELECT Id, thn__Property__c, thn__Start__c, thn__End__c FROM thn__PMS_Block__c WHERE thn__MYCE_Quote__c='" + myceQuoteID + "'",
@@ -1259,7 +1264,8 @@ public class MyceToOpera extends BaseTest {
                 THY589UserName,
                 "--json"});
         String pmsBlockInventoryID2 = JsonParser2.getFieldValue(pmsBlockInventoryRecord2.toString(), "Id");
-        Object pmsBlockRates1 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        Object pmsBlockRates1 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:soql:query",
                 "-q",
                 "SELECT Id, thn__Start__c, thn__End__c, thn__Rate__c, thn__RateCode__c, thn__RoomType__c  FROM" +
@@ -1269,7 +1275,8 @@ public class MyceToOpera extends BaseTest {
                 "--json"});
         System.out.println(pmsBlockRates1);
         List<String> pmsBlockRatesID1= JsonParser2.getFieldValueSoql(pmsBlockRates1.toString(), "Id");
-        Object pmsBlockRates2 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        Object pmsBlockRates2 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:soql:query",
                 "-q",
                 "SELECT Id, thn__Start__c, thn__End__c, thn__Rate__c, thn__RateCode__c, thn__RoomType__c  FROM" +
@@ -1360,7 +1367,8 @@ public class MyceToOpera extends BaseTest {
                 THY589UserName,
                 "--json"});
         String cloneMyceQuoteID = JsonParser2.getFieldValue(cloneMyceQuoteRecord.toString(), "Id");
-        Object pmsBlockClone = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        Object pmsBlockClone = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:soql:query",
                 "-q",
                 "SELECT Id, thn__Property__c, thn__Start__c, thn__End__c FROM thn__PMS_Block__c WHERE thn__MYCE_Quote__c='" + cloneMyceQuoteID + "'",
@@ -1370,7 +1378,8 @@ public class MyceToOpera extends BaseTest {
         List<String> values2= JsonParser2.getFieldValueSoql(pmsBlock.toString(), "Id");
         String pmsBlockCloneID1 = values2.get(0);
         String pmsBlockCloneID2 = values2.get(1);
-        Object pmsBlockRatesClone1 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        Object pmsBlockRatesClone1 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:soql:query",
                 "-q",
                 "SELECT Id, thn__Start__c, thn__End__c, thn__Rate__c, thn__RateCode__c, thn__RoomType__c  FROM" +
@@ -1379,7 +1388,8 @@ public class MyceToOpera extends BaseTest {
                 THY589UserName,
                 "--json"});
         List<String> pmsBlockRatesCloneID1= JsonParser2.getFieldValueSoql(pmsBlockRatesClone1.toString(), "Id");
-        Object pmsBlockRatesClone2 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        Object pmsBlockRatesClone2 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:soql:query",
                 "-q",
                 "SELECT Id, thn__Start__c, thn__End__c, thn__Rate__c, thn__RateCode__c, thn__RoomType__c  FROM" +
@@ -1594,7 +1604,8 @@ public class MyceToOpera extends BaseTest {
                 "--json"});
         String pmsBlockID = JsonParser2.getFieldValue(pmsBlockRecord.toString(), "Id");
 
-        Object pmsBlockRates = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        Object pmsBlockRates = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:soql:query",
                 "-q",
                 "SELECT Id, thn__Start__c, thn__End__c, thn__Rate__c, thn__RateCode__c, thn__RoomType__c  FROM" +

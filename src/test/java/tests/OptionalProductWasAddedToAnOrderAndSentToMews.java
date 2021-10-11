@@ -58,7 +58,8 @@ public class OptionalProductWasAddedToAnOrderAndSentToMews extends BaseTest {
                 TB_132_UserName,
                 "--json"});
         String propertyDemoID = JsonParser2.getFieldValue(propertyDemoRecord.toString(), "Id");
-        StringBuilder productRecordWines = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder productRecordWines = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Product__c",
@@ -82,7 +83,8 @@ public class OptionalProductWasAddedToAnOrderAndSentToMews extends BaseTest {
                 TB_132_UserName,
                 "--json"});
         String myceQuoteID = JsonParser2.getFieldValue(myseQuoteResult.toString(), "id");
-        StringBuilder quoteProductResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quoteProductResult = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:create",
                 "-s",
                 "thn__Quote_Product__c",
@@ -96,7 +98,8 @@ public class OptionalProductWasAddedToAnOrderAndSentToMews extends BaseTest {
         developerConsoleWindow.openDeveloperConsole();
         developerConsoleWindow.openExecuteAnonymousWindow();
         developerConsoleWindow.runApexCodeFromFile("src/main/Data/BatchCreateOrders");
-        Object orders = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        Object orders = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:soql:query",
                 "-q",
                 "SELECT Id FROM thn__Order__c WHERE thn__MYCE_Quote__c='" + myceQuoteID + "'",
@@ -132,7 +135,8 @@ public class OptionalProductWasAddedToAnOrderAndSentToMews extends BaseTest {
                 TB_132_UserName,
                 "--json"});
         String propertyDemoID = JsonParser2.getFieldValue(propertyDemoRecord.toString(), "Id");
-        StringBuilder productRecordWines = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder productRecordWines = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Product__c",
@@ -156,7 +160,8 @@ public class OptionalProductWasAddedToAnOrderAndSentToMews extends BaseTest {
                 TB_132_UserName,
                 "--json"});
         String myceQuoteID = JsonParser2.getFieldValue(myseQuoteResult.toString(), "id");
-        StringBuilder quoteProductResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quoteProductResult = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:create",
                 "-s",
                 "thn__Quote_Product__c",
@@ -170,7 +175,8 @@ public class OptionalProductWasAddedToAnOrderAndSentToMews extends BaseTest {
         developerConsoleWindow.openDeveloperConsole();
         developerConsoleWindow.openExecuteAnonymousWindow();
         developerConsoleWindow.runApexCodeFromFile("src/main/Data/BatchCreateOrders");
-        Object orders = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        Object orders = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:soql:query",
                 "-q",
                 "SELECT Id, Name FROM thn__Order__c WHERE thn__MYCE_Quote__c='" + myceQuoteID + "'",
@@ -226,7 +232,8 @@ public class OptionalProductWasAddedToAnOrderAndSentToMews extends BaseTest {
                 TB_132_UserName,
                 "--json"});
         String propertyDemoID = JsonParser2.getFieldValue(propertyDemoRecord.toString(), "Id");
-        StringBuilder productRecordMHD = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder productRecordMHD = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Product__c",
@@ -249,7 +256,8 @@ public class OptionalProductWasAddedToAnOrderAndSentToMews extends BaseTest {
                 TB_132_UserName,
                 "--json"});
         String myceQuoteID = JsonParser2.getFieldValue(myseQuoteResult.toString(), "id");
-        StringBuilder quoteMeetingRoomResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quoteMeetingRoomResult = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:create",
                 "-s",
                 "thn__Quote_Meeting_Room__c",
@@ -264,7 +272,8 @@ public class OptionalProductWasAddedToAnOrderAndSentToMews extends BaseTest {
         developerConsoleWindow.openDeveloperConsole();
         developerConsoleWindow.openExecuteAnonymousWindow();
         developerConsoleWindow.runApexCodeFromFile("src/main/Data/BatchCreateOrders");
-        Object orders = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        Object orders = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:soql:query",
                 "-q",
                 "SELECT Id FROM thn__Order__c WHERE thn__MYCE_Quote__c='" + myceQuoteID + "'",
@@ -300,7 +309,8 @@ public class OptionalProductWasAddedToAnOrderAndSentToMews extends BaseTest {
                 TB_132_UserName,
                 "--json"});
         String propertyDemoID = JsonParser2.getFieldValue(propertyDemoRecord.toString(), "Id");
-        StringBuilder productRecordMHD = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder productRecordMHD = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Product__c",
@@ -323,7 +333,8 @@ public class OptionalProductWasAddedToAnOrderAndSentToMews extends BaseTest {
                 TB_132_UserName,
                 "--json"});
         String myceQuoteID = JsonParser2.getFieldValue(myseQuoteResult.toString(), "id");
-        StringBuilder quoteMeetingRoomResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quoteMeetingRoomResult = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:create",
                 "-s",
                 "thn__Quote_Meeting_Room__c",
@@ -338,7 +349,8 @@ public class OptionalProductWasAddedToAnOrderAndSentToMews extends BaseTest {
         developerConsoleWindow.openDeveloperConsole();
         developerConsoleWindow.openExecuteAnonymousWindow();
         developerConsoleWindow.runApexCodeFromFile("src/main/Data/BatchCreateOrders");
-        Object orders = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        Object orders = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:soql:query",
                 "-q",
                 "SELECT Id, Name FROM thn__Order__c WHERE thn__MYCE_Quote__c='" + myceQuoteID + "'",

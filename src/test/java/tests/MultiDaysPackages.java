@@ -55,7 +55,8 @@ public class MultiDaysPackages extends BaseTest {
                 "-u",
                 THY607_608_UserName,
                 "--json"});
-        StringBuilder propertyRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder propertyRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Hotel__c",
@@ -65,7 +66,8 @@ public class MultiDaysPackages extends BaseTest {
                 THY607_608_UserName,
                 "--json"});
         String propertyID = JsonParser2.getFieldValue(propertyRecord.toString(), "Id");
-        StringBuilder productRecordMHD = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder productRecordMHD = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Product__c",
@@ -75,7 +77,8 @@ public class MultiDaysPackages extends BaseTest {
                 THY607_608_UserName,
                 "--json"});
         String meetingHalfDayID = JsonParser2.getFieldValue(productRecordMHD.toString(), "Id");
-        StringBuilder productRecordRoom1Night = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder productRecordRoom1Night = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Product__c",
@@ -85,7 +88,8 @@ public class MultiDaysPackages extends BaseTest {
                 THY607_608_UserName,
                 "--json"});
         String room1NightID = JsonParser2.getFieldValue(productRecordRoom1Night.toString(), "Id");
-        StringBuilder beverageRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder beverageRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Product__c",
@@ -95,7 +99,8 @@ public class MultiDaysPackages extends BaseTest {
                 THY607_608_UserName,
                 "--json"});
         String beverageID = JsonParser2.getFieldValue(beverageRecord.toString(), "Id");
-        StringBuilder activityRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder activityRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Product__c",
@@ -105,7 +110,8 @@ public class MultiDaysPackages extends BaseTest {
                 THY607_608_UserName,
                 "--json"});
         String activityID = JsonParser2.getFieldValue(activityRecord.toString(), "Id");
-        StringBuilder equipmentRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder equipmentRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Product__c",
@@ -115,7 +121,8 @@ public class MultiDaysPackages extends BaseTest {
                 THY607_608_UserName,
                 "--json"});
         String equipmentID = JsonParser2.getFieldValue(equipmentRecord.toString(), "Id");
-        StringBuilder dinerRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder dinerRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Product__c",
@@ -125,7 +132,8 @@ public class MultiDaysPackages extends BaseTest {
                 THY607_608_UserName,
                 "--json"});
         String dinerID = JsonParser2.getFieldValue(dinerRecord.toString(), "Id");
-        StringBuilder packageResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder packageResult = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:create",
                 "-s",
                 "thn__Package__c",
@@ -135,7 +143,8 @@ public class MultiDaysPackages extends BaseTest {
                 THY607_608_UserName,
                 "--json"});
         String packageId = JsonParser2.getFieldValue(packageResult.toString(), "id");
-        StringBuilder packageLineResult1 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder packageLineResult1 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:create",
                 "-s",
                 "thn__Package_Line__c",
@@ -148,7 +157,8 @@ public class MultiDaysPackages extends BaseTest {
                 "--json"});
         System.out.println(packageLineResult1);
         String packageLineId1 = JsonParser2.getFieldValue(packageLineResult1.toString(), "id");
-        StringBuilder packageLineResult2 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder packageLineResult2 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:create",
                 "-s",
                 "thn__Package_Line__c",
@@ -160,7 +170,8 @@ public class MultiDaysPackages extends BaseTest {
                 THY607_608_UserName,
                 "--json"});
         String packageLineId2 = JsonParser2.getFieldValue(packageLineResult2.toString(), "id");
-        StringBuilder packageLineResult3 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder packageLineResult3 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:create",
                 "-s",
                 "thn__Package_Line__c",
@@ -172,7 +183,8 @@ public class MultiDaysPackages extends BaseTest {
                 THY607_608_UserName,
                 "--json"});
         String packageLineId3 = JsonParser2.getFieldValue(packageLineResult3.toString(), "id");
-        StringBuilder packageLineResult4 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder packageLineResult4 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:create",
                 "-s",
                 "thn__Package_Line__c",
@@ -184,7 +196,8 @@ public class MultiDaysPackages extends BaseTest {
                 THY607_608_UserName,
                 "--json"});
         String packageLineId4 = JsonParser2.getFieldValue(packageLineResult4.toString(), "id");
-        StringBuilder packageLineResult5 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder packageLineResult5 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:create",
                 "-s",
                 "thn__Package_Line__c",
@@ -196,7 +209,8 @@ public class MultiDaysPackages extends BaseTest {
                 THY607_608_UserName,
                 "--json"});
         String packageLineId5 = JsonParser2.getFieldValue(packageLineResult5.toString(), "id");
-        StringBuilder packageLineResult6 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder packageLineResult6 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:create",
                 "-s",
                 "thn__Package_Line__c",
@@ -222,7 +236,8 @@ public class MultiDaysPackages extends BaseTest {
                 THY607_608_UserName,
                 "--json"});
         String myceQuoteID = JsonParser2.getFieldValue(myseQuoteResult.toString(), "id");
-        StringBuilder quotePackageResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quotePackageResult = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:create",
                 "-s",
                 "thn__Quote_Package__c",
@@ -239,7 +254,8 @@ public class MultiDaysPackages extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     @Story("THY-607-608: Multi days packages")
     public void testMultiDaysPackages1() throws InterruptedException, IOException {
-        StringBuilder quoteRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quoteRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__MYCE_Quote__c",
@@ -249,7 +265,8 @@ public class MultiDaysPackages extends BaseTest {
                 THY607_608_UserName,
                 "--json"});
         String quoteID = JsonParser2.getFieldValue(quoteRecord.toString(), "Id");
-        StringBuilder quotePackageLineRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quotePackageLineRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Quote_Package_Line__c",
@@ -260,7 +277,8 @@ public class MultiDaysPackages extends BaseTest {
                 "--json"});
         System.out.println(quotePackageLineRecord);
         String quotePackageLineId = JsonParser2.getFieldValue(quotePackageLineRecord.toString(), "Id");
-        StringBuilder updateQuotePackageLineRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder updateQuotePackageLineRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:update",
                 "-s",
                 "thn__Quote_Package_Line__c",
@@ -272,7 +290,8 @@ public class MultiDaysPackages extends BaseTest {
                 THY607_608_UserName,
                 "--json"});
         System.out.println(updateQuotePackageLineRecord);
-        StringBuilder updatedQuotePackageLineRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder updatedQuotePackageLineRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Quote_Package_Line__c",
@@ -283,7 +302,8 @@ public class MultiDaysPackages extends BaseTest {
                 "--json"});
         String quotePackageLineFromDate = JsonParser2.getFieldValue(updatedQuotePackageLineRecord.toString(), "thn__From_Date__c");
         String quotePackageLineToDate = JsonParser2.getFieldValue(updatedQuotePackageLineRecord.toString(), "thn__To_Date__c");
-        StringBuilder quoteProductRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quoteProductRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Quote_Product__c",
@@ -294,7 +314,8 @@ public class MultiDaysPackages extends BaseTest {
                 "--json"});
         System.out.println(quoteProductRecord);
         String fsDateId =JsonParser2.getFieldValue(quoteProductRecord.toString(), "thn__FS_Date__c");
-        StringBuilder fsDateRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder fsDateRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__FS_Date__c",
@@ -318,7 +339,8 @@ public class MultiDaysPackages extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     @Story("THY-607-608: Multi days packages")
     public void testMultiDaysPackages2() throws InterruptedException, IOException {
-        StringBuilder quoteRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quoteRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__MYCE_Quote__c",
@@ -328,7 +350,8 @@ public class MultiDaysPackages extends BaseTest {
                 THY607_608_UserName,
                 "--json"});
         String quoteID = JsonParser2.getFieldValue(quoteRecord.toString(), "Id");
-        StringBuilder quotePackageLineRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quotePackageLineRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Quote_Package_Line__c",
@@ -339,7 +362,8 @@ public class MultiDaysPackages extends BaseTest {
                 "--json"});
         System.out.println(quotePackageLineRecord);
         String quotePackageLineId = JsonParser2.getFieldValue(quotePackageLineRecord.toString(), "Id");
-        StringBuilder updateQuotePackageLineRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder updateQuotePackageLineRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:update",
                 "-s",
                 "thn__Quote_Package_Line__c",
@@ -351,7 +375,8 @@ public class MultiDaysPackages extends BaseTest {
                 THY607_608_UserName,
                 "--json"});
         System.out.println(updateQuotePackageLineRecord);
-        StringBuilder updatedQuotePackageLineRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder updatedQuotePackageLineRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Quote_Package_Line__c",
@@ -362,7 +387,8 @@ public class MultiDaysPackages extends BaseTest {
                 "--json"});
         String quotePackageLineFromDate = JsonParser2.getFieldValue(updatedQuotePackageLineRecord.toString(), "thn__From_Date__c");
         String quotePackageLineToDate = JsonParser2.getFieldValue(updatedQuotePackageLineRecord.toString(), "thn__To_Date__c");
-        StringBuilder quoteProductRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quoteProductRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Quote_Product__c",
@@ -373,7 +399,8 @@ public class MultiDaysPackages extends BaseTest {
                 "--json"});
         System.out.println(quoteProductRecord);
         String fsDateId =JsonParser2.getFieldValue(quoteProductRecord.toString(), "thn__FS_Date__c");
-        StringBuilder fsDateRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder fsDateRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__FS_Date__c",
@@ -396,7 +423,8 @@ public class MultiDaysPackages extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     @Story("THY-607-608: Multi days packages")
     public void testMultiDaysPackages3() throws InterruptedException, IOException {
-        StringBuilder quoteRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quoteRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__MYCE_Quote__c",
@@ -406,7 +434,8 @@ public class MultiDaysPackages extends BaseTest {
                 THY607_608_UserName,
                 "--json"});
         String quoteID = JsonParser2.getFieldValue(quoteRecord.toString(), "Id");
-        StringBuilder quotePackageLineRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quotePackageLineRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Quote_Package_Line__c",
@@ -417,7 +446,8 @@ public class MultiDaysPackages extends BaseTest {
                 "--json"});
         System.out.println(quotePackageLineRecord);
         String quotePackageLineId = JsonParser2.getFieldValue(quotePackageLineRecord.toString(), "Id");
-        StringBuilder updateQuotePackageLineRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder updateQuotePackageLineRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:update",
                 "-s",
                 "thn__Quote_Package_Line__c",
@@ -429,7 +459,8 @@ public class MultiDaysPackages extends BaseTest {
                 THY607_608_UserName,
                 "--json"});
         System.out.println(updateQuotePackageLineRecord);
-        StringBuilder updatedQuotePackageLineRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder updatedQuotePackageLineRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Quote_Package_Line__c",
@@ -440,7 +471,8 @@ public class MultiDaysPackages extends BaseTest {
                 "--json"});
         String quotePackageLineFromDate = JsonParser2.getFieldValue(updatedQuotePackageLineRecord.toString(), "thn__From_Date__c");
         String quotePackageLineToDate = JsonParser2.getFieldValue(updatedQuotePackageLineRecord.toString(), "thn__To_Date__c");
-        StringBuilder quoteProductRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quoteProductRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Quote_Product__c",
@@ -451,7 +483,8 @@ public class MultiDaysPackages extends BaseTest {
                 "--json"});
         System.out.println(quoteProductRecord);
         String fsDateId =JsonParser2.getFieldValue(quoteProductRecord.toString(), "thn__FS_Date__c");
-        StringBuilder fsDateRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder fsDateRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__FS_Date__c",
@@ -474,7 +507,8 @@ public class MultiDaysPackages extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     @Story("THY-607-608: Multi days packages")
     public void testMultiDaysPackages4() throws InterruptedException, IOException {
-        StringBuilder quoteRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quoteRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__MYCE_Quote__c",
@@ -484,7 +518,8 @@ public class MultiDaysPackages extends BaseTest {
                 THY607_608_UserName,
                 "--json"});
         String quoteID = JsonParser2.getFieldValue(quoteRecord.toString(), "Id");
-        StringBuilder quotePackageLineRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quotePackageLineRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Quote_Package_Line__c",
@@ -495,7 +530,8 @@ public class MultiDaysPackages extends BaseTest {
                 "--json"});
         System.out.println(quotePackageLineRecord);
         String quotePackageLineId = JsonParser2.getFieldValue(quotePackageLineRecord.toString(), "Id");
-        StringBuilder updateQuotePackageLineRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder updateQuotePackageLineRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:update",
                 "-s",
                 "thn__Quote_Package_Line__c",
@@ -507,7 +543,8 @@ public class MultiDaysPackages extends BaseTest {
                 THY607_608_UserName,
                 "--json"});
         System.out.println(updateQuotePackageLineRecord);
-        StringBuilder updatedQuotePackageLineRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder updatedQuotePackageLineRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Quote_Package_Line__c",
@@ -518,7 +555,8 @@ public class MultiDaysPackages extends BaseTest {
                 "--json"});
         String quotePackageLineFromDate = JsonParser2.getFieldValue(updatedQuotePackageLineRecord.toString(), "thn__From_Date__c");
         String quotePackageLineToDate = JsonParser2.getFieldValue(updatedQuotePackageLineRecord.toString(), "thn__To_Date__c");
-        StringBuilder quoteProductRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quoteProductRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Quote_Product__c",
@@ -529,7 +567,8 @@ public class MultiDaysPackages extends BaseTest {
                 "--json"});
         System.out.println(quoteProductRecord);
         String fsDateId =JsonParser2.getFieldValue(quoteProductRecord.toString(), "thn__FS_Date__c");
-        StringBuilder fsDateRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder fsDateRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__FS_Date__c",
@@ -552,7 +591,8 @@ public class MultiDaysPackages extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     @Story("THY-607-608: Multi days packages")
     public void testMultiDaysPackages5() throws InterruptedException, IOException {
-        StringBuilder quoteRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quoteRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__MYCE_Quote__c",
@@ -562,7 +602,8 @@ public class MultiDaysPackages extends BaseTest {
                 THY607_608_UserName,
                 "--json"});
         String quoteID = JsonParser2.getFieldValue(quoteRecord.toString(), "Id");
-        StringBuilder quotePackageLineRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quotePackageLineRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Quote_Package_Line__c",
@@ -573,7 +614,8 @@ public class MultiDaysPackages extends BaseTest {
                 "--json"});
         System.out.println(quotePackageLineRecord);
         String quotePackageLineId = JsonParser2.getFieldValue(quotePackageLineRecord.toString(), "Id");
-        StringBuilder updateQuotePackageLineRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder updateQuotePackageLineRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:update",
                 "-s",
                 "thn__Quote_Package_Line__c",
@@ -585,7 +627,8 @@ public class MultiDaysPackages extends BaseTest {
                 THY607_608_UserName,
                 "--json"});
         System.out.println(updateQuotePackageLineRecord);
-        StringBuilder updatedQuotePackageLineRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder updatedQuotePackageLineRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Quote_Package_Line__c",
@@ -596,7 +639,8 @@ public class MultiDaysPackages extends BaseTest {
                 "--json"});
         String quotePackageLineFromDate = JsonParser2.getFieldValue(updatedQuotePackageLineRecord.toString(), "thn__From_Date__c");
         String quotePackageLineToDate = JsonParser2.getFieldValue(updatedQuotePackageLineRecord.toString(), "thn__To_Date__c");
-        StringBuilder quoteHotelRoomRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quoteHotelRoomRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Quote_Hotel_Room__c",
@@ -618,7 +662,8 @@ public class MultiDaysPackages extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     @Story("THY-607-608: Multi days packages")
     public void testMultiDaysPackages6() throws InterruptedException, IOException {
-        StringBuilder quoteRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quoteRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__MYCE_Quote__c",
@@ -628,7 +673,8 @@ public class MultiDaysPackages extends BaseTest {
                 THY607_608_UserName,
                 "--json"});
         String quoteID = JsonParser2.getFieldValue(quoteRecord.toString(), "Id");
-        StringBuilder quotePackageLineRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quotePackageLineRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Quote_Package_Line__c",
@@ -639,7 +685,8 @@ public class MultiDaysPackages extends BaseTest {
                 "--json"});
         System.out.println(quotePackageLineRecord);
         String quotePackageLineId = JsonParser2.getFieldValue(quotePackageLineRecord.toString(), "Id");
-        StringBuilder updateQuotePackageLineRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder updateQuotePackageLineRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:update",
                 "-s",
                 "thn__Quote_Package_Line__c",
@@ -651,7 +698,8 @@ public class MultiDaysPackages extends BaseTest {
                 THY607_608_UserName,
                 "--json"});
         System.out.println(updateQuotePackageLineRecord);
-        StringBuilder updatedQuotePackageLineRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder updatedQuotePackageLineRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Quote_Package_Line__c",
@@ -662,7 +710,8 @@ public class MultiDaysPackages extends BaseTest {
                 "--json"});
         String quotePackageLineFromDate = JsonParser2.getFieldValue(updatedQuotePackageLineRecord.toString(), "thn__From_Date__c");
         String quotePackageLineToDate = JsonParser2.getFieldValue(updatedQuotePackageLineRecord.toString(), "thn__To_Date__c");
-        StringBuilder quoteMeetingRoomRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quoteMeetingRoomRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Quote_Meeting_Room__c",
@@ -673,7 +722,8 @@ public class MultiDaysPackages extends BaseTest {
                 "--json"});
         System.out.println(quoteMeetingRoomRecord);
         String fsDateId =JsonParser2.getFieldValue(quoteMeetingRoomRecord.toString(), "thn__FS_Date__c");
-        StringBuilder fsDateRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder fsDateRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__FS_Date__c",
@@ -697,7 +747,8 @@ public class MultiDaysPackages extends BaseTest {
     @Story("THY-607-608: Multi days packages")
     public void testMultiDaysPackages7() throws InterruptedException, IOException {
         String expectedMessage = "Failed to update record with code FIELD_CUSTOM_VALIDATION_EXCEPTION.";
-        StringBuilder quoteRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quoteRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__MYCE_Quote__c",
@@ -707,7 +758,8 @@ public class MultiDaysPackages extends BaseTest {
                 THY607_608_UserName,
                 "--json"});
         String quoteID = JsonParser2.getFieldValue(quoteRecord.toString(), "Id");
-        StringBuilder quotePackageLineRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quotePackageLineRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Quote_Package_Line__c",
@@ -718,7 +770,8 @@ public class MultiDaysPackages extends BaseTest {
                 "--json"});
         System.out.println(quotePackageLineRecord);
         String quotePackageLineId = JsonParser2.getFieldValue(quotePackageLineRecord.toString(), "Id");
-        StringBuilder updateQuotePackageLineRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder updateQuotePackageLineRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:update",
                 "-s",
                 "thn__Quote_Package_Line__c",

@@ -57,7 +57,8 @@ public class MultiDeleteTesting extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     @Story("Multi delete testing")
     public void logIn() throws InterruptedException, IOException {
-        StringBuilder authorise = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder authorise = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:auth:jwt:grant",
                 "--clientid",
                 key,
@@ -116,7 +117,8 @@ public class MultiDeleteTesting extends BaseTest {
                 "-u",
                 ALIAS,
                 "--json"});
-        StringBuilder propertyRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder propertyRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Hotel__c",
@@ -126,7 +128,8 @@ public class MultiDeleteTesting extends BaseTest {
                 ALIAS,
                 "--json"});
         String propertyID = JsonParser2.getFieldValue(propertyRecord.toString(), "Id");
-        StringBuilder productRecordMHD = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder productRecordMHD = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Product__c",
@@ -136,7 +139,8 @@ public class MultiDeleteTesting extends BaseTest {
                 ALIAS,
                 "--json"});
         String meetingHalfDayID = JsonParser2.getFieldValue(productRecordMHD.toString(), "Id");
-        StringBuilder productRecordMFD = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder productRecordMFD = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Product__c",
@@ -146,7 +150,8 @@ public class MultiDeleteTesting extends BaseTest {
                 ALIAS,
                 "--json"});
         String meetingFullDayID = JsonParser2.getFieldValue(productRecordMFD.toString(), "Id");
-        StringBuilder productRecordRoom1Night = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder productRecordRoom1Night = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Product__c",
@@ -156,7 +161,8 @@ public class MultiDeleteTesting extends BaseTest {
                 ALIAS,
                 "--json"});
         String room1NightID = JsonParser2.getFieldValue(productRecordRoom1Night.toString(), "Id");
-        StringBuilder productRecordRoom2Nights = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder productRecordRoom2Nights = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Product__c",
@@ -166,7 +172,8 @@ public class MultiDeleteTesting extends BaseTest {
                 ALIAS,
                 "--json"});
         String room2NightsID = JsonParser2.getFieldValue(productRecordRoom2Nights.toString(), "Id");
-        StringBuilder winesRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder winesRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Product__c",
@@ -176,7 +183,8 @@ public class MultiDeleteTesting extends BaseTest {
                 ALIAS,
                 "--json"});
         String winesID = JsonParser2.getFieldValue(winesRecord.toString(), "Id");
-        StringBuilder beverageRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder beverageRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Product__c",
@@ -186,7 +194,8 @@ public class MultiDeleteTesting extends BaseTest {
                 ALIAS,
                 "--json"});
         String beverageID = JsonParser2.getFieldValue(beverageRecord.toString(), "Id");
-        StringBuilder roomTypeSingleRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder roomTypeSingleRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Space_Area__c",
@@ -196,7 +205,8 @@ public class MultiDeleteTesting extends BaseTest {
                 ALIAS,
                 "--json"});
         String roomTypeSingleID = JsonParser2.getFieldValue(roomTypeSingleRecord.toString(), "Id");
-        StringBuilder packageResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder packageResult = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:create",
                 "-s",
                 "thn__Package__c",
@@ -206,7 +216,8 @@ public class MultiDeleteTesting extends BaseTest {
                 ALIAS,
                 "--json"});
         String packageId = JsonParser2.getFieldValue(packageResult.toString(), "id");
-        StringBuilder packageLineResult1 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder packageLineResult1 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:create",
                 "-s",
                 "thn__Package_Line__c",
@@ -219,7 +230,8 @@ public class MultiDeleteTesting extends BaseTest {
                 "--json"});
         System.out.println(packageLineResult1);
         String packageLineId1 = JsonParser2.getFieldValue(packageLineResult1.toString(), "id");
-        StringBuilder packageLineResult2 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder packageLineResult2 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:create",
                 "-s",
                 "thn__Package_Line__c",
@@ -231,7 +243,8 @@ public class MultiDeleteTesting extends BaseTest {
                 ALIAS,
                 "--json"});
         String packageLineId2 = JsonParser2.getFieldValue(packageLineResult2.toString(), "id");
-        StringBuilder packageLineResult3 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder packageLineResult3 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:create",
                 "-s",
                 "thn__Package_Line__c",
@@ -243,7 +256,8 @@ public class MultiDeleteTesting extends BaseTest {
                 ALIAS,
                 "--json"});
         String packageLineId3 = JsonParser2.getFieldValue(packageLineResult3.toString(), "id");
-        StringBuilder packageLineResult4 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder packageLineResult4 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:create",
                 "-s",
                 "thn__Package_Line__c",
@@ -255,7 +269,8 @@ public class MultiDeleteTesting extends BaseTest {
                 ALIAS,
                 "--json"});
         String packageLineId4 = JsonParser2.getFieldValue(packageLineResult4.toString(), "id");
-        StringBuilder packageLineResult5 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder packageLineResult5 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:create",
                 "-s",
                 "thn__Package_Line__c",
@@ -267,7 +282,8 @@ public class MultiDeleteTesting extends BaseTest {
                 ALIAS,
                 "--json"});
         String packageLineId5 = JsonParser2.getFieldValue(packageLineResult5.toString(), "id");
-        StringBuilder packageLineResult6 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder packageLineResult6 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:create",
                 "-s",
                 "thn__Package_Line__c",
@@ -292,7 +308,8 @@ public class MultiDeleteTesting extends BaseTest {
                 ALIAS,
                 "--json"});
         String myceQuoteID = JsonParser2.getFieldValue(myseQuoteResult.toString(), "id");
-        StringBuilder quotePackageResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quotePackageResult = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:create",
                 "-s",
                 "thn__Quote_Package__c",
@@ -316,7 +333,8 @@ public class MultiDeleteTesting extends BaseTest {
                 ALIAS,
                 "--json"});
         String myceQuoteID2 = JsonParser2.getFieldValue(myseQuoteResult2.toString(), "id");
-        StringBuilder quoteHotelRoom1 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quoteHotelRoom1 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:create",
                 "-s",
                 "thn__Quote_Hotel_Room__c",
@@ -327,7 +345,8 @@ public class MultiDeleteTesting extends BaseTest {
                 ALIAS,
                 "--json"});
         String quoteHotelRoomId1 = JsonParser2.getFieldValue(quoteHotelRoom1.toString(), "id");
-        StringBuilder quoteHotelRoom2 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quoteHotelRoom2 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:create",
                 "-s",
                 "thn__Quote_Hotel_Room__c",
@@ -338,7 +357,8 @@ public class MultiDeleteTesting extends BaseTest {
                 ALIAS,
                 "--json"});
         String quoteHotelRoomId2 = JsonParser2.getFieldValue(quoteHotelRoom2.toString(), "id");
-        StringBuilder quoteMeetingRoom1 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quoteMeetingRoom1 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:create",
                 "-s",
                 "thn__Quote_Meeting_Room__c",
@@ -349,7 +369,8 @@ public class MultiDeleteTesting extends BaseTest {
                 ALIAS,
                 "--json"});
         String quoteMeetingRoomID1 = JsonParser2.getFieldValue(quoteMeetingRoom1.toString(), "id");
-        StringBuilder quoteMeetingRoom2 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quoteMeetingRoom2 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:create",
                 "-s",
                 "thn__Quote_Meeting_Room__c",
@@ -360,7 +381,8 @@ public class MultiDeleteTesting extends BaseTest {
                 ALIAS,
                 "--json"});
         String quoteMeetingRoomID2 = JsonParser2.getFieldValue(quoteMeetingRoom2.toString(), "id");
-        StringBuilder quoteProduct1 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quoteProduct1 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:create",
                 "-s",
                 "thn__Quote_Product__c",
@@ -371,7 +393,8 @@ public class MultiDeleteTesting extends BaseTest {
                 ALIAS,
                 "--json"});
         String quoteProductId1 = JsonParser2.getFieldValue(quoteProduct1.toString(), "id");
-        StringBuilder quoteProduct2 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quoteProduct2 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:create",
                 "-s",
                 "thn__Quote_Product__c",
@@ -395,7 +418,8 @@ public class MultiDeleteTesting extends BaseTest {
                 ALIAS,
                 "--json"});
         String myceQuoteID3 = JsonParser2.getFieldValue(myseQuoteResult3.toString(), "id");
-        StringBuilder quoteHotelRoom3 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quoteHotelRoom3 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:create",
                 "-s",
                 "thn__Quote_Hotel_Room__c",
@@ -406,7 +430,8 @@ public class MultiDeleteTesting extends BaseTest {
                 ALIAS,
                 "--json"});
         String quoteHotelRoomId3 = JsonParser2.getFieldValue(quoteHotelRoom3.toString(), "id");
-        StringBuilder quoteHotelRoom4 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quoteHotelRoom4 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:create",
                 "-s",
                 "thn__Quote_Hotel_Room__c",
@@ -435,7 +460,8 @@ public class MultiDeleteTesting extends BaseTest {
         myceQuotes.openProducts();
         quoteProducts.selectAllItems("2");
         quoteProducts.multiDeleteRecords();
-        StringBuilder quoteRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quoteRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__MYCE_Quote__c",
@@ -445,7 +471,8 @@ public class MultiDeleteTesting extends BaseTest {
                 ALIAS,
                 "--json"});
         String quoteID = JsonParser2.getFieldValue(quoteRecord.toString(), "Id");
-        StringBuilder quoteProductsSoql = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quoteProductsSoql = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:soql:query",
                 "-q",
                 "SELECT Id FROM thn__Quote_Product__c WHERE thn__MYCE_Quote__c='" + quoteID + "'",
@@ -453,7 +480,8 @@ public class MultiDeleteTesting extends BaseTest {
                 ALIAS,
                 "--json"});
         List<String> quotesProductsID = JsonParser2.getFieldValueSoql(quoteProductsSoql.toString(), "Id");
-        StringBuilder quoteHotelRoomsSoql = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quoteHotelRoomsSoql = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:soql:query",
                 "-q",
                 "SELECT Id FROM thn__Quote_Hotel_Room__c WHERE thn__MYCE_Quote__c='" + quoteID + "'",
@@ -461,7 +489,8 @@ public class MultiDeleteTesting extends BaseTest {
                 ALIAS,
                 "--json"});
         List<String> quotesHotelRoomsID = JsonParser2.getFieldValueSoql(quoteHotelRoomsSoql.toString(), "Id");
-        StringBuilder quoteMeetingRoomsSoql = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quoteMeetingRoomsSoql = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:soql:query",
                 "-q",
                 "SELECT Id FROM thn__Quote_Meeting_Room__c WHERE thn__MYCE_Quote__c='" + quoteID + "'",
@@ -484,7 +513,8 @@ public class MultiDeleteTesting extends BaseTest {
         myceQuotes.openMeetingPackages();
         quoteMeetingPackages.selectItemNumber("1");
         quoteMeetingPackages.multiDeleteRecords();
-        StringBuilder quoteRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quoteRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__MYCE_Quote__c",
@@ -494,7 +524,8 @@ public class MultiDeleteTesting extends BaseTest {
                 ALIAS,
                 "--json"});
         String quoteID = JsonParser2.getFieldValue(quoteRecord.toString(), "Id");
-        StringBuilder quoteProductsSoql = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quoteProductsSoql = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:soql:query",
                 "-q",
                 "SELECT Id FROM thn__Quote_Product__c WHERE thn__MYCE_Quote__c='" + quoteID + "'",
@@ -502,7 +533,8 @@ public class MultiDeleteTesting extends BaseTest {
                 ALIAS,
                 "--json"});
         List<String> quotesProductsID = JsonParser2.getFieldValueSoql(quoteProductsSoql.toString(), "Id");
-        StringBuilder quoteHotelRoomsSoql = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quoteHotelRoomsSoql = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:soql:query",
                 "-q",
                 "SELECT Id FROM thn__Quote_Hotel_Room__c WHERE thn__MYCE_Quote__c='" + quoteID + "'",
@@ -510,7 +542,8 @@ public class MultiDeleteTesting extends BaseTest {
                 ALIAS,
                 "--json"});
         List<String> quotesHotelRoomsID = JsonParser2.getFieldValueSoql(quoteHotelRoomsSoql.toString(), "Id");
-        StringBuilder quoteMeetingRoomsSoql = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quoteMeetingRoomsSoql = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:soql:query",
                 "-q",
                 "SELECT Id FROM thn__Quote_Meeting_Room__c WHERE thn__MYCE_Quote__c='" + quoteID + "'",
@@ -539,7 +572,8 @@ public class MultiDeleteTesting extends BaseTest {
         myceQuotes.openProducts();
         quoteProducts.selectAllItems("2");
         quoteProducts.multiDeleteRecords();
-        StringBuilder quoteRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quoteRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__MYCE_Quote__c",
@@ -549,7 +583,8 @@ public class MultiDeleteTesting extends BaseTest {
                 ALIAS,
                 "--json"});
         String quoteID = JsonParser2.getFieldValue(quoteRecord.toString(), "Id");
-        StringBuilder quoteProductsSoql = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quoteProductsSoql = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:soql:query",
                 "-q",
                 "SELECT Id FROM thn__Quote_Product__c WHERE thn__MYCE_Quote__c='" + quoteID + "'",
@@ -557,7 +592,8 @@ public class MultiDeleteTesting extends BaseTest {
                 ALIAS,
                 "--json"});
         List<String> quotesProductsID = JsonParser2.getFieldValueSoql(quoteProductsSoql.toString(), "Id");
-        StringBuilder quoteHotelRoomsSoql = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quoteHotelRoomsSoql = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:soql:query",
                 "-q",
                 "SELECT Id FROM thn__Quote_Hotel_Room__c WHERE thn__MYCE_Quote__c='" + quoteID + "'",
@@ -565,7 +601,8 @@ public class MultiDeleteTesting extends BaseTest {
                 ALIAS,
                 "--json"});
         List<String> quotesHotelRoomsID = JsonParser2.getFieldValueSoql(quoteHotelRoomsSoql.toString(), "Id");
-        StringBuilder quoteMeetingRoomsSoql = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quoteMeetingRoomsSoql = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:soql:query",
                 "-q",
                 "SELECT Id FROM thn__Quote_Meeting_Room__c WHERE thn__MYCE_Quote__c='" + quoteID + "'",
@@ -589,7 +626,8 @@ public class MultiDeleteTesting extends BaseTest {
         myceQuotes.openHotelRooms();
         quoteHotelRoom.selectItems("2");
         quoteHotelRoom.multiDeleteRecords();
-        StringBuilder quoteRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quoteRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__MYCE_Quote__c",
@@ -599,7 +637,8 @@ public class MultiDeleteTesting extends BaseTest {
                 ALIAS,
                 "--json"});
         String quoteID = JsonParser2.getFieldValue(quoteRecord.toString(), "Id");
-        StringBuilder quoteHotelRoomsSoql = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quoteHotelRoomsSoql = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:soql:query",
                 "-q",
                 "SELECT Id FROM thn__Quote_Hotel_Room__c WHERE thn__MYCE_Quote__c='" + quoteID + "'",

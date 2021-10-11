@@ -18,7 +18,8 @@ public class PackagesCustomPrice extends BaseTest {
     @Description("THY-588: Packages - custom price")
     @Story("Case 1: Delete a ‘Quote Package Line’.")
     public void packageCustomPrice_DeletePackageLine() throws InterruptedException, IOException {
-        StringBuilder propertyRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder propertyRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Hotel__c",
@@ -28,7 +29,8 @@ public class PackagesCustomPrice extends BaseTest {
                 ALIAS,
                 "--json"});
         String propertyID = JsonParser2.getFieldValue(propertyRecord.toString(), "Id");
-        StringBuilder productRecord1 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder productRecord1 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Product__c",
@@ -38,7 +40,8 @@ public class PackagesCustomPrice extends BaseTest {
                 ALIAS,
                 "--json"});
         String foodID = JsonParser2.getFieldValue(productRecord1.toString(), "Id");
-        StringBuilder productRecord2 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder productRecord2 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Product__c",
@@ -48,7 +51,8 @@ public class PackagesCustomPrice extends BaseTest {
                 ALIAS,
                 "--json"});
         String beverageID = JsonParser2.getFieldValue(productRecord2.toString(), "Id");
-        StringBuilder productRecord3 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder productRecord3 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Product__c",
@@ -58,7 +62,8 @@ public class PackagesCustomPrice extends BaseTest {
                 ALIAS,
                 "--json"});
         String equipmentID = JsonParser2.getFieldValue(productRecord3.toString(), "Id");
-        StringBuilder packageResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder packageResult = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:create",
                 "-s",
                 "thn__Package__c",
@@ -68,7 +73,8 @@ public class PackagesCustomPrice extends BaseTest {
                 ALIAS,
                 "--json"});
         String packageId = JsonParser2.getFieldValue(packageResult.toString(), "id");
-        StringBuilder packageLineResult1 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder packageLineResult1 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:create",
                 "-s",
                 "thn__Package_Line__c",
@@ -80,7 +86,8 @@ public class PackagesCustomPrice extends BaseTest {
                 ALIAS,
                 "--json"});
         String packageLineId1 = JsonParser2.getFieldValue(packageLineResult1.toString(), "id");
-        StringBuilder packageLineResult2 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder packageLineResult2 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:create",
                 "-s",
                 "thn__Package_Line__c",
@@ -92,7 +99,8 @@ public class PackagesCustomPrice extends BaseTest {
                 ALIAS,
                 "--json"});
         String packageLineId2 = JsonParser2.getFieldValue(packageLineResult2.toString(), "id");
-        StringBuilder packageLineResult3 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder packageLineResult3 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:create",
                 "-s",
                 "thn__Package_Line__c",
@@ -104,7 +112,8 @@ public class PackagesCustomPrice extends BaseTest {
                 ALIAS,
                 "--json"});
         String packageLineId3 = JsonParser2.getFieldValue(packageLineResult3.toString(), "id");
-        StringBuilder packageLineResult4 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder packageLineResult4 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:create",
                 "-s",
                 "thn__Package_Line__c",
@@ -116,7 +125,8 @@ public class PackagesCustomPrice extends BaseTest {
                 ALIAS,
                 "--json"});
         String packageLineId4 = JsonParser2.getFieldValue(packageLineResult4.toString(), "id");
-        StringBuilder myseQuoteResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder myseQuoteResult = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:create",
                 "-s",
                 "thn__MYCE_Quote__c",
@@ -127,7 +137,8 @@ public class PackagesCustomPrice extends BaseTest {
                 ALIAS,
                 "--json"});
         String myceQuoteID = JsonParser2.getFieldValue(myseQuoteResult.toString(), "id");
-        StringBuilder quotePackageResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quotePackageResult = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:create",
                 "-s",
                 "thn__Quote_Package__c",
@@ -138,7 +149,8 @@ public class PackagesCustomPrice extends BaseTest {
                 ALIAS,
                 "--json"});
         String quotePackageId = JsonParser2.getFieldValue(quotePackageResult.toString(), "id");
-        StringBuilder quotePackageLineRecord1 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quotePackageLineRecord1 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Quote_Package_Line__c",
@@ -149,7 +161,8 @@ public class PackagesCustomPrice extends BaseTest {
                 "--json"});
         //System.out.println(quotePackageLineRecord1);
         //String quotePackageLineId1 = JsonParser2.getFieldValue(quotePackageResult.toString(), "Id");
-        StringBuilder quotePackageLineRecord2 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quotePackageLineRecord2 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Quote_Package_Line__c",
@@ -158,7 +171,8 @@ public class PackagesCustomPrice extends BaseTest {
                 "-u",
                 ALIAS,
                 "--json"});
-        StringBuilder quotePackageLineRecord3 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quotePackageLineRecord3 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Quote_Package_Line__c",
@@ -167,7 +181,8 @@ public class PackagesCustomPrice extends BaseTest {
                 "-u",
                 ALIAS,
                 "--json"});
-        StringBuilder quotePackageLineRecord4 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quotePackageLineRecord4 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Quote_Package_Line__c",
@@ -176,7 +191,8 @@ public class PackagesCustomPrice extends BaseTest {
                 "-u",
                 ALIAS,
                 "--json"});
-        StringBuilder quotePackageRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quotePackageRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Quote_Package__c",
@@ -192,7 +208,8 @@ public class PackagesCustomPrice extends BaseTest {
         Integer listPriceQuotePackage = JsonParser2.getFieldValueLikeInteger(quotePackageRecord, "result", "thn__List_Price__c");
         Integer sumPricePackLine1 = listPriceQuotePackLine1 + listPriceQuotePackLine2 + listPriceQuotePackLine3 + listPriceQuotePackLine4;
         Assert.assertEquals(listPriceQuotePackage, sumPricePackLine1);
-        StringBuilder deleteResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder deleteResult = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:delete",
                 "-s",
                 "thn__Quote_Package_Line__c",
@@ -202,7 +219,8 @@ public class PackagesCustomPrice extends BaseTest {
                 ALIAS,
                 "--json"});
         System.out.println(deleteResult);
-        StringBuilder quotePackageRecord2 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quotePackageRecord2 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Quote_Package__c",
@@ -221,7 +239,8 @@ public class PackagesCustomPrice extends BaseTest {
     @Description("THY-588: Packages - custom price")
     @Story("Case 2: Users should be able to create new ‘Package Lines’ on created Quote.")
     public void packageCustomPrice_addQuotePackageLine() throws InterruptedException, IOException {
-        StringBuilder propertyRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder propertyRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Hotel__c",
@@ -231,7 +250,8 @@ public class PackagesCustomPrice extends BaseTest {
                 ALIAS,
                 "--json"});
         String propertyID = JsonParser2.getFieldValue(propertyRecord.toString(), "Id");
-        StringBuilder productRecord1 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder productRecord1 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Product__c",
@@ -241,7 +261,8 @@ public class PackagesCustomPrice extends BaseTest {
                 ALIAS,
                 "--json"});
         String foodID = JsonParser2.getFieldValue(productRecord1.toString(), "Id");
-        StringBuilder productRecord2 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder productRecord2 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Product__c",
@@ -251,7 +272,8 @@ public class PackagesCustomPrice extends BaseTest {
                 ALIAS,
                 "--json"});
         String beverageID = JsonParser2.getFieldValue(productRecord2.toString(), "Id");
-        StringBuilder productRecord3 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder productRecord3 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Product__c",
@@ -261,7 +283,8 @@ public class PackagesCustomPrice extends BaseTest {
                 ALIAS,
                 "--json"});
         String equipmentID = JsonParser2.getFieldValue(productRecord3.toString(), "Id");
-        StringBuilder packageResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder packageResult = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:create",
                 "-s",
                 "thn__Package__c",
@@ -271,7 +294,8 @@ public class PackagesCustomPrice extends BaseTest {
                 ALIAS,
                 "--json"});
         String packageId = JsonParser2.getFieldValue(packageResult.toString(), "id");
-        StringBuilder packageLineResult1 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder packageLineResult1 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:create",
                 "-s",
                 "thn__Package_Line__c",
@@ -283,7 +307,8 @@ public class PackagesCustomPrice extends BaseTest {
                 ALIAS,
                 "--json"});
         String packageLineId1 = JsonParser2.getFieldValue(packageLineResult1.toString(), "id");
-        StringBuilder packageLineResult2 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder packageLineResult2 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:create",
                 "-s",
                 "thn__Package_Line__c",
@@ -295,7 +320,8 @@ public class PackagesCustomPrice extends BaseTest {
                 ALIAS,
                 "--json"});
         String packageLineId2 = JsonParser2.getFieldValue(packageLineResult2.toString(), "id");
-        StringBuilder packageLineResult3 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder packageLineResult3 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:create",
                 "-s",
                 "thn__Package_Line__c",
@@ -307,7 +333,8 @@ public class PackagesCustomPrice extends BaseTest {
                 ALIAS,
                 "--json"});
         String packageLineId3 = JsonParser2.getFieldValue(packageLineResult3.toString(), "id");
-        StringBuilder packageLineResult4 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder packageLineResult4 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:create",
                 "-s",
                 "thn__Package_Line__c",
@@ -319,7 +346,8 @@ public class PackagesCustomPrice extends BaseTest {
                 ALIAS,
                 "--json"});
         String packageLineId4 = JsonParser2.getFieldValue(packageLineResult4.toString(), "id");
-        StringBuilder myseQuoteResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder myseQuoteResult = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:create",
                 "-s",
                 "thn__MYCE_Quote__c",
@@ -330,7 +358,8 @@ public class PackagesCustomPrice extends BaseTest {
                 ALIAS,
                 "--json"});
         String myceQuoteID = JsonParser2.getFieldValue(myseQuoteResult.toString(), "id");
-        StringBuilder quotePackageResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quotePackageResult = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:create",
                 "-s",
                 "thn__Quote_Package__c",
@@ -341,7 +370,8 @@ public class PackagesCustomPrice extends BaseTest {
                 ALIAS,
                 "--json"});
         String quotePackageId = JsonParser2.getFieldValue(quotePackageResult.toString(), "id");
-        StringBuilder quotePackageLineRecord1 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quotePackageLineRecord1 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Quote_Package_Line__c",
@@ -352,7 +382,8 @@ public class PackagesCustomPrice extends BaseTest {
                 "--json"});
         //System.out.println(quotePackageLineRecord1);
         //String quotePackageLineId1 = JsonParser2.getFieldValue(quotePackageResult.toString(), "Id");
-        StringBuilder quotePackageLineRecord2 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quotePackageLineRecord2 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Quote_Package_Line__c",
@@ -361,7 +392,8 @@ public class PackagesCustomPrice extends BaseTest {
                 "-u",
                 ALIAS,
                 "--json"});
-        StringBuilder quotePackageLineRecord3 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quotePackageLineRecord3 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Quote_Package_Line__c",
@@ -370,7 +402,8 @@ public class PackagesCustomPrice extends BaseTest {
                 "-u",
                 ALIAS,
                 "--json"});
-        StringBuilder quotePackageLineRecord4 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quotePackageLineRecord4 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Quote_Package_Line__c",
@@ -379,7 +412,8 @@ public class PackagesCustomPrice extends BaseTest {
                 "-u",
                 ALIAS,
                 "--json"});
-        StringBuilder quotePackageRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quotePackageRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Quote_Package__c",
@@ -395,7 +429,8 @@ public class PackagesCustomPrice extends BaseTest {
         Integer listPriceQuotePackage = JsonParser2.getFieldValueLikeInteger(quotePackageRecord, "result", "thn__List_Price__c");
         Integer sumPricePackLine1 = listPriceQuotePackLine1 + listPriceQuotePackLine2 + listPriceQuotePackLine3 + listPriceQuotePackLine4;
         Assert.assertEquals(listPriceQuotePackage, sumPricePackLine1);
-        StringBuilder quotePackageLineResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quotePackageLineResult = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:create",
                 "-s",
                 "thn__Quote_Package_Line__c",
@@ -407,7 +442,8 @@ public class PackagesCustomPrice extends BaseTest {
                 ALIAS,
                 "--json"});
         String addedQuotePackageLineId = JsonParser2.getFieldValue(quotePackageLineResult.toString(), "id");
-        StringBuilder quotePackageLineRecord5 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quotePackageLineRecord5 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Quote_Package_Line__c",
@@ -417,7 +453,8 @@ public class PackagesCustomPrice extends BaseTest {
                 ALIAS,
                 "--json"});
         System.out.println(quotePackageLineRecord5);
-        StringBuilder quotePackageRecord2 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quotePackageRecord2 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Quote_Package__c",
@@ -427,39 +464,6 @@ public class PackagesCustomPrice extends BaseTest {
                 ALIAS,
                 "--json"});
         System.out.println(quotePackageRecord2);
-        /*Integer unitPriceExclTaxQuotePackage = JsonParser2.getFieldValueLikeInteger(quotePackageRecord2, "result", "thn__Unit_Price_excl_Tax__c");
-        Integer unitPriceInclTaxQuotePackage = JsonParser2.getFieldValueLikeInteger(quotePackageRecord2, "result", "thn__Unit_Price_incl_Tax__c");
-        Integer salesPriceExclTaxQuotePackage = JsonParser2.getFieldValueLikeInteger(quotePackageRecord2, "result", "thn__Sales_Price_excl_Tax__c");
-        Integer salesPriceInclTaxQuotePackage = JsonParser2.getFieldValueLikeInteger(quotePackageRecord2, "result", "thn__Sales_Price_incl_Tax__c");
-        Integer unitPriceExclTaxQuotePackageLine1 = JsonParser2.getFieldValueLikeInteger(quotePackageLineRecord1, "result", "thn__Unit_Price_excl_Tax__c");
-        Integer unitPriceInclTaxQuotePackageLine1 = JsonParser2.getFieldValueLikeInteger(quotePackageLineRecord1, "result", "thn__Unit_Price_incl_Tax__c");
-        Integer salesPriceExclTaxQuotePackageLine1 = JsonParser2.getFieldValueLikeInteger(quotePackageLineRecord1, "result", "thn__Sales_Price_excl_Tax__c");
-        Integer salesPriceInclTaxQuotePackageLine1 = JsonParser2.getFieldValueLikeInteger(quotePackageLineRecord1, "result", "thn__Sales_Price_incl_Tax__c");
-        Integer unitPriceExclTaxQuotePackageLine2 = JsonParser2.getFieldValueLikeInteger(quotePackageLineRecord2, "result", "thn__Unit_Price_excl_Tax__c");
-        Integer unitPriceInclTaxQuotePackageLine2 = JsonParser2.getFieldValueLikeInteger(quotePackageLineRecord2, "result", "thn__Unit_Price_incl_Tax__c");
-        Integer salesPriceExclTaxQuotePackageLine2 = JsonParser2.getFieldValueLikeInteger(quotePackageLineRecord2, "result", "thn__Sales_Price_excl_Tax__c");
-        Integer salesPriceInclTaxQuotePackageLine2 = JsonParser2.getFieldValueLikeInteger(quotePackageLineRecord2, "result", "thn__Sales_Price_incl_Tax__c");
-        Integer unitPriceExclTaxQuotePackageLine3 = JsonParser2.getFieldValueLikeInteger(quotePackageLineRecord3, "result", "thn__Unit_Price_excl_Tax__c");
-        Integer unitPriceInclTaxQuotePackageLine3 = JsonParser2.getFieldValueLikeInteger(quotePackageLineRecord3, "result", "thn__Unit_Price_incl_Tax__c");
-        Integer salesPriceExclTaxQuotePackageLine3 = JsonParser2.getFieldValueLikeInteger(quotePackageLineRecord3, "result", "thn__Sales_Price_excl_Tax__c");
-        Integer salesPriceInclTaxQuotePackageLine3 = JsonParser2.getFieldValueLikeInteger(quotePackageLineRecord3, "result", "thn__Sales_Price_incl_Tax__c");
-        Integer unitPriceExclTaxQuotePackageLine4 = JsonParser2.getFieldValueLikeInteger(quotePackageLineRecord4, "result", "thn__Unit_Price_excl_Tax__c");
-        Integer unitPriceInclTaxQuotePackageLine4 = JsonParser2.getFieldValueLikeInteger(quotePackageLineRecord4, "result", "thn__Unit_Price_incl_Tax__c");
-        Integer salesPriceExclTaxQuotePackageLine4 = JsonParser2.getFieldValueLikeInteger(quotePackageLineRecord4, "result", "thn__Sales_Price_excl_Tax__c");
-        Integer salesPriceInclTaxQuotePackageLine4 = JsonParser2.getFieldValueLikeInteger(quotePackageLineRecord4, "result", "thn__Sales_Price_incl_Tax__c");
-        Integer unitPriceExclTaxQuotePackageLine5 = JsonParser2.getFieldValueLikeInteger(quotePackageLineRecord5, "result", "thn__Unit_Price_excl_Tax__c");
-        Integer unitPriceInclTaxQuotePackageLine5 = JsonParser2.getFieldValueLikeInteger(quotePackageLineRecord5, "result", "thn__Unit_Price_incl_Tax__c");
-        Integer salesPriceExclTaxQuotePackageLine5 = JsonParser2.getFieldValueLikeInteger(quotePackageLineRecord5, "result", "thn__Sales_Price_excl_Tax__c");
-        Integer salesPriceInclTaxQuotePackageLine5 = JsonParser2.getFieldValueLikeInteger(quotePackageLineRecord5, "result", "thn__Sales_Price_incl_Tax__c");
-        Integer sumUnitPriceExclTaxQuotePackageLines = unitPriceExclTaxQuotePackageLine1 + unitPriceExclTaxQuotePackageLine2 +unitPriceExclTaxQuotePackageLine3 + unitPriceExclTaxQuotePackageLine4 + unitPriceExclTaxQuotePackageLine5;
-        Integer sumUnitPriceInclTaxQuotePackageLines = unitPriceInclTaxQuotePackageLine1 + unitPriceInclTaxQuotePackageLine2 + unitPriceInclTaxQuotePackageLine3 + unitPriceInclTaxQuotePackageLine4 + unitPriceInclTaxQuotePackageLine5;
-        Integer sumSalesPriceExclTaxQuotePackageLines = salesPriceExclTaxQuotePackageLine1 + salesPriceExclTaxQuotePackageLine2 + salesPriceExclTaxQuotePackageLine3 +salesPriceExclTaxQuotePackageLine4 + salesPriceExclTaxQuotePackageLine5;
-        Integer sumSalesPriceInclTaxQuotePackageLines = salesPriceInclTaxQuotePackageLine1 + salesPriceInclTaxQuotePackageLine2 + salesPriceInclTaxQuotePackageLine3 + salesPriceInclTaxQuotePackageLine4 + salesPriceInclTaxQuotePackageLine5;
-        Assert.assertEquals(unitPriceExclTaxQuotePackage, sumUnitPriceExclTaxQuotePackageLines);
-        Assert.assertEquals(unitPriceInclTaxQuotePackage, sumUnitPriceInclTaxQuotePackageLines);
-        Assert.assertEquals(salesPriceExclTaxQuotePackage, sumSalesPriceExclTaxQuotePackageLines);
-        Assert.assertEquals(salesPriceInclTaxQuotePackage, sumSalesPriceInclTaxQuotePackageLines);*/
-
         double unitPriceExclTaxQuotePackage = JsonParser2.getFieldValueLikeDouble(quotePackageRecord2, "result", "thn__Unit_Price_excl_Tax__c");
         double unitPriceInclTaxQuotePackage = JsonParser2.getFieldValueLikeDouble(quotePackageRecord2, "result", "thn__Unit_Price_incl_Tax__c");
         double salesPriceExclTaxQuotePackage = JsonParser2.getFieldValueLikeDouble(quotePackageRecord2, "result", "thn__Sales_Price_excl_Tax__c");
@@ -499,7 +503,8 @@ public class PackagesCustomPrice extends BaseTest {
     @Description("THY-588: Packages - custom price")
     @Story("Case 3: Add a ‘Discount’ to our ‘Quote Package’. Add more ‘Quote Package Lines’ that have ‘Apply Discount’ set to ‘true’.")
     public void packageCustomPrice_Discount() throws InterruptedException, IOException {
-        StringBuilder propertyRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder propertyRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Hotel__c",
@@ -509,7 +514,8 @@ public class PackagesCustomPrice extends BaseTest {
                 ALIAS,
                 "--json"});
         String propertyID = JsonParser2.getFieldValue(propertyRecord.toString(), "Id");
-        StringBuilder productRecord1 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder productRecord1 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Product__c",
@@ -519,7 +525,8 @@ public class PackagesCustomPrice extends BaseTest {
                 ALIAS,
                 "--json"});
         String foodID = JsonParser2.getFieldValue(productRecord1.toString(), "Id");
-        StringBuilder productRecord2 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder productRecord2 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Product__c",
@@ -529,7 +536,8 @@ public class PackagesCustomPrice extends BaseTest {
                 ALIAS,
                 "--json"});
         String beverageID = JsonParser2.getFieldValue(productRecord2.toString(), "Id");
-        StringBuilder productRecord3 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder productRecord3 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Product__c",
@@ -539,7 +547,8 @@ public class PackagesCustomPrice extends BaseTest {
                 ALIAS,
                 "--json"});
         String equipmentID = JsonParser2.getFieldValue(productRecord3.toString(), "Id");
-        StringBuilder packageResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder packageResult = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:create",
                 "-s",
                 "thn__Package__c",
@@ -549,7 +558,8 @@ public class PackagesCustomPrice extends BaseTest {
                 ALIAS,
                 "--json"});
         String packageId = JsonParser2.getFieldValue(packageResult.toString(), "id");
-        StringBuilder packageLineResult1 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder packageLineResult1 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:create",
                 "-s",
                 "thn__Package_Line__c",
@@ -561,7 +571,8 @@ public class PackagesCustomPrice extends BaseTest {
                 ALIAS,
                 "--json"});
         String packageLineId1 = JsonParser2.getFieldValue(packageLineResult1.toString(), "id");
-        StringBuilder packageLineResult2 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder packageLineResult2 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:create",
                 "-s",
                 "thn__Package_Line__c",
@@ -573,7 +584,8 @@ public class PackagesCustomPrice extends BaseTest {
                 ALIAS,
                 "--json"});
         String packageLineId2 = JsonParser2.getFieldValue(packageLineResult2.toString(), "id");
-        StringBuilder packageLineResult3 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder packageLineResult3 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:create",
                 "-s",
                 "thn__Package_Line__c",
@@ -585,7 +597,8 @@ public class PackagesCustomPrice extends BaseTest {
                 ALIAS,
                 "--json"});
         String packageLineId3 = JsonParser2.getFieldValue(packageLineResult3.toString(), "id");
-        StringBuilder packageLineResult4 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder packageLineResult4 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:create",
                 "-s",
                 "thn__Package_Line__c",
@@ -597,7 +610,8 @@ public class PackagesCustomPrice extends BaseTest {
                 ALIAS,
                 "--json"});
         String packageLineId4 = JsonParser2.getFieldValue(packageLineResult4.toString(), "id");
-        StringBuilder myseQuoteResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder myseQuoteResult = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:create",
                 "-s",
                 "thn__MYCE_Quote__c",
@@ -608,7 +622,8 @@ public class PackagesCustomPrice extends BaseTest {
                 ALIAS,
                 "--json"});
         String myceQuoteID = JsonParser2.getFieldValue(myseQuoteResult.toString(), "id");
-        StringBuilder quotePackageResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quotePackageResult = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:create",
                 "-s",
                 "thn__Quote_Package__c",
@@ -619,7 +634,8 @@ public class PackagesCustomPrice extends BaseTest {
                 ALIAS,
                 "--json"});
         String quotePackageId = JsonParser2.getFieldValue(quotePackageResult.toString(), "id");
-        StringBuilder quotePackageLineRecord1 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quotePackageLineRecord1 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Quote_Package_Line__c",
@@ -630,7 +646,8 @@ public class PackagesCustomPrice extends BaseTest {
                 "--json"});
         //System.out.println(quotePackageLineRecord1);
         //String quotePackageLineId1 = JsonParser2.getFieldValue(quotePackageResult.toString(), "Id");
-        StringBuilder quotePackageLineRecord2 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quotePackageLineRecord2 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Quote_Package_Line__c",
@@ -639,7 +656,8 @@ public class PackagesCustomPrice extends BaseTest {
                 "-u",
                 ALIAS,
                 "--json"});
-        StringBuilder quotePackageLineRecord3 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quotePackageLineRecord3 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Quote_Package_Line__c",
@@ -648,7 +666,8 @@ public class PackagesCustomPrice extends BaseTest {
                 "-u",
                 ALIAS,
                 "--json"});
-        StringBuilder quotePackageLineRecord4 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quotePackageLineRecord4 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Quote_Package_Line__c",
@@ -657,7 +676,8 @@ public class PackagesCustomPrice extends BaseTest {
                 "-u",
                 ALIAS,
                 "--json"});
-        StringBuilder quotePackageRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quotePackageRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Quote_Package__c",
@@ -673,7 +693,8 @@ public class PackagesCustomPrice extends BaseTest {
         Integer listPriceQuotePackage = JsonParser2.getFieldValueLikeInteger(quotePackageRecord, "result", "thn__List_Price__c");
         Integer sumPricePackLine1 = listPriceQuotePackLine1 + listPriceQuotePackLine2 + listPriceQuotePackLine3 + listPriceQuotePackLine4;
         Assert.assertEquals(listPriceQuotePackage, sumPricePackLine1);
-        SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:update",
                 "-s",
                 "thn__Quote_Package__c",
@@ -684,7 +705,8 @@ public class PackagesCustomPrice extends BaseTest {
                 "-u",
                 ALIAS,
                 "--json"});
-        StringBuilder quotePackageLineResult1 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quotePackageLineResult1 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:create",
                 "-s",
                 "thn__Quote_Package_Line__c",
@@ -697,7 +719,8 @@ public class PackagesCustomPrice extends BaseTest {
                 "--json"});
         String addedQuotePackageLineId1 = JsonParser2.getFieldValue(quotePackageLineResult1.toString(), "id");
         //System.out.println(quotePackageLineResult1);
-        StringBuilder quotePackageLineResult2 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quotePackageLineResult2 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:create",
                 "-s",
                 "thn__Quote_Package_Line__c",
@@ -710,7 +733,8 @@ public class PackagesCustomPrice extends BaseTest {
                 "--json"});
         System.out.println(quotePackageLineResult2);
         String addedQuotePackageLineId2 = JsonParser2.getFieldValue(quotePackageLineResult2.toString(), "id");
-        StringBuilder quotePackageLineRecord5 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quotePackageLineRecord5 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Quote_Package_Line__c",
@@ -719,7 +743,8 @@ public class PackagesCustomPrice extends BaseTest {
                 "-u",
                 ALIAS,
                 "--json"});
-        StringBuilder quotePackageLineRecord6 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quotePackageLineRecord6 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Quote_Package_Line__c",
@@ -728,7 +753,8 @@ public class PackagesCustomPrice extends BaseTest {
                 "-u",
                 ALIAS,
                 "--json"});
-        StringBuilder quotePackageRecord2 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quotePackageRecord2 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Quote_Package__c",
@@ -780,9 +806,6 @@ public class PackagesCustomPrice extends BaseTest {
         Assert.assertEquals(salesPriceExclTaxQuotePackage, sumSalesPriceExclTaxQuotePackageLines);
         Assert.assertEquals(salesPriceInclTaxQuotePackage, sumSalesPriceInclTaxQuotePackageLines);
         Assert.assertEquals(discountQuotePackage, sumDiscountQuotePackageLines);
-
-
-
     }
 
 }

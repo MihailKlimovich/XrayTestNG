@@ -18,7 +18,8 @@ public class MultiEditOnQuotesRelatedList extends BaseTest {
     @Story("THY-516: Multi edit on quote's related list")
     public void RequestAgent_case1() throws InterruptedException, IOException {
         loginPageForScratchOrg.logInOnScratchOrg(driver);
-        SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:update",
                 "-s",
                 "User",
@@ -29,7 +30,8 @@ public class MultiEditOnQuotesRelatedList extends BaseTest {
                 "-u",
                 ALIAS,
                 "--json"});
-        StringBuilder res = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder res = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:update",
                 "-s",
                 "thn__bypass__c",
@@ -42,7 +44,8 @@ public class MultiEditOnQuotesRelatedList extends BaseTest {
                 "--json"});
 
 
-        StringBuilder propertyRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder propertyRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Hotel__c",
@@ -52,7 +55,8 @@ public class MultiEditOnQuotesRelatedList extends BaseTest {
                 ALIAS,
                 "--json"});
         String propertyID = JsonParser2.getFieldValue(propertyRecord.toString(), "Id");
-        StringBuilder productRecord1 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder productRecord1 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Product__c",
@@ -62,7 +66,8 @@ public class MultiEditOnQuotesRelatedList extends BaseTest {
                 ALIAS,
                 "--json"});
         String meetingHalfDayID = JsonParser2.getFieldValue(productRecord1.toString(), "Id");
-        StringBuilder productRecord2 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder productRecord2 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Product__c",
@@ -72,7 +77,8 @@ public class MultiEditOnQuotesRelatedList extends BaseTest {
                 ALIAS,
                 "--json"});
         String dinerID = JsonParser2.getFieldValue(productRecord2.toString(), "Id");
-        StringBuilder productRecord3 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder productRecord3 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Product__c",
@@ -82,7 +88,8 @@ public class MultiEditOnQuotesRelatedList extends BaseTest {
                 ALIAS,
                 "--json"});
         String meetingFullDayID = JsonParser2.getFieldValue(productRecord3.toString(), "Id");
-        StringBuilder productRecord4 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder productRecord4 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Product__c",
@@ -92,7 +99,8 @@ public class MultiEditOnQuotesRelatedList extends BaseTest {
                 ALIAS,
                 "--json"});
         String foodID = JsonParser2.getFieldValue(productRecord4.toString(), "Id");
-        StringBuilder packageResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder packageResult = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:create",
                 "-s",
                 "thn__Package__c",
@@ -102,7 +110,8 @@ public class MultiEditOnQuotesRelatedList extends BaseTest {
                 ALIAS,
                 "--json"});
         String packageId = JsonParser2.getFieldValue(packageResult.toString(), "id");
-        StringBuilder packageLineResult1 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder packageLineResult1 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:create",
                 "-s",
                 "thn__Package_Line__c",
@@ -113,7 +122,8 @@ public class MultiEditOnQuotesRelatedList extends BaseTest {
                 "-u",
                 ALIAS,
                 "--json"});
-        StringBuilder packageLineResult2 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder packageLineResult2 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:create",
                 "-s",
                 "thn__Package_Line__c",
@@ -124,7 +134,8 @@ public class MultiEditOnQuotesRelatedList extends BaseTest {
                 "-u",
                 ALIAS,
                 "--json"});
-        StringBuilder packageLineResult3 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder packageLineResult3 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:create",
                 "-s",
                 "thn__Package_Line__c",
@@ -135,7 +146,8 @@ public class MultiEditOnQuotesRelatedList extends BaseTest {
                 "-u",
                 ALIAS,
                 "--json"});
-        StringBuilder packageLineResult4 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder packageLineResult4 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:create",
                 "-s",
                 "thn__Package_Line__c",
@@ -146,7 +158,8 @@ public class MultiEditOnQuotesRelatedList extends BaseTest {
                 "-u",
                 ALIAS,
                 "--json"});
-        StringBuilder myseQuoteResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder myseQuoteResult = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:create",
                 "-s",
                 "thn__MYCE_Quote__c",
@@ -157,7 +170,8 @@ public class MultiEditOnQuotesRelatedList extends BaseTest {
                 ALIAS,
                 "--json"});
         String myceQuoteID = JsonParser2.getFieldValue(myseQuoteResult.toString(), "id");
-        StringBuilder quotePackageResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quotePackageResult = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:create",
                 "-s",
                 "thn__Quote_Package__c",

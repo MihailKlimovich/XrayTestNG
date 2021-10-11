@@ -18,7 +18,8 @@ public class TotalAmountInclTax extends BaseTest {
     @Description("THY-523 Total_amount_incl_Tax__c")
     @Story("THY-523 Total_amount_incl_Tax__c")
     public void totalAmountInclTaxTest() throws InterruptedException, IOException {
-        StringBuilder propertyRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder propertyRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Hotel__c",
@@ -28,7 +29,8 @@ public class TotalAmountInclTax extends BaseTest {
                 ALIAS,
                 "--json"});
         String propertyID = JsonParser2.getFieldValue(propertyRecord.toString(), "Id");
-        StringBuilder productRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder productRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Product__c",
@@ -38,7 +40,8 @@ public class TotalAmountInclTax extends BaseTest {
                 ALIAS,
                 "--json"});
         String productID = JsonParser2.getFieldValue(productRecord.toString(), "Id");
-        StringBuilder roomTypeRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder roomTypeRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Space_Area__c",
@@ -48,7 +51,8 @@ public class TotalAmountInclTax extends BaseTest {
                 ALIAS,
                 "--json"});
         String roomTypeID = JsonParser2.getFieldValue(roomTypeRecord.toString(), "Id");
-        StringBuilder productRecord2 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder productRecord2 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Product__c",
@@ -58,7 +62,8 @@ public class TotalAmountInclTax extends BaseTest {
                 ALIAS,
                 "--json"});
         String productWinesID = JsonParser2.getFieldValue(productRecord2.toString(), "Id");
-        StringBuilder productRecord3 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder productRecord3 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Product__c",
@@ -68,7 +73,8 @@ public class TotalAmountInclTax extends BaseTest {
                 ALIAS,
                 "--json"});
         String meetingHalfDayID = JsonParser2.getFieldValue(productRecord3.toString(), "Id");
-        StringBuilder myseQuoteResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder myseQuoteResult = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:create",
                 "-s",
                 "thn__MYCE_Quote__c",
@@ -79,7 +85,8 @@ public class TotalAmountInclTax extends BaseTest {
                 ALIAS,
                 "--json"});
         String myceQuoteID = JsonParser2.getFieldValue(myseQuoteResult.toString(), "id");
-        StringBuilder quoteHotelRoomResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quoteHotelRoomResult = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:create",
                 "-s",
                 "thn__Quote_Hotel_Room__c",
@@ -90,7 +97,8 @@ public class TotalAmountInclTax extends BaseTest {
                 ALIAS,
                 "--json"});
         String quoteHotelRoomId = JsonParser2.getFieldValue(quoteHotelRoomResult.toString(), "id");
-        StringBuilder quoteProductResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quoteProductResult = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:create",
                 "-s",
                 "thn__Quote_Product__c",
@@ -101,7 +109,8 @@ public class TotalAmountInclTax extends BaseTest {
                 ALIAS,
                 "--json"});
         String quoteProductId = JsonParser2.getFieldValue(quoteProductResult.toString(), "id");
-        StringBuilder quoteMeetingRoomResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quoteMeetingRoomResult = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:create",
                 "-s",
                 "thn__Quote_Meeting_Room__c",
@@ -111,7 +120,8 @@ public class TotalAmountInclTax extends BaseTest {
                 ALIAS,
                 "--json"});
         String quoteMeetingRoomId = JsonParser2.getFieldValue(quoteMeetingRoomResult.toString(), "id");
-        StringBuilder myceQuoteRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder myceQuoteRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__MYCE_Quote__c",

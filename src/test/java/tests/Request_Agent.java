@@ -17,7 +17,8 @@ public class Request_Agent extends BaseTest{
     @Severity(SeverityLevel.NORMAL)
     @Story("THY-506: Request - Agent")
     public void logIn() throws InterruptedException, IOException {
-        StringBuilder authorise = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder authorise = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:auth:jwt:grant",
                 "--clientid",
                 key,
@@ -36,7 +37,8 @@ public class Request_Agent extends BaseTest{
     @Severity(SeverityLevel.NORMAL)
     @Story("THY-506: Request - Agent")
     public void deleteOldData() throws InterruptedException, IOException {
-        StringBuilder res = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder res = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:delete",
                 "-s",
                 "Account",
@@ -46,7 +48,8 @@ public class Request_Agent extends BaseTest{
                 ALIAS,
                 "--json"});
         System.out.println(res);
-        SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:delete",
                 "-s",
                 "Account",
@@ -55,7 +58,8 @@ public class Request_Agent extends BaseTest{
                 "-u",
                 ALIAS,
                 "--json"});
-        SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:delete",
                 "-s",
                 "Account",
@@ -64,7 +68,8 @@ public class Request_Agent extends BaseTest{
                 "-u",
                 ALIAS,
                 "--json"});
-        SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:delete",
                 "-s",
                 "Account",
@@ -73,7 +78,8 @@ public class Request_Agent extends BaseTest{
                 "-u",
                 ALIAS,
                 "--json"});
-        SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:delete",
                 "-s",
                 "Account",
@@ -82,7 +88,8 @@ public class Request_Agent extends BaseTest{
                 "-u",
                 ALIAS,
                 "--json"});
-        SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:delete",
                 "-s",
                 "Contact",
@@ -91,7 +98,8 @@ public class Request_Agent extends BaseTest{
                 "-u",
                 ALIAS,
                 "--json"});
-        SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:delete",
                 "-s",
                 "Contact",
@@ -100,7 +108,8 @@ public class Request_Agent extends BaseTest{
                 "-u",
                 ALIAS,
                 "--json"});
-        SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:delete",
                 "-s",
                 "TestAgentContact",
@@ -109,7 +118,8 @@ public class Request_Agent extends BaseTest{
                 "-u",
                 ALIAS,
                 "--json"});
-        SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:delete",
                 "-s",
                 "TestContact",
@@ -118,7 +128,6 @@ public class Request_Agent extends BaseTest{
                 "-u",
                 ALIAS,
                 "--json"});
-
     }
 
     @Test(priority = 3, description = "Fill Agent contact Email, make sure Contact with matching email exists in the" +
@@ -126,7 +135,8 @@ public class Request_Agent extends BaseTest{
     @Severity(SeverityLevel.NORMAL)
     @Story("THY-506: Request - Agent")
     public void RequestAgent_case1() throws InterruptedException, IOException {
-        StringBuilder propertyRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder propertyRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Hotel__c",
@@ -136,7 +146,8 @@ public class Request_Agent extends BaseTest{
                 ALIAS,
                 "--json"});
         String propertyID = JsonParser2.getFieldValue(propertyRecord.toString(), "Id");
-        StringBuilder result = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder result = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:update",
                 "-s",
                 "thn__Hotel__c",
@@ -147,7 +158,8 @@ public class Request_Agent extends BaseTest{
                 "-u",
                 ALIAS,
                 "--json"});
-        StringBuilder accountResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder accountResult = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:create",
                 "-s",
                 "Account",
@@ -157,7 +169,8 @@ public class Request_Agent extends BaseTest{
                 ALIAS,
                 "--json"});
         String accountId = JsonParser2.getFieldValue(accountResult.toString(), "id");
-        StringBuilder contactResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder contactResult = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:create",
                 "-s",
                 "Contact",
@@ -167,7 +180,8 @@ public class Request_Agent extends BaseTest{
                 ALIAS,
                 "--json"});
         String contactId = JsonParser2.getFieldValue(contactResult.toString(), "id");
-        StringBuilder requestResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder requestResult = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:create",
                 "-s",
                 "thn__Request__c",
@@ -177,7 +191,8 @@ public class Request_Agent extends BaseTest{
                 ALIAS,
                 "--json"});
         String requestId = JsonParser2.getFieldValue(requestResult.toString(), "id");
-        StringBuilder requestRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder requestRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Request__c",
@@ -198,7 +213,8 @@ public class Request_Agent extends BaseTest{
     @Severity(SeverityLevel.NORMAL)
     @Story("THY-506: Request - Agent")
     public void RequestAgent_case2() throws InterruptedException, IOException {
-        StringBuilder contactResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder contactResult = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:create",
                 "-s",
                 "Contact",
@@ -208,7 +224,8 @@ public class Request_Agent extends BaseTest{
                 ALIAS,
                 "--json"});
         String contactId = JsonParser2.getFieldValue(contactResult.toString(), "id");
-        StringBuilder requestResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder requestResult = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:create",
                 "-s",
                 "thn__Request__c",
@@ -222,7 +239,8 @@ public class Request_Agent extends BaseTest{
         requests.clickConvert();
         convertWindow.fillConvertForm("Demo", "3", date.generateTodayDate(), date.generateDate_plus(0, 3));
         Thread.sleep(3000);
-        StringBuilder requestRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder requestRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Request__c",
@@ -235,7 +253,8 @@ public class Request_Agent extends BaseTest{
         String agentId = JsonParser2.getFieldValue(requestRecord.toString(), "thn__Agent__c");
         String requestContactId = JsonParser2.getFieldValue(requestRecord.toString(), "thn__Contact__c");
         String requestAccountId = JsonParser2.getFieldValue(requestRecord.toString(), "thn__Account__c");
-        StringBuilder myceQuoteRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder myceQuoteRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__MYCE_Quote__c",
@@ -259,7 +278,8 @@ public class Request_Agent extends BaseTest{
     @Severity(SeverityLevel.NORMAL)
     @Story("THY-506: Request - Agent")
     public void RequestAgent_case3() throws InterruptedException, IOException {
-        StringBuilder requestResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder requestResult = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:create",
                 "-s",
                 "thn__Request__c",
@@ -274,7 +294,8 @@ public class Request_Agent extends BaseTest{
         requests.clickConvert();
         convertWindow.fillConvertForm("Demo", "3", date.generateTodayDate(), date.generateDate_plus(0, 3));
         Thread.sleep(3000);
-        StringBuilder requestRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder requestRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Request__c",
@@ -287,7 +308,8 @@ public class Request_Agent extends BaseTest{
         String agentId = JsonParser2.getFieldValue(requestRecord.toString(), "thn__Agent__c");
         String requestContactId = JsonParser2.getFieldValue(requestRecord.toString(), "thn__Contact__c");
         String requestAccountId = JsonParser2.getFieldValue(requestRecord.toString(), "thn__Account__c");
-        StringBuilder myceQuoteRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder myceQuoteRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__MYCE_Quote__c",

@@ -17,7 +17,8 @@ public class HotelRoomModifications extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     @Story("Hotel room modification")
     public void logIn() throws InterruptedException, IOException {
-        StringBuilder authorise = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder authorise = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:auth:jwt:grant",
                 "--clientid",
                 key,
@@ -45,7 +46,8 @@ public class HotelRoomModifications extends BaseTest {
                 "-u",
                 ALIAS,
                 "--json"});
-        StringBuilder propertyRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder propertyRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Hotel__c",
@@ -74,7 +76,8 @@ public class HotelRoomModifications extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     @Story("Hotel room modification")
     public void hotelRoomModificationTest1() throws InterruptedException, IOException {
-        StringBuilder quoteRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quoteRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__MYCE_Quote__c",
@@ -84,7 +87,8 @@ public class HotelRoomModifications extends BaseTest {
                 ALIAS,
                 "--json"});
         String quoteID = JsonParser2.getFieldValue(quoteRecord.toString(), "Id");
-        StringBuilder productRecordRoom1Night = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder productRecordRoom1Night = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Product__c",
@@ -94,7 +98,8 @@ public class HotelRoomModifications extends BaseTest {
                 ALIAS,
                 "--json"});
         String room1NightID = JsonParser2.getFieldValue(productRecordRoom1Night.toString(), "Id");
-        StringBuilder roomTypeSingleRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder roomTypeSingleRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Space_Area__c",
@@ -104,7 +109,8 @@ public class HotelRoomModifications extends BaseTest {
                 ALIAS,
                 "--json"});
         String roomTypeSingleID = JsonParser2.getFieldValue(roomTypeSingleRecord.toString(), "Id");
-        StringBuilder OccupancyTypeRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder OccupancyTypeRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Occupancy_Type__mdt",
@@ -114,7 +120,8 @@ public class HotelRoomModifications extends BaseTest {
                 ALIAS,
                 "--json"});
         String numberOccupancyType = JsonParser2.getFieldValue(OccupancyTypeRecord.toString(), "thn__Number__c");
-        StringBuilder quoteHotelRoom1 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quoteHotelRoom1 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:create",
                 "-s",
                 "thn__Quote_Hotel_Room__c",
@@ -125,7 +132,8 @@ public class HotelRoomModifications extends BaseTest {
                 ALIAS,
                 "--json"});
         String quoteHotelRoomId1 = JsonParser2.getFieldValue(quoteHotelRoom1.toString(), "id");
-        StringBuilder quoteHotelRoomRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quoteHotelRoomRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Quote_Hotel_Room__c",
@@ -142,7 +150,8 @@ public class HotelRoomModifications extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     @Story("Hotel room modification")
     public void hotelRoomModificationTest2() throws InterruptedException, IOException {
-        StringBuilder quoteRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quoteRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__MYCE_Quote__c",
@@ -152,7 +161,8 @@ public class HotelRoomModifications extends BaseTest {
                 ALIAS,
                 "--json"});
         String quoteID = JsonParser2.getFieldValue(quoteRecord.toString(), "Id");
-        StringBuilder OccupancyTypeRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder OccupancyTypeRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Occupancy_Type__mdt",
@@ -162,7 +172,8 @@ public class HotelRoomModifications extends BaseTest {
                 ALIAS,
                 "--json"});
         String numberOccupancyType = JsonParser2.getFieldValue(OccupancyTypeRecord.toString(), "thn__Number__c");
-        StringBuilder quoteHotelRoomsSoql = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quoteHotelRoomsSoql = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:soql:query",
                 "-q",
                 "SELECT Id FROM thn__Quote_Hotel_Room__c WHERE thn__MYCE_Quote__c='" + quoteID + "'",
@@ -182,7 +193,8 @@ public class HotelRoomModifications extends BaseTest {
                 "-u",
                 ALIAS,
                 "--json"});
-        StringBuilder quoteHotelRoomRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quoteHotelRoomRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Quote_Hotel_Room__c",
@@ -199,7 +211,8 @@ public class HotelRoomModifications extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     @Story("Hotel room modification")
     public void hotelRoomModificationTest3() throws InterruptedException, IOException {
-        StringBuilder quoteRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quoteRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__MYCE_Quote__c",
@@ -209,7 +222,8 @@ public class HotelRoomModifications extends BaseTest {
                 ALIAS,
                 "--json"});
         String quoteID = JsonParser2.getFieldValue(quoteRecord.toString(), "Id");
-        StringBuilder OccupancyTypeRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder OccupancyTypeRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Occupancy_Type__mdt",
@@ -220,7 +234,8 @@ public class HotelRoomModifications extends BaseTest {
                 "--json"});
         System.out.println(OccupancyTypeRecord);
         String occupancyTypeMessage = JsonParser2.getFieldValue2(OccupancyTypeRecord.toString(), "message");
-        StringBuilder quoteHotelRoomsSoql = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quoteHotelRoomsSoql = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:soql:query",
                 "-q",
                 "SELECT Id FROM thn__Quote_Hotel_Room__c WHERE thn__MYCE_Quote__c='" + quoteID + "'",
@@ -240,7 +255,8 @@ public class HotelRoomModifications extends BaseTest {
                 "-u",
                 ALIAS,
                 "--json"});
-        StringBuilder quoteHotelRoomRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quoteHotelRoomRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Quote_Hotel_Room__c",
@@ -258,7 +274,8 @@ public class HotelRoomModifications extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     @Story("Hotel room modification")
     public void hotelRoomModificationTest4() throws InterruptedException, IOException {
-        StringBuilder quoteRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quoteRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__MYCE_Quote__c",
@@ -268,7 +285,8 @@ public class HotelRoomModifications extends BaseTest {
                 ALIAS,
                 "--json"});
         String quoteID = JsonParser2.getFieldValue(quoteRecord.toString(), "Id");
-        StringBuilder quoteHotelRoomsSoql = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quoteHotelRoomsSoql = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:soql:query",
                 "-q",
                 "SELECT Id FROM thn__Quote_Hotel_Room__c WHERE thn__MYCE_Quote__c='" + quoteID + "'",
@@ -290,7 +308,8 @@ public class HotelRoomModifications extends BaseTest {
                 "--json"});
         System.out.println(quoteHotelRoomUpdateResult);
 
-        StringBuilder quoteHotelRoomRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quoteHotelRoomRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Quote_Hotel_Room__c",
@@ -308,7 +327,8 @@ public class HotelRoomModifications extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     @Story("Hotel room modification")
     public void hotelRoomModificationTest5() throws InterruptedException, IOException {
-        StringBuilder quoteRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quoteRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__MYCE_Quote__c",
@@ -318,7 +338,8 @@ public class HotelRoomModifications extends BaseTest {
                 ALIAS,
                 "--json"});
         String quoteID = JsonParser2.getFieldValue(quoteRecord.toString(), "Id");
-        StringBuilder quoteHotelRoomsSoql = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quoteHotelRoomsSoql = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:soql:query",
                 "-q",
                 "SELECT Id FROM thn__Quote_Hotel_Room__c WHERE thn__MYCE_Quote__c='" + quoteID + "'",
@@ -352,7 +373,8 @@ public class HotelRoomModifications extends BaseTest {
                 "--json"});
         System.out.println(quoteHotelRoomUpdateResult2);
 
-        StringBuilder quoteHotelRoomRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quoteHotelRoomRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Quote_Hotel_Room__c",
@@ -372,7 +394,8 @@ public class HotelRoomModifications extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     @Story("Hotel room modification")
     public void hotelRoomModificationTest6() throws InterruptedException, IOException {
-        StringBuilder quoteRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quoteRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__MYCE_Quote__c",
@@ -382,7 +405,8 @@ public class HotelRoomModifications extends BaseTest {
                 ALIAS,
                 "--json"});
         String quoteID = JsonParser2.getFieldValue(quoteRecord.toString(), "Id");
-        StringBuilder quoteHotelRoomsSoql = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quoteHotelRoomsSoql = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:soql:query",
                 "-q",
                 "SELECT Id FROM thn__Quote_Hotel_Room__c WHERE thn__MYCE_Quote__c='" + quoteID + "'",
@@ -402,7 +426,8 @@ public class HotelRoomModifications extends BaseTest {
                 "-u",
                 ALIAS,
                 "--json"});
-        StringBuilder quoteHotelRoomRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quoteHotelRoomRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Quote_Hotel_Room__c",

@@ -18,7 +18,8 @@ public class ReservationCreationProcess extends BaseTest {
     @Description("THY-487 Reservation creation process")
     @Story("Case 1")
     public void reservationCreationProcess1() throws InterruptedException, IOException {
-        StringBuilder propertyRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder propertyRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Hotel__c",
@@ -28,7 +29,8 @@ public class ReservationCreationProcess extends BaseTest {
                 ALIAS,
                 "--json"});
         String propertyID = JsonParser2.getFieldValue(propertyRecord.toString(), "Id");
-        StringBuilder productRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder productRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Product__c",
@@ -38,7 +40,8 @@ public class ReservationCreationProcess extends BaseTest {
                 ALIAS,
                 "--json"});
         String productID = JsonParser2.getFieldValue(productRecord.toString(), "Id");
-        StringBuilder guestResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder guestResult = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:create",
                 "-s",
                 "thn__Guest__c",
@@ -48,7 +51,8 @@ public class ReservationCreationProcess extends BaseTest {
                 ALIAS,
                 "--json"});
         String guestID = JsonParser2.getFieldValue(guestResult.toString(), "id");
-        StringBuilder myseQuoteResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder myseQuoteResult = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:create",
                 "-s",
                 "thn__MYCE_Quote__c",
@@ -59,7 +63,8 @@ public class ReservationCreationProcess extends BaseTest {
                 ALIAS,
                 "--json"});
         String myceQuoteID = JsonParser2.getFieldValue(myseQuoteResult.toString(), "id");
-        StringBuilder roomTypeRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder roomTypeRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Space_Area__c",
@@ -69,7 +74,8 @@ public class ReservationCreationProcess extends BaseTest {
                 ALIAS,
                 "--json"});
         String roomTypeID = JsonParser2.getFieldValue(roomTypeRecord.toString(), "Id");
-        StringBuilder quoteHotelRoomResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quoteHotelRoomResult = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:create",
                 "-s",
                 "thn__Quote_Hotel_Room__c",
@@ -80,7 +86,8 @@ public class ReservationCreationProcess extends BaseTest {
                 ALIAS,
                 "--json"});
         String quoteHotelRoomId = JsonParser2.getFieldValue(quoteHotelRoomResult.toString(), "id");
-        StringBuilder result = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder result = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:update",
                 "-s",
                 "thn__MYCE_Quote__c",
@@ -91,7 +98,8 @@ public class ReservationCreationProcess extends BaseTest {
                 "-u",
                 ALIAS,
                 "--json"});
-        StringBuilder reservationRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder reservationRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Reservation__c",
@@ -102,7 +110,8 @@ public class ReservationCreationProcess extends BaseTest {
                 "--json"});
         String reservationId = JsonParser2.getFieldValue(reservationRecord.toString(), "Id");
         System.out.println(reservationId);
-        StringBuilder reservationPricesRecords = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder reservationPricesRecords = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Reservation_Price__c",
@@ -120,7 +129,8 @@ public class ReservationCreationProcess extends BaseTest {
     @Description("THY-487 Reservation creation process")
     @Story("Case 2")
     public void reservationCreationProcess2() throws InterruptedException, IOException {
-        StringBuilder propertyRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder propertyRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Hotel__c",
@@ -130,7 +140,8 @@ public class ReservationCreationProcess extends BaseTest {
                 ALIAS,
                 "--json"});
         String propertyID = JsonParser2.getFieldValue(propertyRecord.toString(), "Id");
-        StringBuilder productRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder productRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Product__c",
@@ -140,7 +151,8 @@ public class ReservationCreationProcess extends BaseTest {
                 ALIAS,
                 "--json"});
         String productID = JsonParser2.getFieldValue(productRecord.toString(), "Id");
-        StringBuilder guestResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder guestResult = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:create",
                 "-s",
                 "thn__Guest__c",
@@ -150,7 +162,8 @@ public class ReservationCreationProcess extends BaseTest {
                 ALIAS,
                 "--json"});
         String guestID = JsonParser2.getFieldValue(guestResult.toString(), "id");
-        StringBuilder myseQuoteResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder myseQuoteResult = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:create",
                 "-s",
                 "thn__MYCE_Quote__c",
@@ -161,7 +174,8 @@ public class ReservationCreationProcess extends BaseTest {
                 ALIAS,
                 "--json"});
         String myceQuoteID = JsonParser2.getFieldValue(myseQuoteResult.toString(), "id");
-        StringBuilder roomTypeRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder roomTypeRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Space_Area__c",
@@ -171,7 +185,8 @@ public class ReservationCreationProcess extends BaseTest {
                 ALIAS,
                 "--json"});
         String roomTypeID = JsonParser2.getFieldValue(roomTypeRecord.toString(), "Id");
-        StringBuilder quoteHotelRoomResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quoteHotelRoomResult = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:create",
                 "-s",
                 "thn__Quote_Hotel_Room__c",
@@ -182,7 +197,8 @@ public class ReservationCreationProcess extends BaseTest {
                 ALIAS,
                 "--json"});
         String quoteHotelRoomId = JsonParser2.getFieldValue(quoteHotelRoomResult.toString(), "id");
-        SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:update",
                 "-s",
                 "thn__MYCE_Quote__c",
@@ -193,7 +209,8 @@ public class ReservationCreationProcess extends BaseTest {
                 "-u",
                 ALIAS,
                 "--json"});
-        StringBuilder reservationRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder reservationRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Reservation__c",
@@ -204,7 +221,8 @@ public class ReservationCreationProcess extends BaseTest {
                 "--json"});
         String reservationId = JsonParser2.getFieldValue(reservationRecord.toString(), "Id");
         System.out.println(reservationId);
-        StringBuilder reservationPricesRecords = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder reservationPricesRecords = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Reservation_Price__c",
@@ -216,7 +234,8 @@ public class ReservationCreationProcess extends BaseTest {
         String message = JsonParser2.getFieldValue2(reservationPricesRecords.toString(), "message");
         System.out.println(reservationPricesRecords);
         Assert.assertTrue(message.contains("5 records were retrieved"));
-        StringBuilder update =SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder update =SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:update",
                 "-s",
                 "thn__Quote_Hotel_Room__c",
@@ -228,7 +247,8 @@ public class ReservationCreationProcess extends BaseTest {
                 ALIAS,
                 "--json"});
         System.out.println(update);
-        StringBuilder reservationPricesRecords2 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder reservationPricesRecords2 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Reservation_Price__c",
@@ -240,7 +260,8 @@ public class ReservationCreationProcess extends BaseTest {
         System.out.println(reservationPricesRecords2);
         String message2 = JsonParser2.getFieldValue2(reservationPricesRecords2.toString(), "message");
         Assert.assertTrue(message2.contains("2 records were retrieved"));
-        StringBuilder update2 =SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder update2 =SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:update",
                 "-s",
                 "thn__Quote_Hotel_Room__c",
@@ -251,7 +272,8 @@ public class ReservationCreationProcess extends BaseTest {
                 "-u",
                 ALIAS,
                 "--json"});
-        StringBuilder reservationPricesRecords3 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder reservationPricesRecords3 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Reservation_Price__c",
@@ -263,7 +285,8 @@ public class ReservationCreationProcess extends BaseTest {
         System.out.println(reservationPricesRecords3);
         String message3 = JsonParser2.getFieldValue2(reservationPricesRecords3.toString(), "message");
         Assert.assertTrue(message3.contains("3 records were retrieved"));
-        StringBuilder update3 =SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder update3 =SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:update",
                 "-s",
                 "thn__Quote_Hotel_Room__c",
@@ -275,7 +298,8 @@ public class ReservationCreationProcess extends BaseTest {
                 ALIAS,
                 "--json"});
         System.out.println(update);
-        StringBuilder reservationPricesRecords4 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder reservationPricesRecords4 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Reservation_Price__c",

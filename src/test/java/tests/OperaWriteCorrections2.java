@@ -18,7 +18,8 @@ public class OperaWriteCorrections2 extends BaseTest {
     @Description("THY-582: Opera Write - Corrections")
     @Story("PMS Account")
     public void testOperaWrite1() throws InterruptedException, IOException {
-        StringBuilder authorise = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder authorise = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:auth:jwt:grant",
                 "--clientid",
                 thynkPackKey,
@@ -30,7 +31,8 @@ public class OperaWriteCorrections2 extends BaseTest {
                 thynkPackDevOrg
         });
         System.out.println(authorise);
-        StringBuilder pmsAccountRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder pmsAccountRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__PMS_Account__c",
@@ -51,7 +53,8 @@ public class OperaWriteCorrections2 extends BaseTest {
     @Description("THY-582: Opera Write - Corrections")
     @Story("Guest")
     public void testOperaWrite2() throws InterruptedException, IOException {
-        StringBuilder guestRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder guestRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Guest__c",
@@ -70,7 +73,8 @@ public class OperaWriteCorrections2 extends BaseTest {
     @Description("THY-582: Opera Write - Corrections")
     @Story("Reservation")
     public void testOperaWrite3() throws InterruptedException, IOException {
-        StringBuilder guestRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder guestRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Guest__c",
@@ -81,7 +85,8 @@ public class OperaWriteCorrections2 extends BaseTest {
                 "--json"});
         System.out.println(guestRecord);
         String guestId = JsonParser2.getFieldValue(guestRecord.toString(), "Id");
-        StringBuilder reservationRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder reservationRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Reservation__c",
@@ -102,7 +107,8 @@ public class OperaWriteCorrections2 extends BaseTest {
     @Description("THY-582: Opera Write - Corrections")
     @Story("PMS Block")
     public void testOperaWrite4() throws InterruptedException, IOException {
-        StringBuilder pmsBlockRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder pmsBlockRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__PMS_Block__c",

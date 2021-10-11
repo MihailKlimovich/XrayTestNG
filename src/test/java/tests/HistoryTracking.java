@@ -320,7 +320,8 @@ public class HistoryTracking extends BaseTest {
                 THY519_578_UserName,
                 "--json"});
         String propertyDemoID = JsonParser2.getFieldValue(propertyDemoRecord.toString(), "Id");
-        StringBuilder productRecordFood = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder productRecordFood = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Product__c",
@@ -330,7 +331,8 @@ public class HistoryTracking extends BaseTest {
                 THY519_578_UserName,
                 "--json"});
         String foodID = JsonParser2.getFieldValue(productRecordFood.toString(), "Id");
-        StringBuilder productRecordWines = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder productRecordWines = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Product__c",
@@ -340,7 +342,8 @@ public class HistoryTracking extends BaseTest {
                 THY519_578_UserName,
                 "--json"});
         String winesID = JsonParser2.getFieldValue(productRecordWines.toString(), "Id");
-        StringBuilder productRecordMHD = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder productRecordMHD = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Product__c",
@@ -350,7 +353,8 @@ public class HistoryTracking extends BaseTest {
                 THY519_578_UserName,
                 "--json"});
         String meetingHalfDayID = JsonParser2.getFieldValue(productRecordMHD.toString(), "Id");
-        StringBuilder productRecordRoom1Night = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder productRecordRoom1Night = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Product__c",
@@ -384,7 +388,8 @@ public class HistoryTracking extends BaseTest {
                 THY519_578_UserName,
                 "--json"});
         String myceQuoteID = JsonParser2.getFieldValue(myseQuoteResult.toString(), "id");
-        StringBuilder packageResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder packageResult = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:create",
                 "-s",
                 "thn__Package__c",
@@ -394,7 +399,8 @@ public class HistoryTracking extends BaseTest {
                 THY519_578_UserName,
                 "--json"});
         String packageId = JsonParser2.getFieldValue(packageResult.toString(), "id");
-        StringBuilder packageLineResult1 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder packageLineResult1 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:create",
                 "-s",
                 "thn__Package_Line__c",
@@ -406,7 +412,8 @@ public class HistoryTracking extends BaseTest {
                 THY519_578_UserName,
                 "--json"});
         String packageLineId1 = JsonParser2.getFieldValue(packageLineResult1.toString(), "id");
-        StringBuilder quotePackageResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quotePackageResult = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:create",
                 "-s",
                 "thn__Quote_Package__c",
@@ -417,7 +424,8 @@ public class HistoryTracking extends BaseTest {
                 THY519_578_UserName,
                 "--json"});
         String quotePackageId = JsonParser2.getFieldValue(quotePackageResult.toString(), "id");
-        StringBuilder historyRecord1 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder historyRecord1 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__History__c",
@@ -427,7 +435,8 @@ public class HistoryTracking extends BaseTest {
                 THY519_578_UserName,
                 "--json"});
         String historyID1 = JsonParser2.getFieldValue(historyRecord1.toString(), "Id");
-        StringBuilder historyRecord2 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder historyRecord2 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__History__c",
@@ -439,7 +448,8 @@ public class HistoryTracking extends BaseTest {
         String historyID2 = JsonParser2.getFieldValue(historyRecord2.toString(), "Id");
         Assert.assertNotNull(historyID1);
         Assert.assertNotNull(historyID2);
-        StringBuilder quoteMeetingRoomResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quoteMeetingRoomResult = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:create",
                 "-s",
                 "thn__Quote_Meeting_Room__c",
@@ -451,7 +461,8 @@ public class HistoryTracking extends BaseTest {
                 "--json"});
         System.out.println(quoteMeetingRoomResult);
         String quoteMeetingRoomId = JsonParser2.getFieldValue(quoteMeetingRoomResult.toString(), "id");
-        StringBuilder quoteProductResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quoteProductResult = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:create",
                 "-s",
                 "thn__Quote_Product__c",
@@ -461,7 +472,8 @@ public class HistoryTracking extends BaseTest {
                 THY519_578_UserName,
                 "--json"});
         String quoteProductId = JsonParser2.getFieldValue(quoteProductResult.toString(), "id");
-        StringBuilder quoteHotelRoomResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quoteHotelRoomResult = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:create",
                 "-s",
                 "thn__Quote_Hotel_Room__c",
@@ -472,7 +484,8 @@ public class HistoryTracking extends BaseTest {
                 THY519_578_UserName,
                 "--json"});
         String quoteHotelRoomId = JsonParser2.getFieldValue(quoteHotelRoomResult.toString(), "id");
-        StringBuilder historyRecord3 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder historyRecord3 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__History__c",
@@ -483,7 +496,8 @@ public class HistoryTracking extends BaseTest {
                 THY519_578_UserName,
                 "--json"});
         String historyID3 = JsonParser2.getFieldValue(historyRecord3.toString(), "Id");
-        StringBuilder historyRecord4 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder historyRecord4 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__History__c",
@@ -494,7 +508,8 @@ public class HistoryTracking extends BaseTest {
                 THY519_578_UserName,
                 "--json"});
         String historyID4 = JsonParser2.getFieldValue(historyRecord4.toString(), "Id");
-        StringBuilder historyRecord5 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder historyRecord5 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__History__c",
@@ -526,7 +541,8 @@ public class HistoryTracking extends BaseTest {
                 THY519_578_UserName,
                 "--json"});
         String propertyDemoID = JsonParser2.getFieldValue(propertyDemoRecord.toString(), "Id");
-        StringBuilder guestResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder guestResult = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:create",
                 "-s",
                 "thn__Guest__c",
@@ -563,7 +579,8 @@ public class HistoryTracking extends BaseTest {
                 "--json"});
         System.out.println(paymentResult);
         String paymentID = JsonParser2.getFieldValue(paymentResult.toString(), "id");
-        StringBuilder historyRecord1 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder historyRecord1 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__History__c",
@@ -618,7 +635,8 @@ public class HistoryTracking extends BaseTest {
                 THY519_578_UserName,
                 "--json"});
         String invoiceID = JsonParser2.getFieldValue(invoiceResult.toString(), "id");
-        StringBuilder historyRecord1 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder historyRecord1 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__History__c",
@@ -648,7 +666,8 @@ public class HistoryTracking extends BaseTest {
                 THY519_578_UserName,
                 "--json"});
         String propertyDemoID = JsonParser2.getFieldValue(propertyDemoRecord.toString(), "Id");
-        StringBuilder productRecordWines = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder productRecordWines = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Product__c",
@@ -658,7 +677,8 @@ public class HistoryTracking extends BaseTest {
                 THY519_578_UserName,
                 "--json"});
         String winesID = JsonParser2.getFieldValue(productRecordWines.toString(), "Id");
-        StringBuilder productRecordMHD = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder productRecordMHD = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Product__c",
@@ -668,7 +688,8 @@ public class HistoryTracking extends BaseTest {
                 THY519_578_UserName,
                 "--json"});
         String meetingHalfDayID = JsonParser2.getFieldValue(productRecordMHD.toString(), "Id");
-        StringBuilder productRecordRoom1Night = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder productRecordRoom1Night = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Product__c",
@@ -702,7 +723,8 @@ public class HistoryTracking extends BaseTest {
                 THY519_578_UserName,
                 "--json"});
         String myceQuoteID = JsonParser2.getFieldValue(myseQuoteResult.toString(), "id");
-        StringBuilder quoteMeetingRoomResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quoteMeetingRoomResult = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:create",
                 "-s",
                 "thn__Quote_Meeting_Room__c",
@@ -713,7 +735,8 @@ public class HistoryTracking extends BaseTest {
                 THY519_578_UserName,
                 "--json"});
         String quoteMeetingRoomId = JsonParser2.getFieldValue(quoteMeetingRoomResult.toString(), "id");
-        StringBuilder quoteProductResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quoteProductResult = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:create",
                 "-s",
                 "thn__Quote_Product__c",
@@ -723,7 +746,8 @@ public class HistoryTracking extends BaseTest {
                 THY519_578_UserName,
                 "--json"});
         String quoteProductId = JsonParser2.getFieldValue(quoteProductResult.toString(), "id");
-        StringBuilder quoteHotelRoomResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quoteHotelRoomResult = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:create",
                 "-s",
                 "thn__Quote_Hotel_Room__c",
@@ -770,7 +794,8 @@ public class HistoryTracking extends BaseTest {
                 "-u",
                 THY519_578_UserName,
                 "--json"});
-        StringBuilder historyRecord1 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder historyRecord1 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__History__c",
@@ -781,7 +806,8 @@ public class HistoryTracking extends BaseTest {
                 "-u",
                 THY519_578_UserName,
                 "--json"});
-        StringBuilder historyRecord2 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder historyRecord2 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__History__c",
@@ -792,7 +818,8 @@ public class HistoryTracking extends BaseTest {
                 "-u",
                 THY519_578_UserName,
                 "--json"});
-        StringBuilder historyRecord3 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder historyRecord3 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__History__c",
@@ -874,7 +901,8 @@ public class HistoryTracking extends BaseTest {
         myceQuotes.clickMyceQuoteTab();
         myceQuotes.openMyceQoteRecord("TestHistoryTrackingAuto5");
         myceQuotes.updateOrder();
-        StringBuilder historyRecord1 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder historyRecord1 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__History__c",
@@ -903,7 +931,8 @@ public class HistoryTracking extends BaseTest {
                 THY519_578_UserName,
                 "--json"});
         String propertyDemoID = JsonParser2.getFieldValue(propertyDemoRecord.toString(), "Id");
-        StringBuilder guestResult1 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder guestResult1 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:create",
                 "-s",
                 "thn__Guest__c",
@@ -913,7 +942,8 @@ public class HistoryTracking extends BaseTest {
                 THY519_578_UserName,
                 "--json"});
         String guestID1 = JsonParser2.getFieldValue(guestResult1.toString(), "id");
-        StringBuilder guestResult2 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder guestResult2 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:create",
                 "-s",
                 "thn__Guest__c",
@@ -960,7 +990,8 @@ public class HistoryTracking extends BaseTest {
                 "-u",
                 THY519_578_UserName,
                 "--json"});
-        StringBuilder historyRecord1 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder historyRecord1 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__History__c",
@@ -1007,7 +1038,8 @@ public class HistoryTracking extends BaseTest {
                 "-u",
                 THY519_578_UserName,
                 "--json"});
-        StringBuilder historyRecord1 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder historyRecord1 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__History__c",
@@ -1055,7 +1087,8 @@ public class HistoryTracking extends BaseTest {
         myceQuotes.clickMyceQuoteTab();
         myceQuotes.openMyceQoteRecord("TestHistoryTrackingAuto8");
         myceQuotes.cloneMyceQuote("CloneTestHistoryTrackingAuto8");
-        StringBuilder cloneMyceQuoteRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder cloneMyceQuoteRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__MYCE_Quote__c",
@@ -1065,7 +1098,8 @@ public class HistoryTracking extends BaseTest {
                 THY519_578_UserName,
                 "--json"});
         String cloneMyceQuoteID = JsonParser2.getFieldValue(cloneMyceQuoteRecord.toString(), "Id");
-        StringBuilder historyRecord1 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder historyRecord1 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__History__c",
@@ -1095,7 +1129,8 @@ public class HistoryTracking extends BaseTest {
                 THY519_578_UserName,
                 "--json"});
         String propertyDemoID = JsonParser2.getFieldValue(propertyDemoRecord.toString(), "Id");
-        StringBuilder productRecordFood = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder productRecordFood = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Product__c",
@@ -1118,7 +1153,8 @@ public class HistoryTracking extends BaseTest {
                 THY519_578_UserName,
                 "--json"});
         String myceQuoteID = JsonParser2.getFieldValue(myseQuoteResult.toString(), "id");
-        StringBuilder packageResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder packageResult = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:create",
                 "-s",
                 "thn__Package__c",
@@ -1128,7 +1164,8 @@ public class HistoryTracking extends BaseTest {
                 THY519_578_UserName,
                 "--json"});
         String packageId = JsonParser2.getFieldValue(packageResult.toString(), "id");
-        StringBuilder packageLineResult1 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder packageLineResult1 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:create",
                 "-s",
                 "thn__Package_Line__c",
@@ -1140,7 +1177,8 @@ public class HistoryTracking extends BaseTest {
                 THY519_578_UserName,
                 "--json"});
         String packageLineId1 = JsonParser2.getFieldValue(packageLineResult1.toString(), "id");
-        StringBuilder quotePackageResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quotePackageResult = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:create",
                 "-s",
                 "thn__Quote_Package__c",
@@ -1154,7 +1192,8 @@ public class HistoryTracking extends BaseTest {
         myceQuotes.clickMyceQuoteTab();
         myceQuotes.openMyceQoteRecord("TestHistoryTrackingAuto9");
         myceQuotes.cloneRelatedRecord(date.generateTodayDate3_plus(0 , 0), "Quote Package");
-        StringBuilder quotePackageSoql = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quotePackageSoql = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:soql:query",
                 "-q",
                 "SELECT Id FROM thn__Quote_Package__c WHERE thn__MYCE_Quote__c='" + myceQuoteID + "'",
@@ -1166,7 +1205,8 @@ public class HistoryTracking extends BaseTest {
         String quotePackageID2 = quotesPackageID.get(1);
         System.out.println(quotePackageID1);
         System.out.println(quotePackageID2);
-        StringBuilder historyRecord1 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder historyRecord1 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__History__c",
@@ -1177,7 +1217,8 @@ public class HistoryTracking extends BaseTest {
                 THY519_578_UserName,
                 "--json"});
         String historyID1 = JsonParser2.getFieldValue(historyRecord1.toString(), "Id");
-        StringBuilder historyRecord2 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder historyRecord2 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__History__c",
@@ -1209,7 +1250,8 @@ public class HistoryTracking extends BaseTest {
                 THY519_578_UserName,
                 "--json"});
         String propertyDemoID = JsonParser2.getFieldValue(propertyDemoRecord.toString(), "Id");
-        StringBuilder productRecordRoom1Night = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder productRecordRoom1Night = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Product__c",
@@ -1243,7 +1285,8 @@ public class HistoryTracking extends BaseTest {
                 THY519_578_UserName,
                 "--json"});
         String myceQuoteID = JsonParser2.getFieldValue(myseQuoteResult.toString(), "id");
-        StringBuilder quoteHotelRoomResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quoteHotelRoomResult = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:create",
                 "-s",
                 "thn__Quote_Hotel_Room__c",
@@ -1257,7 +1300,8 @@ public class HistoryTracking extends BaseTest {
         myceQuotes.clickMyceQuoteTab();
         myceQuotes.openMyceQoteRecord("TestHistoryTrackingAuto10");
         myceQuotes.cloneRelatedRecord(date.generateTodayDate3_plus(0 , 0), "Quote Hotel Room");
-        StringBuilder quoteHotelRoomsSoql = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quoteHotelRoomsSoql = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:soql:query",
                 "-q",
                 "SELECT Id FROM thn__Quote_Hotel_Room__c WHERE thn__MYCE_Quote__c='" + myceQuoteID + "'",
@@ -1269,7 +1313,8 @@ public class HistoryTracking extends BaseTest {
         String quoteHotelRoomID2 = quotesHotelRoomsID.get(1);
         System.out.println(quoteHotelRoomID1);
         System.out.println(quoteHotelRoomID2);
-        StringBuilder historyRecord1 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder historyRecord1 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__History__c",
@@ -1280,7 +1325,8 @@ public class HistoryTracking extends BaseTest {
                 THY519_578_UserName,
                 "--json"});
         String historyID1 = JsonParser2.getFieldValue(historyRecord1.toString(), "Id");
-        StringBuilder historyRecord2 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder historyRecord2 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__History__c",
@@ -1312,7 +1358,8 @@ public class HistoryTracking extends BaseTest {
                 THY519_578_UserName,
                 "--json"});
         String propertyDemoID = JsonParser2.getFieldValue(propertyDemoRecord.toString(), "Id");
-        StringBuilder productRecordWines = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder productRecordWines = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Product__c",
@@ -1335,7 +1382,8 @@ public class HistoryTracking extends BaseTest {
                 THY519_578_UserName,
                 "--json"});
         String myceQuoteID = JsonParser2.getFieldValue(myseQuoteResult.toString(), "id");
-        StringBuilder quoteProductResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quoteProductResult = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:create",
                 "-s",
                 "thn__Quote_Product__c",
@@ -1347,7 +1395,8 @@ public class HistoryTracking extends BaseTest {
         myceQuotes.clickMyceQuoteTab();
         myceQuotes.openMyceQoteRecord("TestHistoryTrackingAuto11");
         myceQuotes.cloneRelatedRecord(date.generateTodayDate3_plus(0, 0), "Quote Product");
-        StringBuilder quoteProductsSoql = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quoteProductsSoql = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:soql:query",
                 "-q",
                 "SELECT Id FROM thn__Quote_Product__c WHERE thn__MYCE_Quote__c='" + myceQuoteID + "'",
@@ -1359,7 +1408,8 @@ public class HistoryTracking extends BaseTest {
         String quoteProductID2 = quotesProductsID.get(1);
         System.out.println(quoteProductID1);
         System.out.println(quoteProductID2);
-        StringBuilder historyRecord1 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder historyRecord1 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__History__c",
@@ -1370,7 +1420,8 @@ public class HistoryTracking extends BaseTest {
                 THY519_578_UserName,
                 "--json"});
         String historyID1 = JsonParser2.getFieldValue(historyRecord1.toString(), "Id");
-        StringBuilder historyRecord2 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder historyRecord2 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__History__c",
@@ -1402,7 +1453,8 @@ public class HistoryTracking extends BaseTest {
                 THY519_578_UserName,
                 "--json"});
         String propertyDemoID = JsonParser2.getFieldValue(propertyDemoRecord.toString(), "Id");
-        StringBuilder productRecordMHD = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder productRecordMHD = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Product__c",
@@ -1425,7 +1477,8 @@ public class HistoryTracking extends BaseTest {
                 THY519_578_UserName,
                 "--json"});
         String myceQuoteID = JsonParser2.getFieldValue(myseQuoteResult.toString(), "id");
-        StringBuilder quoteMeetingRoomResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quoteMeetingRoomResult = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:create",
                 "-s",
                 "thn__Quote_Meeting_Room__c",
@@ -1439,7 +1492,8 @@ public class HistoryTracking extends BaseTest {
         myceQuotes.clickMyceQuoteTab();
         myceQuotes.openMyceQoteRecord("TestHistoryTrackingAuto12");
         myceQuotes.cloneRelatedRecord(date.generateTodayDate3_plus(0, 0), "Quote Meetings Room");
-        StringBuilder quoteMeetingRoomsSoql = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quoteMeetingRoomsSoql = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:soql:query",
                 "-q",
                 "SELECT Id FROM thn__Quote_Meeting_Room__c WHERE thn__MYCE_Quote__c='" + myceQuoteID + "'",
@@ -1451,7 +1505,8 @@ public class HistoryTracking extends BaseTest {
         String quoteMeetingRoomID2 = quotesMeetingRoomsID.get(1);
         System.out.println(quoteMeetingRoomID1);
         System.out.println(quoteMeetingRoomID2);
-        StringBuilder historyRecord1 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder historyRecord1 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__History__c",
@@ -1462,7 +1517,8 @@ public class HistoryTracking extends BaseTest {
                 THY519_578_UserName,
                 "--json"});
         String historyID1 = JsonParser2.getFieldValue(historyRecord1.toString(), "Id");
-        StringBuilder historyRecord2 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder historyRecord2 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__History__c",
@@ -1510,7 +1566,8 @@ public class HistoryTracking extends BaseTest {
         myceQuotes.clickMyceQuoteTab();
         myceQuotes.openMyceQoteRecord("TestHistoryTrackingAuto13");
         myceQuotes.changeDate(date.generateTodayDate3_plus(0, 1));
-        StringBuilder historyRecord1 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder historyRecord1 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__History__c",
@@ -1540,7 +1597,8 @@ public class HistoryTracking extends BaseTest {
                 THY519_578_UserName,
                 "--json"});
         String propertyDemoID = JsonParser2.getFieldValue(propertyDemoRecord.toString(), "Id");
-        StringBuilder productRecordWines = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder productRecordWines = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Product__c",
@@ -1550,7 +1608,8 @@ public class HistoryTracking extends BaseTest {
                 THY519_578_UserName,
                 "--json"});
         String winesID = JsonParser2.getFieldValue(productRecordWines.toString(), "Id");
-        StringBuilder productRecordMHD = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder productRecordMHD = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Product__c",
@@ -1560,7 +1619,8 @@ public class HistoryTracking extends BaseTest {
                 THY519_578_UserName,
                 "--json"});
         String meetingHalfDayID = JsonParser2.getFieldValue(productRecordMHD.toString(), "Id");
-        StringBuilder productRecordRoom1Night = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder productRecordRoom1Night = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Product__c",
@@ -1594,7 +1654,8 @@ public class HistoryTracking extends BaseTest {
                 THY519_578_UserName,
                 "--json"});
         String myceQuoteID = JsonParser2.getFieldValue(myseQuoteResult.toString(), "id");
-        StringBuilder quoteMeetingRoomResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quoteMeetingRoomResult = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:create",
                 "-s",
                 "thn__Quote_Meeting_Room__c",
@@ -1606,7 +1667,8 @@ public class HistoryTracking extends BaseTest {
                 "--json"});
         System.out.println(quoteMeetingRoomResult);
         String quoteMeetingRoomId = JsonParser2.getFieldValue(quoteMeetingRoomResult.toString(), "id");
-        StringBuilder quoteProductResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quoteProductResult = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:create",
                 "-s",
                 "thn__Quote_Product__c",
@@ -1616,7 +1678,8 @@ public class HistoryTracking extends BaseTest {
                 THY519_578_UserName,
                 "--json"});
         String quoteProductId = JsonParser2.getFieldValue(quoteProductResult.toString(), "id");
-        StringBuilder quoteHotelRoomResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quoteHotelRoomResult = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:create",
                 "-s",
                 "thn__Quote_Hotel_Room__c",
@@ -1657,7 +1720,8 @@ public class HistoryTracking extends BaseTest {
                 "-u",
                 THY519_578_UserName,
                 "--json"});
-        StringBuilder historyRecord1 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder historyRecord1 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__History__c",
@@ -1669,7 +1733,8 @@ public class HistoryTracking extends BaseTest {
                 THY519_578_UserName,
                 "--json"});
         String historyID1 = JsonParser2.getFieldValue(historyRecord1.toString(), "Id");
-        StringBuilder historyRecord2 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder historyRecord2 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__History__c",
@@ -1681,7 +1746,8 @@ public class HistoryTracking extends BaseTest {
                 THY519_578_UserName,
                 "--json"});
         String historyID2 = JsonParser2.getFieldValue(historyRecord2.toString(), "Id");
-        StringBuilder historyRecord3 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder historyRecord3 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__History__c",
@@ -1714,7 +1780,8 @@ public class HistoryTracking extends BaseTest {
                 THY519_578_UserName,
                 "--json"});
         String propertyDemoID = JsonParser2.getFieldValue(propertyDemoRecord.toString(), "Id");
-        StringBuilder productRecordFood = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder productRecordFood = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Product__c",
@@ -1737,7 +1804,8 @@ public class HistoryTracking extends BaseTest {
                 THY519_578_UserName,
                 "--json"});
         String myceQuoteID = JsonParser2.getFieldValue(myseQuoteResult.toString(), "id");
-        StringBuilder packageResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder packageResult = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:create",
                 "-s",
                 "thn__Package__c",
@@ -1747,7 +1815,8 @@ public class HistoryTracking extends BaseTest {
                 THY519_578_UserName,
                 "--json"});
         String packageId = JsonParser2.getFieldValue(packageResult.toString(), "id");
-        StringBuilder packageLineResult1 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder packageLineResult1 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:create",
                 "-s",
                 "thn__Package_Line__c",
@@ -1759,7 +1828,8 @@ public class HistoryTracking extends BaseTest {
                 THY519_578_UserName,
                 "--json"});
         String packageLineId1 = JsonParser2.getFieldValue(packageLineResult1.toString(), "id");
-        StringBuilder quotePackageResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder quotePackageResult = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:create",
                 "-s",
                 "thn__Quote_Package__c",
@@ -1780,7 +1850,8 @@ public class HistoryTracking extends BaseTest {
                 "-u",
                 THY519_578_UserName,
                 "--json"});
-        StringBuilder historyRecord1 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder historyRecord1 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__History__c",
@@ -1792,7 +1863,8 @@ public class HistoryTracking extends BaseTest {
                 THY519_578_UserName,
                 "--json"});
         String historyID1 = JsonParser2.getFieldValue(historyRecord1.toString(), "Id");
-        StringBuilder historyRecord2 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder historyRecord2 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__History__c",
@@ -1823,7 +1895,8 @@ public class HistoryTracking extends BaseTest {
                 THY519_578_UserName,
                 "--json"});
         String propertyDemoID = JsonParser2.getFieldValue(propertyDemoRecord.toString(), "Id");
-        StringBuilder guestResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder guestResult = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:create",
                 "-s",
                 "thn__Guest__c",
@@ -1859,7 +1932,8 @@ public class HistoryTracking extends BaseTest {
                 THY519_578_UserName,
                 "--json"});;
         String paymentID = JsonParser2.getFieldValue(paymentResult.toString(), "id");
-        StringBuilder paymentRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder paymentRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Payment__c",
@@ -1879,7 +1953,8 @@ public class HistoryTracking extends BaseTest {
                 "-u",
                 THY519_578_UserName,
                 "--json"});
-        StringBuilder historyRecord1 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder historyRecord1 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__History__c",
@@ -1935,7 +2010,8 @@ public class HistoryTracking extends BaseTest {
                 THY519_578_UserName,
                 "--json"});
         String invoiceID = JsonParser2.getFieldValue(invoiceResult.toString(), "id");
-        StringBuilder invoiceRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder invoiceRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Invoice__c",
@@ -1955,7 +2031,8 @@ public class HistoryTracking extends BaseTest {
                 "-u",
                 THY519_578_UserName,
                 "--json"});
-        StringBuilder historyRecord1 = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder historyRecord1 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__History__c",

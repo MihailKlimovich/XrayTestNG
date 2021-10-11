@@ -86,7 +86,8 @@ public class BaseTest {
     final protected String thynkPackUserName = "rostislav.orel@succraft.com";
     final protected String thynkPackKey = "3MVG91BJr_0ZDQ4ta_ZwN1EEnfj.OQSJWOBWMPFXclJ22A8oaKqM9KTLdsoSupXX0idQnMIdsI3IweGbsJx6t";
     final protected String thynkPackPassword = "Rost1508";
-    final protected String SFDX = "/home/minsk-sc/sfdx/bin/sfdx";
+    final protected String SFDX = "/home/user/sfdx/bin/sfdx";
+    final protected String serverKeyPath = "/home/user/jdoe/JWT/server.key";
 
     final protected String key = "3MVG9sSN_PMn8tjQ_i1zH6SFiiRiWU8a6A0ccIA8pgi6PtKmTcevqRVhFkbTw9WjqjcylgNcp6WfR7tCRz1Z5";
     final protected String ALIAS = "test-sy9dufviyszi@example.com";

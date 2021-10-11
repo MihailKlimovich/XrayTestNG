@@ -19,7 +19,8 @@ public class OperaWriteCorrections extends BaseTest {
     @Story("PMS Account")
     public void testOperaWrite1() throws InterruptedException, IOException {
 
-        StringBuilder authorise = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder authorise = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:auth:jwt:grant",
                 "--clientid",
                 thynkPackKey,
@@ -31,7 +32,8 @@ public class OperaWriteCorrections extends BaseTest {
                 thynkPackDevOrg
         });
         System.out.println(authorise);
-        StringBuilder resultDelete = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder resultDelete = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:delete",
                 "-s",
                 "thn__PMS_Account__c",
@@ -41,7 +43,8 @@ public class OperaWriteCorrections extends BaseTest {
                 thynkPackUserName,
                 "--json"});
         System.out.println(resultDelete);
-        StringBuilder pmsAccountResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder pmsAccountResult = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:create",
                 "-s",
                 "thn__PMS_Account__c",
@@ -52,7 +55,8 @@ public class OperaWriteCorrections extends BaseTest {
                 "--json"});
         System.out.println(pmsAccountResult);
         String pmsAccountId = JsonParser2.getFieldValue(pmsAccountResult.toString(), "id");
-        SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:update",
                 "-s",
                 "thn__PMS_Account__c",
@@ -63,7 +67,8 @@ public class OperaWriteCorrections extends BaseTest {
                 "-u",
                 thynkPackUserName,
                 "--json"});
-        StringBuilder pmsAccountRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder pmsAccountRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__PMS_Account__c",
@@ -82,7 +87,8 @@ public class OperaWriteCorrections extends BaseTest {
     @Description("THY-582: Opera Write - Corrections")
     @Story("Guest")
     public void testOperaWrite2() throws InterruptedException, IOException {
-        StringBuilder resultDelete = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder resultDelete = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:delete",
                 "-s",
                 "thn__Guest__c",
@@ -93,7 +99,8 @@ public class OperaWriteCorrections extends BaseTest {
                 "--json"});
         System.out.println(resultDelete);
 
-        StringBuilder guestResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder guestResult = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:create",
                 "-s",
                 "thn__Guest__c",
@@ -105,7 +112,8 @@ public class OperaWriteCorrections extends BaseTest {
                 "--json"});
         System.out.println(guestResult);
         String guestId = JsonParser2.getFieldValue(guestResult.toString(), "id");
-        SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:update",
                 "-s",
                 "thn__Guest__c",
@@ -116,7 +124,8 @@ public class OperaWriteCorrections extends BaseTest {
                 "-u",
                 thynkPackUserName,
                 "--json"});
-        StringBuilder guestRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder guestRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Guest__c",
@@ -135,7 +144,8 @@ public class OperaWriteCorrections extends BaseTest {
     @Description("THY-582: Opera Write - Corrections")
     @Story("Reservation")
     public void testOperaWrite3() throws InterruptedException, IOException {
-        SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:delete",
                 "-s",
                 "thn__Guest__c",
@@ -144,7 +154,8 @@ public class OperaWriteCorrections extends BaseTest {
                 "-u",
                 thynkPackUserName,
                 "--json"});
-        SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:delete",
                 "-s",
                 "thn__Mews_Service__c",
@@ -153,7 +164,8 @@ public class OperaWriteCorrections extends BaseTest {
                 "-u",
                 thynkPackUserName,
                 "--json"});
-        SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:delete",
                 "-s",
                 "thn__Space_Area__c",
@@ -162,7 +174,8 @@ public class OperaWriteCorrections extends BaseTest {
                 "-u",
                 thynkPackUserName,
                 "--json"});
-        SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:delete",
                 "-s",
                 "thn__Rate__c",
@@ -171,9 +184,8 @@ public class OperaWriteCorrections extends BaseTest {
                 "-u",
                 thynkPackUserName,
                 "--json"});
-
-
-        StringBuilder propertyRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder propertyRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Hotel__c",
@@ -183,7 +195,8 @@ public class OperaWriteCorrections extends BaseTest {
                 thynkPackUserName,
                 "--json"});
         String propertyID = JsonParser2.getFieldValue(propertyRecord.toString(), "Id");
-        StringBuilder mewsServiceResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder mewsServiceResult = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:create",
                 "-s",
                 "thn__Mews_Service__c",
@@ -194,7 +207,8 @@ public class OperaWriteCorrections extends BaseTest {
                 "--json"});
         System.out.println(mewsServiceResult);
         String mewsServiceId = JsonParser2.getFieldValue(mewsServiceResult.toString(), "id");
-        StringBuilder roomTypeResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder roomTypeResult = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:create",
                 "-s",
                 "thn__Space_Area__c",
@@ -205,7 +219,8 @@ public class OperaWriteCorrections extends BaseTest {
                 "--json"});
         System.out.println(roomTypeResult);
         String roomTypeId = JsonParser2.getFieldValue(roomTypeResult.toString(), "id");
-        StringBuilder rateResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder rateResult = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:create",
                 "-s",
                 "thn__Rate__c",
@@ -217,7 +232,8 @@ public class OperaWriteCorrections extends BaseTest {
         System.out.println(rateResult);
         String rateId = JsonParser2.getFieldValue(rateResult.toString(), "id");
 
-        StringBuilder guestResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder guestResult = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:create",
                 "-s",
                 "thn__Guest__c",
@@ -230,8 +246,8 @@ public class OperaWriteCorrections extends BaseTest {
                 "--json"});
         System.out.println(guestResult);
         String guestId = JsonParser2.getFieldValue(guestResult.toString(), "id");
-
-        StringBuilder reservationResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder reservationResult = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:create",
                 "-s",
                 "thn__Reservation__c",
@@ -252,7 +268,8 @@ public class OperaWriteCorrections extends BaseTest {
                 "--json"});
         System.out.println(reservationResult);
         String reservationId = JsonParser2.getFieldValue(reservationResult.toString(), "id");
-        SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:update",
                 "-s",
                 "thn__Reservation__c",
@@ -263,7 +280,8 @@ public class OperaWriteCorrections extends BaseTest {
                 "-u",
                 thynkPackUserName,
                 "--json"});
-        StringBuilder reservationRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder reservationRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Reservation__c",
@@ -282,7 +300,8 @@ public class OperaWriteCorrections extends BaseTest {
     @Description("THY-582: Opera Write - Corrections")
     @Story("PMS Block")
     public void testOperaWrite4() throws InterruptedException, IOException {
-        SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:delete",
                 "-s",
                 "thn__PMS_Block__c",
@@ -292,7 +311,8 @@ public class OperaWriteCorrections extends BaseTest {
                 thynkPackUserName,
                 "--json"});
 
-        StringBuilder pmsBlockResult = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder pmsBlockResult = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:create",
                 "-s",
                 "thn__PMS_Block__c",
@@ -308,7 +328,8 @@ public class OperaWriteCorrections extends BaseTest {
                 "--json"});
         System.out.println(pmsBlockResult);
         String pmsBlockId = JsonParser2.getFieldValue(pmsBlockResult.toString(), "id");
-        SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:update",
                 "-s",
                 "thn__PMS_Block__c",
@@ -319,7 +340,8 @@ public class OperaWriteCorrections extends BaseTest {
                 "-u",
                 thynkPackUserName,
                 "--json"});
-        StringBuilder pmsBlockRecord = SfdxCommand.runLinuxCommand1(new String[]{"/home/minsk-sc/sfdx/bin/sfdx",
+        StringBuilder pmsBlockRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__PMS_Block__c",
