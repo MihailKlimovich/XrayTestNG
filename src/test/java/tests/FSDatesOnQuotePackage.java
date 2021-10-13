@@ -36,6 +36,7 @@ public class FSDatesOnQuotePackage extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     @Story("FS dates on quote package")
     public void case1() throws InterruptedException, IOException {
+
         SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:delete",
@@ -152,25 +153,12 @@ public class FSDatesOnQuotePackage extends BaseTest {
                 "-v",
                 "Name='Meeting Room' thn__Package__c='" + packageId + "' thn__Type__c='Meeting Room'" +
                         " thn__Product__c='" + meetingHalfDayID + "' thn__Start_Time__c=12:00 thn__End_Time__c=13:00" +
-                        " thn__Unit_Price__c=20 thn__VAT_Category__c=1 thn__AppliedDay__c=1",
+                        " thn__Unit_Price__c=20 thn__VAT_Category__c=1",
                 "-u",
                 ALIAS,
                 "--json"});
         System.out.println(packageLineResult1);
         String packageLineId1 = JsonParser2.getFieldValue(packageLineResult1.toString(), "id");
-        StringBuilder packageLineResult2 = SfdxCommand.runLinuxCommand1(new String[]{
-                SFDX,
-                "force:data:record:create",
-                "-s",
-                "thn__Package_Line__c",
-                "-v",
-                "Name='Hotel Room' thn__Package__c='" + packageId + "' thn__Type__c='Hotel Room'" +
-                        " thn__Product__c='" + room1NightID + "' thn__Start_Time__c=12:00 thn__End_Time__c=13:00" +
-                        " thn__Unit_Price__c=100 thn__VAT_Category__c=1 thn__AppliedDay__c=1",
-                "-u",
-                ALIAS,
-                "--json"});
-        String packageLineId2 = JsonParser2.getFieldValue(packageLineResult2.toString(), "id");
         StringBuilder packageLineResult3 = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:create",
@@ -179,50 +167,11 @@ public class FSDatesOnQuotePackage extends BaseTest {
                 "-v",
                 "Name='Beer' thn__Package__c='" + packageId + "' thn__Type__c='Beverage'" +
                         " thn__Product__c='" + beverageID + "' thn__Start_Time__c=15:00 thn__End_Time__c=16:00" +
-                        " thn__Unit_Price__c=10 thn__VAT_Category__c=1 thn__AppliedDay__c=1",
+                        " thn__Unit_Price__c=10 thn__VAT_Category__c=1",
                 "-u",
                 ALIAS,
                 "--json"});
         String packageLineId3 = JsonParser2.getFieldValue(packageLineResult3.toString(), "id");
-        StringBuilder packageLineResult4 = SfdxCommand.runLinuxCommand1(new String[]{
-                SFDX,
-                "force:data:record:create",
-                "-s",
-                "thn__Package_Line__c",
-                "-v",
-                "Name='Tennis' thn__Package__c='" + packageId + "' thn__Type__c='Activity'" +
-                        " thn__Product__c='" + activityID + "' thn__Start_Time__c=15:00 thn__End_Time__c=16:00" +
-                        " thn__Unit_Price__c=40 thn__VAT_Category__c=1 thn__AppliedDay__c=1",
-                "-u",
-                ALIAS,
-                "--json"});
-        String packageLineId4 = JsonParser2.getFieldValue(packageLineResult4.toString(), "id");
-        StringBuilder packageLineResult5 = SfdxCommand.runLinuxCommand1(new String[]{
-                SFDX,
-                "force:data:record:create",
-                "-s",
-                "thn__Package_Line__c",
-                "-v",
-                "Name='Bicycle' thn__Package__c='" + packageId + "' thn__Type__c='Equipment'" +
-                        " thn__Product__c='" + equipmentID + "' thn__Start_Time__c=15:00 thn__End_Time__c=16:00" +
-                        " thn__Unit_Price__c=50 thn__VAT_Category__c=1 thn__AppliedDay__c=1",
-                "-u",
-                ALIAS,
-                "--json"});
-        String packageLineId5 = JsonParser2.getFieldValue(packageLineResult5.toString(), "id");
-        StringBuilder packageLineResult6 = SfdxCommand.runLinuxCommand1(new String[]{
-                SFDX,
-                "force:data:record:create",
-                "-s",
-                "thn__Package_Line__c",
-                "-v",
-                "Name='Burger' thn__Package__c='" + packageId + "' thn__Type__c='Food'" +
-                        " thn__Product__c='" + dinerID + "' thn__Start_Time__c=15:00 thn__End_Time__c=16:00" +
-                        " thn__Unit_Price__c=10 thn__VAT_Category__c=1 thn__AppliedDay__c=1",
-                "-u",
-                ALIAS,
-                "--json"});
-        String packageLineId6 = JsonParser2.getFieldValue(packageLineResult6.toString(), "id");
         StringBuilder myseQuoteResult = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:create",
@@ -264,13 +213,36 @@ public class FSDatesOnQuotePackage extends BaseTest {
                 SFDX,
                 "force:data:soql:query",
                 "-q",
-                "SELECT thn__Date__c FROM thn__FS_Date__c WHERE thn__MYCE_Quote__c='" + myceQuoteID + "'",
+                "SELECT thn__Date__c, Id FROM thn__FS_Date__c WHERE thn__MYCE_Quote__c='" + myceQuoteID + "'",
+                "-u",
+                ALIAS,
+                "--json"});
+        StringBuilder quoteProductRecordsSoql = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:soql:query",
+                "-q",
+                "SELECT thn__FS_Date__c FROM thn__Quote_Product__c WHERE thn__MYCE_Quote__c='" + myceQuoteID + "'",
+                "-u",
+                ALIAS,
+                "--json"});
+        StringBuilder quoteMeetingRoomRecordsSoql = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:soql:query",
+                "-q",
+                "SELECT thn__FS_Date__c FROM thn__Quote_Meeting_Room__c WHERE thn__MYCE_Quote__c='" + myceQuoteID + "'",
                 "-u",
                 ALIAS,
                 "--json"});
         System.out.println(fsDateRecordsSoql);
+        List<String> quoteProductFSDate = JsonParser2.getFieldValueSoql(quoteProductRecordsSoql.toString(), "thn__FS_Date__c");
+        List<String> quoteMeetingRoomFSDate = JsonParser2.getFieldValueSoql(quoteMeetingRoomRecordsSoql.toString(), "thn__FS_Date__c");
         List<String> dates = JsonParser2.getFieldValueSoql(fsDateRecordsSoql.toString(), "thn__Date__c");
+        List<String> IdFSDate = JsonParser2.getFieldValueSoql(fsDateRecordsSoql.toString(), "Id");
         System.out.println(dates);
+        Assert.assertEquals(quoteProductFSDate.size(), 1);
+        Assert.assertEquals(quoteMeetingRoomFSDate.size(), 1);
+        Assert.assertEquals(quoteProductFSDate.get(0), IdFSDate.get(0));
+        Assert.assertEquals(quoteMeetingRoomFSDate.get(0), IdFSDate.get(0));
         Assert.assertEquals(dates.size(), 4);
         Assert.assertEquals(dates.get(0), date.generateTodayDate2_plus(0, 0));
         Assert.assertEquals(dates.get(1), date.generateTodayDate2_plus(0, 1));
@@ -321,16 +293,43 @@ public class FSDatesOnQuotePackage extends BaseTest {
                 SFDX,
                 "force:data:soql:query",
                 "-q",
-                "SELECT thn__Date__c FROM thn__FS_Date__c WHERE thn__MYCE_Quote__c='" + quoteID + "'",
+                "SELECT thn__Date__c, Id FROM thn__FS_Date__c WHERE thn__MYCE_Quote__c='" + quoteID + "'",
+                "-u",
+                ALIAS,
+                "--json"});
+        StringBuilder quoteProductRecordsSoql = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:soql:query",
+                "-q",
+                "SELECT thn__FS_Date__c FROM thn__Quote_Product__c WHERE thn__MYCE_Quote__c='" + quoteID + "'",
+                "-u",
+                ALIAS,
+                "--json"});
+        StringBuilder quoteMeetingRoomRecordsSoql = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:soql:query",
+                "-q",
+                "SELECT thn__FS_Date__c FROM thn__Quote_Meeting_Room__c WHERE thn__MYCE_Quote__c='" + quoteID + "'",
                 "-u",
                 ALIAS,
                 "--json"});
         System.out.println(fsDateRecordsSoql);
+        List<String> quoteProductFSDate = JsonParser2.getFieldValueSoql(quoteProductRecordsSoql.toString(), "thn__FS_Date__c");
+        List<String> quoteMeetingRoomFSDate = JsonParser2.getFieldValueSoql(quoteMeetingRoomRecordsSoql.toString(), "thn__FS_Date__c");
         List<String> dates = JsonParser2.getFieldValueSoql(fsDateRecordsSoql.toString(), "thn__Date__c");
+        List<String> IdFSDate = JsonParser2.getFieldValueSoql(fsDateRecordsSoql.toString(), "Id");
         System.out.println(dates);
-        Assert.assertEquals(dates.size(), 2);
+        Assert.assertEquals(quoteProductFSDate.size(), 2);
+        Assert.assertEquals(quoteMeetingRoomFSDate.size(), 2);
+        Assert.assertEquals(quoteProductFSDate.get(0), IdFSDate.get(0));
+        Assert.assertEquals(quoteProductFSDate.get(1), IdFSDate.get(1));
+        Assert.assertEquals(quoteMeetingRoomFSDate.get(0), IdFSDate.get(0));
+        Assert.assertEquals(quoteMeetingRoomFSDate.get(1), IdFSDate.get(1));
+        Assert.assertEquals(dates.size(), 4);
         Assert.assertEquals(dates.get(0), date.generateTodayDate2_plus(0, 0));
         Assert.assertEquals(dates.get(1), date.generateTodayDate2_plus(0, 1));
+        Assert.assertEquals(dates.get(2), date.generateTodayDate2_plus(0, 2));
+        Assert.assertEquals(dates.get(3), date.generateTodayDate2_plus(0, 3));
     }
 
 }

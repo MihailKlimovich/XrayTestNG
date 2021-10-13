@@ -105,6 +105,11 @@
             <class name="tests.HotelRoomModifications"/>
         </classes>
     </test>
+    <test name="FSDates on quote package">
+        <classes>
+            <class name="tests.FSDatesOnQuotePackage"/>
+        </classes>
+    </test>
 
 
 
