@@ -21,9 +21,7 @@ public class MultiDeleteTesting extends BaseTest {
 
 
     @BeforeClass
-    @Override
     public void classLevelSetup() {
-        super.classLevelSetup();
         ChromeOptions options= new ChromeOptions();
         options.addArguments("--disable-cache");
         options.addArguments("--disk-cache-size=1");
@@ -43,9 +41,7 @@ public class MultiDeleteTesting extends BaseTest {
     }
 
     @AfterClass
-    @Override
     public void teardown() {
-        super.teardown();
         driver.close();
         driver.quit();
         if (driver != null) {
@@ -453,9 +449,13 @@ public class MultiDeleteTesting extends BaseTest {
         myceQuotes.openHotelRooms();
         quoteHotelRoom.selectItems("2");
         quoteHotelRoom.multiDeleteRecords();
+        myceQuotes.goToMyceQuotes();
+        myceQuotes.openMyceQoteRecord("QuoteTestMultiDeleteAuto1");
         myceQuotes.openMeetingRooms();
         quoteMeetingRoom.selectItems("2");
         quoteMeetingRoom.multiDeleteRecords();
+        myceQuotes.goToMyceQuotes();
+        myceQuotes.openMyceQoteRecord("QuoteTestMultiDeleteAuto1");
         myceQuotes.openProducts();
         quoteProducts.selectAllItems("2");
         quoteProducts.multiDeleteRecords();
@@ -565,9 +565,13 @@ public class MultiDeleteTesting extends BaseTest {
         myceQuotes.openHotelRooms();
         quoteHotelRoom.selectItems("2");
         quoteHotelRoom.multiDeleteRecords();
+        myceQuotes.goToMyceQuotes();
+        myceQuotes.openMyceQoteRecord("QuoteTestMultiDeleteAuto2");
         myceQuotes.openMeetingRooms();
         quoteMeetingRoom.selectItems("2");
         quoteMeetingRoom.multiDeleteRecords();
+        myceQuotes.goToMyceQuotes();
+        myceQuotes.openMyceQoteRecord("QuoteTestMultiDeleteAuto2");
         myceQuotes.openProducts();
         quoteProducts.selectAllItems("2");
         quoteProducts.multiDeleteRecords();

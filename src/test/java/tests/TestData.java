@@ -25,7 +25,16 @@ public class TestData extends BaseTest{
             developerConsoleWindow.openDeveloperConsole();
             developerConsoleWindow.openExecuteAnonymousWindow();
             developerConsoleWindow.runApexCodeFromFile("src/main/Data/AllData");
-            developerConsoleWindow.runApexCodeFromFile("src/main/Data/OccupancyTypeMetadata");
+        }
+
+        @Test (priority = 3)
+        @Severity(SeverityLevel.NORMAL)
+        @Description("Create Occupancy Type Metadata")
+        @Story("Occupancy Type Metadata")
+        public void createOccupancyTypeMetadata() throws InterruptedException, IOException {
+           developerConsoleWindow.openDeveloperConsole();
+           developerConsoleWindow.openExecuteAnonymousWindow();
+           developerConsoleWindow.runApexCodeFromFile("src/main/Data/OccupancyTypeMetadata");
         }
 
 }
