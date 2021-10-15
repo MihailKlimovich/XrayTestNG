@@ -17,20 +17,20 @@ public class OptionalProductWasAddedToAnOrderAndSentToMews extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     @Story("TB-132: Optional Product was added to an Order and sent to Mews")
     public void logIn() throws InterruptedException, IOException {
-        loginPageForScratchOrg.logInOnScratchOrg2(driver, "https://test.salesforce.com/", TB_132_UserName, TB_132_Password);
         StringBuilder authorise = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:auth:jwt:grant",
                 "--clientid",
-                TB_132_Key,
+                CONSUMER_KEY,
                 "--jwtkeyfile",
-                "/home/user/jdoe/JWT/server.key",
+                SERVER_KEY_PATH,
                 "--username",
-                TB_132_UserName,
+                ORG_USERNAME,
                 "--instanceurl",
-                "https://test.salesforce.com"
+                ORG_URL
         });
-
+        System.out.println(authorise);
+        loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
     }
 
     @Test(priority = 2, description = "Add quote product, Optional’ checkbox is set to ‘true’")
@@ -45,7 +45,7 @@ public class OptionalProductWasAddedToAnOrderAndSentToMews extends BaseTest {
                 "-w",
                 "Name='TestOptionalProductAuto1'",
                 "-u",
-                TB_132_UserName,
+                ORG_USERNAME,
                 "--json"});
         StringBuilder propertyDemoRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
@@ -55,7 +55,7 @@ public class OptionalProductWasAddedToAnOrderAndSentToMews extends BaseTest {
                 "-w",
                 "Name='Demo'",
                 "-u",
-                TB_132_UserName,
+                ORG_USERNAME,
                 "--json"});
         String propertyDemoID = JsonParser2.getFieldValue(propertyDemoRecord.toString(), "Id");
         StringBuilder productRecordWines = SfdxCommand.runLinuxCommand1(new String[]{
@@ -66,7 +66,7 @@ public class OptionalProductWasAddedToAnOrderAndSentToMews extends BaseTest {
                 "-w",
                 "Name='WINES'",
                 "-u",
-                TB_132_UserName,
+                ORG_USERNAME,
                 "--json"});
         String winesID = JsonParser2.getFieldValue(productRecordWines.toString(), "Id");
         System.out.println(winesID);
@@ -80,7 +80,7 @@ public class OptionalProductWasAddedToAnOrderAndSentToMews extends BaseTest {
                         " thn__Hotel__c='" + propertyDemoID + "' thn__Arrival_Date__c=" + date.generateTodayDate2() +
                         " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 3),
                 "-u",
-                TB_132_UserName,
+                ORG_USERNAME,
                 "--json"});
         String myceQuoteID = JsonParser2.getFieldValue(myseQuoteResult.toString(), "id");
         StringBuilder quoteProductResult = SfdxCommand.runLinuxCommand1(new String[]{
@@ -91,7 +91,7 @@ public class OptionalProductWasAddedToAnOrderAndSentToMews extends BaseTest {
                 "-v",
                 "thn__MYCE_Quote__c='" + myceQuoteID + "' thn__Product__c='" + winesID + "' thn__Optional__c=true",
                 "-u",
-                TB_132_UserName,
+                ORG_USERNAME,
                 "--json"});
         System.out.println(quoteProductResult);
         String quoteProductId = JsonParser2.getFieldValue(quoteProductResult.toString(), "id");
@@ -104,7 +104,7 @@ public class OptionalProductWasAddedToAnOrderAndSentToMews extends BaseTest {
                 "-q",
                 "SELECT Id FROM thn__Order__c WHERE thn__MYCE_Quote__c='" + myceQuoteID + "'",
                 "-u",
-                TB_132_UserName,
+                ORG_USERNAME,
                 "--json"});
         List<String> ordersID= JsonParser2.getFieldValueSoql(orders.toString(), "Id");
         Assert.assertEquals(ordersID.size(), 0);
@@ -122,7 +122,7 @@ public class OptionalProductWasAddedToAnOrderAndSentToMews extends BaseTest {
                 "-w",
                 "Name='TestOptionalProductAuto2'",
                 "-u",
-                TB_132_UserName,
+                ORG_USERNAME,
                 "--json"});
         StringBuilder propertyDemoRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
@@ -132,7 +132,7 @@ public class OptionalProductWasAddedToAnOrderAndSentToMews extends BaseTest {
                 "-w",
                 "Name='Demo'",
                 "-u",
-                TB_132_UserName,
+                ORG_USERNAME,
                 "--json"});
         String propertyDemoID = JsonParser2.getFieldValue(propertyDemoRecord.toString(), "Id");
         StringBuilder productRecordWines = SfdxCommand.runLinuxCommand1(new String[]{
@@ -143,7 +143,7 @@ public class OptionalProductWasAddedToAnOrderAndSentToMews extends BaseTest {
                 "-w",
                 "Name='WINES'",
                 "-u",
-                TB_132_UserName,
+                ORG_USERNAME,
                 "--json"});
         String winesID = JsonParser2.getFieldValue(productRecordWines.toString(), "Id");
         System.out.println(winesID);
@@ -157,7 +157,7 @@ public class OptionalProductWasAddedToAnOrderAndSentToMews extends BaseTest {
                         " thn__Hotel__c='" + propertyDemoID + "' thn__Arrival_Date__c=" + date.generateTodayDate2() +
                         " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 3),
                 "-u",
-                TB_132_UserName,
+                ORG_USERNAME,
                 "--json"});
         String myceQuoteID = JsonParser2.getFieldValue(myseQuoteResult.toString(), "id");
         StringBuilder quoteProductResult = SfdxCommand.runLinuxCommand1(new String[]{
@@ -168,7 +168,7 @@ public class OptionalProductWasAddedToAnOrderAndSentToMews extends BaseTest {
                 "-v",
                 "thn__MYCE_Quote__c='" + myceQuoteID + "' thn__Product__c='" + winesID + "' thn__Optional__c=false",
                 "-u",
-                TB_132_UserName,
+                ORG_USERNAME,
                 "--json"});
         System.out.println(quoteProductResult);
         String quoteProductId = JsonParser2.getFieldValue(quoteProductResult.toString(), "id");
@@ -181,7 +181,7 @@ public class OptionalProductWasAddedToAnOrderAndSentToMews extends BaseTest {
                 "-q",
                 "SELECT Id, Name FROM thn__Order__c WHERE thn__MYCE_Quote__c='" + myceQuoteID + "'",
                 "-u",
-                TB_132_UserName,
+                ORG_USERNAME,
                 "--json"});
         List<String> ordersID= JsonParser2.getFieldValueSoql(orders.toString(), "Id");
         List<String> ordersName= JsonParser2.getFieldValueSoql(orders.toString(),  "Name");
@@ -193,7 +193,7 @@ public class OptionalProductWasAddedToAnOrderAndSentToMews extends BaseTest {
                 "-w",
                 "thn__Order__c=" + ordersID.get(0) + "'",
                 "-u",
-                TB_132_UserName,
+                ORG_USERNAME,
                 "--json"});
         System.out.println(orderLinesRecord);
         String orderLineID = JsonParser2.getFieldValue(orderLinesRecord.toString(), "Id");
@@ -219,7 +219,7 @@ public class OptionalProductWasAddedToAnOrderAndSentToMews extends BaseTest {
                 "-w",
                 "Name='TestOptionalProductAuto3'",
                 "-u",
-                TB_132_UserName,
+                ORG_USERNAME,
                 "--json"});
         StringBuilder propertyDemoRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
@@ -229,7 +229,7 @@ public class OptionalProductWasAddedToAnOrderAndSentToMews extends BaseTest {
                 "-w",
                 "Name='Demo'",
                 "-u",
-                TB_132_UserName,
+                ORG_USERNAME,
                 "--json"});
         String propertyDemoID = JsonParser2.getFieldValue(propertyDemoRecord.toString(), "Id");
         StringBuilder productRecordMHD = SfdxCommand.runLinuxCommand1(new String[]{
@@ -240,7 +240,7 @@ public class OptionalProductWasAddedToAnOrderAndSentToMews extends BaseTest {
                 "-w",
                 "Name='MEETING HALF DAY'",
                 "-u",
-                TB_132_UserName,
+                ORG_USERNAME,
                 "--json"});
         String meetingHalfDayID = JsonParser2.getFieldValue(productRecordMHD.toString(), "Id");
         StringBuilder myseQuoteResult = SfdxCommand.runLinuxCommand1(new String[]{
@@ -253,7 +253,7 @@ public class OptionalProductWasAddedToAnOrderAndSentToMews extends BaseTest {
                         " thn__Hotel__c='" + propertyDemoID + "' thn__Arrival_Date__c=" + date.generateTodayDate2() +
                         " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 3),
                 "-u",
-                TB_132_UserName,
+                ORG_USERNAME,
                 "--json"});
         String myceQuoteID = JsonParser2.getFieldValue(myseQuoteResult.toString(), "id");
         StringBuilder quoteMeetingRoomResult = SfdxCommand.runLinuxCommand1(new String[]{
@@ -265,7 +265,7 @@ public class OptionalProductWasAddedToAnOrderAndSentToMews extends BaseTest {
                 "thn__MYCE_Quote__c='" + myceQuoteID + "' thn__Product__c='" + meetingHalfDayID +
                         "' thn__Optional__c=true",
                 "-u",
-                TB_132_UserName,
+                ORG_USERNAME,
                 "--json"});
         System.out.println(quoteMeetingRoomResult);
         String quoteMeetingRoomId = JsonParser2.getFieldValue(quoteMeetingRoomResult.toString(), "id");
@@ -278,7 +278,7 @@ public class OptionalProductWasAddedToAnOrderAndSentToMews extends BaseTest {
                 "-q",
                 "SELECT Id FROM thn__Order__c WHERE thn__MYCE_Quote__c='" + myceQuoteID + "'",
                 "-u",
-                TB_132_UserName,
+                ORG_USERNAME,
                 "--json"});
         List<String> ordersID= JsonParser2.getFieldValueSoql(orders.toString(), "Id");
         Assert.assertEquals(ordersID.size(), 0);
@@ -296,7 +296,7 @@ public class OptionalProductWasAddedToAnOrderAndSentToMews extends BaseTest {
                 "-w",
                 "Name='TestOptionalProductAuto4'",
                 "-u",
-                TB_132_UserName,
+                ORG_USERNAME,
                 "--json"});
         StringBuilder propertyDemoRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
@@ -306,7 +306,7 @@ public class OptionalProductWasAddedToAnOrderAndSentToMews extends BaseTest {
                 "-w",
                 "Name='Demo'",
                 "-u",
-                TB_132_UserName,
+                ORG_USERNAME,
                 "--json"});
         String propertyDemoID = JsonParser2.getFieldValue(propertyDemoRecord.toString(), "Id");
         StringBuilder productRecordMHD = SfdxCommand.runLinuxCommand1(new String[]{
@@ -317,7 +317,7 @@ public class OptionalProductWasAddedToAnOrderAndSentToMews extends BaseTest {
                 "-w",
                 "Name='MEETING HALF DAY'",
                 "-u",
-                TB_132_UserName,
+                ORG_USERNAME,
                 "--json"});
         String meetingHalfDayID = JsonParser2.getFieldValue(productRecordMHD.toString(), "Id");
         StringBuilder myseQuoteResult = SfdxCommand.runLinuxCommand1(new String[]{
@@ -330,7 +330,7 @@ public class OptionalProductWasAddedToAnOrderAndSentToMews extends BaseTest {
                         " thn__Hotel__c='" + propertyDemoID + "' thn__Arrival_Date__c=" + date.generateTodayDate2() +
                         " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 3),
                 "-u",
-                TB_132_UserName,
+                ORG_USERNAME,
                 "--json"});
         String myceQuoteID = JsonParser2.getFieldValue(myseQuoteResult.toString(), "id");
         StringBuilder quoteMeetingRoomResult = SfdxCommand.runLinuxCommand1(new String[]{
@@ -342,7 +342,7 @@ public class OptionalProductWasAddedToAnOrderAndSentToMews extends BaseTest {
                 "thn__MYCE_Quote__c='" + myceQuoteID + "' thn__Product__c='" + meetingHalfDayID +
                         "' thn__Optional__c=false",
                 "-u",
-                TB_132_UserName,
+                ORG_USERNAME,
                 "--json"});
         System.out.println(quoteMeetingRoomResult);
         String quoteMeetingRoomId = JsonParser2.getFieldValue(quoteMeetingRoomResult.toString(), "id");
@@ -355,7 +355,7 @@ public class OptionalProductWasAddedToAnOrderAndSentToMews extends BaseTest {
                 "-q",
                 "SELECT Id, Name FROM thn__Order__c WHERE thn__MYCE_Quote__c='" + myceQuoteID + "'",
                 "-u",
-                TB_132_UserName,
+                ORG_USERNAME,
                 "--json"});
         List<String> ordersID= JsonParser2.getFieldValueSoql(orders.toString(), "Id");
         List<String> ordersName= JsonParser2.getFieldValueSoql(orders.toString(),  "Name");
@@ -367,7 +367,7 @@ public class OptionalProductWasAddedToAnOrderAndSentToMews extends BaseTest {
                 "-w",
                 "thn__Order__c=" + ordersID.get(0) + "'",
                 "-u",
-                TB_132_UserName,
+                ORG_USERNAME,
                 "--json"});
         System.out.println(orderLinesRecord);
         String orderLineID = JsonParser2.getFieldValue(orderLinesRecord.toString(), "Id");

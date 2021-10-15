@@ -21,13 +21,13 @@ public class HotelRoomModifications extends BaseTest {
                 SFDX,
                 "force:auth:jwt:grant",
                 "--clientid",
-                key,
+                CONSUMER_KEY,
                 "--jwtkeyfile",
-                "/home/user/jdoe/JWT/server.key",
+                SERVER_KEY_PATH,
                 "--username",
-                ALIAS,
+                ORG_USERNAME,
                 "--instanceurl",
-                "https://test.salesforce.com"
+                ORG_URL
         });
         System.out.println(authorise);
     }
@@ -44,7 +44,7 @@ public class HotelRoomModifications extends BaseTest {
                 "-w",
                 "Name='QuoteTestHotelRoomModification'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         StringBuilder propertyRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
@@ -54,7 +54,7 @@ public class HotelRoomModifications extends BaseTest {
                 "-w",
                 "Name='Demo'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String propertyID = JsonParser2.getFieldValue(propertyRecord.toString(), "Id");
         StringBuilder myseQuoteResult = SfdxCommand.runLinuxCommand1(new String[]{
@@ -67,7 +67,7 @@ public class HotelRoomModifications extends BaseTest {
                         "' thn__Arrival_Date__c=" + date.generateTodayDate2() + " thn__Departure_Date__c=" +
                         date.generateTodayDate2_plus(0, 3),
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String myceQuoteID = JsonParser2.getFieldValue(myseQuoteResult.toString(), "id");
     }
@@ -84,7 +84,7 @@ public class HotelRoomModifications extends BaseTest {
                 "-w",
                 "Name='QuoteTestHotelRoomModification'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String quoteID = JsonParser2.getFieldValue(quoteRecord.toString(), "Id");
         StringBuilder productRecordRoom1Night = SfdxCommand.runLinuxCommand1(new String[]{
@@ -95,7 +95,7 @@ public class HotelRoomModifications extends BaseTest {
                 "-w",
                 "Name='ROOM 1 NIGHT'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String room1NightID = JsonParser2.getFieldValue(productRecordRoom1Night.toString(), "Id");
         StringBuilder roomTypeSingleRecord = SfdxCommand.runLinuxCommand1(new String[]{
@@ -106,7 +106,7 @@ public class HotelRoomModifications extends BaseTest {
                 "-w",
                 "Name='Single'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String roomTypeSingleID = JsonParser2.getFieldValue(roomTypeSingleRecord.toString(), "Id");
         StringBuilder OccupancyTypeRecord = SfdxCommand.runLinuxCommand1(new String[]{
@@ -117,7 +117,7 @@ public class HotelRoomModifications extends BaseTest {
                 "-w",
                 "thn__Name__c='Twin'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String numberOccupancyType = JsonParser2.getFieldValue(OccupancyTypeRecord.toString(), "thn__Number__c");
         StringBuilder quoteHotelRoom1 = SfdxCommand.runLinuxCommand1(new String[]{
@@ -129,7 +129,7 @@ public class HotelRoomModifications extends BaseTest {
                 "thn__MYCE_Quote__c='" + quoteID + "' thn__Product__c='"
                         + room1NightID + "' thn__Space_Area__c='" + roomTypeSingleID + "' thn__Type_of_Occupancy__c='Twin'" ,
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String quoteHotelRoomId1 = JsonParser2.getFieldValue(quoteHotelRoom1.toString(), "id");
         StringBuilder quoteHotelRoomRecord = SfdxCommand.runLinuxCommand1(new String[]{
@@ -140,7 +140,7 @@ public class HotelRoomModifications extends BaseTest {
                 "-w",
                 "Id='" + quoteHotelRoomId1 + "'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String numberOfAdults = JsonParser2.getFieldValue(quoteHotelRoomRecord.toString(), "thn__Number_of_Adults__c");
         Assert.assertEquals(numberOfAdults, numberOccupancyType);
@@ -158,7 +158,7 @@ public class HotelRoomModifications extends BaseTest {
                 "-w",
                 "Name='QuoteTestHotelRoomModification'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String quoteID = JsonParser2.getFieldValue(quoteRecord.toString(), "Id");
         StringBuilder OccupancyTypeRecord = SfdxCommand.runLinuxCommand1(new String[]{
@@ -169,7 +169,7 @@ public class HotelRoomModifications extends BaseTest {
                 "-w",
                 "thn__Name__c='Quadruple'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String numberOccupancyType = JsonParser2.getFieldValue(OccupancyTypeRecord.toString(), "thn__Number__c");
         StringBuilder quoteHotelRoomsSoql = SfdxCommand.runLinuxCommand1(new String[]{
@@ -178,7 +178,7 @@ public class HotelRoomModifications extends BaseTest {
                 "-q",
                 "SELECT Id FROM thn__Quote_Hotel_Room__c WHERE thn__MYCE_Quote__c='" + quoteID + "'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         List<String> quotesHotelRoomsID = JsonParser2.getFieldValueSoql(quoteHotelRoomsSoql.toString(), "Id");
         StringBuilder quoteHotelRoomUpdateResult = SfdxCommand.runLinuxCommand1(new String[]{
@@ -191,7 +191,7 @@ public class HotelRoomModifications extends BaseTest {
                 "-v",
                 "thn__Type_of_Occupancy__c='Quadruple'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         StringBuilder quoteHotelRoomRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
@@ -201,7 +201,7 @@ public class HotelRoomModifications extends BaseTest {
                 "-w",
                 "Id='" + quotesHotelRoomsID.get(0) + "'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String numberOfAdults = JsonParser2.getFieldValue(quoteHotelRoomRecord.toString(), "thn__Number_of_Adults__c");
         Assert.assertEquals(numberOfAdults, numberOccupancyType);
@@ -219,7 +219,7 @@ public class HotelRoomModifications extends BaseTest {
                 "-w",
                 "Name='QuoteTestHotelRoomModification'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String quoteID = JsonParser2.getFieldValue(quoteRecord.toString(), "Id");
         StringBuilder OccupancyTypeRecord = SfdxCommand.runLinuxCommand1(new String[]{
@@ -230,7 +230,7 @@ public class HotelRoomModifications extends BaseTest {
                 "-w",
                 "thn__Name__c='Single'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         System.out.println(OccupancyTypeRecord);
         String occupancyTypeMessage = JsonParser2.getFieldValue2(OccupancyTypeRecord.toString(), "message");
@@ -240,7 +240,7 @@ public class HotelRoomModifications extends BaseTest {
                 "-q",
                 "SELECT Id FROM thn__Quote_Hotel_Room__c WHERE thn__MYCE_Quote__c='" + quoteID + "'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         List<String> quotesHotelRoomsID = JsonParser2.getFieldValueSoql(quoteHotelRoomsSoql.toString(), "Id");
         StringBuilder quoteHotelRoomUpdateResult = SfdxCommand.runLinuxCommand1(new String[]{
@@ -253,7 +253,7 @@ public class HotelRoomModifications extends BaseTest {
                 "-v",
                 "thn__Type_of_Occupancy__c='Single'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         StringBuilder quoteHotelRoomRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
@@ -263,7 +263,7 @@ public class HotelRoomModifications extends BaseTest {
                 "-w",
                 "Id='" + quotesHotelRoomsID.get(0) + "'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String numberOfAdults = JsonParser2.getFieldValue(quoteHotelRoomRecord.toString(), "thn__Number_of_Adults__c");
         Assert.assertEquals(numberOfAdults,"1");
@@ -282,7 +282,7 @@ public class HotelRoomModifications extends BaseTest {
                 "-w",
                 "Name='QuoteTestHotelRoomModification'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String quoteID = JsonParser2.getFieldValue(quoteRecord.toString(), "Id");
         StringBuilder quoteHotelRoomsSoql = SfdxCommand.runLinuxCommand1(new String[]{
@@ -291,7 +291,7 @@ public class HotelRoomModifications extends BaseTest {
                 "-q",
                 "SELECT Id FROM thn__Quote_Hotel_Room__c WHERE thn__MYCE_Quote__c='" + quoteID + "'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         List<String> quotesHotelRoomsID = JsonParser2.getFieldValueSoql(quoteHotelRoomsSoql.toString(), "Id");
         StringBuilder quoteHotelRoomUpdateResult = SfdxCommand.runLinuxCommand1(new String[]{
@@ -304,7 +304,7 @@ public class HotelRoomModifications extends BaseTest {
                 "-v",
                 "thn__Type_of_Occupancy__c=''",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         System.out.println(quoteHotelRoomUpdateResult);
 
@@ -316,7 +316,7 @@ public class HotelRoomModifications extends BaseTest {
                 "-w",
                 "Id='" + quotesHotelRoomsID.get(0) + "'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         System.out.println(quoteHotelRoomRecord);
         String numberOfAdults = JsonParser2.getFieldValue(quoteHotelRoomRecord.toString(), "thn__Number_of_Adults__c");
@@ -335,7 +335,7 @@ public class HotelRoomModifications extends BaseTest {
                 "-w",
                 "Name='QuoteTestHotelRoomModification'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String quoteID = JsonParser2.getFieldValue(quoteRecord.toString(), "Id");
         StringBuilder quoteHotelRoomsSoql = SfdxCommand.runLinuxCommand1(new String[]{
@@ -344,7 +344,7 @@ public class HotelRoomModifications extends BaseTest {
                 "-q",
                 "SELECT Id FROM thn__Quote_Hotel_Room__c WHERE thn__MYCE_Quote__c='" + quoteID + "'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         List<String> quotesHotelRoomsID = JsonParser2.getFieldValueSoql(quoteHotelRoomsSoql.toString(), "Id");
         StringBuilder quoteHotelRoomUpdateResult = SfdxCommand.runLinuxCommand1(new String[]{
@@ -357,7 +357,7 @@ public class HotelRoomModifications extends BaseTest {
                 "-v",
                 "thn__Type_of_Occupancy__c='Quadruple'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         StringBuilder quoteHotelRoomUpdateResult2 = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
@@ -369,7 +369,7 @@ public class HotelRoomModifications extends BaseTest {
                 "-v",
                 "thn__Number_of_Adults__c=15",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         System.out.println(quoteHotelRoomUpdateResult2);
 
@@ -381,7 +381,7 @@ public class HotelRoomModifications extends BaseTest {
                 "-w",
                 "Id='" + quotesHotelRoomsID.get(0) + "'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         System.out.println(quoteHotelRoomRecord);
         String numberOfAdults = JsonParser2.getFieldValue(quoteHotelRoomRecord.toString(), "thn__Number_of_Adults__c");
@@ -402,7 +402,7 @@ public class HotelRoomModifications extends BaseTest {
                 "-w",
                 "Name='QuoteTestHotelRoomModification'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String quoteID = JsonParser2.getFieldValue(quoteRecord.toString(), "Id");
         StringBuilder quoteHotelRoomsSoql = SfdxCommand.runLinuxCommand1(new String[]{
@@ -411,7 +411,7 @@ public class HotelRoomModifications extends BaseTest {
                 "-q",
                 "SELECT Id FROM thn__Quote_Hotel_Room__c WHERE thn__MYCE_Quote__c='" + quoteID + "'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         List<String> quotesHotelRoomsID = JsonParser2.getFieldValueSoql(quoteHotelRoomsSoql.toString(), "Id");
         StringBuilder quoteHotelRoomUpdateResult = SfdxCommand.runLinuxCommand1(new String[]{
@@ -424,7 +424,7 @@ public class HotelRoomModifications extends BaseTest {
                 "-v",
                 "thn__Discount__c='10'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         StringBuilder quoteHotelRoomRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
@@ -434,7 +434,7 @@ public class HotelRoomModifications extends BaseTest {
                 "-w",
                 "Id='" + quotesHotelRoomsID.get(0) + "'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         System.out.println(quoteHotelRoomRecord);
         String numberOfAdults = JsonParser2.getFieldValue(quoteHotelRoomRecord.toString(), "thn__Number_of_Adults__c");

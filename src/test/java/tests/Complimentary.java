@@ -18,6 +18,19 @@ public class Complimentary extends BaseTest {
     @Description("THY-540 Myce Quote - Complimentary")
     @Story("Case 1: Make Quote having Quote related records linked to the Quote package and not linked to the Quote package Complimentary")
     public void testComplimentary1() throws InterruptedException, IOException {
+        StringBuilder authorise = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:auth:jwt:grant",
+                "--clientid",
+                CONSUMER_KEY,
+                "--jwtkeyfile",
+                SERVER_KEY_PATH,
+                "--username",
+                ORG_USERNAME,
+                "--instanceurl",
+                ORG_URL
+        });
+        System.out.println(authorise);
         StringBuilder productRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:get",
@@ -26,7 +39,7 @@ public class Complimentary extends BaseTest {
                 "-w",
                 "Name='ROOM 1 NIGHT'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String productID = JsonParser2.getFieldValue(productRecord.toString(), "Id");
         StringBuilder roomTypeRecord = SfdxCommand.runLinuxCommand1(new String[]{
@@ -37,7 +50,7 @@ public class Complimentary extends BaseTest {
                 "-w",
                 "Name='Queen'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String roomTypeID = JsonParser2.getFieldValue(roomTypeRecord.toString(), "Id");
         StringBuilder productRecord2 = SfdxCommand.runLinuxCommand1(new String[]{
@@ -48,7 +61,7 @@ public class Complimentary extends BaseTest {
                 "-w",
                 "Name='WINES'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String productWinesID = JsonParser2.getFieldValue(productRecord2.toString(), "Id");
         StringBuilder productRecord3 = SfdxCommand.runLinuxCommand1(new String[]{
@@ -59,7 +72,7 @@ public class Complimentary extends BaseTest {
                 "-w",
                 "Name='MEETING HALF DAY'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String meetingHalfDayID = JsonParser2.getFieldValue(productRecord3.toString(), "Id");
         StringBuilder propertyRecord = SfdxCommand.runLinuxCommand1(new String[]{
@@ -70,7 +83,7 @@ public class Complimentary extends BaseTest {
                 "-w",
                 "Name='Demo'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String propertyID = JsonParser2.getFieldValue(propertyRecord.toString(), "Id");
         StringBuilder packageResult = SfdxCommand.runLinuxCommand1(new String[]{
@@ -81,7 +94,7 @@ public class Complimentary extends BaseTest {
                 "-v",
                 "Name='TestComplimentary' thn__Hotel__c='" + propertyID + "'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String packageId = JsonParser2.getFieldValue(packageResult.toString(), "id");
         StringBuilder packageLineResult = SfdxCommand.runLinuxCommand1(new String[]{
@@ -94,7 +107,7 @@ public class Complimentary extends BaseTest {
                         " thn__Product__c='" + productID + "' thn__Start_Time__c=00:00 thn__End_Time__c=09:00" +
                         " thn__Unit_Price__c=10 thn__VAT_Category__c=1",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         System.out.println(packageLineResult);
         StringBuilder myseQuoteResult = SfdxCommand.runLinuxCommand1(new String[]{
@@ -106,7 +119,7 @@ public class Complimentary extends BaseTest {
                 "Name='Test Complimentary 1' thn__Pax__c=10 thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
                         date.generateTodayDate2() + " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 3),
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String myceQuoteID = JsonParser2.getFieldValue(myseQuoteResult.toString(), "id");
         StringBuilder quoteHotelRoomResult = SfdxCommand.runLinuxCommand1(new String[]{
@@ -120,7 +133,7 @@ public class Complimentary extends BaseTest {
                         date.generateTodayDate2() + "T10:00:00.000+0000 thn__Product__c='" + productID + "'" +
                         " thn__Space_Area__c='" + roomTypeID + "' thn__Unit_Price__c=10" ,
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String quoteHotelRoomId = JsonParser2.getFieldValue(quoteHotelRoomResult.toString(), "id");
         StringBuilder quoteProductResult = SfdxCommand.runLinuxCommand1(new String[]{
@@ -133,7 +146,7 @@ public class Complimentary extends BaseTest {
                         "' thn__Pax__c=10 thn__Unit_Price__c=10 thn__Start_Date_Time__c=" + date.generateTodayDate2_plus(0, 0) +
                         " thn__End_Date_Time__c=" + date.generateTodayDate2_plus(0, 1),
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String quoteProductId = JsonParser2.getFieldValue(quoteProductResult.toString(), "id");
         StringBuilder quoteMeetingRoomResult = SfdxCommand.runLinuxCommand1(new String[]{
@@ -144,7 +157,7 @@ public class Complimentary extends BaseTest {
                 "-v",
                 "thn__MYCE_Quote__c='" + myceQuoteID + "' thn__Product__c='" + meetingHalfDayID + "' thn__Unit_Price__c=10",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String quoteMeetingRoomId = JsonParser2.getFieldValue(quoteMeetingRoomResult.toString(), "id");
         StringBuilder quotePackageResult = SfdxCommand.runLinuxCommand1(new String[]{
@@ -156,7 +169,7 @@ public class Complimentary extends BaseTest {
                 "thn__MYCE_Quote__c='" + myceQuoteID + "' thn__Package__c='" + packageId +
                         "' thn__Unit_Price__c=10",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String quotePackageId = JsonParser2.getFieldValue(quotePackageResult.toString(), "id");
         StringBuilder result = SfdxCommand.runLinuxCommand1(new String[]{
@@ -169,7 +182,7 @@ public class Complimentary extends BaseTest {
                 "-v",
                 "thn__Complimentary__c=true",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         System.out.println(result);
         StringBuilder myceQuoteRecord = SfdxCommand.runLinuxCommand1(new String[]{
@@ -180,7 +193,7 @@ public class Complimentary extends BaseTest {
                 "-w",
                 "Id='" + myceQuoteID + "'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         System.out.println(myceQuoteRecord);
         StringBuilder quoteHotelRoomRecord = SfdxCommand.runLinuxCommand1(new String[]{
@@ -191,7 +204,7 @@ public class Complimentary extends BaseTest {
                 "-w",
                 "Id='" + quoteHotelRoomId + "'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         System.out.println(quoteHotelRoomRecord);
         StringBuilder quoteProductRecord = SfdxCommand.runLinuxCommand1(new String[]{
@@ -202,7 +215,7 @@ public class Complimentary extends BaseTest {
                 "-w",
                 "Id='" + quoteProductId + "'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         System.out.println(quoteProductRecord);
         StringBuilder quoteMeetingRoomRecord = SfdxCommand.runLinuxCommand1(new String[]{
@@ -213,7 +226,7 @@ public class Complimentary extends BaseTest {
                 "-w",
                 "Id='" + quoteMeetingRoomId + "'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         System.out.println(quoteMeetingRoomRecord);
         StringBuilder quotePackageRecord = SfdxCommand.runLinuxCommand1(new String[]{
@@ -224,7 +237,7 @@ public class Complimentary extends BaseTest {
                 "-w",
                 "Id='" + quotePackageId + "'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         System.out.println(quotePackageRecord);
         String complimentaryMyceQuote = JsonParser2.getFieldValue(myceQuoteRecord.toString(), "thn__Complimentary__c");
@@ -268,7 +281,7 @@ public class Complimentary extends BaseTest {
                 "-w",
                 "Name='ROOM 1 NIGHT'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String productID = JsonParser2.getFieldValue(productRecord.toString(), "Id");
         StringBuilder roomTypeRecord = SfdxCommand.runLinuxCommand1(new String[]{
@@ -279,7 +292,7 @@ public class Complimentary extends BaseTest {
                 "-w",
                 "Name='Queen'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String roomTypeID = JsonParser2.getFieldValue(roomTypeRecord.toString(), "Id");
         StringBuilder productRecord2 = SfdxCommand.runLinuxCommand1(new String[]{
@@ -290,7 +303,7 @@ public class Complimentary extends BaseTest {
                 "-w",
                 "Name='WINES'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String productWinesID = JsonParser2.getFieldValue(productRecord2.toString(), "Id");
         StringBuilder productRecord3 = SfdxCommand.runLinuxCommand1(new String[]{
@@ -301,7 +314,7 @@ public class Complimentary extends BaseTest {
                 "-w",
                 "Name='MEETING HALF DAY'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String meetingHalfDayID = JsonParser2.getFieldValue(productRecord3.toString(), "Id");
         StringBuilder propertyRecord = SfdxCommand.runLinuxCommand1(new String[]{
@@ -312,7 +325,7 @@ public class Complimentary extends BaseTest {
                 "-w",
                 "Name='Demo'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String propertyID = JsonParser2.getFieldValue(propertyRecord.toString(), "Id");
         StringBuilder packageResult = SfdxCommand.runLinuxCommand1(new String[]{
@@ -323,7 +336,7 @@ public class Complimentary extends BaseTest {
                 "-v",
                 "Name='TestComplimentary2' thn__Hotel__c='" + propertyID + "'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String packageId = JsonParser2.getFieldValue(packageResult.toString(), "id");
         StringBuilder packageLineResult = SfdxCommand.runLinuxCommand1(new String[]{
@@ -336,7 +349,7 @@ public class Complimentary extends BaseTest {
                         " thn__Product__c='" + productID + "' thn__Start_Time__c=00:00 thn__End_Time__c=09:00" +
                         " thn__Unit_Price__c=10 thn__VAT_Category__c=1",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         System.out.println(packageLineResult);
         StringBuilder myseQuoteResult = SfdxCommand.runLinuxCommand1(new String[]{
@@ -348,7 +361,7 @@ public class Complimentary extends BaseTest {
                 "Name='Test Complimentary 2' thn__Pax__c=10 thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
                         date.generateTodayDate2() + " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 3),
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String myceQuoteID = JsonParser2.getFieldValue(myseQuoteResult.toString(), "id");
         StringBuilder quoteHotelRoomResult = SfdxCommand.runLinuxCommand1(new String[]{
@@ -362,7 +375,7 @@ public class Complimentary extends BaseTest {
                         date.generateTodayDate2() + "T10:00:00.000+0000 thn__Product__c='" + productID + "'" +
                         " thn__Space_Area__c='" + roomTypeID + "' thn__Unit_Price__c=10",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String quoteHotelRoomId = JsonParser2.getFieldValue(quoteHotelRoomResult.toString(), "id");
         StringBuilder quoteProductResult = SfdxCommand.runLinuxCommand1(new String[]{
@@ -375,7 +388,7 @@ public class Complimentary extends BaseTest {
                         "' thn__Pax__c=10 thn__Unit_Price__c=10 thn__Start_Date_Time__c=" + date.generateTodayDate2_plus(0, 0) +
                         " thn__End_Date_Time__c=" + date.generateTodayDate2_plus(0, 1),
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String quoteProductId = JsonParser2.getFieldValue(quoteProductResult.toString(), "id");
         StringBuilder quoteMeetingRoomResult = SfdxCommand.runLinuxCommand1(new String[]{
@@ -386,7 +399,7 @@ public class Complimentary extends BaseTest {
                 "-v",
                 "thn__MYCE_Quote__c='" + myceQuoteID + "' thn__Product__c='" + meetingHalfDayID + "' thn__Unit_Price__c=10",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String quoteMeetingRoomId = JsonParser2.getFieldValue(quoteMeetingRoomResult.toString(), "id");
         StringBuilder quotePackageResult = SfdxCommand.runLinuxCommand1(new String[]{
@@ -398,7 +411,7 @@ public class Complimentary extends BaseTest {
                 "thn__MYCE_Quote__c='" + myceQuoteID + "' thn__Package__c='" + packageId +
                         "' thn__Unit_Price__c=10",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String quotePackageId = JsonParser2.getFieldValue(quotePackageResult.toString(), "id");
         SfdxCommand.runLinuxCommand1(new String[]{
@@ -411,7 +424,7 @@ public class Complimentary extends BaseTest {
                 "-v",
                 "thn__Complimentary__c=true",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
@@ -423,7 +436,7 @@ public class Complimentary extends BaseTest {
                 "-v",
                 "thn__Complimentary__c=false",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         StringBuilder myceQuoteRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
@@ -433,7 +446,7 @@ public class Complimentary extends BaseTest {
                 "-w",
                 "Id='" + myceQuoteID + "'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         System.out.println(myceQuoteRecord);
         StringBuilder quoteHotelRoomRecord = SfdxCommand.runLinuxCommand1(new String[]{
@@ -444,7 +457,7 @@ public class Complimentary extends BaseTest {
                 "-w",
                 "Id='" + quoteHotelRoomId + "'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         System.out.println(quoteHotelRoomRecord);
         StringBuilder quoteProductRecord = SfdxCommand.runLinuxCommand1(new String[]{
@@ -455,7 +468,7 @@ public class Complimentary extends BaseTest {
                 "-w",
                 "Id='" + quoteProductId + "'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         System.out.println(quoteProductRecord);
         StringBuilder quoteMeetingRoomRecord = SfdxCommand.runLinuxCommand1(new String[]{
@@ -466,7 +479,7 @@ public class Complimentary extends BaseTest {
                 "-w",
                 "Id='" + quoteMeetingRoomId + "'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         System.out.println(quoteMeetingRoomRecord);
         StringBuilder quotePackageRecord = SfdxCommand.runLinuxCommand1(new String[]{
@@ -477,7 +490,7 @@ public class Complimentary extends BaseTest {
                 "-w",
                 "Id='" + quotePackageId + "'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         System.out.println(quotePackageRecord);
         String complimentaryMyceQuote = JsonParser2.getFieldValue(myceQuoteRecord.toString(), "thn__Complimentary__c");
@@ -521,7 +534,7 @@ public class Complimentary extends BaseTest {
                 "-w",
                 "Name='ROOM 1 NIGHT'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String productID = JsonParser2.getFieldValue(productRecord.toString(), "Id");
         StringBuilder roomTypeRecord = SfdxCommand.runLinuxCommand1(new String[]{
@@ -532,7 +545,7 @@ public class Complimentary extends BaseTest {
                 "-w",
                 "Name='Queen'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String roomTypeID = JsonParser2.getFieldValue(roomTypeRecord.toString(), "Id");
         StringBuilder productRecord2 = SfdxCommand.runLinuxCommand1(new String[]{
@@ -543,7 +556,7 @@ public class Complimentary extends BaseTest {
                 "-w",
                 "Name='WINES'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String productWinesID = JsonParser2.getFieldValue(productRecord2.toString(), "Id");
         StringBuilder productRecord3 = SfdxCommand.runLinuxCommand1(new String[]{
@@ -554,7 +567,7 @@ public class Complimentary extends BaseTest {
                 "-w",
                 "Name='MEETING HALF DAY'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String meetingHalfDayID = JsonParser2.getFieldValue(productRecord3.toString(), "Id");
         StringBuilder propertyRecord = SfdxCommand.runLinuxCommand1(new String[]{
@@ -565,7 +578,7 @@ public class Complimentary extends BaseTest {
                 "-w",
                 "Name='Demo'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String propertyID = JsonParser2.getFieldValue(propertyRecord.toString(), "Id");
         StringBuilder packageResult = SfdxCommand.runLinuxCommand1(new String[]{
@@ -576,7 +589,7 @@ public class Complimentary extends BaseTest {
                 "-v",
                 "Name='TestComplimentary3' thn__Hotel__c='" + propertyID + "'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String packageId = JsonParser2.getFieldValue(packageResult.toString(), "id");
         StringBuilder packageLineResult = SfdxCommand.runLinuxCommand1(new String[]{
@@ -589,7 +602,7 @@ public class Complimentary extends BaseTest {
                         " thn__Product__c='" + productID + "' thn__Start_Time__c=00:00 thn__End_Time__c=09:00" +
                         " thn__Unit_Price__c=10 thn__VAT_Category__c=1",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         System.out.println(packageLineResult);
         StringBuilder myseQuoteResult = SfdxCommand.runLinuxCommand1(new String[]{
@@ -601,7 +614,7 @@ public class Complimentary extends BaseTest {
                 "Name='Test Complimentary 3' thn__Pax__c=10 thn__Complimentary__c=true thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
                         date.generateTodayDate2() + " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 3),
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String myceQuoteID = JsonParser2.getFieldValue(myseQuoteResult.toString(), "id");
         StringBuilder quoteHotelRoomResult = SfdxCommand.runLinuxCommand1(new String[]{
@@ -615,7 +628,7 @@ public class Complimentary extends BaseTest {
                         date.generateTodayDate2() + "T10:00:00.000+0000 thn__Product__c='" + productID + "'" +
                         " thn__Space_Area__c='" + roomTypeID + "' thn__Unit_Price__c=10",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String quoteHotelRoomId = JsonParser2.getFieldValue(quoteHotelRoomResult.toString(), "id");
         StringBuilder quoteProductResult = SfdxCommand.runLinuxCommand1(new String[]{
@@ -628,7 +641,7 @@ public class Complimentary extends BaseTest {
                         "' thn__Pax__c=10 thn__Unit_Price__c=10 thn__Start_Date_Time__c=" + date.generateTodayDate2_plus(0, 0) +
                         " thn__End_Date_Time__c=" + date.generateTodayDate2_plus(0, 1),
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String quoteProductId = JsonParser2.getFieldValue(quoteProductResult.toString(), "id");
         StringBuilder quoteMeetingRoomResult = SfdxCommand.runLinuxCommand1(new String[]{
@@ -639,7 +652,7 @@ public class Complimentary extends BaseTest {
                 "-v",
                 "thn__MYCE_Quote__c='" + myceQuoteID + "' thn__Product__c='" + meetingHalfDayID + "' thn__Unit_Price__c=10",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String quoteMeetingRoomId = JsonParser2.getFieldValue(quoteMeetingRoomResult.toString(), "id");
         StringBuilder quotePackageResult = SfdxCommand.runLinuxCommand1(new String[]{
@@ -651,7 +664,7 @@ public class Complimentary extends BaseTest {
                 "thn__MYCE_Quote__c='" + myceQuoteID + "' thn__Package__c='" + packageId +
                         "' thn__Unit_Price__c=10",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String quotePackageId = JsonParser2.getFieldValue(quotePackageResult.toString(), "id");
         StringBuilder myceQuoteRecord = SfdxCommand.runLinuxCommand1(new String[]{
@@ -662,7 +675,7 @@ public class Complimentary extends BaseTest {
                 "-w",
                 "Id='" + myceQuoteID + "'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         System.out.println(myceQuoteRecord);
         StringBuilder quoteHotelRoomRecord = SfdxCommand.runLinuxCommand1(new String[]{
@@ -673,7 +686,7 @@ public class Complimentary extends BaseTest {
                 "-w",
                 "Id='" + quoteHotelRoomId + "'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         System.out.println(quoteHotelRoomRecord);
         StringBuilder quoteProductRecord = SfdxCommand.runLinuxCommand1(new String[]{
@@ -684,7 +697,7 @@ public class Complimentary extends BaseTest {
                 "-w",
                 "Id='" + quoteProductId + "'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         System.out.println(quoteProductRecord);
         StringBuilder quoteMeetingRoomRecord = SfdxCommand.runLinuxCommand1(new String[]{
@@ -695,7 +708,7 @@ public class Complimentary extends BaseTest {
                 "-w",
                 "Id='" + quoteMeetingRoomId + "'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         System.out.println(quoteMeetingRoomRecord);
         StringBuilder quotePackageRecord = SfdxCommand.runLinuxCommand1(new String[]{
@@ -706,7 +719,7 @@ public class Complimentary extends BaseTest {
                 "-w",
                 "Id='" + quotePackageId + "'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         System.out.println(quotePackageRecord);
         String complimentaryMyceQuote = JsonParser2.getFieldValue(myceQuoteRecord.toString(), "thn__Complimentary__c");

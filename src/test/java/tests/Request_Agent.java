@@ -21,16 +21,16 @@ public class Request_Agent extends BaseTest{
                 SFDX,
                 "force:auth:jwt:grant",
                 "--clientid",
-                key,
+                CONSUMER_KEY,
                 "--jwtkeyfile",
-                "/home/user/jdoe/JWT/server.key",
+                SERVER_KEY_PATH,
                 "--username",
-                ALIAS,
+                ORG_USERNAME,
                 "--instanceurl",
-                "https://test.salesforce.com"
+                ORG_URL
         });
         System.out.println(authorise);
-        loginPageForScratchOrg.logInOnScratchOrg2(driver, urlForScratch, ALIAS, passwordForScratch);
+        loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
     }
 
     @Test(priority = 2, description = "Delete old data")
@@ -45,7 +45,7 @@ public class Request_Agent extends BaseTest{
                 "-w",
                 "Name='TestRequest",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         System.out.println(res);
         SfdxCommand.runLinuxCommand1(new String[]{
@@ -56,7 +56,7 @@ public class Request_Agent extends BaseTest{
                 "-w",
                 "Name='Sandman",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
@@ -66,7 +66,7 @@ public class Request_Agent extends BaseTest{
                 "-w",
                 "Name='Sandman2",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
@@ -76,7 +76,7 @@ public class Request_Agent extends BaseTest{
                 "-w",
                 "Name='TestAccount",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
@@ -86,7 +86,7 @@ public class Request_Agent extends BaseTest{
                 "-w",
                 "Name='Sandman2",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
@@ -96,7 +96,7 @@ public class Request_Agent extends BaseTest{
                 "-w",
                 "LastName='Shepard'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
@@ -106,7 +106,7 @@ public class Request_Agent extends BaseTest{
                 "-w",
                 "LastName='Anderson'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
@@ -116,7 +116,7 @@ public class Request_Agent extends BaseTest{
                 "-w",
                 "LastName='Anderson'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
@@ -126,7 +126,7 @@ public class Request_Agent extends BaseTest{
                 "-w",
                 "LastName='Anderson'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
     }
 
@@ -143,7 +143,7 @@ public class Request_Agent extends BaseTest{
                 "-w",
                 "Name='Demo'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String propertyID = JsonParser2.getFieldValue(propertyRecord.toString(), "Id");
         StringBuilder result = SfdxCommand.runLinuxCommand1(new String[]{
@@ -156,7 +156,7 @@ public class Request_Agent extends BaseTest{
                 "-v",
                 "thn__Request_Name__c='Demo'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         StringBuilder accountResult = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
@@ -166,7 +166,7 @@ public class Request_Agent extends BaseTest{
                 "-v",
                 "Name='TestRequest",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String accountId = JsonParser2.getFieldValue(accountResult.toString(), "id");
         StringBuilder contactResult = SfdxCommand.runLinuxCommand1(new String[]{
@@ -177,7 +177,7 @@ public class Request_Agent extends BaseTest{
                 "-v",
                 "LastName='Shepard' Email='test@tut.by' AccountId='" + accountId + "'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String contactId = JsonParser2.getFieldValue(contactResult.toString(), "id");
         StringBuilder requestResult = SfdxCommand.runLinuxCommand1(new String[]{
@@ -188,7 +188,7 @@ public class Request_Agent extends BaseTest{
                 "-v",
                 "thn__Agent_contact_Email__c='test@tut.by'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String requestId = JsonParser2.getFieldValue(requestResult.toString(), "id");
         StringBuilder requestRecord = SfdxCommand.runLinuxCommand1(new String[]{
@@ -199,7 +199,7 @@ public class Request_Agent extends BaseTest{
                 "-w",
                 "Id='" + requestId + "'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         System.out.println(requestRecord);
         String agentContact = JsonParser2.getFieldValue(requestRecord.toString(), "thn__Agent_contact__c");
@@ -221,7 +221,7 @@ public class Request_Agent extends BaseTest{
                 "-v",
                 "LastName='Anderson' Email='test2@tut.by'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String contactId = JsonParser2.getFieldValue(contactResult.toString(), "id");
         StringBuilder requestResult = SfdxCommand.runLinuxCommand1(new String[]{
@@ -232,7 +232,7 @@ public class Request_Agent extends BaseTest{
                 "-v",
                 "thn__Agent_contact_Email__c='test2@tut.by' thn__Agent_Name__c='Sandman'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String requestId = JsonParser2.getFieldValue(requestResult.toString(), "id");
         requests.openRequestRecord(requestId);
@@ -247,7 +247,7 @@ public class Request_Agent extends BaseTest{
                 "-w",
                 "Id='" + requestId + "'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String agentContactId = JsonParser2.getFieldValue(requestRecord.toString(), "thn__Agent_contact__c");
         String agentId = JsonParser2.getFieldValue(requestRecord.toString(), "thn__Agent__c");
@@ -261,7 +261,7 @@ public class Request_Agent extends BaseTest{
                 "-w",
                 "thn__Agent__c='" + agentId + "'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String myceQuoteAgentContactId = JsonParser2.getFieldValue(myceQuoteRecord.toString(), "thn__Agent_Contact__c");
         String myceQuoteAgentId = JsonParser2.getFieldValue(myceQuoteRecord.toString(), "thn__Agent__c");
@@ -287,7 +287,7 @@ public class Request_Agent extends BaseTest{
                 "thn__Agent_contact_Email__c='test3@tut.by' thn__Agent_contact_Last_Name__c='TestAgentContact'" +
                         " thn__Last_Name__c='TestContact' thn__Account_Name__c='TestAccount'  thn__Agent_Name__c='Sandman2'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String requestId = JsonParser2.getFieldValue(requestResult.toString(), "id");
         requests.openRequestRecord(requestId);
@@ -302,7 +302,7 @@ public class Request_Agent extends BaseTest{
                 "-w",
                 "Id='" + requestId + "'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String agentContactId = JsonParser2.getFieldValue(requestRecord.toString(), "thn__Agent_contact__c");
         String agentId = JsonParser2.getFieldValue(requestRecord.toString(), "thn__Agent__c");
@@ -316,7 +316,7 @@ public class Request_Agent extends BaseTest{
                 "-w",
                 "thn__Agent__c='" + agentId + "'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String myceQuoteAgentContactId = JsonParser2.getFieldValue(myceQuoteRecord.toString(), "thn__Agent_Contact__c");
         String myceQuoteAgentId = JsonParser2.getFieldValue(myceQuoteRecord.toString(), "thn__Agent__c");

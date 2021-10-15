@@ -14,7 +14,7 @@ public class TestData extends BaseTest{
         @Description("LogIn")
         @Story("LogIn")
         public void testLogIn() {
-            loginPageForScratchOrg.logInOnScratchOrg(driver);
+            loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
         }
 
         @Test (priority = 2)

@@ -18,6 +18,19 @@ public class OnConsumption extends BaseTest {
     @Description("THY-570: On Consumption")
     @Story("Add Quote product on MYCE Quote. Set 5 for Pax, On consumption == true.")
     public void testOnConsumption1() throws InterruptedException, IOException {
+        StringBuilder authorise = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:auth:jwt:grant",
+                "--clientid",
+                CONSUMER_KEY,
+                "--jwtkeyfile",
+                SERVER_KEY_PATH,
+                "--username",
+                ORG_USERNAME,
+                "--instanceurl",
+                ORG_URL
+        });
+        System.out.println(authorise);
         StringBuilder propertyRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:get",
@@ -26,7 +39,7 @@ public class OnConsumption extends BaseTest {
                 "-w",
                 "Name='Demo'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String propertyID = JsonParser2.getFieldValue(propertyRecord.toString(), "Id");
         StringBuilder productRecord2 = SfdxCommand.runLinuxCommand1(new String[]{
@@ -37,7 +50,7 @@ public class OnConsumption extends BaseTest {
                 "-w",
                 "Name='WINES'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String productWinesID = JsonParser2.getFieldValue(productRecord2.toString(), "Id");
         StringBuilder myseQuoteResult = SfdxCommand.runLinuxCommand1(new String[]{
@@ -49,7 +62,7 @@ public class OnConsumption extends BaseTest {
                 "Name='Test On Consumption 1' thn__Pax__c=10 thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
                         date.generateTodayDate2() + " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 3),
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String myceQuoteID = JsonParser2.getFieldValue(myseQuoteResult.toString(), "id");
         StringBuilder quoteProductResult = SfdxCommand.runLinuxCommand1(new String[]{
@@ -61,7 +74,7 @@ public class OnConsumption extends BaseTest {
                 "thn__MYCE_Quote__c='" + myceQuoteID + "' thn__Product__c='" + productWinesID +
                         "' thn__Pax__c=5 thn__On_Consumption__c=true",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String quoteProductId = JsonParser2.getFieldValue(quoteProductResult.toString(), "id");
         StringBuilder quoteProductRecord = SfdxCommand.runLinuxCommand1(new String[]{
@@ -72,7 +85,7 @@ public class OnConsumption extends BaseTest {
                 "-w",
                 "Id='" + quoteProductId + "'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
 
         String onConsumption = JsonParser2.getFieldValue(quoteProductRecord.toString(), "thn__On_Consumption__c");
@@ -94,7 +107,7 @@ public class OnConsumption extends BaseTest {
                 "-w",
                 "Name='Demo'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String propertyID = JsonParser2.getFieldValue(propertyRecord.toString(), "Id");
         StringBuilder productRecord2 = SfdxCommand.runLinuxCommand1(new String[]{
@@ -105,7 +118,7 @@ public class OnConsumption extends BaseTest {
                 "-w",
                 "Name='WINES'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String productWinesID = JsonParser2.getFieldValue(productRecord2.toString(), "Id");
         StringBuilder myseQuoteResult = SfdxCommand.runLinuxCommand1(new String[]{
@@ -117,7 +130,7 @@ public class OnConsumption extends BaseTest {
                 "Name='Test On Consumption 2' thn__Pax__c=10 thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
                         date.generateTodayDate2() + " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 3),
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String myceQuoteID = JsonParser2.getFieldValue(myseQuoteResult.toString(), "id");
         StringBuilder quoteProductResult = SfdxCommand.runLinuxCommand1(new String[]{
@@ -129,7 +142,7 @@ public class OnConsumption extends BaseTest {
                 "thn__MYCE_Quote__c='" + myceQuoteID + "' thn__Product__c='" + productWinesID +
                         "' thn__On_Consumption__c=true",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String quoteProductId = JsonParser2.getFieldValue(quoteProductResult.toString(), "id");
         StringBuilder quoteProductRecord = SfdxCommand.runLinuxCommand1(new String[]{
@@ -140,7 +153,7 @@ public class OnConsumption extends BaseTest {
                 "-w",
                 "Id='" + quoteProductId + "'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String onConsumption = JsonParser2.getFieldValue(quoteProductRecord.toString(), "thn__On_Consumption__c");
         String paxQuoteProduct = JsonParser2.getFieldValue(quoteProductRecord.toString(), "thn__Pax__c");
@@ -161,7 +174,7 @@ public class OnConsumption extends BaseTest {
                 "-w",
                 "Name='Demo'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String propertyID = JsonParser2.getFieldValue(propertyRecord.toString(), "Id");
         StringBuilder productRecord2 = SfdxCommand.runLinuxCommand1(new String[]{
@@ -172,7 +185,7 @@ public class OnConsumption extends BaseTest {
                 "-w",
                 "Name='WINES'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String productWinesID = JsonParser2.getFieldValue(productRecord2.toString(), "Id");
         StringBuilder myseQuoteResult = SfdxCommand.runLinuxCommand1(new String[]{
@@ -184,7 +197,7 @@ public class OnConsumption extends BaseTest {
                 "Name='Test On Consumption 3' thn__Pax__c=10 thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
                         date.generateTodayDate2() + " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 3),
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String myceQuoteID = JsonParser2.getFieldValue(myseQuoteResult.toString(), "id");
         StringBuilder quoteProductResult = SfdxCommand.runLinuxCommand1(new String[]{
@@ -196,7 +209,7 @@ public class OnConsumption extends BaseTest {
                 "thn__MYCE_Quote__c='" + myceQuoteID + "' thn__Product__c='" + productWinesID +
                         "' thn__On_Consumption__c=true",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String quoteProductId = JsonParser2.getFieldValue(quoteProductResult.toString(), "id");
         SfdxCommand.runLinuxCommand1(new String[]{
@@ -209,7 +222,7 @@ public class OnConsumption extends BaseTest {
                "-v",
                "thn__Pax__c=3",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         StringBuilder quoteProductRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
@@ -219,7 +232,7 @@ public class OnConsumption extends BaseTest {
                 "-w",
                 "Id='" + quoteProductId + "'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String onConsumption = JsonParser2.getFieldValue(quoteProductRecord.toString(), "thn__On_Consumption__c");
         String paxQuoteProduct = JsonParser2.getFieldValue(quoteProductRecord.toString(), "thn__Pax__c");
@@ -240,7 +253,7 @@ public class OnConsumption extends BaseTest {
                 "-w",
                 "Name='Demo'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String propertyID = JsonParser2.getFieldValue(propertyRecord.toString(), "Id");
         StringBuilder productRecord2 = SfdxCommand.runLinuxCommand1(new String[]{
@@ -251,7 +264,7 @@ public class OnConsumption extends BaseTest {
                 "-w",
                 "Name='WINES'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String productWinesID = JsonParser2.getFieldValue(productRecord2.toString(), "Id");
         StringBuilder myseQuoteResult = SfdxCommand.runLinuxCommand1(new String[]{
@@ -263,7 +276,7 @@ public class OnConsumption extends BaseTest {
                 "Name='Test On Consumption 4' thn__Pax__c=10 thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
                         date.generateTodayDate2() + " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 3),
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String myceQuoteID = JsonParser2.getFieldValue(myseQuoteResult.toString(), "id");
         StringBuilder quoteProductResult = SfdxCommand.runLinuxCommand1(new String[]{
@@ -275,7 +288,7 @@ public class OnConsumption extends BaseTest {
                 "thn__MYCE_Quote__c='" + myceQuoteID + "' thn__Product__c='" + productWinesID +
                         "' thn__Pax__c=5",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String quoteProductId = JsonParser2.getFieldValue(quoteProductResult.toString(), "id");
         SfdxCommand.runLinuxCommand1(new String[]{
@@ -288,7 +301,7 @@ public class OnConsumption extends BaseTest {
                 "-v",
                 "thn__On_Consumption__c=true",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         StringBuilder quoteProductRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
@@ -298,7 +311,7 @@ public class OnConsumption extends BaseTest {
                 "-w",
                 "Id='" + quoteProductId + "'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String onConsumption = JsonParser2.getFieldValue(quoteProductRecord.toString(), "thn__On_Consumption__c");
         String paxQuoteProduct = JsonParser2.getFieldValue(quoteProductRecord.toString(), "thn__Pax__c");

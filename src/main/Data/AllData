@@ -1,6 +1,8 @@
 
   delete [select name from thn__MYCE_Quote__c];
      delete [select name from thn__Hotel__c where name != 'Demo' and name!='Property Auto'];
+     delete [select Name from thn__Payment__c];
+     delete [select Name from thn__Bill__c];
      delete [select name from thn__Package__c];
      delete [select thn__FirstName__c from thn__Guest__c];
      delete [select name from thn__Reservation__c];

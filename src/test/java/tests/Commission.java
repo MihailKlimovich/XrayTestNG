@@ -21,13 +21,13 @@ public class Commission extends BaseTest {
                 SFDX,
                 "force:auth:jwt:grant",
                 "--clientid",
-                key,
+                CONSUMER_KEY,
                 "--jwtkeyfile",
-                serverKeyPath,
+                SERVER_KEY_PATH,
                 "--username",
-                ALIAS,
+                ORG_USERNAME,
                 "--instanceurl",
-                urlForScratch
+                ORG_URL
         });
         System.out.println(authorise);
     }
@@ -44,7 +44,7 @@ public class Commission extends BaseTest {
                 "-w",
                 "Name='TestAccountWithCommission",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
@@ -54,7 +54,7 @@ public class Commission extends BaseTest {
                 "-w",
                 "Name='TestAccountWithoutCommission",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
@@ -64,7 +64,7 @@ public class Commission extends BaseTest {
                 "-w",
                 "Name='TestCommission",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
@@ -74,7 +74,7 @@ public class Commission extends BaseTest {
                 "-w",
                 "Name='TestCommissionPackage",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         StringBuilder propertyRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
@@ -84,7 +84,7 @@ public class Commission extends BaseTest {
                 "-w",
                 "Name='Demo'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String propertyID = JsonParser2.getFieldValue(propertyRecord.toString(), "Id");
         StringBuilder accountResult1 = SfdxCommand.runLinuxCommand1(new String[]{
@@ -96,7 +96,7 @@ public class Commission extends BaseTest {
                 "Name='TestAccountWithCommission' thn__Comm_Activity__c=15 thn__Beverage__c=15 thn__Comm_Equipment__c=15" +
                         " thn__Food__c=15 thn__Room__c=15 thn__Meeting_Room__c=15 thn__Other__c=15 thn__Comm_Packages__c=15",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String accountId1 = JsonParser2.getFieldValue(accountResult1.toString(), "id");
         StringBuilder accountResult2 = SfdxCommand.runLinuxCommand1(new String[]{
@@ -107,7 +107,7 @@ public class Commission extends BaseTest {
                 "-v",
                 "Name='TestAccountWithoutCommission'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String accountId2 = JsonParser2.getFieldValue(accountResult2.toString(), "id");
         StringBuilder res = SfdxCommand.runLinuxCommand1(new String[]{
@@ -122,7 +122,7 @@ public class Commission extends BaseTest {
                         " thn__Comm_Hotel_Rooms__c=10 thn__Comm_Meeting_Rooms__c=10 thn__Comm_Other__c=10" +
                         " thn__Comm_Packages__c=10",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         System.out.println(res);
         StringBuilder myseQuoteResult = SfdxCommand.runLinuxCommand1(new String[]{
@@ -135,7 +135,7 @@ public class Commission extends BaseTest {
                         "' thn__Arrival_Date__c=" + date.generateTodayDate2() + " thn__Departure_Date__c=" +
                         date.generateTodayDate2_plus(0, 3),
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String myceQuoteID = JsonParser2.getFieldValue(myseQuoteResult.toString(), "id");
     }
@@ -153,7 +153,7 @@ public class Commission extends BaseTest {
                 "-w",
                 "Name='TestCommission'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String quoteID = JsonParser2.getFieldValue(quoteRecord.toString(), "Id");
         StringBuilder accountRecord = SfdxCommand.runLinuxCommand1(new String[]{
@@ -164,7 +164,7 @@ public class Commission extends BaseTest {
                 "-w",
                 "Name='TestAccountWithCommission'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String accountID = JsonParser2.getFieldValue(accountRecord.toString(), "Id");
         StringBuilder res = SfdxCommand.runLinuxCommand1(new String[]{
@@ -177,7 +177,7 @@ public class Commission extends BaseTest {
                 "-v",
                 "thn__Company__c='" + accountID + "' thn__Commission_to__c='Company' thn__Commissionable__c=true",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         StringBuilder updateQuoteRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
@@ -187,7 +187,7 @@ public class Commission extends BaseTest {
                 "-w",
                 "Id='" + quoteID + "'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String quoteCommActivity = JsonParser2.getFieldValue(updateQuoteRecord.toString(), "thn__Comm_Activity__c");
         String quoteCommBeverage = JsonParser2.getFieldValue(updateQuoteRecord.toString(), "thn__Comm_Beverage__c");
@@ -228,7 +228,7 @@ public class Commission extends BaseTest {
                 "-w",
                 "Name='TestCommission'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String quoteID = JsonParser2.getFieldValue(quoteRecord.toString(), "Id");
         StringBuilder accountRecord = SfdxCommand.runLinuxCommand1(new String[]{
@@ -239,7 +239,7 @@ public class Commission extends BaseTest {
                 "-w",
                 "Name='TestAccountWithoutCommission'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String accountID = JsonParser2.getFieldValue(accountRecord.toString(), "Id");
         StringBuilder res = SfdxCommand.runLinuxCommand1(new String[]{
@@ -252,7 +252,7 @@ public class Commission extends BaseTest {
                 "-v",
                 "thn__Company__c='" + accountID + "' thn__Commission_to__c='Company' thn__Commissionable__c=true",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         System.out.println(res);
         StringBuilder updateQuoteRecord = SfdxCommand.runLinuxCommand1(new String[]{
@@ -263,7 +263,7 @@ public class Commission extends BaseTest {
                 "-w",
                 "Id='" + quoteID + "'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         System.out.println(updateQuoteRecord);
         StringBuilder propertyRecord = SfdxCommand.runLinuxCommand1(new String[]{
@@ -274,7 +274,7 @@ public class Commission extends BaseTest {
                 "-w",
                 "Name='Demo'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String propertyCommActivity = JsonParser2.getFieldValue(propertyRecord.toString(), "thn__Comm_Activity__c");
         String propertyCommBeverage = JsonParser2.getFieldValue(propertyRecord.toString(), "thn__Comm_Beverage__c");
@@ -314,7 +314,7 @@ public class Commission extends BaseTest {
                 "-w",
                 "Name='TestCommission'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String quoteID = JsonParser2.getFieldValue(quoteRecord.toString(), "Id");
         StringBuilder propertyRecord = SfdxCommand.runLinuxCommand1(new String[]{
@@ -325,7 +325,7 @@ public class Commission extends BaseTest {
                 "-w",
                 "Name='Demo'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String propertyID = JsonParser2.getFieldValue(propertyRecord.toString(), "Id");
         StringBuilder productRecordMHD = SfdxCommand.runLinuxCommand1(new String[]{
@@ -336,7 +336,7 @@ public class Commission extends BaseTest {
                 "-w",
                 "Name='MEETING HALF DAY'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String meetingHalfDayID = JsonParser2.getFieldValue(productRecordMHD.toString(), "Id");
         StringBuilder productRecordRoom1Night = SfdxCommand.runLinuxCommand1(new String[]{
@@ -347,7 +347,7 @@ public class Commission extends BaseTest {
                 "-w",
                 "Name='ROOM 1 NIGHT'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String room1NightID = JsonParser2.getFieldValue(productRecordRoom1Night.toString(), "Id");
         StringBuilder beverageRecord = SfdxCommand.runLinuxCommand1(new String[]{
@@ -358,7 +358,7 @@ public class Commission extends BaseTest {
                 "-w",
                 "Name='BEVERAGE'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String beverageID = JsonParser2.getFieldValue(beverageRecord.toString(), "Id");
         StringBuilder activityRecord = SfdxCommand.runLinuxCommand1(new String[]{
@@ -369,7 +369,7 @@ public class Commission extends BaseTest {
                 "-w",
                 "Name='ACTIVITY'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String activityID = JsonParser2.getFieldValue(activityRecord.toString(), "Id");
         StringBuilder equipmentRecord = SfdxCommand.runLinuxCommand1(new String[]{
@@ -380,7 +380,7 @@ public class Commission extends BaseTest {
                 "-w",
                 "Name='EQUIPMENT'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String equipmentID = JsonParser2.getFieldValue(equipmentRecord.toString(), "Id");
         StringBuilder dinerRecord = SfdxCommand.runLinuxCommand1(new String[]{
@@ -391,7 +391,7 @@ public class Commission extends BaseTest {
                 "-w",
                 "Name='DINER'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String dinerID = JsonParser2.getFieldValue(dinerRecord.toString(), "Id");
         StringBuilder packageResult = SfdxCommand.runLinuxCommand1(new String[]{
@@ -402,7 +402,7 @@ public class Commission extends BaseTest {
                 "-v",
                 "Name='TestCommissionPackage' thn__Hotel__c='" + propertyID + "'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String packageId = JsonParser2.getFieldValue(packageResult.toString(), "id");
         StringBuilder packageLineResult1 = SfdxCommand.runLinuxCommand1(new String[]{
@@ -415,7 +415,7 @@ public class Commission extends BaseTest {
                         " thn__Product__c='" + meetingHalfDayID + "' thn__Start_Time__c=12:00 thn__End_Time__c=13:00" +
                         " thn__Unit_Price__c=20 thn__VAT_Category__c=1",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String packageLineId1 = JsonParser2.getFieldValue(packageLineResult1.toString(), "id");
         StringBuilder packageLineResult2 = SfdxCommand.runLinuxCommand1(new String[]{
@@ -428,7 +428,7 @@ public class Commission extends BaseTest {
                         " thn__Product__c='" + room1NightID + "' thn__Start_Time__c=12:00 thn__End_Time__c=13:00" +
                         " thn__Unit_Price__c=100 thn__VAT_Category__c=1",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String packageLineId2 = JsonParser2.getFieldValue(packageLineResult2.toString(), "id");
         StringBuilder packageLineResult3 = SfdxCommand.runLinuxCommand1(new String[]{
@@ -441,7 +441,7 @@ public class Commission extends BaseTest {
                         " thn__Product__c='" + beverageID + "' thn__Start_Time__c=15:00 thn__End_Time__c=16:00" +
                         " thn__Unit_Price__c=10 thn__VAT_Category__c=1",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String packageLineId3 = JsonParser2.getFieldValue(packageLineResult3.toString(), "id");
         StringBuilder packageLineResult4 = SfdxCommand.runLinuxCommand1(new String[]{
@@ -454,7 +454,7 @@ public class Commission extends BaseTest {
                         " thn__Product__c='" + activityID + "' thn__Start_Time__c=15:00 thn__End_Time__c=16:00" +
                         " thn__Unit_Price__c=40 thn__VAT_Category__c=1",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String packageLineId4 = JsonParser2.getFieldValue(packageLineResult4.toString(), "id");
         StringBuilder packageLineResult5 = SfdxCommand.runLinuxCommand1(new String[]{
@@ -467,7 +467,7 @@ public class Commission extends BaseTest {
                         " thn__Product__c='" + equipmentID + "' thn__Start_Time__c=15:00 thn__End_Time__c=16:00" +
                         " thn__Unit_Price__c=50 thn__VAT_Category__c=1",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String packageLineId5 = JsonParser2.getFieldValue(packageLineResult5.toString(), "id");
         StringBuilder packageLineResult6 = SfdxCommand.runLinuxCommand1(new String[]{
@@ -480,7 +480,7 @@ public class Commission extends BaseTest {
                         " thn__Product__c='" + dinerID + "' thn__Start_Time__c=15:00 thn__End_Time__c=16:00" +
                         " thn__Unit_Price__c=10 thn__VAT_Category__c=1",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String packageLineId6 = JsonParser2.getFieldValue(packageLineResult6.toString(), "id");
         StringBuilder quotePackageResult = SfdxCommand.runLinuxCommand1(new String[]{
@@ -491,7 +491,7 @@ public class Commission extends BaseTest {
                 "-v",
                 "thn__MYCE_Quote__c='" + quoteID + "' thn__Package__c='" + packageId + "'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String quotePackageId = JsonParser2.getFieldValue(quotePackageResult.toString(), "id");
         StringBuilder res = SfdxCommand.runLinuxCommand1(new String[]{
@@ -504,7 +504,7 @@ public class Commission extends BaseTest {
                 "-v",
                 "thn__Comm_Package__c=33",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         StringBuilder quotePackageRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
@@ -514,7 +514,7 @@ public class Commission extends BaseTest {
                 "-w",
                 "Id='" + quotePackageId +"'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         StringBuilder quoteHotelRoomRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
@@ -524,7 +524,7 @@ public class Commission extends BaseTest {
                 "-w",
                 "Name='ROOM 1 NIGHT' thn__MYCE_Quote__c='" + quoteID + "'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         StringBuilder beverageProductRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
@@ -534,7 +534,7 @@ public class Commission extends BaseTest {
                 "-w",
                 "Name='BEVERAGE' thn__MYCE_Quote__c='" + quoteID + "'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         StringBuilder activityProductRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
@@ -544,7 +544,7 @@ public class Commission extends BaseTest {
                 "-w",
                 "Name='ACTIVITY' thn__MYCE_Quote__c='" + quoteID + "'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         StringBuilder equipmentProductRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
@@ -554,7 +554,7 @@ public class Commission extends BaseTest {
                 "-w",
                 "Name='EQUIPMENT' thn__MYCE_Quote__c='" + quoteID + "'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         StringBuilder foodProductRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
@@ -564,7 +564,7 @@ public class Commission extends BaseTest {
                 "-w",
                 "Name='DINER' thn__MYCE_Quote__c='" + quoteID + "'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         StringBuilder quoteMeetingRoomRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
@@ -574,7 +574,7 @@ public class Commission extends BaseTest {
                 "-w",
                 "Name='DEFAULT - MEETING HALF DAY' thn__MYCE_Quote__c='" + quoteID + "'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         StringBuilder updateQuoteRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
@@ -584,7 +584,7 @@ public class Commission extends BaseTest {
                 "-w",
                 "Id='" + quoteID + "'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String quoteCommPackage = JsonParser2.getFieldValue(updateQuoteRecord.toString(), "thn__Comm_Package__c");
         String commissionPercentageQuotePackage = JsonParser2.getFieldValue(quotePackageRecord.toString(), "thn__Commission__c");
@@ -609,7 +609,7 @@ public class Commission extends BaseTest {
                 "-w",
                 "Id='" + quotePackageId +"'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
     }
 
@@ -626,7 +626,7 @@ public class Commission extends BaseTest {
                 "-w",
                 "Name='TestCommission'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String quoteID = JsonParser2.getFieldValue(quoteRecord.toString(), "Id");
         StringBuilder roomTypeRecord = SfdxCommand.runLinuxCommand1(new String[]{
@@ -637,7 +637,7 @@ public class Commission extends BaseTest {
                 "-w",
                 "Name='Single'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String roomTypeID = JsonParser2.getFieldValue(roomTypeRecord.toString(), "Id");
         StringBuilder propertyRecord = SfdxCommand.runLinuxCommand1(new String[]{
@@ -648,7 +648,7 @@ public class Commission extends BaseTest {
                 "-w",
                 "Name='Demo'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String propertyID = JsonParser2.getFieldValue(propertyRecord.toString(), "Id");
         StringBuilder productRecordMHD = SfdxCommand.runLinuxCommand1(new String[]{
@@ -659,7 +659,7 @@ public class Commission extends BaseTest {
                 "-w",
                 "Name='MEETING HALF DAY'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String meetingHalfDayID = JsonParser2.getFieldValue(productRecordMHD.toString(), "Id");
         StringBuilder productRecordRoom1Night = SfdxCommand.runLinuxCommand1(new String[]{
@@ -670,7 +670,7 @@ public class Commission extends BaseTest {
                 "-w",
                 "Name='ROOM 1 NIGHT'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String room1NightID = JsonParser2.getFieldValue(productRecordRoom1Night.toString(), "Id");
         StringBuilder beverageRecord = SfdxCommand.runLinuxCommand1(new String[]{
@@ -681,7 +681,7 @@ public class Commission extends BaseTest {
                 "-w",
                 "Name='BEVERAGE'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String beverageID = JsonParser2.getFieldValue(beverageRecord.toString(), "Id");
         StringBuilder activityRecord = SfdxCommand.runLinuxCommand1(new String[]{
@@ -692,7 +692,7 @@ public class Commission extends BaseTest {
                 "-w",
                 "Name='ACTIVITY'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String activityID = JsonParser2.getFieldValue(activityRecord.toString(), "Id");
         StringBuilder equipmentRecord = SfdxCommand.runLinuxCommand1(new String[]{
@@ -703,7 +703,7 @@ public class Commission extends BaseTest {
                 "-w",
                 "Name='EQUIPMENT'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String equipmentID = JsonParser2.getFieldValue(equipmentRecord.toString(), "Id");
         StringBuilder dinerRecord = SfdxCommand.runLinuxCommand1(new String[]{
@@ -714,7 +714,7 @@ public class Commission extends BaseTest {
                 "-w",
                 "Name='DINER'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String dinerID = JsonParser2.getFieldValue(dinerRecord.toString(), "Id");
         StringBuilder quoteHotelRoomResult = SfdxCommand.runLinuxCommand1(new String[]{
@@ -726,7 +726,7 @@ public class Commission extends BaseTest {
                 "thn__MYCE_Quote__c='" + quoteID + "' thn__Product__c='" + room1NightID +
                         "' thn__Space_Area__c='" + roomTypeID + "' thn__Sales_Price_incl_Tax__c=300",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String quoteHotelRoomId = JsonParser2.getFieldValue(quoteHotelRoomResult.toString(), "id");
         SfdxCommand.runLinuxCommand1(new String[]{
@@ -739,7 +739,7 @@ public class Commission extends BaseTest {
                 "-v",
                 "thn__Sales_Price_excl_Tax__c=200 thn__Sales_Price_incl_Tax__c=300",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         StringBuilder quoteProductBeverageResult = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
@@ -749,7 +749,7 @@ public class Commission extends BaseTest {
                 "-v",
                 "thn__MYCE_Quote__c='" + quoteID + "' thn__Product__c='" + beverageID + "'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String quoteProductBeverageId = JsonParser2.getFieldValue(quoteProductBeverageResult.toString(), "id");
         StringBuilder quoteProductActivityResult = SfdxCommand.runLinuxCommand1(new String[]{
@@ -760,7 +760,7 @@ public class Commission extends BaseTest {
                 "-v",
                 "thn__MYCE_Quote__c='" + quoteID + "' thn__Product__c='" + activityID + "'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String quoteProductActivityId = JsonParser2.getFieldValue(quoteProductActivityResult.toString(), "id");
         StringBuilder quoteProductEquipmentResult = SfdxCommand.runLinuxCommand1(new String[]{
@@ -771,7 +771,7 @@ public class Commission extends BaseTest {
                 "-v",
                 "thn__MYCE_Quote__c='" + quoteID + "' thn__Product__c='" + equipmentID + "'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String quoteProductEquipmentId = JsonParser2.getFieldValue(quoteProductEquipmentResult.toString(), "id");
         StringBuilder quoteProductDinerResult = SfdxCommand.runLinuxCommand1(new String[]{
@@ -782,7 +782,7 @@ public class Commission extends BaseTest {
                 "-v",
                 "thn__MYCE_Quote__c='" + quoteID + "' thn__Product__c='" + dinerID + "'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String quoteProductDinerId = JsonParser2.getFieldValue(quoteProductDinerResult.toString(), "id");
         StringBuilder quoteMeetingRoomResult = SfdxCommand.runLinuxCommand1(new String[]{
@@ -793,7 +793,7 @@ public class Commission extends BaseTest {
                 "-v",
                 "thn__MYCE_Quote__c='" + quoteID + "' thn__Product__c='" + meetingHalfDayID + "'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String quoteMeetingRoomId = JsonParser2.getFieldValue(quoteMeetingRoomResult.toString(), "id");
         StringBuilder res = SfdxCommand.runLinuxCommand1(new String[]{
@@ -807,7 +807,7 @@ public class Commission extends BaseTest {
                 "thn__Stage__c='2 - Propose' thn__Comm_Activity__c=5 thn__Comm_Beverage__c=6 thn__Comm_Equipment__c=7 thn__Comm_Food__c=8" +
                         " thn__Comm_Hotel_Rooms__c=9 thn__Comm_Meeting_Rooms__c=11 thn__Comm_Other__c=12",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         System.out.println(res);
         StringBuilder quoteHotelRoomRecord = SfdxCommand.runLinuxCommand1(new String[]{
@@ -818,7 +818,7 @@ public class Commission extends BaseTest {
                 "-w",
                 "Id='" + quoteHotelRoomId + "'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         StringBuilder beverageProductRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
@@ -828,7 +828,7 @@ public class Commission extends BaseTest {
                 "-w",
                 "Id='" + quoteProductBeverageId + "'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         StringBuilder activityProductRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
@@ -838,7 +838,7 @@ public class Commission extends BaseTest {
                 "-w",
                 "Id='" + quoteProductActivityId + "'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         StringBuilder equipmentProductRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
@@ -848,7 +848,7 @@ public class Commission extends BaseTest {
                 "-w",
                 "Id='" + quoteProductEquipmentId + "'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         StringBuilder foodProductRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
@@ -858,7 +858,7 @@ public class Commission extends BaseTest {
                 "-w",
                 "Id='" + quoteProductDinerId + "'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         StringBuilder quoteMeetingRoomRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
@@ -868,7 +868,7 @@ public class Commission extends BaseTest {
                 "-w",
                 "Id='" + quoteMeetingRoomId + "'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         StringBuilder updateQuoteRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
@@ -878,7 +878,7 @@ public class Commission extends BaseTest {
                 "-w",
                 "Id='" + quoteID + "'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         System.out.println(updateQuoteRecord);
         StringBuilder commissionRecordsSoql = SfdxCommand.runLinuxCommand1(new String[]{
@@ -887,7 +887,7 @@ public class Commission extends BaseTest {
                 "-q",
                 "SELECT Name FROM thn__Commission__c WHERE thn__MYCE_Quote__c='" + quoteID + "'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         System.out.println(commissionRecordsSoql);
         List<String> commissionName = JsonParser2.getFieldValueSoql(commissionRecordsSoql.toString(), "Name");
@@ -930,7 +930,7 @@ public class Commission extends BaseTest {
                 "-w",
                 "Name='TestCommission'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String quoteID = JsonParser2.getFieldValue(quoteRecord.toString(), "Id");
         StringBuilder quoteHotelRoomRecord = SfdxCommand.runLinuxCommand1(new String[]{
@@ -943,7 +943,7 @@ public class Commission extends BaseTest {
                 "-v",
                 "thn__Commission_Percentage__c=19",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         StringBuilder beverageProductRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
@@ -955,7 +955,7 @@ public class Commission extends BaseTest {
                 "-v",
                 "thn__Commission_Percentage__c=16",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         StringBuilder activityProductRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
@@ -967,7 +967,7 @@ public class Commission extends BaseTest {
                 "-v",
                 "thn__Commission_Percentage__c=15",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         StringBuilder equipmentProductRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
@@ -979,7 +979,7 @@ public class Commission extends BaseTest {
                 "-v",
                 "thn__Commission_Percentage__c=17",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         StringBuilder foodProductRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
@@ -991,7 +991,7 @@ public class Commission extends BaseTest {
                 "-v",
                 "thn__Commission_Percentage__c=18",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         StringBuilder quoteMeetingRoomRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
@@ -1003,7 +1003,7 @@ public class Commission extends BaseTest {
                 "-v",
                 "thn__Commission_Percentage__c=21",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         StringBuilder commissionRecordsSoql = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
@@ -1011,7 +1011,7 @@ public class Commission extends BaseTest {
                 "-q",
                 "SELECT Name FROM thn__Commission__c WHERE thn__MYCE_Quote__c='" + quoteID + "'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         System.out.println(commissionRecordsSoql);
         List<String> commissionName = JsonParser2.getFieldValueSoql(commissionRecordsSoql.toString(), "Name");
@@ -1037,7 +1037,7 @@ public class Commission extends BaseTest {
                 "-w",
                 "Name='TestCommission'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         String quoteID = JsonParser2.getFieldValue(quoteRecord.toString(), "Id");
         StringBuilder res = SfdxCommand.runLinuxCommand1(new String[]{
@@ -1051,7 +1051,7 @@ public class Commission extends BaseTest {
                 "thn__Stage__c='2 - Propose' thn__Comm_Activity__c=15 thn__Comm_Beverage__c=15 thn__Comm_Equipment__c=15 thn__Comm_Food__c=15" +
                         " thn__Comm_Hotel_Rooms__c=15 thn__Comm_Meeting_Rooms__c=15 thn__Comm_Other__c=15",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
 
         StringBuilder commissionRecordsSoql = SfdxCommand.runLinuxCommand1(new String[]{
@@ -1060,7 +1060,7 @@ public class Commission extends BaseTest {
                 "-q",
                 "SELECT Name FROM thn__Commission__c WHERE thn__MYCE_Quote__c='" + quoteID + "'",
                 "-u",
-                ALIAS,
+                ORG_USERNAME,
                 "--json"});
         System.out.println(commissionRecordsSoql);
         List<String> commissionName = JsonParser2.getFieldValueSoql(commissionRecordsSoql.toString(), "Name");

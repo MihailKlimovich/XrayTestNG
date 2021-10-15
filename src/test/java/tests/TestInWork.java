@@ -22,16 +22,16 @@ public class TestInWork extends BaseTest{
                 SFDX,
                 "force:auth:jwt:grant",
                 "--clientid",
-                key,
+                CONSUMER_KEY,
                 "--jwtkeyfile",
-                "/home/user/jdoe/JWT/server.key",
+                SERVER_KEY_PATH,
                 "--username",
                 ORG_USERNAME,
                 "--instanceurl",
-                "https://test.salesforce.com"
+                ORG_URL
         });
         System.out.println(authorise);
-        loginPageForScratchOrg.logInOnScratchOrg2(driver, urlForScratch, ORG_USERNAME, ORG_PASSWORD);
+        loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
     }
 
     @Test(priority = 2, description = "Delete old data")
