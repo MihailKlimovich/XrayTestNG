@@ -53,19 +53,19 @@ public class BaseTest {
     public static final String testDataExcelFileName = "testdata.xlsx";
 
 
-    /*public String ORG_USERNAME = System.getenv("JAVAUSERNAME");
+    public String ORG_USERNAME = System.getenv("JAVAUSERNAME");
     public String ORG_PASSWORD = System.getenv("JAVAPASSWORD");
     public String ORG_URL = System.getenv("SF_URL");
     public String CONSUMER_KEY = System.getenv("SF_CONSUMER_KEY");
     public String SFDX = System.getenv("SFDX");
-    public String SERVER_KEY_PATH = System.getenv("SERVER_KEY_PATH");*/
+    public String SERVER_KEY_PATH = System.getenv("SERVER_KEY_PATH");
 
-    public String ORG_USERNAME = "test-sy9dufviyszi@example.com";
+    /*public String ORG_USERNAME = "test-sy9dufviyszi@example.com";
     public String ORG_PASSWORD = "3k#eyhtorFvbj";
     public String ORG_URL = "https://test.salesforce.com";
     public String CONSUMER_KEY = "3MVG9sSN_PMn8tjQ_i1zH6SFiiRiWU8a6A0ccIA8pgi6PtKmTcevqRVhFkbTw9WjqjcylgNcp6WfR7tCRz1Z5";
     public String SFDX = "/home/user/sfdx/bin/sfdx";
-    public String SERVER_KEY_PATH = "/home/user/jdoe/JWT/server.key";
+    public String SERVER_KEY_PATH = "/home/user/jdoe/JWT/server.key";*/
 
 
     final protected String thynkPackDevOrg = "https://thynkpack-dev-ed.my.salesforce.com/";
