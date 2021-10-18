@@ -24,7 +24,7 @@ public class ValidationRuleTest1 extends BaseTest {
         public void testLogIn() {
             //given
             //when
-            loginPageForScratchOrg.logInOnScratchOrg(driver);
+            loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
         }
 
         @Test(priority = 2, description="Setting up validation rules")

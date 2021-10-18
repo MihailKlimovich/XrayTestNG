@@ -120,6 +120,11 @@
             <class name="tests.CommissionCorrections"/>
         </classes>
     </test>
+    <test name="Quote's accounts to Mews">
+        <classes>
+            <class name="tests.QuotesAccountToMews"/>
+        </classes>
+    </test>
 
 
 
