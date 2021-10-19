@@ -125,6 +125,11 @@
             <class name="tests.QuotesAccountToMews"/>
         </classes>
     </test>
+    <test name="Guest Management Testing">
+        <classes>
+            <class name="tests.GuestManagementTesting"/>
+        </classes>
+    </test>
 
 
 

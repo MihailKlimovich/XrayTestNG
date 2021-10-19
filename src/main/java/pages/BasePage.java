@@ -176,6 +176,12 @@ public class BasePage {
         action.sendKeys(Keys.ENTER).perform();
     }
 
+    @Step("Press SPACE")
+    public void space() {
+        Actions action = new Actions(driver);
+        action.sendKeys(Keys.SPACE).perform();
+    }
+
     @Step("Press DELETE")
     public void delete() {
         Actions action = new Actions(driver);

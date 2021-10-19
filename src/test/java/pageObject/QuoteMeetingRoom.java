@@ -40,11 +40,18 @@ public class QuoteMeetingRoom extends BasePage {
     By END_DATE_FIELD = By.xpath("//div//label[text()='Date']/following::input[@name='thn__End_Date_Time__c']");
     By MYCE_QUOTE_NAME = By.xpath("//div//span[@id = 'window']");
     By MULTI_DELETE_BUTTON = By.xpath("//a[@title='Multidelete']");
+    By MULTIEDIT_BUTTON = By.xpath("//h1[text()='Meeting Rooms']/following::div[@title='Multiedit']");
 
 
 
 
 
+
+    @Step("Click Multiedit")
+    public void clickMultiedit() throws InterruptedException {
+        wait1.until(ExpectedConditions.presenceOfElementLocated(MULTIEDIT_BUTTON)).click();
+        Thread.sleep(3000);
+    }
 
     @Step("Fill out the meeting room")
     public void createMeetingRoom(String pax) throws InterruptedException {
@@ -138,6 +145,44 @@ public class QuoteMeetingRoom extends BasePage {
         enter();
         Thread.sleep(5000);
         enter();
+    }
+
+    @Step("Multi Edit products")
+    public  void multiEditMeetingRooms() throws InterruptedException {
+        Thread.sleep(3000);
+        space();
+        tab();
+        tab();
+        Thread.sleep(1000);
+        space();
+        tab();
+        tab();
+        Thread.sleep(1000);
+        space();
+        tab();
+        tab();
+        tab();
+        Thread.sleep(1000);
+        space();
+        tab();
+        Thread.sleep(1000);
+        space();
+        tab();
+        Thread.sleep(1000);
+        space();
+        tab();
+        Thread.sleep(1000);
+        space();
+        Thread.sleep(1000);
+        space();
+        tab();
+        tab();
+        Thread.sleep(1000);
+        space();
+        Thread.sleep(3000);
+        tab();
+        Thread.sleep(1000);
+        space();
     }
 
 

@@ -44,7 +44,6 @@ public class BaseTest {
     protected JsonParser2 jsonParser2;
     protected Requests requests;
     protected ConvertWindow convertWindow;
-    protected MultiEditProducts multiEditProducts;
 
     public WebDriver getDriver() {
         return driver;
@@ -122,7 +121,6 @@ public class BaseTest {
         jsonParser2 = new JsonParser2(driver);
         requests = new Requests(driver);
         convertWindow = new ConvertWindow(driver);
-        multiEditProducts = new MultiEditProducts(driver);
     }
 
     @AfterClass

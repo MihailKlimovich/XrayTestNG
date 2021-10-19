@@ -53,8 +53,9 @@ public class QuoteProducts extends BasePage {
     }
 
     @Step("Click Multiedit")
-    public void clickMultiedit(){
+    public void clickMultiedit() throws InterruptedException {
         wait1.until(ExpectedConditions.presenceOfElementLocated(MULTIEDIT_BUTTON)).click();
+        Thread.sleep(3000);
     }
 
     @Step("Fill out the product")
@@ -137,6 +138,31 @@ public class QuoteProducts extends BasePage {
         enter();
         Thread.sleep(5000);
         enter();
+    }
+
+    @Step("Multi Edit products")
+    public  void multiEditProducts() throws InterruptedException {
+        Thread.sleep(3000);
+        tab();
+        space();
+        Thread.sleep(1000);
+        tab();
+        space();
+        Thread.sleep(1000);
+        tab();
+        space();
+        Thread.sleep(1000);
+        tab();
+        space();
+        Thread.sleep(2000);
+        space();
+        tab();
+        Thread.sleep(1000);
+        tab();
+        space();
+        Thread.sleep(2000);
+        tab();
+        space();
     }
 
 
