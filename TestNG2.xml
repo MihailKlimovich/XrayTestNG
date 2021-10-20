@@ -110,9 +110,24 @@
             <class name="tests.FSDatesOnQuotePackage"/>
         </classes>
     </test>
-    <test name="Comission">
+    <test name="Commission">
         <classes>
             <class name="tests.Commission"/>
+        </classes>
+    </test>
+    <test name="Commission Corrections">
+        <classes>
+            <class name="tests.CommissionCorrections"/>
+        </classes>
+    </test>
+    <test name="Quote's accounts to Mews">
+        <classes>
+            <class name="tests.QuotesAccountToMews"/>
+        </classes>
+    </test>
+    <test name="Guest Management Testing">
+        <classes>
+            <class name="tests.GuestManagementTesting"/>
         </classes>
     </test>
 

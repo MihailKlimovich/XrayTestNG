@@ -19,15 +19,9 @@ public class Commission extends BaseTest {
     public void logIn() throws InterruptedException, IOException {
         StringBuilder authorise = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
-                "force:auth:jwt:grant",
-                "--clientid",
-                CONSUMER_KEY,
-                "--jwtkeyfile",
-                SERVER_KEY_PATH,
-                "--username",
-                ORG_USERNAME,
-                "--instanceurl",
-                ORG_URL
+                "auth:sfdxurl:store",
+                "-f",
+                SFDX_AUTH_URL
         });
         System.out.println(authorise);
     }
