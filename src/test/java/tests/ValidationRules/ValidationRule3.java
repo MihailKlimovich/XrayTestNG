@@ -433,7 +433,7 @@ public class ValidationRule3 extends BaseTest {
                 "-s",
                 "thn__Hotel__c",
                 "-w",
-                "Name='Demo'",
+                "thn__Unique_Id__c='Demo'",
                 "-u",
                 ORG_USERNAME,
                 "--json"});
@@ -500,7 +500,7 @@ public class ValidationRule3 extends BaseTest {
                 "-s",
                 "thn__Hotel__c",
                 "-w",
-                "Name='Demo'",
+                "thn__Unique_Id__c='Demo'",
                 "-u",
                 ORG_USERNAME,
                 "--json"});
@@ -648,7 +648,7 @@ public class ValidationRule3 extends BaseTest {
                 "-s",
                 "thn__Hotel__c",
                 "-w",
-                "Name='Demo'",
+                "thn__Unique_Id__c='Demo'",
                 "-u",
                 ORG_USERNAME,
                 "--json"});
@@ -718,7 +718,7 @@ public class ValidationRule3 extends BaseTest {
                 "-s",
                 "thn__Hotel__c",
                 "-w",
-                "Name='Demo'",
+                "thn__Unique_Id__c='Demo'",
                 "-u",
                 ORG_USERNAME,
                 "--json"});
@@ -814,7 +814,7 @@ public class ValidationRule3 extends BaseTest {
                 "-s",
                 "thn__Hotel__c",
                 "-w",
-                "Name='Demo'",
+                "thn__Unique_Id__c='Demo'",
                 "-u",
                 ORG_USERNAME,
                 "--json"});
@@ -910,7 +910,7 @@ public class ValidationRule3 extends BaseTest {
                 "-s",
                 "thn__Hotel__c",
                 "-w",
-                "Name='Demo'",
+                "thn__Unique_Id__c='Demo'",
                 "-u",
                 ORG_USERNAME,
                 "--json"});
@@ -1006,7 +1006,7 @@ public class ValidationRule3 extends BaseTest {
                 "-s",
                 "thn__Hotel__c",
                 "-w",
-                "Name='Demo'",
+                "thn__Unique_Id__c='Demo'",
                 "-u",
                 ORG_USERNAME,
                 "--json"});
@@ -1102,7 +1102,7 @@ public class ValidationRule3 extends BaseTest {
                 "-s",
                 "thn__Hotel__c",
                 "-w",
-                "Name='Demo'",
+                "thn__Unique_Id__c='Demo'",
                 "-u",
                 ORG_USERNAME,
                 "--json"});
@@ -1194,7 +1194,7 @@ public class ValidationRule3 extends BaseTest {
                 "-s",
                 "thn__Hotel__c",
                 "-w",
-                "Name='Demo'",
+                "thn__Unique_Id__c='Demo'",
                 "-u",
                 ORG_USERNAME,
                 "--json"});
@@ -1388,7 +1388,7 @@ public class ValidationRule3 extends BaseTest {
                 "-s",
                 "thn__Hotel__c",
                 "-w",
-                "Name='Demo'",
+                "thn__Unique_Id__c='Demo'",
                 "-u",
                 ORG_USERNAME,
                 "--json"});
@@ -1501,7 +1501,7 @@ public class ValidationRule3 extends BaseTest {
                 "-s",
                 "thn__Hotel__c",
                 "-w",
-                "Name='Demo'",
+                "thn__Unique_Id__c='Demo'",
                 "-u",
                 ORG_USERNAME,
                 "--json"});
@@ -1579,7 +1579,7 @@ public class ValidationRule3 extends BaseTest {
                 "-s",
                 "thn__Hotel__c",
                 "-w",
-                "Name='Demo'",
+                "thn__Unique_Id__c='Demo'",
                 "-u",
                 ORG_USERNAME,
                 "--json"});
@@ -1674,7 +1674,7 @@ public class ValidationRule3 extends BaseTest {
                 "-s",
                 "thn__Hotel__c",
                 "-w",
-                "Name='Demo'",
+                "thn__Unique_Id__c='Demo'",
                 "-u",
                 ORG_USERNAME,
                 "--json"});
@@ -1800,7 +1800,7 @@ public class ValidationRule3 extends BaseTest {
                 "-s",
                 "thn__Hotel__c",
                 "-w",
-                "Name='Demo'",
+                "thn__Unique_Id__c='Demo'",
                 "-u",
                 ORG_USERNAME,
                 "--json"});
@@ -1868,7 +1868,7 @@ public class ValidationRule3 extends BaseTest {
                 "-s",
                 "thn__Hotel__c",
                 "-w",
-                "Name='Demo'",
+                "thn__Unique_Id__c='Demo'",
                 "-u",
                 ORG_USERNAME,
                 "--json"});
@@ -1923,7 +1923,7 @@ public class ValidationRule3 extends BaseTest {
                 "-s",
                 "thn__Hotel__c",
                 "-w",
-                "Name='Demo'",
+                "thn__Unique_Id__c='Demo'",
                 "-u",
                 ORG_USERNAME,
                 "--json"});
@@ -2024,7 +2024,7 @@ public class ValidationRule3 extends BaseTest {
                 "-s",
                 "thn__Hotel__c",
                 "-w",
-                "Name='Demo'",
+                "thn__Unique_Id__c='Demo'",
                 "-u",
                 ORG_USERNAME,
                 "--json"});
@@ -2127,7 +2127,7 @@ public class ValidationRule3 extends BaseTest {
                 "-s",
                 "thn__Hotel__c",
                 "-w",
-                "Name='Demo'",
+                "thn__Unique_Id__c='Demo'",
                 "-u",
                 ORG_USERNAME,
                 "--json"});
@@ -2182,7 +2182,7 @@ public class ValidationRule3 extends BaseTest {
                 "-s",
                 "thn__Hotel__c",
                 "-w",
-                "Name='Demo'",
+                "thn__Unique_Id__c='Demo'",
                 "-u",
                 ORG_USERNAME,
                 "--json"});
@@ -2284,7 +2284,7 @@ public class ValidationRule3 extends BaseTest {
                 "-s",
                 "thn__Hotel__c",
                 "-w",
-                "Name='Demo'",
+                "thn__Unique_Id__c='Demo'",
                 "-u",
                 ORG_USERNAME,
                 "--json"});
@@ -2341,7 +2341,7 @@ public class ValidationRule3 extends BaseTest {
                 "-s",
                 "thn__Hotel__c",
                 "-w",
-                "Name='Demo'",
+                "thn__Unique_Id__c='Demo'",
                 "-u",
                 ORG_USERNAME,
                 "--json"});
@@ -2420,7 +2420,7 @@ public class ValidationRule3 extends BaseTest {
                 "-s",
                 "thn__Hotel__c",
                 "-w",
-                "Name='Demo'",
+                "thn__Unique_Id__c='Demo'",
                 "-u",
                 ORG_USERNAME,
                 "--json"});
@@ -2502,7 +2502,7 @@ public class ValidationRule3 extends BaseTest {
                 "-s",
                 "thn__Hotel__c",
                 "-w",
-                "Name='Demo'",
+                "thn__Unique_Id__c='Demo'",
                 "-u",
                 ORG_USERNAME,
                 "--json"});
@@ -2611,7 +2611,7 @@ public class ValidationRule3 extends BaseTest {
                 "-s",
                 "thn__Hotel__c",
                 "-w",
-                "Name='Demo'",
+                "thn__Unique_Id__c='Demo'",
                 "-u",
                 ORG_USERNAME,
                 "--json"});
@@ -2712,7 +2712,7 @@ public class ValidationRule3 extends BaseTest {
                 "-s",
                 "thn__Hotel__c",
                 "-w",
-                "Name='Demo'",
+                "thn__Unique_Id__c='Demo'",
                 "-u",
                 ORG_USERNAME,
                 "--json"});
@@ -2803,7 +2803,7 @@ public class ValidationRule3 extends BaseTest {
                 "-s",
                 "thn__Hotel__c",
                 "-w",
-                "Name='Demo'",
+                "thn__Unique_Id__c='Demo'",
                 "-u",
                 ORG_USERNAME,
                 "--json"});

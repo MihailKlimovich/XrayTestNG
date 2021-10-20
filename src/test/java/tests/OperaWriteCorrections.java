@@ -19,6 +19,7 @@ public class OperaWriteCorrections extends BaseTest {
     @Story("PMS Account")
     public void testOperaWrite1() throws InterruptedException, IOException {
 
+
         StringBuilder authorise = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:auth:jwt:grant",
@@ -190,7 +191,7 @@ public class OperaWriteCorrections extends BaseTest {
                 "-s",
                 "thn__Hotel__c",
                 "-w",
-                "Name='Demo'",
+                "thn__Unique_Id__c='Demo'",
                 "-u",
                 thynkPackUserName,
                 "--json"});

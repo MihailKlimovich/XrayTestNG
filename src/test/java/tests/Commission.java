@@ -82,7 +82,7 @@ public class Commission extends BaseTest {
                 "-s",
                 "thn__Hotel__c",
                 "-w",
-                "Name='Demo'",
+                "thn__Unique_Id__c='Demo'",
                 "-u",
                 ORG_USERNAME,
                 "--json"});
@@ -116,7 +116,7 @@ public class Commission extends BaseTest {
                 "-s",
                 "thn__Hotel__c",
                 "-w",
-                "Name='Demo'",
+                "thn__Unique_Id__c='Demo'",
                 "-v",
                 "thn__Comm_Activity__c=10 thn__Comm_Beverage__c=10 thn__Comm_Equipment__c=10 thn__Comm_Food__c=10" +
                         " thn__Comm_Hotel_Rooms__c=10 thn__Comm_Meeting_Rooms__c=10 thn__Comm_Other__c=10" +
@@ -272,7 +272,7 @@ public class Commission extends BaseTest {
                 "-s",
                 "thn__Hotel__c",
                 "-w",
-                "Name='Demo'",
+                "thn__Unique_Id__c='Demo'",
                 "-u",
                 ORG_USERNAME,
                 "--json"});
@@ -323,7 +323,7 @@ public class Commission extends BaseTest {
                 "-s",
                 "thn__Hotel__c",
                 "-w",
-                "Name='Demo'",
+                "thn__Unique_Id__c='Demo'",
                 "-u",
                 ORG_USERNAME,
                 "--json"});
@@ -646,7 +646,7 @@ public class Commission extends BaseTest {
                 "-s",
                 "thn__Hotel__c",
                 "-w",
-                "Name='Demo'",
+                "thn__Unique_Id__c='Demo'",
                 "-u",
                 ORG_USERNAME,
                 "--json"});

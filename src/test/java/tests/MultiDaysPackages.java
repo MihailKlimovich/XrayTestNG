@@ -61,7 +61,7 @@ public class MultiDaysPackages extends BaseTest {
                 "-s",
                 "thn__Hotel__c",
                 "-w",
-                "Name='Demo'",
+                "thn__Unique_Id__c='Demo'",
                 "-u",
                 ORG_USERNAME,
                 "--json"});
