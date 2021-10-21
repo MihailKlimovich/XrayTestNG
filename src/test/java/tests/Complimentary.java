@@ -18,7 +18,7 @@ public class Complimentary extends BaseTest {
     @Description("THY-540 Myce Quote - Complimentary")
     @Story("Case 1: Make Quote having Quote related records linked to the Quote package and not linked to the Quote package Complimentary")
     public void testComplimentary1() throws InterruptedException, IOException {
-        StringBuilder authorise = SfdxCommand.runLinuxCommand1(new String[]{
+        /*StringBuilder authorise = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:auth:jwt:grant",
                 "--clientid",
@@ -30,7 +30,8 @@ public class Complimentary extends BaseTest {
                 "--instanceurl",
                 ORG_URL
         });
-        System.out.println(authorise);
+        System.out.println(authorise);*/
+        loginPage.authoriseURL(SFDX, SFDX_AUTH_URL);
         StringBuilder productRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:get",

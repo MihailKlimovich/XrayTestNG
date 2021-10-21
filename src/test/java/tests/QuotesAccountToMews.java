@@ -16,7 +16,7 @@ public class QuotesAccountToMews extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     @Story("Quote's accounts to Mews")
     public void logIn() throws InterruptedException, IOException {
-        StringBuilder authorise = SfdxCommand.runLinuxCommand1(new String[]{
+        /*StringBuilder authorise = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:auth:jwt:grant",
                 "--clientid",
@@ -28,7 +28,8 @@ public class QuotesAccountToMews extends BaseTest {
                 "--instanceurl",
                 ORG_URL
         });
-        System.out.println(authorise);
+        System.out.println(authorise);*/
+        loginPage.authoriseURL(SFDX, SFDX_AUTH_URL);
     }
 
     @Test(priority = 2, description = "1. Create Myce Quote, 2. Specify Agent, make sure agent.mews_id == null," +

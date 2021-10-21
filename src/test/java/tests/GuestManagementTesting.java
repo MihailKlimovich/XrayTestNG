@@ -16,7 +16,7 @@ public class GuestManagementTesting extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     @Story("Guest Management testing")
     public void logIn() throws InterruptedException, IOException {
-        StringBuilder authorise = SfdxCommand.runLinuxCommand1(new String[]{
+        /*StringBuilder authorise = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:auth:jwt:grant",
                 "--clientid",
@@ -28,7 +28,8 @@ public class GuestManagementTesting extends BaseTest {
                 "--instanceurl",
                 ORG_URL
         });
-        System.out.println(authorise);
+        System.out.println(authorise);*/
+        loginPage.authoriseURL(SFDX, SFDX_AUTH_URL);
     }
 
     @Test(priority = 2, description = "Create a new myce quote and fill values: company and contact, agent and contact," +

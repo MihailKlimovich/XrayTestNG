@@ -21,7 +21,7 @@ public class HistoryTracking extends BaseTest {
         loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
         homePageForScratchOrg.openAppLauncher();
         homePageForScratchOrg.sendTextInAppWindow("MYCE");
-        StringBuilder authorise = SfdxCommand.runLinuxCommand1(new String[]{
+        /*StringBuilder authorise = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:auth:jwt:grant",
                 "--clientid",
@@ -33,7 +33,8 @@ public class HistoryTracking extends BaseTest {
                 "--instanceurl",
                 ORG_URL
         });
-        System.out.println(authorise);
+        System.out.println(authorise);*/
+        loginPage.authoriseURL(SFDX, SFDX_AUTH_URL);
         SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:delete",

@@ -21,7 +21,7 @@ public class MyceToOpera extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     @Story("THY-589: MYCE to Opera")
     public void testMyceToOpera_WhereOneHotelRoom() throws InterruptedException, IOException {
-        StringBuilder authorise = SfdxCommand.runLinuxCommand1(new String[]{
+        /*StringBuilder authorise = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:auth:jwt:grant",
                 "--clientid",
@@ -33,7 +33,8 @@ public class MyceToOpera extends BaseTest {
                 "--instanceurl",
                 ORG_URL
         });
-        System.out.println(authorise);
+        System.out.println(authorise);*/
+        loginPage.authoriseURL(SFDX, SFDX_AUTH_URL);
         SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:delete",

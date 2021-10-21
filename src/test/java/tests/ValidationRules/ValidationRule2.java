@@ -24,7 +24,7 @@ public class ValidationRule2 extends BaseTest {
     @Description("Setup.thn__ByPass__c.thn__ByPassVR__c == true and User.thn__ByPassVR__c == false")
     @Story("Settings")
     public void settingUpValidationRules() throws InterruptedException, IOException {
-        StringBuilder authorise = SfdxCommand.runLinuxCommand1(new String[]{
+        /*StringBuilder authorise = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:auth:jwt:grant",
                 "--clientid",
@@ -36,7 +36,8 @@ public class ValidationRule2 extends BaseTest {
                 "--instanceurl",
                 ORG_URL
         });
-        System.out.println(authorise);
+        System.out.println(authorise);*/
+        loginPage.authoriseURL(SFDX, SFDX_AUTH_URL);
         SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:update",

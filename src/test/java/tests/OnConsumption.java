@@ -18,7 +18,7 @@ public class OnConsumption extends BaseTest {
     @Description("THY-570: On Consumption")
     @Story("Add Quote product on MYCE Quote. Set 5 for Pax, On consumption == true.")
     public void testOnConsumption1() throws InterruptedException, IOException {
-        StringBuilder authorise = SfdxCommand.runLinuxCommand1(new String[]{
+        /*StringBuilder authorise = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:auth:jwt:grant",
                 "--clientid",
@@ -30,7 +30,8 @@ public class OnConsumption extends BaseTest {
                 "--instanceurl",
                 ORG_URL
         });
-        System.out.println(authorise);
+        System.out.println(authorise);*/
+        loginPage.authoriseURL(SFDX, SFDX_AUTH_URL);
         StringBuilder propertyRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:get",

@@ -18,7 +18,7 @@ public class PackagesCustomPrice extends BaseTest {
     @Description("THY-588: Packages - custom price")
     @Story("Case 1: Delete a ‘Quote Package Line’.")
     public void packageCustomPrice_DeletePackageLine() throws InterruptedException, IOException {
-        StringBuilder authorise = SfdxCommand.runLinuxCommand1(new String[]{
+        /*StringBuilder authorise = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:auth:jwt:grant",
                 "--clientid",
@@ -30,7 +30,8 @@ public class PackagesCustomPrice extends BaseTest {
                 "--instanceurl",
                 ORG_URL
         });
-        System.out.println(authorise);
+        System.out.println(authorise);*/
+        loginPage.authoriseURL(SFDX, SFDX_AUTH_URL);
         StringBuilder propertyRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:get",

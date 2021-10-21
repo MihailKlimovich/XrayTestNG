@@ -52,7 +52,7 @@ public class MultiEditOnQuotesRelatedList extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     @Story("Multi edit on quote's related list UAT")
     public void login() throws InterruptedException, IOException {
-        StringBuilder authorise = SfdxCommand.runLinuxCommand1(new String[]{
+        /*StringBuilder authorise = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:auth:jwt:grant",
                 "--clientid",
@@ -64,7 +64,8 @@ public class MultiEditOnQuotesRelatedList extends BaseTest {
                 "--instanceurl",
                 ORG_URL
         });
-        System.out.println(authorise);
+        System.out.println(authorise);*/
+        loginPage.authoriseURL(SFDX, SFDX_AUTH_URL);
         loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
         StringBuilder result2 = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,

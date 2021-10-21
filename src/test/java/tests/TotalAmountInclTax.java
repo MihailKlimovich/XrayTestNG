@@ -18,7 +18,7 @@ public class TotalAmountInclTax extends BaseTest {
     @Description("THY-523 Total_amount_incl_Tax__c")
     @Story("THY-523 Total_amount_incl_Tax__c")
     public void totalAmountInclTaxTest() throws InterruptedException, IOException {
-        StringBuilder authorise = SfdxCommand.runLinuxCommand1(new String[]{
+        /*StringBuilder authorise = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:auth:jwt:grant",
                 "--clientid",
@@ -30,7 +30,8 @@ public class TotalAmountInclTax extends BaseTest {
                 "--instanceurl",
                 ORG_URL
         });
-        System.out.println(authorise);
+        System.out.println(authorise);*/
+        loginPage.authoriseURL(SFDX, SFDX_AUTH_URL);
         StringBuilder propertyRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:get",
