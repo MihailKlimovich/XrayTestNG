@@ -5,6 +5,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 
+import java.io.IOException;
+
 public class LoginPageForPackageOrg extends BasePage{
 
     /**Constructor*/
@@ -104,6 +106,18 @@ public class LoginPageForPackageOrg extends BasePage{
             }
         }
         return null;
+    }
+
+
+    public void authoriseURL(String sfdxPath, String jsonPath) throws IOException, InterruptedException {
+        StringBuilder authorise = BasePage.runLinuxCommand1(new String[]{
+                sfdxPath,
+                "auth:sfdxurl:store",
+                "-f",
+                jsonPath
+        });
+        System.out.println(authorise);
+
     }
 
 

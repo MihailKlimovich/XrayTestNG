@@ -64,8 +64,9 @@ public class BaseTest {
     public String ORG_PASSWORD = "3k#eyhtorFvbj";
     public String ORG_URL = "https://test.salesforce.com";
     public String CONSUMER_KEY = "3MVG9sSN_PMn8tjQ_i1zH6SFiiRiWU8a6A0ccIA8pgi6PtKmTcevqRVhFkbTw9WjqjcylgNcp6WfR7tCRz1Z5";
-    public String SFDX = "/home/minsk-sc/sfdx/bin/sfdx";
-    public String SERVER_KEY_PATH = "/home/user/jdoe/JWT/server.key";*/
+    public String SFDX = "/home/user/sfdx/bin/sfdx";
+    public String SERVER_KEY_PATH = "/home/user/salesforceauthotest/jdoe/JWT/server.key";
+    public String SFDX_AUTH_URL = "/home/user/authFile.json";*/
 
 
 

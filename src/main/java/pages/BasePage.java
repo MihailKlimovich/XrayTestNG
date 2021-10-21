@@ -455,6 +455,22 @@ public class BasePage {
         return strB;
     }
 
+    @Step("Run SFDX command")
+    public static StringBuilder  runLinuxCommand(String[] cmd) throws InterruptedException, IOException {
+        StringBuilder strB = new StringBuilder();
+        Runtime run = Runtime.getRuntime();
+        Process pr = run.exec(cmd);
+        pr.waitFor();
+        BufferedReader buf = new BufferedReader(new InputStreamReader(pr.getInputStream()));
+        String line = "";
+        while ((line = buf.readLine()) != null) {
+            strB.append(line);
+            strB.append("\n");
+        }
+        buf.close();
+        return strB;
+    }
+
 
 
 
