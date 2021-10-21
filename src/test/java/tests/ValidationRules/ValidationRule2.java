@@ -2141,7 +2141,7 @@ public class ValidationRule2 extends BaseTest {
                 "-s",
                 "thn__Product__c",
                 "-w",
-                "Name='WINES'",
+                "Name='WINES' thn__Hotel__c='" + propertyID + "'",
                 "-u",
                 ORG_USERNAME,
                 "--json"});
@@ -2196,7 +2196,7 @@ public class ValidationRule2 extends BaseTest {
                 "-s",
                 "thn__Product__c",
                 "-w",
-                "Name='WINES'",
+                "Name='WINES' thn__Hotel__c='" + propertyID + "'",
                 "-u",
                 ORG_USERNAME,
                 "--json"});
@@ -2298,7 +2298,7 @@ public class ValidationRule2 extends BaseTest {
                 "-s",
                 "thn__Product__c",
                 "-w",
-                "Name='WINES'",
+                "Name='WINES' thn__Hotel__c='" + propertyID + "'",
                 "-u",
                 ORG_USERNAME,
                 "--json"});

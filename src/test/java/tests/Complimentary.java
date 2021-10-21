@@ -32,6 +32,17 @@ public class Complimentary extends BaseTest {
         });
         System.out.println(authorise);*/
         loginPage.authoriseURL(SFDX, SFDX_AUTH_URL);
+        StringBuilder propertyRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:get",
+                "-s",
+                "thn__Hotel__c",
+                "-w",
+                "thn__Unique_Id__c='Demo'",
+                "-u",
+                ORG_USERNAME,
+                "--json"});
+        String propertyID = JsonParser2.getFieldValue(propertyRecord.toString(), "Id");
         StringBuilder productRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:get",
@@ -60,7 +71,7 @@ public class Complimentary extends BaseTest {
                 "-s",
                 "thn__Product__c",
                 "-w",
-                "Name='WINES'",
+                "Name='WINES' thn__Hotel__c='" + propertyID + "'",
                 "-u",
                 ORG_USERNAME,
                 "--json"});
@@ -76,17 +87,6 @@ public class Complimentary extends BaseTest {
                 ORG_USERNAME,
                 "--json"});
         String meetingHalfDayID = JsonParser2.getFieldValue(productRecord3.toString(), "Id");
-        StringBuilder propertyRecord = SfdxCommand.runLinuxCommand1(new String[]{
-                SFDX,
-                "force:data:record:get",
-                "-s",
-                "thn__Hotel__c",
-                "-w",
-                "thn__Unique_Id__c='Demo'",
-                "-u",
-                ORG_USERNAME,
-                "--json"});
-        String propertyID = JsonParser2.getFieldValue(propertyRecord.toString(), "Id");
         StringBuilder packageResult = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:create",
@@ -274,6 +274,17 @@ public class Complimentary extends BaseTest {
     @Description("THY-540 Myce Quote - Complimentary")
     @Story("Case 2: Set Complimentary to FALSE on Quote with related records after Complimentary was set to TRUE")
     public void testComplimentary2() throws InterruptedException, IOException {
+        StringBuilder propertyRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:get",
+                "-s",
+                "thn__Hotel__c",
+                "-w",
+                "thn__Unique_Id__c='Demo'",
+                "-u",
+                ORG_USERNAME,
+                "--json"});
+        String propertyID = JsonParser2.getFieldValue(propertyRecord.toString(), "Id");
         StringBuilder productRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:get",
@@ -302,7 +313,7 @@ public class Complimentary extends BaseTest {
                 "-s",
                 "thn__Product__c",
                 "-w",
-                "Name='WINES'",
+                "Name='WINES' thn__Hotel__c='" + propertyID + "'",
                 "-u",
                 ORG_USERNAME,
                 "--json"});
@@ -318,17 +329,6 @@ public class Complimentary extends BaseTest {
                 ORG_USERNAME,
                 "--json"});
         String meetingHalfDayID = JsonParser2.getFieldValue(productRecord3.toString(), "Id");
-        StringBuilder propertyRecord = SfdxCommand.runLinuxCommand1(new String[]{
-                SFDX,
-                "force:data:record:get",
-                "-s",
-                "thn__Hotel__c",
-                "-w",
-                "thn__Unique_Id__c='Demo'",
-                "-u",
-                ORG_USERNAME,
-                "--json"});
-        String propertyID = JsonParser2.getFieldValue(propertyRecord.toString(), "Id");
         StringBuilder packageResult = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:create",
@@ -527,6 +527,17 @@ public class Complimentary extends BaseTest {
     @Description("THY-540 Myce Quote - Complimentary")
     @Story("Case 3: Add Quote hotel rooms, Quote meeting rooms, Quote products and Quote meeting packages to the Quote when Complimentary is set to TRUE")
     public void testComplimentary3() throws InterruptedException, IOException {
+        StringBuilder propertyRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:get",
+                "-s",
+                "thn__Hotel__c",
+                "-w",
+                "thn__Unique_Id__c='Demo'",
+                "-u",
+                ORG_USERNAME,
+                "--json"});
+        String propertyID = JsonParser2.getFieldValue(propertyRecord.toString(), "Id");
         StringBuilder productRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:get",
@@ -555,7 +566,7 @@ public class Complimentary extends BaseTest {
                 "-s",
                 "thn__Product__c",
                 "-w",
-                "Name='WINES'",
+                "Name='WINES' thn__Hotel__c='" + propertyID + "'",
                 "-u",
                 ORG_USERNAME,
                 "--json"});
@@ -571,17 +582,6 @@ public class Complimentary extends BaseTest {
                 ORG_USERNAME,
                 "--json"});
         String meetingHalfDayID = JsonParser2.getFieldValue(productRecord3.toString(), "Id");
-        StringBuilder propertyRecord = SfdxCommand.runLinuxCommand1(new String[]{
-                SFDX,
-                "force:data:record:get",
-                "-s",
-                "thn__Hotel__c",
-                "-w",
-                "thn__Unique_Id__c='Demo'",
-                "-u",
-                ORG_USERNAME,
-                "--json"});
-        String propertyID = JsonParser2.getFieldValue(propertyRecord.toString(), "Id");
         StringBuilder packageResult = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:create",

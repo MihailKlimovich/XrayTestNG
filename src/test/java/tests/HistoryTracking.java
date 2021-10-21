@@ -339,7 +339,7 @@ public class HistoryTracking extends BaseTest {
                 "-s",
                 "thn__Product__c",
                 "-w",
-                "Name='WINES'",
+                "Name='WINES' thn__Hotel__c='" + propertyDemoID + "'",
                 "-u",
                 ORG_USERNAME,
                 "--json"});
@@ -674,7 +674,7 @@ public class HistoryTracking extends BaseTest {
                 "-s",
                 "thn__Product__c",
                 "-w",
-                "Name='WINES'",
+                "Name='WINES' thn__Hotel__c='" + propertyDemoID + "'",
                 "-u",
                 ORG_USERNAME,
                 "--json"});
@@ -1366,7 +1366,7 @@ public class HistoryTracking extends BaseTest {
                 "-s",
                 "thn__Product__c",
                 "-w",
-                "Name='WINES'",
+                "Name='WINES' thn__Hotel__c='" + propertyDemoID + "'",
                 "-u",
                 ORG_USERNAME,
                 "--json"});
@@ -1605,7 +1605,7 @@ public class HistoryTracking extends BaseTest {
                 "-s",
                 "thn__Product__c",
                 "-w",
-                "Name='WINES'",
+                "Name='WINES' thn__Hotel__c='" + propertyDemoID + "'",
                 "-u",
                 ORG_USERNAME,
                 "--json"});
