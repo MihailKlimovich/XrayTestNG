@@ -43,7 +43,7 @@ public class Commission extends BaseTest {
                 "-s",
                 "Account",
                 "-w",
-                "Name='TestAccountWithCommission",
+                "Name='TestAccountWithCommissionAuto",
                 "-u",
                 ORG_USERNAME,
                 "--json"});
@@ -63,7 +63,7 @@ public class Commission extends BaseTest {
                 "-s",
                 "thn__MYCE_Quote__c",
                 "-w",
-                "Name='TestCommission",
+                "Name='TestCommissionAuto",
                 "-u",
                 ORG_USERNAME,
                 "--json"});
@@ -73,7 +73,7 @@ public class Commission extends BaseTest {
                 "-s",
                 "thn__Package__c",
                 "-w",
-                "Name='TestCommissionPackage",
+                "Name='TestCommissionPackageAuto",
                 "-u",
                 ORG_USERNAME,
                 "--json"});
@@ -94,7 +94,7 @@ public class Commission extends BaseTest {
                 "-s",
                 "Account",
                 "-v",
-                "Name='TestAccountWithCommission' thn__Comm_Activity__c=15 thn__Beverage__c=15 thn__Comm_Equipment__c=15" +
+                "Name='TestAccountWithCommissionAuto' thn__Comm_Activity__c=15 thn__Beverage__c=15 thn__Comm_Equipment__c=15" +
                         " thn__Food__c=15 thn__Room__c=15 thn__Meeting_Room__c=15 thn__Other__c=15 thn__Comm_Packages__c=15",
                 "-u",
                 ORG_USERNAME,
@@ -106,7 +106,7 @@ public class Commission extends BaseTest {
                 "-s",
                 "Account",
                 "-v",
-                "Name='TestAccountWithoutCommission'",
+                "Name='TestAccountWithoutCommissionAuto'",
                 "-u",
                 ORG_USERNAME,
                 "--json"});
@@ -132,7 +132,7 @@ public class Commission extends BaseTest {
                 "-s",
                 "thn__MYCE_Quote__c",
                 "-v",
-                "Name='TestCommission' thn__Pax__c=1 thn__Hotel__c='" + propertyID +
+                "Name='TestCommissionAuto' thn__Pax__c=1 thn__Hotel__c='" + propertyID +
                         "' thn__Arrival_Date__c=" + date.generateTodayDate2() + " thn__Departure_Date__c=" +
                         date.generateTodayDate2_plus(0, 3),
                 "-u",
@@ -152,7 +152,7 @@ public class Commission extends BaseTest {
                 "-s",
                 "thn__MYCE_Quote__c",
                 "-w",
-                "Name='TestCommission'",
+                "Name='TestCommissionAuto'",
                 "-u",
                 ORG_USERNAME,
                 "--json"});
@@ -163,7 +163,7 @@ public class Commission extends BaseTest {
                 "-s",
                 "Account",
                 "-w",
-                "Name='TestAccountWithCommission'",
+                "Name='TestAccountWithCommissionAuto'",
                 "-u",
                 ORG_USERNAME,
                 "--json"});
@@ -227,7 +227,7 @@ public class Commission extends BaseTest {
                 "-s",
                 "thn__MYCE_Quote__c",
                 "-w",
-                "Name='TestCommission'",
+                "Name='TestCommissionAuto'",
                 "-u",
                 ORG_USERNAME,
                 "--json"});
@@ -238,7 +238,7 @@ public class Commission extends BaseTest {
                 "-s",
                 "Account",
                 "-w",
-                "Name='TestAccountWithoutCommission'",
+                "Name='TestAccountWithoutCommissionAuto'",
                 "-u",
                 ORG_USERNAME,
                 "--json"});
@@ -313,7 +313,7 @@ public class Commission extends BaseTest {
                 "-s",
                 "thn__MYCE_Quote__c",
                 "-w",
-                "Name='TestCommission'",
+                "Name='TestCommissionAuto'",
                 "-u",
                 ORG_USERNAME,
                 "--json"});
@@ -401,7 +401,7 @@ public class Commission extends BaseTest {
                 "-s",
                 "thn__Package__c",
                 "-v",
-                "Name='TestCommissionPackage' thn__Hotel__c='" + propertyID + "'",
+                "Name='TestCommissionPackageAuto' thn__Hotel__c='" + propertyID + "'",
                 "-u",
                 ORG_USERNAME,
                 "--json"});
@@ -625,7 +625,7 @@ public class Commission extends BaseTest {
                 "-s",
                 "thn__MYCE_Quote__c",
                 "-w",
-                "Name='TestCommission'",
+                "Name='TestCommissionAuto'",
                 "-u",
                 ORG_USERNAME,
                 "--json"});
@@ -929,7 +929,7 @@ public class Commission extends BaseTest {
                 "-s",
                 "thn__MYCE_Quote__c",
                 "-w",
-                "Name='TestCommission'",
+                "Name='TestCommissionAuto'",
                 "-u",
                 ORG_USERNAME,
                 "--json"});
@@ -1036,7 +1036,7 @@ public class Commission extends BaseTest {
                 "-s",
                 "thn__MYCE_Quote__c",
                 "-w",
-                "Name='TestCommission'",
+                "Name='TestCommissionAuto'",
                 "-u",
                 ORG_USERNAME,
                 "--json"});
