@@ -120,6 +120,28 @@ public class LoginPageForPackageOrg extends BasePage{
 
     }
 
+    public void authoriseURL2(String sfdxPath, String authURL, String userName) throws IOException, InterruptedException {
+        BasePage.runLinuxCommand1(new String[]{
+                "echo ${{" + authURL +"}} > ./SFDX_URL.txt"
+        });
+        StringBuilder authorise = BasePage.runLinuxCommand1(new String[]{
+                sfdxPath,
+                "auth:sfdxurl:store",
+                "-f",
+                "./DEVHUB_SFDX_URL.txt",
+                "-a",
+                userName
+        });
+        System.out.println(authorise);
+        BasePage.runLinuxCommand1(new String[]{
+                sfdxPath,
+                "force:org:open",
+                "-u",
+                userName
+        });
+    }
+
+
 
 }
 

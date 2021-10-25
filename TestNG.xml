@@ -5,9 +5,9 @@
         <listener class-name="utils.Listeners.TestListener"/>
         <listener class-name="utils.Listeners.AnnotationTransformer"/>
     </listeners>
-    <test name="THY-510: ValidationRule1">
+    <test name="THY-523: Total_amount_incl_Tax__c">
         <classes>
-            <class name="tests.ValidationRules.ValidationRule1"/>
+            <class name="tests.TotalAmountInclTax"/>
         </classes>
     </test>
 
