@@ -53,7 +53,7 @@ public class MultiDeleteTesting extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     @Story("Multi delete testing")
     public void logIn() throws InterruptedException, IOException {
-        StringBuilder authorise = SfdxCommand.runLinuxCommand1(new String[]{
+        /*StringBuilder authorise = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:auth:jwt:grant",
                 "--clientid",
@@ -64,8 +64,8 @@ public class MultiDeleteTesting extends BaseTest {
                 ORG_USERNAME,
                 "--instanceurl",
                 ORG_URL
-        });
-        System.out.println(authorise);
+        });*/
+        loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
         loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
     }
 

@@ -440,7 +440,7 @@ public class BasePage {
         Assert.assertTrue(isDisplayed(elementLocation), Message);
     }
 
-    public static StringBuilder  runLinuxCommand1(String[] cmd) throws InterruptedException, IOException {
+    public static StringBuilder runLinuxCommand1(String[] cmd) throws InterruptedException, IOException {
         StringBuilder strB = new StringBuilder();
         Runtime run = Runtime.getRuntime();
         Process pr = run.exec(cmd);

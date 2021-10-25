@@ -17,7 +17,7 @@ public class Commission extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     @Story("Commission")
     public void logIn() throws InterruptedException, IOException {
-        loginPage.authoriseURL(SFDX, SFDX_AUTH_URL);
+        loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
         /*StringBuilder authorise = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:auth:jwt:grant",

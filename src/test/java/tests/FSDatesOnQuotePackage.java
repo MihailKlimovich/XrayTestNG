@@ -30,7 +30,7 @@ public class FSDatesOnQuotePackage extends BaseTest {
                 ORG_URL
         });
         System.out.println(authorise);*/
-        loginPage.authoriseURL(SFDX, SFDX_AUTH_URL);
+        loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
     }
 
     @Test(priority = 2, description = "Create Myce Quote, Add Quote package, Change Myce Quote stage to 2 - Propose to generate FS dates")

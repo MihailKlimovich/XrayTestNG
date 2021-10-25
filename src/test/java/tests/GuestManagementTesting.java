@@ -29,7 +29,7 @@ public class GuestManagementTesting extends BaseTest {
                 ORG_URL
         });
         System.out.println(authorise);*/
-        loginPage.authoriseURL(SFDX, SFDX_AUTH_URL);
+        loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
     }
 
     @Test(priority = 2, description = "Create a new myce quote and fill values: company and contact, agent and contact," +

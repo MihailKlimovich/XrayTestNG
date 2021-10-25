@@ -5,7 +5,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 public class LoginPageForPackageOrg extends BasePage{
 
@@ -109,40 +112,29 @@ public class LoginPageForPackageOrg extends BasePage{
     }
 
 
-    public void authoriseURL(String sfdxPath, String jsonPath) throws IOException, InterruptedException {
-        StringBuilder authorise = BasePage.runLinuxCommand1(new String[]{
-                sfdxPath,
-                "auth:sfdxurl:store",
-                "-f",
-                jsonPath
-        });
-        System.out.println(authorise);
 
-    }
 
-    public void authoriseURL2(String sfdxPath, String authURL, String userName) throws IOException, InterruptedException {
-        BasePage.runLinuxCommand1(new String[]{
-                "echo",
-                authURL,
-                ">",
-                "SFDX_URL.txt"
-        });
-        StringBuilder authorise = BasePage.runLinuxCommand1(new String[]{
-                sfdxPath,
-                "auth:sfdxurl:store",
-                "-f",
-                "./DEVHUB_SFDX_URL.txt",
-                "-a",
-                userName
-        });
-        System.out.println(authorise);
-        BasePage.runLinuxCommand1(new String[]{
-                sfdxPath,
-                "force:org:open",
-                "-u",
-                userName
-        });
-    }
+
+        public void authoriseURL(String sfdxPath, String authURL, String userName) throws IOException, InterruptedException {
+            File createFile = new File("/home/user/SFDX_URL.txt");
+            createFile.createNewFile();
+            PrintWriter pw = new PrintWriter(createFile);
+            pw.write(authURL);
+            pw.flush();
+            pw.close();
+            StringBuilder authorise = BasePage.runLinuxCommand1(new String[]{
+                    sfdxPath,
+                    "auth:sfdxurl:store",
+                    "-f",
+                    "/home/user/SFDX_URL.txt",
+                    "-a",
+                    userName
+            });
+            System.out.println(authorise);
+        }
+
+
+
 
 
 

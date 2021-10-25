@@ -65,7 +65,7 @@ public class MultiEditOnQuotesRelatedList extends BaseTest {
                 ORG_URL
         });
         System.out.println(authorise);*/
-        loginPage.authoriseURL(SFDX, SFDX_AUTH_URL);
+        loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
         loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
         StringBuilder result2 = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,

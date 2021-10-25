@@ -29,7 +29,7 @@ public class QuotesAccountToMews extends BaseTest {
                 ORG_URL
         });
         System.out.println(authorise);*/
-        loginPage.authoriseURL(SFDX, SFDX_AUTH_URL);
+        loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
     }
 
     @Test(priority = 2, description = "1. Create Myce Quote, 2. Specify Agent, make sure agent.mews_id == null," +

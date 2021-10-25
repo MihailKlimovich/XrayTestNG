@@ -37,7 +37,7 @@ public class ValidationRule2 extends BaseTest {
                 ORG_URL
         });
         System.out.println(authorise);*/
-        loginPage.authoriseURL(SFDX, SFDX_AUTH_URL);
+        loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
         SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:update",

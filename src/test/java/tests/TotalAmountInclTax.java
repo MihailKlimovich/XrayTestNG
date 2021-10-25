@@ -31,7 +31,7 @@ public class TotalAmountInclTax extends BaseTest {
                 ORG_URL
         });
         System.out.println(authorise);*/
-        loginPage.authoriseURL2(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
+        loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
         StringBuilder propertyRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:get",
