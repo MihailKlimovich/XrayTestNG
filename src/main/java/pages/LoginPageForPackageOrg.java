@@ -131,6 +131,10 @@ public class LoginPageForPackageOrg extends BasePage{
                     userName
             });
             System.out.println(authorise);
+            if(createFile.delete()){
+                System.out.println("/home/user/SFDX_URL.txt файл удален");
+            }else System.out.println("Файла /home/user/SFDX_URL.txt не обнаружено");
+
         }
 
 
