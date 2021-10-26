@@ -44,6 +44,8 @@ public class BaseTest {
     protected JsonParser2 jsonParser2;
     protected Requests requests;
     protected ConvertWindow convertWindow;
+    protected Hotel hotel;
+    protected Product product;
 
     public WebDriver getDriver() {
         return driver;
@@ -69,19 +71,25 @@ public class BaseTest {
     public String SFDX_AUTH_URL = "/home/user/authFile.json";*/
 
     /*public String ORG_USERNAME = "cs1@com.postpart";
-    public String ORG_PASSWORD = "3k#eyhtorFvbj";
+    public String ORG_PASSWORD = "Std2021!65";
     public String ORG_URL = "https://test.salesforce.com";
     public String CONSUMER_KEY = "3MVG9sSN_PMn8tjQ_i1zH6SFiiRiWU8a6A0ccIA8pgi6PtKmTcevqRVhFkbTw9WjqjcylgNcp6WfR7tCRz1Z5";
     public String SFDX = "/home/user/sfdx/bin/sfdx";
     public String SERVER_KEY_PATH = "/home/user/salesforceauthotest/jdoe/JWT/server.key";
     public String SFDX_AUTH_URL = "force://PlatformCLI::5Aep861KhtojOqEEpdH0TQSE9vuVzdljKpf1MnxJ39U2zMud8kQ1z6hlDIRT73KpEekvlhTMdXkadgGyID.Mu1f@thdemo-dev-ed.my.salesforce.com";*/
 
-
+    /*public String ORG_USERNAME = "qa-tb185@succraft.com";
+    public String ORG_PASSWORD = "hellohello11";
+    public String ORG_URL = "https://test.salesforce.com";
+    public String CONSUMER_KEY = "";
+    public String SFDX = "/home/user/sfdx/bin/sfdx";
+    public String SERVER_KEY_PATH = "/home/user/salesforceauthotest/jdoe/JWT/server.key";
+    public String SFDX_AUTH_URL = "force://PlatformCLI::5Aep861wJWHSPwPUn30ST91_7_exFCnWFlcoL1MeBKWIcNGIG0kKEhPC_lpdzhh7VooFCOPc4T_DWeXwfODnHcl@java-innovation-1800-dev-ed.cs129.my.salesforce.com";
 
     final protected String thynkPackDevOrg = "https://thynkpack-dev-ed.my.salesforce.com/";
     final protected String thynkPackUserName = "rostislav.orel@succraft.com";
     final protected String thynkPackKey = "3MVG91BJr_0ZDQ4ta_ZwN1EEnfj.OQSJWOBWMPFXclJ22A8oaKqM9KTLdsoSupXX0idQnMIdsI3IweGbsJx6t";
-    final protected String thynkPackPassword = "Rost1508";
+    final protected String thynkPackPassword = "Rost1508";*/
 
 
 
@@ -132,6 +140,8 @@ public class BaseTest {
         jsonParser2 = new JsonParser2(driver);
         requests = new Requests(driver);
         convertWindow = new ConvertWindow(driver);
+        hotel = new Hotel(driver);
+        product = new Product(driver);
     }
 
     @AfterClass

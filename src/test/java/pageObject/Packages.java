@@ -8,6 +8,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import pages.BasePage;
 
+import java.io.IOException;
+
 import static org.openqa.selenium.support.ui.ExpectedConditions.alertIsPresent;
 
 public class Packages extends BasePage {
@@ -120,6 +122,40 @@ public class Packages extends BasePage {
         wait1.until(ExpectedConditions.presenceOfElementLocated(END_DATE_FIELD)).click();
         writeText(END_DATE_FIELD, endDate);
         wait1.until(ExpectedConditions.elementToBeClickable(SAVE_BUTTON)).click();
+    }
+
+
+    //////////////////////////////   SFDX COMMANDS   ////////////////////////////////////
+
+    @Step("Create Package")
+    public String createPackageSFDX(String sfdxPath, String value, String userName) throws IOException, InterruptedException {
+        StringBuilder packageResult = SfdxCommand.runLinuxCommand1(new String[]{
+                sfdxPath,
+                "force:data:record:create",
+                "-s",
+                "thn__Package__c",
+                "-v",
+                value,
+                "-u",
+                userName,
+                "--json"});
+        String packageId = JsonParser2.getFieldValue(packageResult.toString(), "id");
+        return packageId;
+    }
+
+    @Step("Delete Package SFDX")
+    public void deletePackageSFDX(String sfdxPath, String where, String userName) throws IOException, InterruptedException {
+        StringBuilder result = SfdxCommand.runLinuxCommand1(new String[]{
+                sfdxPath,
+                "force:data:record:delete",
+                "-s",
+                "thn__Package__c",
+                "-w",
+                where,
+                "-u",
+                userName,
+                "--json"});
+        System.out.println(result);
     }
 
 

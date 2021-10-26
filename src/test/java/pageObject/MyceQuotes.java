@@ -7,13 +7,20 @@ import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import pages.BasePage;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
+
 import static org.openqa.selenium.support.ui.ExpectedConditions.alertIsPresent;
 
 
-public class MyceQuotes extends BasePage{
+public class MyceQuotes extends BasePage {
 
 
-    /**Constructor*/
+    /**
+     * Constructor
+     */
     public MyceQuotes(WebDriver driver) {
         super(driver);
     }
@@ -72,11 +79,6 @@ public class MyceQuotes extends BasePage{
     By CREATE_CLONE_BUTTON = By.xpath("//thn-clone-multi-select-component//button[text()='Create']");
 
 
-
-
-
-
-
     @Step("Open MYCE Quote record")
     public void openMyceQoteRecord(String name) throws InterruptedException {
         wait1.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//table//a[@title='" + name + "']")));
@@ -86,10 +88,12 @@ public class MyceQuotes extends BasePage{
     @Step("Open Myce Quote page")
     public MyceQuotes goToMyceQuotes() throws InterruptedException {
         driver.navigate().to("https://postillion-hotels--postpart.lightning.force.com/lightning/o/thn__MYCE_Quote__c/list?filterName=Recent");
-        try{if(wait2.until(ExpectedConditions.alertIsPresent())!=null){
-            Alert alert = wait2.until(alertIsPresent());
-            alert.accept();
-        }}catch (TimeoutException e){
+        try {
+            if (wait2.until(ExpectedConditions.alertIsPresent()) != null) {
+                Alert alert = wait2.until(alertIsPresent());
+                alert.accept();
+            }
+        } catch (TimeoutException e) {
         }
         return this;
     }
@@ -100,7 +104,6 @@ public class MyceQuotes extends BasePage{
         Thread.sleep(1000);
         click3(MYCE_QUOTE_TAB);
     }
-
 
 
     @Step("Clone Myce Quote")
@@ -136,7 +139,7 @@ public class MyceQuotes extends BasePage{
     }
 
     @Step
-    public void createNewMyceQuote(){
+    public void createNewMyceQuote() {
         wait1.until(ExpectedConditions.presenceOfElementLocated(NEW_MYCE_QUOTE_BUTTON)).click();
         wait1.until(ExpectedConditions.presenceOfElementLocated(QUATE_RADIO_BUTTON)).click();
         wait1.until(ExpectedConditions.elementToBeClickable(NEXT_BUTTON)).click();
@@ -376,8 +379,6 @@ public class MyceQuotes extends BasePage{
     }
 
 
-
-
     @Step("Click Edit")
     public void clickEdit() throws InterruptedException {
         wait1.until(ExpectedConditions.elementToBeClickable(EDIT_BUTTON)).click();
@@ -398,15 +399,14 @@ public class MyceQuotes extends BasePage{
     }
 
     @Step("Click Save")
-    public void clickSave(){
+    public void clickSave() {
         wait1.until(ExpectedConditions.elementToBeClickable(SAVE_BUTTON)).click();
     }
 
     @Step("Click Is Confirmed radio button")
-    public void clickIsConfirmed(){
+    public void clickIsConfirmed() {
         wait1.until(ExpectedConditions.presenceOfElementLocated(IS_CONFIRMED_RADIO_BUTTON)).click();
     }
-
 
 
     @Step("Open Hotel Rooms")
@@ -445,7 +445,7 @@ public class MyceQuotes extends BasePage{
     @Step("Open first product")
     public void openProduct(String productName) throws InterruptedException {
         wait1.until(ExpectedConditions.presenceOfElementLocated(By.
-                xpath("//a[@title='"+ productName + "']"))).click();
+                xpath("//a[@title='" + productName + "']"))).click();
         Thread.sleep(2000);
     }
 
@@ -482,7 +482,7 @@ public class MyceQuotes extends BasePage{
     }
 
     @Step("Refresh page")
-    public void refreshPage(WebDriver driver){
+    public void refreshPage(WebDriver driver) {
         refreshPage(driver);
     }
 
@@ -493,6 +493,41 @@ public class MyceQuotes extends BasePage{
         click3(UPDATE_ORDER_BUTTON);
         Thread.sleep(3000);
     }
+
+    //////////////////////////////   SFDX COMMANDS   ////////////////////////////////////
+    @Step("Create Quote SFDX")
+    public String createQuoteSFDX(String sfdxPath, String value, String userName) throws IOException, InterruptedException {
+        StringBuilder myseQuoteResult = SfdxCommand.runLinuxCommand1(new String[]{
+                sfdxPath,
+                "force:data:record:create",
+                "-s",
+                "thn__MYCE_Quote__c",
+                "-v",
+                value,
+                "-u",
+                userName,
+                "--json"});
+        System.out.println(myseQuoteResult);
+        String myceQuoteID = JsonParser2.getFieldValue(myseQuoteResult.toString(), "id");
+        return myceQuoteID;
+    }
+
+
+    @Step("Delete Quote SFDX")
+    public void deleteQuoteSFDX(String sfdxPath, String where, String userName) throws IOException, InterruptedException {
+        StringBuilder result = SfdxCommand.runLinuxCommand1(new String[]{
+                sfdxPath,
+                "force:data:record:delete",
+                "-s",
+                "thn__MYCE_Quote__c",
+                "-w",
+                where,
+                "-u",
+                userName,
+                "--json"});
+        System.out.println(result);
+    }
+
 
 
 

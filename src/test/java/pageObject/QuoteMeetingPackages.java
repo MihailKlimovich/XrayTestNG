@@ -6,6 +6,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import pages.BasePage;
 
+import java.io.IOException;
+
 public class QuoteMeetingPackages extends BasePage {
 
     /**Constructor*/
@@ -117,6 +119,25 @@ public class QuoteMeetingPackages extends BasePage {
         By SELECT_NUMBer_ITEM_CHECKBOX = By.xpath("//span[text()='Select item "+ numberOfElements + "']/preceding-sibling::span");
         wait1.until(ExpectedConditions.presenceOfElementLocated(SELECT_NUMBer_ITEM_CHECKBOX));
         click3(SELECT_NUMBer_ITEM_CHECKBOX);
+    }
+
+
+    //////////////////////////////   SFDX COMMANDS   ////////////////////////////////////
+    @Step("Create Quote Package SFDX")
+    public String createQuotePackageSFDX(String sfdxPath, String value, String userName) throws IOException, InterruptedException {
+        StringBuilder quotePackageResult = SfdxCommand.runLinuxCommand1(new String[]{
+                sfdxPath,
+                "force:data:record:create",
+                "-s",
+                "thn__Quote_Package__c",
+                "-v",
+                value,
+                "-u",
+                userName,
+                "--json"});
+        System.out.println(quotePackageResult);
+        String quotePackageID = JsonParser2.getFieldValue(quotePackageResult.toString(), "id");
+        return quotePackageID;
     }
 
 

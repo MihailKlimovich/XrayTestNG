@@ -6,6 +6,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import pages.BasePage;
 
+import java.io.IOException;
+
 public class PackageLine extends BasePage {
 
     public PackageLine(WebDriver driver) {
@@ -147,6 +149,24 @@ public class PackageLine extends BasePage {
     @Step("Read help error message")
     public String readHelpErrorMessage() throws InterruptedException {
         return readRecalculateMessage(HELP_ERROR_MESSAGE);
+    }
+
+    //////////////////////////////   SFDX COMMANDS   ////////////////////////////////////
+
+    @Step("Create Package Line")
+    public String createPackageLineSFDX(String sfdxPath, String value, String userName) throws IOException, InterruptedException {
+        StringBuilder packageResult = SfdxCommand.runLinuxCommand1(new String[]{
+                sfdxPath,
+                "force:data:record:create",
+                "-s",
+                "thn__Package_Line__c",
+                "-v",
+                value,
+                "-u",
+                userName,
+                "--json"});
+        String packageLineId = JsonParser2.getFieldValue(packageResult.toString(), "id");
+        return packageLineId;
     }
 
 }
