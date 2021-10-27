@@ -1088,7 +1088,7 @@ public class HistoryTracking extends BaseTest {
         String myceQuoteID = JsonParser2.getFieldValue(myseQuoteResult.toString(), "id");
         myceQuotes.clickMyceQuoteTab();
         myceQuotes.openMyceQoteRecord("TestHistoryTrackingAuto8");
-        myceQuotes.cloneMyceQuote("CloneTestHistoryTrackingAuto8");
+        myceQuotes.cloneMyceQuote("CloneTestHistoryTrackingAuto8", date.generateTodayDate_plus(0, 0));
         StringBuilder cloneMyceQuoteRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:get",

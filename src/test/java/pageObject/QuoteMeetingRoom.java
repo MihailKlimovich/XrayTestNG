@@ -6,6 +6,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import pages.BasePage;
 
+import java.io.IOException;
+
 public class QuoteMeetingRoom extends BasePage {
 
     /**Constructor*/
@@ -184,6 +186,41 @@ public class QuoteMeetingRoom extends BasePage {
         Thread.sleep(1000);
         space();
     }
+
+    //////////////////////////////   SFDX COMMANDS   ////////////////////////////////////
+    @Step("Create Quote Meeting Room SFDX")
+    public String createQuoteMeetingRoomSFDX(String sfdxPath, String value, String userName) throws IOException, InterruptedException {
+        StringBuilder quoteMeetingRoomResult = SfdxCommand.runLinuxCommand1(new String[]{
+                sfdxPath,
+                "force:data:record:create",
+                "-s",
+                "thn__Quote_Meeting_Room__c",
+                "-v",
+                value,
+                "-u",
+                userName,
+                "--json"});
+        System.out.println("Quote meeting room create result:");
+        System.out.println(quoteMeetingRoomResult);
+        String quoteMeetingRoomID = JsonParser2.getFieldValue(quoteMeetingRoomResult.toString(), "id");
+        return quoteMeetingRoomID;
+    }
+
+    @Step("Get Quote Meeting Room SFDX")
+    public StringBuilder getQuoteMeetingRoomSFDX(String sfdxPath, String where, String userName) throws IOException, InterruptedException {
+        StringBuilder quoteMeetingRoomRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                sfdxPath,
+                "force:data:record:get",
+                "-s",
+                "thn__Quote_Meeting_Room__c",
+                "-w",
+                where,
+                "-u",
+                userName,
+                "--json"});
+        return quoteMeetingRoomRecord;
+    }
+
 
 
 

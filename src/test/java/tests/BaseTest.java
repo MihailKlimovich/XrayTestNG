@@ -46,6 +46,7 @@ public class BaseTest {
     protected ConvertWindow convertWindow;
     protected Hotel hotel;
     protected Product product;
+    protected RoomType roomType;
 
     public WebDriver getDriver() {
         return driver;
@@ -78,18 +79,18 @@ public class BaseTest {
     public String SERVER_KEY_PATH = "/home/user/salesforceauthotest/jdoe/JWT/server.key";
     public String SFDX_AUTH_URL = "force://PlatformCLI::5Aep861KhtojOqEEpdH0TQSE9vuVzdljKpf1MnxJ39U2zMud8kQ1z6hlDIRT73KpEekvlhTMdXkadgGyID.Mu1f@thdemo-dev-ed.my.salesforce.com";*/
 
-    /*public String ORG_USERNAME = "qa-tb185@succraft.com";
+    /*public String ORG_USERNAME = "qa-thy626@succraft.com";
     public String ORG_PASSWORD = "hellohello11";
     public String ORG_URL = "https://test.salesforce.com";
     public String CONSUMER_KEY = "";
     public String SFDX = "/home/user/sfdx/bin/sfdx";
     public String SERVER_KEY_PATH = "/home/user/salesforceauthotest/jdoe/JWT/server.key";
-    public String SFDX_AUTH_URL = "force://PlatformCLI::5Aep861wJWHSPwPUn30ST91_7_exFCnWFlcoL1MeBKWIcNGIG0kKEhPC_lpdzhh7VooFCOPc4T_DWeXwfODnHcl@java-innovation-1800-dev-ed.cs129.my.salesforce.com";
+    public String SFDX_AUTH_URL = "force://PlatformCLI::5Aep861xBpRqBedp8vzzGbigTH4C1HLTaldn0ZQWDzst2bGneG1Jej_gy659erJpIRCmfjSkmPiMj51qffSufGp@platform-site-757-dev-ed.cs160.my.salesforce.com";*/
 
     final protected String thynkPackDevOrg = "https://thynkpack-dev-ed.my.salesforce.com/";
     final protected String thynkPackUserName = "rostislav.orel@succraft.com";
     final protected String thynkPackKey = "3MVG91BJr_0ZDQ4ta_ZwN1EEnfj.OQSJWOBWMPFXclJ22A8oaKqM9KTLdsoSupXX0idQnMIdsI3IweGbsJx6t";
-    final protected String thynkPackPassword = "Rost1508";*/
+    final protected String thynkPackPassword = "Rost1508";
 
 
 
@@ -142,6 +143,7 @@ public class BaseTest {
         convertWindow = new ConvertWindow(driver);
         hotel = new Hotel(driver);
         product = new Product(driver);
+        roomType = new RoomType(driver);
     }
 
     @AfterClass

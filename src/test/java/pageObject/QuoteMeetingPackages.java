@@ -135,9 +135,25 @@ public class QuoteMeetingPackages extends BasePage {
                 "-u",
                 userName,
                 "--json"});
+        System.out.println("Quote meeting package create result:");
         System.out.println(quotePackageResult);
         String quotePackageID = JsonParser2.getFieldValue(quotePackageResult.toString(), "id");
         return quotePackageID;
+    }
+
+    @Step("Get Quote Package SFDX")
+    public StringBuilder getQuotePackageSFDX(String sfdxPath, String where, String userName) throws IOException, InterruptedException {
+        StringBuilder quotePackageRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                sfdxPath,
+                "force:data:record:get",
+                "-s",
+                "thn__Quote_Package__c",
+                "-w",
+                where,
+                "-u",
+                userName,
+                "--json"});
+        return quotePackageRecord;
     }
 
 

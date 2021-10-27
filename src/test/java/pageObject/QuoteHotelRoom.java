@@ -6,6 +6,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import pages.BasePage;
 
+import java.io.IOException;
+
 public class QuoteHotelRoom extends BasePage {
 
     /**Constructor*/
@@ -129,6 +131,39 @@ public class QuoteHotelRoom extends BasePage {
         click3(SELECT_NUMBer_ITEM_CHECKBOX);
     }
 
+    //////////////////////////////   SFDX COMMANDS   ////////////////////////////////////
+    @Step("Create Quote Hotel Room SFDX")
+    public String createQuoteHotelRoomSFDX(String sfdxPath, String value, String userName) throws IOException, InterruptedException {
+        StringBuilder quoteHotelRoomResult = SfdxCommand.runLinuxCommand1(new String[]{
+                sfdxPath,
+                "force:data:record:create",
+                "-s",
+                "thn__Quote_Hotel_Room__c",
+                "-v",
+                value,
+                "-u",
+                userName,
+                "--json"});
+        System.out.println("Quote hotel room create result:");
+        System.out.println(quoteHotelRoomResult);
+        String quoteHotelRoomID = JsonParser2.getFieldValue(quoteHotelRoomResult.toString(), "id");
+        return quoteHotelRoomID;
+    }
+
+    @Step("Get Quote Hotel Room SFDX")
+    public StringBuilder getQuoteHotelRoomSFDX(String sfdxPath, String where, String userName) throws IOException, InterruptedException {
+        StringBuilder quoteHotelRoomRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                sfdxPath,
+                "force:data:record:get",
+                "-s",
+                "thn__Quote_Hotel_Room__c",
+                "-w",
+                where,
+                "-u",
+                userName,
+                "--json"});
+        return quoteHotelRoomRecord;
+    }
 
 
 

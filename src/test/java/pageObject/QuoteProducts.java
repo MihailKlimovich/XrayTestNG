@@ -6,6 +6,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import pages.BasePage;
 
+import java.io.IOException;
+
 public class QuoteProducts extends BasePage {
 
     /**Constructor*/
@@ -163,6 +165,40 @@ public class QuoteProducts extends BasePage {
         Thread.sleep(2000);
         tab();
         space();
+    }
+
+    //////////////////////////////   SFDX COMMANDS   ////////////////////////////////////
+    @Step("Create Quote Product SFDX")
+    public String createQuoteProductSFDX(String sfdxPath, String value, String userName) throws IOException, InterruptedException {
+        StringBuilder quoteProductResult = SfdxCommand.runLinuxCommand1(new String[]{
+                sfdxPath,
+                "force:data:record:create",
+                "-s",
+                "thn__Quote_Product__c",
+                "-v",
+                value,
+                "-u",
+                userName,
+                "--json"});
+        System.out.println("Quote product create result:");
+        System.out.println(quoteProductResult);
+        String quoteProductID = JsonParser2.getFieldValue(quoteProductResult.toString(), "id");
+        return quoteProductID;
+    }
+
+    @Step("Get Quote Product SFDX")
+    public StringBuilder getQuoteProductSFDX(String sfdxPath, String where, String userName) throws IOException, InterruptedException {
+        StringBuilder QuoteProductRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                sfdxPath,
+                "force:data:record:get",
+                "-s",
+                "thn__Quote_Product__c",
+                "-w",
+                where,
+                "-u",
+                userName,
+                "--json"});
+        return QuoteProductRecord;
     }
 
 

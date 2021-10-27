@@ -67,8 +67,8 @@ public class MyceQuotes extends BasePage {
     By QUOTE_NAME = By.xpath("//slot[@slot='primaryField']//lightning-formatted-text");
     By CLONE_MYCE_QUOTE_BUTTON = By.xpath("//div//runtime_platform_actions-action-renderer[@title='Clone MYCE Quote']");
     By DROP_DOWN_BUTTON = By.xpath("//records-lwc-highlights-panel//lightning-button-menu[@class='menu-button-item slds-dropdown-trigger slds-dropdown-trigger_click']//button");
-    By KEEP_ALL_PAX_CHECKBOX = By.xpath("//span//input[@name='Keep all Pax']/following-sibling::label//span");
-    By KEEP_ROOMS_PAX_CHECKBOX = By.xpath("//input[@name='Keep all Pax']/following-sibling::label//span");
+    By KEEP_ALL_PAX_CHECKBOX = By.xpath("//span//input[@name='Keep all Pax']/following-sibling::label//span[@class='slds-checkbox_faux']");
+    By KEEP_ROOMS_PAX_CHECKBOX = By.xpath("//input[@name='Keep rooms Pax']/following-sibling::label//span[@class='slds-checkbox_faux']");
     By SAVE_BUTTON_FOR_CLONE = By.xpath("//footer//button[text()='Save']");
     By CHANGE_DATE_BUTTON = By.xpath("//button[@name='thn__MYCE_Quote__c.thn__Change_Date']");
     By NEW_ARRIVAL_DATE_FIELD = By.xpath("//input[@name='New_arrival_date']");
@@ -77,6 +77,7 @@ public class MyceQuotes extends BasePage {
     By UPDATE_ORDER_BUTTON = By.xpath("//button[@name='thn__MYCE_Quote__c.thn__Product_Modification']");
     By CLONE_TO_DATE_FIELD = By.xpath("//thn-clone-multi-select-component//input[@name='cloneTo']");
     By CREATE_CLONE_BUTTON = By.xpath("//thn-clone-multi-select-component//button[text()='Create']");
+    By CLONE_QUOTE_ARRIVAL_DAY_FIELD = By.xpath("//div//input[@name='Arrival Date']");
 
 
     @Step("Open MYCE Quote record")
@@ -87,7 +88,7 @@ public class MyceQuotes extends BasePage {
 
     @Step("Open Myce Quote page")
     public MyceQuotes goToMyceQuotes() throws InterruptedException {
-        driver.navigate().to("https://postillion-hotels--postpart.lightning.force.com/lightning/o/thn__MYCE_Quote__c/list?filterName=Recent");
+        driver.navigate().to("https://platform-site-757-dev-ed.lightning.force.com/lightning/o/thn__MYCE_Quote__c/list?filterName=Recent");
         try {
             if (wait2.until(ExpectedConditions.alertIsPresent()) != null) {
                 Alert alert = wait2.until(alertIsPresent());
@@ -107,15 +108,19 @@ public class MyceQuotes extends BasePage {
 
 
     @Step("Clone Myce Quote")
-    public void cloneMyceQuote(String name) throws InterruptedException {
-        wait1.until(ExpectedConditions.presenceOfElementLocated(DROP_DOWN_BUTTON));
-        Thread.sleep(2000);
-        click3(DROP_DOWN_BUTTON);
-        enter();
+    public void cloneMyceQuote(String name, String date) throws InterruptedException {
+        wait1.until(ExpectedConditions.presenceOfElementLocated(CLONE_MYCE_QUOTE_BUTTON));
+        click3(CLONE_MYCE_QUOTE_BUTTON);
         wait1.until(ExpectedConditions.presenceOfElementLocated(NAME_QUOTE_FIELD)).click();
         writeText(NAME_QUOTE_FIELD, name);
-        wait1.until(ExpectedConditions.presenceOfElementLocated(KEEP_ALL_PAX_CHECKBOX)).click();
-        wait1.until(ExpectedConditions.presenceOfElementLocated(KEEP_ROOMS_PAX_CHECKBOX)).click();
+        click3(CLONE_QUOTE_ARRIVAL_DAY_FIELD);
+        clear(CLONE_QUOTE_ARRIVAL_DAY_FIELD);
+        writeText(CLONE_QUOTE_ARRIVAL_DAY_FIELD, date);
+        wait1.until(ExpectedConditions.presenceOfElementLocated(KEEP_ALL_PAX_CHECKBOX));
+        Thread.sleep(1000);
+        click3(KEEP_ALL_PAX_CHECKBOX);
+        wait1.until(ExpectedConditions.presenceOfElementLocated(KEEP_ROOMS_PAX_CHECKBOX));
+        click3(KEEP_ROOMS_PAX_CHECKBOX);
         wait1.until(ExpectedConditions.presenceOfElementLocated(SAVE_BUTTON_FOR_CLONE)).click();
         wait1.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//slot[@slot='header']//slot[@slot='primaryField']//lightning-formatted-text[text()='" + name + "']")));
         Thread.sleep(5000);
@@ -507,11 +512,11 @@ public class MyceQuotes extends BasePage {
                 "-u",
                 userName,
                 "--json"});
+        System.out.println("Quote create result:");
         System.out.println(myseQuoteResult);
         String myceQuoteID = JsonParser2.getFieldValue(myseQuoteResult.toString(), "id");
         return myceQuoteID;
     }
-
 
     @Step("Delete Quote SFDX")
     public void deleteQuoteSFDX(String sfdxPath, String where, String userName) throws IOException, InterruptedException {
@@ -526,6 +531,21 @@ public class MyceQuotes extends BasePage {
                 userName,
                 "--json"});
         System.out.println(result);
+    }
+
+    @Step("Get Quote SFDX")
+    public StringBuilder getQuoteSFDX(String sfdxPath, String where, String userName) throws IOException, InterruptedException {
+        StringBuilder quoteRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                sfdxPath,
+                "force:data:record:get",
+                "-s",
+                "thn__MYCE_Quote__c",
+                "-w",
+                where,
+                "-u",
+                userName,
+                "--json"});
+        return quoteRecord;
     }
 
 
