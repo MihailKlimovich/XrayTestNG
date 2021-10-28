@@ -9,6 +9,7 @@ import pageObject.JsonParser2;
 import pageObject.MyceQuotes;
 
 import java.io.IOException;
+import java.util.List;
 
 public class CloneMyceQuoteAndCloneSelection extends BaseTest {
 
@@ -71,13 +72,11 @@ public class CloneMyceQuoteAndCloneSelection extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     @Story("Clone Myce quote and clone selection")
     public void cloneQuote() throws InterruptedException, IOException {
-        loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
         myceQuotes.deleteQuoteSFDX(SFDX, "Name='CloneMyceQuoteAutoTestClone'", ORG_USERNAME);
         myceQuotes.goToMyceQuotes();
         myceQuotes.openMyceQoteRecord("CloneMyceQuoteAutoTest");
         myceQuotes.cloneMyceQuote("CloneMyceQuoteAutoTestClone", date.generateTodayDate_plus(0, 1));
         StringBuilder clonedQuoteRecord = myceQuotes.getQuoteSFDX(SFDX, "Name='CloneMyceQuoteAutoTestClone'", ORG_USERNAME);
-        System.out.println(clonedQuoteRecord);
         String clonedQuoteID= JsonParser2.getFieldValue(clonedQuoteRecord.toString(), "Id");
         String clonedQuoteArrivalDay = JsonParser2.getFieldValue(clonedQuoteRecord.toString(), "thn__Arrival_Date__c");
         String clonedQuoteDepartureDate= JsonParser2.getFieldValue(clonedQuoteRecord.toString(), "thn__Departure_Date__c");
@@ -120,7 +119,114 @@ public class CloneMyceQuoteAndCloneSelection extends BaseTest {
         Assert.assertNotNull(clonedQuoteProductsID2);
         Assert.assertNotNull(clonedQuoteMeetingRoomD1);
         Assert.assertNotNull(clonedQuoteMeetingRoomD2);
-
     }
 
+    @Test(priority = 4, description = "Clone selection of records: quote hotel room")
+    @Severity(SeverityLevel.NORMAL)
+    @Story("Clone Myce quote and clone selection")
+    public void cloneQuoteHotelRooms() throws InterruptedException, IOException {
+        //loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
+        myceQuotes.goToMyceQuotes();
+        myceQuotes.openMyceQoteRecord("CloneMyceQuoteAutoTest");
+        myceQuotes.cloneRelatedRecord(date.generateTodayDate_plus(0 , 0), "Quote Hotel Room");
+        StringBuilder quoteRecord = myceQuotes.getQuoteSFDX(SFDX, "Name='CloneMyceQuoteAutoTest'", ORG_USERNAME);
+        String myceQuoteID= JsonParser2.getFieldValue(quoteRecord.toString(), "Id");
+        StringBuilder quoteHotelRooms = myceQuotes.soql(SFDX, "SELECT Id, thn__Space_Area__c," +
+                " thn__Arrival_Date_Time__c, thn__Departure_Date_Time__c  FROM thn__Quote_Hotel_Room__c WHERE" +
+                " Name='ROOM 2 NIGHTS' and thn__MYCE_Quote__c='" + myceQuoteID + "'", ORG_USERNAME);
+        System.out.println(quoteHotelRooms);
+        List<String> quoteHotelRoomsID = JsonParser2.getFieldValueSoql(quoteHotelRooms.toString(), "Id");
+        List<String> quoteHotelRoomsRoomType = JsonParser2.
+                getFieldValueSoql(quoteHotelRooms.toString(), "thn__Space_Area__c");
+        List<String> quoteHotelRoomsArrivalDateTime = JsonParser2.
+                getFieldValueSoql(quoteHotelRooms.toString(), "thn__Arrival_Date_Time__c");
+        List<String> quoteHotelRoomsDepartureDateTime = JsonParser2.
+                getFieldValueSoql(quoteHotelRooms.toString(), "thn__Departure_Date_Time__c");
+        Assert.assertEquals(quoteHotelRoomsID.size(), 2);
+        Assert.assertEquals(quoteHotelRoomsRoomType.get(0), quoteHotelRoomsRoomType.get(1));
+        Assert.assertEquals(quoteHotelRoomsArrivalDateTime.get(0), quoteHotelRoomsArrivalDateTime.get(1));
+        Assert.assertEquals(quoteHotelRoomsDepartureDateTime.get(0), quoteHotelRoomsDepartureDateTime.get(1));
+    }
+
+    @Test(priority = 5, description = "Clone selection of records: quote product")
+    @Severity(SeverityLevel.NORMAL)
+    @Story("Clone Myce quote and clone selection")
+    public void cloneQuoteProduct() throws InterruptedException, IOException {
+        //loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
+        myceQuotes.goToMyceQuotes();
+        myceQuotes.openMyceQoteRecord("CloneMyceQuoteAutoTest");
+        myceQuotes.cloneRelatedRecord(date.generateTodayDate_plus(0 , 0), "Quote Product");
+        StringBuilder quoteRecord = myceQuotes.getQuoteSFDX(SFDX, "Name='CloneMyceQuoteAutoTest'", ORG_USERNAME);
+        String myceQuoteID= JsonParser2.getFieldValue(quoteRecord.toString(), "Id");
+        StringBuilder quoteProducts = myceQuotes.soql(SFDX, "SELECT Id, thn__Pax__c," +
+                " thn__Start_Date_Time__c, thn__End_Date_Time__c  FROM thn__Quote_Product__c WHERE" +
+                " Name='DINER' and thn__MYCE_Quote__c='" + myceQuoteID + "'", ORG_USERNAME);
+        List<String> quoteProductsID = JsonParser2.getFieldValueSoql(quoteProducts.toString(), "Id");
+        List<Integer> quoteProductsPax = JsonParser2.
+                getFieldValueSoql2(quoteProducts.toString(), "thn__Pax__c");
+        List<String> quoteProductsStartDateTime = JsonParser2.
+                getFieldValueSoql(quoteProducts.toString(), "thn__Start_Date_Time__c");
+        List<String> quoteProductsEndDateTime = JsonParser2.
+                getFieldValueSoql(quoteProducts.toString(), "thn__End_Date_Time__c");
+        Assert.assertEquals(quoteProductsID.size(), 2);
+        Assert.assertEquals(quoteProductsPax.get(0), quoteProductsPax.get(1));
+        Assert.assertEquals(quoteProductsStartDateTime.get(0), quoteProductsStartDateTime.get(1));
+        Assert.assertEquals(quoteProductsEndDateTime.get(0), quoteProductsEndDateTime.get(1));
+    }
+
+    @Test(priority = 6, description = "Clone selection of records: quote meeting room")
+    @Severity(SeverityLevel.NORMAL)
+    @Story("Clone Myce quote and clone selection")
+    public void cloneQuoteMeetingRoom() throws InterruptedException, IOException {
+        //loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
+        myceQuotes.goToMyceQuotes();
+        myceQuotes.openMyceQoteRecord("CloneMyceQuoteAutoTest");
+        myceQuotes.cloneRelatedRecord(date.generateTodayDate_plus(0 , 0), "Quote Meetings Room");
+        StringBuilder quoteRecord = myceQuotes.getQuoteSFDX(SFDX, "Name='CloneMyceQuoteAutoTest'", ORG_USERNAME);
+        String myceQuoteID= JsonParser2.getFieldValue(quoteRecord.toString(), "Id");
+        StringBuilder quoteMeetingRoom = myceQuotes.soql(SFDX, "SELECT Id, thn__Product__c," +
+                " thn__Pax__c, thn__Start_Date_Time__c, thn__End_Date_Time__c  FROM thn__Quote_Meeting_Room__c WHERE" +
+                " Name='DEFAULT - MEETING FULL DAY' and thn__MYCE_Quote__c='" + myceQuoteID + "'", ORG_USERNAME);
+        List<String> quoteMeetingRoomsID = JsonParser2.getFieldValueSoql(quoteMeetingRoom.toString(), "Id");
+        List<String> quoteMeetingRoomsProduct = JsonParser2.getFieldValueSoql(quoteMeetingRoom.toString(), "thn__Product__c");
+        List<Integer> quoteMeetingRoomsPax = JsonParser2.
+                getFieldValueSoql2(quoteMeetingRoom.toString(), "thn__Pax__c");
+        List<String> quoteMeetingRoomsStartDateTime = JsonParser2.
+                getFieldValueSoql(quoteMeetingRoom.toString(), "thn__Start_Date_Time__c");
+        List<String> quoteMeetingRoomsEndDateTime = JsonParser2.
+                getFieldValueSoql(quoteMeetingRoom.toString(), "thn__End_Date_Time__c");
+        Assert.assertEquals(quoteMeetingRoomsID.size(), 2);
+        Assert.assertEquals(quoteMeetingRoomsPax.get(0), quoteMeetingRoomsPax.get(1));
+        Assert.assertEquals(quoteMeetingRoomsProduct.get(0), quoteMeetingRoomsProduct.get(1));
+        Assert.assertEquals(quoteMeetingRoomsStartDateTime.get(0), quoteMeetingRoomsStartDateTime.get(1));
+        Assert.assertEquals(quoteMeetingRoomsEndDateTime.get(0), quoteMeetingRoomsEndDateTime.get(1));
+    }
+
+    @Test(priority = 7, description = "Clone selection of records: quote package")
+    @Severity(SeverityLevel.NORMAL)
+    @Story("Clone Myce quote and clone selection")
+    public void cloneQuotePackage() throws InterruptedException, IOException {
+        //loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
+        myceQuotes.goToMyceQuotes();
+        myceQuotes.openMyceQoteRecord("CloneMyceQuoteAutoTest");
+        myceQuotes.cloneRelatedRecord(date.generateTodayDate_plus(0 , 0), "Quote Package");
+        StringBuilder quoteRecord = myceQuotes.getQuoteSFDX(SFDX, "Name='CloneMyceQuoteAutoTest'", ORG_USERNAME);
+        String myceQuoteID= JsonParser2.getFieldValue(quoteRecord.toString(), "Id");
+        StringBuilder quotePackage = myceQuotes.soql(SFDX, "SELECT Id, thn__Package__c," +
+                " thn__Pax__c, thn__Start_Date__c, thn__End_Date__c  FROM thn__Quote_Package__c WHERE" +
+                " Name='CloneAutoTest' and thn__MYCE_Quote__c='" + myceQuoteID + "'", ORG_USERNAME);
+        List<String> quotePackagesID = JsonParser2.getFieldValueSoql(quotePackage.toString(), "Id");
+        List<String> quotePackagesPack = JsonParser2.getFieldValueSoql(quotePackage.toString(), "thn__Package__c");
+        List<Integer> quotePackagesPax = JsonParser2.
+                getFieldValueSoql2(quotePackage.toString(), "thn__Pax__c");
+        List<String> quotePackageStartDate = JsonParser2.
+                getFieldValueSoql(quotePackage.toString(), "thn__Start_Date__c");
+        List<String> quoteMPackageEndDate = JsonParser2.
+                getFieldValueSoql(quotePackage.toString(), "thn__End_Date__c");
+        Assert.assertEquals(quotePackagesID.size(), 2);
+        Assert.assertEquals(quotePackagesPax.get(0), quotePackagesPax.get(1));
+        Assert.assertEquals(quotePackagesPack.get(0), quotePackagesPack.get(1));
+        Assert.assertEquals(quotePackageStartDate.get(0), quotePackageStartDate.get(1));
+        Assert.assertEquals(quoteMPackageEndDate.get(0), quoteMPackageEndDate.get(1));
+    }
 }

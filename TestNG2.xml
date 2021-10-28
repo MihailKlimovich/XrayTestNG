@@ -130,6 +130,11 @@
             <class name="tests.GuestManagementTesting"/>
         </classes>
     </test>
+    <test name="Clone Myce quote and clone selection">
+        <classes>
+            <class name="tests.CloneMyceQuoteAndCloneSelection"/>
+        </classes>
+    </test>
 
 
 

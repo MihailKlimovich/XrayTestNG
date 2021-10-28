@@ -19,8 +19,6 @@ public class HistoryTracking extends BaseTest {
     @Story("THY-519: History tracking")
     public void logIn() throws InterruptedException, IOException {
         loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
-        homePageForScratchOrg.openAppLauncher();
-        homePageForScratchOrg.sendTextInAppWindow("MYCE");
         /*StringBuilder authorise = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:auth:jwt:grant",
@@ -900,7 +898,7 @@ public class HistoryTracking extends BaseTest {
                 ORG_USERNAME,
                 "--json"});
 
-        myceQuotes.clickMyceQuoteTab();
+        myceQuotes.goToMyceQuotes();
         myceQuotes.openMyceQoteRecord("TestHistoryTrackingAuto5");
         myceQuotes.updateOrder();
         StringBuilder historyRecord1 = SfdxCommand.runLinuxCommand1(new String[]{
@@ -1086,7 +1084,7 @@ public class HistoryTracking extends BaseTest {
                 ORG_USERNAME,
                 "--json"});
         String myceQuoteID = JsonParser2.getFieldValue(myseQuoteResult.toString(), "id");
-        myceQuotes.clickMyceQuoteTab();
+        myceQuotes.goToMyceQuotes();
         myceQuotes.openMyceQoteRecord("TestHistoryTrackingAuto8");
         myceQuotes.cloneMyceQuote("CloneTestHistoryTrackingAuto8", date.generateTodayDate_plus(0, 0));
         StringBuilder cloneMyceQuoteRecord = SfdxCommand.runLinuxCommand1(new String[]{
@@ -1191,9 +1189,9 @@ public class HistoryTracking extends BaseTest {
                 ORG_USERNAME,
                 "--json"});
         String quotePackageId = JsonParser2.getFieldValue(quotePackageResult.toString(), "id");
-        myceQuotes.clickMyceQuoteTab();
+        myceQuotes.goToMyceQuotes();
         myceQuotes.openMyceQoteRecord("TestHistoryTrackingAuto9");
-        myceQuotes.cloneRelatedRecord(date.generateTodayDate3_plus(0 , 0), "Quote Package");
+        myceQuotes.cloneRelatedRecord(date.generateTodayDate_plus(0 , 0), "Quote Package");
         StringBuilder quotePackageSoql = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:soql:query",
@@ -1299,9 +1297,9 @@ public class HistoryTracking extends BaseTest {
                 ORG_USERNAME,
                 "--json"});
         //String quoteHotelRoomId = JsonParser2.getFieldValue(quoteHotelRoomResult.toString(), "id");
-        myceQuotes.clickMyceQuoteTab();
+        myceQuotes.goToMyceQuotes();
         myceQuotes.openMyceQoteRecord("TestHistoryTrackingAuto10");
-        myceQuotes.cloneRelatedRecord(date.generateTodayDate3_plus(0 , 0), "Quote Hotel Room");
+        myceQuotes.cloneRelatedRecord(date.generateTodayDate_plus(0 , 0), "Quote Hotel Room");
         StringBuilder quoteHotelRoomsSoql = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:soql:query",
@@ -1394,9 +1392,9 @@ public class HistoryTracking extends BaseTest {
                 "-u",
                 ORG_USERNAME,
                 "--json"});
-        myceQuotes.clickMyceQuoteTab();
+        myceQuotes.goToMyceQuotes();
         myceQuotes.openMyceQoteRecord("TestHistoryTrackingAuto11");
-        myceQuotes.cloneRelatedRecord(date.generateTodayDate3_plus(0, 0), "Quote Product");
+        myceQuotes.cloneRelatedRecord(date.generateTodayDate_plus(0, 0), "Quote Product");
         StringBuilder quoteProductsSoql = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:soql:query",
@@ -1491,9 +1489,9 @@ public class HistoryTracking extends BaseTest {
                 ORG_USERNAME,
                 "--json"});
 
-        myceQuotes.clickMyceQuoteTab();
+        myceQuotes.goToMyceQuotes();
         myceQuotes.openMyceQoteRecord("TestHistoryTrackingAuto12");
-        myceQuotes.cloneRelatedRecord(date.generateTodayDate3_plus(0, 0), "Quote Meetings Room");
+        myceQuotes.cloneRelatedRecord(date.generateTodayDate_plus(0, 0), "Quote Meetings Room");
         StringBuilder quoteMeetingRoomsSoql = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:soql:query",
@@ -1565,7 +1563,7 @@ public class HistoryTracking extends BaseTest {
                 ORG_USERNAME,
                 "--json"});
         String myceQuoteID = JsonParser2.getFieldValue(myseQuoteResult.toString(), "id");
-        myceQuotes.clickMyceQuoteTab();
+        myceQuotes.goToMyceQuotes();
         myceQuotes.openMyceQoteRecord("TestHistoryTrackingAuto13");
         myceQuotes.changeDate(date.generateTodayDate3_plus(0, 1));
         StringBuilder historyRecord1 = SfdxCommand.runLinuxCommand1(new String[]{

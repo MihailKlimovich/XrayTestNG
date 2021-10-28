@@ -57,7 +57,7 @@ public class JsonParser2 extends BasePage {
         }catch (UnsupportedOperationException e){
             return null;}
     }
-    @Step("Get value from SOQL")
+    @Step("Get value from SOQL (String)")
     public static List<String> getFieldValueSoql(String json, String... keys) throws UnsupportedOperationException {
         JSONObject obj = new JSONObject(json);
         JSONArray array = obj.getJSONObject("result").getJSONArray("records");
@@ -71,37 +71,19 @@ public class JsonParser2 extends BasePage {
         return records;
     }
 
-
-
-    @Step("Get value")
-    public static String getFieldValue111(String json, String key) throws UnsupportedOperationException {
-        try {
-            JsonObject jsonObject = new JsonParser().parse(json).getAsJsonObject();
-            String result = jsonObject.getAsJsonObject("result").get(key).getAsString();
-            return result;
-        }catch (UnsupportedOperationException e){
-            return null;}
-    }
-
-    public static void getFieldValue3(StringBuilder json, String key) throws UnsupportedOperationException {
-
-        System.out.println(json);
+    @Step("Get value from SOQL (Integer)")
+    public static List<Integer> getFieldValueSoql2(String json, String... keys) throws UnsupportedOperationException {
         JSONObject obj = new JSONObject(json);
-        //obj.getJSONObject("result");
-        JSONArray arr = obj.getJSONArray("records"); // notice that `"posts": [...]`
-        for (int i = 0; i < arr.length(); i++)
-        {
-            String result = arr.getJSONObject(i).getString(key);
-            System.out.println(result);
-
+        JSONArray array = obj.getJSONObject("result").getJSONArray("records");
+        ArrayList<Integer> records = new ArrayList<>();
+        for (int i = 0; i < array.length(); i++) {
+            for (String key: keys) {
+                int result = array.getJSONObject(i).getInt(key);
+                records.add(result);
+            }
         }
+        return records;
     }
 
 
-
-    /*public static String getFieldValue(String json, String key) {
-        JSONObject obj = new JSONObject(json);
-        String result = obj.getJSONObject("result").getString(key);
-        return result;
-    }*/
 }

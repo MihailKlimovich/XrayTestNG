@@ -78,12 +78,14 @@ public class MyceQuotes extends BasePage {
     By CLONE_TO_DATE_FIELD = By.xpath("//thn-clone-multi-select-component//input[@name='cloneTo']");
     By CREATE_CLONE_BUTTON = By.xpath("//thn-clone-multi-select-component//button[text()='Create']");
     By CLONE_QUOTE_ARRIVAL_DAY_FIELD = By.xpath("//div//input[@name='Arrival Date']");
+    By SERIE_TAB = By.xpath("//li//a[@data-label='Serie']");
 
 
     @Step("Open MYCE Quote record")
     public void openMyceQoteRecord(String name) throws InterruptedException {
-        wait1.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//table//a[@title='" + name + "']")));
-        click3(By.xpath("//table//a[@title='" + name + "']"));
+        waitForTests.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//table//a[@title='" + name + "']")));
+        //wait1.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//table//a[@title='" + name + "']")));
+        click(By.xpath("//table//a[@title='" + name + "']"));
     }
 
     @Step("Open Myce Quote page")
@@ -128,9 +130,10 @@ public class MyceQuotes extends BasePage {
 
     @Step("Clone related record")
     public void cloneRelatedRecord(String date, String nameRecord) throws InterruptedException {
-        refreshPage();
+        waitForTests.until(ExpectedConditions.presenceOfElementLocated(SERIE_TAB));
+        Thread.sleep(1000);
+        click(SERIE_TAB);
         wait1.until(ExpectedConditions.presenceOfElementLocated(CLONE_TO_DATE_FIELD));
-        Thread.sleep(2000);
         click(CLONE_TO_DATE_FIELD);
         ctrlA();
         delete();
@@ -546,6 +549,19 @@ public class MyceQuotes extends BasePage {
                 userName,
                 "--json"});
         return quoteRecord;
+    }
+
+    @Step("SOQL")
+    public StringBuilder soql(String sfdxPath, String soql, String userName) throws IOException, InterruptedException {
+        StringBuilder jsonObject = SfdxCommand.runLinuxCommand1(new String[]{
+                sfdxPath,
+                "force:data:soql:query",
+                "-q",
+                soql,
+                "-u",
+                userName,
+                "--json"});
+        return jsonObject;
     }
 
 

@@ -34,7 +34,7 @@ public class BasePage {
         wait1 = new WebDriverWait(driver, 10);
         wait2 = new WebDriverWait(driver, 5);
         waitForTests = new FluentWait(this.driver)
-                .withTimeout(Duration.ofSeconds(2))
+                .withTimeout(Duration.ofSeconds(4))
                 .pollingEvery(Duration.ofSeconds(5));
     }
 
