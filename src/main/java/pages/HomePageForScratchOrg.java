@@ -106,10 +106,6 @@ public class HomePageForScratchOrg extends BasePage {
         enter();
     }
 
-    @Step("Change Permission Set Assignments")
-    public void changePermissionSetAssignment(String userName) throws InterruptedException {
-        waitForTests.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//td//a[text()='" + userName + "']")));
-        click(By.xpath("//td//a[text()='" + userName + "']"));
-    }
+
 
 }

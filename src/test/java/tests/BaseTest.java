@@ -47,6 +47,8 @@ public class BaseTest {
     protected Hotel hotel;
     protected Product product;
     protected RoomType roomType;
+    protected Resource resource;
+    protected User user;
 
     public WebDriver getDriver() {
         return driver;
@@ -137,6 +139,8 @@ public class BaseTest {
         hotel = new Hotel(driver);
         product = new Product(driver);
         roomType = new RoomType(driver);
+        resource = new Resource(driver);
+        user = new User(driver);
     }
 
     @AfterClass

@@ -135,6 +135,11 @@
             <class name="tests.CloneMyceQuoteAndCloneSelection"/>
         </classes>
     </test>
+    <test name="Clone Myce quote and clone selection -overbooking">
+        <classes>
+            <class name="tests.CloneOverbookingVersion"/>
+        </classes>
+    </test>
 
 
 

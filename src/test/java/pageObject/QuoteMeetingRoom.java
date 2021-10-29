@@ -125,13 +125,15 @@ public class QuoteMeetingRoom extends BasePage {
 
     @Step("Return to MYCE Quote")
     public void clickQuoteName(String nameQuote){
-        wait1.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@force-highlights2_highlights2]//span[text()='"+ nameQuote +"']"))).click();
+        wait1.until(ExpectedConditions.presenceOfElementLocated(By.
+                xpath("//div[@force-highlights2_highlights2]//span[text()='"+ nameQuote +"']"))).click();
     }
 
     @Step("Select all items")
     public  void selectItems(String numberOfElements) throws InterruptedException {
         refreshPage();
-        By SELECT_ALL_ITEMS_CHECKBOX = By.xpath("//span[text()='Select " + numberOfElements + " items']/preceding-sibling::span");
+        By SELECT_ALL_ITEMS_CHECKBOX = By.
+                xpath("//span[text()='Select " + numberOfElements + " items']/preceding-sibling::span");
         wait1.until(ExpectedConditions.presenceOfElementLocated(SELECT_ALL_ITEMS_CHECKBOX));
         click3(SELECT_ALL_ITEMS_CHECKBOX);
     }
@@ -189,7 +191,8 @@ public class QuoteMeetingRoom extends BasePage {
 
     //////////////////////////////   SFDX COMMANDS   ////////////////////////////////////
     @Step("Create Quote Meeting Room SFDX")
-    public String createQuoteMeetingRoomSFDX(String sfdxPath, String value, String userName) throws IOException, InterruptedException {
+    public String createQuoteMeetingRoomSFDX(String sfdxPath, String value, String userName)
+            throws IOException, InterruptedException {
         StringBuilder quoteMeetingRoomResult = SfdxCommand.runLinuxCommand1(new String[]{
                 sfdxPath,
                 "force:data:record:create",
@@ -207,7 +210,8 @@ public class QuoteMeetingRoom extends BasePage {
     }
 
     @Step("Get Quote Meeting Room SFDX")
-    public StringBuilder getQuoteMeetingRoomSFDX(String sfdxPath, String where, String userName) throws IOException, InterruptedException {
+    public StringBuilder getQuoteMeetingRoomSFDX(String sfdxPath, String where, String userName)
+            throws IOException, InterruptedException {
         StringBuilder quoteMeetingRoomRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 sfdxPath,
                 "force:data:record:get",
@@ -219,6 +223,24 @@ public class QuoteMeetingRoom extends BasePage {
                 userName,
                 "--json"});
         return quoteMeetingRoomRecord;
+    }
+
+    @Step("Update Quote Meeting Room SFDX")
+    public void updateQuoteMeetingRoomSFDX(String sfdxPath, String where, String value, String userName)
+            throws IOException, InterruptedException {
+        StringBuilder quoteMeetingRoomUpdateResult = SfdxCommand.runLinuxCommand1(new String[]{
+                sfdxPath,
+                "force:data:record:update",
+                "-s",
+                "thn__Quote_Meeting_Room__c",
+                "-w",
+                where,
+                "-v",
+                value,
+                "-u",
+                userName,
+                "--json"});
+        System.out.println(quoteMeetingRoomUpdateResult);
     }
 
 

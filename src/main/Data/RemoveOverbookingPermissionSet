@@ -1,0 +1,4 @@
+ string userId = UserInfo.getUserId();
+ string permSetId = [SELECT Id FROM PermissionSet WHERE Name = 'Overbooking_User' LIMIT 1].Id;
+ If (permSetId != null){
+ delete [SELECT Id from PermissionSetAssignment WHERE PermissionSetId = : permSetId AND AssigneeId = : userId];
