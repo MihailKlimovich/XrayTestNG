@@ -26,7 +26,7 @@ public class CloneOverbookingVersion extends BaseTest{
         loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
     }
 
-    @Test(priority = 2, description = "Preconditions (User hasn’t overbooking permission)")
+    @Test(priority = 2, description = "Preconditions")
     @Severity(SeverityLevel.NORMAL)
     @Story("Clone Myce quote and clone selection - overbooking version")
     public void preconditions() throws InterruptedException, IOException {

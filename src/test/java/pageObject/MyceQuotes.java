@@ -111,8 +111,8 @@ public class MyceQuotes extends BasePage {
 
     @Step("Clone Myce Quote")
     public void cloneMyceQuote(String name, String date) throws InterruptedException {
-        wait1.until(ExpectedConditions.presenceOfElementLocated(CLONE_MYCE_QUOTE_BUTTON));
-        click3(CLONE_MYCE_QUOTE_BUTTON);
+        //waitForTests.until(ExpectedConditions.presenceOfElementLocated(CLONE_MYCE_QUOTE_BUTTON));
+        click4(CLONE_MYCE_QUOTE_BUTTON);
         wait1.until(ExpectedConditions.presenceOfElementLocated(NAME_QUOTE_FIELD)).click();
         writeText(NAME_QUOTE_FIELD, name);
         click3(CLONE_QUOTE_ARRIVAL_DAY_FIELD);
@@ -496,9 +496,10 @@ public class MyceQuotes extends BasePage {
 
     @Step("Update order")
     public void updateOrder() throws InterruptedException {
-        wait1.until(ExpectedConditions.elementToBeClickable(UPDATE_ORDER_BUTTON));
-        Thread.sleep(2000);
-        click3(UPDATE_ORDER_BUTTON);
+        click4(UPDATE_ORDER_BUTTON);
+        //wait1.until(ExpectedConditions.elementToBeClickable(UPDATE_ORDER_BUTTON));
+        //Thread.sleep(2000);
+        //click3(UPDATE_ORDER_BUTTON);
         Thread.sleep(3000);
     }
 

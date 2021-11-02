@@ -201,6 +201,24 @@ public class QuoteProducts extends BasePage {
         return QuoteProductRecord;
     }
 
+    @Step("Update Quote Product SFDX")
+    public void updateQuoteProducSFDX(String sfdxPath, String where, String value, String userName)
+            throws IOException, InterruptedException {
+        StringBuilder quoteProductUpdateResult = SfdxCommand.runLinuxCommand1(new String[]{
+                sfdxPath,
+                "force:data:record:update",
+                "-s",
+                "thn__Quote_Product__c",
+                "-w",
+                where,
+                "-v",
+                value,
+                "-u",
+                userName,
+                "--json"});
+        System.out.println(quoteProductUpdateResult);
+    }
+
 
 
 }

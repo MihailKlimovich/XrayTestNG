@@ -49,6 +49,7 @@ public class BaseTest {
     protected RoomType roomType;
     protected Resource resource;
     protected User user;
+    protected Order order;
 
     public WebDriver getDriver() {
         return driver;
@@ -141,6 +142,7 @@ public class BaseTest {
         roomType = new RoomType(driver);
         resource = new Resource(driver);
         user = new User(driver);
+        order = new Order(driver);
     }
 
     @AfterClass

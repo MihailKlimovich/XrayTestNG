@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.time.Duration;
 
+import static org.openqa.selenium.support.ui.ExpectedConditions.elementToBeClickable;
 import static org.openqa.selenium.support.ui.ExpectedConditions.presenceOfElementLocated;
 import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElementLocated;
 
@@ -90,6 +91,28 @@ public class BasePage {
     public void click3(By elementLocation) throws InterruptedException {
         int attempts = 0;
         WebElement element = wait1.until(presenceOfElementLocated(elementLocation));
+        while (attempts < 2) {
+            try {
+                element.click();
+                System.out.println(" Click  "+(elementLocation));
+                break;
+            }
+            catch (JavascriptException | ElementClickInterceptedException | StaleElementReferenceException e) {
+                JavascriptExecutor executor = (JavascriptExecutor) driver;
+                executor.executeScript("arguments[0].click();", element);
+                System.out.println("JavascriptException. Action click "+(elementLocation));
+                break;
+            }
+            catch (Exception e) {
+                System.out.println("Something wrong "+(elementLocation));
+            }
+            attempts++;
+        }
+    }
+
+    public void click4(By elementLocation) throws InterruptedException {
+        int attempts = 0;
+        WebElement element = wait1.until(elementToBeClickable(elementLocation));
         while (attempts < 2) {
             try {
                 element.click();
