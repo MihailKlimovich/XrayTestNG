@@ -50,6 +50,8 @@ public class BaseTest {
     protected Resource resource;
     protected User user;
     protected Order order;
+    protected Deposit deposit;
+    protected Payment payment;
 
     public WebDriver getDriver() {
         return driver;
@@ -143,6 +145,8 @@ public class BaseTest {
         resource = new Resource(driver);
         user = new User(driver);
         order = new Order(driver);
+        deposit = new Deposit(driver);
+        payment = new Payment(driver);
     }
 
     @AfterClass

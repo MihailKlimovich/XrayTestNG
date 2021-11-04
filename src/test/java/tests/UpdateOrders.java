@@ -142,7 +142,7 @@ public class UpdateOrders extends BaseTest {
         Assert.assertEquals(paxNewOrderLine, "3");
     }
 
-    @Test(priority = 3, description = "Change the ‘Start Date Time’ on quote Product. Result:a duplicate ‘Order’ was" +
+    @Test(priority = 5, description = "Change the ‘Start Date Time’ on quote Product. Result:a duplicate ‘Order’ was" +
             " crated, A new 'Order’ was created.")
     @Severity(SeverityLevel.NORMAL)
     @Story("Update Orders")
@@ -176,7 +176,7 @@ public class UpdateOrders extends BaseTest {
         Assert.assertEquals(duplicateOrderName, "Stay (Duplicate)");
     }
 
-    @Test(priority = 4, description = "Change the ‘Unit price’ on quote Product. Result:a duplicate ‘Order’ was" +
+    @Test(priority = 6, description = "Change the ‘Unit price’ on quote Product. Result:a duplicate ‘Order’ was" +
             " crated, A new 'Order’ was created and an ‘Order Line’ related record for our ‘Quote Product’ with the new" +
             " changed 'Gross Value'. ")
     @Severity(SeverityLevel.NORMAL)

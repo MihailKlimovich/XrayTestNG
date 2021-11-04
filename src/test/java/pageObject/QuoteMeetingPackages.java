@@ -156,5 +156,21 @@ public class QuoteMeetingPackages extends BasePage {
         return quotePackageRecord;
     }
 
+    @Step("Delete Quote Package SFDX")
+    public StringBuilder deleteQuotePackageSFDX(String sfdxPath, String where, String userName) throws IOException, InterruptedException {
+        StringBuilder result = SfdxCommand.runLinuxCommand1(new String[]{
+                sfdxPath,
+                "force:data:record:delete",
+                "-s",
+                "thn__Quote_Package__c",
+                "-w",
+                where,
+                "-u",
+                userName,
+                "--json"});
+        System.out.println(result);
+        return result;
+    }
+
 
 }

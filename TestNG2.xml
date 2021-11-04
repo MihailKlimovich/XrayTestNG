@@ -145,6 +145,16 @@
             <class name="tests.CloneOverbookingVersion"/>
         </classes>
     </test>
+    <test name="Myce quote and deposits">
+        <classes>
+            <class name="tests.MyceQuoteAndDeposits"/>
+        </classes>
+    </test>
+    <test name="Payment to Mews">
+        <classes>
+            <class name="tests.PaymentToMews"/>
+        </classes>
+    </test>
 
 
 

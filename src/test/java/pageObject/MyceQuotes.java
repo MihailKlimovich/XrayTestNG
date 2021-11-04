@@ -504,6 +504,7 @@ public class MyceQuotes extends BasePage {
     }
 
     //////////////////////////////   SFDX COMMANDS   ////////////////////////////////////
+
     @Step("Create Quote SFDX")
     public String createQuoteSFDX(String sfdxPath, String value, String userName) throws IOException, InterruptedException {
         StringBuilder myseQuoteResult = SfdxCommand.runLinuxCommand1(new String[]{
@@ -550,6 +551,24 @@ public class MyceQuotes extends BasePage {
                 userName,
                 "--json"});
         return quoteRecord;
+    }
+
+    @Step("Update Quote SFDX")
+    public void updateQuoteSFDX(String sfdxPath, String where, String value, String userName)
+            throws IOException, InterruptedException {
+        StringBuilder quoteUpdateResult = SfdxCommand.runLinuxCommand1(new String[]{
+                sfdxPath,
+                "force:data:record:update",
+                "-s",
+                "thn__MYCE_Quote__c",
+                "-w",
+                where,
+                "-v",
+                value,
+                "-u",
+                userName,
+                "--json"});
+        System.out.println(quoteUpdateResult);
     }
 
     @Step("SOQL")

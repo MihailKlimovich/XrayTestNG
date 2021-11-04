@@ -8,6 +8,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import pages.BasePage;
 
+import java.io.IOException;
+
 import static org.openqa.selenium.support.ui.ExpectedConditions.alertIsPresent;
 
 public class Guests extends BasePage {
@@ -58,5 +60,43 @@ public class Guests extends BasePage {
     @Step("Close window")
     public void closeWindow(){
         wait1.until(ExpectedConditions.elementToBeClickable(CLOSE_WINDOW_BUTTON)).click();
+    }
+
+    //////////////////////////////   SFDX COMMANDS   ////////////////////////////////////
+
+    @Step("Create Guest SFDX")
+    public String createGuestSFDX(String sfdxPath, String value, String userName) throws IOException, InterruptedException {
+        StringBuilder guestResult = SfdxCommand.runLinuxCommand1(new String[]{
+                sfdxPath,
+                "force:data:record:create",
+                "-s",
+                "thn__Guest__c",
+                "-v",
+                value,
+                "-u",
+                userName,
+                "--json"});
+        System.out.println("Guest create result:");
+        System.out.println(guestResult);
+        String guestID = JsonParser2.getFieldValue(guestResult.toString(), "id");
+        return guestID;
+    }
+
+    @Step("Update Guest SFDX")
+    public void updateGuestSFDX(String sfdxPath, String where, String value, String userName)
+            throws IOException, InterruptedException {
+        StringBuilder guestUpdateResult = SfdxCommand.runLinuxCommand1(new String[]{
+                sfdxPath,
+                "force:data:record:update",
+                "-s",
+                "thn__Guest__c",
+                "-w",
+                where,
+                "-v",
+                value,
+                "-u",
+                userName,
+                "--json"});
+        System.out.println(guestUpdateResult);
     }
 }

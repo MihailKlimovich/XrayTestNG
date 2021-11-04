@@ -165,6 +165,40 @@ public class QuoteHotelRoom extends BasePage {
         return quoteHotelRoomRecord;
     }
 
+    @Step("Delete Quote Hotel Room SFDX")
+    public StringBuilder deleteQuoteHotelRoomSFDX(String sfdxPath, String where, String userName) throws IOException, InterruptedException {
+        StringBuilder result = SfdxCommand.runLinuxCommand1(new String[]{
+                sfdxPath,
+                "force:data:record:delete",
+                "-s",
+                "thn__Quote_Hotel_Room__c",
+                "-w",
+                where,
+                "-u",
+                userName,
+                "--json"});
+        System.out.println(result);
+        return result;
+    }
+
+    @Step("Update Quote Hotel Room SFDX")
+    public void updateQuoteHotelRoomSFDX(String sfdxPath, String where, String value, String userName)
+            throws IOException, InterruptedException {
+        StringBuilder quoteHotelRoomUpdateResult = SfdxCommand.runLinuxCommand1(new String[]{
+                sfdxPath,
+                "force:data:record:update",
+                "-s",
+                "thn__Quote_Hotel_Room__c",
+                "-w",
+                where,
+                "-v",
+                value,
+                "-u",
+                userName,
+                "--json"});
+        System.out.println(quoteHotelRoomUpdateResult);
+    }
+
 
 
 
