@@ -46,7 +46,8 @@ public class CloneMyceQuoteAndCloneSelection extends BaseTest {
         String roomTypeSingleID = JsonParser2.getFieldValue(roomTypeSingleRecord.toString(), "Id");
         String quoteID = myceQuotes.createQuoteSFDX(SFDX, "Name='CloneMyceQuoteAutoTest' thn__Pax__c=5" +
                 " thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" + date.generateTodayDate2()
-                + " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 2) + " thn__Closed_Status__c='Won'", ORG_USERNAME);
+                + " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 2) +
+                " thn__Closed_Status__c='Won'", ORG_USERNAME);
         String packageID = packages.createPackageSFDX(SFDX, "Name='CloneAutoTest' thn__Hotel__c='" + propertyID +
                 "'", ORG_USERNAME);
         packageLine.createPackageLineSFDX(SFDX, "Name='Meeting Room' thn__Package__c='" + packageID +

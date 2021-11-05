@@ -8,6 +8,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import pages.BasePage;
 
+import java.io.IOException;
+
 import static org.openqa.selenium.support.ui.ExpectedConditions.alertIsPresent;
 
 public class ResourceGrouping extends BasePage {
@@ -66,5 +68,25 @@ public class ResourceGrouping extends BasePage {
     @Step("Read error message 2")
     public String readErrorMessage2() throws InterruptedException {
         return readRecalculateMessage(MESSAGE_ERROR_TEXT);
+    }
+
+    //////////////////////////////   SFDX COMMANDS   ////////////////////////////////////
+    @Step("Create Resource Grouping SFDX")
+    public String createResourceGroupingSFDX(String sfdxPath, String value, String userName)
+            throws IOException, InterruptedException {
+        StringBuilder resourceGroupingResult = SfdxCommand.runLinuxCommand1(new String[]{
+                sfdxPath,
+                "force:data:record:create",
+                "-s",
+                "thn__Resource_Grouping__c",
+                "-v",
+                value,
+                "-u",
+                userName,
+                "--json"});
+        System.out.println("Quote create result:");
+        System.out.println(resourceGroupingResult);
+        String resourceID = JsonParser2.getFieldValue(resourceGroupingResult.toString(), "id");
+        return resourceID;
     }
 }

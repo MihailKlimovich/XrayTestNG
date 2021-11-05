@@ -16,7 +16,8 @@ public class Resource extends BasePage {
     //////////////////////////////   SFDX COMMANDS   ////////////////////////////////////
 
     @Step("Create Resource SFDX")
-    public String createResourceSFDX(String sfdxPath, String value, String userName) throws IOException, InterruptedException {
+    public String createResourceSFDX(String sfdxPath, String value, String userName)
+            throws IOException, InterruptedException {
         StringBuilder resourceResult = SfdxCommand.runLinuxCommand1(new String[]{
                 sfdxPath,
                 "force:data:record:create",
@@ -34,7 +35,8 @@ public class Resource extends BasePage {
     }
 
     @Step("Delete Resource SFDX")
-    public void deleteResource(String sfdxPath, String where, String userName) throws IOException, InterruptedException {
+    public void deleteResourceSFDX(String sfdxPath, String where, String userName)
+            throws IOException, InterruptedException {
         StringBuilder result = SfdxCommand.runLinuxCommand1(new String[]{
                 sfdxPath,
                 "force:data:record:delete",
@@ -47,6 +49,8 @@ public class Resource extends BasePage {
                 "--json"});
         System.out.println(result);
     }
+
+
 
 
 }

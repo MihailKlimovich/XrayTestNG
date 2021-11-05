@@ -155,6 +155,22 @@
             <class name="tests.PaymentToMews"/>
         </classes>
     </test>
+    <test name="Prevent reserved hotel rooms from being deleted">
+        <classes>
+            <class name="tests.PreventReservedHotelRoomsFromBeingDeleted"/>
+        </classes>
+    </test>
+    <test name="Combo product: tax change">
+        <classes>
+            <class name="tests.ComboProductTaxChange"/>
+        </classes>
+    </test>
+    <test name="Myce quote - Fill Option date">
+        <classes>
+            <class name="tests.MyceQuoteFillOptionDate"/>
+        </classes>
+    </test>
+
 
 
 

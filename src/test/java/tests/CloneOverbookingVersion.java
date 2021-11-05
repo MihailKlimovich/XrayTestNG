@@ -36,8 +36,8 @@ public class CloneOverbookingVersion extends BaseTest{
         myceQuotes.deleteQuoteSFDX(SFDX, "Name='CloneOverbookingAutoTest'", ORG_USERNAME);
         myceQuotes.deleteQuoteSFDX(SFDX, "Name='CloneOverbookingAutoTest2'", ORG_USERNAME);
         packages.deletePackageSFDX(SFDX, "Name='CloneOverbookingPackageAutoTest", ORG_USERNAME);
-        resource.deleteResource(SFDX, "Name='ResourceOverbookingAuto1", ORG_USERNAME);
-        resource.deleteResource(SFDX, "Name='ResourceOverbookingAuto2", ORG_USERNAME);
+        resource.deleteResourceSFDX(SFDX, "Name='ResourceOverbookingAuto1", ORG_USERNAME);
+        resource.deleteResourceSFDX(SFDX, "Name='ResourceOverbookingAuto2", ORG_USERNAME);
         StringBuilder hotelRecord= hotel.getHotelSFDX(SFDX, "thn__Unique_Id__c='Demo'", ORG_USERNAME);
         String propertyID = JsonParser2.getFieldValue(hotelRecord.toString(), "Id");
         StringBuilder meetingHalfDayRecord = product.getProductSFDX(SFDX, "Name='MEETING HALF DAY'", ORG_USERNAME);

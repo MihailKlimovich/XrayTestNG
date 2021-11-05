@@ -10,6 +10,7 @@ import pageObject.JsonParser2;
 import pageObject.SfdxCommand;
 
 import java.io.IOException;
+import java.util.List;
 
 public class ReservationCreationProcess extends BaseTest {
 
@@ -71,23 +72,18 @@ public class ReservationCreationProcess extends BaseTest {
                 "-s",
                 "thn__MYCE_Quote__c",
                 "-v",
-                "Name='Test reservation process' thn__Pax__c=1 thn__Reservation_Guest__c='" + guestID + "' thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
-                        date.generateTodayDate2() + " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 3),
+                "Name='Test reservation process' thn__Pax__c=1 thn__Reservation_Guest__c='" + guestID + "'" +
+                        " thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" + date.generateTodayDate2() +
+                        " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 3),
                 "-u",
                 ORG_USERNAME,
                 "--json"});
         String myceQuoteID = JsonParser2.getFieldValue(myseQuoteResult.toString(), "id");
-        StringBuilder roomTypeRecord = SfdxCommand.runLinuxCommand1(new String[]{
-                SFDX,
-                "force:data:record:get",
-                "-s",
-                "thn__Space_Area__c",
-                "-w",
-                "Name='a0j3O000006EOBP'",
-                "-u",
-                ORG_USERNAME,
-                "--json"});
-        String roomTypeID = JsonParser2.getFieldValue(roomTypeRecord.toString(), "Id");
+        StringBuilder roomTypeRecords = myceQuotes.
+                soql(SFDX, "SELECT Id from thn__Space_Area__c where thn__Mews_Id__c!=null AND thn__Hotel__c='" +
+                        propertyID + "'", ORG_USERNAME);
+        System.out.println(guests);
+        List<String> roomTypesId = JsonParser2.getFieldValueSoql(roomTypeRecords.toString(), "Id");
         StringBuilder quoteHotelRoomResult = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:create",
@@ -95,7 +91,7 @@ public class ReservationCreationProcess extends BaseTest {
                 "thn__Quote_Hotel_Room__c",
                 "-v",
                 "thn__MYCE_Quote__c='" + myceQuoteID + "' thn__Product__c='" + productID + "'" +
-                        " thn__Space_Area__c='" + roomTypeID + "' thn__Unit_Price__c=10" ,
+                        " thn__Space_Area__c='" + roomTypesId.get(0) + "' thn__Unit_Price__c=10" ,
                 "-u",
                 ORG_USERNAME,
                 "--json"});
@@ -182,23 +178,18 @@ public class ReservationCreationProcess extends BaseTest {
                 "-s",
                 "thn__MYCE_Quote__c",
                 "-v",
-                "Name='Test reservation process 2' thn__Pax__c=1 thn__Reservation_Guest__c='" + guestID + "' thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
-                        date.generateTodayDate2() + " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 5),
+                "Name='Test reservation process 2' thn__Pax__c=1 thn__Reservation_Guest__c='" + guestID + "'" +
+                        " thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" + date.generateTodayDate2() +
+                        " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 5),
                 "-u",
                 ORG_USERNAME,
                 "--json"});
         String myceQuoteID = JsonParser2.getFieldValue(myseQuoteResult.toString(), "id");
-        StringBuilder roomTypeRecord = SfdxCommand.runLinuxCommand1(new String[]{
-                SFDX,
-                "force:data:record:get",
-                "-s",
-                "thn__Space_Area__c",
-                "-w",
-                "Name='a0j3O000006EOBP'",
-                "-u",
-                ORG_USERNAME,
-                "--json"});
-        String roomTypeID = JsonParser2.getFieldValue(roomTypeRecord.toString(), "Id");
+        StringBuilder roomTypeRecords = myceQuotes.
+                soql(SFDX, "SELECT Id from thn__Space_Area__c where thn__Mews_Id__c!=null AND thn__Hotel__c='" +
+                        propertyID + "'", ORG_USERNAME);
+        System.out.println(guests);
+        List<String> roomTypesId = JsonParser2.getFieldValueSoql(roomTypeRecords.toString(), "Id");
         StringBuilder quoteHotelRoomResult = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:create",
@@ -206,7 +197,7 @@ public class ReservationCreationProcess extends BaseTest {
                 "thn__Quote_Hotel_Room__c",
                 "-v",
                 "thn__MYCE_Quote__c='" + myceQuoteID + "' thn__Product__c='" + productID + "'" +
-                        " thn__Space_Area__c='" + roomTypeID + "' thn__Unit_Price__c=10" ,
+                        " thn__Space_Area__c='" + roomTypesId.get(0) + "' thn__Unit_Price__c=10" ,
                 "-u",
                 ORG_USERNAME,
                 "--json"});
@@ -256,7 +247,8 @@ public class ReservationCreationProcess extends BaseTest {
                 "-w",
                 "id='" + quoteHotelRoomId + "'",
                 "-v",
-                "thn__Arrival_Date_Time__c=" + date.generateTodayDate2() + " thn__Departure_Date_Time__c=" + date.generateTodayDate2_plus(0, 2),
+                "thn__Arrival_Date_Time__c=" + date.generateTodayDate2() + " thn__Departure_Date_Time__c=" +
+                        date.generateTodayDate2_plus(0, 2),
                 "-u",
                 ORG_USERNAME,
                 "--json"});
@@ -282,7 +274,8 @@ public class ReservationCreationProcess extends BaseTest {
                 "-w",
                 "id='" + quoteHotelRoomId + "'",
                 "-v",
-                "thn__Arrival_Date_Time__c=" + date.generateTodayDate2() + " thn__Departure_Date_Time__c=" + date.generateTodayDate2_plus(0, 3),
+                "thn__Arrival_Date_Time__c=" + date.generateTodayDate2() + " thn__Departure_Date_Time__c=" +
+                        date.generateTodayDate2_plus(0, 3),
                 "-u",
                 ORG_USERNAME,
                 "--json"});
@@ -307,7 +300,8 @@ public class ReservationCreationProcess extends BaseTest {
                 "-w",
                 "id='" + quoteHotelRoomId + "'",
                 "-v",
-                "thn__Arrival_Date_Time__c=" + date.generateTodayDate2() + " thn__Departure_Date_Time__c=" + date.generateTodayDate2_plus(0, 10),
+                "thn__Arrival_Date_Time__c=" + date.generateTodayDate2() + " thn__Departure_Date_Time__c=" +
+                        date.generateTodayDate2_plus(0, 10),
                 "-u",
                 ORG_USERNAME,
                 "--json"});
