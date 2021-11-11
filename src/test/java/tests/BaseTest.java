@@ -52,6 +52,9 @@ public class BaseTest {
     protected Order order;
     protected Deposit deposit;
     protected Payment payment;
+    protected ChangeResource changeResource;
+    protected Files files;
+
 
     public WebDriver getDriver() {
         return driver;
@@ -147,6 +150,8 @@ public class BaseTest {
         order = new Order(driver);
         deposit = new Deposit(driver);
         payment = new Payment(driver);
+        changeResource = new ChangeResource(driver);
+        files = new Files(driver);
     }
 
     @AfterClass

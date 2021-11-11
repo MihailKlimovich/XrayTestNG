@@ -102,12 +102,14 @@ public class CloneMyceQuoteAndCloneSelection extends BaseTest {
                 " thn__MYCE_Quote__c='" + clonedQuoteID + "'", ORG_USERNAME);
         System.out.println(clonedQuoteProducts2);
         String clonedQuoteProductsID2 = JsonParser2.getFieldValue(clonedQuoteProducts2.toString(), "Id");
-        StringBuilder clonedQuoteMeeringRoom1 = quoteMeetingRoom.getQuoteMeetingRoomSFDX(SFDX, "Name='DEFAULT - MEETING FULL DAY'" +
-                " thn__MYCE_Quote__c='" + clonedQuoteID + "'", ORG_USERNAME);
+        StringBuilder clonedQuoteMeeringRoom1 = quoteMeetingRoom.
+                getQuoteMeetingRoomSFDX(SFDX, "Name='DEFAULT - MEETING FULL DAY' thn__MYCE_Quote__c='"
+                        + clonedQuoteID + "'", ORG_USERNAME);
         System.out.println(clonedQuoteMeeringRoom1);
         String clonedQuoteMeetingRoomD1 = JsonParser2.getFieldValue(clonedQuoteMeeringRoom1.toString(), "Id");
-        StringBuilder clonedQuoteMeeringRoom2 = quoteMeetingRoom.getQuoteMeetingRoomSFDX(SFDX, "Name='DEFAULT - MEETING HALF DAY'" +
-                " thn__MYCE_Quote__c='" + clonedQuoteID + "'", ORG_USERNAME);
+        StringBuilder clonedQuoteMeeringRoom2 = quoteMeetingRoom.
+                getQuoteMeetingRoomSFDX(SFDX, "Name='DEFAULT - MEETING HALF DAY' thn__MYCE_Quote__c='" +
+                        clonedQuoteID + "'", ORG_USERNAME);
         System.out.println(clonedQuoteMeeringRoom2);
         String clonedQuoteMeetingRoomD2 = JsonParser2.getFieldValue(clonedQuoteMeeringRoom2.toString(), "Id");
         Assert.assertEquals(clonedQuoteArrivalDay, date.generateTodayDate2_plus(0, 1));

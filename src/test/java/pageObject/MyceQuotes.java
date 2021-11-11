@@ -79,6 +79,9 @@ public class MyceQuotes extends BasePage {
     By CREATE_CLONE_BUTTON = By.xpath("//thn-clone-multi-select-component//button[text()='Create']");
     By CLONE_QUOTE_ARRIVAL_DAY_FIELD = By.xpath("//div//input[@name='Arrival Date']");
     By SERIE_TAB = By.xpath("//li//a[@data-label='Serie']");
+    By DOCUMENTS_TAB = By.xpath("//li//a[@data-label='Documents']");
+    By FILES = By.xpath("//span[@title = 'Files']");
+    By ROOMING_LIST_TAB = By.xpath("//li//a[@data-label='Rooming List']");
 
 
     @Step("Open MYCE Quote record")
@@ -99,6 +102,12 @@ public class MyceQuotes extends BasePage {
         } catch (TimeoutException e) {
         }
         return this;
+    }
+
+    @Step("Open Files page")
+    public void goToFiles() throws InterruptedException {
+        click3(DOCUMENTS_TAB);
+        click3(FILES);
     }
 
     @Step("Click MYCE Quote tab")
@@ -501,6 +510,16 @@ public class MyceQuotes extends BasePage {
         //Thread.sleep(2000);
         //click3(UPDATE_ORDER_BUTTON);
         Thread.sleep(3000);
+    }
+
+    @Step("Upload rooming list")
+    public void uploadFile(String filePath) throws IOException, InterruptedException {
+        click3(ROOMING_LIST_TAB);
+        wait1.until(ExpectedConditions.presenceOfElementLocated(By.xpath("input[type=file]"))).sendKeys(filePath);
+        Thread.sleep(3000);
+        //By fileInput = By.cssSelector("input[type=file]");
+        //driver.findElement(fileInput).sendKeys(filePath);
+
     }
 
     //////////////////////////////   SFDX COMMANDS   ////////////////////////////////////

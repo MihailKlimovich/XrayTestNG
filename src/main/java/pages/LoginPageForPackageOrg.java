@@ -112,9 +112,6 @@ public class LoginPageForPackageOrg extends BasePage{
     }
 
 
-
-
-
         public void authoriseURL(String sfdxPath, String authURL, String userName) throws IOException, InterruptedException {
             File createFile = new File("/home/user/SFDX_URL.txt");
             createFile.createNewFile();

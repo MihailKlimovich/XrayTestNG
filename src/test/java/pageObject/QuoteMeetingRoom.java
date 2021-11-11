@@ -43,6 +43,9 @@ public class QuoteMeetingRoom extends BasePage {
     By MYCE_QUOTE_NAME = By.xpath("//div//span[@id = 'window']");
     By MULTI_DELETE_BUTTON = By.xpath("//a[@title='Multidelete']");
     By MULTIEDIT_BUTTON = By.xpath("//h1[text()='Meeting Rooms']/following::div[@title='Multiedit']");
+    By CHANGE_RESOURCE_BUTTON = By.xpath("//div[@title='Change Resource']");
+
+
 
 
 
@@ -54,6 +57,8 @@ public class QuoteMeetingRoom extends BasePage {
         wait1.until(ExpectedConditions.presenceOfElementLocated(MULTIEDIT_BUTTON)).click();
         Thread.sleep(3000);
     }
+
+
 
     @Step("Fill out the meeting room")
     public void createMeetingRoom(String pax) throws InterruptedException {
@@ -105,6 +110,12 @@ public class QuoteMeetingRoom extends BasePage {
         wait1.until(ExpectedConditions.presenceOfElementLocated(SAVE_BUTTON)).click();
     }
 
+    @Step("Click 'Change resource'")
+    public void clickChangeResource() throws InterruptedException {
+        click4(CHANGE_RESOURCE_BUTTON);
+        Thread.sleep(7000);
+    }
+
     public void changeSetupType(String type) throws InterruptedException {
         wait1.until(ExpectedConditions.presenceOfElementLocated(SETUP_FIELD)).click();
         clickInvisibleElement(By.xpath("//span[@title='" + type + "']"));
@@ -129,12 +140,20 @@ public class QuoteMeetingRoom extends BasePage {
                 xpath("//div[@force-highlights2_highlights2]//span[text()='"+ nameQuote +"']"))).click();
     }
 
+    @Step("Select item")
+    public  void selectItem(String itemNumber) throws InterruptedException {
+        refreshPage();
+        By SELECT_ITEM_CHECKBOX = By.
+                xpath("//span[text()='Select item " + itemNumber + "']/preceding-sibling::span");
+        wait1.until(ExpectedConditions.presenceOfElementLocated(SELECT_ITEM_CHECKBOX));
+        click2(SELECT_ITEM_CHECKBOX);
+    }
+
     @Step("Select all items")
     public  void selectItems(String numberOfElements) throws InterruptedException {
         refreshPage();
         By SELECT_ALL_ITEMS_CHECKBOX = By.
                 xpath("//span[text()='Select " + numberOfElements + " items']/preceding-sibling::span");
-        wait1.until(ExpectedConditions.presenceOfElementLocated(SELECT_ALL_ITEMS_CHECKBOX));
         click3(SELECT_ALL_ITEMS_CHECKBOX);
     }
 

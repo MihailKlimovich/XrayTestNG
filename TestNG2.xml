@@ -170,6 +170,11 @@
             <class name="tests.MyceQuoteFillOptionDate"/>
         </classes>
     </test>
+    <test name="Shadow Meeting rooms">
+        <classes>
+            <class name="tests.ShadowMeetingRooms"/>
+        </classes>
+    </test>
 
 
 
