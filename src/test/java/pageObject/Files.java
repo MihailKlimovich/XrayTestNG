@@ -14,6 +14,8 @@ import pages.BasePage;
 
 import java.io.*;
 
+import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElementLocated;
+
 public class Files extends BasePage {
 
     /**Constructor*/
@@ -25,11 +27,33 @@ public class Files extends BasePage {
     By DOWNLOAD_BUTTON= By.xpath("//li//a[@title='Download']");
 
     @Step("Click Download")
-    public void clickDownload() throws InterruptedException {
-        click3(SHOW_MORE_ACTION);
-        click3(DOWNLOAD_BUTTON);
-        Thread.sleep(3000);
+    public void clickDownload(String fileName) throws InterruptedException {
+        refreshPage();
+        int attempts = 0;
+        while (attempts < 4) {
+            try {
+                wait1.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[@title='" + fileName + "']")));
+                click3(SHOW_MORE_ACTION);
+                click3(DOWNLOAD_BUTTON);
+                Thread.sleep(3000);
+                break;
+            }
+            catch (Exception e){
+                refreshPage();
+            }
+            attempts++;
+        }
     }
+
+    @Step("Delete dile")
+    public void deleteFile(String filePath) throws InterruptedException {
+        File file = new File(filePath);
+        if(file.delete()){
+            System.out.println(filePath + " файл удален");
+        }else System.out.println("Файла " + filePath + " не обнаружено");
+    }
+
+
 
     @Step("Update xls")
     public void updateXLS(String fileName, int numberRow, int numderCell, String value) throws IOException {

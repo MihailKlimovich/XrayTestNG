@@ -38,17 +38,22 @@ public class RoomingList extends BaseTest {
                         propertyID + "'", ORG_USERNAME);
         System.out.println(guests);
         List<String> roomTypesId = JsonParser2.getFieldValueSoql(roomTypeRecords.toString(), "Id");
+        String guestID = guests.createGuestSFDX(SFDX, "thn__LastName__c='RoomingListAutoTest' thn__Hotel__c='"
+                + propertyID + "' thn__Send_to_Mews__c=true", ORG_USERNAME);
         String quoteID = myceQuotes.createQuoteSFDX(SFDX, "Name='RoomingListAutoTest' thn__Pax__c=3" +
                 " thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" + date.generateTodayDate2()
                 + " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 2), ORG_USERNAME);
-        myceQuotes.updateQuoteSFDX(SFDX, "Id='" + quoteID + "'", "thn__Stage__c='2 - Propose'" +
-                " thn__SendToMews__c=true", ORG_USERNAME);
-        myceQuotes.updateQuoteSFDX(SFDX, "Id='" + quoteID + "'", "thn__Stage__c='1 - Qualify'" +
-                " thn__SendToMews__c=false", ORG_USERNAME);
+        myceQuotes.updateQuoteSFDX(SFDX, "Id='" + quoteID + "'",
+                "thn__Reservation_Guest__c='" + guestID + "'", ORG_USERNAME);
         quoteHotelRoom.createQuoteHotelRoomSFDX(SFDX, "thn__MYCE_Quote__c='" + quoteID + "' thn__Product__c='" +
-                room2NightsID + "' thn__Space_Area__c='" + roomTypesId.get(0) + "'", ORG_USERNAME);
+                room2NightsID + "' thn__Space_Area__c='" + roomTypesId.get(1) + "'", ORG_USERNAME);
         myceQuotes.updateQuoteSFDX(SFDX, "Id='" + quoteID + "'", "thn__Stage__c='2 - Propose'" +
                 " thn__SendToMews__c=true", ORG_USERNAME);
+        StringBuilder reservations = myceQuotes.soql(SFDX, "SELECT Id FROM thn__Reservation__c WHERE" +
+                " thn__MYCE_Quote__c='" + quoteID + "'", ORG_USERNAME);
+        List<String> reservationsID = JsonParser2.getFieldValueSoql(reservations.toString(), "Id");
+        Assert.assertEquals(reservationsID.size(), 3);
+
     }
 
     @Test(priority = 3, description = "Set the checkbox ‘Generate Rooming List’ on the Quote to ‘True’. Result:" +
@@ -67,16 +72,18 @@ public class RoomingList extends BaseTest {
         Assert.assertEquals(roomingListID.size(), 3);
     }
 
-    @Test(priority = 4, description = "")
+    @Test(priority = 4, description = "Complete the file and upload it using the upload component on quote. Expected" +
+            " result: when phone or email are completed, guest is created ")
     @Severity(SeverityLevel.NORMAL)
     @Story("Rooming list testing")
     public void case2() throws InterruptedException, IOException {
+        files.deleteFile("/home/user/Downloads/Rooming List RoomingListAutoTest.xlsx");
         myceQuotes.goToMyceQuotes();
         myceQuotes.openMyceQoteRecord("RoomingListAutoTest");
         myceQuotes.goToFiles();
-        files.clickDownload();
-        files.updateXLS("Rooming List RoomingListAutoTest.xlsx", 1, 0, "Rost");
-        files.updateXLS("Rooming List RoomingListAutoTest.xlsx", 1, 1, "Oryol");
+        files.clickDownload("Rooming List RoomingListAutoTest");
+        files.updateXLS("Rooming List RoomingListAutoTest.xlsx", 1, 0, "Werty");
+        files.updateXLS("Rooming List RoomingListAutoTest.xlsx", 1, 1, "Kukin");
         files.updateXLS("Rooming List RoomingListAutoTest.xlsx", 1, 2, "451899");
         files.updateXLS("Rooming List RoomingListAutoTest.xlsx", 1, 5, "Belarus");
         files.updateXLS("Rooming List RoomingListAutoTest.xlsx", 2, 0, "John");
@@ -90,6 +97,32 @@ public class RoomingList extends BaseTest {
         myceQuotes.goToMyceQuotes();
         myceQuotes.openMyceQoteRecord("RoomingListAutoTest");
         myceQuotes.uploadFile("/home/user/Downloads/Rooming List RoomingListAutoTest.xlsx");
+        StringBuilder quoteRecord = myceQuotes.getQuoteSFDX(SFDX, "Name='RoomingListAutoTest'", ORG_USERNAME);
+        String quoteID= JsonParser2.getFieldValue(quoteRecord.toString(), "Id");
+        StringBuilder roomingListRecord1 = roomingList.getRoomungListSFDX(SFDX, "thn__MYCE_Quote__c='"
+                + quoteID + "' thn__Last_Name__c='Kukin'", ORG_USERNAME);
+        StringBuilder roomingListRecord2 = roomingList.getRoomungListSFDX(SFDX, "thn__MYCE_Quote__c='"
+                + quoteID + "' thn__Last_Name__c='Doe'", ORG_USERNAME);
+        StringBuilder roomingListRecord3 = roomingList.getRoomungListSFDX(SFDX, "thn__MYCE_Quote__c='"
+                + quoteID + "' thn__Last_Name__c='Corleone'", ORG_USERNAME);
+        String phone1 = JsonParser2.getFieldValue(roomingListRecord1.toString(), "thn__Phone__c");
+        String phone2 = JsonParser2.getFieldValue(roomingListRecord2.toString(), "thn__Phone__c");
+        String phone3 = JsonParser2.getFieldValue(roomingListRecord3.toString(), "thn__Phone__c");
+        String nationality1 = JsonParser2.getFieldValue(roomingListRecord1.toString(), "thn__Nationality__c");
+        String nationality2 = JsonParser2.getFieldValue(roomingListRecord2.toString(), "thn__Nationality__c");
+        String nationality3 = JsonParser2.getFieldValue(roomingListRecord3.toString(), "thn__Nationality__c");
+        String guest1 = JsonParser2.getFieldValue(roomingListRecord1.toString(), "thn__Guest__c");
+        String guest2 = JsonParser2.getFieldValue(roomingListRecord2.toString(), "thn__Guest__c");
+        String guest3 = JsonParser2.getFieldValue(roomingListRecord3.toString(), "thn__Guest__c");
+        Assert.assertEquals(phone1, "451899");
+        Assert.assertEquals(phone2, "551454");
+        Assert.assertEquals(phone3, "578977");
+        Assert.assertEquals(nationality1, "Belarus");
+        Assert.assertEquals(nationality2, "American");
+        Assert.assertEquals(nationality3, "Italian");
+        Assert.assertNotNull(guest1);
+        Assert.assertNotNull(guest2);
+        Assert.assertNotNull(guest3);
     }
 
 }

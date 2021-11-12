@@ -8,6 +8,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import pageObject.*;
+import pageObject.RoomingList;
 import pages.HomePageForPackageOrg;
 import pages.HomePageForScratchOrg;
 import pages.LoginPageForPackageOrg;
@@ -54,6 +55,7 @@ public class BaseTest {
     protected Payment payment;
     protected ChangeResource changeResource;
     protected Files files;
+    protected RoomingList roomingList;
 
 
     public WebDriver getDriver() {
@@ -152,6 +154,7 @@ public class BaseTest {
         payment = new Payment(driver);
         changeResource = new ChangeResource(driver);
         files = new Files(driver);
+        roomingList = new RoomingList(driver);
     }
 
     @AfterClass
