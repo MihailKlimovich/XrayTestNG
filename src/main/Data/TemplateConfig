@@ -6,17 +6,17 @@
 
      Metadata.CustomMetadataValue customField1 = new Metadata.CustomMetadataValue();
         customField1.field = 'thn__Columns__c';
-        customField1.value = 'thn__First_Name__c, thn__Last_Name__c, thn__Phone__c, thn__Room_Type__c, thn__Room__c, thn__Nationality__c, thn__Email__c';
+        customField1.value = 'thn__First_Name__c, thn__Last_Name__c, thn__Phone__c, thn__Room_Type__c, thn__Room__c, thn__Nationality__c, thn__Email__c, thn__Guest__c';
         cmd.values.add(customField1);
 
      Metadata.CustomMetadataValue customField2 = new Metadata.CustomMetadataValue();
         customField2.field = 'thn__Pre_Populated_Columns__c';
-        customField2.value = 'thn__Last_Name__c,thn__Reservation__c, thn__Room_Type__c, thn__Room__c, thn__Nationality__c, thn__Email__c';
+        customField2.value = 'thn__Last_Name__c,thn__Reservation__c, thn__Room_Type__c, thn__Room__c, thn__Nationality__c, thn__Email__c, thn__Guest__c';
         cmd.values.add(customField2);
 
      Metadata.CustomMetadataValue customField3 = new Metadata.CustomMetadataValue();
         customField3.field = 'thn__Retrieve_Columns__c';
-        customField3.value = 'thn__First_Name__c, thn__Last_Name__c, thn__Email__c, thn__Room__c, thn__Nationality__c';
+        customField3.value = 'thn__First_Name__c, thn__Last_Name__c, thn__Room__c, thn__Nationality__c, thn__Email__c, thn__Guest__c';
         cmd.values.add(customField3);
 
       mdContainer.addMetadata(cmd);

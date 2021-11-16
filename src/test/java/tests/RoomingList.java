@@ -18,9 +18,9 @@ public class RoomingList extends BaseTest {
     public void logIn() throws InterruptedException, IOException {
         loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
         loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
-        //developerConsoleWindow.openDeveloperConsole();
-        //developerConsoleWindow.openExecuteAnonymousWindow();
-        //developerConsoleWindow.runApexCodeFromFile("src/main/Data/TemplateConfig");
+        developerConsoleWindow.openDeveloperConsole();
+        developerConsoleWindow.openExecuteAnonymousWindow();
+        developerConsoleWindow.runApexCodeFromFile("src/main/Data/TemplateConfig");
     }
 
     @Test(priority = 2, description = "Create MYCE Quote, specify Reservation Guest, Add Quote hotel rooms, Send Quote" +
@@ -84,8 +84,8 @@ public class RoomingList extends BaseTest {
         files.clickDownload("Rooming List RoomingListAutoTest");
         files.updateXLS("Rooming List RoomingListAutoTest.xlsx", 1, 0, "Werty");
         files.updateXLS("Rooming List RoomingListAutoTest.xlsx", 1, 1, "Kukin");
-        files.updateXLS("Rooming List RoomingListAutoTest.xlsx", 1, 2, "451899");
         files.updateXLS("Rooming List RoomingListAutoTest.xlsx", 1, 5, "Belarus");
+        files.updateXLS("Rooming List RoomingListAutoTest.xlsx", 1, 6, "bel@gmail.com");
         files.updateXLS("Rooming List RoomingListAutoTest.xlsx", 2, 0, "John");
         files.updateXLS("Rooming List RoomingListAutoTest.xlsx", 2, 1, "Doe");
         files.updateXLS("Rooming List RoomingListAutoTest.xlsx", 2, 2, "551454");
@@ -114,7 +114,7 @@ public class RoomingList extends BaseTest {
         String guest1 = JsonParser2.getFieldValue(roomingListRecord1.toString(), "thn__Guest__c");
         String guest2 = JsonParser2.getFieldValue(roomingListRecord2.toString(), "thn__Guest__c");
         String guest3 = JsonParser2.getFieldValue(roomingListRecord3.toString(), "thn__Guest__c");
-        Assert.assertEquals(phone1, "451899");
+        Assert.assertEquals(phone1, null);
         Assert.assertEquals(phone2, "551454");
         Assert.assertEquals(phone3, "578977");
         Assert.assertEquals(nationality1, "Belarus");
@@ -124,5 +124,62 @@ public class RoomingList extends BaseTest {
         Assert.assertNotNull(guest2);
         Assert.assertNotNull(guest3);
     }
+
+    @Test(priority = 5, description = "If an error is found a new rooming list record is generated: invalid email" +
+            " address or phone = letters then no error is thrown. Records are not updated  ")
+    @Severity(SeverityLevel.NORMAL)
+    @Story("Rooming list testing")
+    public void case3() throws InterruptedException, IOException {
+        files.deleteFile("/home/user/Downloads/Rooming List RoomingListAutoTest.xlsx");
+        myceQuotes.goToMyceQuotes();
+        myceQuotes.openMyceQoteRecord("RoomingListAutoTest");
+        myceQuotes.goToFiles();
+        files.clickDownload("Rooming List RoomingListAutoTest");
+        files.updateXLS("Rooming List RoomingListAutoTest.xlsx", 1, 2, "abc");
+        files.updateXLS("Rooming List RoomingListAutoTest.xlsx", 2, 6, "4355");
+               myceQuotes.goToMyceQuotes();
+        myceQuotes.openMyceQoteRecord("RoomingListAutoTest");
+        myceQuotes.uploadFile("/home/user/Downloads/Rooming List RoomingListAutoTest.xlsx");
+        StringBuilder quoteRecord = myceQuotes.getQuoteSFDX(SFDX, "Name='RoomingListAutoTest'", ORG_USERNAME);
+        String quoteID= JsonParser2.getFieldValue(quoteRecord.toString(), "Id");
+        StringBuilder roomingListRecord1 = roomingList.getRoomungListSFDX(SFDX, "thn__MYCE_Quote__c='"
+                + quoteID + "' thn__Last_Name__c='Kukin'", ORG_USERNAME);
+        StringBuilder roomingListRecord2 = roomingList.getRoomungListSFDX(SFDX, "thn__MYCE_Quote__c='"
+                + quoteID + "' thn__Last_Name__c='Doe'", ORG_USERNAME);
+        StringBuilder roomingListRecord3 = roomingList.getRoomungListSFDX(SFDX, "thn__MYCE_Quote__c='"
+                + quoteID + "' thn__Last_Name__c='Corleone'", ORG_USERNAME);
+        String phone1 = JsonParser2.getFieldValue(roomingListRecord1.toString(), "thn__Phone__c");
+        String email2 = JsonParser2.getFieldValue(roomingListRecord2.toString(), "thn__Email__c");
+        Assert.assertEquals(phone1, null);
+        Assert.assertEquals(email2, null);
+    }
+
+    @Test(priority = 6, description = "Change the file and upload it again / update the rooming list record to match" +
+            " another guest. Expected result: reservation guest is deleted and new reservation guest is created")
+    @Severity(SeverityLevel.NORMAL)
+    @Story("Rooming list testing")
+    public void case4() throws InterruptedException, IOException {
+        files.deleteFile("/home/user/Downloads/Rooming List RoomingListAutoTest.xlsx");
+        StringBuilder hotelRecord = hotel.getHotelSFDX(SFDX, "thn__Unique_Id__c='Demo'", ORG_USERNAME);
+        String propertyID = JsonParser2.getFieldValue(hotelRecord.toString(), "Id");
+        String guestID = guests.createGuestSFDX(SFDX, "thn__LastName__c='Taylor' thn__Hotel__c='"
+                + propertyID + "' thn__Send_to_Mews__c=true", ORG_USERNAME);
+        myceQuotes.goToMyceQuotes();
+        myceQuotes.openMyceQoteRecord("RoomingListAutoTest");
+        myceQuotes.goToFiles();
+        files.clickDownload("Rooming List RoomingListAutoTest");
+        files.updateXLS("Rooming List RoomingListAutoTest.xlsx", 1, 7, guestID);
+        myceQuotes.goToMyceQuotes();
+        myceQuotes.openMyceQoteRecord("RoomingListAutoTest");
+        myceQuotes.uploadFile("/home/user/Downloads/Rooming List RoomingListAutoTest.xlsx");
+        StringBuilder quoteRecord = myceQuotes.getQuoteSFDX(SFDX, "Name='RoomingListAutoTest'", ORG_USERNAME);
+        String quoteID = JsonParser2.getFieldValue(quoteRecord.toString(), "Id");
+        StringBuilder roomingListRecord1 = roomingList.getRoomungListSFDX(SFDX, "thn__MYCE_Quote__c='"
+                + quoteID + "' thn__Last_Name__c='Taylor'", ORG_USERNAME);
+        String guest1 = JsonParser2.getFieldValue(roomingListRecord1.toString(), "thn__Guest__c");
+        Assert.assertEquals(guest1, guestID);
+    }
+
+
 
 }

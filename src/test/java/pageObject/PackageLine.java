@@ -27,7 +27,8 @@ public class PackageLine extends BasePage {
     By SAVE_BUTTON = By.xpath("//div[@class='isModal inlinePanel oneRecordActionWrapper']//button[@name='SaveEdit']");
     By NEW_PACKAGE_LINE_BUTTON = By.xpath("//span[text()='Package Lines']/following::button[@name='New']");
     By MESSAGE_ERROR_TEXT = By.xpath("//div[@class='container']//li");
-    By CLOSE_WINDOW_BUTTON = By.xpath("//div[@class='modal-container slds-modal__container']//button[@title='Close this window']");
+    By CLOSE_WINDOW_BUTTON = By.
+            xpath("//div[@class='modal-container slds-modal__container']//button[@title='Close this window']");
     By APPLIED_DAY_FIELD = By.xpath("//label[text()='Applied Day']/following-sibling::div//input");
     By APPLY_DISCOUNT_RADIO_BUTTON = By.xpath("//force-record-layout-section//span[text()='Apply Discount']");
     By HELP_ERROR_MESSAGE = By.xpath("//div[@data-help-message]");
@@ -154,7 +155,8 @@ public class PackageLine extends BasePage {
     //////////////////////////////   SFDX COMMANDS   ////////////////////////////////////
 
     @Step("Create Package Line")
-    public String createPackageLineSFDX(String sfdxPath, String value, String userName) throws IOException, InterruptedException {
+    public String createPackageLineSFDX(String sfdxPath, String value, String userName)
+            throws IOException, InterruptedException {
         StringBuilder packageResult = SfdxCommand.runLinuxCommand1(new String[]{
                 sfdxPath,
                 "force:data:record:create",
@@ -167,6 +169,40 @@ public class PackageLine extends BasePage {
                 "--json"});
         String packageLineId = JsonParser2.getFieldValue(packageResult.toString(), "id");
         return packageLineId;
+    }
+
+    @Step("Get Package Line SFDX")
+    public StringBuilder getPackageLineSFDX(String sfdxPath, String where, String userName)
+            throws IOException, InterruptedException {
+        StringBuilder packageLineRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                sfdxPath,
+                "force:data:record:get",
+                "-s",
+                "thn__Package_Line__c",
+                "-w",
+                where,
+                "-u",
+                userName,
+                "--json"});
+        return packageLineRecord;
+    }
+
+    @Step("Update Package Line SFDX")
+    public void updatePackageLineSFDX(String sfdxPath, String where, String value, String userName)
+            throws IOException, InterruptedException {
+        StringBuilder packageLineUpdateResult = SfdxCommand.runLinuxCommand1(new String[]{
+                sfdxPath,
+                "force:data:record:update",
+                "-s",
+                "thn__Package_Line__c",
+                "-w",
+                where,
+                "-v",
+                value,
+                "-u",
+                userName,
+                "--json"});
+        System.out.println(packageLineUpdateResult);
     }
 
 }

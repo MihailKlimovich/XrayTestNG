@@ -50,6 +50,21 @@ public class Resource extends BasePage {
         System.out.println(result);
     }
 
+    @Step("Get Resource SFDX")
+    public StringBuilder getResourceSFDX(String sfdxPath, String where, String userName) throws IOException, InterruptedException {
+        StringBuilder resourceRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                sfdxPath,
+                "force:data:record:get",
+                "-s",
+                "thn__Resource__c",
+                "-w",
+                where,
+                "-u",
+                userName,
+                "--json"});
+        return resourceRecord;
+    }
+
 
 
 

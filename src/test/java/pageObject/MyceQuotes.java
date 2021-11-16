@@ -514,6 +514,7 @@ public class MyceQuotes extends BasePage {
 
     @Step("Upload rooming list")
     public void uploadFile(String filePath) throws IOException, InterruptedException {
+        refreshPage();
         click3(ROOMING_LIST_TAB);
         Thread.sleep(3000);
         wait1.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//slot/child::input"))).sendKeys("" + filePath + "");

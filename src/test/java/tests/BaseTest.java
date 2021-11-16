@@ -88,12 +88,12 @@ public class BaseTest {
     public String CONSUMER_KEY = "";
     public String SFDX = "/home/user/sfdx/bin/sfdx";
     public String SERVER_KEY_PATH = "/home/user/salesforceauthotest/jdoe/JWT/server.key";
-    public String SFDX_AUTH_URL = "force://PlatformCLI::5Aep861xBpRqBedp8vzzGbigTH4C1HLTaldn0ZQWDzst2bGneG1Jej_gy659erJpIRCmfjSkmPiMj51qffSufGp@platform-site-757-dev-ed.cs160.my.salesforce.com";*/
+    public String SFDX_AUTH_URL = "force://PlatformCLI::5Aep861xBpRqBedp8vzzGbigTH4C1HLTaldn0ZQWDzst2bGneG1Jej_gy659erJpIRCmfjSkmPiMj51qffSufGp@platform-site-757-dev-ed.cs160.my.salesforce.com";
 
     final protected String thynkPackDevOrg = "https://thynkpack-dev-ed.my.salesforce.com/";
     final protected String thynkPackUserName = "rostislav.orel@succraft.com";
     final protected String thynkPackKey = "3MVG91BJr_0ZDQ4ta_ZwN1EEnfj.OQSJWOBWMPFXclJ22A8oaKqM9KTLdsoSupXX0idQnMIdsI3IweGbsJx6t";
-    final protected String thynkPackPassword = "Rost1508";
+    final protected String thynkPackPassword = "Rost1508";*/
 
 
 

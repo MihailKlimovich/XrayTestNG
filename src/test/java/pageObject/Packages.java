@@ -31,6 +31,10 @@ public class Packages extends BasePage {
     By ACCOUNT_FIELD= By.xpath("//label[text()='Account']/following-sibling::div//input");
     By START_DATE_FIELD= By.xpath("//label[text()='Start Date']/following-sibling::div//input");
     By END_DATE_FIELD= By.xpath("//label[text()='End Date']/following-sibling::div//input");
+    By CLONE_PACKAGE_BUTTON = By.xpath("//button[text()='Clone Package']");
+    By SAVE_CLONE_PACKAGE_BUTTON = By.xpath("//button[text()='Save']");
+    By NAME_CLONE_PACKAGE_FIELD = By.xpath("//label[text()='Name']/following-sibling::div//input");
+
 
 
 
@@ -54,6 +58,16 @@ public class Packages extends BasePage {
         Thread.sleep(2000);
         wait1.until(ExpectedConditions.presenceOfElementLocated(NEW_PACKAGE));
         click2(NEW_PACKAGE);
+    }
+
+    @Step("Clone Package")
+    public void clonePackage(String name) throws InterruptedException {
+        click3(CLONE_PACKAGE_BUTTON);
+        click3(NAME_CLONE_PACKAGE_FIELD);
+        clear(NAME_CLONE_PACKAGE_FIELD);
+        writeText(NAME_CLONE_PACKAGE_FIELD, name);
+        click3(SAVE_CLONE_PACKAGE_BUTTON);
+
     }
 
     @Step("Fill out the package form where Multi_Days__c == true")
@@ -124,6 +138,13 @@ public class Packages extends BasePage {
         wait1.until(ExpectedConditions.elementToBeClickable(SAVE_BUTTON)).click();
     }
 
+    @Step("Open Package record")
+    public void openPackageRecord(String name) throws InterruptedException {
+        waitForTests.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//table//a[@title='" + name + "']")));
+        //wait1.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//table//a[@title='" + name + "']")));
+        click(By.xpath("//table//a[@title='" + name + "']"));
+    }
+
 
     //////////////////////////////   SFDX COMMANDS   ////////////////////////////////////
 
@@ -157,6 +178,23 @@ public class Packages extends BasePage {
                 "--json"});
         System.out.println(result);
     }
+
+    @Step("Get Package SFDX")
+    public StringBuilder getPackageSFDX(String sfdxPath, String where, String userName) throws IOException, InterruptedException {
+        StringBuilder packageRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                sfdxPath,
+                "force:data:record:get",
+                "-s",
+                "thn__Package__c",
+                "-w",
+                where,
+                "-u",
+                userName,
+                "--json"});
+        return packageRecord;
+    }
+
+
 
 
 
