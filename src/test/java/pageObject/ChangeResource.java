@@ -26,6 +26,11 @@ public class ChangeResource extends BasePage {
     By NO_RADIO_BUTTON = By.xpath("//span//input[@value='No']");
     By START_DATE_FIELD = By.xpath("//button[@title='Select a date']/parent::lightning-button-icon/parent::div//input[@name='Start_Date_Time']");
     By END_DATE_FIELD = By.xpath("//button[@title='Select a date']/parent::lightning-button-icon/parent::div//input[@name='End_Date_Time']");
+    By START_TIME_FIELD = By.xpath("//lightning-timepicker//input[@name='Start_Date_Time']");
+    By END_TIME_FIELD = By.xpath("//lightning-timepicker//input[@name='End_Date_Time']");
+    By UPDATE_PRICES_CHECKBOX = By.xpath("//input[@name='Update_Prices']");
+    By BREAK_OUT_CHECKBOX = By.xpath("//input[@name='Break_Out']");
+    By HALF_DAY_CHECKBOX = By.xpath("//input[@name='Half_Day']");
 
 
     @Step("Change resource")
@@ -54,13 +59,51 @@ public class ChangeResource extends BasePage {
         return message;
     }
 
-    @Step("Change resource and start/end time")
-    public String changeResourceAndTime(String newResource, String confirm) throws InterruptedException {
+    @Step("Change resource and update price")
+    public String changeResourceAndUpdatePrice(String newResource) throws InterruptedException {
         driver.switchTo().frame(0);
         click3(REMOVE_BUTTON);
         click3(NEW_RESOURCE_FIELD);
         writeText(NEW_RESOURCE_FIELD, newResource);
         click3(By.xpath("//li[@data-name='" + newResource + "']"));
+        click3(UPDATE_PRICES_CHECKBOX);
+        click3(BREAK_OUT_CHECKBOX);
+        click3(HALF_DAY_CHECKBOX);
+        click4(NEXT_BUTTON);
+        try {
+            if (wait2.until(ExpectedConditions.presenceOfElementLocated(CONFIRMATION_MESSAGE)) != null){
+                String confirmationMessage = readText(CONFIRMATION_MESSAGE);
+                click3(YES_RADIO_BUTTON);
+                click4(NEXT_BUTTON);
+                click4(FINISH_BUTTON);
+                driver.switchTo().defaultContent();
+                return confirmationMessage;
+            }
+        }catch (TimeoutException e) {
+
+            click4(FINISH_BUTTON);
+            driver.switchTo().defaultContent();
+        }
+        String message = "Message not found";
+        return message;
+    }
+
+    @Step("Change resource and start/end time")
+    public String changeResourceAndDateTime(String newResource, String startDate, String startTime, String endDate,
+                                            String endTime, String confirm) throws InterruptedException {
+        driver.switchTo().frame(0);
+        click3(REMOVE_BUTTON);
+        click3(NEW_RESOURCE_FIELD);
+        writeText(NEW_RESOURCE_FIELD, newResource);
+        click3(By.xpath("//li[@data-name='" + newResource + "']"));
+        click3(START_DATE_FIELD);
+        writeText(START_DATE_FIELD, startDate);
+        click3(START_TIME_FIELD);
+        writeText(START_TIME_FIELD, startTime);
+        click3(END_DATE_FIELD);
+        writeText(END_DATE_FIELD, endDate);
+        click3(END_TIME_FIELD);
+        writeText(END_TIME_FIELD, endTime);
         click4(NEXT_BUTTON);
         try {
             if (wait2.until(ExpectedConditions.presenceOfElementLocated(CONFIRMATION_MESSAGE)) != null){

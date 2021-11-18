@@ -75,7 +75,8 @@ public class OverbookingAndPriceUpdate extends BaseTest {
         String resourceID4 = resource.createResourceSFDX(SFDX, "Name='OverbookingChangePriceAutoTest4'" +
                 " thn__Hotel__c='" + propertyID + "' thn__Type__c='Meeting Room' thn__is_Shareable__c=true", ORG_USERNAME);
         String resourceID5 = resource.createResourceSFDX(SFDX, "Name='OverbookingChangePriceAutoTest5'" +
-                " thn__Hotel__c='" + propertyID + "' thn__Type__c='Meeting Room' thn__is_Shareable__c=true", ORG_USERNAME);
+                " thn__Hotel__c='" + propertyID + "' thn__Type__c='Meeting Room' thn__is_Shareable__c=true" +
+                " thn__Break_out_half_day__c=60 thn__Break_out_full_day__c=100", ORG_USERNAME);
         resourceGrouping.createResourceGroupingSFDX(SFDX, "thn__Grouped_Resource__c='" + resourceID2 + "'" +
                 " thn__Resource_Group__c='" + resourceID3 + "'", ORG_USERNAME);
         String quoteID = myceQuotes.createQuoteSFDX(SFDX, "Name='OverbookingChangePriceAutoTest' thn__Pax__c=5" +
@@ -221,6 +222,73 @@ public class OverbookingAndPriceUpdate extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     @Story("Overbooking & price update")
     public void case6() throws InterruptedException, IOException {
+        String expectedMessage = "Do you wish to overbook?";
+        StringBuilder meetingFullDayRecord = product.getProductSFDX(SFDX, "Name='MEETING FULL DAY'", ORG_USERNAME);
+        String meetingFullDayID = JsonParser2.getFieldValue(meetingFullDayRecord.toString(), "Id");
+        StringBuilder quoteRecord = myceQuotes.
+                getQuoteSFDX(SFDX, "Name='OverbookingChangePriceAutoTest'", ORG_USERNAME);
+        String myceQuoteID= JsonParser2.getFieldValue(quoteRecord.toString(), "Id");
+        String quoteMeetingRoomId = quoteMeetingRoom.createQuoteMeetingRoomSFDX(SFDX, "thn__MYCE_Quote__c='"
+                + myceQuoteID + "' thn__Product__c='" + meetingFullDayID + "'", ORG_USERNAME);
+        StringBuilder quoteMeetingRoomRecord = quoteMeetingRoom.
+                getQuoteMeetingRoomSFDX(SFDX, "Id='" + quoteMeetingRoomId + "'", ORG_USERNAME);
+        String quoteMeetingRoomResource = JsonParser2.
+                getFieldValue(quoteMeetingRoomRecord.toString(), "thn__Resource__c");
+        String quoteMeetingRoomStartDate = JsonParser2.
+                getFieldValue(quoteMeetingRoomRecord.toString(), "thn__Start_Date__c");
+        String quoteMeetingRoomEndDate = JsonParser2.
+                getFieldValue(quoteMeetingRoomRecord.toString(), "thn__End_Date__c");
+        String quoteMeetingRoomStartTime = JsonParser2.
+                getFieldValue(quoteMeetingRoomRecord.toString(), "thn__Start_Time__c");
+        String quoteMeetingRoomEndTime = JsonParser2.
+                getFieldValue(quoteMeetingRoomRecord.toString(), "thn__End_Time__c");
+        myceQuotes.goToMyceQuotes();
+        myceQuotes.openMyceQoteRecord("OverbookingChangePriceAutoTest");
+        myceQuotes.openMeetingRooms();
+        quoteMeetingRoom.selectItem("5");
+        quoteMeetingRoom.clickChangeResource();
+        String message = changeResource.changeResourceAndDateTime("OverbookingChangePriceAutoTest3",
+                date.generateTodayDate2(), "15:00", date.generateTodayDate2(), "15:30", "No" );
+        StringBuilder updatedQuoteMeetingRoomRecord = quoteMeetingRoom.
+                getQuoteMeetingRoomSFDX(SFDX, "Id='" + quoteMeetingRoomId + "'", ORG_USERNAME);
+        String updatedQuoteMeetingRoomResource = JsonParser2.
+                getFieldValue(updatedQuoteMeetingRoomRecord.toString(), "thn__Resource__c");
+        String updatedQuoteMeetingRoomStartDate = JsonParser2.
+                getFieldValue(updatedQuoteMeetingRoomRecord.toString(), "thn__Start_Date__c");
+        String updatedQuoteMeetingRoomEndDate = JsonParser2.
+                getFieldValue(updatedQuoteMeetingRoomRecord.toString(), "thn__End_Date__c");
+        String updatedQuoteMeetingRoomStartTime = JsonParser2.
+                getFieldValue(updatedQuoteMeetingRoomRecord.toString(), "thn__Start_Time__c");
+        String updatedQuoteMeetingRoomEndTime = JsonParser2.
+                getFieldValue(updatedQuoteMeetingRoomRecord.toString(), "thn__End_Time__c");
+        Assert.assertEquals(message, expectedMessage);
+        Assert.assertEquals(updatedQuoteMeetingRoomResource, quoteMeetingRoomResource);
+        Assert.assertEquals(updatedQuoteMeetingRoomStartDate, quoteMeetingRoomStartDate);
+        Assert.assertEquals(updatedQuoteMeetingRoomEndDate, quoteMeetingRoomEndDate);
+        Assert.assertEquals(updatedQuoteMeetingRoomStartTime, quoteMeetingRoomStartTime);
+        Assert.assertEquals(updatedQuoteMeetingRoomEndTime, quoteMeetingRoomEndTime);
+    }
+
+    @Test(priority = 9, description = "Update meeting room’s resource and check ‘update prices’. Expected result:" +
+            " Prices are updated based on new resource’s pricing and value on meeting room (break out/half day)")
+    @Severity(SeverityLevel.NORMAL)
+    @Story("Overbooking & price update")
+    public void case7() throws InterruptedException, IOException {
+        StringBuilder meetingFullDayRecord = product.getProductSFDX(SFDX, "Name='MEETING FULL DAY'", ORG_USERNAME);
+        String meetingFullDayID = JsonParser2.getFieldValue(meetingFullDayRecord.toString(), "Id");
+        StringBuilder quoteRecord = myceQuotes.
+                getQuoteSFDX(SFDX, "Name='OverbookingChangePriceAutoTest'", ORG_USERNAME);
+        String myceQuoteID= JsonParser2.getFieldValue(quoteRecord.toString(), "Id");
+        String quoteMeetingRoomId = quoteMeetingRoom.createQuoteMeetingRoomSFDX(SFDX, "thn__MYCE_Quote__c='"
+                + myceQuoteID + "' thn__Product__c='" + meetingFullDayID + "'", ORG_USERNAME);
+        StringBuilder quoteMeetingRoomRecord = quoteMeetingRoom.
+                getQuoteMeetingRoomSFDX(SFDX, "Id='" + quoteMeetingRoomId + "'", ORG_USERNAME);
+        myceQuotes.goToMyceQuotes();
+        myceQuotes.openMyceQoteRecord("OverbookingChangePriceAutoTest");
+        myceQuotes.openMeetingRooms();
+        quoteMeetingRoom.selectItem("6");
+        quoteMeetingRoom.clickChangeResource();
+
 
     }
 
