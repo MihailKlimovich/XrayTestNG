@@ -26,9 +26,9 @@ public class OverbookingAndPriceUpdate extends BaseTest {
         options.addArguments("--disable-gpu");
         options.addArguments("--disable-extensions");
         options.addArguments("--disable-dev-shm-usage");
-        //options.addArguments("user-data-dir=/tmp/temp_profile");
+        options.addArguments("user-data-dir=/tmp/temp_profile");
         options.addArguments(" --whitelisted-ips=\"\"");
-        //options.addArguments("--headless", "window-size=1920,1024", "--no-sandbox");
+        options.addArguments("--headless", "window-size=1920,1024", "--no-sandbox");
         driver = new ChromeDriver(options);
         driver.manage().deleteAllCookies();
         driver.manage().window().maximize();
@@ -36,14 +36,14 @@ public class OverbookingAndPriceUpdate extends BaseTest {
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     }
 
-    /*@AfterClass
+    @AfterClass
     public void teardown() {
         driver.close();
         driver.quit();
         if (driver != null) {
             driver = null;
         }
-    }*/
+    }
 
     @Test(priority = 1, description = "LogIn")
     @Severity(SeverityLevel.NORMAL)
@@ -249,6 +249,7 @@ public class OverbookingAndPriceUpdate extends BaseTest {
         quoteMeetingRoom.clickChangeResource();
         String message = changeResource.changeResourceAndDateTime("OverbookingChangePriceAutoTest3",
                 date.generateTodayDate2(), "15:00", date.generateTodayDate2(), "15:30", "No" );
+        Thread.sleep(2000);
         StringBuilder updatedQuoteMeetingRoomRecord = quoteMeetingRoom.
                 getQuoteMeetingRoomSFDX(SFDX, "Id='" + quoteMeetingRoomId + "'", ORG_USERNAME);
         String updatedQuoteMeetingRoomResource = JsonParser2.
@@ -283,13 +284,73 @@ public class OverbookingAndPriceUpdate extends BaseTest {
                 + myceQuoteID + "' thn__Product__c='" + meetingFullDayID + "'", ORG_USERNAME);
         StringBuilder quoteMeetingRoomRecord = quoteMeetingRoom.
                 getQuoteMeetingRoomSFDX(SFDX, "Id='" + quoteMeetingRoomId + "'", ORG_USERNAME);
+        String quoteMeetingRoomResource = JsonParser2.
+                getFieldValue(quoteMeetingRoomRecord.toString(), "thn__Resource__c");
+        String quoteMeetingRoomSalesPriceExclTax = JsonParser2.
+                getFieldValue(quoteMeetingRoomRecord.toString(), "thn__Sales_Price_excl_Tax__c");
+        String quoteMeetingRoomSalesPriceInclTax = JsonParser2.
+                getFieldValue(quoteMeetingRoomRecord.toString(), "thn__Sales_Price_incl_Tax__c");
         myceQuotes.goToMyceQuotes();
         myceQuotes.openMyceQoteRecord("OverbookingChangePriceAutoTest");
         myceQuotes.openMeetingRooms();
         quoteMeetingRoom.selectItem("6");
         quoteMeetingRoom.clickChangeResource();
+        changeResource.changeResourceAndUpdatePrice("OverbookingChangePriceAutoTest5");
+        StringBuilder updatedQuoteMeetingRoomRecord = quoteMeetingRoom.
+                getQuoteMeetingRoomSFDX(SFDX, "Id='" + quoteMeetingRoomId + "'", ORG_USERNAME);
+        String updatedQuoteMeetingRoomResource = JsonParser2.
+                getFieldValue(updatedQuoteMeetingRoomRecord.toString(), "thn__Resource__c");
+        String updatedQuoteMeetingRoomSalesPriceExclTax = JsonParser2.
+                getFieldValue(updatedQuoteMeetingRoomRecord.toString(), "thn__Sales_Price_excl_Tax__c");
+        String updatedQuoteMeetingRoomSalesPriceInclTax = JsonParser2.
+                getFieldValue(updatedQuoteMeetingRoomRecord.toString(), "thn__Sales_Price_incl_Tax__c");
+        String updatedQuoteMeetingRoomBreakOutCheckbox = JsonParser2.
+                getFieldValue(updatedQuoteMeetingRoomRecord.toString(), "thn__Break_out__c");
+        String updatedQuoteMeetingRoomHalfDayCheckbox = JsonParser2.
+                getFieldValue(updatedQuoteMeetingRoomRecord.toString(), "thn__Half_day__c");
+        Assert.assertNotEquals(updatedQuoteMeetingRoomResource, quoteMeetingRoomResource);
+        Assert.assertNotEquals(updatedQuoteMeetingRoomSalesPriceExclTax, quoteMeetingRoomSalesPriceExclTax);
+        Assert.assertNotEquals(updatedQuoteMeetingRoomSalesPriceInclTax, quoteMeetingRoomSalesPriceInclTax);
+        Assert.assertEquals(updatedQuoteMeetingRoomBreakOutCheckbox, "true");
+        Assert.assertEquals(updatedQuoteMeetingRoomHalfDayCheckbox, "true");
+    }
 
+    @Test(priority = 10, description = "Remove permission set from user and update a meeting room with booked" +
+            " resource. Expected result: Warning for overbooking with no possibility to update the meeting room")
+    @Severity(SeverityLevel.NORMAL)
+    @Story("Overbooking & price update")
+    public void case8() throws InterruptedException, IOException {
+        developerConsoleWindow.openDeveloperConsole();
+        developerConsoleWindow.openExecuteAnonymousWindow();
+        developerConsoleWindow.runApexCodeFromFile("src/main/Data/RemoveOverbookingPermissionSet");
+        StringBuilder resourceRecord = resource.
+                getResourceSFDX(SFDX, "Name='OverbookingChangePriceAutoTest3'", ORG_USERNAME);
+        String resourceId = JsonParser2.getFieldValue(resourceRecord.toString(), "Id");
+        StringBuilder meetingFullDayRecord = product.getProductSFDX(SFDX, "Name='MEETING FULL DAY'", ORG_USERNAME);
+        String meetingFullDayID = JsonParser2.getFieldValue(meetingFullDayRecord.toString(), "Id");
+        StringBuilder quoteRecord = myceQuotes.
+                getQuoteSFDX(SFDX, "Name='OverbookingChangePriceAutoTest'", ORG_USERNAME);
+        String myceQuoteID= JsonParser2.getFieldValue(quoteRecord.toString(), "Id");
+        String quoteMeetingRoomId = quoteMeetingRoom.createQuoteMeetingRoomSFDX(SFDX, "thn__MYCE_Quote__c='"
+                + myceQuoteID + "' thn__Product__c='" + meetingFullDayID + "'", ORG_USERNAME);
+        myceQuotes.goToMyceQuotes();
+        myceQuotes.openMyceQoteRecord("OverbookingChangePriceAutoTest");
+        myceQuotes.openMeetingRooms();
+        quoteMeetingRoom.selectItem("7");
+        quoteMeetingRoom.clickChangeResource();
+        changeResource.changeResource("OverbookingChangePriceAutoTest3");
+        StringBuilder quoteMeetingRoomRecord = quoteMeetingRoom.
+                getQuoteMeetingRoomSFDX(SFDX, "Id='" + quoteMeetingRoomId + "'", ORG_USERNAME);
+        String quoteMeetingRoomResource = JsonParser2.
+                getFieldValue(quoteMeetingRoomRecord.toString(), "thn__Resource__c");
+        Assert.assertNotEquals(quoteMeetingRoomResource, resourceId);
+    }
 
+    @Test(priority = 11, description = "Return Overbooking Permission to the user")
+    @Severity(SeverityLevel.NORMAL)
+    @Story("Overbooking & price update")
+    public void postconditions() throws InterruptedException, IOException {
+        user.addPermissionSet(SFDX, "Overbooking_User", ORG_USERNAME);
     }
 
 }

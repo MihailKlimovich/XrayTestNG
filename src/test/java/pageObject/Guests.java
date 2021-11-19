@@ -82,6 +82,36 @@ public class Guests extends BasePage {
         return guestID;
     }
 
+    @Step("Delete Guest SFDX")
+    public void deleteGuestSFDX(String sfdxPath, String where, String userName) throws IOException, InterruptedException {
+        StringBuilder result = SfdxCommand.runLinuxCommand1(new String[]{
+                sfdxPath,
+                "force:data:record:delete",
+                "-s",
+                "thn__Guest__c",
+                "-w",
+                where,
+                "-u",
+                userName,
+                "--json"});
+        System.out.println(result);
+    }
+
+    @Step("Get Guest SFDX")
+    public StringBuilder getGuestSFDX(String sfdxPath, String where, String userName) throws IOException, InterruptedException {
+        StringBuilder guestRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                sfdxPath,
+                "force:data:record:get",
+                "-s",
+                "thn__Guest__c",
+                "-w",
+                where,
+                "-u",
+                userName,
+                "--json"});
+        return guestRecord;
+    }
+
     @Step("Update Guest SFDX")
     public void updateGuestSFDX(String sfdxPath, String where, String value, String userName)
             throws IOException, InterruptedException {

@@ -185,6 +185,11 @@
             <class name="tests.ClonePackage"/>
         </classes>
     </test>
+    <test name="Overbooking and price update">
+        <classes>
+            <class name="tests.OverbookingAndPriceUpdate"/>
+        </classes>
+    </test>
 
 
 

@@ -1,0 +1,2 @@
+ GuestToContactBatch job = new GuestToContactBatch();
+ DataBase.executeBatch(job);

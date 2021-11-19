@@ -56,6 +56,7 @@ public class BaseTest {
     protected ChangeResource changeResource;
     protected Files files;
     protected RoomingList roomingList;
+    protected Contact contact;
 
 
     public WebDriver getDriver() {
@@ -65,13 +66,13 @@ public class BaseTest {
     public static final String testDataExcelFileName = "testdata.xlsx";
 
 
-    public String ORG_USERNAME = System.getenv("JAVAUSERNAME");
+    /*public String ORG_USERNAME = System.getenv("JAVAUSERNAME");
     public String ORG_PASSWORD = System.getenv("JAVAPASSWORD");
     public String ORG_URL = System.getenv("SF_URL");
     public String CONSUMER_KEY = System.getenv("SF_CONSUMER_KEY");
     public String SFDX = System.getenv("SFDX");
     public String SERVER_KEY_PATH = System.getenv("SERVER_KEY_PATH");
-    public String SFDX_AUTH_URL = System.getenv("AUTH_URL");
+    public String SFDX_AUTH_URL = System.getenv("AUTH_URL");*/
 
 
     /*public String ORG_USERNAME = "cs1@com.postpart";
@@ -82,13 +83,13 @@ public class BaseTest {
     public String SERVER_KEY_PATH = "/home/user/salesforceauthotest/jdoe/JWT/server.key";
     public String SFDX_AUTH_URL = "force://PlatformCLI::5Aep861KhtojOqEEpdH0TQSE9vuVzdljKpf1MnxJ39U2zMud8kQ1z6hlDIRT73KpEekvlhTMdXkadgGyID.Mu1f@thdemo-dev-ed.my.salesforce.com";*/
 
-    /*public String ORG_USERNAME = "qa-thy626@succraft.com";
+    public String ORG_USERNAME = "qa-thy626@succraft.com";
     public String ORG_PASSWORD = "hellohello11";
     public String ORG_URL = "https://test.salesforce.com";
     public String CONSUMER_KEY = "";
     public String SFDX = "/home/user/sfdx/bin/sfdx";
     public String SERVER_KEY_PATH = "/home/user/salesforceauthotest/jdoe/JWT/server.key";
-    public String SFDX_AUTH_URL = "force://PlatformCLI::5Aep861xBpRqBedp8vzzGbigTH4C1HLTaldn0ZQWDzst2bGneG1Jej_gy659erJpIRCmfjSkmPiMj51qffSufGp@platform-site-757-dev-ed.cs160.my.salesforce.com";*/
+    public String SFDX_AUTH_URL = "force://PlatformCLI::5Aep861xBpRqBedp8vzzGbigTH4C1HLTaldn0ZQWDzst2bGneG1Jej_gy659erJpIRCmfjSkmPiMj51qffSufGp@platform-site-757-dev-ed.cs160.my.salesforce.com";
 
     final protected String thynkPackDevOrg = "https://thynkpack-dev-ed.my.salesforce.com/";
     final protected String thynkPackUserName = "rostislav.orel@succraft.com";
@@ -108,9 +109,9 @@ public class BaseTest {
         options.addArguments("--disable-gpu");
         options.addArguments("--disable-extensions");
         options.addArguments("--disable-dev-shm-usage");
-        options.addArguments("user-data-dir=/tmp/temp_profile");
+        //options.addArguments("user-data-dir=/tmp/temp_profile");
         options.addArguments(" --whitelisted-ips=\"\"");
-        options.addArguments("--headless", "window-size=1920,1024", "--no-sandbox");
+        //options.addArguments("--headless", "window-size=1920,1024", "--no-sandbox");
         driver = new ChromeDriver(options);
         driver.manage().deleteAllCookies();
         driver.manage().window().maximize();
@@ -155,16 +156,17 @@ public class BaseTest {
         changeResource = new ChangeResource(driver);
         files = new Files(driver);
         roomingList = new RoomingList(driver);
+        contact = new Contact(driver);
     }
 
-    @AfterClass
+    /*@AfterClass
     public void teardown(){
         driver.close();
         driver.quit();
         if (driver != null) {
             driver = null;
         }
-   }
+   }*/
 
 
 
