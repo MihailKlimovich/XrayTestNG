@@ -83,13 +83,13 @@ public class BaseTest {
     public String SERVER_KEY_PATH = "/home/user/salesforceauthotest/jdoe/JWT/server.key";
     public String SFDX_AUTH_URL = "force://PlatformCLI::5Aep861KhtojOqEEpdH0TQSE9vuVzdljKpf1MnxJ39U2zMud8kQ1z6hlDIRT73KpEekvlhTMdXkadgGyID.Mu1f@thdemo-dev-ed.my.salesforce.com";*/
 
-    /*public String ORG_USERNAME = "qa-thy626@succraft.com";
-    public String ORG_PASSWORD = "hellohello11";
+    /*public String ORG_USERNAME = "test-hkqopel4ifg3@example.com";
+    public String ORG_PASSWORD = "-3paensOtgmch";
     public String ORG_URL = "https://test.salesforce.com";
     public String CONSUMER_KEY = "";
     public String SFDX = "/home/user/sfdx/bin/sfdx";
     public String SERVER_KEY_PATH = "/home/user/salesforceauthotest/jdoe/JWT/server.key";
-    public String SFDX_AUTH_URL = "force://PlatformCLI::5Aep861xBpRqBedp8vzzGbigTH4C1HLTaldn0ZQWDzst2bGneG1Jej_gy659erJpIRCmfjSkmPiMj51qffSufGp@platform-site-757-dev-ed.cs160.my.salesforce.com";*/
+    public String SFDX_AUTH_URL = "force://PlatformCLI::5Aep861ybeDfdtD3GVtypJokouk1t1sS65n9SBeD0g08IbD9UzZ72dUKxnLfs4sr.PVE0WFGrH0nTTEWb0F2O6U@app-ability-9306-dev-ed.cs102.my.salesforce.com";*/
 
     final protected String thynkPackDevOrg = "https://thynkpack-dev-ed.my.salesforce.com/";
     final protected String thynkPackUserName = "rostislav.orel@succraft.com";

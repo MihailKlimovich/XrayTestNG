@@ -33,7 +33,7 @@ public class GuestToContact extends BaseTest {
                         " upsert settings;");
     }
 
-    @Test(priority = 2, description = "Preconditions: creatingguests and contacts")
+    @Test(priority = 2, description = "Preconditions: creating guests and contacts")
     @Severity(SeverityLevel.NORMAL)
     @Story("Guest to contact")
     public void preconditions() throws InterruptedException, IOException {

@@ -195,6 +195,11 @@
             <class name="tests.OverbookingAndPriceUpdate"/>
         </classes>
     </test>
+    <test name="Default Setup testing">
+        <classes>
+            <class name="tests.DefaultSetupTesting"/>
+        </classes>
+    </test>
 
 </suite>
 
