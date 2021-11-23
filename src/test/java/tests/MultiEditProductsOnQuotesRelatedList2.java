@@ -1,6 +1,5 @@
 package tests;
 
-import io.qameta.allure.Description;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.Story;
@@ -17,7 +16,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-public class MultiEditOnQuotesRelatedList extends BaseTest {
+public class MultiEditProductsOnQuotesRelatedList2 extends BaseTest {
 
     @BeforeClass
     public void classLevelSetup() {
@@ -52,19 +51,6 @@ public class MultiEditOnQuotesRelatedList extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     @Story("Multi edit on quote's related list UAT")
     public void login() throws InterruptedException, IOException {
-        /*StringBuilder authorise = SfdxCommand.runLinuxCommand1(new String[]{
-                SFDX,
-                "force:auth:jwt:grant",
-                "--clientid",
-                CONSUMER_KEY,
-                "--jwtkeyfile",
-                SERVER_KEY_PATH,
-                "--username",
-                ORG_USERNAME,
-                "--instanceurl",
-                ORG_URL
-        });
-        System.out.println(authorise);*/
         loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
         loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
         StringBuilder result2 = SfdxCommand.runLinuxCommand1(new String[]{
@@ -129,7 +115,7 @@ public class MultiEditOnQuotesRelatedList extends BaseTest {
         Assert.assertEquals(byPassVr, "true");
     }
 
-    @Test(priority = 2, description = "Quote products and Quote meeting rooms are part of the Quote Package")
+    @Test(priority = 2, description = "Quote products and Quote meeting rooms are part of the Quote Package.")
     @Severity(SeverityLevel.NORMAL)
     @Story("Multi edit on quote's related list UAT")
     public void case1() throws InterruptedException, IOException {

@@ -57,6 +57,8 @@ public class BaseTest {
     protected Files files;
     protected RoomingList roomingList;
     protected Contact contact;
+    protected MultiEditProducts multiEditProducts;
+    protected MultiEditMeetingRooms multiEditMeetingRooms;
 
 
     public WebDriver getDriver() {
@@ -157,6 +159,8 @@ public class BaseTest {
         files = new Files(driver);
         roomingList = new RoomingList(driver);
         contact = new Contact(driver);
+        multiEditProducts = new MultiEditProducts(driver);
+        multiEditMeetingRooms = new MultiEditMeetingRooms(driver);
     }
 
     @AfterClass

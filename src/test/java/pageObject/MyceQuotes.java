@@ -18,9 +18,7 @@ import static org.openqa.selenium.support.ui.ExpectedConditions.alertIsPresent;
 public class MyceQuotes extends BasePage {
 
 
-    /**
-     * Constructor
-     */
+    /**Constructor*/
     public MyceQuotes(WebDriver driver) {
         super(driver);
     }
