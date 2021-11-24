@@ -36,28 +36,20 @@ public class MultiEditMeetingRooms extends BasePage {
     @Step("Multi Edit Products (Meeting Rooms are part of Package)")
     public void multiEditMeetingRooms_PartOfPackage
             (String newSetup, String newResStatus, String newFuncName, String commissionable, String hideOnOffer,
-             String lockResource, String newComPer, String newDisPer, String newDisAmmount, String newUnitPrice)
+             String lockResource)
             throws InterruptedException {
         driver.switchTo().frame(0);
-        click3(EDIT_SETUP_VALUES_CHECKBOX);
-        click3(NEW_SETUP_PICKLIST);
+        click3(By.xpath("//input[@name='Edit_Setup_Values_0']"));
+        click3(By.xpath("//select[@name='New_Setup_0']"));
         click3(By.xpath("//option[text()='" + newSetup + "']"));
-        click3(EDIT_RESERVATION_STATUS_CHECKBOX);
-        click3(NEW_RESERVATION_STATUS_PICKLIST);
+        click3(By.xpath("//input[@name='Edit_Reservation_Status_Values_0']"));
+        click3(By.xpath("//select[@name='New_Reservation_Status_0']"));
         click3(By.xpath("//option[text()='" + newResStatus + "']"));
-        click3(NEW_FUNCTION_NAME_FIELD);
-        writeText(NEW_FUNCTION_NAME_FIELD, newFuncName);
-        click3(By.xpath("//input[@name='Lock_Resource_0' and @value='" + lockResource + "_Choice' ]"));
-        click3(By.xpath("//input[@name='Hide_on_Offer_0' and @value='" + hideOnOffer + "_Choice' ]"));
-        click3(By.xpath("//input[@name='Commissionable_0' and @value='" + commissionable + "_Choice' ]"));
-        click3(NEW_COMISSION_PERCENTAGE_FIELD);
-        writeText(NEW_COMISSION_PERCENTAGE_FIELD, newComPer );
-        click3(NEW_DISCOUNT_PERCENTAGE_FIELD);
-        writeText(NEW_DISCOUNT_PERCENTAGE_FIELD, newDisPer);
-        click3(NEW_DISCOUNT_AMOUNT_FIELD);
-        writeText(NEW_DISCOUNT_AMOUNT_FIELD, newDisAmmount);
-        click3(NEW_UNIT_PRICE_FIELD);
-        writeText(NEW_UNIT_PRICE_FIELD, newUnitPrice);
+        click3(By.xpath("//input[@name='New_Function_Name_0']"));
+        writeText(By.xpath("//input[@name='New_Function_Name_0']"), newFuncName);
+        click3(By.xpath("//input[@name='Lock_Resource_0' and @value='" + lockResource + "_Choice']"));
+        click3(By.xpath("//input[@name='Hide_on_Offer_0' and @value='" + hideOnOffer + "_Choice']"));
+        click3(By.xpath("//input[@name='Commissionable_0' and @value='" + commissionable + "_Choice']"));
         click4(NEXT_BUTTON);
         click3(YES_CHOICE_BUTTON);
         click4(NEXT_BUTTON);
