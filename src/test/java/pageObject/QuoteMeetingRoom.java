@@ -170,44 +170,6 @@ public class QuoteMeetingRoom extends BasePage {
         enter();
     }
 
-    @Step("Multi Edit products")
-    public  void multiEditMeetingRooms() throws InterruptedException {
-        Thread.sleep(3000);
-        space();
-        tab();
-        tab();
-        Thread.sleep(1000);
-        space();
-        tab();
-        tab();
-        Thread.sleep(1000);
-        space();
-        tab();
-        tab();
-        tab();
-        Thread.sleep(1000);
-        space();
-        tab();
-        Thread.sleep(1000);
-        space();
-        tab();
-        Thread.sleep(1000);
-        space();
-        tab();
-        Thread.sleep(1000);
-        space();
-        Thread.sleep(1000);
-        space();
-        tab();
-        tab();
-        Thread.sleep(1000);
-        space();
-        Thread.sleep(3000);
-        tab();
-        Thread.sleep(1000);
-        space();
-    }
-
     //////////////////////////////   SFDX COMMANDS   ////////////////////////////////////
     @Step("Create Quote Meeting Room SFDX")
     public String createQuoteMeetingRoomSFDX(String sfdxPath, String value, String userName)

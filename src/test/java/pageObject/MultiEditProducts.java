@@ -65,7 +65,7 @@ public class MultiEditProducts extends BasePage {
         writeText(NEW_PAX_FIELD, newPax);
         click3(NEW_ACTUAL_PAX_FIELD);
         writeText(NEW_ACTUAL_PAX_FIELD, newActualPax);
-        click3(By.xpath("//input[@name='Commissionable_0' and @value='" + commissionable + "_Choice' ]"));
+        click3(By.xpath("//input[@name='Commissionable' and @value='" + commissionable + "_Choice' ]"));
         click3(By.xpath("//input[@name='Hide_on_Offer' and @value='" + hideOnOffer + "_Choice' ]"));
         click3(By.xpath("//input[@name='Is_on_Consumption' and @value='" + isOnConsumption + "_Choice' ]"));
         click3(NEW_COMISSION_PERCENTAGE_FIELD);
@@ -81,6 +81,7 @@ public class MultiEditProducts extends BasePage {
         click4(NEXT_BUTTON);
         click4(FINISH_BUTTON);
         driver.switchTo().defaultContent();
+        Thread.sleep(3000);
     }
 
 
