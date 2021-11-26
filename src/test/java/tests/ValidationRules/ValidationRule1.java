@@ -39,13 +39,13 @@ public class ValidationRule1 extends BaseTest{
         });
         System.out.println(authorise);*/
         loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
-        StringBuilder result2 = SfdxCommand.runLinuxCommand1(new String[]{
+        /*StringBuilder result2 = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:update",
                 "-s",
                 "User",
                 "-w",
-                "Name='User User'",
+                "Name='Rostislav'",
                 "-v",
                 "thn__ByPassVR__c=false",
                 "-u",
@@ -80,7 +80,7 @@ public class ValidationRule1 extends BaseTest{
                 "-s",
                 "User",
                 "-w",
-                "Name='User User'",
+                "Name='Rostislav'",
                 "-u",
                 ORG_USERNAME,
                 "--json"});
@@ -98,7 +98,7 @@ public class ValidationRule1 extends BaseTest{
         System.out.println(byPassRecord);
         String byPassVr = JsonParser2.getFieldValue(byPassRecord.toString(), "thn__ByPassVR__c");
         Assert.assertEquals(userByPass, "false");
-        Assert.assertEquals(byPassVr, "false");
+        Assert.assertEquals(byPassVr, "false");*/
     }
 
 
@@ -277,17 +277,16 @@ public class ValidationRule1 extends BaseTest{
     @Description("Myce_Quote__c.VR28_Cancelled_Status")
     @Story("Set thn__Is_Confirmed__c to false, Change MYCE Quote Closed Status to ‘Cancelled’")
     public void testCreateNewMyceQuote8() throws InterruptedException, IOException {
-        String expectedMessage = "Closed Status can be 'Cancelled' only if Myce quote was 'Won'";
-        StringBuilder result = SfdxCommand.runLinuxCommand1(new String[]{
-                SFDX,
-                "force:data:record:create",
-                "-s",
-                "thn__MYCE_Quote__c",
-                "-v",
-                "Name='Test8' thn__Closed_Status__c='Cancelled'",
-                "-u",
-                ORG_USERNAME,
-                "--json"});
+        String expectedMessage = "Failed to update record with code FIELD_CUSTOM_VALIDATION_EXCEPTION. Fields: []";
+        StringBuilder hotelRecord= hotel.getHotelSFDX(SFDX, "thn__Unique_Id__c='Demo'", ORG_USERNAME);
+        String propertyID = JsonParser2.getFieldValue(hotelRecord.toString(), "Id");
+        String quoteID = myceQuotes.createQuoteSFDX(SFDX, "Name='Test8' thn__Pax__c=5" +
+                " thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" + date.generateTodayDate2()
+                + " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 2), ORG_USERNAME);
+        myceQuotes.updateQuoteSFDX(SFDX, "Id='" + quoteID + "'", "thn__Stage__c='4 - Closed'" +
+                " thn__Is_Confirmed__c=false thn__Closed_Status__c='Lost'", ORG_USERNAME );
+        StringBuilder result = myceQuotes.updateQuoteSFDX(SFDX, "Id='" + quoteID + "'",
+                "thn__Closed_Status__c='Cancelled'", ORG_USERNAME);
         String message = JsonParser2.getFieldValue2(result.toString(), "message");
         Assert.assertEquals(message, expectedMessage);
     }
@@ -1259,7 +1258,7 @@ public class ValidationRule1 extends BaseTest{
     @Story("Add meeting room to the package, Add package on MYCE Quote, Open Quote meeting room record," +
             " thn__Shadow__c == FALSE, Change thn__Start_Date_Time__c, thn__End_Date_Time__c")
     public void testCreateQuoteMeetingsRoom3() throws InterruptedException, IOException {
-        String expectedMessage = "Failed to update record with code FIELD_CUSTOM_VALIDATION_EXCEPTION. Fields: [ 'thn__Start_Date_Time__c' ]";
+        String expectedMessage = "Failed to update record with code FIELD_CUSTOM_VALIDATION_EXCEPTION. Fields: []";
         StringBuilder propertyRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:get",
@@ -1289,7 +1288,8 @@ public class ValidationRule1 extends BaseTest{
                 "thn__MYCE_Quote__c",
                 "-v",
                 "Name='Test17' thn__Pax__c=4 thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
-                        date.generateTodayDate2() + " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 3),
+                        date.generateTodayDate2() + " thn__Departure_Date__c=" +
+                        date.generateTodayDate2_plus(0, 3),
                 "-u",
                 ORG_USERNAME,
                 "--json"});
@@ -1326,7 +1326,7 @@ public class ValidationRule1 extends BaseTest{
                 "id='" + meetingRoomID + "'",
                 "-v",
                 "thn__Start_Date_Time__c=" + date.generateTodayDate2_plus(0, 1) +
-                        " thn__End_Date_Time__c=" + date.generateTodayDate2_plus(0, 1),
+                        " thn__End_Date_Time__c=" + date.generateTodayDate2_plus(0, 2),
                 "-u",
                 ORG_USERNAME,
                 "--json"});

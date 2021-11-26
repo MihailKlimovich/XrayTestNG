@@ -1,14 +1,12 @@
 
   delete [select name from thn__MYCE_Quote__c];
-     delete [select name from thn__Hotel__c where name != 'Demo' and name!='Property Auto'];
      delete [select Name from thn__Payment__c];
      delete [select Name from thn__Bill__c];
      delete [select name from thn__Package__c];
      delete [select thn__FirstName__c from thn__Guest__c];
      delete [select name from thn__Reservation__c];
      delete [select name from thn__Resource__c where name='TestRes' or name='TestRes2'];
-     delete [select name from Contact];
-     delete [select name from Account where name != 'Sample Account for Entitlements' and name!='DEFAULT'];
+     delete [select name from Account where name = 'First Test Account' or name='Test Agent' or name='Test Company'];
      delete [select thn__Name__c from thn__Item__c];
      delete [select Name from thn__Request__c];
      delete [select Name from thn__Credit_Note__c];

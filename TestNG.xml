@@ -200,6 +200,11 @@
             <class name="tests.DefaultSetupTesting"/>
         </classes>
     </test>
+    <test name="Error management: null price on product">
+        <classes>
+            <class name="tests.ErrorManagementNullPriceOnProduct"/>
+        </classes>
+    </test>
     <test name="Multi edit on quote's related list UAT">
         <classes>
             <class name="tests.MultiEditOnQuotesRelatedList"/>
