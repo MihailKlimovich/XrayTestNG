@@ -13,24 +13,11 @@ import java.io.IOException;
 
 public class OnConsumption extends BaseTest {
 
-    @Test(priority = 1, description = "THY-570: On Consumption")
+    @Test(priority = 1, description = "Add Quote product on MYCE Quote. Set 5 for Pax, On consumption == true." +
+            " Result: Pax on Quote product is set to 0")
     @Severity(SeverityLevel.NORMAL)
-    @Description("THY-570: On Consumption")
-    @Story("Add Quote product on MYCE Quote. Set 5 for Pax, On consumption == true.")
+    @Story("THY-570: On Consumption")
     public void testOnConsumption1() throws InterruptedException, IOException {
-        /*StringBuilder authorise = SfdxCommand.runLinuxCommand1(new String[]{
-                SFDX,
-                "force:auth:jwt:grant",
-                "--clientid",
-                CONSUMER_KEY,
-                "--jwtkeyfile",
-                SERVER_KEY_PATH,
-                "--username",
-                ORG_USERNAME,
-                "--instanceurl",
-                ORG_URL
-        });
-        System.out.println(authorise);*/
         loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
         StringBuilder propertyRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
@@ -61,7 +48,8 @@ public class OnConsumption extends BaseTest {
                 "thn__MYCE_Quote__c",
                 "-v",
                 "Name='Test On Consumption 1' thn__Pax__c=10 thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
-                        date.generateTodayDate2() + " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 3),
+                        date.generateTodayDate2() + " thn__Departure_Date__c=" +
+                        date.generateTodayDate2_plus(0, 3),
                 "-u",
                 ORG_USERNAME,
                 "--json"});
@@ -95,10 +83,10 @@ public class OnConsumption extends BaseTest {
         Assert.assertEquals(paxQuoteProduct, "0");
     }
 
-    @Test(priority = 2, description = "THY-570: On Consumption")
+    @Test(priority = 2, description = "Add Quote product on MYCE Quote. Do not fill Pax field," +
+            " On consumption == true. Result: Pax on Quote product is set to 0.")
     @Severity(SeverityLevel.NORMAL)
-    @Description("THY-570: On Consumption")
-    @Story("Add Quote product on MYCE Quote. Do not fill Pax field, On consumption == true.")
+    @Story("THY-570: On Consumption")
     public void testOnConsumption2() throws InterruptedException, IOException {
         StringBuilder propertyRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
@@ -129,7 +117,8 @@ public class OnConsumption extends BaseTest {
                 "thn__MYCE_Quote__c",
                 "-v",
                 "Name='Test On Consumption 2' thn__Pax__c=10 thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
-                        date.generateTodayDate2() + " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 3),
+                        date.generateTodayDate2() + " thn__Departure_Date__c=" +
+                        date.generateTodayDate2_plus(0, 3),
                 "-u",
                 ORG_USERNAME,
                 "--json"});
@@ -162,10 +151,10 @@ public class OnConsumption extends BaseTest {
         Assert.assertEquals(paxQuoteProduct, "0");
     }
 
-    @Test(priority = 3, description = "THY-570: On Consumption")
+    @Test(priority = 3, description = "Edit Pax on Quote product, On consumption == true." +
+            " Result: Pax value is not changed.")
     @Severity(SeverityLevel.NORMAL)
-    @Description("THY-570: On Consumption")
-    @Story("Add Quote product on MYCE Quote. Do not fill Pax field, On consumption == true.")
+    @Story("THY-570: On Consumption")
     public void testOnConsumption3() throws InterruptedException, IOException {
         StringBuilder propertyRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
@@ -196,7 +185,8 @@ public class OnConsumption extends BaseTest {
                 "thn__MYCE_Quote__c",
                 "-v",
                 "Name='Test On Consumption 3' thn__Pax__c=10 thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
-                        date.generateTodayDate2() + " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 3),
+                        date.generateTodayDate2() + " thn__Departure_Date__c=" +
+                        date.generateTodayDate2_plus(0, 3),
                 "-u",
                 ORG_USERNAME,
                 "--json"});
@@ -241,10 +231,10 @@ public class OnConsumption extends BaseTest {
         Assert.assertEquals(paxQuoteProduct, "0");
     }
 
-    @Test(priority = 4, description = "THY-570: On Consumption")
+    @Test(priority = 4, description = "Set On consumption to true on existing Quote product. Result: Pax on Quote" +
+            " product is set to 0.")
     @Severity(SeverityLevel.NORMAL)
-    @Description("THY-570: On Consumption")
-    @Story("Set  On consumption to true on existing Quote product")
+    @Story("THY-570: On Consumption")
     public void testOnConsumption4() throws InterruptedException, IOException {
         StringBuilder propertyRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
@@ -275,7 +265,8 @@ public class OnConsumption extends BaseTest {
                 "thn__MYCE_Quote__c",
                 "-v",
                 "Name='Test On Consumption 4' thn__Pax__c=10 thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
-                        date.generateTodayDate2() + " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 3),
+                        date.generateTodayDate2() + " thn__Departure_Date__c=" +
+                        date.generateTodayDate2_plus(0, 3),
                 "-u",
                 ORG_USERNAME,
                 "--json"});
@@ -317,6 +308,52 @@ public class OnConsumption extends BaseTest {
         String onConsumption = JsonParser2.getFieldValue(quoteProductRecord.toString(), "thn__On_Consumption__c");
         String paxQuoteProduct = JsonParser2.getFieldValue(quoteProductRecord.toString(), "thn__Pax__c");
         Assert.assertEquals(onConsumption, "true");
+        Assert.assertEquals(paxQuoteProduct, "0");
+    }
+
+    @Test(priority = 5, description = "Add Quote product on MYCE Quote. Always on consumption == true on Product." +
+            " Result: Pax on Quote product is set to 0.")
+    @Severity(SeverityLevel.NORMAL)
+    @Story("THY-570: On Consumption")
+    public void testOnConsumption5() throws InterruptedException, IOException {
+        myceQuotes.deleteQuoteSFDX(SFDX, "Name='Test On Consumption 5'", ORG_USERNAME);
+        product.deleteProductSFDX(SFDX, "Name='GinAuto'", ORG_USERNAME);
+        StringBuilder hotelRecord= hotel.getHotelSFDX(SFDX, "thn__Unique_Id__c='Demo'", ORG_USERNAME);
+        String propertyID = JsonParser2.getFieldValue(hotelRecord.toString(), "Id");
+        String productId = product.createProductSFDX(SFDX, "Name='GinAuto' thn__Hotel__c='" + propertyID +
+                "' thn__MYCE_Product_Type__c='Beverage' thn__Always_On_Consumption__c=true", ORG_USERNAME);
+        String quoteID = myceQuotes.createQuoteSFDX(SFDX, "Name='Test On Consumption 5' thn__Pax__c=5" +
+                " thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" + date.generateTodayDate2()
+                + " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 2), ORG_USERNAME);
+        String quoteProductId = quoteProducts.createQuoteProductSFDX(SFDX, "thn__MYCE_Quote__c='" + quoteID +
+                "' thn__Product__c='" + productId + "'", ORG_USERNAME);
+        StringBuilder quoteProductRecord = quoteProducts.getQuoteProductSFDX(SFDX, "Id='" + quoteProductId +
+                "'", ORG_USERNAME);
+        String paxQuoteProduct = JsonParser2.getFieldValue(quoteProductRecord.toString(), "thn__Pax__c");
+        Assert.assertEquals(paxQuoteProduct, "0");
+    }
+
+    @Test(priority = 6, description = "Edit Pax on Quote product where 'Always on consumption' == true on Product." +
+            " Result: Pax value is not changed.")
+    @Severity(SeverityLevel.NORMAL)
+    @Story("THY-570: On Consumption")
+    public void testOnConsumption6() throws InterruptedException, IOException {
+        myceQuotes.deleteQuoteSFDX(SFDX, "Name='Test On Consumption 6'", ORG_USERNAME);
+        product.deleteProductSFDX(SFDX, "Name='VodkaAuto'", ORG_USERNAME);
+        StringBuilder hotelRecord= hotel.getHotelSFDX(SFDX, "thn__Unique_Id__c='Demo'", ORG_USERNAME);
+        String propertyID = JsonParser2.getFieldValue(hotelRecord.toString(), "Id");
+        String productId = product.createProductSFDX(SFDX, "Name='VodkaAuto' thn__Hotel__c='" + propertyID +
+                "' thn__MYCE_Product_Type__c='Beverage' thn__Always_On_Consumption__c=true", ORG_USERNAME);
+        String quoteID = myceQuotes.createQuoteSFDX(SFDX, "Name='Test On Consumption 6' thn__Pax__c=5" +
+                " thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" + date.generateTodayDate2()
+                + " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 2), ORG_USERNAME);
+        String quoteProductId = quoteProducts.createQuoteProductSFDX(SFDX, "thn__MYCE_Quote__c='" + quoteID +
+                "' thn__Product__c='" + productId + "'", ORG_USERNAME);
+        quoteProducts.updateQuoteProducSFDX(SFDX, "Id='" + quoteProductId + "'", "thn__Pax__c=3",
+                ORG_USERNAME);
+        StringBuilder quoteProductRecord = quoteProducts.getQuoteProductSFDX(SFDX, "Id='" + quoteProductId +
+                "'", ORG_USERNAME);
+        String paxQuoteProduct = JsonParser2.getFieldValue(quoteProductRecord.toString(), "thn__Pax__c");
         Assert.assertEquals(paxQuoteProduct, "0");
     }
 }

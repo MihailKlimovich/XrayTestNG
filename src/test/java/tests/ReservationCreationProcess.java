@@ -14,25 +14,15 @@ import java.util.List;
 
 public class ReservationCreationProcess extends BaseTest {
 
-    @Test(priority = 1, description = "THY-487 Reservation creation process")
+    @Test(priority = 1, description = "Create MYCE Quote, link Reservation guest to the Quote. Add Quote hotel rooms." +
+            " On MYCE Quote set ‘Send To Mews’ and ‘Generate Rooming List’ checkboxes to true. Result: Reservation" +
+            " and Reservation price records linked to Reservations are created")
     @Severity(SeverityLevel.NORMAL)
-    @Description("THY-487 Reservation creation process")
-    @Story("Case 1")
-    public void reservationCreationProcess1() throws InterruptedException, IOException {
-        /*StringBuilder authorise = SfdxCommand.runLinuxCommand1(new String[]{
-                SFDX,
-                "force:auth:jwt:grant",
-                "--clientid",
-                CONSUMER_KEY,
-                "--jwtkeyfile",
-                SERVER_KEY_PATH,
-                "--username",
-                ORG_USERNAME,
-                "--instanceurl",
-                ORG_URL
-        });
-        System.out.println(authorise);*/
+    @Story("THY-487 Reservation creation process\"")
+    public void case1() throws InterruptedException, IOException {
         loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
+        myceQuotes.deleteQuoteSFDX(SFDX, "Name='TestReservationProcessAuto1'", ORG_USERNAME);
+        guests.deleteGuestSFDX(SFDX, "thn__LastName__c='TestGuestAuto1'" , ORG_USERNAME);
         StringBuilder propertyRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:get",
@@ -61,18 +51,19 @@ public class ReservationCreationProcess extends BaseTest {
                 "-s",
                 "thn__Guest__c",
                 "-v",
-                "thn__FirstName__c='TestGuest' thn__Email__c='werty@tut.by' thn__Hotel__c='" + propertyID + "'",
+                "thn__LastName__c='TestGuestAuto1' thn__Hotel__c='" + propertyID + "'",
                 "-u",
                 ORG_USERNAME,
                 "--json"});
         String guestID = JsonParser2.getFieldValue(guestResult.toString(), "id");
+        guests.updateGuestSFDX(SFDX, "Id='" + guestID + "'", "thn__Send_to_Mews__c=true", ORG_USERNAME);
         StringBuilder myseQuoteResult = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:create",
                 "-s",
                 "thn__MYCE_Quote__c",
                 "-v",
-                "Name='Test reservation process' thn__Pax__c=1 thn__Reservation_Guest__c='" + guestID + "'" +
+                "Name='TestReservationProcessAuto1' thn__Pax__c=1 thn__Reservation_Guest__c='" + guestID + "'" +
                         " thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" + date.generateTodayDate2() +
                         " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 3),
                 "-u",
@@ -134,11 +125,15 @@ public class ReservationCreationProcess extends BaseTest {
         Assert.assertTrue(message.contains("3 records were retrieved"));
     }
 
-    @Test(priority = 2, description = "THY-487 Reservation creation process")
+    @Test(priority = 2, description = "Change dates on n Quote Hotel Room record. Result: Reservation price records" +
+            " linked to Reservations are updated: in case hotel room period is educed, records outside the period are" +
+            " deleted; if hotel room period is increased and is within the Quote period, new Reservation price" +
+            " records ate created; if new dates are outside Quote period nothing happens")
     @Severity(SeverityLevel.NORMAL)
-    @Description("THY-487 Reservation creation process")
-    @Story("Case 2")
-    public void reservationCreationProcess2() throws InterruptedException, IOException {
+    @Story("THY-487 Reservation creation process")
+    public void case2() throws InterruptedException, IOException {
+        myceQuotes.deleteQuoteSFDX(SFDX, "Name='TestReservationProcessAuto2'", ORG_USERNAME);
+        guests.deleteGuestSFDX(SFDX, "thn__LastName__c='TestGuestAuto2'" , ORG_USERNAME);
         StringBuilder propertyRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:get",
@@ -167,18 +162,19 @@ public class ReservationCreationProcess extends BaseTest {
                 "-s",
                 "thn__Guest__c",
                 "-v",
-                "thn__FirstName__c='TestGuest2' thn__Email__c='werty@tut.by' thn__Hotel__c='" + propertyID + "'",
+                "thn__LastName__c='TestGuestAuto2' thn__Hotel__c='" + propertyID + "'",
                 "-u",
                 ORG_USERNAME,
                 "--json"});
         String guestID = JsonParser2.getFieldValue(guestResult.toString(), "id");
+        guests.updateGuestSFDX(SFDX, "Id='" + guestID + "'", "thn__Send_to_Mews__c=true", ORG_USERNAME);
         StringBuilder myseQuoteResult = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:create",
                 "-s",
                 "thn__MYCE_Quote__c",
                 "-v",
-                "Name='Test reservation process 2' thn__Pax__c=1 thn__Reservation_Guest__c='" + guestID + "'" +
+                "Name='TestReservationProcessAuto2' thn__Pax__c=1 thn__Reservation_Guest__c='" + guestID + "'" +
                         " thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" + date.generateTodayDate2() +
                         " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 5),
                 "-u",
@@ -275,7 +271,7 @@ public class ReservationCreationProcess extends BaseTest {
                 "id='" + quoteHotelRoomId + "'",
                 "-v",
                 "thn__Arrival_Date_Time__c=" + date.generateTodayDate2() + " thn__Departure_Date_Time__c=" +
-                        date.generateTodayDate2_plus(0, 3),
+                        date.generateTodayDate2_plus(0, 2),
                 "-u",
                 ORG_USERNAME,
                 "--json"});
@@ -291,7 +287,7 @@ public class ReservationCreationProcess extends BaseTest {
                 "--json"});
         System.out.println(reservationPricesRecords3);
         String message3 = JsonParser2.getFieldValue2(reservationPricesRecords3.toString(), "message");
-        Assert.assertTrue(message3.contains("3 records were retrieved"));
+        Assert.assertTrue(message3.contains("2 records were retrieved"));
         StringBuilder update3 =SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:update",
@@ -318,7 +314,7 @@ public class ReservationCreationProcess extends BaseTest {
                 "--json"});
         System.out.println(reservationPricesRecords4);
         String message4= JsonParser2.getFieldValue2(reservationPricesRecords4.toString(), "message");
-        Assert.assertTrue(message4.contains("3 records were retrieved"));
+        Assert.assertTrue(message4.contains("2 records were retrieved"));
     }
 
 }

@@ -66,12 +66,11 @@ public class UpdateOrders extends BaseTest {
         StringBuilder quoteProductRecord = quoteProducts.
                 getQuoteProductSFDX(SFDX, "Id='" + quoteProductID + "'", ORG_USERNAME);
         String unitPriceQuoteProduct = JsonParser2.getFieldValue(quoteProductRecord.toString(), "thn__Unit_Price__c");
-        //myceQuotes.goToMyceQuotes();
-        //myceQuotes.openMyceQoteRecord("UpdateOrdersAutoTest");
-        //myceQuotes.updateOrder();
         developerConsoleWindow.openDeveloperConsole();
         developerConsoleWindow.openExecuteAnonymousWindow();
         developerConsoleWindow.runApexCodeFromFile("src/main/Data/BatchCreateOrders");
+        //developerConsoleWindow.runApexCode("thn.BatchGlobalScheduling brs = new thn.BatchGlobalScheduling();\n" +
+        //        "Database.executeBatch(brs, 1);");
         StringBuilder orderRecord = order.getOrderSFDX(SFDX, "thn__MYCE_Quote__c='" + quoteID + "'", ORG_USERNAME);
         String orderID = JsonParser2.getFieldValue(orderRecord.toString(), "Id");
         String orderConsumptionDate = JsonParser2.getFieldValue(orderRecord.toString(), "thn__ConsumptionUtc__c");

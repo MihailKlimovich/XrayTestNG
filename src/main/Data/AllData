@@ -10,10 +10,11 @@
      delete [select thn__Name__c from thn__Item__c];
      delete [select Name from thn__Request__c];
      delete [select Name from thn__Credit_Note__c];
+     delete [select name from thn__Hotel__c where name = 'TestAuto'];
 
 
     thn__Hotel__c prop1 = new thn__Hotel__c();
-       prop1.Name = 'Test';
+       prop1.Name = 'TestAuto';
        insert prop1;
 
 
@@ -125,6 +126,6 @@
 
           thn__Resource__c resource2 = new thn__Resource__c();
           resource2.Name = 'TestRes2';
-          id propId2 = [select id from thn__Hotel__c where Name = 'Test'].id;
+          id propId2 = [select id from thn__Hotel__c where Name = 'TestAuto'].id;
           resource2.thn__Hotel__c = propId2;
           insert resource2;

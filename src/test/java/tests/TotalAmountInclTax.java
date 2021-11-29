@@ -13,24 +13,13 @@ import java.io.IOException;
 
 public class TotalAmountInclTax extends BaseTest {
 
-    @Test(priority = 1, description = "THY-523 Total_amount_incl_Tax__c")
+    @Test(priority = 1, description = "Create MYCE Quote. Add Quote hotel rooms, Quote Products, Quote meeting rooms." +
+            " Result: thn__Total_Amount_incl_Tax__c field equals the thn__Total_incl_Tax__c field which is the sum of" +
+            " thn_Total_Product_incl_Tax__c + thn_Total_Meeting_Room_incl_Tax__c + thn_Total_Hotel_Room_incl_Tax__c")
     @Severity(SeverityLevel.NORMAL)
     @Description("THY-523 Total_amount_incl_Tax__c")
     @Story("THY-523 Total_amount_incl_Tax__c")
     public void totalAmountInclTaxTest() throws InterruptedException, IOException {
-        /*StringBuilder authorise = SfdxCommand.runLinuxCommand1(new String[]{
-                SFDX,
-                "force:auth:jwt:grant",
-                "--clientid",
-                CONSUMER_KEY,
-                "--jwtkeyfile",
-                SERVER_KEY_PATH,
-                "--username",
-                ORG_USERNAME,
-                "--instanceurl",
-                ORG_URL
-        });
-        System.out.println(authorise);*/
         loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
         StringBuilder propertyRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
@@ -94,7 +83,8 @@ public class TotalAmountInclTax extends BaseTest {
                 "thn__MYCE_Quote__c",
                 "-v",
                 "Name='TotalAmountInclTaxTest' thn__Pax__c=10 thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
-                        date.generateTodayDate2() + " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 3),
+                        date.generateTodayDate2() + " thn__Departure_Date__c="
+                        + date.generateTodayDate2_plus(0, 3),
                 "-u",
                 ORG_USERNAME,
                 "--json"});
@@ -129,7 +119,8 @@ public class TotalAmountInclTax extends BaseTest {
                 "-s",
                 "thn__Quote_Meeting_Room__c",
                 "-v",
-                "thn__MYCE_Quote__c='" + myceQuoteID + "' thn__Product__c='" + meetingHalfDayID + "' thn__Unit_Price__c=10",
+                "thn__MYCE_Quote__c='" + myceQuoteID + "' thn__Product__c='" + meetingHalfDayID + "'" +
+                        " thn__Unit_Price__c=10",
                 "-u",
                 ORG_USERNAME,
                 "--json"});
@@ -145,12 +136,17 @@ public class TotalAmountInclTax extends BaseTest {
                 ORG_USERNAME,
                 "--json"});
         System.out.println(myceQuoteRecord);
-        Integer totalHotelRoomInclTax = JsonParser2.getFieldValueLikeInteger(myceQuoteRecord, "result", "thn__Total_Hotel_Room_incl_Tax__c");
-        Integer totalProductInclTax = JsonParser2.getFieldValueLikeInteger(myceQuoteRecord, "result", "thn__Total_Product_incl_Tax__c");
-        Integer totalMeetingRoomInclTax = JsonParser2.getFieldValueLikeInteger(myceQuoteRecord, "result", "thn__Total_Meeting_Room_incl_Tax__c");
+        Integer totalHotelRoomInclTax = JsonParser2.
+                getFieldValueLikeInteger(myceQuoteRecord, "result", "thn__Total_Hotel_Room_incl_Tax__c");
+        Integer totalProductInclTax = JsonParser2.
+                getFieldValueLikeInteger(myceQuoteRecord, "result", "thn__Total_Product_incl_Tax__c");
+        Integer totalMeetingRoomInclTax = JsonParser2.
+                getFieldValueLikeInteger(myceQuoteRecord, "result", "thn__Total_Meeting_Room_incl_Tax__c");
         Integer sum = totalHotelRoomInclTax + totalProductInclTax + totalMeetingRoomInclTax;
-        Integer totalAmountInclTax = JsonParser2.getFieldValueLikeInteger(myceQuoteRecord, "result", "thn__Total_Amount_incl_Tax__c");
-        Integer totalInclTax = JsonParser2.getFieldValueLikeInteger(myceQuoteRecord, "result", "thn__Total_incl_Tax__c");
+        Integer totalAmountInclTax = JsonParser2.
+                getFieldValueLikeInteger(myceQuoteRecord, "result", "thn__Total_Amount_incl_Tax__c");
+        Integer totalInclTax = JsonParser2.
+                getFieldValueLikeInteger(myceQuoteRecord, "result", "thn__Total_incl_Tax__c");
         Assert.assertEquals(totalInclTax, sum );
         Assert.assertEquals(totalInclTax, totalAmountInclTax);
     }
