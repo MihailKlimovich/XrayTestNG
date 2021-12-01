@@ -12,6 +12,7 @@ import org.testng.annotations.Test;
 import pageObject.JsonParser2;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class ShadowMeetingRooms extends BaseTest {
@@ -88,10 +89,14 @@ public class ShadowMeetingRooms extends BaseTest {
                 " mdContainer.addMetadata(cmd);" + "\n" +
                 " Id job = Metadata.Operations.enqueueDeployment(mdContainer, null);" + "\n" +
                 " System.debug(job);");
+        StringBuilder recordTypes = myceQuotes.soql(SFDX, "SELECT Id FROM RecordType WHERE" +
+                " SobjectType='thn__MYCE_Quote__c' AND Name='Quote'", ORG_USERNAME);
+        System.out.println(recordTypes);
+        List<String> recordTypeID = JsonParser2.getFieldValueSoql(recordTypes.toString(), "Id");
         String quoteID = myceQuotes.createQuoteSFDX(SFDX, "Name='ShadowMeetingRoomsAutoTest' thn__Pax__c=5" +
                 " thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" + date.generateTodayDate2()
                 + " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 2) + "" +
-                " thn__Closed_Status__c='Won'", ORG_USERNAME);
+                " RecordTypeId='" + recordTypeID.get(0) + "'", ORG_USERNAME);
         quoteMeetingRoom.createQuoteMeetingRoomSFDX(SFDX, "thn__MYCE_Quote__c='" + quoteID + "'" +
                 " thn__Product__c='" + meetingHalfDayID + "'", ORG_USERNAME);
         myceQuotes.goToMyceQuotes();

@@ -8,6 +8,7 @@ import org.testng.annotations.Test;
 import pageObject.JsonParser2;
 
 import java.io.IOException;
+import java.util.List;
 
 public class ErrorManagementNullPriceOnProduct extends BaseTest {
 
@@ -30,10 +31,14 @@ public class ErrorManagementNullPriceOnProduct extends BaseTest {
         String propertyID = JsonParser2.getFieldValue(hotelRecord.toString(), "Id");
         String productId = product.createProductSFDX(SFDX, "Name='WhiskeyAuto' thn__Hotel__c='" + propertyID +
                 "' thn__MYCE_Product_Type__c='Beverage'", ORG_USERNAME);
+        StringBuilder recordTypes = myceQuotes.soql(SFDX, "SELECT Id FROM RecordType WHERE" +
+                " SobjectType='thn__MYCE_Quote__c' AND Name='Quote'", ORG_USERNAME);
+        System.out.println(recordTypes);
+        List<String> recordTypeID = JsonParser2.getFieldValueSoql(recordTypes.toString(), "Id");
         String quoteID = myceQuotes.createQuoteSFDX(SFDX, "Name='NullPriceOnProductAutoTest' thn__Pax__c=5" +
                 " thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" + date.generateTodayDate2()
                 + " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 2) + "" +
-                " thn__Closed_Status__c='Won'", ORG_USERNAME);
+                " RecordTypeId='" + recordTypeID.get(0) + "'", ORG_USERNAME);
         String quoteProductId = quoteProducts.createQuoteProductSFDX(SFDX, "thn__MYCE_Quote__c='" + quoteID +
                 "' thn__Product__c='" + productId + "'", ORG_USERNAME);
         StringBuilder quoteProductRecord = quoteProducts.getQuoteProductSFDX(SFDX, "Id='" + quoteProductId +

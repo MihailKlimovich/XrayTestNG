@@ -12,6 +12,7 @@ import org.testng.annotations.Test;
 import pageObject.JsonParser2;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class DefaultSetupTesting extends BaseTest {
@@ -70,10 +71,14 @@ public class DefaultSetupTesting extends BaseTest {
                 + propertyID + "' thn__Type__c='Meeting Room' thn__Default_setup__c='Cabaret'", ORG_USERNAME);
         String resourceId3 = resource.createResourceSFDX(SFDX, "Name='DefaultSetupAutoTest3' thn__Hotel__c='"
                 + propertyID + "' thn__Type__c='Meeting Room' thn__Default_setup__c='Theater'", ORG_USERNAME);
+        StringBuilder recordTypes = myceQuotes.soql(SFDX, "SELECT Id FROM RecordType WHERE" +
+                " SobjectType='thn__MYCE_Quote__c' AND Name='Quote'", ORG_USERNAME);
+        System.out.println(recordTypes);
+        List<String> recordTypeID = JsonParser2.getFieldValueSoql(recordTypes.toString(), "Id");
         String quoteID = myceQuotes.createQuoteSFDX(SFDX, "Name='DefaultSetupAutoTesting' thn__Pax__c=5" +
                 " thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" + date.generateTodayDate2()
                 + " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 2) + "" +
-                " thn__Closed_Status__c='Won'", ORG_USERNAME);
+                " RecordTypeId='" + recordTypeID.get(0) + "'", ORG_USERNAME);
     }
 
     @Test(priority = 3, description = "Create a quote meeting room without setup and assign a resource. Expected" +

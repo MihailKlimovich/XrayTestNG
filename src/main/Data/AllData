@@ -1,5 +1,5 @@
 
-  delete [select name from thn__MYCE_Quote__c];
+  delete [select name from thn__MYCE_Quote__c where name != 'Shadow'];
      delete [select Name from thn__Payment__c];
      delete [select Name from thn__Bill__c];
      delete [select name from thn__Package__c];

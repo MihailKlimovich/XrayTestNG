@@ -101,6 +101,14 @@ public class BaseTest {
     public String SERVER_KEY_PATH = "/home/user/salesforceauthotest/jdoe/JWT/server.key";
     public String SFDX_AUTH_URL = "force://PlatformCLI::5Aep861yNl8cSWS3xX63jHZ.ngSZAmvp8hJceBHlTlTeFBvHepIodVDm_zkSA8ZYTRBPGqjE1AmSauRg6CAVr5L@thautomation-dev-ed.my.salesforce.com";*/
 
+    /*public String ORG_USERNAME = "dev.autotest.unmanaged@thynk.cloud";
+    public String ORG_PASSWORD = "Welcome1508";
+    public String ORG_URL = "https://login.salesforce.com/";
+    public String CONSUMER_KEY = "";
+    public String SFDX = "/home/user/sfdx/bin/sfdx";
+    public String SERVER_KEY_PATH = "/home/user/salesforceauthotest/jdoe/JWT/server.key";
+    public String SFDX_AUTH_URL = "";*/
+
     final protected String thynkPackDevOrg = "https://thynkpack-dev-ed.my.salesforce.com/";
     final protected String thynkPackUserName = "rostislav.orel@succraft.com";
     final protected String thynkPackKey = "3MVG91BJr_0ZDQ4ta_ZwN1EEnfj.OQSJWOBWMPFXclJ22A8oaKqM9KTLdsoSupXX0idQnMIdsI3IweGbsJx6t";

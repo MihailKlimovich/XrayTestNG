@@ -26,13 +26,18 @@ public class PaymentToMews extends BaseTest {
         myceQuotes.deleteQuoteSFDX(SFDX, "Name='PaymentToMewsAutoTest'", ORG_USERNAME);
         StringBuilder hotelRecord= hotel.getHotelSFDX(SFDX, "thn__Unique_Id__c='Demo'", ORG_USERNAME);
         String propertyID = JsonParser2.getFieldValue(hotelRecord.toString(), "Id");
+        StringBuilder recordTypes = myceQuotes.soql(SFDX, "SELECT Id FROM RecordType WHERE" +
+                " SobjectType='thn__MYCE_Quote__c' AND Name='Quote'", ORG_USERNAME);
+        System.out.println(recordTypes);
+        List<String> recordTypeID = JsonParser2.getFieldValueSoql(recordTypes.toString(), "Id");
         String quoteID = myceQuotes.createQuoteSFDX(SFDX, "Name='PaymentToMewsAutoTest' thn__Pax__c=5" +
                 " thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" + date.generateTodayDate2()
                 + " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 2) + "" +
-                " thn__Closed_Status__c='Won' thn__Stage__c='4 - Closed'", ORG_USERNAME);
+                " RecordTypeId='" + recordTypeID.get(0) + "' thn__Closed_Status__c='Won' thn__Stage__c='4 - Closed'",
+                ORG_USERNAME);
         StringBuilder guestRecords = myceQuotes.
                 soql(SFDX, "SELECT Id from thn__Guest__c where thn__Mews_Id__c!=null", ORG_USERNAME);
-        System.out.println(guests);
+        System.out.println(guestRecords);
         List<String> guestsId = JsonParser2.getFieldValueSoql(guestRecords.toString(), "Id");
         StringBuilder accoutingCategory = myceQuotes.
                 soql(SFDX, "SELECT Id from thn__Accounting_Category__c where thn__Hotel__c='" + propertyID +

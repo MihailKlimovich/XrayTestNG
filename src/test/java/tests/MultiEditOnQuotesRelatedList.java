@@ -54,66 +54,6 @@ public class MultiEditOnQuotesRelatedList extends BaseTest {
     public void login() throws InterruptedException, IOException {
         loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
         loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
-        StringBuilder result2 = SfdxCommand.runLinuxCommand1(new String[]{
-                SFDX,
-                "force:data:record:update",
-                "-s",
-                "User",
-                "-w",
-                "Name='User User'",
-                "-v",
-                "thn__ByPassVR__c=true",
-                "-u",
-                ORG_USERNAME,
-                "--json"});
-        System.out.println(result2);
-        Object byPass = SfdxCommand.runLinuxCommand1(new String[]{
-                SFDX,
-                "force:data:soql:query",
-                "-q",
-                "SELECT Id FROM thn__bypass__c",
-                "-u",
-                ORG_USERNAME,
-                "--json"});
-        List<String> byPassID = JsonParser2.getFieldValueSoql(byPass.toString(), "Id");
-        String byPassId = byPassID.get(0);
-        StringBuilder res = SfdxCommand.runLinuxCommand1(new String[]{
-                SFDX,
-                "force:data:record:update",
-                "-s",
-                "thn__bypass__c",
-                "-w",
-                "Id='" + byPassId + "'",
-                "-v",
-                "thn__bypassvr__c=true",
-                "-u",
-                ORG_USERNAME,
-                "--json"});
-        StringBuilder userRecord = SfdxCommand.runLinuxCommand1(new String[]{
-                SFDX,
-                "force:data:record:get",
-                "-s",
-                "User",
-                "-w",
-                "Name='User User'",
-                "-u",
-                ORG_USERNAME,
-                "--json"});
-        String userByPass = JsonParser2.getFieldValue(userRecord.toString(), "thn__ByPassVR__c");
-        StringBuilder byPassRecord = SfdxCommand.runLinuxCommand1(new String[]{
-                SFDX,
-                "force:data:record:get",
-                "-s",
-                "thn__bypass__c",
-                "-w",
-                "Id='" + byPassId + "'",
-                "-u",
-                ORG_USERNAME,
-                "--json"});
-        System.out.println(byPassRecord);
-        String byPassVr = JsonParser2.getFieldValue(byPassRecord.toString(), "thn__ByPassVR__c");
-        Assert.assertEquals(userByPass, "true");
-        Assert.assertEquals(byPassVr, "true");
     }
 
     @Test(priority = 2, description = "Preconditions: Creating Packages and Quotes")
@@ -158,16 +98,20 @@ public class MultiEditOnQuotesRelatedList extends BaseTest {
         packageLine.createPackageLineSFDX(SFDX, "Name='Beer' thn__Package__c='" + packageID2 + "'" +
                 " thn__Type__c='Beverage' thn__Product__c='" + beverageID + "' thn__Start_Time__c=15:00" +
                 " thn__End_Time__c=16:00 thn__Unit_Price__c=10 thn__VAT_Category__c=1", ORG_USERNAME);
+        StringBuilder recordTypes = myceQuotes.soql(SFDX, "SELECT Id FROM RecordType WHERE" +
+                " SobjectType='thn__MYCE_Quote__c' AND Name='Quote'", ORG_USERNAME);
+        System.out.println(recordTypes);
+        List<String> recordTypeID = JsonParser2.getFieldValueSoql(recordTypes.toString(), "Id");
         String quoteID1 = myceQuotes.createQuoteSFDX(SFDX, "Name='MultiEditAutoTest1' thn__Pax__c=5" +
                 " thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" + date.generateTodayDate2()
                 + " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 2) + "" +
-                " thn__Closed_Status__c='Won'", ORG_USERNAME);
+                " RecordTypeId='" + recordTypeID.get(0) + "'", ORG_USERNAME);
         quoteMeetingPackages.createQuotePackageSFDX(SFDX, "thn__MYCE_Quote__c='" + quoteID1 + "'" +
                 " thn__Package__c='" + packageID1 + "'", ORG_USERNAME);
         String quoteID2 = myceQuotes.createQuoteSFDX(SFDX, "Name='MultiEditAutoTest2' thn__Pax__c=5" +
                 " thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" + date.generateTodayDate2()
                 + " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 2) + "" +
-                " thn__Closed_Status__c='Won'", ORG_USERNAME);
+                " RecordTypeId='" + recordTypeID.get(0) + "'", ORG_USERNAME);
         quoteMeetingRoom.createQuoteMeetingRoomSFDX(SFDX, "thn__MYCE_Quote__c='" + quoteID2 + "'" +
                 " thn__Product__c='" + meetingFullDayID + "'", ORG_USERNAME);
         quoteMeetingRoom.createQuoteMeetingRoomSFDX(SFDX, "thn__MYCE_Quote__c='" + quoteID2 + "'" +
@@ -179,7 +123,7 @@ public class MultiEditOnQuotesRelatedList extends BaseTest {
         String quoteID3 = myceQuotes.createQuoteSFDX(SFDX, "Name='MultiEditAutoTest3' thn__Pax__c=5" +
                 " thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" + date.generateTodayDate2()
                 + " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 2) + "" +
-                " thn__Closed_Status__c='Won'", ORG_USERNAME);
+                " RecordTypeId='" + recordTypeID.get(0) + "'", ORG_USERNAME);
         quoteMeetingPackages.createQuotePackageSFDX(SFDX, "thn__MYCE_Quote__c='" + quoteID3 + "'" +
                 " thn__Package__c='" + packageID2 + "'", ORG_USERNAME);
         quoteProducts.createQuoteProductSFDX(SFDX, "thn__MYCE_Quote__c='" + quoteID3 + "' thn__Product__c='" +
@@ -251,7 +195,7 @@ public class MultiEditOnQuotesRelatedList extends BaseTest {
         quoteMeetingRoom.selectItems("2");
         quoteMeetingRoom.clickMultiedit();
         multiEditMeetingRooms.multiEditMeetingRooms_PartOfPackage("Party", "Confirmed",
-                "Werty", "Yes", "Yes", "Yes");
+                "Yes", "Yes", "Yes");
         StringBuilder quoteMeetingRoomRecord1 = quoteMeetingRoom.getQuoteMeetingRoomSFDX(SFDX,
                 "thn__MYCE_Quote__c='" + quoteID + "' Name='DEFAULT - MEETING HALF DAY'", ORG_USERNAME);
         StringBuilder quoteMeetingRoomRecord2 = quoteMeetingRoom.getQuoteMeetingRoomSFDX(SFDX,
@@ -264,10 +208,6 @@ public class MultiEditOnQuotesRelatedList extends BaseTest {
                 getFieldValue(quoteMeetingRoomRecord1.toString(), "thn__Reservation_Status__c");
         String quoteMeetingRoomReservationStatus2= JsonParser2.
                 getFieldValue(quoteMeetingRoomRecord2.toString(), "thn__Reservation_Status__c");
-        String quoteMeetingRoomFunctionName1= JsonParser2.
-                getFieldValue(quoteMeetingRoomRecord1.toString(), "thn__Function_Name__c");
-        String quoteMeetingRoomFunctionName2= JsonParser2.
-                getFieldValue(quoteMeetingRoomRecord2.toString(), "thn__Function_Name__c");
         String quoteMeetingRoomCommissionable1= JsonParser2.
                 getFieldValue(quoteMeetingRoomRecord1.toString(), "thn__Commissionable__c");
         String quoteMeetingRoomCommissionable2= JsonParser2.
@@ -284,8 +224,6 @@ public class MultiEditOnQuotesRelatedList extends BaseTest {
         Assert.assertEquals(quoteMeetingRoomSetup2, "Party");
         Assert.assertEquals(quoteMeetingRoomReservationStatus1, "Confirmed");
         Assert.assertEquals(quoteMeetingRoomReservationStatus2, "Confirmed");
-        Assert.assertEquals(quoteMeetingRoomFunctionName1, "Werty");
-        Assert.assertEquals(quoteMeetingRoomFunctionName2, "Werty");
         Assert.assertEquals(quoteMeetingRoomCommissionable1, "true");
         Assert.assertEquals(quoteMeetingRoomCommissionable2, "true");
         Assert.assertEquals(quoteMeetingRoomHideOnOffer1, "true");
@@ -407,7 +345,7 @@ public class MultiEditOnQuotesRelatedList extends BaseTest {
         quoteMeetingRoom.clickMultiedit();
         multiEditMeetingRooms.multiEditMeetingRooms_notPartOfPackage(date.generateTodayDate3_plus(0, 1),
                 date.generateTodayDate3_plus(0, 2), "Classroom", "Confirmed",
-                "Ytrew", "3", "2", "Yes", "Yes",
+                 "3", "2", "Yes", "Yes",
                 "Yes", "5", "10", "", "");
         StringBuilder quoteMeetingRoomRecord1 = quoteMeetingRoom.getQuoteMeetingRoomSFDX(SFDX,
                 "thn__MYCE_Quote__c='" + quoteID + "' Name='DEFAULT - MEETING HALF DAY'", ORG_USERNAME);
@@ -421,10 +359,6 @@ public class MultiEditOnQuotesRelatedList extends BaseTest {
                 getFieldValue(quoteMeetingRoomRecord1.toString(), "thn__Reservation_Status__c");
         String quoteMeetingRoomReservationStatus2= JsonParser2.
                 getFieldValue(quoteMeetingRoomRecord2.toString(), "thn__Reservation_Status__c");
-        String quoteMeetingRoomFunctionName1= JsonParser2.
-                getFieldValue(quoteMeetingRoomRecord1.toString(), "thn__Function_Name__c");
-        String quoteMeetingRoomFunctionName2= JsonParser2.
-                getFieldValue(quoteMeetingRoomRecord2.toString(), "thn__Function_Name__c");
         String quoteMeetingRoomCommissionable1= JsonParser2.
                 getFieldValue(quoteMeetingRoomRecord1.toString(), "thn__Commissionable__c");
         String quoteMeetingRoomCommissionable2= JsonParser2.
@@ -473,8 +407,6 @@ public class MultiEditOnQuotesRelatedList extends BaseTest {
         Assert.assertEquals(quoteMeetingRoomSetup2, "Classroom");
         Assert.assertEquals(quoteMeetingRoomReservationStatus1, "Confirmed");
         Assert.assertEquals(quoteMeetingRoomReservationStatus2, "Confirmed");
-        Assert.assertEquals(quoteMeetingRoomFunctionName1, "Ytrew");
-        Assert.assertEquals(quoteMeetingRoomFunctionName2, "Ytrew");
         Assert.assertEquals(quoteMeetingRoomCommissionable1, "true");
         Assert.assertEquals(quoteMeetingRoomCommissionable2, "true");
         Assert.assertEquals(quoteMeetingRoomHideOnOffer1, "true");
@@ -561,7 +493,7 @@ public class MultiEditOnQuotesRelatedList extends BaseTest {
         quoteMeetingRoom.selectItems("2");
         quoteMeetingRoom.clickMultiedit();
         multiEditMeetingRooms.multiEditMeetingRooms_PartOfPackage("Party", "Confirmed",
-                "Werty", "Yes", "Yes", "Yes");
+                 "Yes", "Yes", "Yes");
         StringBuilder quoteMeetingRoomRecord1 = quoteMeetingRoom.getQuoteMeetingRoomSFDX(SFDX,
                 "thn__MYCE_Quote__c='" + quoteID + "' Name='DEFAULT - MEETING HALF DAY'", ORG_USERNAME);
         StringBuilder quoteMeetingRoomRecord2 = quoteMeetingRoom.getQuoteMeetingRoomSFDX(SFDX,
@@ -594,8 +526,6 @@ public class MultiEditOnQuotesRelatedList extends BaseTest {
         Assert.assertEquals(quoteMeetingRoomSetup2, "Party");
         Assert.assertEquals(quoteMeetingRoomReservationStatus1, "Confirmed");
         Assert.assertEquals(quoteMeetingRoomReservationStatus2, "Confirmed");
-        Assert.assertEquals(quoteMeetingRoomFunctionName1, "Werty");
-        Assert.assertEquals(quoteMeetingRoomFunctionName2, "Werty");
         Assert.assertEquals(quoteMeetingRoomCommissionable1, "true");
         Assert.assertEquals(quoteMeetingRoomCommissionable2, "true");
         Assert.assertEquals(quoteMeetingRoomHideOnOffer1, "true");

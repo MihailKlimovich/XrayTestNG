@@ -44,10 +44,14 @@ public class CloneMyceQuoteAndCloneSelection extends BaseTest {
         String meetingFullDayID = JsonParser2.getFieldValue(meetingFullDayRecord.toString(), "Id");
         StringBuilder roomTypeSingleRecord = roomType.getRoomTypeSFDX(SFDX, "Name='Single'", ORG_USERNAME);
         String roomTypeSingleID = JsonParser2.getFieldValue(roomTypeSingleRecord.toString(), "Id");
+        StringBuilder recordTypes = myceQuotes.soql(SFDX, "SELECT Id FROM RecordType WHERE" +
+                " SobjectType='thn__MYCE_Quote__c' AND Name='Quote'", ORG_USERNAME);
+        System.out.println(recordTypes);
+        List<String> recordTypeID = JsonParser2.getFieldValueSoql(recordTypes.toString(), "Id");
         String quoteID = myceQuotes.createQuoteSFDX(SFDX, "Name='CloneMyceQuoteAutoTest' thn__Pax__c=5" +
                 " thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" + date.generateTodayDate2()
-                + " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 2) +
-                " thn__Closed_Status__c='Won'", ORG_USERNAME);
+                + " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 2) + " RecordTypeId='"
+                + recordTypeID.get(0) + "'", ORG_USERNAME);
         String packageID = packages.createPackageSFDX(SFDX, "Name='CloneAutoTest' thn__Hotel__c='" + propertyID +
                 "'", ORG_USERNAME);
         packageLine.createPackageLineSFDX(SFDX, "Name='Meeting Room' thn__Package__c='" + packageID +
@@ -76,7 +80,7 @@ public class CloneMyceQuoteAndCloneSelection extends BaseTest {
         myceQuotes.deleteQuoteSFDX(SFDX, "Name='CloneMyceQuoteAutoTestClone'", ORG_USERNAME);
         myceQuotes.goToMyceQuotes();
         myceQuotes.openMyceQoteRecord("CloneMyceQuoteAutoTest");
-        myceQuotes.cloneMyceQuote("CloneMyceQuoteAutoTestClone", date.generateTodayDate_plus(0, 1));
+        myceQuotes.cloneMyceQuote("CloneMyceQuoteAutoTestClone", date.generateTodayDate3_plus(0, 0));
         StringBuilder clonedQuoteRecord = myceQuotes.getQuoteSFDX(SFDX, "Name='CloneMyceQuoteAutoTestClone'", ORG_USERNAME);
         String clonedQuoteID= JsonParser2.getFieldValue(clonedQuoteRecord.toString(), "Id");
         String clonedQuoteArrivalDay = JsonParser2.getFieldValue(clonedQuoteRecord.toString(), "thn__Arrival_Date__c");
@@ -112,8 +116,8 @@ public class CloneMyceQuoteAndCloneSelection extends BaseTest {
                         clonedQuoteID + "'", ORG_USERNAME);
         System.out.println(clonedQuoteMeeringRoom2);
         String clonedQuoteMeetingRoomD2 = JsonParser2.getFieldValue(clonedQuoteMeeringRoom2.toString(), "Id");
-        Assert.assertEquals(clonedQuoteArrivalDay, date.generateTodayDate2_plus(0, 1));
-        Assert.assertEquals(clonedQuoteDepartureDate, date.generateTodayDate2_plus(0, 3));
+        Assert.assertEquals(clonedQuoteArrivalDay, date.generateTodayDate2_plus(0, 0));
+        Assert.assertEquals(clonedQuoteDepartureDate, date.generateTodayDate2_plus(0, 2));
         Assert.assertEquals(clonedQuotePax, "5");
         Assert.assertNotNull(clonedQuoteHotelRoomID1);
         Assert.assertNotNull(clonedQuoteHotelRoomID2);
@@ -131,7 +135,7 @@ public class CloneMyceQuoteAndCloneSelection extends BaseTest {
         //loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
         myceQuotes.goToMyceQuotes();
         myceQuotes.openMyceQoteRecord("CloneMyceQuoteAutoTest");
-        myceQuotes.cloneRelatedRecord(date.generateTodayDate_plus(0 , 0), "Quote Hotel Room");
+        myceQuotes.cloneRelatedRecord(date.generateTodayDate3_plus(0 , 0), "Quote Hotel Room");
         StringBuilder quoteRecord = myceQuotes.getQuoteSFDX(SFDX, "Name='CloneMyceQuoteAutoTest'", ORG_USERNAME);
         String myceQuoteID= JsonParser2.getFieldValue(quoteRecord.toString(), "Id");
         StringBuilder quoteHotelRooms = myceQuotes.soql(SFDX, "SELECT Id, thn__Space_Area__c," +
@@ -158,7 +162,7 @@ public class CloneMyceQuoteAndCloneSelection extends BaseTest {
         //loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
         myceQuotes.goToMyceQuotes();
         myceQuotes.openMyceQoteRecord("CloneMyceQuoteAutoTest");
-        myceQuotes.cloneRelatedRecord(date.generateTodayDate_plus(0 , 0), "Quote Product");
+        myceQuotes.cloneRelatedRecord(date.generateTodayDate3_plus(0 , 0), "Quote Product");
         StringBuilder quoteRecord = myceQuotes.getQuoteSFDX(SFDX, "Name='CloneMyceQuoteAutoTest'", ORG_USERNAME);
         String myceQuoteID= JsonParser2.getFieldValue(quoteRecord.toString(), "Id");
         StringBuilder quoteProducts = myceQuotes.soql(SFDX, "SELECT Id, thn__Pax__c," +
@@ -184,7 +188,7 @@ public class CloneMyceQuoteAndCloneSelection extends BaseTest {
         //loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
         myceQuotes.goToMyceQuotes();
         myceQuotes.openMyceQoteRecord("CloneMyceQuoteAutoTest");
-        myceQuotes.cloneRelatedRecord(date.generateTodayDate_plus(0 , 0), "Quote Meetings Room");
+        myceQuotes.cloneRelatedRecord(date.generateTodayDate3_plus(0 , 0), "Quote Meetings Room");
         StringBuilder quoteRecord = myceQuotes.getQuoteSFDX(SFDX, "Name='CloneMyceQuoteAutoTest'", ORG_USERNAME);
         String myceQuoteID= JsonParser2.getFieldValue(quoteRecord.toString(), "Id");
         StringBuilder quoteMeetingRoom = myceQuotes.soql(SFDX, "SELECT Id, thn__Product__c," +
@@ -212,7 +216,7 @@ public class CloneMyceQuoteAndCloneSelection extends BaseTest {
         //loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
         myceQuotes.goToMyceQuotes();
         myceQuotes.openMyceQoteRecord("CloneMyceQuoteAutoTest");
-        myceQuotes.cloneRelatedRecord(date.generateTodayDate_plus(0 , 0), "Quote Package");
+        myceQuotes.cloneRelatedRecord(date.generateTodayDate3_plus(0 , 0), "Quote Package");
         StringBuilder quoteRecord = myceQuotes.getQuoteSFDX(SFDX, "Name='CloneMyceQuoteAutoTest'", ORG_USERNAME);
         String myceQuoteID= JsonParser2.getFieldValue(quoteRecord.toString(), "Id");
         StringBuilder quotePackage = myceQuotes.soql(SFDX, "SELECT Id, thn__Package__c," +

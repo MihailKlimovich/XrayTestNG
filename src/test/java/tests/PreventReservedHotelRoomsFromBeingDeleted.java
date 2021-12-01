@@ -40,11 +40,15 @@ public class PreventReservedHotelRoomsFromBeingDeleted extends BaseTest {
                         propertyID + "'", ORG_USERNAME);
         System.out.println(guests);
         List<String> roomTypesId = JsonParser2.getFieldValueSoql(roomTypeRecords.toString(), "Id");
+        StringBuilder recordTypes = myceQuotes.soql(SFDX, "SELECT Id FROM RecordType WHERE" +
+                " SobjectType='thn__MYCE_Quote__c' AND Name='Quote'", ORG_USERNAME);
+        System.out.println(recordTypes);
+        List<String> recordTypeID = JsonParser2.getFieldValueSoql(recordTypes.toString(), "Id");
         String quoteID = myceQuotes.createQuoteSFDX(SFDX, "Name='DeleteReservedHotelRoomAutoTest' thn__Pax__c=1" +
                 " thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" + date.generateTodayDate2()
-                + " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 2), ORG_USERNAME);
-        myceQuotes.updateQuoteSFDX(SFDX, "Id='" + quoteID + "'", "thn__Stage__c='2 - Propose'" +
-                " thn__SendToMews__c=true", ORG_USERNAME);
+                + " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 2) + " RecordTypeId='"
+                + recordTypeID.get(0) + "'", ORG_USERNAME);
+        myceQuotes.updateQuoteSFDX(SFDX, "Id='" + quoteID + "'", "thn__Stage__c='2 - Propose'", ORG_USERNAME);
         myceQuotes.updateQuoteSFDX(SFDX, "Id='" + quoteID + "'", "thn__Stage__c='1 - Qualify'" +
                 " thn__SendToMews__c=false", ORG_USERNAME);
         String packageID = packages.createPackageSFDX(SFDX, "Name='PackWithHotelRoomAuto' thn__Hotel__c='"
@@ -99,12 +103,12 @@ public class PreventReservedHotelRoomsFromBeingDeleted extends BaseTest {
         StringBuilder quoteRecord = myceQuotes.
                 getQuoteSFDX(SFDX, "Name='DeleteReservedHotelRoomAutoTest'", ORG_USERNAME);
         String quoteID= JsonParser2.getFieldValue(quoteRecord.toString(), "Id");
-        StringBuilder deleteResult = quoteMeetingPackages.deleteQuotePackageSFDX(SFDX,
-                "thn__MYCE_Quote__c='" + quoteID + "'  Name='PackWithHotelRoomAuto'",ORG_USERNAME);
         quoteHotelRoom.updateQuoteHotelRoomSFDX(SFDX, "thn__MYCE_Quote__c='" + quoteID + "'" +
-                "  Name='ROOM 1 NIGHT", "thn__Mews_State__c='Canceled'", ORG_USERNAME);
+                "  Name='ROOM 1 NIGHT", "thn__Reason_Canceled__c='Canceled' thn__Mews_State__c='Canceled'",
+                ORG_USERNAME);
         quoteHotelRoom.updateQuoteHotelRoomSFDX(SFDX, "thn__MYCE_Quote__c='" + quoteID + "'" +
-                "  Name='ROOM 2 NIGHTS", "thn__Mews_State__c='Canceled'", ORG_USERNAME);
+                "  Name='ROOM 2 NIGHTS", "thn__Reason_Canceled__c='Canceled' thn__Mews_State__c='Canceled'",
+                ORG_USERNAME);
         quoteMeetingPackages.deleteQuotePackageSFDX(SFDX, "thn__MYCE_Quote__c='" + quoteID + "'" +
                 "  Name='PackWithHotelRoomAuto'",ORG_USERNAME);
         quoteHotelRoom.deleteQuoteHotelRoomSFDX(SFDX, "thn__MYCE_Quote__c='" + quoteID + "'" +

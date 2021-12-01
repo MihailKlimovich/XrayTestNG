@@ -17,27 +17,15 @@ public class Request_Agent extends BaseTest{
     @Severity(SeverityLevel.NORMAL)
     @Story("THY-506: Request - Agent")
     public void logIn() throws InterruptedException, IOException {
-        /*StringBuilder authorise = SfdxCommand.runLinuxCommand1(new String[]{
-                SFDX,
-                "force:auth:jwt:grant",
-                "--clientid",
-                CONSUMER_KEY,
-                "--jwtkeyfile",
-                SERVER_KEY_PATH,
-                "--username",
-                ORG_USERNAME,
-                "--instanceurl",
-                ORG_URL
-        });
-        System.out.println(authorise);*/
         loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
         loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
     }
 
-    @Test(priority = 2, description = "Delete old data")
+    @Test(priority = 2, description = "Fill Agent contact Email, make sure Contact with matching email exists in the" +
+            " system and is linked to Account, convert the record")
     @Severity(SeverityLevel.NORMAL)
     @Story("THY-506: Request - Agent")
-    public void deleteOldData() throws InterruptedException, IOException {
+    public void RequestAgent_case1() throws InterruptedException, IOException {
         StringBuilder res = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:delete",
@@ -53,89 +41,12 @@ public class Request_Agent extends BaseTest{
                 SFDX,
                 "force:data:record:delete",
                 "-s",
-                "Account",
-                "-w",
-                "Name='Sandman",
-                "-u",
-                ORG_USERNAME,
-                "--json"});
-        SfdxCommand.runLinuxCommand1(new String[]{
-                SFDX,
-                "force:data:record:delete",
-                "-s",
-                "Account",
-                "-w",
-                "Name='Sandman2",
-                "-u",
-                ORG_USERNAME,
-                "--json"});
-        SfdxCommand.runLinuxCommand1(new String[]{
-                SFDX,
-                "force:data:record:delete",
-                "-s",
-                "Account",
-                "-w",
-                "Name='TestAccount",
-                "-u",
-                ORG_USERNAME,
-                "--json"});
-        SfdxCommand.runLinuxCommand1(new String[]{
-                SFDX,
-                "force:data:record:delete",
-                "-s",
-                "Account",
-                "-w",
-                "Name='Sandman2",
-                "-u",
-                ORG_USERNAME,
-                "--json"});
-        SfdxCommand.runLinuxCommand1(new String[]{
-                SFDX,
-                "force:data:record:delete",
-                "-s",
                 "Contact",
                 "-w",
                 "LastName='Shepard'",
                 "-u",
                 ORG_USERNAME,
                 "--json"});
-        SfdxCommand.runLinuxCommand1(new String[]{
-                SFDX,
-                "force:data:record:delete",
-                "-s",
-                "Contact",
-                "-w",
-                "LastName='Anderson'",
-                "-u",
-                ORG_USERNAME,
-                "--json"});
-        SfdxCommand.runLinuxCommand1(new String[]{
-                SFDX,
-                "force:data:record:delete",
-                "-s",
-                "TestAgentContact",
-                "-w",
-                "LastName='Anderson'",
-                "-u",
-                ORG_USERNAME,
-                "--json"});
-        SfdxCommand.runLinuxCommand1(new String[]{
-                SFDX,
-                "force:data:record:delete",
-                "-s",
-                "TestContact",
-                "-w",
-                "LastName='Anderson'",
-                "-u",
-                ORG_USERNAME,
-                "--json"});
-    }
-
-    @Test(priority = 3, description = "Fill Agent contact Email, make sure Contact with matching email exists in the" +
-            " system and is linked to Account, convert the record")
-    @Severity(SeverityLevel.NORMAL)
-    @Story("THY-506: Request - Agent")
-    public void RequestAgent_case1() throws InterruptedException, IOException {
         StringBuilder propertyRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:get",
@@ -209,11 +120,31 @@ public class Request_Agent extends BaseTest{
         Assert.assertEquals(agent, accountId);
     }
 
-    @Test(priority = 4, description = "    Fill Agent contact Email, make sure Contact with matching email exists" +
+    @Test(priority = 3, description = "    Fill Agent contact Email, make sure Contact with matching email exists" +
             " in the system, fill Agent Name, make sure such an account doesn’t exist, convert the record")
     @Severity(SeverityLevel.NORMAL)
     @Story("THY-506: Request - Agent")
     public void RequestAgent_case2() throws InterruptedException, IOException {
+        SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:delete",
+                "-s",
+                "Contact",
+                "-w",
+                "LastName='Anderson'",
+                "-u",
+                ORG_USERNAME,
+                "--json"});
+        SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:delete",
+                "-s",
+                "Account",
+                "-w",
+                "Name='Sandman",
+                "-u",
+                ORG_USERNAME,
+                "--json"});
         StringBuilder contactResult = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:create",
@@ -274,11 +205,61 @@ public class Request_Agent extends BaseTest{
         Assert.assertEquals(myceQuoteCompanyContactId, requestContactId);
     }
 
-    @Test(priority = 5, description = "Fill Agent contact Email, Contact with matching email doesn’t exist in the" +
+    @Test(priority = 4, description = "Fill Agent contact Email, Contact with matching email doesn’t exist in the" +
             " system, fill Agent Name, convert record")
     @Severity(SeverityLevel.NORMAL)
     @Story("THY-506: Request - Agent")
     public void RequestAgent_case3() throws InterruptedException, IOException {
+        SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:delete",
+                "-s",
+                "Account",
+                "-w",
+                "Name='Sandman2",
+                "-u",
+                ORG_USERNAME,
+                "--json"});
+        SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:delete",
+                "-s",
+                "TestAgentContact",
+                "-w",
+                "LastName='Anderson'",
+                "-u",
+                ORG_USERNAME,
+                "--json"});
+        SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:delete",
+                "-s",
+                "TestContact",
+                "-w",
+                "LastName='Anderson'",
+                "-u",
+                ORG_USERNAME,
+                "--json"});
+        SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:delete",
+                "-s",
+                "Account",
+                "-w",
+                "Name='TestAccount",
+                "-u",
+                ORG_USERNAME,
+                "--json"});
+        SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:delete",
+                "-s",
+                "Account",
+                "-w",
+                "Name='Sandman2",
+                "-u",
+                ORG_USERNAME,
+                "--json"});
         StringBuilder requestResult = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:create",

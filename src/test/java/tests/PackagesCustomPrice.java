@@ -13,25 +13,15 @@ import java.io.IOException;
 
 public class PackagesCustomPrice extends BaseTest {
 
-    @Test(priority = 1, description = "THY-588: Packages - custom price")
+    @Test(priority = 1, description = "Delete a ‘Quote Package Line’. Result: When a ‘Quote Package Line’ is deleted," +
+            "  the ‘List Price’ of the ‘Quote Package’ is calculated from the sum of the related ‘Quote Package" +
+            " Lines’ ‘List Prices’")
     @Severity(SeverityLevel.NORMAL)
-    @Description("THY-588: Packages - custom price")
-    @Story("Case 1: Delete a ‘Quote Package Line’.")
+    @Story("Case 1: THY-588: Packages - custom price’.")
     public void packageCustomPrice_DeletePackageLine() throws InterruptedException, IOException {
-        /*StringBuilder authorise = SfdxCommand.runLinuxCommand1(new String[]{
-                SFDX,
-                "force:auth:jwt:grant",
-                "--clientid",
-                CONSUMER_KEY,
-                "--jwtkeyfile",
-                SERVER_KEY_PATH,
-                "--username",
-                ORG_USERNAME,
-                "--instanceurl",
-                ORG_URL
-        });
-        System.out.println(authorise);*/
         loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
+        packages.deletePackageSFDX(SFDX, "Name='TestPackagesCustomPrice'", ORG_USERNAME);
+        myceQuotes.deleteQuoteSFDX(SFDX, "Name='TestPackageCustomPrice1'", ORG_USERNAME);
         StringBuilder propertyRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:get",
@@ -145,8 +135,9 @@ public class PackagesCustomPrice extends BaseTest {
                 "-s",
                 "thn__MYCE_Quote__c",
                 "-v",
-                "Name='TestPackageCustomPrice1' thn__Pax__c=1 thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
-                        date.generateTodayDate2() + " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 3),
+                "Name='TestPackageCustomPrice1' thn__Pax__c=1 thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c="
+                        + date.generateTodayDate2() + " thn__Departure_Date__c="
+                        + date.generateTodayDate2_plus(0, 3),
                 "-u",
                 ORG_USERNAME,
                 "--json"});
@@ -215,12 +206,18 @@ public class PackagesCustomPrice extends BaseTest {
                 "-u",
                 ORG_USERNAME,
                 "--json"});
-        Integer listPriceQuotePackLine1 = JsonParser2.getFieldValueLikeInteger(quotePackageLineRecord1, "result", "thn__List_Price__c");
-        Integer listPriceQuotePackLine2 = JsonParser2.getFieldValueLikeInteger(quotePackageLineRecord2, "result", "thn__List_Price__c");
-        Integer listPriceQuotePackLine3 = JsonParser2.getFieldValueLikeInteger(quotePackageLineRecord3, "result", "thn__List_Price__c");
-        Integer listPriceQuotePackLine4 = JsonParser2.getFieldValueLikeInteger(quotePackageLineRecord4, "result", "thn__List_Price__c");
-        Integer listPriceQuotePackage = JsonParser2.getFieldValueLikeInteger(quotePackageRecord, "result", "thn__List_Price__c");
-        Integer sumPricePackLine1 = listPriceQuotePackLine1 + listPriceQuotePackLine2 + listPriceQuotePackLine3 + listPriceQuotePackLine4;
+        Integer listPriceQuotePackLine1 = JsonParser2.
+                getFieldValueLikeInteger(quotePackageLineRecord1, "result", "thn__List_Price__c");
+        Integer listPriceQuotePackLine2 = JsonParser2.
+                getFieldValueLikeInteger(quotePackageLineRecord2, "result", "thn__List_Price__c");
+        Integer listPriceQuotePackLine3 = JsonParser2.
+                getFieldValueLikeInteger(quotePackageLineRecord3, "result", "thn__List_Price__c");
+        Integer listPriceQuotePackLine4 = JsonParser2.
+                getFieldValueLikeInteger(quotePackageLineRecord4, "result", "thn__List_Price__c");
+        Integer listPriceQuotePackage = JsonParser2.
+                getFieldValueLikeInteger(quotePackageRecord, "result", "thn__List_Price__c");
+        Integer sumPricePackLine1 = listPriceQuotePackLine1 + listPriceQuotePackLine2 + listPriceQuotePackLine3
+                + listPriceQuotePackLine4;
         Assert.assertEquals(listPriceQuotePackage, sumPricePackLine1);
         StringBuilder deleteResult = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
@@ -243,16 +240,21 @@ public class PackagesCustomPrice extends BaseTest {
                 "-u",
                 ORG_USERNAME,
                 "--json"});
-        Integer listPriceQuotePackage2 = JsonParser2.getFieldValueLikeInteger(quotePackageRecord2, "result", "thn__List_Price__c");
+        Integer listPriceQuotePackage2 = JsonParser2.
+                getFieldValueLikeInteger(quotePackageRecord2, "result", "thn__List_Price__c");
         Integer sumPricePackLine2 = listPriceQuotePackLine2 + listPriceQuotePackLine3 + listPriceQuotePackLine4;
         Assert.assertEquals(listPriceQuotePackage2, sumPricePackLine2);
     }
 
-    @Test(priority = 2, description = "THY-588: Packages - custom price")
+    @Test(priority = 2, description = "Users should be able to create new ‘Package Lines’ on created Quote. Result:" +
+            " ‘Unit Price excl. Tax', ‘Unit Price incl. Tax', ‘Sales Price excl. Tax’, ‘Sales Price incl. Tax’ fields" +
+            " are automatically calculated according to our newly added 'Quote Package Lines’. A new product was" +
+            " added to the ‘Quote Products’.")
     @Severity(SeverityLevel.NORMAL)
-    @Description("THY-588: Packages - custom price")
-    @Story("Case 2: Users should be able to create new ‘Package Lines’ on created Quote.")
+    @Story("THY-588: Packages - custom price")
     public void packageCustomPrice_addQuotePackageLine() throws InterruptedException, IOException {
+        packages.deletePackageSFDX(SFDX, "Name='TestPackagesCustomPrice2'", ORG_USERNAME);
+        myceQuotes.deleteQuoteSFDX(SFDX, "Name='TestPackageCustomPrice2'", ORG_USERNAME);
         StringBuilder propertyRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:get",
@@ -366,8 +368,9 @@ public class PackagesCustomPrice extends BaseTest {
                 "-s",
                 "thn__MYCE_Quote__c",
                 "-v",
-                "Name='TestPackageCustomPrice2' thn__Pax__c=1 thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
-                        date.generateTodayDate2() + " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 3),
+                "Name='TestPackageCustomPrice2' thn__Pax__c=1 thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c="
+                        + date.generateTodayDate2() + " thn__Departure_Date__c="
+                        + date.generateTodayDate2_plus(0, 3),
                 "-u",
                 ORG_USERNAME,
                 "--json"});
@@ -436,12 +439,18 @@ public class PackagesCustomPrice extends BaseTest {
                 "-u",
                 ORG_USERNAME,
                 "--json"});
-        Integer listPriceQuotePackLine1 = JsonParser2.getFieldValueLikeInteger(quotePackageLineRecord1, "result", "thn__List_Price__c");
-        Integer listPriceQuotePackLine2 = JsonParser2.getFieldValueLikeInteger(quotePackageLineRecord2, "result", "thn__List_Price__c");
-        Integer listPriceQuotePackLine3 = JsonParser2.getFieldValueLikeInteger(quotePackageLineRecord3, "result", "thn__List_Price__c");
-        Integer listPriceQuotePackLine4 = JsonParser2.getFieldValueLikeInteger(quotePackageLineRecord4, "result", "thn__List_Price__c");
-        Integer listPriceQuotePackage = JsonParser2.getFieldValueLikeInteger(quotePackageRecord, "result", "thn__List_Price__c");
-        Integer sumPricePackLine1 = listPriceQuotePackLine1 + listPriceQuotePackLine2 + listPriceQuotePackLine3 + listPriceQuotePackLine4;
+        Integer listPriceQuotePackLine1 = JsonParser2.
+                getFieldValueLikeInteger(quotePackageLineRecord1, "result", "thn__List_Price__c");
+        Integer listPriceQuotePackLine2 = JsonParser2.
+                getFieldValueLikeInteger(quotePackageLineRecord2, "result", "thn__List_Price__c");
+        Integer listPriceQuotePackLine3 = JsonParser2.
+                getFieldValueLikeInteger(quotePackageLineRecord3, "result", "thn__List_Price__c");
+        Integer listPriceQuotePackLine4 = JsonParser2.
+                getFieldValueLikeInteger(quotePackageLineRecord4, "result", "thn__List_Price__c");
+        Integer listPriceQuotePackage = JsonParser2.
+                getFieldValueLikeInteger(quotePackageRecord, "result", "thn__List_Price__c");
+        Integer sumPricePackLine1 = listPriceQuotePackLine1 + listPriceQuotePackLine2 + listPriceQuotePackLine3
+                + listPriceQuotePackLine4;
         Assert.assertEquals(listPriceQuotePackage, sumPricePackLine1);
         StringBuilder quotePackageLineResult = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
@@ -478,45 +487,82 @@ public class PackagesCustomPrice extends BaseTest {
                 ORG_USERNAME,
                 "--json"});
         System.out.println(quotePackageRecord2);
-        double unitPriceExclTaxQuotePackage = JsonParser2.getFieldValueLikeDouble(quotePackageRecord2, "result", "thn__Unit_Price_excl_Tax__c");
-        double unitPriceInclTaxQuotePackage = JsonParser2.getFieldValueLikeDouble(quotePackageRecord2, "result", "thn__Unit_Price_incl_Tax__c");
-        double salesPriceExclTaxQuotePackage = JsonParser2.getFieldValueLikeDouble(quotePackageRecord2, "result", "thn__Sales_Price_excl_Tax__c");
-        double salesPriceInclTaxQuotePackage = JsonParser2.getFieldValueLikeDouble(quotePackageRecord2, "result", "thn__Sales_Price_incl_Tax__c");
-        double unitPriceExclTaxQuotePackageLine1 = JsonParser2.getFieldValueLikeDouble(quotePackageLineRecord1, "result", "thn__Unit_Price_excl_Tax__c");
-        double unitPriceInclTaxQuotePackageLine1 = JsonParser2.getFieldValueLikeDouble(quotePackageLineRecord1, "result", "thn__Unit_Price_incl_Tax__c");
-        double salesPriceExclTaxQuotePackageLine1 = JsonParser2.getFieldValueLikeDouble(quotePackageLineRecord1, "result", "thn__Sales_Price_excl_Tax__c");
-        double salesPriceInclTaxQuotePackageLine1 = JsonParser2.getFieldValueLikeDouble(quotePackageLineRecord1, "result", "thn__Sales_Price_incl_Tax__c");
-        double unitPriceExclTaxQuotePackageLine2 = JsonParser2.getFieldValueLikeDouble(quotePackageLineRecord2, "result", "thn__Unit_Price_excl_Tax__c");
-        double unitPriceInclTaxQuotePackageLine2 = JsonParser2.getFieldValueLikeDouble(quotePackageLineRecord2, "result", "thn__Unit_Price_incl_Tax__c");
-        double salesPriceExclTaxQuotePackageLine2 = JsonParser2.getFieldValueLikeDouble(quotePackageLineRecord2, "result", "thn__Sales_Price_excl_Tax__c");
-        double salesPriceInclTaxQuotePackageLine2 = JsonParser2.getFieldValueLikeDouble(quotePackageLineRecord2, "result", "thn__Sales_Price_incl_Tax__c");
-        double unitPriceExclTaxQuotePackageLine3 = JsonParser2.getFieldValueLikeDouble(quotePackageLineRecord3, "result", "thn__Unit_Price_excl_Tax__c");
-        double unitPriceInclTaxQuotePackageLine3 = JsonParser2.getFieldValueLikeDouble(quotePackageLineRecord3, "result", "thn__Unit_Price_incl_Tax__c");
-        double salesPriceExclTaxQuotePackageLine3 = JsonParser2.getFieldValueLikeDouble(quotePackageLineRecord3, "result", "thn__Sales_Price_excl_Tax__c");
-        double salesPriceInclTaxQuotePackageLine3 = JsonParser2.getFieldValueLikeDouble(quotePackageLineRecord3, "result", "thn__Sales_Price_incl_Tax__c");
-        double unitPriceExclTaxQuotePackageLine4 = JsonParser2.getFieldValueLikeDouble(quotePackageLineRecord4, "result", "thn__Unit_Price_excl_Tax__c");
-        double unitPriceInclTaxQuotePackageLine4 = JsonParser2.getFieldValueLikeDouble(quotePackageLineRecord4, "result", "thn__Unit_Price_incl_Tax__c");
-        double salesPriceExclTaxQuotePackageLine4 = JsonParser2.getFieldValueLikeDouble(quotePackageLineRecord4, "result", "thn__Sales_Price_excl_Tax__c");
-        double salesPriceInclTaxQuotePackageLine4 = JsonParser2.getFieldValueLikeDouble(quotePackageLineRecord4, "result", "thn__Sales_Price_incl_Tax__c");
-        double unitPriceExclTaxQuotePackageLine5 = JsonParser2.getFieldValueLikeDouble(quotePackageLineRecord5, "result", "thn__Unit_Price_excl_Tax__c");
-        double unitPriceInclTaxQuotePackageLine5 = JsonParser2.getFieldValueLikeDouble(quotePackageLineRecord5, "result", "thn__Unit_Price_incl_Tax__c");
-        double salesPriceExclTaxQuotePackageLine5 = JsonParser2.getFieldValueLikeDouble(quotePackageLineRecord5, "result", "thn__Sales_Price_excl_Tax__c");
-        double salesPriceInclTaxQuotePackageLine5 = JsonParser2.getFieldValueLikeDouble(quotePackageLineRecord5, "result", "thn__Sales_Price_incl_Tax__c");
-        double sumUnitPriceExclTaxQuotePackageLines = unitPriceExclTaxQuotePackageLine1 + unitPriceExclTaxQuotePackageLine2 +unitPriceExclTaxQuotePackageLine3 + unitPriceExclTaxQuotePackageLine4 + unitPriceExclTaxQuotePackageLine5;
-        double sumUnitPriceInclTaxQuotePackageLines = unitPriceInclTaxQuotePackageLine1 + unitPriceInclTaxQuotePackageLine2 + unitPriceInclTaxQuotePackageLine3 + unitPriceInclTaxQuotePackageLine4 + unitPriceInclTaxQuotePackageLine5;
-        double sumSalesPriceExclTaxQuotePackageLines = salesPriceExclTaxQuotePackageLine1 + salesPriceExclTaxQuotePackageLine2 + salesPriceExclTaxQuotePackageLine3 +salesPriceExclTaxQuotePackageLine4 + salesPriceExclTaxQuotePackageLine5;
-        double sumSalesPriceInclTaxQuotePackageLines = salesPriceInclTaxQuotePackageLine1 + salesPriceInclTaxQuotePackageLine2 + salesPriceInclTaxQuotePackageLine3 + salesPriceInclTaxQuotePackageLine4 + salesPriceInclTaxQuotePackageLine5;
+        double unitPriceExclTaxQuotePackage = JsonParser2.
+                getFieldValueLikeDouble(quotePackageRecord2, "result", "thn__Unit_Price_excl_Tax__c");
+        double unitPriceInclTaxQuotePackage = JsonParser2.
+                getFieldValueLikeDouble(quotePackageRecord2, "result", "thn__Unit_Price_incl_Tax__c");
+        double salesPriceExclTaxQuotePackage = JsonParser2.
+                getFieldValueLikeDouble(quotePackageRecord2, "result", "thn__Sales_Price_excl_Tax__c");
+        double salesPriceInclTaxQuotePackage = JsonParser2.
+                getFieldValueLikeDouble(quotePackageRecord2, "result", "thn__Sales_Price_incl_Tax__c");
+        double unitPriceExclTaxQuotePackageLine1 = JsonParser2.
+                getFieldValueLikeDouble(quotePackageLineRecord1, "result", "thn__Unit_Price_excl_Tax__c");
+        double unitPriceInclTaxQuotePackageLine1 = JsonParser2.
+                getFieldValueLikeDouble(quotePackageLineRecord1, "result", "thn__Unit_Price_incl_Tax__c");
+        double salesPriceExclTaxQuotePackageLine1 = JsonParser2.
+                getFieldValueLikeDouble(quotePackageLineRecord1, "result", "thn__Sales_Price_excl_Tax__c");
+        double salesPriceInclTaxQuotePackageLine1 = JsonParser2.
+                getFieldValueLikeDouble(quotePackageLineRecord1, "result", "thn__Sales_Price_incl_Tax__c");
+        double unitPriceExclTaxQuotePackageLine2 = JsonParser2.
+                getFieldValueLikeDouble(quotePackageLineRecord2, "result", "thn__Unit_Price_excl_Tax__c");
+        double unitPriceInclTaxQuotePackageLine2 = JsonParser2.
+                getFieldValueLikeDouble(quotePackageLineRecord2, "result", "thn__Unit_Price_incl_Tax__c");
+        double salesPriceExclTaxQuotePackageLine2 = JsonParser2.
+                getFieldValueLikeDouble(quotePackageLineRecord2, "result", "thn__Sales_Price_excl_Tax__c");
+        double salesPriceInclTaxQuotePackageLine2 = JsonParser2.
+                getFieldValueLikeDouble(quotePackageLineRecord2, "result", "thn__Sales_Price_incl_Tax__c");
+        double unitPriceExclTaxQuotePackageLine3 = JsonParser2.
+                getFieldValueLikeDouble(quotePackageLineRecord3, "result", "thn__Unit_Price_excl_Tax__c");
+        double unitPriceInclTaxQuotePackageLine3 = JsonParser2.
+                getFieldValueLikeDouble(quotePackageLineRecord3, "result", "thn__Unit_Price_incl_Tax__c");
+        double salesPriceExclTaxQuotePackageLine3 = JsonParser2.
+                getFieldValueLikeDouble(quotePackageLineRecord3, "result", "thn__Sales_Price_excl_Tax__c");
+        double salesPriceInclTaxQuotePackageLine3 = JsonParser2.
+                getFieldValueLikeDouble(quotePackageLineRecord3, "result", "thn__Sales_Price_incl_Tax__c");
+        double unitPriceExclTaxQuotePackageLine4 = JsonParser2.
+                getFieldValueLikeDouble(quotePackageLineRecord4, "result", "thn__Unit_Price_excl_Tax__c");
+        double unitPriceInclTaxQuotePackageLine4 = JsonParser2.
+                getFieldValueLikeDouble(quotePackageLineRecord4, "result", "thn__Unit_Price_incl_Tax__c");
+        double salesPriceExclTaxQuotePackageLine4 = JsonParser2.
+                getFieldValueLikeDouble(quotePackageLineRecord4, "result", "thn__Sales_Price_excl_Tax__c");
+        double salesPriceInclTaxQuotePackageLine4 = JsonParser2.
+                getFieldValueLikeDouble(quotePackageLineRecord4, "result", "thn__Sales_Price_incl_Tax__c");
+        double unitPriceExclTaxQuotePackageLine5 = JsonParser2.
+                getFieldValueLikeDouble(quotePackageLineRecord5, "result", "thn__Unit_Price_excl_Tax__c");
+        double unitPriceInclTaxQuotePackageLine5 = JsonParser2.
+                getFieldValueLikeDouble(quotePackageLineRecord5, "result", "thn__Unit_Price_incl_Tax__c");
+        double salesPriceExclTaxQuotePackageLine5 = JsonParser2.
+                getFieldValueLikeDouble(quotePackageLineRecord5, "result", "thn__Sales_Price_excl_Tax__c");
+        double salesPriceInclTaxQuotePackageLine5 = JsonParser2.
+                getFieldValueLikeDouble(quotePackageLineRecord5, "result", "thn__Sales_Price_incl_Tax__c");
+        double sumUnitPriceExclTaxQuotePackageLines = unitPriceExclTaxQuotePackageLine1
+                + unitPriceExclTaxQuotePackageLine2 +unitPriceExclTaxQuotePackageLine3
+                + unitPriceExclTaxQuotePackageLine4 + unitPriceExclTaxQuotePackageLine5;
+        double sumUnitPriceInclTaxQuotePackageLines = unitPriceInclTaxQuotePackageLine1
+                + unitPriceInclTaxQuotePackageLine2 + unitPriceInclTaxQuotePackageLine3
+                + unitPriceInclTaxQuotePackageLine4 + unitPriceInclTaxQuotePackageLine5;
+        double sumSalesPriceExclTaxQuotePackageLines = salesPriceExclTaxQuotePackageLine1
+                + salesPriceExclTaxQuotePackageLine2 + salesPriceExclTaxQuotePackageLine3
+                +salesPriceExclTaxQuotePackageLine4 + salesPriceExclTaxQuotePackageLine5;
+        double sumSalesPriceInclTaxQuotePackageLines = salesPriceInclTaxQuotePackageLine1
+                + salesPriceInclTaxQuotePackageLine2 + salesPriceInclTaxQuotePackageLine3
+                + salesPriceInclTaxQuotePackageLine4 + salesPriceInclTaxQuotePackageLine5;
         Assert.assertEquals(unitPriceExclTaxQuotePackage, sumUnitPriceExclTaxQuotePackageLines);
         Assert.assertEquals(unitPriceInclTaxQuotePackage, sumUnitPriceInclTaxQuotePackageLines);
         Assert.assertEquals(salesPriceExclTaxQuotePackage, sumSalesPriceExclTaxQuotePackageLines);
         Assert.assertEquals(salesPriceInclTaxQuotePackage, sumSalesPriceInclTaxQuotePackageLines);
     }
 
-    @Test(priority = 3, description = "THY-588: Packages - custom price")
+    @Test(priority = 3, description = "Add a ‘Discount’ to our ‘Quote Package’. Add more ‘Quote Package Lines’ that" +
+            " have ‘Apply Discount’ set to ‘true’. Result: The value from ‘Discount amount’  field on the ‘Quote" +
+            " Package’ is split between two ‘Quote Package Line’ products that had 'Apply Discount’ set to ‘true’." +
+            " ‘Unit Price excl. Tax', ‘Unit Price incl. Tax', ‘Sales Price excl. Tax’, ‘Sales Price incl. Tax’ fields" +
+            " are automatically calculated according to our newly added 'Quote Package Lines’. ")
     @Severity(SeverityLevel.NORMAL)
-    @Description("THY-588: Packages - custom price")
-    @Story("Case 3: Add a ‘Discount’ to our ‘Quote Package’. Add more ‘Quote Package Lines’ that have ‘Apply Discount’ set to ‘true’.")
+    @Story("THY-588: Packages - custom price")
     public void packageCustomPrice_Discount() throws InterruptedException, IOException {
+        packages.deletePackageSFDX(SFDX, "Name='TestPackagesCustomPrice3'", ORG_USERNAME);
+        myceQuotes.deleteQuoteSFDX(SFDX, "Name='TestPackageCustomPrice3'", ORG_USERNAME);
         StringBuilder propertyRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:get",
@@ -567,7 +613,8 @@ public class PackagesCustomPrice extends BaseTest {
                 "-s",
                 "thn__Package__c",
                 "-v",
-                "Name='TestPackagesCustomPrice3' thn__Hotel__c='" + propertyID + "' thn__Custom_Price__c=true thn__Discount_Max__c=100",
+                "Name='TestPackagesCustomPrice3' thn__Hotel__c='" + propertyID + "' thn__Custom_Price__c=true" +
+                        " thn__Discount_Max__c=100",
                 "-u",
                 ORG_USERNAME,
                 "--json"});
@@ -630,8 +677,9 @@ public class PackagesCustomPrice extends BaseTest {
                 "-s",
                 "thn__MYCE_Quote__c",
                 "-v",
-                "Name='TestPackageCustomPrice3' thn__Pax__c=1 thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
-                        date.generateTodayDate2() + " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 3),
+                "Name='TestPackageCustomPrice3' thn__Pax__c=1 thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c="
+                        + date.generateTodayDate2() + " thn__Departure_Date__c="
+                        + date.generateTodayDate2_plus(0, 3),
                 "-u",
                 ORG_USERNAME,
                 "--json"});
@@ -700,12 +748,18 @@ public class PackagesCustomPrice extends BaseTest {
                 "-u",
                 ORG_USERNAME,
                 "--json"});
-        Integer listPriceQuotePackLine1 = JsonParser2.getFieldValueLikeInteger(quotePackageLineRecord1, "result", "thn__List_Price__c");
-        Integer listPriceQuotePackLine2 = JsonParser2.getFieldValueLikeInteger(quotePackageLineRecord2, "result", "thn__List_Price__c");
-        Integer listPriceQuotePackLine3 = JsonParser2.getFieldValueLikeInteger(quotePackageLineRecord3, "result", "thn__List_Price__c");
-        Integer listPriceQuotePackLine4 = JsonParser2.getFieldValueLikeInteger(quotePackageLineRecord4, "result", "thn__List_Price__c");
-        Integer listPriceQuotePackage = JsonParser2.getFieldValueLikeInteger(quotePackageRecord, "result", "thn__List_Price__c");
-        Integer sumPricePackLine1 = listPriceQuotePackLine1 + listPriceQuotePackLine2 + listPriceQuotePackLine3 + listPriceQuotePackLine4;
+        Integer listPriceQuotePackLine1 = JsonParser2.
+                getFieldValueLikeInteger(quotePackageLineRecord1, "result", "thn__List_Price__c");
+        Integer listPriceQuotePackLine2 = JsonParser2.
+                getFieldValueLikeInteger(quotePackageLineRecord2, "result", "thn__List_Price__c");
+        Integer listPriceQuotePackLine3 = JsonParser2.
+                getFieldValueLikeInteger(quotePackageLineRecord3, "result", "thn__List_Price__c");
+        Integer listPriceQuotePackLine4 = JsonParser2.
+                getFieldValueLikeInteger(quotePackageLineRecord4, "result", "thn__List_Price__c");
+        Integer listPriceQuotePackage = JsonParser2.
+                getFieldValueLikeInteger(quotePackageRecord, "result", "thn__List_Price__c");
+        Integer sumPricePackLine1 = listPriceQuotePackLine1 + listPriceQuotePackLine2 + listPriceQuotePackLine3
+                + listPriceQuotePackLine4;
         Assert.assertEquals(listPriceQuotePackage, sumPricePackLine1);
         SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
@@ -779,42 +833,85 @@ public class PackagesCustomPrice extends BaseTest {
                 "--json"});
         System.out.println(quotePackageRecord2);
         System.out.println(quotePackageLineRecord6);
-        double discountQuotePackageLine5 = JsonParser2.getFieldValueLikeDouble(quotePackageLineRecord5, "result", "thn__Discount__c");
-        double discountQuotePackageLine6 = JsonParser2.getFieldValueLikeDouble(quotePackageLineRecord6, "result", "thn__Discount__c");
-        double discountQuotePackage = JsonParser2.getFieldValueLikeDouble(quotePackageRecord2, "result", "thn__Discount_Amount__c");
+        double discountQuotePackageLine5 = JsonParser2.
+                getFieldValueLikeDouble(quotePackageLineRecord5, "result", "thn__Discount__c");
+        double discountQuotePackageLine6 = JsonParser2.
+                getFieldValueLikeDouble(quotePackageLineRecord6, "result", "thn__Discount__c");
+        double discountQuotePackage = JsonParser2.
+                getFieldValueLikeDouble(quotePackageRecord2, "result", "thn__Discount_Amount__c");
         double sumDiscountQuotePackageLines = discountQuotePackageLine5 + discountQuotePackageLine6;
-        double unitPriceExclTaxQuotePackage = JsonParser2.getFieldValueLikeDouble(quotePackageRecord2, "result", "thn__Unit_Price_excl_Tax__c");
-        double unitPriceInclTaxQuotePackage = JsonParser2.getFieldValueLikeDouble(quotePackageRecord2, "result", "thn__Unit_Price_incl_Tax__c");
-        double salesPriceExclTaxQuotePackage = JsonParser2.getFieldValueLikeDouble(quotePackageRecord2, "result", "thn__Sales_Price_excl_Tax__c");
-        double salesPriceInclTaxQuotePackage = JsonParser2.getFieldValueLikeDouble(quotePackageRecord2, "result", "thn__Sales_Price_incl_Tax__c");
-        double unitPriceExclTaxQuotePackageLine1 = JsonParser2.getFieldValueLikeDouble(quotePackageLineRecord1, "result", "thn__Unit_Price_excl_Tax__c");
-        double unitPriceInclTaxQuotePackageLine1 = JsonParser2.getFieldValueLikeDouble(quotePackageLineRecord1, "result", "thn__Unit_Price_incl_Tax__c");
-        double salesPriceExclTaxQuotePackageLine1 = JsonParser2.getFieldValueLikeDouble(quotePackageLineRecord1, "result", "thn__Sales_Price_excl_Tax__c");
-        double salesPriceInclTaxQuotePackageLine1 = JsonParser2.getFieldValueLikeDouble(quotePackageLineRecord1, "result", "thn__Sales_Price_incl_Tax__c");
-        double unitPriceExclTaxQuotePackageLine2 = JsonParser2.getFieldValueLikeDouble(quotePackageLineRecord2, "result", "thn__Unit_Price_excl_Tax__c");
-        double unitPriceInclTaxQuotePackageLine2 = JsonParser2.getFieldValueLikeDouble(quotePackageLineRecord2, "result", "thn__Unit_Price_incl_Tax__c");
-        double salesPriceExclTaxQuotePackageLine2 = JsonParser2.getFieldValueLikeDouble(quotePackageLineRecord2, "result", "thn__Sales_Price_excl_Tax__c");
-        double salesPriceInclTaxQuotePackageLine2 = JsonParser2.getFieldValueLikeDouble(quotePackageLineRecord2, "result", "thn__Sales_Price_incl_Tax__c");
-        double unitPriceExclTaxQuotePackageLine3 = JsonParser2.getFieldValueLikeDouble(quotePackageLineRecord3, "result", "thn__Unit_Price_excl_Tax__c");
-        double unitPriceInclTaxQuotePackageLine3 = JsonParser2.getFieldValueLikeDouble(quotePackageLineRecord3, "result", "thn__Unit_Price_incl_Tax__c");
-        double salesPriceExclTaxQuotePackageLine3 = JsonParser2.getFieldValueLikeDouble(quotePackageLineRecord3, "result", "thn__Sales_Price_excl_Tax__c");
-        double salesPriceInclTaxQuotePackageLine3 = JsonParser2.getFieldValueLikeDouble(quotePackageLineRecord3, "result", "thn__Sales_Price_incl_Tax__c");
-        double unitPriceExclTaxQuotePackageLine4 = JsonParser2.getFieldValueLikeDouble(quotePackageLineRecord4, "result", "thn__Unit_Price_excl_Tax__c");
-        double unitPriceInclTaxQuotePackageLine4 = JsonParser2.getFieldValueLikeDouble(quotePackageLineRecord4, "result", "thn__Unit_Price_incl_Tax__c");
-        double salesPriceExclTaxQuotePackageLine4 = JsonParser2.getFieldValueLikeDouble(quotePackageLineRecord4, "result", "thn__Sales_Price_excl_Tax__c");
-        double salesPriceInclTaxQuotePackageLine4 = JsonParser2.getFieldValueLikeDouble(quotePackageLineRecord4, "result", "thn__Sales_Price_incl_Tax__c");
-        double unitPriceExclTaxQuotePackageLine5 = JsonParser2.getFieldValueLikeDouble(quotePackageLineRecord5, "result", "thn__Unit_Price_excl_Tax__c");
-        double unitPriceInclTaxQuotePackageLine5 = JsonParser2.getFieldValueLikeDouble(quotePackageLineRecord5, "result", "thn__Unit_Price_incl_Tax__c");
-        double salesPriceExclTaxQuotePackageLine5 = JsonParser2.getFieldValueLikeDouble(quotePackageLineRecord5, "result", "thn__Sales_Price_excl_Tax__c");
-        double salesPriceInclTaxQuotePackageLine5 = JsonParser2.getFieldValueLikeDouble(quotePackageLineRecord5, "result", "thn__Sales_Price_incl_Tax__c");
-        double unitPriceExclTaxQuotePackageLine6 = JsonParser2.getFieldValueLikeDouble(quotePackageLineRecord6, "result", "thn__Unit_Price_excl_Tax__c");
-        double unitPriceInclTaxQuotePackageLine6 = JsonParser2.getFieldValueLikeDouble(quotePackageLineRecord6, "result", "thn__Unit_Price_incl_Tax__c");
-        double salesPriceExclTaxQuotePackageLine6 = JsonParser2.getFieldValueLikeDouble(quotePackageLineRecord6, "result", "thn__Sales_Price_excl_Tax__c");
-        double salesPriceInclTaxQuotePackageLine6 = JsonParser2.getFieldValueLikeDouble(quotePackageLineRecord6, "result", "thn__Sales_Price_incl_Tax__c");
-        double sumUnitPriceExclTaxQuotePackageLines = unitPriceExclTaxQuotePackageLine1 + unitPriceExclTaxQuotePackageLine2 +unitPriceExclTaxQuotePackageLine3 + unitPriceExclTaxQuotePackageLine4 + unitPriceExclTaxQuotePackageLine5 + unitPriceExclTaxQuotePackageLine6;
-        double sumUnitPriceInclTaxQuotePackageLines = unitPriceInclTaxQuotePackageLine1 + unitPriceInclTaxQuotePackageLine2 + unitPriceInclTaxQuotePackageLine3 + unitPriceInclTaxQuotePackageLine4 + unitPriceInclTaxQuotePackageLine5 + unitPriceInclTaxQuotePackageLine6;
-        double sumSalesPriceExclTaxQuotePackageLines = salesPriceExclTaxQuotePackageLine1 + salesPriceExclTaxQuotePackageLine2 + salesPriceExclTaxQuotePackageLine3 +salesPriceExclTaxQuotePackageLine4 + salesPriceExclTaxQuotePackageLine5 + salesPriceExclTaxQuotePackageLine6;
-        double sumSalesPriceInclTaxQuotePackageLines = salesPriceInclTaxQuotePackageLine1 + salesPriceInclTaxQuotePackageLine2 + salesPriceInclTaxQuotePackageLine3 + salesPriceInclTaxQuotePackageLine4 + salesPriceInclTaxQuotePackageLine5 + salesPriceInclTaxQuotePackageLine6;
+        double unitPriceExclTaxQuotePackage = JsonParser2.
+                getFieldValueLikeDouble(quotePackageRecord2, "result", "thn__Unit_Price_excl_Tax__c");
+        double unitPriceInclTaxQuotePackage = JsonParser2.
+                getFieldValueLikeDouble(quotePackageRecord2, "result", "thn__Unit_Price_incl_Tax__c");
+        double salesPriceExclTaxQuotePackage = JsonParser2.
+                getFieldValueLikeDouble(quotePackageRecord2, "result", "thn__Sales_Price_excl_Tax__c");
+        double salesPriceInclTaxQuotePackage = JsonParser2.
+                getFieldValueLikeDouble(quotePackageRecord2, "result", "thn__Sales_Price_incl_Tax__c");
+        double unitPriceExclTaxQuotePackageLine1 = JsonParser2.
+                getFieldValueLikeDouble(quotePackageLineRecord1, "result", "thn__Unit_Price_excl_Tax__c");
+        double unitPriceInclTaxQuotePackageLine1 = JsonParser2.
+                getFieldValueLikeDouble(quotePackageLineRecord1, "result", "thn__Unit_Price_incl_Tax__c");
+        double salesPriceExclTaxQuotePackageLine1 = JsonParser2.
+                getFieldValueLikeDouble(quotePackageLineRecord1, "result", "thn__Sales_Price_excl_Tax__c");
+        double salesPriceInclTaxQuotePackageLine1 = JsonParser2.
+                getFieldValueLikeDouble(quotePackageLineRecord1, "result", "thn__Sales_Price_incl_Tax__c");
+        double unitPriceExclTaxQuotePackageLine2 = JsonParser2.
+                getFieldValueLikeDouble(quotePackageLineRecord2, "result", "thn__Unit_Price_excl_Tax__c");
+        double unitPriceInclTaxQuotePackageLine2 = JsonParser2.
+                getFieldValueLikeDouble(quotePackageLineRecord2, "result", "thn__Unit_Price_incl_Tax__c");
+        double salesPriceExclTaxQuotePackageLine2 = JsonParser2.
+                getFieldValueLikeDouble(quotePackageLineRecord2, "result", "thn__Sales_Price_excl_Tax__c");
+        double salesPriceInclTaxQuotePackageLine2 = JsonParser2.
+                getFieldValueLikeDouble(quotePackageLineRecord2, "result", "thn__Sales_Price_incl_Tax__c");
+        double unitPriceExclTaxQuotePackageLine3 = JsonParser2.
+                getFieldValueLikeDouble(quotePackageLineRecord3, "result", "thn__Unit_Price_excl_Tax__c");
+        double unitPriceInclTaxQuotePackageLine3 = JsonParser2.
+                getFieldValueLikeDouble(quotePackageLineRecord3, "result", "thn__Unit_Price_incl_Tax__c");
+        double salesPriceExclTaxQuotePackageLine3 = JsonParser2.
+                getFieldValueLikeDouble(quotePackageLineRecord3, "result", "thn__Sales_Price_excl_Tax__c");
+        double salesPriceInclTaxQuotePackageLine3 = JsonParser2.
+                getFieldValueLikeDouble(quotePackageLineRecord3, "result", "thn__Sales_Price_incl_Tax__c");
+        double unitPriceExclTaxQuotePackageLine4 = JsonParser2.
+                getFieldValueLikeDouble(quotePackageLineRecord4, "result", "thn__Unit_Price_excl_Tax__c");
+        double unitPriceInclTaxQuotePackageLine4 = JsonParser2.
+                getFieldValueLikeDouble(quotePackageLineRecord4, "result", "thn__Unit_Price_incl_Tax__c");
+        double salesPriceExclTaxQuotePackageLine4 = JsonParser2.
+                getFieldValueLikeDouble(quotePackageLineRecord4, "result", "thn__Sales_Price_excl_Tax__c");
+        double salesPriceInclTaxQuotePackageLine4 = JsonParser2.
+                getFieldValueLikeDouble(quotePackageLineRecord4, "result", "thn__Sales_Price_incl_Tax__c");
+        double unitPriceExclTaxQuotePackageLine5 = JsonParser2.
+                getFieldValueLikeDouble(quotePackageLineRecord5, "result", "thn__Unit_Price_excl_Tax__c");
+        double unitPriceInclTaxQuotePackageLine5 = JsonParser2.
+                getFieldValueLikeDouble(quotePackageLineRecord5, "result", "thn__Unit_Price_incl_Tax__c");
+        double salesPriceExclTaxQuotePackageLine5 = JsonParser2.
+                getFieldValueLikeDouble(quotePackageLineRecord5, "result", "thn__Sales_Price_excl_Tax__c");
+        double salesPriceInclTaxQuotePackageLine5 = JsonParser2.
+                getFieldValueLikeDouble(quotePackageLineRecord5, "result", "thn__Sales_Price_incl_Tax__c");
+        double unitPriceExclTaxQuotePackageLine6 = JsonParser2.
+                getFieldValueLikeDouble(quotePackageLineRecord6, "result", "thn__Unit_Price_excl_Tax__c");
+        double unitPriceInclTaxQuotePackageLine6 = JsonParser2.
+                getFieldValueLikeDouble(quotePackageLineRecord6, "result", "thn__Unit_Price_incl_Tax__c");
+        double salesPriceExclTaxQuotePackageLine6 = JsonParser2.
+                getFieldValueLikeDouble(quotePackageLineRecord6, "result", "thn__Sales_Price_excl_Tax__c");
+        double salesPriceInclTaxQuotePackageLine6 = JsonParser2.
+                getFieldValueLikeDouble(quotePackageLineRecord6, "result", "thn__Sales_Price_incl_Tax__c");
+        double sumUnitPriceExclTaxQuotePackageLines = unitPriceExclTaxQuotePackageLine1
+                + unitPriceExclTaxQuotePackageLine2 +unitPriceExclTaxQuotePackageLine3
+                + unitPriceExclTaxQuotePackageLine4 + unitPriceExclTaxQuotePackageLine5
+                + unitPriceExclTaxQuotePackageLine6;
+        double sumUnitPriceInclTaxQuotePackageLines = unitPriceInclTaxQuotePackageLine1
+                + unitPriceInclTaxQuotePackageLine2 + unitPriceInclTaxQuotePackageLine3
+                + unitPriceInclTaxQuotePackageLine4 + unitPriceInclTaxQuotePackageLine5
+                + unitPriceInclTaxQuotePackageLine6;
+        double sumSalesPriceExclTaxQuotePackageLines = salesPriceExclTaxQuotePackageLine1
+                + salesPriceExclTaxQuotePackageLine2 + salesPriceExclTaxQuotePackageLine3
+                +salesPriceExclTaxQuotePackageLine4 + salesPriceExclTaxQuotePackageLine5
+                + salesPriceExclTaxQuotePackageLine6;
+        double sumSalesPriceInclTaxQuotePackageLines = salesPriceInclTaxQuotePackageLine1
+                + salesPriceInclTaxQuotePackageLine2 + salesPriceInclTaxQuotePackageLine3
+                + salesPriceInclTaxQuotePackageLine4 + salesPriceInclTaxQuotePackageLine5
+                + salesPriceInclTaxQuotePackageLine6;
         Assert.assertEquals(unitPriceExclTaxQuotePackage, sumUnitPriceExclTaxQuotePackageLines);
         Assert.assertEquals(unitPriceInclTaxQuotePackage, sumUnitPriceInclTaxQuotePackageLines);
         Assert.assertEquals(salesPriceExclTaxQuotePackage, sumSalesPriceExclTaxQuotePackageLines);

@@ -17,19 +17,7 @@ public class CommissionCorrections extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     @Story("Commission correction")
     public void logIn() throws InterruptedException, IOException {
-        /*StringBuilder authorise = SfdxCommand.runLinuxCommand1(new String[]{
-                SFDX,
-                "force:auth:jwt:grant",
-                "--clientid",
-                CONSUMER_KEY,
-                "--jwtkeyfile",
-                SERVER_KEY_PATH,
-                "--username",
-                ORG_USERNAME,
-                "--instanceurl",
-                ORG_URL
-        });
-        System.out.println(authorise);*/
+
         loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
     }
 

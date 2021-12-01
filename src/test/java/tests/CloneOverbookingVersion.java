@@ -48,10 +48,14 @@ public class CloneOverbookingVersion extends BaseTest{
                 propertyID + "' thn__Type__c='Meeting Room'", ORG_USERNAME);
         String resourceID2 = resource.createResourceSFDX(SFDX, "Name='ResourceOverbookingAuto2' thn__Hotel__c='" +
                 propertyID + "' thn__Type__c='Meeting Room'", ORG_USERNAME);
+        StringBuilder recordTypes = myceQuotes.soql(SFDX, "SELECT Id FROM RecordType WHERE" +
+                " SobjectType='thn__MYCE_Quote__c' AND Name='Quote'", ORG_USERNAME);
+        System.out.println(recordTypes);
+        List<String> recordTypeID = JsonParser2.getFieldValueSoql(recordTypes.toString(), "Id");
         String quoteID = myceQuotes.createQuoteSFDX(SFDX, "Name='CloneOverbookingAutoTest' thn__Pax__c=5" +
                 " thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" + date.generateTodayDate2()
                 + " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 2) + "" +
-                " thn__Closed_Status__c='Won'", ORG_USERNAME);
+                " RecordTypeId='" + recordTypeID.get(0) + "'", ORG_USERNAME);
         String packageID = packages.createPackageSFDX(SFDX, "Name='CloneOverbookingPackageAutoTest'" +
                 " thn__Hotel__c='" + propertyID + "'", ORG_USERNAME);
         packageLine.createPackageLineSFDX(SFDX, "Name='Meeting Room' thn__Package__c='" + packageID +
@@ -70,7 +74,7 @@ public class CloneOverbookingVersion extends BaseTest{
         String quoteID2 = myceQuotes.createQuoteSFDX(SFDX, "Name='CloneOverbookingAutoTest2' thn__Pax__c=5" +
                 " thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" + date.generateTodayDate2()
                 + " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 2) + "" +
-                " thn__Closed_Status__c='Won'", ORG_USERNAME);
+                " RecordTypeId='" + recordTypeID.get(0) + "'", ORG_USERNAME);
         quoteMeetingPackages.createQuotePackageSFDX(SFDX, "thn__MYCE_Quote__c='" + quoteID2 + "'" +
                 " thn__Package__c='" + packageID + "'", ORG_USERNAME);
         quoteMeetingRoom.updateQuoteMeetingRoomSFDX(SFDX, "thn__MYCE_Quote__c='" + quoteID2 + "'" +
@@ -93,7 +97,7 @@ public class CloneOverbookingVersion extends BaseTest{
         myceQuotes.deleteQuoteSFDX(SFDX, "Name='CloneOverbookingAutoTestClone'", ORG_USERNAME);
         myceQuotes.goToMyceQuotes();
         myceQuotes.openMyceQoteRecord("CloneOverbookingAutoTest");
-        myceQuotes.cloneMyceQuote("CloneOverbookingAutoTestClone", date.generateTodayDate_plus(0, 0));
+        myceQuotes.cloneMyceQuote("CloneOverbookingAutoTestClone", date.generateTodayDate3_plus(0, 0));
         StringBuilder clonedQuoteRecord = myceQuotes.getQuoteSFDX(SFDX, "Name='CloneOverbookingAutoTestClone'",
                 ORG_USERNAME);
         String clonedQuoteID= JsonParser2.getFieldValue(clonedQuoteRecord.toString(), "Id");
@@ -124,7 +128,7 @@ public class CloneOverbookingVersion extends BaseTest{
                 "You don’t have the permission to overbook resources. Default meeting room has been assigned.";
         myceQuotes.goToMyceQuotes();
         myceQuotes.openMyceQoteRecord("CloneOverbookingAutoTest");
-        myceQuotes.cloneRelatedRecord(date.generateTodayDate_plus(0 , 0), "Quote Package");
+        myceQuotes.cloneRelatedRecord(date.generateTodayDate3_plus(0 , 0), "Quote Package");
         StringBuilder quoteRecord = myceQuotes.getQuoteSFDX(SFDX, "Name='CloneOverbookingAutoTest'", ORG_USERNAME);
         String myceQuoteID= JsonParser2.getFieldValue(quoteRecord.toString(), "Id");
         StringBuilder meetingHalfDayRecord = product.getProductSFDX(SFDX, "Name='MEETING HALF DAY'", ORG_USERNAME);
@@ -153,7 +157,7 @@ public class CloneOverbookingVersion extends BaseTest{
                 "You don’t have the permission to overbook resources. Default meeting room has been assigned.";
         myceQuotes.goToMyceQuotes();
         myceQuotes.openMyceQoteRecord("CloneOverbookingAutoTest");
-        myceQuotes.cloneRelatedRecord(date.generateTodayDate_plus(0 , 0), "Quote Meetings Room");
+        myceQuotes.cloneRelatedRecord(date.generateTodayDate3_plus(0 , 0), "Quote Meetings Room");
         StringBuilder quoteRecord = myceQuotes.getQuoteSFDX(SFDX, "Name='CloneOverbookingAutoTest'", ORG_USERNAME);
         String myceQuoteID= JsonParser2.getFieldValue(quoteRecord.toString(), "Id");
         StringBuilder meetingFullDayRecord = product.getProductSFDX(SFDX, "Name='MEETING FULL DAY'", ORG_USERNAME);
@@ -185,7 +189,7 @@ public class CloneOverbookingVersion extends BaseTest{
         myceQuotes.deleteQuoteSFDX(SFDX, "Name='CloneOverbookingAutoTestClone2'", ORG_USERNAME);
         myceQuotes.goToMyceQuotes();
         myceQuotes.openMyceQoteRecord("CloneOverbookingAutoTest2");
-        myceQuotes.cloneMyceQuote("CloneOverbookingAutoTestClone2", date.generateTodayDate_plus(0, 0));
+        myceQuotes.cloneMyceQuote("CloneOverbookingAutoTestClone2", date.generateTodayDate3_plus(0, 0));
         StringBuilder clonedQuoteRecord = myceQuotes.getQuoteSFDX(SFDX, "Name='CloneOverbookingAutoTestClone2'",
                 ORG_USERNAME);
         String clonedQuoteID= JsonParser2.getFieldValue(clonedQuoteRecord.toString(), "Id");
@@ -215,7 +219,7 @@ public class CloneOverbookingVersion extends BaseTest{
         //loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
         myceQuotes.goToMyceQuotes();
         myceQuotes.openMyceQoteRecord("CloneOverbookingAutoTest2");
-        myceQuotes.cloneRelatedRecord(date.generateTodayDate_plus(0 , 0), "Quote Package");
+        myceQuotes.cloneRelatedRecord(date.generateTodayDate3_plus(0 , 0), "Quote Package");
         StringBuilder quoteRecord = myceQuotes.getQuoteSFDX(SFDX, "Name='CloneOverbookingAutoTest2'", ORG_USERNAME);
         String myceQuoteID= JsonParser2.getFieldValue(quoteRecord.toString(), "Id");
         StringBuilder meetingHalfDayRecord = product.getProductSFDX(SFDX, "Name='MEETING HALF DAY'", ORG_USERNAME);
@@ -236,7 +240,7 @@ public class CloneOverbookingVersion extends BaseTest{
         //loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
         myceQuotes.goToMyceQuotes();
         myceQuotes.openMyceQoteRecord("CloneOverbookingAutoTest2");
-        myceQuotes.cloneRelatedRecord(date.generateTodayDate_plus(0 , 0), "Quote Meetings Room");
+        myceQuotes.cloneRelatedRecord(date.generateTodayDate3_plus(0 , 0), "Quote Meetings Room");
         StringBuilder quoteRecord = myceQuotes.getQuoteSFDX(SFDX, "Name='CloneOverbookingAutoTest2'", ORG_USERNAME);
         String myceQuoteID= JsonParser2.getFieldValue(quoteRecord.toString(), "Id");
         StringBuilder meetingFullDayRecord = product.getProductSFDX(SFDX, "Name='MEETING FULL DAY'", ORG_USERNAME);

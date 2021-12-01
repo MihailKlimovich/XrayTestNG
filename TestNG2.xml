@@ -20,6 +20,11 @@
             <class name="tests.TestData"/>
         </classes>
     </test>
+    <test name="Guest to contact">
+        <classes>
+            <class name="tests.GuestToContact"/>
+        </classes>
+    </test>
     <test name="Update Orders">
         <classes>
             <class name="tests.UpdateOrders"/>
@@ -188,6 +193,21 @@
     <test name="Overbooking and price update">
         <classes>
             <class name="tests.OverbookingAndPriceUpdate"/>
+        </classes>
+    </test>
+    <test name="Default Setup testing">
+        <classes>
+            <class name="tests.DefaultSetupTesting"/>
+        </classes>
+    </test>
+    <test name="Error management: null price on product">
+        <classes>
+            <class name="tests.ErrorManagementNullPriceOnProduct"/>
+        </classes>
+    </test>
+    <test name="Multi edit on quote's related list UAT">
+        <classes>
+            <class name="tests.MultiEditOnQuotesRelatedList"/>
         </classes>
     </test>
 

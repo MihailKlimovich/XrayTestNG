@@ -18,19 +18,6 @@ public class Commission extends BaseTest {
     @Story("Commission")
     public void logIn() throws InterruptedException, IOException {
         loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
-        /*StringBuilder authorise = SfdxCommand.runLinuxCommand1(new String[]{
-                SFDX,
-                "force:auth:jwt:grant",
-                "--clientid",
-                CONSUMER_KEY,
-                "--jwtkeyfile",
-                SERVER_KEY_PATH,
-                "--username",
-                ORG_USERNAME,
-                "--instanceurl",
-                ORG_URL
-        });
-        System.out.println(authorise);*/
     }
 
     @Test(priority = 2, description = "Preconditions")

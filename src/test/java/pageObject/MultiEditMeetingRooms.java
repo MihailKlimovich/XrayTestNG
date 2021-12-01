@@ -35,7 +35,7 @@ public class MultiEditMeetingRooms extends BasePage {
 
     @Step("Multi Edit Products (Meeting Rooms are part of Package)")
     public void multiEditMeetingRooms_PartOfPackage
-            (String newSetup, String newResStatus, String newFuncName, String commissionable, String hideOnOffer,
+            (String newSetup, String newResStatus, String commissionable, String hideOnOffer,
              String lockResource)
             throws InterruptedException {
         driver.switchTo().frame(0);
@@ -44,9 +44,10 @@ public class MultiEditMeetingRooms extends BasePage {
         click3(By.xpath("//option[text()='" + newSetup + "']"));
         click3(By.xpath("//input[@name='Edit_Reservation_Status_Values_0']"));
         click3(By.xpath("//select[@name='New_Reservation_Status_0']"));
+        Thread.sleep(1000);
         click3(By.xpath("//option[text()='" + newResStatus + "']"));
-        click3(By.xpath("//input[@name='New_Function_Name_0']"));
-        writeText(By.xpath("//input[@name='New_Function_Name_0']"), newFuncName);
+        //click3(By.xpath("//input[@name='New_Function_Name_0']"));
+        //writeText(By.xpath("//input[@name='New_Function_Name_0']"), newFuncName);
         click3(By.xpath("//input[@name='Lock_Resource_0' and @value='" + lockResource + "_Choice']"));
         click3(By.xpath("//input[@name='Hide_on_Offer_0' and @value='" + hideOnOffer + "_Choice']"));
         click3(By.xpath("//input[@name='Commissionable_0' and @value='" + commissionable + "_Choice']"));
@@ -59,7 +60,7 @@ public class MultiEditMeetingRooms extends BasePage {
 
     @Step("Multi Edit Products (Meeting Rooms are not part of Package)")
     public void multiEditMeetingRooms_notPartOfPackage
-            (String newStartDate, String newEndDate, String newSetup, String newResStatus, String newFuncName,
+            (String newStartDate, String newEndDate, String newSetup, String newResStatus,
              String newPax, String newActualPax, String commissionable, String hideOnOffer, String lockResource,
              String newComPer, String newDisPer, String newDisAmmount, String newUnitPrice )
             throws InterruptedException {
@@ -74,8 +75,6 @@ public class MultiEditMeetingRooms extends BasePage {
         click3(EDIT_RESERVATION_STATUS_CHECKBOX);
         click3(NEW_RESERVATION_STATUS_PICKLIST);
         click3(By.xpath("//option[text()='" + newResStatus + "']"));
-        click3(NEW_FUNCTION_NAME_FIELD);
-        writeText(NEW_FUNCTION_NAME_FIELD, newFuncName);
         click3(NEW_PAX_FIELD);
         writeText(NEW_PAX_FIELD, newPax);
         click3(NEW_ACTUAL_PAX_FIELD);

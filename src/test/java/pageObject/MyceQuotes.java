@@ -68,11 +68,11 @@ public class MyceQuotes extends BasePage {
     By KEEP_ALL_PAX_CHECKBOX = By.xpath("//span//input[@name='Keep all Pax']/following-sibling::label//span[@class='slds-checkbox_faux']");
     By KEEP_ROOMS_PAX_CHECKBOX = By.xpath("//input[@name='Keep rooms Pax']/following-sibling::label//span[@class='slds-checkbox_faux']");
     By SAVE_BUTTON_FOR_CLONE = By.xpath("//footer//button[text()='Save']");
-    By CHANGE_DATE_BUTTON = By.xpath("//button[@name='thn__MYCE_Quote__c.thn__Change_Date']");
+    By CHANGE_DATE_BUTTON = By.xpath("//button[@name='thn__MYCE_Quote__c.Change_Date']");
     By NEW_ARRIVAL_DATE_FIELD = By.xpath("//input[@name='New_arrival_date']");
     By NEXT_BUTTON_CHANGE_DATE_WINDOW = By.xpath("//button[@title='Next']");
     By FINISH_BUTTON_CHANGE_DATE_WINDOW = By.xpath("//button[@title='Finish']");
-    By UPDATE_ORDER_BUTTON = By.xpath("//button[@name='thn__MYCE_Quote__c.thn__Product_Modification']");
+    By UPDATE_ORDER_BUTTON = By.xpath("//button[@name='thn__MYCE_Quote__c.Update_Order']");
     By CLONE_TO_DATE_FIELD = By.xpath("//thn-clone-multi-select-component//input[@name='cloneTo']");
     By CREATE_CLONE_BUTTON = By.xpath("//thn-clone-multi-select-component//button[text()='Create']");
     By CLONE_QUOTE_ARRIVAL_DAY_FIELD = By.xpath("//div//input[@name='Arrival Date']");
@@ -162,7 +162,7 @@ public class MyceQuotes extends BasePage {
 
     @Step("Change date")
     public void changeDate(String date) throws InterruptedException {
-        wait1.until(ExpectedConditions.presenceOfElementLocated(CHANGE_DATE_BUTTON));
+        click4(CHANGE_DATE_BUTTON);
         Thread.sleep(2000);
         click3(CHANGE_DATE_BUTTON);
         wait1.until(ExpectedConditions.presenceOfElementLocated(NEW_ARRIVAL_DATE_FIELD)).click();

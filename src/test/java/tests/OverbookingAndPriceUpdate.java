@@ -12,6 +12,7 @@ import org.testng.annotations.Test;
 import pageObject.JsonParser2;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class OverbookingAndPriceUpdate extends BaseTest {
@@ -79,10 +80,14 @@ public class OverbookingAndPriceUpdate extends BaseTest {
                 " thn__Break_out_half_day__c=60 thn__Break_out_full_day__c=100", ORG_USERNAME);
         resourceGrouping.createResourceGroupingSFDX(SFDX, "thn__Grouped_Resource__c='" + resourceID2 + "'" +
                 " thn__Resource_Group__c='" + resourceID3 + "'", ORG_USERNAME);
+        StringBuilder recordTypes = myceQuotes.soql(SFDX, "SELECT Id FROM RecordType WHERE" +
+                " SobjectType='thn__MYCE_Quote__c' AND Name='Quote'", ORG_USERNAME);
+        System.out.println(recordTypes);
+        List<String> recordTypeID = JsonParser2.getFieldValueSoql(recordTypes.toString(), "Id");
         String quoteID = myceQuotes.createQuoteSFDX(SFDX, "Name='OverbookingChangePriceAutoTest' thn__Pax__c=5" +
                 " thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" + date.generateTodayDate2()
                 + " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 2) + "" +
-                " thn__Closed_Status__c='Won'", ORG_USERNAME);
+                " RecordTypeId='" + recordTypeID.get(0) + "'", ORG_USERNAME);
     }
 
     @Test(priority = 3, description = "Create a quote meeting room. Click on change resource to assign a different" +

@@ -8,6 +8,7 @@ import org.testng.annotations.Test;
 import pageObject.JsonParser2;
 
 import java.io.IOException;
+import java.util.List;
 
 public class MyceQuoteFillOptionDate extends BaseTest {
 
@@ -30,10 +31,14 @@ public class MyceQuoteFillOptionDate extends BaseTest {
         developerConsoleWindow.runApexCodeFromFile("src/main/Data/UpdateOptionInterval5Days");
         StringBuilder hotelRecord= hotel.getHotelSFDX(SFDX, "thn__Unique_Id__c='Demo'", ORG_USERNAME);
         String propertyID = JsonParser2.getFieldValue(hotelRecord.toString(), "Id");
+        StringBuilder recordTypes = myceQuotes.soql(SFDX, "SELECT Id FROM RecordType WHERE" +
+                " SobjectType='thn__MYCE_Quote__c' AND Name='Quote'", ORG_USERNAME);
+        System.out.println(recordTypes);
+        List<String> recordTypeID = JsonParser2.getFieldValueSoql(recordTypes.toString(), "Id");
         String quoteID = myceQuotes.createQuoteSFDX(SFDX, "Name='FillOptionDateAutoTest1' thn__Pax__c=5" +
                 " thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" + date.generateTodayDate2()
                 + " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 2) +
-                " thn__Closed_Status__c='Won'", ORG_USERNAME);
+                " RecordTypeId='" + recordTypeID.get(0) + "'", ORG_USERNAME);
         StringBuilder quoteRecord = myceQuotes.getQuoteSFDX(SFDX, "Id='" + quoteID + "'", ORG_USERNAME);
         String quoteOptionDate = JsonParser2.getFieldValue(quoteRecord.toString(), "thn__Option_date__c");
         Assert.assertEquals(quoteOptionDate, date.generateTodayDate2_plus(0, 5));
@@ -50,10 +55,14 @@ public class MyceQuoteFillOptionDate extends BaseTest {
         developerConsoleWindow.runApexCodeFromFile("src/main/Data/UpdateOptionInterval0Days");
         StringBuilder hotelRecord= hotel.getHotelSFDX(SFDX, "thn__Unique_Id__c='Demo'", ORG_USERNAME);
         String propertyID = JsonParser2.getFieldValue(hotelRecord.toString(), "Id");
+        StringBuilder recordTypes = myceQuotes.soql(SFDX, "SELECT Id FROM RecordType WHERE" +
+                " SobjectType='thn__MYCE_Quote__c' AND Name='Quote'", ORG_USERNAME);
+        System.out.println(recordTypes);
+        List<String> recordTypeID = JsonParser2.getFieldValueSoql(recordTypes.toString(), "Id");
         String quoteID = myceQuotes.createQuoteSFDX(SFDX, "Name='FillOptionDateAutoTest2' thn__Pax__c=5" +
                 " thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" + date.generateTodayDate2()
                 + " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 2) +
-                " thn__Closed_Status__c='Won'", ORG_USERNAME);
+                " RecordTypeId='" + recordTypeID.get(0) + "'", ORG_USERNAME);
         StringBuilder quoteRecord = myceQuotes.getQuoteSFDX(SFDX, "Id='" + quoteID + "'", ORG_USERNAME);
         String quoteOptionDate = JsonParser2.getFieldValue(quoteRecord.toString(), "thn__Option_date__c");
         Assert.assertEquals(quoteOptionDate, date.generateTodayDate2_plus(0, 0));

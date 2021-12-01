@@ -45,7 +45,7 @@ public class ComboProductTaxChange extends BaseTest {
         String listPriceInclTaxProductComponent = JsonParser2.
                 getFieldValue(productComponentRecord.toString(), "thn__List_Price_incl_Tax__c");
         Assert.assertEquals(taxCategoryProductComponent, "2");
-        Assert.assertEquals(listPriceInclTaxProductComponent, "120");
+        Assert.assertEquals(listPriceInclTaxProductComponent, "106");
     }
 
 }

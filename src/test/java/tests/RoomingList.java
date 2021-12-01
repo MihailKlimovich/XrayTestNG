@@ -40,9 +40,14 @@ public class RoomingList extends BaseTest {
         List<String> roomTypesId = JsonParser2.getFieldValueSoql(roomTypeRecords.toString(), "Id");
         String guestID = guests.createGuestSFDX(SFDX, "thn__LastName__c='RoomingListAutoTest' thn__Hotel__c='"
                 + propertyID + "' thn__Send_to_Mews__c=true", ORG_USERNAME);
+        StringBuilder recordTypes = myceQuotes.soql(SFDX, "SELECT Id FROM RecordType WHERE" +
+                " SobjectType='thn__MYCE_Quote__c' AND Name='Quote'", ORG_USERNAME);
+        System.out.println(recordTypes);
+        List<String> recordTypeID = JsonParser2.getFieldValueSoql(recordTypes.toString(), "Id");
         String quoteID = myceQuotes.createQuoteSFDX(SFDX, "Name='RoomingListAutoTest' thn__Pax__c=3" +
                 " thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" + date.generateTodayDate2()
-                + " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 2), ORG_USERNAME);
+                + " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 2) + " RecordTypeId='" +
+                recordTypeID.get(0) + "'", ORG_USERNAME);
         myceQuotes.updateQuoteSFDX(SFDX, "Id='" + quoteID + "'",
                 "thn__Reservation_Guest__c='" + guestID + "'", ORG_USERNAME);
         quoteHotelRoom.createQuoteHotelRoomSFDX(SFDX, "thn__MYCE_Quote__c='" + quoteID + "' thn__Product__c='" +
@@ -77,6 +82,7 @@ public class RoomingList extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     @Story("Rooming list testing")
     public void case2() throws InterruptedException, IOException {
+        //loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
         files.deleteFile("/home/user/Downloads/Rooming List RoomingListAutoTest.xlsx");
         myceQuotes.goToMyceQuotes();
         myceQuotes.openMyceQoteRecord("RoomingListAutoTest");
