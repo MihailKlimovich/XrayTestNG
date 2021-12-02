@@ -1,9 +1,1 @@
-2021-12-01 18:06:53,023 INFO  - settingUpValidationRules test is starting.
-2021-12-01 18:07:00,510 INFO  - testCreateNewMyceQuote1 test is starting.
-2021-12-01 18:07:01,703 INFO  - testCreateNewMyceQuote2 test is starting.
-2021-12-01 18:07:02,940 INFO  - testCreateNewMyceQuote3 test is starting.
-2021-12-01 18:07:04,116 INFO  - testCreateNewMyceQuote4 test is starting.
-2021-12-01 18:07:05,265 INFO  - testCreateNewMyceQuote5 test is starting.
-2021-12-01 18:07:08,838 INFO  - testCreateNewMyceQuote6 test is starting.
-2021-12-01 18:07:10,017 INFO  - testCreateNewMyceQuote7 test is starting.
-2021-12-01 18:07:11,142 INFO  - testCreateNewMyceQuote8 test is starting.
+2021-12-02 17:21:11,691 INFO  - logIn test is starting.
