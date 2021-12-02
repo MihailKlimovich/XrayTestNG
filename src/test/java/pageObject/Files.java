@@ -33,7 +33,8 @@ public class Files extends BasePage {
         while (attempts < 4) {
             try {
                 wait1.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[@title='" + fileName + "']")));
-                click(SHOW_MORE_ACTION);
+                Thread.sleep(2000);
+                click3(SHOW_MORE_ACTION);
                 click3(DOWNLOAD_BUTTON);
                 Thread.sleep(3000);
                 break;
