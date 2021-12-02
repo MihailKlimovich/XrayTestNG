@@ -8,12 +8,16 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import pageObject.JsonParser2;
+import utils.Listeners.TestListener;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+
+@Listeners({TestListener.class})
 
 public class CloneOverbookingVersion extends BaseTest{
 

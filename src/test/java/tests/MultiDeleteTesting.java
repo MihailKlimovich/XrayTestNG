@@ -6,16 +6,16 @@ import io.qameta.allure.Story;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 import pageObject.JsonParser2;
 import pageObject.SfdxCommand;
+import utils.Listeners.TestListener;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+
+@Listeners({TestListener.class})
 
 public class MultiDeleteTesting extends BaseTest {
 

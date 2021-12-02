@@ -6,14 +6,18 @@ import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.Story;
 import org.json.simple.parser.ParseException;
 import org.testng.Assert;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import pageObject.JsonParser;
 import pageObject.JsonParser2;
 import pageObject.SfdxCommand;
+import utils.Listeners.TestListener;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+@Listeners({TestListener.class})
 
 public class MyceToOpera extends BaseTest {
 
