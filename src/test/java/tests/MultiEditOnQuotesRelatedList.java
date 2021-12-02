@@ -236,7 +236,7 @@ public class MultiEditOnQuotesRelatedList extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     @Story("Multi edit on quote's related list UAT")
     public void case3() throws InterruptedException, IOException {
-        // loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
+        //loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
         StringBuilder quoteRecord = myceQuotes.
                 getQuoteSFDX(SFDX, "Name='MultiEditAutoTest2'", ORG_USERNAME);
         String quoteID= JsonParser2.getFieldValue(quoteRecord.toString(), "Id");
@@ -248,8 +248,8 @@ public class MultiEditOnQuotesRelatedList extends BaseTest {
         myceQuotes.openProducts();
         quoteProducts.selectAllItems("2");
         quoteProducts.clickMultiedit();
-        multiEditProducts.multiEditProducts_notPartOfPackage(date.generateTodayDate3_plus(0, 1),
-                date.generateTodayDate3_plus(0, 2), "DEFAULT - MEETING FULL DAY",
+        multiEditProducts.multiEditProducts_notPartOfPackage(date.generateTodayDate3_plus(0, 0),
+                date.generateTodayDate3_plus(0, 1), "DEFAULT - MEETING FULL DAY",
                 "3", "2", "Yes", "Yes", "No",
                 "5", "10", "", "");
         StringBuilder quoteProductRecord1 = quoteProducts.
@@ -312,10 +312,10 @@ public class MultiEditOnQuotesRelatedList extends BaseTest {
         Assert.assertEquals(productHideOnOffer2, "true");
         Assert.assertEquals(productIsOnConsumption1, "false");
         Assert.assertEquals(productIsOnConsumption2, "false");
-        Assert.assertEquals(productStartDate1, date.generateTodayDate2_plus(0, 1));
-        Assert.assertEquals(productStartDate2, date.generateTodayDate2_plus(0, 1));
-        Assert.assertEquals(productEndDate1, date.generateTodayDate2_plus(0, 2));
-        Assert.assertEquals(productEndDate2, date.generateTodayDate2_plus(0, 2));
+        Assert.assertEquals(productStartDate1, date.generateTodayDate2_plus(0, 0));
+        Assert.assertEquals(productStartDate2, date.generateTodayDate2_plus(0, 0));
+        Assert.assertEquals(productEndDate1, date.generateTodayDate2_plus(0, 1));
+        Assert.assertEquals(productEndDate2, date.generateTodayDate2_plus(0, 1));
         Assert.assertEquals(productPax1, "3");
         Assert.assertEquals(productPax2, "3");
         Assert.assertEquals(productActualPax1, "2");
@@ -475,7 +475,7 @@ public class MultiEditOnQuotesRelatedList extends BaseTest {
         Assert.assertEquals(productCommissionable2, "true");
         Assert.assertEquals(productHideOnOffer1, "true");
         Assert.assertEquals(productHideOnOffer2, "true");
-        Assert.assertEquals(productIsOnConsumption1, "false");
+        Assert.assertEquals(productIsOnConsumption1, "true");
         Assert.assertEquals(productIsOnConsumption2, "false");
     }
 

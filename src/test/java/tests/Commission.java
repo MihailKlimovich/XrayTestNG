@@ -40,7 +40,7 @@ public class Commission extends BaseTest {
                 "-s",
                 "Account",
                 "-w",
-                "Name='TestAccountWithoutCommission",
+                "Name='TestAccountWithoutCommissionAuto",
                 "-u",
                 ORG_USERNAME,
                 "--json"});

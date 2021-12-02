@@ -62,7 +62,7 @@ public class Packages extends BasePage {
 
     @Step("Clone Package")
     public void clonePackage(String name) throws InterruptedException {
-        click3(CLONE_PACKAGE_BUTTON);
+        click2(CLONE_PACKAGE_BUTTON);
         click3(NAME_CLONE_PACKAGE_FIELD);
         clear(NAME_CLONE_PACKAGE_FIELD);
         writeText(NAME_CLONE_PACKAGE_FIELD, name);

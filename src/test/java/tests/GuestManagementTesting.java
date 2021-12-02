@@ -313,7 +313,7 @@ public class GuestManagementTesting extends BaseTest {
         String reservationGuestMewsId = JsonParser2.getFieldValue(reservationGuestRecord.toString(), "thn__Mews_Id__c");
         String reservationGuestLastName = JsonParser2.getFieldValue(reservationGuestRecord.toString(), "thn__LastName__c");
         Assert.assertNotNull(reservationGuestMewsId);
-        Assert.assertEquals(reservationGuestLastName, "AutoReservationGuest");
+        Assert.assertEquals(reservationGuestLastName, "GuestManagementTesting");
     }
 
 }

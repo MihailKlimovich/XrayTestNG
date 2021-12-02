@@ -25,33 +25,19 @@ public class ValidationRule1 extends BaseTest{
     @Severity(SeverityLevel.NORMAL)
     @Story("THY-510: Validation rule updated")
     public void settingUpValidationRules() throws InterruptedException, IOException {
-        /*StringBuilder authorise = SfdxCommand.runLinuxCommand1(new String[]{
-                SFDX,
-                "force:auth:jwt:grant",
-                "--clientid",
-                CONSUMER_KEY,
-                "--jwtkeyfile",
-                SERVER_KEY_PATH,
-                "--username",
-                ORG_USERNAME,
-                "--instanceurl",
-                ORG_URL
-        });
-        System.out.println(authorise);*/
         loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
-        /*StringBuilder result2 = SfdxCommand.runLinuxCommand1(new String[]{
+        SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:update",
                 "-s",
                 "User",
                 "-w",
-                "Name='Rostislav'",
+                "Name='User User'",
                 "-v",
                 "thn__ByPassVR__c=false",
                 "-u",
                 ORG_USERNAME,
                 "--json"});
-        System.out.println(result2);
         Object byPass = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:soql:query",
@@ -80,7 +66,7 @@ public class ValidationRule1 extends BaseTest{
                 "-s",
                 "User",
                 "-w",
-                "Name='Rostislav'",
+                "Name='User User'",
                 "-u",
                 ORG_USERNAME,
                 "--json"});
@@ -98,11 +84,12 @@ public class ValidationRule1 extends BaseTest{
         System.out.println(byPassRecord);
         String byPassVr = JsonParser2.getFieldValue(byPassRecord.toString(), "thn__ByPassVR__c");
         Assert.assertEquals(userByPass, "false");
-        Assert.assertEquals(byPassVr, "false");*/
+        Assert.assertEquals(byPassVr, "false");
     }
 
 
-    @Test(priority = 2, description = "Myce_Quote__c.Commission_Validation_Rule: Commissionable == true & thn__Commission_to__c == null ")
+    @Test(priority = 2, description = "Myce_Quote__c.Commission_Validation_Rule: Commissionable == true &" +
+            " thn__Commission_to__c == null ")
     @Severity(SeverityLevel.NORMAL)
     @Story("THY-510: Validation rule updated")
     public void testCreateNewMyceQuote1() throws InterruptedException, IOException {
