@@ -210,6 +210,11 @@
             <class name="tests.MultiEditOnQuotesRelatedList"/>
         </classes>
     </test>
+    <test name="Meeting room and resource pricing">
+        <classes>
+            <class name="tests.MeetingRoomAndResourcePricing"/>
+        </classes>
+    </test>
 
 
 

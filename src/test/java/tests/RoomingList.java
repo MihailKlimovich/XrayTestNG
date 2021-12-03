@@ -22,9 +22,9 @@ public class RoomingList extends BaseTest {
     public void logIn() throws InterruptedException, IOException {
         loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
         loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
-        developerConsoleWindow.openDeveloperConsole();
-        developerConsoleWindow.openExecuteAnonymousWindow();
-        developerConsoleWindow.runApexCodeFromFile("src/main/Data/TemplateConfig");
+        //developerConsoleWindow.openDeveloperConsole();
+        //developerConsoleWindow.openExecuteAnonymousWindow();
+        //developerConsoleWindow.runApexCodeFromFile("src/main/Data/TemplateConfig");
     }
 
     @Test(priority = 2, description = "Create MYCE Quote, specify Reservation Guest, Add Quote hotel rooms, Send Quote" +

@@ -589,7 +589,6 @@ public class MyceQuotes extends BasePage {
                 "--json"});
         System.out.println(quoteUpdateResult);
         return quoteUpdateResult;
-
     }
 
     @Step("SOQL")

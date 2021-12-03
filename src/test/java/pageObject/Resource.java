@@ -65,6 +65,26 @@ public class Resource extends BasePage {
         return resourceRecord;
     }
 
+    @Step("Update Resource SFDX")
+    public StringBuilder updateResourceSFDX(String sfdxPath, String where, String value, String userName)
+            throws IOException, InterruptedException {
+        StringBuilder resourceUpdateResult = SfdxCommand.runLinuxCommand1(new String[]{
+                sfdxPath,
+                "force:data:record:update",
+                "-s",
+                "thn__Resource__c",
+                "-w",
+                where,
+                "-v",
+                value,
+                "-u",
+                userName,
+                "--json"});
+        System.out.println(resourceUpdateResult);
+        return resourceUpdateResult;
+    }
+
+
 
 
 
