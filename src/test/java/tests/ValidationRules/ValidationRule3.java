@@ -44,7 +44,7 @@ public class ValidationRule3 extends BaseTest {
                 "-s",
                 "User",
                 "-w",
-                "Name='User User'",
+                "Name='Rostislav'",
                 "-v",
                 "thn__ByPassVR__c=true",
                 "-u",
@@ -78,7 +78,7 @@ public class ValidationRule3 extends BaseTest {
                 "-s",
                 "User",
                 "-w",
-                "Name='User User'",
+                "Name='Rostislav'",
                 "-u",
                 ORG_USERNAME,
                 "--json"});

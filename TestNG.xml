@@ -20,6 +20,21 @@
             <class name="tests.ValidationRules.ValidationRule1"/>
         </classes>
     </test>
+    <test name="THY-510: ValidationRule2">
+        <classes>
+            <class name="tests.ValidationRules.ValidationRule2"/>
+        </classes>
+    </test>
+    <test name="THY-510: ValidationRule3">
+        <classes>
+            <class name="tests.ValidationRules.ValidationRule3"/>
+        </classes>
+    </test>
+    <test name="THY-510: ValidationRule4">
+        <classes>
+            <class name="tests.ValidationRules.ValidationRule4"/>
+        </classes>
+    </test>
     <test name="THY-487: Reservation creation process">
         <classes>
             <class name="tests.ReservationCreationProcess"/>
@@ -168,6 +183,11 @@
     <test name="Meeting room and resource pricing">
         <classes>
             <class name="tests.MeetingRoomAndResourcePricing"/>
+        </classes>
+    </test>
+    <test name="Myce Quote - Complimentary. Change price calculation with handle Unit field.">
+        <classes>
+            <class name="tests.MyceQuoteComplimentaryChangePriceCalculationWithHandleUnitField"/>
         </classes>
     </test>
 

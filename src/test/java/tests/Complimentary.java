@@ -529,7 +529,8 @@ public class Complimentary extends BaseTest {
     @Test(priority = 3, description = "THY-540 Myce Quote - Complimentary")
     @Severity(SeverityLevel.NORMAL)
     @Description("THY-540 Myce Quote - Complimentary")
-    @Story("Case 3: Add Quote hotel rooms, Quote meeting rooms, Quote products and Quote meeting packages to the Quote when Complimentary is set to TRUE")
+    @Story("Case 3: Add Quote hotel rooms, Quote meeting rooms, Quote products and Quote meeting packages to the" +
+            " Quote when Complimentary is set to TRUE")
     public void testComplimentary3() throws InterruptedException, IOException {
         StringBuilder propertyRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,

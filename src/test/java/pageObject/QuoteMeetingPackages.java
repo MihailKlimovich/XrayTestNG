@@ -172,5 +172,23 @@ public class QuoteMeetingPackages extends BasePage {
         return result;
     }
 
+    @Step("Update Quote Package SFDX")
+    public void updateQuotePackageSFDX(String sfdxPath, String where, String value, String userName)
+            throws IOException, InterruptedException {
+        StringBuilder quotePackageUpdateResult = SfdxCommand.runLinuxCommand1(new String[]{
+                sfdxPath,
+                "force:data:record:update",
+                "-s",
+                "thn__Quote_Package__c",
+                "-w",
+                where,
+                "-v",
+                value,
+                "-u",
+                userName,
+                "--json"});
+        System.out.println(quotePackageUpdateResult);
+    }
+
 
 }
