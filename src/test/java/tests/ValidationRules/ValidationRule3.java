@@ -375,7 +375,6 @@ public class ValidationRule3 extends BaseTest {
                 " thn__Is_Confirmed__c=false thn__Closed_Status__c='Lost'", ORG_USERNAME );
         StringBuilder result = myceQuotes.updateQuoteSFDX(SFDX, "Id='" + quoteID + "'",
                 "thn__Closed_Status__c='Cancelled'", ORG_USERNAME);
-        String message = JsonParser2.getFieldValue2(result.toString(), "message");
         StringBuilder res = myceQuotes.getQuoteSFDX(SFDX, "Id='" + quoteID + "'", ORG_USERNAME);
         String name = JsonParser2.getFieldValue(res.toString(), "Name");
         String closedStatus = JsonParser2.getFieldValue(res.toString(), "thn__Closed_Status__c");
@@ -1088,51 +1087,19 @@ public class ValidationRule3 extends BaseTest {
     @Description("Quote_Hotel_Room__c.VR15_Pax")
     @Story("Add Quote hotel room on MYCE Quote: thn__Pax__c > thn__MYCE_Quote__r.thn__Pax__c")
     public void testCreateQuoteHotelRoom6() throws InterruptedException, IOException {
-        StringBuilder res1 = SfdxCommand.runLinuxCommand1(new String[]{
-                SFDX,
-                "force:data:record:get",
-                "-s",
-                "thn__Hotel__c",
-                "-w",
-                "thn__Unique_Id__c='Demo'",
-                "-u",
-                ORG_USERNAME,
-                "--json"});
-        StringBuilder res2 = SfdxCommand.runLinuxCommand1(new String[]{
-                SFDX,
-                "force:data:record:get",
-                "-s",
-                "thn__Product__c",
-                "-w",
-                "Name='ROOM 2 NIGHTS'",
-                "-u",
-                ORG_USERNAME,
-                "--json"});
-        String productID = JsonParser2.getFieldValue(res2.toString(), "Id");
-        String propertyID = JsonParser2.getFieldValue(res1.toString(), "Id");
-        SfdxCommand.runLinuxCommand1(new String[]{
-                ORG_USERNAME,
-                "force:data:record:create",
-                "-s",
-                "thn__MYCE_Quote__c",
-                "-v",
-                "Name='Test72' thn__Pax__c=5 thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
-                        date.generateTodayDate2_plus(0, 1) + " thn__Departure_Date__c=" +
-                        date.generateTodayDate2_plus(0, 3),
-                "-u",
-                ORG_USERNAME,
-                "--json"});
-        StringBuilder res3 = SfdxCommand.runLinuxCommand1(new String[]{
-                SFDX,
-                "force:data:record:get",
-                "-s",
-                "thn__MYCE_Quote__c",
-                "-w",
-                "Name='Test72'",
-                "-u",
-                ORG_USERNAME,
-                "--json"});
-        String myceQuoteID = JsonParser2.getFieldValue(res3.toString(), "Id");
+        StringBuilder hotelRecord= hotel.getHotelSFDX(SFDX, "thn__Unique_Id__c='Demo'", ORG_USERNAME);
+        String propertyID = JsonParser2.getFieldValue(hotelRecord.toString(), "Id");
+        StringBuilder room2NightsRecord = product.getProductSFDX(SFDX, "Name='ROOM 2 NIGHTS'", ORG_USERNAME);
+        String room2NightsID = JsonParser2.getFieldValue(room2NightsRecord.toString(), "Id");
+        StringBuilder recordTypes = myceQuotes.soql(SFDX, "SELECT Id FROM RecordType WHERE" +
+                " SobjectType='thn__MYCE_Quote__c' AND Name='Quote'", ORG_USERNAME);
+        System.out.println(recordTypes);
+        List<String> recordTypeID = JsonParser2.getFieldValueSoql(recordTypes.toString(), "Id");
+        String quoteID = myceQuotes.createQuoteSFDX(SFDX, "Name='Test71' thn__Pax__c=5" +
+                " thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" + date.generateTodayDate2_plus(0, 1)
+                + " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 3) + " RecordTypeId='"
+                + recordTypeID.get(0) + "'", ORG_USERNAME);
+        StringBuilder myceQuoteRecord = myceQuotes.getQuoteSFDX(SFDX, "Id='" + quoteID + "'", ORG_USERNAME);
         StringBuilder res4 = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:get",
@@ -1150,7 +1117,7 @@ public class ValidationRule3 extends BaseTest {
                 "-s",
                 "thn__Quote_Hotel_Room__c",
                 "-v",
-                "thn__MYCE_Quote__c='" + myceQuoteID + "' thn__Product__c='" + productID +
+                "thn__MYCE_Quote__c='" + quoteID + "' thn__Product__c='" + room2NightsID +
                         "' thn__Space_Area__c='" + roomTypeID + "' thn__Arrival_Date_Time__c=" +
                         date.generateTodayDate2_plus(0, 1) + "T10:00:00.000+0000 thn__Departure_Date_Time__c=" +
                         date.generateTodayDate2_plus(0, 3) + "T19:00:00.000+0000 thn__Pax__c=6",
@@ -1163,14 +1130,14 @@ public class ValidationRule3 extends BaseTest {
                 "-s",
                 "thn__Quote_Hotel_Room__c",
                 "-w",
-                "thn__MYCE_Quote__c='" + myceQuoteID,
+                "thn__MYCE_Quote__c='" + quoteID,
                 "-u",
                 ORG_USERNAME,
                 "--json"});
         String myceQuote = JsonParser2.getFieldValue(res5.toString(), "thn__MYCE_Quote__c");
-        String myceQuotePax= JsonParser2.getFieldValue(res3.toString(), "thn__Pax__c");
+        String myceQuotePax= JsonParser2.getFieldValue(myceQuoteRecord.toString(), "thn__Pax__c");
         String hotelRoomPax= JsonParser2.getFieldValue(res5.toString(), "thn__Pax__c");
-        Assert.assertEquals(myceQuote, myceQuoteID);
+        Assert.assertEquals(myceQuote, quoteID);
         Assert.assertEquals(myceQuotePax, "5");
         Assert.assertEquals(hotelRoomPax, "6");
     }
@@ -1561,7 +1528,7 @@ public class ValidationRule3 extends BaseTest {
         Assert.assertEquals(success, "true");
     }
 
-    @Test(priority = 23, description = "Quote_Package__c.VR12_Dates_within_Quote_dates")
+    /*@Test(priority = 23, description = "Quote_Package__c.VR12_Dates_within_Quote_dates")
     @Severity(SeverityLevel.NORMAL)
     @Description("Quote_Package__c.VR12_Dates_within_Quote_dates")
     @Story("")
@@ -1653,7 +1620,7 @@ public class ValidationRule3 extends BaseTest {
                 "--json"});
         String quotePackageID4 = JsonParser2.getFieldValue(quotePackageResult4.toString(), "id");
         Assert.assertNotNull(quotePackageID4);
-    }
+    }*/
 
     @Test(priority = 24, description = "Quote_Package__c.VR14_Discount")
     @Severity(SeverityLevel.NORMAL)
@@ -1905,7 +1872,7 @@ public class ValidationRule3 extends BaseTest {
         Assert.assertNotNull(quotePackageID);
     }
 
-    @Test(priority = 27, description = "Quote_Package__c.VR34_QuotePackage_Dates")
+    /*@Test(priority = 27, description = "Quote_Package__c.VR34_QuotePackage_Dates")
     @Severity(SeverityLevel.NORMAL)
     @Description("Quote_Package__c.VR34_QuotePackage_Dates")
     @Story("")
@@ -2003,7 +1970,7 @@ public class ValidationRule3 extends BaseTest {
                 "--json"});
         String quotePackageID3 = JsonParser2.getFieldValue(quotePackageResult3.toString(), "id");
         Assert.assertNotNull(quotePackageID3);
-    }
+    }*/
 
     @Test(priority = 28, description = "Quote_Package__c.VR37_Max_Discount")
     @Severity(SeverityLevel.NORMAL)

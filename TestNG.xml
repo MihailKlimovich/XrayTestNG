@@ -150,11 +150,6 @@
             <class name="tests.ShadowMeetingRooms"/>
         </classes>
     </test>
-    <test name="Rooming list testing">
-        <classes>
-            <class name="tests.RoomingList"/>
-        </classes>
-    </test>
     <test name="Clone Package testing">
         <classes>
             <class name="tests.ClonePackage"/>

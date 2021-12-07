@@ -169,8 +169,8 @@ public class MyceQuoteComplimentaryChangePriceCalculationWithHandleUnitField ext
                 "' thn__Product__c='" + winesID + "'", ORG_USERNAME);
         quoteProducts.updateQuoteProducSFDX(SFDX, "Id='" + quoteProductID + "'",
                 "thn__Discount_Percent__c=20", ORG_USERNAME);
-        StringBuilder quoteProductRecord = product.
-                getProductSFDX(SFDX, "Id='" + quoteProductID + "'", ORG_USERNAME);
+        StringBuilder quoteProductRecord = quoteProducts.
+                getQuoteProductSFDX(SFDX, "Id='" + quoteProductID + "'", ORG_USERNAME);
         String productDiscount= JsonParser2.
                 getFieldValue(quoteProductRecord.toString(), "thn__Discount_Percent__c");
         Assert.assertEquals(productDiscount, "100");
@@ -193,8 +193,8 @@ public class MyceQuoteComplimentaryChangePriceCalculationWithHandleUnitField ext
                 quoteID + "' thn__Product__c='" + meetingFullDayID + "'", ORG_USERNAME);
         quoteMeetingRoom.updateQuoteMeetingRoomSFDX(SFDX, "Id='" + quoteMeetingRoomID + "'",
                 "thn__Discount_Percent__c=20", ORG_USERNAME);
-        StringBuilder quoteMeetingRoomRecord = product.
-                getProductSFDX(SFDX, "Id='" + quoteMeetingRoomID + "'", ORG_USERNAME);
+        StringBuilder quoteMeetingRoomRecord = quoteMeetingRoom.
+                getQuoteMeetingRoomSFDX(SFDX, "Id='" + quoteMeetingRoomID + "'", ORG_USERNAME);
         String productDiscount= JsonParser2.
                 getFieldValue(quoteMeetingRoomRecord.toString(), "thn__Discount_Percent__c");
         Assert.assertEquals(productDiscount, "100");

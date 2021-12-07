@@ -365,17 +365,21 @@ public class ValidationRule2 extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     @Description("Myce_Quote__c.VR28_Cancelled_Status")
     @Story("Set thn__Is_Confirmed__c to false, Change MYCE Quote Closed Status to ‘Cancelled’")
-    public void testCreateNewMyceQuote8() throws InterruptedException, IOException {
+    public void TesttestCreateNewMyceQuote8() throws InterruptedException, IOException {
         StringBuilder hotelRecord= hotel.getHotelSFDX(SFDX, "thn__Unique_Id__c='Demo'", ORG_USERNAME);
         String propertyID = JsonParser2.getFieldValue(hotelRecord.toString(), "Id");
+        StringBuilder recordTypes = myceQuotes.soql(SFDX, "SELECT Id FROM RecordType WHERE" +
+                " SobjectType='thn__MYCE_Quote__c' AND Name='Quote'", ORG_USERNAME);
+        System.out.println(recordTypes);
+        List<String> recordTypeID = JsonParser2.getFieldValueSoql(recordTypes.toString(), "Id");
         String quoteID = myceQuotes.createQuoteSFDX(SFDX, "Name='Test37' thn__Pax__c=5" +
                 " thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" + date.generateTodayDate2()
-                + " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 2), ORG_USERNAME);
+                + " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 2) + " RecordTypeId='" +
+                recordTypeID.get(0) + "'", ORG_USERNAME);
         myceQuotes.updateQuoteSFDX(SFDX, "Id='" + quoteID + "'", "thn__Stage__c='4 - Closed'" +
                 " thn__Is_Confirmed__c=false thn__Closed_Status__c='Lost'", ORG_USERNAME );
         StringBuilder result = myceQuotes.updateQuoteSFDX(SFDX, "Id='" + quoteID + "'",
                 "thn__Closed_Status__c='Cancelled'", ORG_USERNAME);
-        String message = JsonParser2.getFieldValue2(result.toString(), "message");
         StringBuilder res = myceQuotes.getQuoteSFDX(SFDX, "Id='" + quoteID + "'", ORG_USERNAME);
         String name = JsonParser2.getFieldValue(res.toString(), "Name");
         String closedStatus = JsonParser2.getFieldValue(res.toString(), "thn__Closed_Status__c");
@@ -1907,7 +1911,7 @@ public class ValidationRule2 extends BaseTest {
         Assert.assertNotNull(quotePackageID);
     }
 
-    @Test(priority = 27, description = "Quote_Package__c.VR34_QuotePackage_Dates")
+    /*@Test(priority = 27, description = "Quote_Package__c.VR34_QuotePackage_Dates")
     @Severity(SeverityLevel.NORMAL)
     @Description("Quote_Package__c.VR34_QuotePackage_Dates")
     @Story("")
@@ -2005,7 +2009,7 @@ public class ValidationRule2 extends BaseTest {
                 "--json"});
         String quotePackageID3 = JsonParser2.getFieldValue(quotePackageResult3.toString(), "id");
         Assert.assertNotNull(quotePackageID3);
-    }
+    }*/
 
     @Test(priority = 28, description = "Quote_Package__c.VR37_Max_Discount")
     @Severity(SeverityLevel.NORMAL)
