@@ -30,6 +30,24 @@ public class Hotel extends BasePage {
         return hotelRecord;
     }
 
+    @Step("Update Hotel SFDX")
+    public void updateHotelSFDX(String sfdxPath, String where, String value, String userName)
+            throws IOException, InterruptedException {
+        StringBuilder hotelUpdateResult = SfdxCommand.runLinuxCommand1(new String[]{
+                sfdxPath,
+                "force:data:record:update",
+                "-s",
+                "thn__Hotel__c",
+                "-w",
+                where,
+                "-v",
+                value,
+                "-u",
+                userName,
+                "--json"});
+        System.out.println(hotelUpdateResult);
+    }
+
 
 
 }

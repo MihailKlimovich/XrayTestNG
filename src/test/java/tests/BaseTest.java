@@ -59,6 +59,7 @@ public class BaseTest {
     protected Contact contact;
     protected MultiEditProducts multiEditProducts;
     protected MultiEditMeetingRooms multiEditMeetingRooms;
+    protected Invoice invoice;
 
 
     public WebDriver getDriver() {
@@ -177,6 +178,8 @@ public class BaseTest {
         contact = new Contact(driver);
         multiEditProducts = new MultiEditProducts(driver);
         multiEditMeetingRooms = new MultiEditMeetingRooms(driver);
+        invoice = new Invoice(driver);
+
     }
 
     @AfterClass

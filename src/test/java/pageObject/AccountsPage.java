@@ -9,6 +9,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.BasePage;
 import pages.HomePageForScratchOrg;
 
+import java.io.IOException;
+
 public class AccountsPage extends BasePage {
 
 
@@ -58,7 +60,59 @@ public class AccountsPage extends BasePage {
         WebDriverWait = new WebDriverWait(driver, 30);
         WebElement industry_name = wait1.until(ExpectedConditions.presenceOfElementLocated(INDUSTRY_NAME_SELECTOR));
         return industry_name.getText();
+    }
 
+    //////////////////////////////   SFDX COMMANDS   ////////////////////////////////////
+
+    @Step("Create Account SFDX")
+    public String createAccountSFDX(String sfdxPath, String value, String userName)
+            throws IOException, InterruptedException {
+        StringBuilder accountResult = SfdxCommand.runLinuxCommand1(new String[]{
+                sfdxPath,
+                "force:data:record:create",
+                "-s",
+                "Account",
+                "-v",
+                value,
+                "-u",
+                userName,
+                "--json"});
+        System.out.println("Account create result:");
+        System.out.println(accountResult);
+        String accountID = JsonParser2.getFieldValue(accountResult.toString(), "id");
+        return accountID;
+    }
+
+    @Step("Delete Account SFDX")
+    public void deleteAccountSFDX(String sfdxPath, String where, String userName)
+            throws IOException, InterruptedException {
+        StringBuilder result = SfdxCommand.runLinuxCommand1(new String[]{
+                sfdxPath,
+                "force:data:record:delete",
+                "-s",
+                "Account",
+                "-w",
+                where,
+                "-u",
+                userName,
+                "--json"});
+        System.out.println(result);
+    }
+
+    @Step("Get Account SFDX")
+    public StringBuilder getAccountSFDX(String sfdxPath, String where, String userName)
+            throws IOException, InterruptedException {
+        StringBuilder accountRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                sfdxPath,
+                "force:data:record:get",
+                "-s",
+                "Account",
+                "-w",
+                where,
+                "-u",
+                userName,
+                "--json"});
+        return accountRecord;
     }
 
 

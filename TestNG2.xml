@@ -220,6 +220,11 @@
             <class name="tests.MyceQuoteComplimentaryChangePriceCalculationWithHandleUnitField"/>
         </classes>
     </test>
+    <test name="Move processes to apex">
+        <classes>
+            <class name="tests.MoveProcessesToApex"/>
+        </classes>
+    </test>
 
 
 

@@ -27,7 +27,7 @@ public class HistoryTracking extends BaseTest {
 
     }
 
-    @Test(priority = 1, description = "Add Quote Meeting Room, Quote Product, Quote Hotel Room, Quote Package")
+    @Test(priority = 2, description = "Add Quote Meeting Room, Quote Product, Quote Hotel Room, Quote Package")
     @Severity(SeverityLevel.NORMAL)
     @Story("THY-519: History tracking")
     public void testHistoryTracking() throws InterruptedException, IOException {
@@ -269,7 +269,7 @@ public class HistoryTracking extends BaseTest {
         Assert.assertNotNull(historyID5);
     }
 
-    @Test(priority = 2, description = "Create Payment record")
+    @Test(priority = 3, description = "Create Payment record")
     @Severity(SeverityLevel.NORMAL)
     @Story("THY-519: History tracking")
     public void testHistoryTracking2() throws InterruptedException, IOException {
@@ -357,7 +357,7 @@ public class HistoryTracking extends BaseTest {
         Assert.assertNotNull(historyID1);
     }
 
-    @Test(priority = 3, description = "Create Invoice records")
+    @Test(priority = 4, description = "Create Invoice records")
     @Severity(SeverityLevel.NORMAL)
     @Story("THY-519: History tracking")
     public void testHistoryTracking3() throws InterruptedException, IOException {
@@ -433,7 +433,7 @@ public class HistoryTracking extends BaseTest {
         Assert.assertNotNull(historyID1);
     }
 
-    @Test(priority = 4, description = "Update MYCE Quote related records. Updated fields are specified in History" +
+    @Test(priority = 5, description = "Update MYCE Quote related records. Updated fields are specified in History" +
             " Settings custom settings")
     @Severity(SeverityLevel.NORMAL)
     @Story("THY-519: History tracking")
@@ -640,7 +640,7 @@ public class HistoryTracking extends BaseTest {
         Assert.assertEquals(history3NewValue, "5.0");
     }
 
-    @Test(priority = 5, description = "Update Order")
+    @Test(priority = 6, description = "Update Order")
     @Severity(SeverityLevel.NORMAL)
     @Story("THY-519: History tracking")
     //Create new action on Myce Quote object. Action type - lighting component, thn:ProductModification "Order update"
@@ -722,7 +722,7 @@ public class HistoryTracking extends BaseTest {
         Assert.assertNotNull(historyID1);
     }
 
-    @Test(priority = 6, description = "Update Payment")
+    @Test(priority = 7, description = "Update Payment")
     @Severity(SeverityLevel.NORMAL)
     @Story("THY-519: History tracking")
     public void testHistoryTracking6() throws InterruptedException, IOException {
@@ -844,7 +844,7 @@ public class HistoryTracking extends BaseTest {
         Assert.assertEquals(newValue, guestID2);
     }
 
-    @Test(priority = 7, description = "Update Invoices")
+    @Test(priority = 8, description = "Update Invoices")
     @Severity(SeverityLevel.NORMAL)
     @Story("THY-519: History tracking")
     //take out in Field Sets thn__Amount_to_invoice__c
@@ -866,7 +866,7 @@ public class HistoryTracking extends BaseTest {
                 "thn__Invoice__c",
                 "-v",
                 "thn__Original_To_Invoice__c=50 thn__to_invoice__c=100" +
-                        " thn__Commentaires__c='TestAuto2' thn__Amount_to_invoice__c=10",
+                        " thn__Commentaires__c='TestAuto2' thn__Amount_to_invoice__c=10 thn__Type__c='Finale'",
                 "-u",
                 ORG_USERNAME,
                 "--json"});
@@ -901,7 +901,7 @@ public class HistoryTracking extends BaseTest {
         Assert.assertEquals(newValue, "50.00");
     }
 
-    @Test(priority = 8, description = "Clone Quote")
+    @Test(priority = 9, description = "Clone Quote")
     @Severity(SeverityLevel.NORMAL)
     @Story("THY-519: History tracking")
     public void testHistoryTracking8() throws InterruptedException, IOException {
@@ -985,7 +985,7 @@ public class HistoryTracking extends BaseTest {
         Assert.assertNotNull(historyID1);
     }
 
-    @Test(priority = 9, description = "Clone Quote package")
+    @Test(priority = 10, description = "Clone Quote package")
     @Severity(SeverityLevel.NORMAL)
     @Story("THY-519: History tracking")
     //Add a component for cloning to the page
@@ -1126,7 +1126,7 @@ public class HistoryTracking extends BaseTest {
         Assert.assertNotNull(historyID2);
     }
 
-    @Test(priority = 10, description = "Clone Quote hotel room")
+    @Test(priority = 11, description = "Clone Quote hotel room")
     @Severity(SeverityLevel.NORMAL)
     @Story("THY-519: History tracking")
     //Add a component for cloning to the page
@@ -1244,7 +1244,7 @@ public class HistoryTracking extends BaseTest {
         Assert.assertNotNull(historyID2);
     }
 
-    @Test(priority = 11, description = "Clone Quote product")
+    @Test(priority = 12, description = "Clone Quote product")
     @Severity(SeverityLevel.NORMAL)
     @Story("THY-519: History tracking")
     //Add a component for cloning to the page
@@ -1349,7 +1349,7 @@ public class HistoryTracking extends BaseTest {
         Assert.assertNotNull(historyID2);
     }
 
-    @Test(priority = 12, description = "Clone Quote meeting room")
+    @Test(priority = 13, description = "Clone Quote meeting room")
     @Severity(SeverityLevel.NORMAL)
     @Story("THY-519: History tracking")
     //Add a component for cloning to the page
@@ -1456,7 +1456,7 @@ public class HistoryTracking extends BaseTest {
         Assert.assertNotNull(historyID2);
     }
 
-    @Test(priority = 13, description = "Change dates")
+    @Test(priority = 14, description = "Change dates")
     @Severity(SeverityLevel.NORMAL)
     @Story("THY-519: History tracking")
     //Add a component for cloning to the page
@@ -1515,7 +1515,7 @@ public class HistoryTracking extends BaseTest {
         Assert.assertNotNull(historyID1);
     }
 
-    @Test(priority = 14, description = "Delete Quote meeting room / Quote hotel room / Quote product records")
+    @Test(priority = 15, description = "Delete Quote meeting room / Quote hotel room / Quote product records")
     @Severity(SeverityLevel.NORMAL)
     @Story("THY-519: History tracking")
     public void testHistoryTracking14() throws InterruptedException, IOException {
@@ -1708,7 +1708,7 @@ public class HistoryTracking extends BaseTest {
         Assert.assertNotNull(historyID3);
     }
 
-    @Test(priority = 15, description = "Delete Quote meeting package")
+    @Test(priority = 16, description = "Delete Quote meeting package")
     @Severity(SeverityLevel.NORMAL)
     @Story("THY-519: History tracking")
     public void testHistoryTracking15() throws InterruptedException, IOException {
@@ -1843,7 +1843,7 @@ public class HistoryTracking extends BaseTest {
         Assert.assertNotNull(historyID2);
     }
 
-    @Test(priority = 16, description = "Delete Payment record")
+    @Test(priority = 17, description = "Delete Payment record")
     @Severity(SeverityLevel.NORMAL)
     @Story("THY-519: History tracking")
     public void testHistoryTracking16() throws InterruptedException, IOException {
@@ -1953,7 +1953,7 @@ public class HistoryTracking extends BaseTest {
         Assert.assertNotNull(historyID1);
     }
 
-    @Test(priority = 17, description = "Delete Invoice record")
+    @Test(priority = 18, description = "Delete Invoice record")
     @Severity(SeverityLevel.NORMAL)
     @Story("THY-519: History tracking")
     public void testHistoryTracking17() throws InterruptedException, IOException {
