@@ -214,5 +214,15 @@ public class MoveProcessesToApex extends BaseTest {
         Assert.assertEquals(invoiceContact, contactCompanyID);
     }
 
+    @Test(priority = 6, description = "Postconditions")
+    @Severity(SeverityLevel.NORMAL)
+    @Story("Move processes to apex")
+    public void postcondition() throws InterruptedException, IOException {
+        myceQuotes.deleteQuoteSFDX(SFDX, "Name='MoveProcessesToApexAutoTest'", ORG_USERNAME);
+        StringBuilder hotelRecord= hotel.getHotelSFDX(SFDX, "thn__Unique_Id__c='Demo'", ORG_USERNAME);
+        String propertyID = JsonParser2.getFieldValue(hotelRecord.toString(), "Id");
+        hotel.updateHotelSFDX(SFDX, "Id='" + propertyID + "'", "thn__Resort__c=''", ORG_USERNAME);
+    }
+
 
 }

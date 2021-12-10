@@ -91,6 +91,11 @@
             <artifactId>zt-exec</artifactId>
             <version>1.12</version>
         </dependency>
+        <dependency>
+            <groupId>com.force.api</groupId>
+            <artifactId>force-partner-api</artifactId>
+            <version>53.1.0</version>
+        </dependency>
     </dependencies>
 
     <build>

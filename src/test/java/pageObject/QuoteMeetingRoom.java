@@ -39,7 +39,10 @@ public class QuoteMeetingRoom extends BasePage {
     By EDIT_BUTTON = By.xpath("//div[text()='Quote Meetings Room']/following::button[@name='Edit']");
     By LOCK_RESOURCE_CHECKBOX = By.
             xpath("//div[@class='isModal inlinePanel oneRecordActionWrapper']//div//input[@name = 'thn__Lock_Resource__c']");
-    By END_DATE_FIELD = By.xpath("//div//label[text()='Date']/following::input[@name='thn__End_Date_Time__c']");
+    By END_DATE_FIELD = By.xpath("//div//label[text()='Date']/following::input[@name='thn__End_Date_Time__c'][1]");
+    By START_DATE_FIELD = By.xpath("//div//label[text()='Date']/following::input[@name='thn__Start_Date_Time__c'][1]");
+    By START_TIME_FIELD = By.xpath("//label[text()='Time']/following::input[@name='thn__Start_Date_Time__c']");
+    By END_TIME_FIELD = By.xpath("//label[text()='Time']/following::input[@name='thn__End_Date_Time__c'][2]");
     By MYCE_QUOTE_NAME = By.xpath("//div//span[@id = 'window']");
     By MULTI_DELETE_BUTTON = By.xpath("//a[@title='Multidelete']");
     By MULTIEDIT_BUTTON = By.xpath("//h1[text()='Meeting Rooms']/following::div[@title='Multiedit']");
@@ -56,6 +59,11 @@ public class QuoteMeetingRoom extends BasePage {
     public void clickMultiedit() throws InterruptedException {
         wait1.until(ExpectedConditions.presenceOfElementLocated(MULTIEDIT_BUTTON)).click();
         Thread.sleep(3000);
+    }
+
+    @Step("Click Edit")
+    public void clickEdit() throws InterruptedException {
+        click3(EDIT_BUTTON);
     }
 
 
@@ -86,6 +94,30 @@ public class QuoteMeetingRoom extends BasePage {
         wait1.until(ExpectedConditions.presenceOfElementLocated(SAVE_BUTTON)).click();
     }
 
+    @Step("Create quote meeting room")
+    public void createQuoteMeetingRoom(String resource, String product,  String startDate, String endDate,
+                                       String startTime, String endTime) throws InterruptedException {
+        click3(NEW_MEETING_ROOM);
+        click3(RESOURCE_FIELD);
+        click3(By.xpath("//span[@title='" + resource + "']"));
+        click3(PRODUCT_FIELD);
+        click3(By.xpath("//span[@title='" + product + "']"));
+        click3(START_DATE_FIELD);
+        clear(START_DATE_FIELD);
+        writeText(START_DATE_FIELD, startDate);
+        click3(END_DATE_FIELD);
+        clear(END_DATE_FIELD);
+        writeText(END_DATE_FIELD, endDate);
+        click3(START_TIME_FIELD);
+        clear(START_TIME_FIELD);
+        writeText(START_TIME_FIELD, startTime);
+        click3(END_TIME_FIELD);
+        clear(END_TIME_FIELD);
+        writeText(END_TIME_FIELD, endTime);
+        click4(SAVE_BUTTON);
+        wait1.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//h1//div[text()='Quote Meetings Room']")));
+    }
+
     @Step("Edit date")
     public void editDate(String record, String endDate){
         wait1.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@title='" + record + "']"))).click();
@@ -94,6 +126,30 @@ public class QuoteMeetingRoom extends BasePage {
         clear(END_DATE_FIELD);
         writeText(END_DATE_FIELD, endDate);
         wait1.until(ExpectedConditions.presenceOfElementLocated(SAVE_BUTTON)).click();
+    }
+
+    @Step("Edit date")
+    public void editDateTime(String startDate, String endDate, String startTime, String endTime)
+            throws InterruptedException {
+        click3(START_DATE_FIELD);
+        clear(START_DATE_FIELD);
+        writeText(START_DATE_FIELD, startDate);
+        click3(END_DATE_FIELD);
+        clear(END_DATE_FIELD);
+        writeText(END_DATE_FIELD, endDate);
+        click3(START_TIME_FIELD);
+        clear(START_TIME_FIELD);
+        writeText(START_TIME_FIELD, startTime);
+        click3(END_TIME_FIELD);
+        clear(END_TIME_FIELD);
+        writeText(END_TIME_FIELD, endTime);
+        click4(SAVE_BUTTON);
+        wait1.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//h1//div[text()='Quote Meetings Room']")));
+    }
+
+    @Step("Open record bu number")
+    public void openRecordByName(String recordName) throws InterruptedException {
+        click3(By.xpath("//a[@title='" + recordName + "']"));
     }
 
     @Step("Change resource when Lock Resource is true")
