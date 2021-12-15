@@ -118,6 +118,28 @@ public class QuoteMeetingRoom extends BasePage {
         wait1.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//h1//div[text()='Quote Meetings Room']")));
     }
 
+    @Step("Create quote meeting room 2")
+    public void createQuoteMeetingRoom2(String product,  String startDate, String endDate,
+                                       String startTime, String endTime) throws InterruptedException {
+        click3(NEW_MEETING_ROOM);
+        click3(PRODUCT_FIELD);
+        click3(By.xpath("//span[@title='" + product + "']"));
+        click3(START_DATE_FIELD);
+        clear(START_DATE_FIELD);
+        writeText(START_DATE_FIELD, startDate);
+        click3(END_DATE_FIELD);
+        clear(END_DATE_FIELD);
+        writeText(END_DATE_FIELD, endDate);
+        click3(START_TIME_FIELD);
+        clear(START_TIME_FIELD);
+        writeText(START_TIME_FIELD, startTime);
+        click3(END_TIME_FIELD);
+        clear(END_TIME_FIELD);
+        writeText(END_TIME_FIELD, endTime);
+        click4(SAVE_BUTTON);
+        wait1.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//h1//div[text()='Quote Meetings Room']")));
+    }
+
     @Step("Edit date")
     public void editDate(String record, String endDate){
         wait1.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@title='" + record + "']"))).click();

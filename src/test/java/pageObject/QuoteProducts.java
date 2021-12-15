@@ -87,6 +87,12 @@ public class QuoteProducts extends BasePage {
         wait1.until(ExpectedConditions.elementToBeClickable(SAVE_BUTTON)).click();
     }
 
+    @Step("Create Quote Product")
+    public void createQuoteProduct(String meetingRoom, String product, String startDate, String endDate)
+            throws InterruptedException {
+        click3(MEETING_ROOM_FIELD);
+    }
+
     @Step("Change date of product")
     public void changeDate(String startDate, String endDate){
         wait1.until(ExpectedConditions.elementToBeClickable(EDIT_BUTTON)).click();

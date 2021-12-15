@@ -225,6 +225,16 @@
             <class name="tests.MoveProcessesToApex"/>
         </classes>
     </test>
+    <test name="THY-619: Quote product creation">
+        <classes>
+            <class name="tests.QuoteProductCreation"/>
+        </classes>
+    </test>
+    <test name="Quote product / meeting room interactions">
+        <classes>
+            <class name="tests.QuoteProductMeetingRoomInteractions"/>
+        </classes>
+    </test>
 
 
 
