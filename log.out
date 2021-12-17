@@ -1,1 +1,6 @@
-2021-12-13 09:42:17,018 INFO  - logIn test is starting.
+2021-12-16 16:38:14,939 INFO  - logIn test is starting.
+2021-12-16 16:38:19,757 INFO  - preconditions test is starting.
+2021-12-16 16:39:08,503 INFO  - multiDeleteTest1 test is starting.
+2021-12-16 16:39:56,877 INFO  - multiDeleteTest2 test is starting.
+2021-12-16 16:40:17,675 INFO  - multiDeleteTest3 test is starting.
+2021-12-16 16:41:05,434 INFO  - multiDeleteTest4 test is starting.

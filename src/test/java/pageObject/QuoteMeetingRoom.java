@@ -17,6 +17,7 @@ public class QuoteMeetingRoom extends BasePage {
 
     By NEW_MEETING_ROOM = By.xpath("//span[text()='Meeting Rooms']/following::div[@title='New']");
     By SAVE_BUTTON = By.xpath("//div[@class='isModal inlinePanel oneRecordActionWrapper']//button[@name='SaveEdit']");
+    By SAVE_EDIT_BUTTON = By.xpath("//button[@name='SaveEdit']");
     By PRODUCT_FIELD = By.xpath("//slot//label[text()='Product']/following-sibling::div//input");
     By PRODUCT_TYPE_ROOM1NIGHT = By.xpath("//span[@title='MEETING HALF DAY']");
     By SETUP_FIELD = By.xpath("//slot//label[text()='Setup']/following-sibling::div//input");
@@ -47,6 +48,9 @@ public class QuoteMeetingRoom extends BasePage {
     By MULTI_DELETE_BUTTON = By.xpath("//a[@title='Multidelete']");
     By MULTIEDIT_BUTTON = By.xpath("//h1[text()='Meeting Rooms']/following::div[@title='Multiedit']");
     By CHANGE_RESOURCE_BUTTON = By.xpath("//div[@title='Change Resource']");
+    By TOAST_MESSSAGE = By.xpath("//span[@class='toastMessage slds-text-heading--small forceActionsText'][1]");
+    By EDIT_START_DAYE_TIME_BUTTON = By.xpath("//button[@title='Edit Start Date/Time']");
+
 
 
 
@@ -169,6 +173,20 @@ public class QuoteMeetingRoom extends BasePage {
         wait1.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//h1//div[text()='Quote Meetings Room']")));
     }
 
+    @Step("Edit start/end time")
+    public void editTime(String startTime, String endTime)
+            throws InterruptedException {
+        click3(EDIT_START_DAYE_TIME_BUTTON);
+        click3(START_TIME_FIELD);
+        clear(START_TIME_FIELD);
+        writeText(START_TIME_FIELD, startTime);
+        click3(END_TIME_FIELD);
+        clear(END_TIME_FIELD);
+        writeText(END_TIME_FIELD, endTime);
+        click4(SAVE_EDIT_BUTTON);
+        wait1.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//h1//div[text()='Quote Meetings Room']")));
+    }
+
     @Step("Open record bu number")
     public void openRecordByName(String recordName) throws InterruptedException {
         click3(By.xpath("//a[@title='" + recordName + "']"));
@@ -207,6 +225,11 @@ public class QuoteMeetingRoom extends BasePage {
         return readRecalculateMessage(MESSAGE_ERROR_TEXT);
     }
 
+    @Step("Read toast message")
+    public String readToastMessage() throws InterruptedException {
+        return readRecalculateMessage(TOAST_MESSSAGE);
+    }
+
     @Step("Close window")
     public void closeWindow(){
         wait1.until(ExpectedConditions.elementToBeClickable(CLOSE_WINDOW_BUTTON)).click();
@@ -236,16 +259,10 @@ public class QuoteMeetingRoom extends BasePage {
     }
 
     @Step("Click multi delete button")
-    public  void multiDeleteRecords() throws InterruptedException {
+    public  void clickMultiDeleteButton() throws InterruptedException {
         wait1.until(ExpectedConditions.presenceOfElementLocated(MULTI_DELETE_BUTTON));
         click3(MULTI_DELETE_BUTTON);
-        Thread.sleep(5000);
-        down();
-        down();
-        tab();
-        enter();
-        Thread.sleep(5000);
-        enter();
+        Thread.sleep(3000);
     }
 
     //////////////////////////////   SFDX COMMANDS   ////////////////////////////////////

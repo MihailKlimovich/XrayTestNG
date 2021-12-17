@@ -52,7 +52,7 @@ public class QuoteProductMeetingRoomInteractions extends BaseTest{
                 + recordTypeID.get(0) + "'", ORG_USERNAME);
         String quoteMeetingRoomId = quoteMeetingRoom.createQuoteMeetingRoomSFDX(SFDX, "thn__MYCE_Quote__c='" +
                 quoteID + "' thn__Product__c='" + meetingHalfDayID + "' thn__Start_Date_Time__c=" +
-                date.generateTodayDate2() + "T23:45:00.000Z thn__End_Date_Time__c=" + date.generateTodayDate2() +
+                date.generateTodayDate2() + "T00:45:00.000Z thn__End_Date_Time__c=" + date.generateTodayDate2() +
                 "T22:00:00.000Z" , ORG_USERNAME);
         /*homePageForScratchOrg.openAppLauncher();
         homePageForScratchOrg.sendTextInAppWindow("MYCE Quotes");
@@ -73,7 +73,7 @@ public class QuoteProductMeetingRoomInteractions extends BaseTest{
                 date.generateTodayDate2() + "T08:00:00.000Z", ORG_USERNAME);
         quoteProducts.createQuoteProductSFDX(SFDX, "thn__MYCE_Quote__c='" + quoteID + "' thn__Product__c='"
                 + productWinesID + "' thn__Service_Area__c='" + quoteMeetingRoomId + "'" +
-                " thn__Start_Date_Time__c=" + date.generateTodayDate2() + "T12:15:00.000Z thn__End_Date_Time__c=" +
+                " thn__Start_Date_Time__c=" + date.generateTodayDate2() + "T02:15:00.000Z thn__End_Date_Time__c=" +
                 date.generateTodayDate2() + "T09:30:00.000Z", ORG_USERNAME);
         quoteProducts.createQuoteProductSFDX(SFDX, "thn__MYCE_Quote__c='" + quoteID + "' thn__Product__c='"
                 + productActivityID + "' thn__Service_Area__c='" + quoteMeetingRoomId + "'" +
@@ -125,7 +125,7 @@ public class QuoteProductMeetingRoomInteractions extends BaseTest{
         Assert.assertEquals(quoteMeetingRoomStartTime, "01:30:00.000Z");
         Assert.assertEquals(baverageStartTime, "13:15:00.000Z");
         Assert.assertEquals(dinerStartTime, "08:00:00.000Z");
-        Assert.assertEquals(winesStartTime, "13:15:00.000Z");
+        Assert.assertEquals(winesStartTime, "03:15:00.000Z");
         Assert.assertEquals(activityStartTime, "01:45:00.000Z");
         Assert.assertEquals(equipmentStartTime, "07:15:00.000Z");
     }
@@ -164,7 +164,7 @@ public class QuoteProductMeetingRoomInteractions extends BaseTest{
         Assert.assertEquals(quoteMeetingRoomStartTime, "08:15:00.000Z");
         Assert.assertEquals(baverageStartTime, "13:15:00.000Z");
         Assert.assertEquals(dinerStartTime, "08:15:00.000Z");
-        Assert.assertEquals(winesStartTime, "13:15:00.000Z");
+        Assert.assertEquals(winesStartTime, "08:15:00.000Z");
         Assert.assertEquals(activityStartTime, "08:15:00.000Z");
         Assert.assertEquals(equipmentStartTime, "07:15:00.000Z");
     }

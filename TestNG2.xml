@@ -235,8 +235,11 @@
             <class name="tests.QuoteProductMeetingRoomInteractions"/>
         </classes>
     </test>
-
-
+    <test name="Overbooking - date times">
+        <classes>
+            <class name="tests.OverbookingDateTimes"/>
+        </classes>
+    </test>
 
 
 </suite>

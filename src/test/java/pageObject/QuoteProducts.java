@@ -141,16 +141,10 @@ public class QuoteProducts extends BasePage {
     }
 
     @Step("Click multi delete button")
-    public  void multiDeleteRecords() throws InterruptedException {
+    public  void clickMultiDeleteButton() throws InterruptedException {
         wait1.until(ExpectedConditions.presenceOfElementLocated(MULTI_DELETE_BUTTON));
         click3(MULTI_DELETE_BUTTON);
-        Thread.sleep(5000);
-        down();
-        down();
-        tab();
-        enter();
-        Thread.sleep(5000);
-        enter();
+        Thread.sleep(3000);
     }
 
     //////////////////////////////   SFDX COMMANDS   ////////////////////////////////////

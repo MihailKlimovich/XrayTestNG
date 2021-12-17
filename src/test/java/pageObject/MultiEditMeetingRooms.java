@@ -70,7 +70,9 @@ public class MultiEditMeetingRooms extends BasePage {
         click3(NEW_END_DATE_FIELD);
         writeText(NEW_END_DATE_FIELD, newEndDate);
         click3(EDIT_SETUP_VALUES_CHECKBOX);
+        Thread.sleep(1000);
         click3(NEW_SETUP_PICKLIST);
+        Thread.sleep(1000);
         click3(By.xpath("//option[text()='" + newSetup + "']"));
         click3(EDIT_RESERVATION_STATUS_CHECKBOX);
         click3(NEW_RESERVATION_STATUS_PICKLIST);

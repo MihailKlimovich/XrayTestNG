@@ -3,6 +3,7 @@ package tests;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.Story;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 import pageObject.JsonParser2;
 
@@ -61,14 +62,14 @@ public class OverbookingDateTimes extends BaseTest{
     @Severity(SeverityLevel.NORMAL)
     @Story("Overbooking - date times")
     public void case1() throws InterruptedException, IOException {
+        String expectedMessage = "Quote Meeting Room is overbooked.";
         myceQuotes.goToMyceQuotes();
         myceQuotes.openMyceQoteRecord("OverbookingDateTimesAutoTest");
         myceQuotes.openMeetingRooms();
         quoteMeetingRoom.openRecordByName("OverbookingDateTimesAutoTest - MEETING FULL DAY");
-        quoteMeetingRoom.clickEdit();
-        quoteMeetingRoom.
-                editDateTime(date.generateTodayDate(), date.generateTodayDate(), "15:00", "16:00");
-
+        quoteMeetingRoom.editTime( "07:00", "19:00");
+        String message = quoteMeetingRoom.readToastMessage();
+        Assert.assertEquals(message, expectedMessage);
     }
 
     @Test(priority = 4, description = "Remove the ‘Overbooking user’ permission set from the current user. Go to" +
@@ -78,6 +79,7 @@ public class OverbookingDateTimes extends BaseTest{
     @Severity(SeverityLevel.NORMAL)
     @Story("Overbooking - date times")
     public void case2() throws InterruptedException, IOException {
+        String expectedMessage = "Something went wrong. Please contact support@thynk.cloud";
         myceQuotes.goToMyceQuotes();
         developerConsoleWindow.openDeveloperConsole();
         developerConsoleWindow.openExecuteAnonymousWindow();
@@ -85,10 +87,17 @@ public class OverbookingDateTimes extends BaseTest{
         myceQuotes.openMyceQoteRecord("OverbookingDateTimesAutoTest");
         myceQuotes.openMeetingRooms();
         quoteMeetingRoom.openRecordByName("OverbookingDateTimesAutoTest - MEETING FULL DAY");
-        quoteMeetingRoom.clickEdit();
-        quoteMeetingRoom.
-                editDateTime(date.generateTodayDate(), date.generateTodayDate(), "15:30", "16:30");
+        quoteMeetingRoom.editTime( "06:45", "19:00");
+        String message = quoteMeetingRoom.readErrorMessage2();
+        Assert.assertEquals(message, expectedMessage);
+    }
 
+    @Test(priority = 5, description = "Postconditions: Add the ‘Overbooking user’ permission set from the" +
+            " current user.")
+    @Severity(SeverityLevel.NORMAL)
+    @Story("Overbooking - date times")
+    public void postconditions() throws InterruptedException, IOException {
+        user.addPermissionSet(SFDX, "Overbooking_User", ORG_USERNAME);
     }
 
 }
