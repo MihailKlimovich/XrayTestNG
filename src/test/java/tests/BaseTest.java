@@ -61,6 +61,8 @@ public class BaseTest {
     protected MultiEditMeetingRooms multiEditMeetingRooms;
     protected Invoice invoice;
     protected MultiDelete multiDelete;
+    protected CreateResourceForm createResourceForm;
+
 
 
     public WebDriver getDriver() {
@@ -181,6 +183,7 @@ public class BaseTest {
         multiEditMeetingRooms = new MultiEditMeetingRooms(driver);
         invoice = new Invoice(driver);
         multiDelete = new MultiDelete(driver);
+        createResourceForm = new CreateResourceForm(driver);
 
     }
 

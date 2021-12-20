@@ -35,6 +35,7 @@ public class QuoteProducts extends BasePage {
             "/lightning-input//span[text()='On Consumption']");
     By MULTIEDIT_BUTTON = By.xpath("//h1[text()='Products']/following::div[@title='Multiedit']");
     By MULTI_DELETE_BUTTON = By.xpath("//a[@title='Multidelete']");
+    By CREATE_RESOURCE_BUTTON = By.xpath("//button[@name='thn__Quote_Product__c.Create_Resource']");
 
 
 
@@ -56,6 +57,18 @@ public class QuoteProducts extends BasePage {
         wait1.until(ExpectedConditions.presenceOfElementLocated(END_DATE_FIELD)).click();
         writeText(END_DATE_FIELD, endDate);
         wait1.until(ExpectedConditions.elementToBeClickable(SAVE_BUTTON)).click();
+    }
+
+    @Step("Click Create Resource button")
+    public  void clickCreateREsourceButton() throws InterruptedException {
+        click4(CREATE_RESOURCE_BUTTON);
+    }
+
+    @Step("Click multi delete button")
+    public  void clickMultiDeleteButton() throws InterruptedException {
+        wait1.until(ExpectedConditions.presenceOfElementLocated(MULTI_DELETE_BUTTON));
+        click3(MULTI_DELETE_BUTTON);
+        Thread.sleep(3000);
     }
 
     @Step("Click Multiedit")
@@ -112,6 +125,11 @@ public class QuoteProducts extends BasePage {
         wait1.until(ExpectedConditions.elementToBeClickable(SAVE_BUTTON)).click();
     }
 
+    @Step("Open quote pdoduct record by Name")
+    public void openRecord_byName(String name) throws InterruptedException {
+        click3(By.xpath("//a[@title='" + name + "']"));
+    }
+
     @Step("Read error message at the top of the page")
     public String readErrorMessage2() throws InterruptedException {
         return readRecalculateMessage(MESSAGE_ERROR_TEXT);
@@ -140,12 +158,7 @@ public class QuoteProducts extends BasePage {
         click3(SELECT_ALL_ITEMS_CHECKBOX);
     }
 
-    @Step("Click multi delete button")
-    public  void clickMultiDeleteButton() throws InterruptedException {
-        wait1.until(ExpectedConditions.presenceOfElementLocated(MULTI_DELETE_BUTTON));
-        click3(MULTI_DELETE_BUTTON);
-        Thread.sleep(3000);
-    }
+
 
     //////////////////////////////   SFDX COMMANDS   ////////////////////////////////////
     @Step("Create Quote Product SFDX")

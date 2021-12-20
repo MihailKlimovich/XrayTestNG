@@ -17,16 +17,19 @@ public class CreditNoteLine extends BasePage {
         super(driver);
     }
 
-    By NEW_CREDIT_NOTE_LINE_BUTTON = By.xpath("//div[@class='windowViewMode-maximized oneContent active lafPageHost']//a[@title='New']");
+    By NEW_CREDIT_NOTE_LINE_BUTTON = By.
+            xpath("//div[@class='windowViewMode-maximized oneContent active lafPageHost']//a[@title='New']");
     By CREDIT_NOTE_FIELD = By.xpath("//div[@class='slds-form']//label[text()='Credit Note']");
-    By NEW_CREDIT_NOTE_BUTTON = By.xpath("//label[text()='Credit Note']/following-sibling::div//span[@title='New Credit Note']");
+    By NEW_CREDIT_NOTE_BUTTON = By.
+            xpath("//label[text()='Credit Note']/following-sibling::div//span[@title='New Credit Note']");
     By SAVE_BUTTON_NEW_CREDIT_NOTE = By.xpath("//div[@class='modal-footer slds-modal__footer']//span[text()='Save']");
     By VAT_FIELD = By.xpath("//div[@class='slds-form']//label[text()='VAT %']/following-sibling::div//input");
     By VAT_CATEGORY = By.xpath("//div[@class='slds-form']//label[text()='VAT Category']");
     By VAT_CATEGORY_TYPE = By.xpath("//span[@title='0']");
     By SAVE_BUTTON = By.xpath("//div[@class='isModal inlinePanel oneRecordActionWrapper']//button[@name='SaveEdit']");
     By MESSAGE_ERROR_TEXT = By.xpath("//div[@class='container']//li");
-    By CLOSE_WINDOW_BUTTON = By.xpath("//div[@class='modal-container slds-modal__container']//button[@title='Close this window']");
+    By CLOSE_WINDOW_BUTTON = By.
+            xpath("//div[@class='modal-container slds-modal__container']//button[@title='Close this window']");
 
 
     @Step ("Click new Credit note line")

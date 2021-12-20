@@ -28,7 +28,7 @@ public class QuoteHotelRoom extends BasePage {
             xpath("//fieldset//legend[text()='Departure Date Time']/following-sibling::div//label[text()='Date']/following-sibling::div//input");
     By DEPARTURE_TIME_FIELD = By.
             xpath("//fieldset//legend[text()='Departure Date Time']/following-sibling::div//label[text()='Time']/following-sibling::div//input");
-    By SAVE_BUTTON = By.xpath("//div[@class='isModal inlinePanel oneRecordActionWrapper']//button[@name='SaveEdit']");
+    By SAVE_BUTTON = By.xpath("//button[@name='SaveEdit']");
     By NEW_HOTEL_ROOM = By.xpath("//span[text()='Hotel Rooms']/following::div[@title='New']");
     By DATA_ERROR_MESSAGE = By.xpath("//div[@data-error-message]");
     By MESSAGE_ERROR_TEXT = By.xpath("//div[@class='container']//li");
@@ -36,6 +36,9 @@ public class QuoteHotelRoom extends BasePage {
     By HELP_ERROR_MESSAGE = By.xpath("//div[@data-help-message]");
     By SELECT_ALL_ITEMS_CHECKBOX = By.xpath("//span[text()='Select 2 items']");
     By MULTI_DELETE_BUTTON = By.xpath("//a[@title='Multidelete']");
+    By EDIT_ROOM_TYPE_BUTTON = By.xpath("//button[@title='Edit Room Type']");
+    By EDIT_RATE_PLAN_BUTTON = By.xpath("//button[@title='Edit Rate Plan']");
+    By TOAST_MESSSAGE = By.xpath("//span[@class='toastMessage slds-text-heading--small forceActionsText'][1]");
 
 
     @Step("Fill out the hotel room")
@@ -104,9 +107,36 @@ public class QuoteHotelRoom extends BasePage {
         wait1.until(ExpectedConditions.elementToBeClickable(CLOSE_WINDOW_BUTTON)).click();
     }
 
+    @Step("Edit room type")
+    public void editRoomType(String roomType) throws InterruptedException {
+        click3(EDIT_ROOM_TYPE_BUTTON);
+        click3(By.xpath("//label[text()='Room Type']/following::button[@title='Clear Selection'][1]"));
+        click3(By.xpath("//div//li//span[@title='" + roomType + "']"));
+        click4(SAVE_BUTTON);
+    }
+
+    @Step("Edit rate plan")
+    public void editRatePlan(String rate) throws InterruptedException {
+        click3(EDIT_RATE_PLAN_BUTTON);
+        click3(By.xpath("//label[text()='Rate Plan']/following::button[@title='Clear Selection'][1]"));
+        click3(By.xpath("//div//li//span[@title='" + rate + "']"));
+        click4(SAVE_BUTTON);
+    }
+
+
+    @Step("Open record bu number")
+    public void openRecordByName(String recordName) throws InterruptedException {
+        click3(By.xpath("//a[@title='" + recordName + "']"));
+    }
+
     @Step("Read help error message")
     public String readHelpErrorMessage() throws InterruptedException {
         return readRecalculateMessage(HELP_ERROR_MESSAGE);
+    }
+
+    @Step("Read toast message")
+    public String readToastMessage() throws InterruptedException {
+        return readRecalculateMessage(TOAST_MESSSAGE);
     }
 
     @Step("Select all items")

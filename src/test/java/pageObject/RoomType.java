@@ -15,7 +15,8 @@ public class RoomType extends BasePage {
 
     //////////////////////////////   SFDX COMMANDS   ////////////////////////////////////
     @Step("Get Room Type SFDX")
-    public StringBuilder getRoomTypeSFDX(String sfdxPath, String where, String userName) throws IOException, InterruptedException {
+    public StringBuilder getRoomTypeSFDX(String sfdxPath, String where, String userName)
+            throws IOException, InterruptedException {
         StringBuilder roomTypeRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 sfdxPath,
                 "force:data:record:get",
@@ -27,6 +28,22 @@ public class RoomType extends BasePage {
                 userName,
                 "--json"});
         return roomTypeRecord;
+    }
+
+    @Step("Delete Room Type SFDX")
+    public void deleteRoomTypeSFDX(String sfdxPath, String where, String userName)
+            throws IOException, InterruptedException {
+        StringBuilder result = SfdxCommand.runLinuxCommand1(new String[]{
+                sfdxPath,
+                "force:data:record:delete",
+                "-s",
+                "thn__Space_Area__c",
+                "-w",
+                where,
+                "-u",
+                userName,
+                "--json"});
+        System.out.println(result);
     }
 
 

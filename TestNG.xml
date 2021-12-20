@@ -205,6 +205,16 @@
             <class name="tests.OverbookingDateTimes"/>
         </classes>
     </test>
+    <test name="Create quote meeting room from quote product">
+        <classes>
+            <class name="tests.CreateQuoteMeetingRoomFromQuoteProduct"/>
+        </classes>
+    </test>
+    <test name="Toast messages testing">
+        <classes>
+            <class name="tests.ToastMessagesTesting"/>
+        </classes>
+    </test>
 
 </suite>
 
