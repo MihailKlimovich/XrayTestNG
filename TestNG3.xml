@@ -5,9 +5,9 @@
         <listener class-name="utils.Listeners.TestListener"/>
         <listener class-name="utils.Listeners.AnnotationTransformer"/>
     </listeners>
-    <test name="Rooming list testing">
+    <test name="Commission Corrections">
         <classes>
-            <class name="tests.RoomingList"/>
+            <class name="tests.CommissionCorrections"/>
         </classes>
     </test>
 

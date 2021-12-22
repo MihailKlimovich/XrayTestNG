@@ -828,7 +828,7 @@ public class ValidationRuleTest1 extends BaseTest {
         reservations.closeWindow();
     }
 
-    @Test(priority = 40, description = "VR38_Resource_Grouping")
+    /*@Test(priority = 40, description = "VR38_Resource_Grouping")
     @Severity(SeverityLevel.NORMAL)
     @Description("VR38_Resource_Grouping")
     @Story("Create Resource Grouping record, try to add Resources with different Properties")
@@ -843,5 +843,5 @@ public class ValidationRuleTest1 extends BaseTest {
         Assert.assertEquals(resourceGrouping.readErrorMessage2(), expectedMessage);
         resourceGrouping.closeWindow();
     }
-
+*/
 }
