@@ -250,6 +250,11 @@
             <class name="tests.ToastMessagesTesting"/>
         </classes>
     </test>
+    <test name="Resource grouping">
+        <classes>
+            <class name="tests.ResourceGroupingTesting"/>
+        </classes>
+    </test>
 
 
 </suite>

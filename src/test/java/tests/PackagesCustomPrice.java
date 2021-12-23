@@ -4,6 +4,7 @@ import io.qameta.allure.Description;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.Story;
+import org.apache.commons.math3.util.Precision;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -844,12 +845,14 @@ public class PackagesCustomPrice extends BaseTest {
         double discountQuotePackage = JsonParser2.
                 getFieldValueLikeDouble(quotePackageRecord2, "result", "thn__Discount_Amount__c");
         double sumDiscountQuotePackageLines = discountQuotePackageLine5 + discountQuotePackageLine6;
-        double unitPriceExclTaxQuotePackage = JsonParser2.
+        double unitPriceExclTaxQuotePackage1 = JsonParser2.
                 getFieldValueLikeDouble(quotePackageRecord2, "result", "thn__Unit_Price_excl_Tax__c");
+        double unitPriceExclTaxQuotePackage = Precision.round(unitPriceExclTaxQuotePackage1, 13);
         double unitPriceInclTaxQuotePackage = JsonParser2.
                 getFieldValueLikeDouble(quotePackageRecord2, "result", "thn__Unit_Price_incl_Tax__c");
-        double salesPriceExclTaxQuotePackage = JsonParser2.
+        double salesPriceExclTaxQuotePackage1 = JsonParser2.
                 getFieldValueLikeDouble(quotePackageRecord2, "result", "thn__Sales_Price_excl_Tax__c");
+        double salesPriceExclTaxQuotePackage = Precision.round(salesPriceExclTaxQuotePackage1, 13);
         double salesPriceInclTaxQuotePackage = JsonParser2.
                 getFieldValueLikeDouble(quotePackageRecord2, "result", "thn__Sales_Price_incl_Tax__c");
         double unitPriceExclTaxQuotePackageLine1 = JsonParser2.
@@ -921,6 +924,7 @@ public class PackagesCustomPrice extends BaseTest {
         Assert.assertEquals(salesPriceExclTaxQuotePackage, sumSalesPriceExclTaxQuotePackageLines);
         Assert.assertEquals(salesPriceInclTaxQuotePackage, sumSalesPriceInclTaxQuotePackageLines);
         Assert.assertEquals(discountQuotePackage, sumDiscountQuotePackageLines);
+
     }
 
 }

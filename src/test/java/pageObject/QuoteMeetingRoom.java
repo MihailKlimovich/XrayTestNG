@@ -319,6 +319,22 @@ public class QuoteMeetingRoom extends BasePage {
         System.out.println(quoteMeetingRoomUpdateResult);
     }
 
+    @Step("Delete Quote Meeting Room SFDX")
+    public void deleteQuoteMeetingRoomSFDX(String sfdxPath, String where, String userName)
+            throws IOException, InterruptedException {
+        StringBuilder result = SfdxCommand.runLinuxCommand1(new String[]{
+                sfdxPath,
+                "force:data:record:delete",
+                "-s",
+                "thn__Quote_Meeting_Room__c",
+                "-w",
+                where,
+                "-u",
+                userName,
+                "--json"});
+        System.out.println(result);
+    }
+
 
 
 
