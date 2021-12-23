@@ -104,6 +104,13 @@ public class HomePageForScratchOrg extends BasePage {
         searchAppWindow.findElement(By.xpath("//input[@placeholder='Search apps and items...']")).sendKeys(text);
         Thread.sleep(3000);
         enter();
+        try {
+            wait1.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@role='presentation']")));
+            click3(By.xpath("//span[text()='All']"));
+        }
+        catch (Exception e){
+
+        }
     }
 
 

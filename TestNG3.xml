@@ -5,9 +5,9 @@
         <listener class-name="utils.Listeners.TestListener"/>
         <listener class-name="utils.Listeners.AnnotationTransformer"/>
     </listeners>
-    <test name="Commission Corrections">
+    <test name="Clone Package testing">
         <classes>
-            <class name="tests.CommissionCorrections"/>
+            <class name="tests.ClonePackage"/>
         </classes>
     </test>
 

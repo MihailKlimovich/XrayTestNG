@@ -315,7 +315,7 @@ public class CommissionCorrections extends BaseTest {
         System.out.println(commissionRecordsSoql);
         List<String> commissionName = JsonParser2.getFieldValueSoql(commissionRecordsSoql.toString(), "Name");
         Assert.assertEquals(commissionName.size(), 6);
-        Assert.assertTrue(commissionName.contains("Hotel Room - 99.00%"));
+        Assert.assertTrue(commissionName.contains("Hotel Room - 59.00%"));
         Assert.assertTrue(commissionName.contains("Meeting Room - 59.00%"));
         Assert.assertTrue(commissionName.contains("Food - 59.00%"));
         Assert.assertTrue(commissionName.contains("Beverage - 59.00%"));
