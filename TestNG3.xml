@@ -25,6 +25,11 @@
             <class name="tests.ErrorManagementNullPriceOnProduct"/>
         </classes>
     </test>
+    <test name="THY-510: ValidationRule1">
+        <classes>
+            <class name="tests.ValidationRules.ValidationRule1"/>
+        </classes>
+    </test>
 </suite>
 
 
