@@ -20,6 +20,11 @@
             <class name="tests.ResourceGroupingTesting"/>
         </classes>
     </test>
+    <test name="Error management: null price on product">
+        <classes>
+            <class name="tests.ErrorManagementNullPriceOnProduct"/>
+        </classes>
+    </test>
 </suite>
 
 
