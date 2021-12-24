@@ -79,7 +79,7 @@ public class OverbookingDateTimes extends BaseTest{
     @Severity(SeverityLevel.NORMAL)
     @Story("Overbooking - date times")
     public void case2() throws InterruptedException, IOException {
-        String expectedMessage = "Something went wrong. Please contact support@thynk.cloud";
+        String expectedMessage = "Something went wrong. Please contact support@thynk.cloud.";
         myceQuotes.goToMyceQuotes();
         developerConsoleWindow.openDeveloperConsole();
         developerConsoleWindow.openExecuteAnonymousWindow();

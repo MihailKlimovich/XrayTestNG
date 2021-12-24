@@ -15,6 +15,11 @@
             <class name="tests.PaymentToMews"/>
         </classes>
     </test>
+    <test name="Resource grouping">
+        <classes>
+            <class name="tests.ResourceGroupingTesting"/>
+        </classes>
+    </test>
 </suite>
 
 
