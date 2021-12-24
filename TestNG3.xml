@@ -10,7 +10,11 @@
             <class name="tests.ClonePackage"/>
         </classes>
     </test>
-
+    <test name="Payment to Mews">
+        <classes>
+            <class name="tests.PaymentToMews"/>
+        </classes>
+    </test>
 </suite>
 
 

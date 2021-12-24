@@ -89,13 +89,12 @@ public class BaseTest {
     public String SERVER_KEY_PATH = "/home/user/salesforceauthotest/jdoe/JWT/server.key";
     public String SFDX_AUTH_URL = "force://PlatformCLI::5Aep861KhtojOqEEpdH0TQSE9vuVzdljKpf1MnxJ39U2zMud8kQ1z6hlDIRT73KpEekvlhTMdXkadgGyID.Mu1f@thdemo-dev-ed.my.salesforce.com";*/
 
-    /*public String ORG_USERNAME = "test-fcspyknr14mx@example.com";
-    public String ORG_PASSWORD = "ztNbvb9!yhtob";
-    public String ORG_URL = "https://test.salesforce.com";
+    /*public String ORG_USERNAME = "dev.autotest.unlocked@thynk.cloud";
+    public String ORG_PASSWORD = "Rost150888";
+    public String ORG_URL = "https://login.salesforce.com/";
     public String CONSUMER_KEY = "";
     public String SFDX = "/home/user/sfdx/bin/sfdx";
-    public String SERVER_KEY_PATH = "/home/user/salesforceauthotest/jdoe/JWT/server.key";
-    public String SFDX_AUTH_URL = "force://PlatformCLI::5Aep861ybeDfdtD3GUSyC__GdV8z6N2WjvehOTz8qBrQeq_EfZbtXSlUXI8OT1_feE97yDnCaatwzdJUapDkxqf@enterprise-connect-3956-dev-ed.cs102.my.salesforce.com";*/
+    public String SFDX_AUTH_URL = "";*/
 
     /*public String ORG_USERNAME = "r@thautomation.sf";
     public String ORG_PASSWORD = "Welcome1508";
