@@ -220,6 +220,11 @@
             <class name="tests.ResourceGroupingTesting"/>
         </classes>
     </test>
+    <test name="Myce Quote - release date formula field">
+        <classes>
+            <class name="tests.MyceQuoteReleaseDateFormulaField"/>
+        </classes>
+    </test>
 
 </suite>
 

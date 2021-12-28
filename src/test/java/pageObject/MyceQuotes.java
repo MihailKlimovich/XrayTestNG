@@ -34,6 +34,7 @@ public class MyceQuotes extends BasePage {
     By PAX_FIELD = By.xpath("//div//input[@name='thn__Pax__c']");
     By COMMISSIONABLE_RADIO_BUTTON = By.xpath("//div//span[text()='Commissionable']");
     By SAVE_BUTTON = By.xpath("//div[@class='isModal inlinePanel oneRecordActionWrapper']//button[@name='SaveEdit']");
+    By SAVE_EDIT_BUTTON = By.xpath("//button[@name='SaveEdit']");
     By PROPERTY_FIELD = By.xpath("//label[text()='Property']/following-sibling::div//input");
     By COMMISSION_FIELD = By.xpath("//span//label[text()='Commission to']");
     By COMMISSION_TYPE_NONE = By.xpath("//span[@title='--None--']");
@@ -80,6 +81,7 @@ public class MyceQuotes extends BasePage {
     By DOCUMENTS_TAB = By.xpath("//li//a[@data-label='Documents']");
     By FILES = By.xpath("//span[@title = 'Files']");
     By ROOMING_LIST_TAB = By.xpath("//li//a[@data-label='Rooming List']");
+    By EDIT_ARRIVAL_DATE_BUTTON = By.xpath("//button[@title='Edit Arrival Date']");
 
 
     @Step("Open MYCE Quote record")
@@ -164,7 +166,6 @@ public class MyceQuotes extends BasePage {
     public void changeDate(String date) throws InterruptedException {
         click4(CHANGE_DATE_BUTTON);
         Thread.sleep(2000);
-        click3(CHANGE_DATE_BUTTON);
         wait1.until(ExpectedConditions.presenceOfElementLocated(NEW_ARRIVAL_DATE_FIELD)).click();
         clear(NEW_ARRIVAL_DATE_FIELD);
         writeText(NEW_ARRIVAL_DATE_FIELD, date);
@@ -174,7 +175,15 @@ public class MyceQuotes extends BasePage {
         wait1.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//p[text()='Quote date has been updated.']")));
         wait1.until(ExpectedConditions.elementToBeClickable(FINISH_BUTTON_CHANGE_DATE_WINDOW)).click();
         Thread.sleep(2000);
+    }
 
+    @Step("Edit arrival date")
+    public void editArrivalDate(String date) throws InterruptedException {
+        click3(EDIT_ARRIVAL_DATE_BUTTON);
+        click3(ARRIVAL_DATA_FIELD);
+        clear(ARRIVAL_DATA_FIELD);
+        writeText(ARRIVAL_DATA_FIELD, date);
+        click4(SAVE_EDIT_BUTTON);
     }
 
     @Step("Fill out the quota form when Commission is None")
