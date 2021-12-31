@@ -62,6 +62,8 @@ public class BaseTest {
     protected Invoice invoice;
     protected MultiDelete multiDelete;
     protected CreateResourceForm createResourceForm;
+    protected QuotePackageLine quotePackageLine;
+    protected QuoteBudget quoteBudget;
 
 
 
@@ -183,6 +185,8 @@ public class BaseTest {
         invoice = new Invoice(driver);
         multiDelete = new MultiDelete(driver);
         createResourceForm = new CreateResourceForm(driver);
+        quotePackageLine = new QuotePackageLine(driver);
+        quoteBudget = new QuoteBudget(driver);
 
     }
 

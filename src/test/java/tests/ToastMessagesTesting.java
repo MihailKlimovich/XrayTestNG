@@ -125,7 +125,6 @@ public class ToastMessagesTesting extends BaseTest {
         Thread.sleep(2000);
         String message = quoteMeetingRoom.readToastMessage();
         Assert.assertEquals(message, expectedMessage);
-
     }
 }
 

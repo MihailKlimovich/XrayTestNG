@@ -205,4 +205,20 @@ public class PackageLine extends BasePage {
         System.out.println(packageLineUpdateResult);
     }
 
+    @Step("Delete Package Line SFDX")
+    public void deletePackageLineSFDX(String sfdxPath, String where, String userName)
+            throws IOException, InterruptedException {
+        StringBuilder result = SfdxCommand.runLinuxCommand1(new String[]{
+                sfdxPath,
+                "force:data:record:delete",
+                "-s",
+                "thn__Package_Line__c",
+                "-w",
+                where,
+                "-u",
+                userName,
+                "--json"});
+        System.out.println(result);
+    }
+
 }

@@ -194,6 +194,24 @@ public class Packages extends BasePage {
         return packageRecord;
     }
 
+    @Step("Update Package SFDX")
+    public void updatePackageSFDX(String sfdxPath, String where, String value, String userName)
+            throws IOException, InterruptedException {
+        StringBuilder packageUpdateResult = SfdxCommand.runLinuxCommand1(new String[]{
+                sfdxPath,
+                "force:data:record:update",
+                "-s",
+                "thn__Package__c",
+                "-w",
+                where,
+                "-v",
+                value,
+                "-u",
+                userName,
+                "--json"});
+        System.out.println(packageUpdateResult);
+    }
+
 
 
 

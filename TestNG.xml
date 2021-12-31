@@ -225,6 +225,11 @@
             <class name="tests.MyceQuoteReleaseDateFormulaField"/>
         </classes>
     </test>
+    <test name="Quote products - unit + Prices calculation regression">
+        <classes>
+            <class name="tests.QuoteProductsUnit"/>
+        </classes>
+    </test>
 
 </suite>
 
