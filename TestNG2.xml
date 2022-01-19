@@ -10,11 +10,6 @@
             <class name="clearCache.ClearCache"/>
         </classes>
     </test>
-    <test name="THY-582: Opera Write - Corrections (Part 1)">
-        <classes>
-            <class name="tests.OperaWriteCorrections"/>
-        </classes>
-    </test>
     <test name="Delete and create data">
         <classes>
             <class name="tests.TestData"/>
@@ -85,19 +80,9 @@
             <class name="tests.PackagesCustomPrice"/>
         </classes>
     </test>
-    <test name="THY-582: Opera Write - Corrections (Part 2)">
-        <classes>
-            <class name="tests.OperaWriteCorrections2"/>
-        </classes>
-    </test>
     <test name="THY-519: History tracking">
         <classes>
             <class name="tests.HistoryTracking"/>
-        </classes>
-    </test>
-    <test name="THY-589: MYCE to Opera">
-        <classes>
-            <class name="tests.MyceToOpera"/>
         </classes>
     </test>
     <test name="THY-607: Multi days packages">

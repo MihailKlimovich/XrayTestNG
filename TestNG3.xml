@@ -10,14 +10,149 @@
             <class name="clearCache.ClearCache"/>
         </classes>
     </test>
+    <test name="THY-582: Opera Write - Corrections (Part 1)">
+        <classes>
+            <class name="tests.OperaWriteCorrections"/>
+        </classes>
+    </test>
     <test name="Delete and create data">
         <classes>
             <class name="tests.TestData"/>
         </classes>
     </test>
-    <test name="Clone Package testing">
+    <test name="Guest to contact">
         <classes>
-            <class name="tests.ClonePackage"/>
+            <class name="tests.GuestToContact"/>
+        </classes>
+    </test>
+    <test name="Update Orders">
+        <classes>
+            <class name="tests.UpdateOrders"/>
+        </classes>
+    </test>
+    <test name="TB-132: Optional Product was added to an Order and sent to Mews">
+        <classes>
+            <class name="tests.OptionalProductWasAddedToAnOrderAndSentToMews"/>
+        </classes>
+    </test>
+    <test name="THY-510: ValidationRule1">
+        <classes>
+            <class name="tests.ValidationRules.ValidationRule1"/>
+        </classes>
+    </test>
+    <test name="THY-510: ValidationRule2">
+        <classes>
+            <class name="tests.ValidationRules.ValidationRule2"/>
+        </classes>
+    </test>
+    <test name="THY-510: ValidationRule3">
+        <classes>
+            <class name="tests.ValidationRules.ValidationRule3"/>
+        </classes>
+    </test>
+    <test name="THY-510: ValidationRule4">
+        <classes>
+            <class name="tests.ValidationRules.ValidationRule4"/>
+        </classes>
+    </test>
+    <test name="THY-487: Reservation creation process">
+        <classes>
+            <class name="tests.ReservationCreationProcess"/>
+        </classes>
+    </test>
+    <test name="THY-523: Total_amount_incl_Tax__c">
+        <classes>
+            <class name="tests.TotalAmountInclTax"/>
+        </classes>
+    </test>
+    <test name="THY-512: Quote hotel room - time fields">
+        <classes>
+            <class name="tests.QuoteHotelRoomTimeFields"/>
+        </classes>
+    </test>
+    <test name="THY-570: On Consumption">
+        <classes>
+            <class name="tests.OnConsumption"/>
+        </classes>
+    </test>
+    <test name="THY-506: Request - Agent">
+        <classes>
+            <class name="tests.Request_Agent"/>
+        </classes>
+    </test>
+    <test name="THY-588: Packages - custom price">
+        <classes>
+            <class name="tests.PackagesCustomPrice"/>
+        </classes>
+    </test>
+    <test name="THY-582: Opera Write - Corrections (Part 2)">
+        <classes>
+            <class name="tests.OperaWriteCorrections2"/>
+        </classes>
+    </test>
+    <test name="THY-519: History tracking">
+        <classes>
+            <class name="tests.HistoryTracking"/>
+        </classes>
+    </test>
+    <test name="THY-589: MYCE to Opera">
+        <classes>
+            <class name="tests.MyceToOpera"/>
+        </classes>
+    </test>
+    <test name="THY-607: Multi days packages">
+        <classes>
+            <class name="tests.MultiDaysPackages"/>
+        </classes>
+    </test>
+    <test name="Multi delete testing">
+        <classes>
+            <class name="tests.MultiDeleteTesting"/>
+        </classes>
+    </test>
+    <test name="Hotel room modification">
+        <classes>
+            <class name="tests.HotelRoomModifications"/>
+        </classes>
+    </test>
+    <test name="FSDates on quote package">
+        <classes>
+            <class name="tests.FSDatesOnQuotePackage"/>
+        </classes>
+    </test>
+    <test name="Commission">
+        <classes>
+            <class name="tests.Commission"/>
+        </classes>
+    </test>
+    <test name="Commission Corrections">
+        <classes>
+            <class name="tests.CommissionCorrections"/>
+        </classes>
+    </test>
+    <test name="Quote's accounts to Mews">
+        <classes>
+            <class name="tests.QuotesAccountToMews"/>
+        </classes>
+    </test>
+    <test name="Guest Management Testing">
+        <classes>
+            <class name="tests.GuestManagementTesting"/>
+        </classes>
+    </test>
+    <test name="Clone Myce quote and clone selection">
+        <classes>
+            <class name="tests.CloneMyceQuoteAndCloneSelection"/>
+        </classes>
+    </test>
+    <test name="Clone Myce quote and clone selection -overbooking">
+        <classes>
+            <class name="tests.CloneOverbookingVersion"/>
+        </classes>
+    </test>
+    <test name="Myce quote and deposits">
+        <classes>
+            <class name="tests.MyceQuoteAndDeposits"/>
         </classes>
     </test>
     <test name="Payment to Mews">
@@ -25,9 +160,44 @@
             <class name="tests.PaymentToMews"/>
         </classes>
     </test>
-    <test name="Resource grouping">
+    <test name="Prevent reserved hotel rooms from being deleted">
         <classes>
-            <class name="tests.ResourceGroupingTesting"/>
+            <class name="tests.PreventReservedHotelRoomsFromBeingDeleted"/>
+        </classes>
+    </test>
+    <test name="Combo product: tax change">
+        <classes>
+            <class name="tests.ComboProductTaxChange"/>
+        </classes>
+    </test>
+    <test name="Myce quote - Fill Option date">
+        <classes>
+            <class name="tests.MyceQuoteFillOptionDate"/>
+        </classes>
+    </test>
+    <test name="Shadow Meeting rooms">
+        <classes>
+            <class name="tests.ShadowMeetingRooms"/>
+        </classes>
+    </test>
+    <test name="Rooming list testing">
+        <classes>
+            <class name="tests.RoomingList"/>
+        </classes>
+    </test>
+    <test name="Clone Package testing">
+        <classes>
+            <class name="tests.ClonePackage"/>
+        </classes>
+    </test>
+    <test name="Overbooking and price update">
+        <classes>
+            <class name="tests.OverbookingAndPriceUpdate"/>
+        </classes>
+    </test>
+    <test name="Default Setup testing">
+        <classes>
+            <class name="tests.DefaultSetupTesting"/>
         </classes>
     </test>
     <test name="Error management: null price on product">
@@ -35,9 +205,69 @@
             <class name="tests.ErrorManagementNullPriceOnProduct"/>
         </classes>
     </test>
-    <test name="THY-510: ValidationRule1">
+    <test name="Multi edit on quote's related list UAT">
         <classes>
-            <class name="tests.ValidationRules.ValidationRule1"/>
+            <class name="tests.MultiEditOnQuotesRelatedList"/>
+        </classes>
+    </test>
+    <test name="Meeting room and resource pricing">
+        <classes>
+            <class name="tests.MeetingRoomAndResourcePricing"/>
+        </classes>
+    </test>
+    <test name="Myce Quote - Complimentary. Change price calculation with handle Unit field.">
+        <classes>
+            <class name="tests.MyceQuoteComplimentaryChangePriceCalculationWithHandleUnitField"/>
+        </classes>
+    </test>
+    <test name="Move processes to apex">
+        <classes>
+            <class name="tests.MoveProcessesToApex"/>
+        </classes>
+    </test>
+    <test name="THY-619: Quote product creation">
+        <classes>
+            <class name="tests.QuoteProductCreation"/>
+        </classes>
+    </test>
+    <test name="Quote product / meeting room interactions">
+        <classes>
+            <class name="tests.QuoteProductMeetingRoomInteractions"/>
+        </classes>
+    </test>
+    <test name="Overbooking - date times">
+        <classes>
+            <class name="tests.OverbookingDateTimes"/>
+        </classes>
+    </test>
+    <test name="Create quote meeting room from quote product">
+        <classes>
+            <class name="tests.CreateQuoteMeetingRoomFromQuoteProduct"/>
+        </classes>
+    </test>
+    <test name="Toast messages testing">
+        <classes>
+            <class name="tests.ToastMessagesTesting"/>
+        </classes>
+    </test>
+    <test name="Resource grouping">
+        <classes>
+            <class name="tests.ResourceGroupingTesting"/>
+        </classes>
+    </test>
+    <test name="Myce Quote - release date formula field">
+        <classes>
+            <class name="tests.MyceQuoteReleaseDateFormulaField"/>
+        </classes>
+    </test>
+    <test name="Quote products - unit + Prices calculation regression">
+        <classes>
+            <class name="tests.QuoteProductsUnit"/>
+        </classes>
+    </test>
+    <test name="THY-662: Complimentary on quote's related">
+        <classes>
+            <class name="tests.ComplimentaryOnQuotesRelated"/>
         </classes>
     </test>
 </suite>
