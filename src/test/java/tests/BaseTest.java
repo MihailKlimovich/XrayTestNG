@@ -64,6 +64,10 @@ public class BaseTest {
     protected CreateResourceForm createResourceForm;
     protected QuotePackageLine quotePackageLine;
     protected QuoteBudget quoteBudget;
+    protected Rate rate;
+    protected RatePrice ratePrice;
+    protected CategoryAdjustment categoryAdjustment;
+    protected CategoryPrice categoryPrice;
 
 
 
@@ -92,11 +96,11 @@ public class BaseTest {
     public String SFDX_AUTH_URL = "force://PlatformCLI::5Aep861KhtojOqEEpdH0TQSE9vuVzdljKpf1MnxJ39U2zMud8kQ1z6hlDIRT73KpEekvlhTMdXkadgGyID.Mu1f@thdemo-dev-ed.my.salesforce.com";*/
 
     /*public String ORG_USERNAME = "dev.autotest.unlocked@thynk.cloud";
-    public String ORG_PASSWORD = "Rost150888";
+    public String ORG_PASSWORD = "Welcome2022";
     public String ORG_URL = "https://login.salesforce.com/";
     public String CONSUMER_KEY = "";
     public String SFDX = "/home/user/sfdx/bin/sfdx";
-    public String SFDX_AUTH_URL = "";*/
+    public String SFDX_AUTH_URL = "force://PlatformCLI::5Aep861yNl8cSWS3xUL2N2n9_bXbYd3N5JhNprTah2dCsO5IEXvQ5M70SMgae9CUf75i0z4oe0wTluP8YHuBMlA@thynk-test-unlocked-dev-ed.my.salesforce.com";*/
 
     /*public String ORG_USERNAME = "r@thautomation.sf";
     public String ORG_PASSWORD = "Welcome1508";
@@ -104,15 +108,16 @@ public class BaseTest {
     public String CONSUMER_KEY = "";
     public String SFDX = "/home/user/sfdx/bin/sfdx";
     public String SERVER_KEY_PATH = "/home/user/salesforceauthotest/jdoe/JWT/server.key";
-    public String SFDX_AUTH_URL = "force://PlatformCLI::5Aep861yNl8cSWS3xX63jHZ.ngSZAmvp8hJceBHlTlTeFBvHepIodVDm_zkSA8ZYTRBPGqjE1AmSauRg6CAVr5L@thautomation-dev-ed.my.salesforce.com";*/
+    public String SFDX_AUTH_URL = "force://PlatformCLI::5Aep861yNl8cSWS3xX63jHZ.ngSZAmvp8hJceBHlTlTeFBvHepIodVDm_zkSA8ZYTRBPGqjE1AmSauRg6CAVr5L@thautomation-dev-ed.my.salesforce.com";
+    public String REQUEST_URL = "https://thautomation-dev-ed.lightning.force.com/lightning/r/thn__Request__c/";*/
 
-    /*public String ORG_USERNAME = "dev.autotest.unmanaged@thynk.cloud";
-    public String ORG_PASSWORD = "Welcome1508";
-    public String ORG_URL = "https://login.salesforce.com/";
+    /*public String ORG_USERNAME = "test-g2ntcbwrb6ti@example.com";
+    public String ORG_PASSWORD = "(gs0wOpncjlwy";
+    public String ORG_URL = "https://test.salesforce.com";
     public String CONSUMER_KEY = "";
     public String SFDX = "/home/user/sfdx/bin/sfdx";
     public String SERVER_KEY_PATH = "/home/user/salesforceauthotest/jdoe/JWT/server.key";
-    public String SFDX_AUTH_URL = "";*/
+    public String SFDX_AUTH_URL = "force://PlatformCLI::5Aep861xBpRqBedp8u4sHbCVImQ6d.Qtxxix5j6otsUU_pvo7IeYFbNlQn4Vx.Y9t8DxtKWn.aXP7zT7E_9vsl9@computing-connect-9659-dev-ed.cs160.my.salesforce.com";*/
 
     final protected String thynkPackDevOrg = "https://thynkpack-dev-ed.my.salesforce.com/";
     final protected String thynkPackUserName = "rostislav.orel@succraft.com";
@@ -187,7 +192,10 @@ public class BaseTest {
         createResourceForm = new CreateResourceForm(driver);
         quotePackageLine = new QuotePackageLine(driver);
         quoteBudget = new QuoteBudget(driver);
-
+        rate = new Rate(driver);
+        ratePrice = new RatePrice(driver);
+        categoryAdjustment = new CategoryAdjustment(driver);
+        categoryPrice = new CategoryPrice(driver);
     }
 
     @AfterClass

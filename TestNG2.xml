@@ -265,6 +265,11 @@
             <class name="tests.QuoteProductsUnit"/>
         </classes>
     </test>
+    <test name="THY-662: Complimentary on quote's related">
+        <classes>
+            <class name="tests.ComplimentaryOnQuotesRelated"/>
+        </classes>
+    </test>
 
 </suite>
 

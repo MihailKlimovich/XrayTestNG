@@ -35,7 +35,7 @@ public class CommissionCorrections extends BaseTest {
                 "-s",
                 "Account",
                 "-w",
-                "Name='TestAccountWithCommission2",
+                "Name='TestAccountWithoutCommission2",
                 "-u",
                 ORG_USERNAME,
                 "--json"});
