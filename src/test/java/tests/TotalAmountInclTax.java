@@ -80,6 +80,7 @@ public class TotalAmountInclTax extends BaseTest {
                 ORG_USERNAME,
                 "--json"});
         String meetingHalfDayID = JsonParser2.getFieldValue(productRecord3.toString(), "Id");
+        System.out.println(meetingHalfDayID);
         StringBuilder myseQuoteResult = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:create",

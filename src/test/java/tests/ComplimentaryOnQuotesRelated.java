@@ -582,7 +582,7 @@ public class ComplimentaryOnQuotesRelated extends BaseTest {
                 getFieldValue(quoteHotelRoomRecord.toString(), "thn__List_Price__c");
         Assert.assertEquals(quoteHotelRoomDiscount, "100");
         Assert.assertEquals(quoteHotelRoomUnitPrice, "0");
-        Assert.assertEquals(quoteHotelRoomListPrice, "90");
+        Assert.assertEquals(quoteHotelRoomListPrice, "20");
     }
 
 

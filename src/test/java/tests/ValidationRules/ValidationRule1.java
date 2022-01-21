@@ -21,7 +21,8 @@ import java.util.List;
 public class ValidationRule1 extends BaseTest{
 
 
-    @Test(priority = 1, description="Setting up validation rules: Setup.thn__ByPass__c.thn__ByPassVR__c == false and User.thn__ByPassVR__c == false ")
+    @Test(priority = 1, description="Setting up validation rules: Setup.thn__ByPass__c.thn__ByPassVR__c == false" +
+            " and User.thn__ByPassVR__c == false ")
     @Severity(SeverityLevel.NORMAL)
     @Story("THY-510: Validation rule updated")
     public void settingUpValidationRules() throws InterruptedException, IOException {
@@ -32,7 +33,7 @@ public class ValidationRule1 extends BaseTest{
                 "-s",
                 "User",
                 "-w",
-                "Name='Rostislav'",
+                "Username='" + ORG_USERNAME + "'",
                 "-v",
                 "thn__ByPassVR__c=false",
                 "-u",
@@ -66,7 +67,7 @@ public class ValidationRule1 extends BaseTest{
                 "-s",
                 "User",
                 "-w",
-                "Name='Rostislav",
+                "Username='" + ORG_USERNAME + "'",
                 "-u",
                 ORG_USERNAME,
                 "--json"});

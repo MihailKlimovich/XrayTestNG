@@ -17,7 +17,6 @@ public class Payment extends BasePage {
     //////////////////////////////   SFDX COMMANDS   ////////////////////////////////////
 
     @Step("Create Payment SFDX")
-
     public String createPaymentSFDX(String sfdxPath, String value, String userName) throws IOException, InterruptedException {
         StringBuilder paymentResult = SfdxCommand.runLinuxCommand1(new String[]{
                 sfdxPath,
