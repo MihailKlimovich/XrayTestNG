@@ -270,6 +270,11 @@
             <class name="tests.ComplimentaryOnQuotesRelated"/>
         </classes>
     </test>
+    <test name="THY-659: Quote accounts to PMS accounts">
+        <classes>
+            <class name="tests.QuoteAccountsToPMSAccounts"/>
+        </classes>
+    </test>
 </suite>
 
 

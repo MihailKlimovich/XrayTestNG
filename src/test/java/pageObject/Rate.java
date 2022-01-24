@@ -49,4 +49,20 @@ public class Rate extends BasePage {
         System.out.println(result);
     }
 
+    @Step("Get Rate SFDX")
+    public StringBuilder getRateSFDX(String sfdxPath, String where, String userName)
+            throws IOException, InterruptedException {
+        StringBuilder rateRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                sfdxPath,
+                "force:data:record:get",
+                "-s",
+                "thn__Rate__c",
+                "-w",
+                where,
+                "-u",
+                userName,
+                "--json"});
+        return rateRecord;
+    }
+
 }

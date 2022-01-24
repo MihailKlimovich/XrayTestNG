@@ -163,7 +163,7 @@ public class QuoteAccountsToPMSAccounts extends BaseTest {
 
     @Test(priority = 5, description = "Remove the linked PMS Company and Company record from the Quote. Create an" +
             " Account record with the Name of 110 characters. Change the stage of the Quote from ‘3 - Tentative’  to" +
-            " ‘1 - Qualify’. Expected result: PMS Company field and Company are empty on the Quote.")
+            " ‘1 - Qualify’. Expected result: The Name of the created PMS Company was shortened to 80 characters. ")
     @Severity(SeverityLevel.NORMAL)
     @Story("THY-659: Quote accounts to PMS accounts")
     public void case4() throws InterruptedException, IOException {
@@ -198,7 +198,7 @@ public class QuoteAccountsToPMSAccounts extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     @Story("THY-659: Quote accounts to PMS accounts")
     public void case5() throws InterruptedException, IOException {
-        myceQuotes.deleteQuoteSFDX(SFDX, "Name='QuoteAccountToPMSAccountsAutoTes2t'", ORG_USERNAME);
+        myceQuotes.deleteQuoteSFDX(SFDX, "Name='QuoteAccountToPMSAccountsAutoTest2'", ORG_USERNAME);
         accounts.deleteAccountSFDX(SFDX, "Name=PMSCompanyAutoTest2", ORG_USERNAME);
         StringBuilder hotelRecord= hotel.getHotelSFDX(SFDX, "thn__Unique_Id__c='Demo'", ORG_USERNAME);
         String propertyID = JsonParser2.getFieldValue(hotelRecord.toString(), "Id");
@@ -279,6 +279,84 @@ public class QuoteAccountsToPMSAccounts extends BaseTest {
         Assert.assertEquals(pmsAccountIsPrimary, "true");
         Assert.assertEquals(pmsAccountPropertyDetailChainCode, "CMT Chain code");
         Assert.assertEquals(pmsAccountPropertyDetailCode, propertyHotelCode);
+    }
+
+    @Test(priority = 7, description = "Remove the linked PMS Travel Agent record from the Quote. Change the stage of the" +
+            " Quote from ‘3 - Tentative’  to ‘1 - Qualify’. Expected result: The earlier created PMS Company record" +
+            " was linked to the Quote.")
+    @Severity(SeverityLevel.NORMAL)
+    @Story("THY-659: Quote accounts to PMS accounts")
+    public void case6() throws InterruptedException, IOException {
+        StringBuilder quoteRecord = myceQuotes.
+                getQuoteSFDX(SFDX, "Name='QuoteAccountToPMSAccountsAutoTest2'", ORG_USERNAME);
+        String quotePMSAgent= JsonParser2.getFieldValue(quoteRecord.toString(), "thn__PMS_Travel_Agent__c");
+        myceQuotes.updateQuoteSFDX(SFDX, "Name='QuoteAccountToPMSAccountsAutoTest2",
+                "thn__PMS_Travel_Agent__c=''", ORG_USERNAME);
+        StringBuilder quoteRecord2 = myceQuotes.
+                getQuoteSFDX(SFDX, "Name='QuoteAccountToPMSAccountsAutoTest2'", ORG_USERNAME);
+        String quotePMSAgent2= JsonParser2.getFieldValue(quoteRecord2.toString(), "thn__PMS_Travel_Agent__c");
+        Assert.assertEquals(quotePMSAgent2, null);
+        myceQuotes.updateQuoteSFDX(SFDX, "Name='QuoteAccountToPMSAccountsAutoTest2",
+                "thn__Stage__c='1 - Qualify'", ORG_USERNAME);
+        StringBuilder updatedQuoteRecord = myceQuotes.
+                getQuoteSFDX(SFDX, "Name='QuoteAccountToPMSAccountsAutoTest2'", ORG_USERNAME);
+        String updatedQuotePMSAgent= JsonParser2.
+                getFieldValue(updatedQuoteRecord.toString(), "thn__PMS_Travel_Agent__c");
+        Assert.assertEquals(updatedQuotePMSAgent, quotePMSAgent);
+    }
+
+    @Test(priority = 8, description = "Remove the linked PMS Travel Agent record from the Quote. Add a different PMS" +
+            " Travel Agent record to the Quote. Change the stage of the Quote from ‘1 - Propose’ to ‘3 - Tentative’." +
+            " Expected result: The earlier created PMS Travel Agent record was linked to the Quote.")
+    @Severity(SeverityLevel.NORMAL)
+    @Story("THY-659: Quote accounts to PMS accounts")
+    public void case7() throws InterruptedException, IOException {
+        pmsAccount.deletePMSAccountSFDX(SFDX, "Name='AutoPMSAccount2'", ORG_USERNAME);
+        StringBuilder quoteRecord = myceQuotes.
+                getQuoteSFDX(SFDX, "Name='QuoteAccountToPMSAccountsAutoTest2'", ORG_USERNAME);
+        String quotePMSAgent= JsonParser2.getFieldValue(quoteRecord.toString(), "thn__PMS_Travel_Agent__c");
+        String newPMSAccountID = pmsAccount.createPMSAccountSFDX(SFDX, "Name='AutoPMSAccount2'", ORG_USERNAME);
+        myceQuotes.updateQuoteSFDX(SFDX, "Name='QuoteAccountToPMSAccountsAutoTest2",
+                "thn__PMS_Travel_Agent__c='" + newPMSAccountID + "'", ORG_USERNAME);
+        StringBuilder quoteRecord2 = myceQuotes.
+                getQuoteSFDX(SFDX, "Name='QuoteAccountToPMSAccountsAutoTest2'", ORG_USERNAME);
+        String quotePMSAgent2= JsonParser2.getFieldValue(quoteRecord2.toString(), "thn__PMS_Travel_Agent__c");
+        Assert.assertEquals(quotePMSAgent2, newPMSAccountID);
+        myceQuotes.updateQuoteSFDX(SFDX, "Name='QuoteAccountToPMSAccountsAutoTest2",
+                "thn__Stage__c='3 - Tentative'", ORG_USERNAME);
+        StringBuilder updatedQuoteRecord = myceQuotes.
+                getQuoteSFDX(SFDX, "Name='QuoteAccountToPMSAccountsAutoTest2'", ORG_USERNAME);
+        String updatedQuotePMSAgent= JsonParser2.
+                getFieldValue(updatedQuoteRecord.toString(), "thn__PMS_Travel_Agent__c");
+        Assert.assertEquals(updatedQuotePMSAgent, quotePMSAgent);
+    }
+
+    @Test(priority = 9, description = "Remove the linked PMS Travel Agent and Agent record from the Quote. Create an" +
+            " Account record with the Name of 110 characters. Change the stage of the Quote from ‘3 - Tentative’  to" +
+            " ‘1 - Qualify’. Expected result: The Name of the created PMS Travel Agent was shortened to 80 characters.")
+    @Severity(SeverityLevel.NORMAL)
+    @Story("THY-659: Quote accounts to PMS accounts")
+    public void case8() throws InterruptedException, IOException {
+        accounts.deleteAccountSFDX(SFDX, "Name=OneHundreedOneHundreedOneHundreedOneHundreedOneHundreedOne" +
+                "HundreedOneHundreedOneHundreedOneHundreedOneHundreed", ORG_USERNAME);
+        String accountId = accounts.createAccountSFDX(SFDX, "Name='OneHundreedOneHundreedOneHundreedOneHundreed" +
+                "OneHundreedOneHundreedOneHundreedOneHundreedOneHundreedOneHundreed'", ORG_USERNAME);
+        StringBuilder accountRecord = accounts.getAccountSFDX(SFDX, "Id='" + accountId + "'", ORG_USERNAME);
+        String accountName= JsonParser2.
+                getFieldValue(accountRecord.toString(), "Name");
+        Assert.assertEquals(accountName.length(), 110);
+        myceQuotes.updateQuoteSFDX(SFDX, "Name='QuoteAccountToPMSAccountsAutoTest2",
+                "thn__Agent__c='" + accountId + "' thn__PMS_Travel_Agent__c=''", ORG_USERNAME);
+        myceQuotes.updateQuoteSFDX(SFDX, "Name='QuoteAccountToPMSAccountsAutoTest2",
+                "thn__Stage__c='1 - Qualify'", ORG_USERNAME);
+        StringBuilder updatedQuoteRecord = myceQuotes.
+                getQuoteSFDX(SFDX, "Name='QuoteAccountToPMSAccountsAutoTest2'", ORG_USERNAME);
+        String quotePMSAgent= JsonParser2.
+                getFieldValue(updatedQuoteRecord.toString(), "thn__PMS_Travel_Agent__c");
+        StringBuilder pmsAccountRecord = pmsAccount.
+                getPMSAccountSFDX(SFDX, "Id='" + quotePMSAgent + "'", ORG_USERNAME);
+        String pmsAccountName = JsonParser2.getFieldValue(pmsAccountRecord.toString(), "Name");
+        Assert.assertEquals(pmsAccountName.length(), 80);
     }
 
 }

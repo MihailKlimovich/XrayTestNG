@@ -70,6 +70,7 @@ public class BaseTest {
     protected CategoryAdjustment categoryAdjustment;
     protected CategoryPrice categoryPrice;
     protected PMSAccount pmsAccount;
+    protected PMSBlock pmsBlock;
 
 
 
@@ -113,24 +114,23 @@ public class BaseTest {
     public String SFDX_AUTH_URL = "force://PlatformCLI::5Aep861yNl8cSWS3xX63jHZ.ngSZAmvp8hJceBHlTlTeFBvHepIodVDm_zkSA8ZYTRBPGqjE1AmSauRg6CAVr5L@thautomation-dev-ed.my.salesforce.com";
     public String REQUEST_URL = "https://thautomation-dev-ed.lightning.force.com/lightning/r/thn__Request__c/";*/
 
-    /*public String ORG_USERNAME = "test-g2ntcbwrb6ti@example.com";
-    public String ORG_PASSWORD = "(gs0wOpncjlwy";
-    public String ORG_URL = "https://test.salesforce.com";
-    public String CONSUMER_KEY = "";
-    public String SFDX = "/home/minsk-sc/sfdx/bin/sfdx";
-    public String SFDX_AUTH_URL = "force://PlatformCLI::5Aep861xBpRqBedp8u4sHbCVImQ6d.Qtxxix5j6otsUU_pvo7IeYFbNlQn4Vx.Y9t8DxtKWn.aXP7zT7E_9vsl9@computing-connect-9659-dev-ed.cs160.my.salesforce.com";*/
+    //public String ORG_USERNAME = "test-g2ntcbwrb6ti@example.com";
+    //public String ORG_PASSWORD = "(gs0wOpncjlwy";
+    //public String ORG_URL = "https://test.salesforce.com";
+    //public String CONSUMER_KEY = "";
+    //public String SFDX = "/home/user/sfdx/bin/sfdx";
+    //public String SFDX_AUTH_URL = "force://PlatformCLI::5Aep861xBpRqBedp8u4sHbCVImQ6d.Qtxxix5j6otsUU_pvo7IeYFbNlQn4Vx.Y9t8DxtKWn.aXP7zT7E_9vsl9@computing-connect-9659-dev-ed.cs160.my.salesforce.com";
 
-    /*public String ORG_USERNAME = "qa-thy659@succraft.com";
-    public String ORG_PASSWORD = "hellohello11";
-    public String ORG_URL = "https://test.salesforce.com";
-    public String CONSUMER_KEY = "";
-    public String SFDX = "/home/minsk-sc/sfdx/bin/sfdx";
-    public String SFDX_AUTH_URL = "force://PlatformCLI::5Aep861wJWHSPwPUn0TQUmlE.lB2WnStr5CmJYmL6vCaErhtYcpmSH07I_y.4CtNvF6a57lMrScmTA7xnw0LK7Z@customization-saas-2335-dev-ed.cs129.my.salesforce.com";*/
+
+
+
+
 
     final protected String thynkPackDevOrg = "https://thynkpack-dev-ed.my.salesforce.com/";
     final protected String thynkPackUserName = "rostislav.orel@succraft.com";
-    final protected String thynkPackKey = "3MVG91BJr_0ZDQ4ta_ZwN1EEnfj.OQSJWOBWMPFXclJ22A8oaKqM9KTLdsoSupXX0idQnMIdsI3IweGbsJx6t";
     final protected String thynkPackPassword = "Rost1508";
+    final protected String thynkPackKey = "3MVG91BJr_0ZDQ4ta_ZwN1EEnfj.OQSJWOBWMPFXclJ22A8oaKqM9KTLdsoSupXX0idQnMIdsI3IweGbsJx6t";
+    public String SFDX_AUTH_URL_THYNK = "force://PlatformCLI::5Aep861KhtojOqEEpf1C.laFhN16Pmut38yhtiYoOyrXXUeg8QGP2hZVxy39KizY65ljaqxviEldYCEYtpb1Gi1@thynkpack-dev-ed.my.salesforce.com";
 
 
 
@@ -205,6 +205,7 @@ public class BaseTest {
         categoryAdjustment = new CategoryAdjustment(driver);
         categoryPrice = new CategoryPrice(driver);
         pmsAccount = new PMSAccount(driver);
+        pmsBlock = new PMSBlock(driver);
     }
 
     @AfterClass
