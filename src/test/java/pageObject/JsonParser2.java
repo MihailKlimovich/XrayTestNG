@@ -57,6 +57,7 @@ public class JsonParser2 extends BasePage {
         }catch (UnsupportedOperationException e){
             return null;}
     }
+
     @Step("Get value from SOQL (String)")
     public static List<String> getFieldValueSoql(String json, String... keys) throws UnsupportedOperationException {
         JSONObject obj = new JSONObject(json);
@@ -79,6 +80,20 @@ public class JsonParser2 extends BasePage {
         for (int i = 0; i < array.length(); i++) {
             for (String key: keys) {
                 int result = array.getJSONObject(i).getInt(key);
+                records.add(result);
+            }
+        }
+        return records;
+    }
+
+    @Step("Get value from SOQL (double)")
+    public static List<Double> getFieldValueSoql3(String json, String... keys) throws UnsupportedOperationException {
+        JSONObject obj = new JSONObject(json);
+        JSONArray array = obj.getJSONObject("result").getJSONArray("records");
+        ArrayList <Double> records = new ArrayList<>();
+        for (int i = 0; i < array.length(); i++) {
+            for (String key: keys) {
+                double result = array.getJSONObject(i).getDouble(key);
                 records.add(result);
             }
         }

@@ -260,6 +260,11 @@
             <class name="tests.QuoteAccountsToPMSAccounts"/>
         </classes>
     </test>
+    <test name="THY-677: Quote hotel room quantity - Budgets & subtotals">
+        <classes>
+            <class name="tests.QuoteHotelRoomQuantityBudgetsAndSubtotals"/>
+        </classes>
+    </test>
 
 </suite>
 

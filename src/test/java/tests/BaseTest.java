@@ -71,6 +71,7 @@ public class BaseTest {
     protected CategoryPrice categoryPrice;
     protected PMSAccount pmsAccount;
     protected PMSBlock pmsBlock;
+    protected QuoteHotelRoomPrice quoteHotelRoomPrice;
 
 
 
@@ -114,12 +115,12 @@ public class BaseTest {
     public String SFDX_AUTH_URL = "force://PlatformCLI::5Aep861yNl8cSWS3xX63jHZ.ngSZAmvp8hJceBHlTlTeFBvHepIodVDm_zkSA8ZYTRBPGqjE1AmSauRg6CAVr5L@thautomation-dev-ed.my.salesforce.com";
     public String REQUEST_URL = "https://thautomation-dev-ed.lightning.force.com/lightning/r/thn__Request__c/";*/
 
-    //public String ORG_USERNAME = "test-g2ntcbwrb6ti@example.com";
-    //public String ORG_PASSWORD = "(gs0wOpncjlwy";
-    //public String ORG_URL = "https://test.salesforce.com";
-    //public String CONSUMER_KEY = "";
-    //public String SFDX = "/home/user/sfdx/bin/sfdx";
-    //public String SFDX_AUTH_URL = "force://PlatformCLI::5Aep861xBpRqBedp8u4sHbCVImQ6d.Qtxxix5j6otsUU_pvo7IeYFbNlQn4Vx.Y9t8DxtKWn.aXP7zT7E_9vsl9@computing-connect-9659-dev-ed.cs160.my.salesforce.com";
+    /*public String ORG_USERNAME = "test-wuejipxgl2tu@example.com";
+    public String ORG_PASSWORD = "MyPassword1";
+    public String ORG_URL = "https://test.salesforce.com";
+    public String CONSUMER_KEY = "";
+    public String SFDX = "/home/user/sfdx/bin/sfdx";
+    public String SFDX_AUTH_URL = "force://PlatformCLI::5Aep861Ylaxber_9t6Fmn6sl2b_hWxyJfTLUF1XSWddXHqfVep6KFyhCUS1elyL2dN9UFRnIE7WBe6LvGD0d4HQ@power-app-5497-dev-ed.cs89.my.salesforce.com";*/
 
 
 
@@ -206,6 +207,7 @@ public class BaseTest {
         categoryPrice = new CategoryPrice(driver);
         pmsAccount = new PMSAccount(driver);
         pmsBlock = new PMSBlock(driver);
+        quoteHotelRoomPrice = new QuoteHotelRoomPrice(driver);
     }
 
     @AfterClass
