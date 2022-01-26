@@ -265,6 +265,11 @@
             <class name="tests.QuoteHotelRoomQuantityBudgetsAndSubtotals"/>
         </classes>
     </test>
+    <test name="THY-591: Quote hotel room - quantity per night">
+        <classes>
+            <class name="tests.QuoteHotelRoomQuantityPerNight"/>
+        </classes>
+    </test>
 
 </suite>
 

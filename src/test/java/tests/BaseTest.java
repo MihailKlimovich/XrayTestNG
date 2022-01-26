@@ -115,12 +115,12 @@ public class BaseTest {
     public String SFDX_AUTH_URL = "force://PlatformCLI::5Aep861yNl8cSWS3xX63jHZ.ngSZAmvp8hJceBHlTlTeFBvHepIodVDm_zkSA8ZYTRBPGqjE1AmSauRg6CAVr5L@thautomation-dev-ed.my.salesforce.com";
     public String REQUEST_URL = "https://thautomation-dev-ed.lightning.force.com/lightning/r/thn__Request__c/";*/
 
-    /*public String ORG_USERNAME = "test-wuejipxgl2tu@example.com";
-    public String ORG_PASSWORD = "MyPassword1";
+    /*public String ORG_USERNAME = "test-vnmpyohmjusp@example.com";
+    public String ORG_PASSWORD = "qruev@u1fyiBw";
     public String ORG_URL = "https://test.salesforce.com";
     public String CONSUMER_KEY = "";
     public String SFDX = "/home/user/sfdx/bin/sfdx";
-    public String SFDX_AUTH_URL = "force://PlatformCLI::5Aep861Ylaxber_9t6Fmn6sl2b_hWxyJfTLUF1XSWddXHqfVep6KFyhCUS1elyL2dN9UFRnIE7WBe6LvGD0d4HQ@power-app-5497-dev-ed.cs89.my.salesforce.com";*/
+    public String SFDX_AUTH_URL = "force://PlatformCLI::5Aep861Ylaxber_9t5zww0PL__eUWOf2NrhVf1kRsnmtotAD3Y4sbr0BPYlzRZpDgV7Flm7OkmAvRV9ZuhV1O00@ability-ability-4484-dev-ed.cs89.my.salesforce.com";*/
 
 
 

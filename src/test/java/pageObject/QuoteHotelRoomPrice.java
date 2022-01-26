@@ -15,8 +15,24 @@ public class QuoteHotelRoomPrice extends BasePage {
 
     //////////////////////////////   SFDX COMMANDS   ////////////////////////////////////
 
+    @Step("Get Quote Hotel Room Price SFDX")
+    public StringBuilder getQuoteHotelRoomPriceSFDX(String sfdxPath, String where, String userName)
+            throws IOException, InterruptedException {
+        StringBuilder quoteHotelRoomPriceRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                sfdxPath,
+                "force:data:record:get",
+                "-s",
+                "thn__Quote_Hotel_Room_Price__c",
+                "-w",
+                where,
+                "-u",
+                userName,
+                "--json"});
+        return quoteHotelRoomPriceRecord;
+    }
+
     @Step("Update Quote Hotel Room Price SFDX")
-    public void updateQuoteHotelRoomPriceSFDX(String sfdxPath, String where, String value, String userName)
+    public StringBuilder updateQuoteHotelRoomPriceSFDX(String sfdxPath, String where, String value, String userName)
             throws IOException, InterruptedException {
         StringBuilder quoteHotelRoomPriceUpdateResult = SfdxCommand.runLinuxCommand1(new String[]{
                 sfdxPath,
@@ -31,6 +47,7 @@ public class QuoteHotelRoomPrice extends BasePage {
                 userName,
                 "--json"});
         System.out.println(quoteHotelRoomPriceUpdateResult);
+        return quoteHotelRoomPriceUpdateResult;
     }
 
 
