@@ -22,7 +22,10 @@ public class TestInWork extends BaseTest{
     @Severity(SeverityLevel.NORMAL)
     @Story("THY-506: Request - Agent")
     public void logIn() throws InterruptedException, IOException {
-        loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
+        loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
+        developerConsoleWindow.openDeveloperConsole();
+        developerConsoleWindow.openExecuteAnonymousWindow();
+        developerConsoleWindow.runApexCodeFromFile("src/main/Data/DefaultAgileValueForUnlockedOrg");
     }
 
 

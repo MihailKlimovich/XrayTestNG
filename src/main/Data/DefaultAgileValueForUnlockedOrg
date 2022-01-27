@@ -1,0 +1,139 @@
+   String propertyID = [select ID from thn__Hotel__c where thn__Unique_Id__c = 'Demo' limit 1].ID;
+      String resourceID = [select ID from thn__Resource__c where Name = 'DEFAULT' AND thn__Hotel__c = :propertyID limit 1].ID;
+      String meetingRoomProductID = [select ID from thn__Product__c where Name = 'MEETING FULL DAY' AND thn__Hotel__c = :propertyID limit 1].ID;
+      String shadowQuoteID = [select ID from thn__MYCE_Quote__c where Name = 'Shadow' AND thn__Hotel__c = :propertyID limit 1].ID;
+
+      Metadata.DeployContainer mdContainer = new Metadata.DeployContainer();
+
+      Metadata.CustomMetadata cmd = new Metadata.CustomMetadata();
+      cmd.fullName = 'thn__Default_Agile_Value__mdt.thn__Hotel_Demo';
+      cmd.label = 'Hotel Demo';
+
+      Metadata.CustomMetadataValue customField1 = new Metadata.CustomMetadataValue();
+      customField1.field = 'thn__Hotel_Id__c';
+      customField1.value = propertyID;
+      cmd.values.add(customField1);
+
+      Metadata.CustomMetadataValue customField2 = new Metadata.CustomMetadataValue();
+      customField2.field = 'thn__Connector__c';
+      customField2.value = 'None';
+      cmd.values.add(customField2);
+
+      Metadata.CustomMetadataValue customField3 = new Metadata.CustomMetadataValue();
+      customField3.field = 'thn__Base_Price__c';
+      customField3.value = 'Tax Included';
+      cmd.values.add(customField3);
+
+      Metadata.CustomMetadataValue customField4 = new Metadata.CustomMetadataValue();
+      customField4.field = 'thn__Hotel_Room_VAT_Cat__c';
+      customField4.value = '1';
+      cmd.values.add(customField4);
+
+      Metadata.CustomMetadataValue customField5 = new Metadata.CustomMetadataValue();
+      customField5.field = 'thn__Meeting_Room_VAT_Cat__c';
+      customField5.value = '2';
+      cmd.values.add(customField5);
+
+      Metadata.CustomMetadataValue customField6 = new Metadata.CustomMetadataValue();
+      customField6.field = 'thn__Product_VAT_Cat__c';
+      customField6.value = '2';
+      cmd.values.add(customField6);
+
+      Metadata.CustomMetadataValue customField7 = new Metadata.CustomMetadataValue();
+      customField7.field = 'thn__Default_Start_hour__c';
+      customField7.value = '8';
+      cmd.values.add(customField7);
+
+      Metadata.CustomMetadataValue customField8 = new Metadata.CustomMetadataValue();
+      customField8.field = 'thn__Default_End_hour__c';
+      customField8.value = '9';
+      cmd.values.add(customField8);
+
+      Metadata.CustomMetadataValue customField9 = new Metadata.CustomMetadataValue();
+      customField9.field = 'thn__Assign_Rate_Price__c';
+      customField9.value = true;
+      cmd.values.add(customField9);
+
+      Metadata.CustomMetadataValue customField10 = new Metadata.CustomMetadataValue();
+      customField10.field = 'thn__Generate_X_Days_Before2__c';
+      customField10.value = '0';
+      cmd.values.add(customField10);
+
+      Metadata.CustomMetadataValue customField11 = new Metadata.CustomMetadataValue();
+      customField11.field = 'thn__Option_interval__c';
+      customField11.value = '0';
+      cmd.values.add(customField11);
+
+      Metadata.CustomMetadataValue customField12 = new Metadata.CustomMetadataValue();
+      customField12.field = 'thn__Commission__c';
+      customField12.value = true;
+      cmd.values.add(customField12);
+
+      Metadata.CustomMetadataValue customField13 = new Metadata.CustomMetadataValue();
+      customField13.field = 'thn__Commission_Invalid_Stage__c';
+      customField13.value = '1 - Qualify';
+      cmd.values.add(customField13);
+
+      Metadata.CustomMetadataValue customField14 = new Metadata.CustomMetadataValue();
+      customField14.field = 'thn__Create_PM_Guest__c';
+      customField14.value = true;
+      cmd.values.add(customField14);
+
+      Metadata.CustomMetadataValue customField15 = new Metadata.CustomMetadataValue();
+      customField15.field = 'thn__Guest_Creation_Stage__c';
+      customField15.value = '2 - Propose';
+      cmd.values.add(customField15);
+
+      Metadata.CustomMetadataValue customField16 = new Metadata.CustomMetadataValue();
+      customField16.field = 'thn__Name_Field__c';
+      customField16.value = 'Name';
+      cmd.values.add(customField16);
+
+      Metadata.CustomMetadataValue customField17 = new Metadata.CustomMetadataValue();
+      customField17.field = 'thn__Auto_Send_Reservations__c';
+      customField17.value = false;
+      cmd.values.add(customField17);
+
+      Metadata.CustomMetadataValue customField21 = new Metadata.CustomMetadataValue();
+      customField21.field = 'thn__Default_Day_Price_Checkbox__c';
+      customField21.value = false;
+      cmd.values.add(customField21);
+
+      Metadata.CustomMetadataValue customField22 = new Metadata.CustomMetadataValue();
+      customField22.field = 'thn__Send_Orders_to__c';
+      customField22.value = 'PMS';
+      cmd.values.add(customField22);
+
+      Metadata.CustomMetadataValue customField24 = new Metadata.CustomMetadataValue();
+      customField24.field = 'thn__Change_After__c';
+      customField24.value = '10';
+      cmd.values.add(customField24);
+
+      Metadata.CustomMetadataValue customField25 = new Metadata.CustomMetadataValue();
+      customField25.field = 'thn__Tax_Rate_Change__c';
+      customField25.value = true;
+      cmd.values.add(customField25);
+
+      Metadata.CustomMetadataValue customField28 = new Metadata.CustomMetadataValue();
+      customField28.field = 'thn__Assign_default_Rate_plan__c';
+      customField28.value = true;
+      cmd.values.add(customField28);
+
+      Metadata.CustomMetadataValue customField29 = new Metadata.CustomMetadataValue();
+      customField29.field = 'thn__Resource_Id__c';
+      customField29.value = resourceID;
+      cmd.values.add(customField29);
+
+      Metadata.CustomMetadataValue customField31 = new Metadata.CustomMetadataValue();
+      customField31.field = 'thn__Meeting_Room_Product__c';
+      customField31.value = meetingRoomProductID;
+      cmd.values.add(customField31);
+
+      Metadata.CustomMetadataValue customField32 = new Metadata.CustomMetadataValue();
+      customField32.field = 'thn__Shadow_Quote_Id__c';
+      customField32.value = shadowQuoteID;
+      cmd.values.add(customField32);
+
+      mdContainer.addMetadata(cmd);
+      Id job = Metadata.Operations.enqueueDeployment(mdContainer, null);
+      System.debug(job);

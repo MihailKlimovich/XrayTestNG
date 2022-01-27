@@ -12,7 +12,7 @@
     </test>
     <test name="Delete and create data">
         <classes>
-            <class name="tests.TestData"/>
+            <class name="tests.TestInWork"/>
         </classes>
     </test>
     <test name="Guest to contact">
@@ -28,26 +28,6 @@
     <test name="TB-132: Optional Product was added to an Order and sent to Mews">
         <classes>
             <class name="tests.OptionalProductWasAddedToAnOrderAndSentToMews"/>
-        </classes>
-    </test>
-    <test name="THY-510: ValidationRule1">
-        <classes>
-            <class name="tests.ValidationRules.ValidationRule1"/>
-        </classes>
-    </test>
-    <test name="THY-510: ValidationRule2">
-        <classes>
-            <class name="tests.ValidationRules.ValidationRule2"/>
-        </classes>
-    </test>
-    <test name="THY-510: ValidationRule3">
-        <classes>
-            <class name="tests.ValidationRules.ValidationRule3"/>
-        </classes>
-    </test>
-    <test name="THY-510: ValidationRule4">
-        <classes>
-            <class name="tests.ValidationRules.ValidationRule4"/>
         </classes>
     </test>
     <test name="THY-487: Reservation creation process">
