@@ -20,7 +20,7 @@ public class TestInWork extends BaseTest{
 
     @Test(priority = 1, description = "LogIn")
     @Severity(SeverityLevel.NORMAL)
-    @Story("THY-506: Request - Agent")
+    @Story("1")
     public void logIn() throws InterruptedException, IOException {
         loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
         developerConsoleWindow.openDeveloperConsole();

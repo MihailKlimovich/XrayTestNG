@@ -10,7 +10,7 @@
             <class name="clearCache.ClearCache"/>
         </classes>
     </test>
-    <test name="Delete and create data">
+    <test name="1">
         <classes>
             <class name="tests.TestInWork"/>
         </classes>
