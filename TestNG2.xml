@@ -250,6 +250,12 @@
             <class name="tests.QuoteHotelRoomQuantityPerNight"/>
         </classes>
     </test>
+    <test name="THY-624: Hotel Inventory">
+        <classes>
+            <class name="tests.HotelInventory"/>
+        </classes>
+    </test>
+
 
 </suite>
 
