@@ -255,6 +255,16 @@
             <class name="tests.HotelInventory"/>
         </classes>
     </test>
+    <test name="TB-264: Quote budget - multiproperty quote">
+        <classes>
+            <class name="tests.TB.QuoteBudgetMultipropertyQuote"/>
+        </classes>
+    </test>
+    <test name="TB-261: Reservation Guest created twice">
+        <classes>
+            <class name="tests.TB.ReservationGuestCreatedTwice"/>
+        </classes>
+    </test>
 
 
 </suite>
