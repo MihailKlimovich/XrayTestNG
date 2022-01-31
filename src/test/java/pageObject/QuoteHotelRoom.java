@@ -39,6 +39,7 @@ public class QuoteHotelRoom extends BasePage {
     By EDIT_ROOM_TYPE_BUTTON = By.xpath("//button[@title='Edit Room Type']");
     By EDIT_RATE_PLAN_BUTTON = By.xpath("//button[@title='Edit Rate Plan']");
     By TOAST_MESSSAGE = By.xpath("//span[@class='toastMessage slds-text-heading--small forceActionsText'][1]");
+    By NEW_OVERBOOKING_BUTTON = By.xpath("//div[@title='New (overbooking)']");
 
 
     @Step("Fill out the hotel room")
@@ -102,6 +103,13 @@ public class QuoteHotelRoom extends BasePage {
         Thread.sleep(3000);
     }
 
+    @Step("Click new overbooking button")
+    public  void clickNewOverbookingButton() throws InterruptedException {
+        wait1.until(ExpectedConditions.presenceOfElementLocated(NEW_OVERBOOKING_BUTTON));
+        click3(NEW_OVERBOOKING_BUTTON);
+        Thread.sleep(3000);
+    }
+
     @Step("Close window")
     public void closeWindow(){
         wait1.until(ExpectedConditions.elementToBeClickable(CLOSE_WINDOW_BUTTON)).click();
@@ -157,7 +165,8 @@ public class QuoteHotelRoom extends BasePage {
 
     //////////////////////////////   SFDX COMMANDS   ////////////////////////////////////
     @Step("Create Quote Hotel Room SFDX")
-    public String createQuoteHotelRoomSFDX(String sfdxPath, String value, String userName) throws IOException, InterruptedException {
+    public String createQuoteHotelRoomSFDX(String sfdxPath, String value, String userName)
+            throws IOException, InterruptedException {
         StringBuilder quoteHotelRoomResult = SfdxCommand.runLinuxCommand1(new String[]{
                 sfdxPath,
                 "force:data:record:create",
@@ -175,7 +184,8 @@ public class QuoteHotelRoom extends BasePage {
     }
 
     @Step("Get Quote Hotel Room SFDX")
-    public StringBuilder getQuoteHotelRoomSFDX(String sfdxPath, String where, String userName) throws IOException, InterruptedException {
+    public StringBuilder getQuoteHotelRoomSFDX(String sfdxPath, String where, String userName)
+            throws IOException, InterruptedException {
         StringBuilder quoteHotelRoomRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 sfdxPath,
                 "force:data:record:get",
@@ -190,7 +200,8 @@ public class QuoteHotelRoom extends BasePage {
     }
 
     @Step("Delete Quote Hotel Room SFDX")
-    public StringBuilder deleteQuoteHotelRoomSFDX(String sfdxPath, String where, String userName) throws IOException, InterruptedException {
+    public StringBuilder deleteQuoteHotelRoomSFDX(String sfdxPath, String where, String userName)
+            throws IOException, InterruptedException {
         StringBuilder result = SfdxCommand.runLinuxCommand1(new String[]{
                 sfdxPath,
                 "force:data:record:delete",

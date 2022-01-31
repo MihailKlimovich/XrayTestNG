@@ -72,6 +72,8 @@ public class BaseTest {
     protected PMSAccount pmsAccount;
     protected PMSBlock pmsBlock;
     protected QuoteHotelRoomPrice quoteHotelRoomPrice;
+    protected CreateQuoteHotelRoomComponent createQuoteHotelRoomComponent;
+    protected Availability availability;
 
 
 
@@ -112,15 +114,15 @@ public class BaseTest {
     public String CONSUMER_KEY = "";
     public String SFDX = "/home/user/sfdx/bin/sfdx";
     public String SERVER_KEY_PATH = "/home/user/salesforceauthotest/jdoe/JWT/server.key";
-    public String SFDX_AUTH_URL = "force://PlatformCLI::5Aep861yNl8cSWS3xX63jHZ.ngSZAmvp8hJceBHlTlTeFBvHepIodVDm_zkSA8ZYTRBPGqjE1AmSauRg6CAVr5L@thautomation-dev-ed.my.salesforce.com";
-    public String REQUEST_URL = "https://thautomation-dev-ed.lightning.force.com/lightning/r/thn__Request__c/";*/
+    public String SFDX_AUTH_URL = "force://PlatformCLI::5Aep861yNl8cSWS3xX63jHZ.ngSZAmvp8hJceBHlTlTeFBvHepIodVDm_zkSA8ZYTRBPGqjE1AmSauRg6CAVr5L@thautomation-dev-ed.my.salesforce.com";*/
 
-    /*public String ORG_USERNAME = "test-vnmpyohmjusp@example.com";
-    public String ORG_PASSWORD = "qruev@u1fyiBw";
+
+    /*public String ORG_USERNAME = "andrey.terlitsky@thy-624test.com";
+    public String ORG_PASSWORD = "Welcome2022";
     public String ORG_URL = "https://test.salesforce.com";
     public String CONSUMER_KEY = "";
     public String SFDX = "/home/user/sfdx/bin/sfdx";
-    public String SFDX_AUTH_URL = "force://PlatformCLI::5Aep861Ylaxber_9t5zww0PL__eUWOf2NrhVf1kRsnmtotAD3Y4sbr0BPYlzRZpDgV7Flm7OkmAvRV9ZuhV1O00@ability-ability-4484-dev-ed.cs89.my.salesforce.com";*/
+    public String SFDX_AUTH_URL = "force://PlatformCLI::5Aep861ZNCA9b_eTjw7Xi9qHkR_dIWqYjQWtd2r15aWliwsM2Usvpo4NNUrGQBx3DhXdBx7_mKkfcnx9Tz3N8eS@java-ability-6738-dev-ed.cs100.my.salesforce.com";*/
 
 
 
@@ -208,6 +210,8 @@ public class BaseTest {
         pmsAccount = new PMSAccount(driver);
         pmsBlock = new PMSBlock(driver);
         quoteHotelRoomPrice = new QuoteHotelRoomPrice(driver);
+        createQuoteHotelRoomComponent = new CreateQuoteHotelRoomComponent(driver);
+        availability = new Availability(driver);
     }
 
     @AfterClass

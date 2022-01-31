@@ -69,7 +69,7 @@ public class MyceQuotes extends BasePage {
     By KEEP_ALL_PAX_CHECKBOX = By.xpath("//span//input[@name='Keep all Pax']/following-sibling::label//span[@class='slds-checkbox_faux']");
     By KEEP_ROOMS_PAX_CHECKBOX = By.xpath("//input[@name='Keep rooms Pax']/following-sibling::label//span[@class='slds-checkbox_faux']");
     By SAVE_BUTTON_FOR_CLONE = By.xpath("//footer//button[text()='Save']");
-    By CHANGE_DATE_BUTTON = By.xpath("//button[@name='thn__MYCE_Quote__c.Change_Date']");
+    By CHANGE_DATE_BUTTON = By.xpath("//button[text()='Change Date']");
     By NEW_ARRIVAL_DATE_FIELD = By.xpath("//input[@name='New_arrival_date']");
     By NEXT_BUTTON_CHANGE_DATE_WINDOW = By.xpath("//button[@title='Next']");
     By FINISH_BUTTON_CHANGE_DATE_WINDOW = By.xpath("//button[@title='Finish']");
@@ -82,6 +82,8 @@ public class MyceQuotes extends BasePage {
     By FILES = By.xpath("//span[@title = 'Files']");
     By ROOMING_LIST_TAB = By.xpath("//li//a[@data-label='Rooming List']");
     By EDIT_ARRIVAL_DATE_BUTTON = By.xpath("//button[@title='Edit Arrival Date']");
+    By CLONE_PAX_FIELD = By.xpath("//input[@name='Pax']");
+
 
 
     @Step("Open MYCE Quote record")
@@ -132,6 +134,23 @@ public class MyceQuotes extends BasePage {
         click3(KEEP_ALL_PAX_CHECKBOX);
         wait1.until(ExpectedConditions.presenceOfElementLocated(KEEP_ROOMS_PAX_CHECKBOX));
         click3(KEEP_ROOMS_PAX_CHECKBOX);
+        wait1.until(ExpectedConditions.presenceOfElementLocated(SAVE_BUTTON_FOR_CLONE)).click();
+        wait1.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//slot[@slot='header']//slot[@slot='primaryField']//lightning-formatted-text[text()='" + name + "']")));
+        Thread.sleep(5000);
+    }
+
+    @Step("Clone Myce Quote. Change date and pax.")
+    public void cloneMyceQuote_changeDateAndPax(String name, String date, String pax) throws InterruptedException {
+        //waitForTests.until(ExpectedConditions.presenceOfElementLocated(CLONE_MYCE_QUOTE_BUTTON));
+        click4(CLONE_MYCE_QUOTE_BUTTON);
+        wait1.until(ExpectedConditions.presenceOfElementLocated(NAME_QUOTE_FIELD)).click();
+        writeText(NAME_QUOTE_FIELD, name);
+        click3(CLONE_QUOTE_ARRIVAL_DAY_FIELD);
+        clear(CLONE_QUOTE_ARRIVAL_DAY_FIELD);
+        writeText(CLONE_QUOTE_ARRIVAL_DAY_FIELD, date);
+        click3(CLONE_PAX_FIELD);
+        clear(CLONE_PAX_FIELD);
+        writeText(CLONE_PAX_FIELD, pax);
         wait1.until(ExpectedConditions.presenceOfElementLocated(SAVE_BUTTON_FOR_CLONE)).click();
         wait1.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//slot[@slot='header']//slot[@slot='primaryField']//lightning-formatted-text[text()='" + name + "']")));
         Thread.sleep(5000);
