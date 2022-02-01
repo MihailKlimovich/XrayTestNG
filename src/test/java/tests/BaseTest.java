@@ -1,6 +1,11 @@
 package tests;
 
 import dates.Dates;
+import org.junit.Rule;
+import org.junit.internal.runners.statements.FailOnTimeout;
+import org.junit.rules.TestWatcher;
+import org.junit.runner.Description;
+import org.junit.runners.model.Statement;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -136,6 +141,19 @@ public class BaseTest {
     public String SFDX_AUTH_URL_THYNK = "force://PlatformCLI::5Aep861KhtojOqEEpf1C.laFhN16Pmut38yhtiYoOyrXXUeg8QGP2hZVxy39KizY65ljaqxviEldYCEYtpb1Gi1@thynkpack-dev-ed.my.salesforce.com";
 
 
+
+
+    @Rule
+    public TestWatcher watcher = new TestWatcher() {
+        @Override
+        public Statement apply(Statement base, Description description) {
+            if (description.getMethodName().toLowerCase().contains("thisTestTakesLonger")) {
+                return new FailOnTimeout(base, 600000); //10 minutes = 600000
+            } else {
+                return new FailOnTimeout(base, 300000); //5 minutes = 300000
+            }
+        }
+    };
 
     @BeforeClass
     public void classLevelSetup(){
