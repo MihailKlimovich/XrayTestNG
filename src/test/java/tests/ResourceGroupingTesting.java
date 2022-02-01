@@ -465,7 +465,7 @@ public class ResourceGroupingTesting extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     @Story("Resource grouping")
     public void case10() throws InterruptedException, IOException {
-        loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
+        //loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
         myceQuotes.deleteQuoteSFDX(SFDX, "Name='ResourceGroupingAutoTest10'", ORG_USERNAME);
         resource.deleteResourceSFDX(SFDX, "Name='ResourceGrouping13'", ORG_USERNAME);
         StringBuilder hotelRecord= hotel.getHotelSFDX(SFDX, "thn__Unique_Id__c='Demo'", ORG_USERNAME);
