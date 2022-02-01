@@ -235,24 +235,9 @@
             <class name="tests.QuoteAccountsToPMSAccounts"/>
         </classes>
     </test>
-    <test name="THY-677: Quote hotel room quantity - Budgets and subtotals">
-        <classes>
-            <class name="tests.QuoteHotelRoomQuantityBudgetsAndSubtotals"/>
-        </classes>
-    </test>
-    <test name="THY-591: Quote hotel room - quantity per night">
-        <classes>
-            <class name="tests.QuoteHotelRoomQuantityPerNight"/>
-        </classes>
-    </test>
     <test name="THY-624: Hotel Inventory">
         <classes>
             <class name="tests.HotelInventory"/>
-        </classes>
-    </test>
-    <test name="TB-264: Quote budget - multiproperty quote">
-        <classes>
-            <class name="tests.TB.QuoteBudgetMultipropertyQuote"/>
         </classes>
     </test>
     <test name="TB-261: Reservation Guest created twice">

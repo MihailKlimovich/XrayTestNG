@@ -48,8 +48,7 @@ public class QuoteAccountsToPMSAccounts extends BaseTest {
                 ORG_USERNAME);
         myceQuotes.updateQuoteSFDX(SFDX, "Id='" + quoteID + "'", "thn__Company__c='" + accountId + "'",
                 ORG_USERNAME);
-        myceQuotes.updateQuoteSFDX(SFDX, "Id='" + quoteID + "'", "thn__Stage__c='3 - Tentative'" +
-                " thn__Closed_Status__c='Won'", ORG_USERNAME);
+        myceQuotes.updateQuoteSFDX(SFDX, "Id='" + quoteID + "'", "thn__Stage__c='3 - Tentative'", ORG_USERNAME);
         StringBuilder quoteRecord = myceQuotes.getQuoteSFDX(SFDX, "Id='" + quoteID + "'", ORG_USERNAME);
         StringBuilder accountRecord = accounts.getAccountSFDX(SFDX, "Id='" + accountId + "'", ORG_USERNAME);
         String quotePMSCompany = JsonParser2.getFieldValue(quoteRecord.toString(), "thn__PMS_Company__c");
@@ -107,7 +106,7 @@ public class QuoteAccountsToPMSAccounts extends BaseTest {
         Assert.assertEquals(pmsAccountSicDesc, accountSicDesc);
         Assert.assertEquals(pmsAccountWebsite, accountWebsite);
         Assert.assertEquals(pmsAccountIsPrimary, "true");
-        Assert.assertEquals(pmsAccountPropertyDetailChainCode, "CMT Chain code");
+        Assert.assertEquals(pmsAccountPropertyDetailChainCode, "DEMO_CHAIN");
         Assert.assertEquals(pmsAccountPropertyDetailCode, propertyHotelCode);
     }
 
@@ -214,12 +213,12 @@ public class QuoteAccountsToPMSAccounts extends BaseTest {
         String accountId = accounts.createAccountSFDX(SFDX, "Name='PMSCompanyAutoTest2' BillingCity='Polotsk'" +
                         " BillingPostalCode='211400' BillingStreet='15 Frantsiska Skoriny' Fax='+375253254789' thn__IATA__c='IATA'" +
                         " Phone='+375253254987' ShippingCity='Farinovo' ShippingPostalCode='211654'" +
-                        " ShippingStreet='16 Frantsiska Skoriny' Sic='SIC Code' SicDesc='SIC Description' Website='polotsk.com'",
+                        " ShippingStreet='16 Frantsiska Skoriny' Sic='SIC Code' SicDesc='SIC Description'" +
+                        " Website='polotsk.com' thn__Type__c='Agent'",
                 ORG_USERNAME);
         myceQuotes.updateQuoteSFDX(SFDX, "Id='" + quoteID + "'", "thn__Agent__c='" + accountId + "'",
                 ORG_USERNAME);
-        myceQuotes.updateQuoteSFDX(SFDX, "Id='" + quoteID + "'", "thn__Stage__c='3 - Tentative'" +
-                " thn__Closed_Status__c='Won'", ORG_USERNAME);
+        myceQuotes.updateQuoteSFDX(SFDX, "Id='" + quoteID + "'", "thn__Stage__c='3 - Tentative'", ORG_USERNAME);
         StringBuilder quoteRecord = myceQuotes.getQuoteSFDX(SFDX, "Id='" + quoteID + "'", ORG_USERNAME);
         StringBuilder accountRecord = accounts.getAccountSFDX(SFDX, "Id='" + accountId + "'", ORG_USERNAME);
         String quotePMSAgent = JsonParser2.getFieldValue(quoteRecord.toString(), "thn__PMS_Travel_Agent__c");
@@ -277,7 +276,7 @@ public class QuoteAccountsToPMSAccounts extends BaseTest {
         Assert.assertEquals(pmsAccountSicDesc, accountSicDesc);
         Assert.assertEquals(pmsAccountWebsite, accountWebsite);
         Assert.assertEquals(pmsAccountIsPrimary, "true");
-        Assert.assertEquals(pmsAccountPropertyDetailChainCode, "CMT Chain code");
+        Assert.assertEquals(pmsAccountPropertyDetailChainCode, "DEMO_CHAIN");
         Assert.assertEquals(pmsAccountPropertyDetailCode, propertyHotelCode);
     }
 

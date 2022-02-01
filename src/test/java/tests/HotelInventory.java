@@ -90,10 +90,10 @@ public class HotelInventory extends BaseTest {
         StringBuilder recordTypes = myceQuotes.soql(SFDX, "SELECT Id FROM RecordType WHERE" +
                 " SobjectType='thn__MYCE_Quote__c' AND Name='Quote'", ORG_USERNAME);
         List<String> recordTypeID = JsonParser2.getFieldValueSoql(recordTypes.toString(), "Id");
-        String quoteID = myceQuotes.createQuoteSFDX(SFDX, "Name='HotelInventoryAutoTest' thn__Pax__c=5" +
+        String quoteID = myceQuotes.createQuoteSFDX(SFDX, "Name='HotelInventoryAutoTest' thn__Pax__c=500" +
                 " thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" + date.generateTodayDate2()
                 + " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 3) + " RecordTypeId='"
-                + recordTypeID.get(0) + "' thn__Closed_Status__c='Won'", ORG_USERNAME);
+                + recordTypeID.get(0) + "'", ORG_USERNAME);
 
     }
 
