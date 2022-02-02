@@ -85,7 +85,6 @@ public class BaseTest {
     public WebDriver getDriver() {
         return driver;
     }
-
     public static final String testDataExcelFileName = "testdata.xlsx";
 
 
@@ -96,41 +95,6 @@ public class BaseTest {
     public String SFDX = System.getenv("SFDX");
     public String SERVER_KEY_PATH = System.getenv("SERVER_KEY_PATH");
     public String SFDX_AUTH_URL = System.getenv("AUTH_URL");
-
-
-    /*public String ORG_USERNAME = "cs1@com.postpart";
-    public String ORG_PASSWORD = "Std2021!65";
-    public String ORG_URL = "https://test.salesforce.com";
-    public String CONSUMER_KEY = "3MVG9sSN_PMn8tjQ_i1zH6SFiiRiWU8a6A0ccIA8pgi6PtKmTcevqRVhFkbTw9WjqjcylgNcp6WfR7tCRz1Z5";
-    public String SFDX = "/home/user/sfdx/bin/sfdx";
-    public String SERVER_KEY_PATH = "/home/user/salesforceauthotest/jdoe/JWT/server.key";
-    public String SFDX_AUTH_URL = "force://PlatformCLI::5Aep861KhtojOqEEpdH0TQSE9vuVzdljKpf1MnxJ39U2zMud8kQ1z6hlDIRT73KpEekvlhTMdXkadgGyID.Mu1f@thdemo-dev-ed.my.salesforce.com";*/
-
-    /*public String ORG_USERNAME = "dev.autotest.unlocked@thynk.cloud";
-    public String ORG_PASSWORD = "Welcome2022";
-    public String ORG_URL = "https://login.salesforce.com/";
-    public String CONSUMER_KEY = "";
-    public String SFDX = "/home/minsk-sc/sfdx/bin/sfdx";
-    public String SFDX_AUTH_URL = "force://PlatformCLI::5Aep861yNl8cSWS3xUL2N2n9_bXbYd3N5JhNprTah2dCsO5IEXvQ5M70SMgae9CUf75i0z4oe0wTluP8YHuBMlA@thynk-test-unlocked-dev-ed.my.salesforce.com";*/
-
-    /*public String ORG_USERNAME = "r@thautomation.sf";
-    public String ORG_PASSWORD = "Welcome1508";
-    public String ORG_URL = "https://login.salesforce.com/";
-    public String CONSUMER_KEY = "";
-    public String SFDX = "/home/user/sfdx/bin/sfdx";
-    public String SERVER_KEY_PATH = "/home/user/salesforceauthotest/jdoe/JWT/server.key";
-    public String SFDX_AUTH_URL = "force://PlatformCLI::5Aep861yNl8cSWS3xX63jHZ.ngSZAmvp8hJceBHlTlTeFBvHepIodVDm_zkSA8ZYTRBPGqjE1AmSauRg6CAVr5L@thautomation-dev-ed.my.salesforce.com";*/
-
-
-    /*public String ORG_USERNAME = "andrey.terlitsky@thy-624test.com";
-    public String ORG_PASSWORD = "Welcome2022";
-    public String ORG_URL = "https://test.salesforce.com";
-    public String CONSUMER_KEY = "";
-    public String SFDX = "/home/user/sfdx/bin/sfdx";
-    public String SFDX_AUTH_URL = "force://PlatformCLI::5Aep861ZNCA9b_eTjw7Xi9qHkR_dIWqYjQWtd2r15aWliwsM2Usvpo4NNUrGQBx3DhXdBx7_mKkfcnx9Tz3N8eS@java-ability-6738-dev-ed.cs100.my.salesforce.com";*/
-
-
-
 
 
 

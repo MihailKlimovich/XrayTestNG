@@ -339,7 +339,7 @@ public class QuoteAccountsToPMSAccounts extends BaseTest {
         accounts.deleteAccountSFDX(SFDX, "Name=OneHundreedOneHundreedOneHundreedOneHundreedOneHundreedOne" +
                 "HundreedOneHundreedOneHundreedOneHundreedOneHundreed", ORG_USERNAME);
         String accountId = accounts.createAccountSFDX(SFDX, "Name='OneHundreedOneHundreedOneHundreedOneHundreed" +
-                "OneHundreedOneHundreedOneHundreedOneHundreedOneHundreedOneHundreed'", ORG_USERNAME);
+                "OneHundreedOneHundreedOneHundreedOneHundreedOneHundreedOneHundreed' thn__Type__c='Agent'", ORG_USERNAME);
         StringBuilder accountRecord = accounts.getAccountSFDX(SFDX, "Id='" + accountId + "'", ORG_USERNAME);
         String accountName= JsonParser2.
                 getFieldValue(accountRecord.toString(), "Name");
