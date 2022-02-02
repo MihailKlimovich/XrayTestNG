@@ -95,6 +95,10 @@ public class BaseTest {
     public String SFDX = System.getenv("SFDX");
     public String SERVER_KEY_PATH = System.getenv("SERVER_KEY_PATH");
     public String SFDX_AUTH_URL = System.getenv("AUTH_URL");
+    public String ADMIN_USERNAME = System.getenv("ADMINUSERNAME");
+    public String ADMIN_PASSWORD = System.getenv("ADMINPASSWORD");
+    public String ADMIN_AUTH_URL = System.getenv("ADMIN_AUTH_URL");
+
 
 
 
