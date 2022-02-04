@@ -25,6 +25,7 @@ public class TotalAmountInclTax extends BaseTest {
     @Story("THY-523 Total_amount_incl_Tax__c")
     public void totalAmountInclTaxTest() throws InterruptedException, IOException {
         loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
+        myceQuotes.deleteQuoteSFDX(SFDX, "Name='TotalAmountInclTaxAutoTest'", ORG_USERNAME);
         StringBuilder propertyRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:get",
@@ -57,6 +58,7 @@ public class TotalAmountInclTax extends BaseTest {
                 "-u",
                 ORG_USERNAME,
                 "--json"});
+        System.out.println(roomTypeRecord);
         String roomTypeID = JsonParser2.getFieldValue(roomTypeRecord.toString(), "Id");
         StringBuilder productRecord2 = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
@@ -87,7 +89,7 @@ public class TotalAmountInclTax extends BaseTest {
                 "-s",
                 "thn__MYCE_Quote__c",
                 "-v",
-                "Name='TotalAmountInclTaxTest' thn__Pax__c=10 thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
+                "Name='TotalAmountInclTaxAutoTest' thn__Pax__c=10 thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
                         date.generateTodayDate2() + " thn__Departure_Date__c="
                         + date.generateTodayDate2_plus(0, 3),
                 "-u",

@@ -188,7 +188,7 @@ public class CloneOverbookingVersion extends BaseTest{
     @Story("Clone Myce quote and clone selection - overbooking version")
     public void сloneQuote2() throws InterruptedException, IOException {
         //loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
-        user.addPermissionSet(SFDX, "Overbooking_User", ORG_USERNAME);
+        user.addPermissionSet(SFDX, "Overbooking_User", ORG_USERNAME, ADMIN_USERNAME);
         String expectedMessage = "Quote Meeting Room is overbooked.";
         myceQuotes.deleteQuoteSFDX(SFDX, "Name='CloneOverbookingAutoTestClone2'", ORG_USERNAME);
         myceQuotes.goToMyceQuotes();

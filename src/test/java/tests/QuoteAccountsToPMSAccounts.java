@@ -54,6 +54,7 @@ public class QuoteAccountsToPMSAccounts extends BaseTest {
         String quotePMSCompany = JsonParser2.getFieldValue(quoteRecord.toString(), "thn__PMS_Company__c");
         StringBuilder pmsAccountRecord = pmsAccount.
                 getPMSAccountSFDX(SFDX, "Id='" + quotePMSCompany + "'", ORG_USERNAME);
+        System.out.println(pmsAccountRecord);
         String accountName = JsonParser2.getFieldValue(accountRecord.toString(), "Name");
         String pmsAccountName = JsonParser2.getFieldValue(pmsAccountRecord.toString(), "Name");
         String accountBillingCity = JsonParser2.getFieldValue(accountRecord.toString(), "BillingCity");

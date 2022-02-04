@@ -43,7 +43,7 @@ public class Packages extends BasePage {
 
     @Step("Open Packages tab...")
     public Packages goToPackages() throws InterruptedException {
-        driver.navigate().to("https://thautomation-dev-ed.lightning.force.com/lightning/o/thn__Package__c/list?filterName=Recent");
+        driver.navigate().to("https://thynk-test-unlocked-dev-ed.lightning.force.com/lightning/o/thn__Package__c/list?filterName=Recent");
         try{if(wait2.until(ExpectedConditions.alertIsPresent())!=null){
             Alert alert = wait2.until(alertIsPresent());
             alert.accept();

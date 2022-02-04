@@ -25,7 +25,7 @@ public class OverbookingDateTimes extends BaseTest{
     @Severity(SeverityLevel.NORMAL)
     @Story("Overbooking - date times")
     public void preconditions() throws InterruptedException, IOException {
-        user.addPermissionSet(SFDX, "Overbooking_User", ORG_USERNAME);
+        user.addPermissionSet(SFDX, "Overbooking_User", ORG_USERNAME, ADMIN_USERNAME);
         myceQuotes.deleteQuoteSFDX(SFDX, "Name='OverbookingDateTimesAutoTest'", ORG_USERNAME);
         resource.deleteResourceSFDX(SFDX, "Name='OverbookingDateTimesAutoTest", ORG_USERNAME);
         StringBuilder hotelRecord= hotel.getHotelSFDX(SFDX, "thn__Unique_Id__c='Demo'", ORG_USERNAME);
@@ -97,7 +97,7 @@ public class OverbookingDateTimes extends BaseTest{
     @Severity(SeverityLevel.NORMAL)
     @Story("Overbooking - date times")
     public void postconditions() throws InterruptedException, IOException {
-        user.addPermissionSet(SFDX, "Overbooking_User", ORG_USERNAME);
+        user.addPermissionSet(SFDX, "Overbooking_User", ORG_USERNAME, ADMIN_USERNAME);
     }
 
 }

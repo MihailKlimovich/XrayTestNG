@@ -94,6 +94,11 @@
       customField17.value = false;
       cmd.values.add(customField17);
 
+      Metadata.CustomMetadataValue customField18 = new Metadata.CustomMetadataValue();
+            customField18.field = 'thn__PMS_Account_stage__c';
+            customField18.value = '1 - Qualify, 3 - Tentative, 4 - Closed';
+            cmd.values.add(customField18);
+
       Metadata.CustomMetadataValue customField21 = new Metadata.CustomMetadataValue();
       customField21.field = 'thn__Default_Day_Price_Checkbox__c';
       customField21.value = false;
@@ -123,6 +128,11 @@
       customField29.field = 'thn__Resource_Id__c';
       customField29.value = resourceID;
       cmd.values.add(customField29);
+
+      Metadata.CustomMetadataValue customField30 = new Metadata.CustomMetadataValue();
+            customField30.field = 'thn__Hotel_room_overbooking__c';
+            customField30.value = true;
+            cmd.values.add(customField30);
 
       Metadata.CustomMetadataValue customField31 = new Metadata.CustomMetadataValue();
       customField31.field = 'thn__Meeting_Room_Product__c';

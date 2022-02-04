@@ -62,7 +62,7 @@ public class DefaultSetupTesting extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     @Story("Default Setup testing")
     public void preconditions() throws InterruptedException, IOException {
-        user.addPermissionSet(SFDX, "Overbooking_User", ORG_USERNAME);
+        user.addPermissionSet(SFDX, "Overbooking_User", ORG_USERNAME, ADMIN_USERNAME);
         myceQuotes.deleteQuoteSFDX(SFDX, "Name='DefaultSetupAutoTesting'", ORG_USERNAME);
         resource.deleteResourceSFDX(SFDX, "Name='DefaultSetupAutoTest'", ORG_USERNAME);
         resource.deleteResourceSFDX(SFDX, "Name='DefaultSetupAutoTest2'", ORG_USERNAME);

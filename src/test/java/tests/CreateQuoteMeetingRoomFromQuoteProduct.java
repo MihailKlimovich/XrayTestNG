@@ -48,7 +48,10 @@ public class CreateQuoteMeetingRoomFromQuoteProduct extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     @Story("THY-621: Create quote meeting room from quote product")
     public void case1() throws InterruptedException, IOException {
-        StringBuilder resourceRecrd = resource.getResourceSFDX(SFDX, "Name='DEFAULT'", ORG_USERNAME);
+        StringBuilder hotelRecord= hotel.getHotelSFDX(SFDX, "thn__Unique_Id__c='Demo'", ORG_USERNAME);
+        String propertyID = JsonParser2.getFieldValue(hotelRecord.toString(), "Id");
+        StringBuilder resourceRecrd = resource.getResourceSFDX(SFDX, "Name='DEFAULT' thn__Hotel__c='"
+                + propertyID +  "'", ORG_USERNAME);
         String resourceId = JsonParser2.getFieldValue(resourceRecrd.toString(), "Id");
         StringBuilder quoteRecord = myceQuotes.
                 getQuoteSFDX(SFDX, "Name='CreateQuoteMeetingRoomFromQuoteProduct'", ORG_USERNAME);

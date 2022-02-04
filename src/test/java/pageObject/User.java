@@ -16,13 +16,15 @@ public class User extends BasePage {
     //////////////////////////////   SFDX COMMANDS   ////////////////////////////////////
 
     @Step("Add Permission Set")
-    public void addPermissionSet(String sfdxPath, String apiName, String userName)
+    public void addPermissionSet(String sfdxPath, String apiName, String forUser, String userName)
             throws IOException, InterruptedException {
         StringBuilder result = SfdxCommand.runLinuxCommand1(new String[]{
                 sfdxPath,
                 "force:user:permset:assign",
                 "-n",
                 apiName,
+                "-o",
+                forUser,
                 "-u",
                 userName,
                 "--json"});

@@ -25,7 +25,7 @@ public class QuoteProductCreation extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     @Story("THY-619: Quote product creation")
     public void preconditions() throws InterruptedException, IOException {
-        developerConsoleWindow.openDeveloperConsole();
+        /*developerConsoleWindow.openDeveloperConsole();
         developerConsoleWindow.openExecuteAnonymousWindow();
         developerConsoleWindow.runApexCode(" Metadata.DeployContainer mdContainer = new Metadata.DeployContainer();\n" +
                 "   Metadata.CustomMetadata cmd = new Metadata.CustomMetadata();\n" +
@@ -41,7 +41,7 @@ public class QuoteProductCreation extends BaseTest {
                 "      cmd.values.add(customField2);\n" +
                 "  mdContainer.addMetadata(cmd);\n" +
                 "    Id job = Metadata.Operations.enqueueDeployment(mdContainer, null);\n" +
-                "    System.debug(job);");
+                "    System.debug(job);");*/
         myceQuotes.deleteQuoteSFDX(SFDX, "Name='QuoteProductCreationAutoTest'", ORG_USERNAME);
         StringBuilder hotelRecord= hotel.getHotelSFDX(SFDX, "thn__Unique_Id__c='Demo'", ORG_USERNAME);
         String propertyID = JsonParser2.getFieldValue(hotelRecord.toString(), "Id");

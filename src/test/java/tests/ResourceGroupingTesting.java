@@ -61,7 +61,7 @@ public class ResourceGroupingTesting extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     @Story("Resource grouping")
     public void case1() throws InterruptedException, IOException {
-        user.addPermissionSet(SFDX, "Overbooking_User", ORG_USERNAME);
+        user.addPermissionSet(SFDX, "Overbooking_User", ORG_USERNAME, ADMIN_USERNAME);
         myceQuotes.deleteQuoteSFDX(SFDX, "Name='ResourceGroupingAutoTest1'", ORG_USERNAME);
         myceQuotes.deleteQuoteSFDX(SFDX, "Name='CloneResourceGroupingAutoTest1'", ORG_USERNAME);
         resource.deleteResourceSFDX(SFDX, "Name='ResourceGrouping1'", ORG_USERNAME);
@@ -305,7 +305,7 @@ public class ResourceGroupingTesting extends BaseTest {
     @Story("Resource grouping")
     public void case6() throws InterruptedException, IOException {
         //loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
-        user.addPermissionSet(SFDX, "Overbooking_User", ORG_USERNAME);
+        user.addPermissionSet(SFDX, "Overbooking_User", ORG_USERNAME, ADMIN_USERNAME);
         myceQuotes.deleteQuoteSFDX(SFDX, "Name='ResourceGroupingAutoTest6'", ORG_USERNAME);
         resource.deleteResourceSFDX(SFDX, "Name='ResourceGrouping8'", ORG_USERNAME);
         resource.deleteResourceSFDX(SFDX, "Name='ResourceGrouping9'", ORG_USERNAME);
@@ -762,7 +762,7 @@ public class ResourceGroupingTesting extends BaseTest {
     @Story("Resource grouping")
     public void case14() throws InterruptedException, IOException {
         //loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
-        user.addPermissionSet(SFDX, "Overbooking_User", ORG_USERNAME);
+        user.addPermissionSet(SFDX, "Overbooking_User", ORG_USERNAME, ADMIN_USERNAME);
         myceQuotes.deleteQuoteSFDX(SFDX, "Name='ResourceGroupingAutoTest14'", ORG_USERNAME);
         resource.deleteResourceSFDX(SFDX, "Name='ResourceGrouping20'", ORG_USERNAME);
         resource.deleteResourceSFDX(SFDX, "Name='ResourceGrouping21'", ORG_USERNAME);

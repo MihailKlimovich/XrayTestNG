@@ -34,7 +34,8 @@ public class ClonePackage extends BaseTest {
         packages.deletePackageSFDX(SFDX, "Name='NewClonePackageAuto'", ORG_USERNAME);
         StringBuilder hotelRecord= hotel.getHotelSFDX(SFDX, "thn__Unique_Id__c='Demo'", ORG_USERNAME);
         String propertyID = JsonParser2.getFieldValue(hotelRecord.toString(), "Id");
-        StringBuilder resourceRecord = resource.getResourceSFDX(SFDX, "Name='DEFAULT'", ORG_USERNAME);
+        StringBuilder resourceRecord = resource.getResourceSFDX(SFDX, "Name='DEFAULT' thn__Hotel__c='"
+                + propertyID + "'", ORG_USERNAME);
         String resourceID = JsonParser2.getFieldValue(resourceRecord.toString(), "Id");
         StringBuilder dinerRecord = product.getProductSFDX(SFDX, "Name='DINER'", ORG_USERNAME);
         String productDinerID= JsonParser2.getFieldValue(dinerRecord.toString(), "Id");

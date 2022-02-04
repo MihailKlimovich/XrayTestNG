@@ -22,7 +22,7 @@ public class ReservationCreationProcess extends BaseTest {
             " On MYCE Quote set ‘Send To Mews’ and ‘Generate Rooming List’ checkboxes to true. Result: Reservation" +
             " and Reservation price records linked to Reservations are created")
     @Severity(SeverityLevel.NORMAL)
-    @Story("THY-487 Reservation creation process\"")
+    @Story("THY-487 Reservation creation process")
     public void case1() throws InterruptedException, IOException {
         loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
         myceQuotes.deleteQuoteSFDX(SFDX, "Name='TestReservationProcessAuto1'", ORG_USERNAME);

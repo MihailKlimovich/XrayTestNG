@@ -35,7 +35,7 @@ public class MyceQuoteReleaseDateFormulaField extends BaseTest{
         String quoteID = myceQuotes.createQuoteSFDX(SFDX, "Name='ReleaseDateAutoTest' thn__Pax__c=5" +
                 " thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" + date.generateTodayDate2()
                 + " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 10) +
-                " RecordTypeId='" + recordTypeID.get(0) + "'", ORG_USERNAME);
+                " RecordTypeId='" + recordTypeID.get(0) + "' thn__Closed_Status__c='Won'", ORG_USERNAME);
         StringBuilder quoteRecord = myceQuotes.getQuoteSFDX(SFDX, "Id='" + quoteID + "'", ORG_USERNAME);
         System.out.println(quoteRecord);
         String releaseDateFormula = JsonParser2.

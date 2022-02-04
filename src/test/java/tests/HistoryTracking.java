@@ -392,6 +392,10 @@ public class HistoryTracking extends BaseTest {
                 ORG_USERNAME,
                 "--json"});
         String propertyDemoID = JsonParser2.getFieldValue(propertyDemoRecord.toString(), "Id");
+        StringBuilder recordTypes = myceQuotes.soql(SFDX, "SELECT Id FROM RecordType WHERE" +
+                " SobjectType='thn__MYCE_Quote__c' AND Name='Quote'", ORG_USERNAME);
+        System.out.println(recordTypes);
+        List<String> recordTypeID = JsonParser2.getFieldValueSoql(recordTypes.toString(), "Id");
         StringBuilder myseQuoteResult = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:create",
@@ -400,7 +404,7 @@ public class HistoryTracking extends BaseTest {
                 "-v",
                 "Name='TestHistoryTrackingAuto3' thn__Pax__c=10 thn__Hotel__c='" + propertyDemoID +
                         "' thn__Arrival_Date__c=" + date.generateTodayDate2() + " thn__Departure_Date__c=" +
-                        date.generateTodayDate2_plus(0, 3),
+                        date.generateTodayDate2_plus(0, 3) + " RecordTypeId='" + recordTypeID.get(0) + "'",
                 "-u",
                 ORG_USERNAME,
                 "--json"});

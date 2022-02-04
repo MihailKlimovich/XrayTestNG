@@ -10,9 +10,9 @@
             <class name="clearCache.ClearCache"/>
         </classes>
     </test>
-    <test name="1">
+    <test name="Preparation">
         <classes>
-            <class name="tests.TestInWork"/>
+            <class name="tests.Preparation"/>
         </classes>
     </test>
     <test name="Guest to contact">

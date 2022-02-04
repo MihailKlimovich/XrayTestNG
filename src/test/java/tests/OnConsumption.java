@@ -23,6 +23,7 @@ public class OnConsumption extends BaseTest {
     @Story("THY-570: On Consumption")
     public void testOnConsumption1() throws InterruptedException, IOException {
         loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
+        myceQuotes.deleteQuoteSFDX(SFDX, "Name='Test On Consumption 1'", ORG_USERNAME);
         StringBuilder propertyRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:get",
@@ -92,6 +93,7 @@ public class OnConsumption extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     @Story("THY-570: On Consumption")
     public void testOnConsumption2() throws InterruptedException, IOException {
+        myceQuotes.deleteQuoteSFDX(SFDX, "Name='Test On Consumption 2'", ORG_USERNAME);
         StringBuilder propertyRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:get",
@@ -160,6 +162,7 @@ public class OnConsumption extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     @Story("THY-570: On Consumption")
     public void testOnConsumption3() throws InterruptedException, IOException {
+        myceQuotes.deleteQuoteSFDX(SFDX, "Name='Test On Consumption 3'", ORG_USERNAME);
         StringBuilder propertyRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:get",
@@ -240,6 +243,7 @@ public class OnConsumption extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     @Story("THY-570: On Consumption")
     public void testOnConsumption4() throws InterruptedException, IOException {
+        myceQuotes.deleteQuoteSFDX(SFDX, "Name='Test On Consumption 4'", ORG_USERNAME);
         StringBuilder propertyRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:get",

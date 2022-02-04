@@ -34,7 +34,7 @@ public class QuoteBudgetMultipropertyQuote extends BaseTest{
         String propertyID2 = JsonParser2.getFieldValue(hotelRecord2.toString(), "Id");
         StringBuilder room1NightRecord = product.getProductSFDX(SFDX, "Name='ROOM 1 NIGHT'", ORG_USERNAME);
         String room1NightID = JsonParser2.getFieldValue(room1NightRecord.toString(), "Id");
-        StringBuilder roomDemo2Record = product.getProductSFDX(SFDX, "Name='Room demo2'", ORG_USERNAME);
+        StringBuilder roomDemo2Record = product.getProductSFDX(SFDX, "Name='Room'", ORG_USERNAME);
         String roomDemo2ID = JsonParser2.getFieldValue(roomDemo2Record.toString(), "Id");
         StringBuilder roomTypeQueenRecord = roomType.getRoomTypeSFDX(SFDX, "Name='Queen'", ORG_USERNAME);
         String roomTypeQueenID = JsonParser2.getFieldValue(roomTypeQueenRecord.toString(), "Id");

@@ -17,6 +17,7 @@ public class ToastMessagesTesting extends BaseTest {
     @Story("Toast messages testing")
     public void logIn() throws InterruptedException, IOException {
         loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
+        loginPage.authoriseURL(SFDX, ADMIN_AUTH_URL, ADMIN_USERNAME);
         loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
     }
 
@@ -27,8 +28,11 @@ public class ToastMessagesTesting extends BaseTest {
     public void preconditions() throws InterruptedException, IOException {
         resource.deleteResourceSFDX(SFDX, "Name='ToastMessagesTesting", ORG_USERNAME);
         myceQuotes.deleteQuoteSFDX(SFDX, "Name='ToastMessagesTesting'", ORG_USERNAME);
+        rate.deleteRateSFDX(SFDX, "Name='TestRateAuto4'", ORG_USERNAME);
         StringBuilder hotelRecord= hotel.getHotelSFDX(SFDX, "thn__Unique_Id__c='Demo'", ORG_USERNAME);
         String propertyID = JsonParser2.getFieldValue(hotelRecord.toString(), "Id");
+        rate.createRateSFDX(SFDX, "Name='TestRateAuto4' thn__IsActive__c=true thn__IsPublic__c=true" +
+                " thn__Hotel__c='" + propertyID + "'", ORG_USERNAME);
         StringBuilder room2NightsRecord = product.getProductSFDX(SFDX, "Name='ROOM 2 NIGHTS'", ORG_USERNAME);
         String room2NightsID = JsonParser2.getFieldValue(room2NightsRecord.toString(), "Id");
         StringBuilder roomTypeRecords = myceQuotes.
@@ -90,7 +94,7 @@ public class ToastMessagesTesting extends BaseTest {
         myceQuotes.openMyceQoteRecord("ToastMessagesTesting");
         myceQuotes.openHotelRooms();
         quoteHotelRoom.openRecordByName("ROOM 2 NIGHTS");
-        quoteHotelRoom.editRatePlan("TestRateAuto3");
+        quoteHotelRoom.editRatePlan("TestRateAuto4");
         String message = quoteHotelRoom.readToastMessage();
         StringBuilder quoteHotelRoomRecord = quoteHotelRoom.
                 getQuoteHotelRoomSFDX(SFDX, "thn__MYCE_Quote__c='" + quoteID + "'", ORG_USERNAME);
@@ -108,6 +112,7 @@ public class ToastMessagesTesting extends BaseTest {
     @Story("Toast messages testing")
     public void case3() throws InterruptedException, IOException {
         //loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
+        user.addPermissionSet(SFDX, "Overbooking_User", ORG_USERNAME, ADMIN_USERNAME);
         String expectedMessage = "Quote Meeting Room is overbooked.";
         StringBuilder quoteRecord = myceQuotes.
                 getQuoteSFDX(SFDX, "Name='ToastMessagesTesting'", ORG_USERNAME);

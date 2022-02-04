@@ -25,6 +25,7 @@ public class QuoteHotelRoomTimeFields extends BaseTest {
     @Story("THY-512 Quote hotel room - time fields")
     public void quoteHotelRoom_timeFieldsTest1() throws InterruptedException, IOException {
         loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
+        myceQuotes.deleteQuoteSFDX(SFDX, "Name='QHR time test 1'", ORG_USERNAME);
         StringBuilder propertyRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:get",
@@ -113,7 +114,6 @@ public class QuoteHotelRoomTimeFields extends BaseTest {
                 getFieldValue(quoteHotelRoomRecord.toString(), "thn__Arrival_Date_Time__c");
         String departureDateTimeQuoteHotelRoom = JsonParser2.
                 getFieldValue(quoteHotelRoomRecord.toString(), "thn__Departure_Date_Time__c");
-
         Assert.assertTrue(arrivalDateTimeQuoteHotelRoom.contains(arrivalDateMyceQuote));
         Assert.assertTrue(departureDateTimeQuoteHotelRoom.contains(departureDateMyceQuote));
     }
@@ -124,6 +124,7 @@ public class QuoteHotelRoomTimeFields extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     @Story("THY-512 Quote hotel room - time fields")
     public void quoteHotelRoom_timeFieldsTest2() throws InterruptedException, IOException {
+        myceQuotes.deleteQuoteSFDX(SFDX, "Name='QHR time test 2'", ORG_USERNAME);
         StringBuilder propertyRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:get",
@@ -232,6 +233,7 @@ public class QuoteHotelRoomTimeFields extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     @Story("THY-512 Quote hotel room - time fields")
     public void quoteHotelRoom_timeFieldsTest3() throws InterruptedException, IOException {
+        myceQuotes.deleteQuoteSFDX(SFDX, "Name='QHR time test 3'", ORG_USERNAME);
         StringBuilder propertyRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:get",
@@ -355,6 +357,8 @@ public class QuoteHotelRoomTimeFields extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     @Story("THY-512 Quote hotel room - time fields")
     public void quoteHotelRoom_timeFieldsTest4() throws InterruptedException, IOException {
+        packages.deletePackageSFDX(SFDX, "Name='Test QHR Date 1'", ORG_USERNAME);
+        myceQuotes.deleteQuoteSFDX(SFDX, "Name='QHR time test 4'", ORG_USERNAME);
         StringBuilder propertyRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:get",
@@ -492,6 +496,8 @@ public class QuoteHotelRoomTimeFields extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     @Story("THY-512 Quote hotel room - time fields")
     public void quoteHotelRoom_timeFieldsTest5() throws InterruptedException, IOException {
+        packages.deletePackageSFDX(SFDX, "Name='Test QHR Date 2'", ORG_USERNAME);
+        myceQuotes.deleteQuoteSFDX(SFDX, "Name='QHR time test 5'", ORG_USERNAME);
         StringBuilder propertyRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:get",

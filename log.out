@@ -1,3 +1,10 @@
-2022-02-02 09:42:31,645 INFO  - logIn test is starting.
-2022-02-02 09:42:37,356 INFO  - case1 test is starting.
-2022-02-02 09:44:01,261 INFO  - case2 test is starting.
+2022-02-04 17:13:56,393 INFO  - logIn test is starting.
+2022-02-04 17:14:03,005 INFO  - testHistoryTracking test is starting.
+2022-02-04 17:14:16,152 INFO  - testHistoryTracking2 test is starting.
+2022-02-04 17:14:22,758 INFO  - testHistoryTracking3 test is starting.
+2022-02-04 17:14:30,592 INFO  - testHistoryTracking4 test is starting.
+2022-02-04 17:14:38,167 INFO  - testHistoryTracking5 test is starting.
+2022-02-04 17:14:55,194 INFO  - testHistoryTracking6 test is starting.
+2022-02-04 17:15:03,918 INFO  - testHistoryTracking7 test is starting.
+2022-02-04 17:15:08,241 INFO  - testHistoryTracking8 test is starting.
+2022-02-04 17:15:51,854 INFO  - testHistoryTracking9 test is starting.

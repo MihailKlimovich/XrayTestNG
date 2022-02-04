@@ -62,7 +62,7 @@ public class OverbookingAndPriceUpdate extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     @Story("Overbooking & price update")
     public void preconditions() throws InterruptedException, IOException {
-        user.addPermissionSet(SFDX, "Overbooking_User", ORG_USERNAME);
+        user.addPermissionSet(SFDX, "Overbooking_User", ORG_USERNAME, ADMIN_USERNAME);
         myceQuotes.deleteQuoteSFDX(SFDX, "Name='OverbookingChangePriceAutoTest'", ORG_USERNAME);
         resource.deleteResourceSFDX(SFDX, "Name='OverbookingChangePriceAutoTest1", ORG_USERNAME);
         resource.deleteResourceSFDX(SFDX, "Name='OverbookingChangePriceAutoTest2", ORG_USERNAME);
@@ -359,7 +359,7 @@ public class OverbookingAndPriceUpdate extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     @Story("Overbooking & price update")
     public void postconditions() throws InterruptedException, IOException {
-        user.addPermissionSet(SFDX, "Overbooking_User", ORG_USERNAME);
+        user.addPermissionSet(SFDX, "Overbooking_User", ORG_USERNAME, ADMIN_USERNAME);
     }
 
 }
