@@ -17,18 +17,11 @@ import java.util.List;
 
 public class CommissionCorrections extends BaseTest {
 
-    @Test(priority = 1, description = "LogIn")
-    @Severity(SeverityLevel.NORMAL)
-    @Story("Commission correction")
-    public void logIn() throws InterruptedException, IOException {
-
-        loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
-    }
-
-    @Test(priority = 2, description = "Preconditions")
+    @Test(priority = 1, description = "Preconditions")
     @Severity(SeverityLevel.NORMAL)
     @Story("Commission correction")
     public void preconditions() throws InterruptedException, IOException {
+        loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
         SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:delete",
@@ -276,7 +269,7 @@ public class CommissionCorrections extends BaseTest {
         System.out.println(res);
     }
 
-    @Test(priority = 3, description = "When commission on quote package is updated, its related records are updated as well")
+    @Test(priority = 2, description = "When commission on quote package is updated, its related records are updated as well")
     @Severity(SeverityLevel.NORMAL)
     @Story("Commission correction")
     public void case1() throws InterruptedException, IOException {

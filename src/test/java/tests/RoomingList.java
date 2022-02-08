@@ -16,22 +16,14 @@ import java.util.List;
 
 public class RoomingList extends BaseTest {
 
-    @Test(priority = 1, description = "LogIn")
-    @Severity(SeverityLevel.NORMAL)
-    @Story("Rooming list testing")
-    public void logIn() throws InterruptedException, IOException {
-        loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
-        loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
-        //developerConsoleWindow.openDeveloperConsole();
-        //developerConsoleWindow.openExecuteAnonymousWindow();
-        //developerConsoleWindow.runApexCodeFromFile("src/main/Data/TemplateConfig");
-    }
 
-    @Test(priority = 2, description = "Create MYCE Quote, specify Reservation Guest, Add Quote hotel rooms, Send Quote" +
-            " to Mews to have Reservations created")
+    @Test(priority = 1, description = "Create MYCE Quote, specify Reservation Guest, Add Quote hotel rooms, Send" +
+            " Quote to Mews to have Reservations created")
     @Severity(SeverityLevel.NORMAL)
     @Story("Rooming list testing")
     public void preconditions() throws InterruptedException, IOException {
+        loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
+        loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
         myceQuotes.deleteQuoteSFDX(SFDX, "Name='RoomingListAutoTest'", ORG_USERNAME);
         StringBuilder hotelRecord= hotel.getHotelSFDX(SFDX, "thn__Unique_Id__c='Demo'", ORG_USERNAME);
         String propertyID = JsonParser2.getFieldValue(hotelRecord.toString(), "Id");
@@ -65,7 +57,7 @@ public class RoomingList extends BaseTest {
 
     }
 
-    @Test(priority = 3, description = "Set the checkbox ‘Generate Rooming List’ on the Quote to ‘True’. Result:" +
+    @Test(priority = 2, description = "Set the checkbox ‘Generate Rooming List’ on the Quote to ‘True’. Result:" +
             " ‘Rooming List’ records were created for each ‘Adult Count’ of the 'Reservation' on the Quote.")
     @Severity(SeverityLevel.NORMAL)
     @Story("Rooming list testing")
@@ -81,7 +73,7 @@ public class RoomingList extends BaseTest {
         Assert.assertEquals(roomingListID.size(), 3);
     }
 
-    @Test(priority = 4, description = "Complete the file and upload it using the upload component on quote. Expected" +
+    @Test(priority = 3, description = "Complete the file and upload it using the upload component on quote. Expected" +
             " result: when phone or email are completed, guest is created ")
     @Severity(SeverityLevel.NORMAL)
     @Story("Rooming list testing")
@@ -95,7 +87,8 @@ public class RoomingList extends BaseTest {
         files.updateXLS("Rooming List RoomingListAutoTest.xlsx", 1, 0, "Werty");
         files.updateXLS("Rooming List RoomingListAutoTest.xlsx", 1, 1, "Kukin");
         files.updateXLS("Rooming List RoomingListAutoTest.xlsx", 1, 5, "Belarus");
-        files.updateXLS("Rooming List RoomingListAutoTest.xlsx", 1, 6, "bel@gmail.com");
+        files.updateXLS("Rooming List RoomingListAutoTest.xlsx", 1, 6,
+                "bel@gmail.com");
         files.updateXLS("Rooming List RoomingListAutoTest.xlsx", 2, 0, "John");
         files.updateXLS("Rooming List RoomingListAutoTest.xlsx", 2, 1, "Doe");
         files.updateXLS("Rooming List RoomingListAutoTest.xlsx", 2, 2, "551454");
@@ -135,7 +128,7 @@ public class RoomingList extends BaseTest {
         Assert.assertNotNull(guest3);
     }
 
-    @Test(priority = 5, description = "If an error is found a new rooming list record is generated: invalid email" +
+    @Test(priority = 4, description = "If an error is found a new rooming list record is generated: invalid email" +
             " address or phone = letters then no error is thrown. Records are not updated  ")
     @Severity(SeverityLevel.NORMAL)
     @Story("Rooming list testing")
@@ -164,7 +157,7 @@ public class RoomingList extends BaseTest {
         Assert.assertEquals(email2, null);
     }
 
-    @Test(priority = 6, description = "Change the file and upload it again / update the rooming list record to match" +
+    @Test(priority = 5, description = "Change the file and upload it again / update the rooming list record to match" +
             " another guest. Expected result: reservation guest is deleted and new reservation guest is created")
     @Severity(SeverityLevel.NORMAL)
     @Story("Rooming list testing")

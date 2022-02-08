@@ -50,26 +50,22 @@ public class ShadowMeetingRooms extends BaseTest {
         }
     }
 
-    @Test(priority = 1, description = "LogIn")
-    @Severity(SeverityLevel.NORMAL)
-    @Story("Shadow Meeting rooms")
-    public void logIn() throws InterruptedException, IOException {
-        loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
-        loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
-    }
 
-    @Test(priority = 2, description = "Create a new myce quote and a meeting room, change the meeting room’s resource" +
+    @Test(priority = 1, description = "Create a new myce quote and a meeting room, change the meeting room’s resource" +
             " to one with related groupings. ")
     @Severity(SeverityLevel.NORMAL)
     @Story("Shadow Meeting rooms")
     public void case1() throws InterruptedException, IOException {
+        loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
+        loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
         resource.deleteResourceSFDX(SFDX, "Name='ShadowMR1'", ORG_USERNAME);
         resource.deleteResourceSFDX(SFDX, "Name='ShadowMR2'", ORG_USERNAME);
         myceQuotes.deleteQuoteSFDX(SFDX, "Name='ShadowMeetingRoomsAutoTest'", ORG_USERNAME);
         myceQuotes.deleteQuoteSFDX(SFDX, "Name='Shadow'", ORG_USERNAME);
         StringBuilder hotelRecord= hotel.getHotelSFDX(SFDX, "thn__Unique_Id__c='Demo'", ORG_USERNAME);
         String propertyID = JsonParser2.getFieldValue(hotelRecord.toString(), "Id");
-        StringBuilder meetingHalfDayRecord = product.getProductSFDX(SFDX, "Name='MEETING HALF DAY'", ORG_USERNAME);
+        StringBuilder meetingHalfDayRecord = product.getProductSFDX(SFDX, "Name='MEETING HALF DAY'",
+                ORG_USERNAME);
         String meetingHalfDayID = JsonParser2.getFieldValue(meetingHalfDayRecord.toString(), "Id");
         String resourceId1 = resource.createResourceSFDX(SFDX, "Name='ShadowMR1' thn__Hotel__c='" + propertyID +
                 "' thn__Type__c='Meeting Room'", ORG_USERNAME);

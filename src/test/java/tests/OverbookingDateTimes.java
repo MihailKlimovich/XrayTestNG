@@ -12,27 +12,24 @@ import java.util.List;
 
 public class OverbookingDateTimes extends BaseTest{
 
-    @Test(priority = 1, description = "LogIn")
-    @Severity(SeverityLevel.NORMAL)
-    @Story("Overbooking - date times")
-    public void logIn() throws InterruptedException, IOException {
-        loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
-        loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
-    }
 
-    @Test(priority = 2, description = "Preconditions: Create a Meeting Room and assign a Resource to it that is" +
+    @Test(priority = 1, description = "Preconditions: Create a Meeting Room and assign a Resource to it that is" +
             " NOT Default, Create another one with the same Resource but different (date) times.")
     @Severity(SeverityLevel.NORMAL)
     @Story("Overbooking - date times")
     public void preconditions() throws InterruptedException, IOException {
+        loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
+        loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
         user.addPermissionSet(SFDX, "Overbooking_User", ORG_USERNAME, ADMIN_USERNAME);
         myceQuotes.deleteQuoteSFDX(SFDX, "Name='OverbookingDateTimesAutoTest'", ORG_USERNAME);
         resource.deleteResourceSFDX(SFDX, "Name='OverbookingDateTimesAutoTest", ORG_USERNAME);
         StringBuilder hotelRecord= hotel.getHotelSFDX(SFDX, "thn__Unique_Id__c='Demo'", ORG_USERNAME);
         String propertyID = JsonParser2.getFieldValue(hotelRecord.toString(), "Id");
-        StringBuilder meetingHalfDayRecord = product.getProductSFDX(SFDX, "Name='MEETING HALF DAY'", ORG_USERNAME);
+        StringBuilder meetingHalfDayRecord = product.getProductSFDX(SFDX, "Name='MEETING HALF DAY'",
+                ORG_USERNAME);
         String meetingHalfDayID = JsonParser2.getFieldValue(meetingHalfDayRecord.toString(), "Id");
-        StringBuilder meetingFullDayRecord = product.getProductSFDX(SFDX, "Name='MEETING FULL DAY'", ORG_USERNAME);
+        StringBuilder meetingFullDayRecord = product.getProductSFDX(SFDX, "Name='MEETING FULL DAY'",
+                ORG_USERNAME);
         String meetingFullDayID = JsonParser2.getFieldValue(meetingFullDayRecord.toString(), "Id");
         String resourceID = resource.createResourceSFDX(SFDX, "Name='OverbookingDateTimesAutoTest'" +
                 " thn__Hotel__c='" + propertyID + "' thn__Type__c='Meeting Room'", ORG_USERNAME);
@@ -56,7 +53,7 @@ public class OverbookingDateTimes extends BaseTest{
                 date.generateTodayDate(), date.generateTodayDate(), "18:00", "19:00");
     }
 
-    @Test(priority = 3, description = "Change the (date)times on the layout for second Quote Meeting Room to at least" +
+    @Test(priority = 2, description = "Change the (date)times on the layout for second Quote Meeting Room to at least" +
             " overlap the date time of  the first record. Result: Overbooking and shadow processes are triggered." +
             " Overbooking message is toasted.")
     @Severity(SeverityLevel.NORMAL)
@@ -72,7 +69,7 @@ public class OverbookingDateTimes extends BaseTest{
         Assert.assertEquals(message, expectedMessage);
     }
 
-    @Test(priority = 4, description = "Remove the ‘Overbooking user’ permission set from the current user. Go to" +
+    @Test(priority = 3, description = "Remove the ‘Overbooking user’ permission set from the current user. Go to" +
             " the 2nd Quote Meeting Room record that we created and try changing the Date time. Result: Error is" +
             " thrown with the message: ‘You don’t have the permission to overbook resources. Default meeting room " +
             "has been assigned.'")
@@ -92,7 +89,7 @@ public class OverbookingDateTimes extends BaseTest{
         Assert.assertEquals(message, expectedMessage);
     }
 
-    @Test(priority = 5, description = "Postconditions: Add the ‘Overbooking user’ permission set from the" +
+    @Test(priority = 4, description = "Postconditions: Add the ‘Overbooking user’ permission set from the" +
             " current user.")
     @Severity(SeverityLevel.NORMAL)
     @Story("Overbooking - date times")

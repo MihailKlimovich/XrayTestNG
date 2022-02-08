@@ -20,21 +20,9 @@ public class Complimentary extends BaseTest {
     @Test(priority = 1, description = "THY-540 Myce Quote - Complimentary")
     @Severity(SeverityLevel.NORMAL)
     @Description("THY-540 Myce Quote - Complimentary")
-    @Story("Case 1: Make Quote having Quote related records linked to the Quote package and not linked to the Quote package Complimentary")
+    @Story("Case 1: Make Quote having Quote related records linked to the Quote package and not linked to the Quote" +
+            " package Complimentary")
     public void testComplimentary1() throws InterruptedException, IOException {
-        /*StringBuilder authorise = SfdxCommand.runLinuxCommand1(new String[]{
-                SFDX,
-                "force:auth:jwt:grant",
-                "--clientid",
-                CONSUMER_KEY,
-                "--jwtkeyfile",
-                SERVER_KEY_PATH,
-                "--username",
-                ORG_USERNAME,
-                "--instanceurl",
-                ORG_URL
-        });
-        System.out.println(authorise);*/
         loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
         StringBuilder propertyRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
@@ -122,7 +110,8 @@ public class Complimentary extends BaseTest {
                 "thn__MYCE_Quote__c",
                 "-v",
                 "Name='Test Complimentary 1' thn__Pax__c=10 thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
-                        date.generateTodayDate2() + " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 3),
+                        date.generateTodayDate2() + " thn__Departure_Date__c=" +
+                        date.generateTodayDate2_plus(0, 3),
                 "-u",
                 ORG_USERNAME,
                 "--json"});
@@ -148,8 +137,9 @@ public class Complimentary extends BaseTest {
                 "thn__Quote_Product__c",
                 "-v",
                 "thn__MYCE_Quote__c='" + myceQuoteID + "' thn__Product__c='" + productWinesID +
-                        "' thn__Pax__c=10 thn__Unit_Price__c=10 thn__Start_Date_Time__c=" + date.generateTodayDate2_plus(0, 0) +
-                        " thn__End_Date_Time__c=" + date.generateTodayDate2_plus(0, 1),
+                        "' thn__Pax__c=10 thn__Unit_Price__c=10 thn__Start_Date_Time__c=" +
+                        date.generateTodayDate2_plus(0, 0) + " thn__End_Date_Time__c=" +
+                        date.generateTodayDate2_plus(0, 1),
                 "-u",
                 ORG_USERNAME,
                 "--json"});
@@ -160,7 +150,8 @@ public class Complimentary extends BaseTest {
                 "-s",
                 "thn__Quote_Meeting_Room__c",
                 "-v",
-                "thn__MYCE_Quote__c='" + myceQuoteID + "' thn__Product__c='" + meetingHalfDayID + "' thn__Unit_Price__c=10",
+                "thn__MYCE_Quote__c='" + myceQuoteID + "' thn__Product__c='" + meetingHalfDayID + "'" +
+                        " thn__Unit_Price__c=10",
                 "-u",
                 ORG_USERNAME,
                 "--json"});
@@ -245,19 +236,32 @@ public class Complimentary extends BaseTest {
                 ORG_USERNAME,
                 "--json"});
         System.out.println(quotePackageRecord);
-        String complimentaryMyceQuote = JsonParser2.getFieldValue(myceQuoteRecord.toString(), "thn__Complimentary__c");
-        String complimentaryQuoteHotelRoom = JsonParser2.getFieldValue(quoteHotelRoomRecord.toString(), "thn__Complimentary__c");
-        String complimentaryQuoteProduct = JsonParser2.getFieldValue(quoteProductRecord.toString(), "thn__Complimentary__c");
-        String complimentaryQuoteMeetingRoom = JsonParser2.getFieldValue(quoteMeetingRoomRecord.toString(), "thn__Complimentary__c");
-        String complimentaryQuotePackage = JsonParser2.getFieldValue(quotePackageRecord.toString(), "thn__Complimentary__c");
-        String unitPriceQuoteHotelRoom = JsonParser2.getFieldValue(quoteHotelRoomRecord.toString(), "thn__Unit_Price__c");
-        String unitPriceQuoteProduct = JsonParser2.getFieldValue(quoteProductRecord.toString(), "thn__Unit_Price__c");
-        String unitPriceQuoteMeetingRoom = JsonParser2.getFieldValue(quoteMeetingRoomRecord.toString(), "thn__Unit_Price__c");
-        String unitPriceQuotePackage = JsonParser2.getFieldValue(quotePackageRecord.toString(), "thn__Unit_Price__c");
-        String discountQuoteHotelRoom = JsonParser2.getFieldValue(quoteHotelRoomRecord.toString(), "thn__Discount_Percent__c");
-        String discountQuoteProduct = JsonParser2.getFieldValue(quoteProductRecord.toString(), "thn__Discount_Percent__c");
-        String discountQuoteMeetingRoom = JsonParser2.getFieldValue(quoteMeetingRoomRecord.toString(), "thn__Discount_Percent__c");
-        String discountQuotePackage = JsonParser2.getFieldValue(quotePackageRecord.toString(), "thn__Discount__c");
+        String complimentaryMyceQuote = JsonParser2.
+                getFieldValue(myceQuoteRecord.toString(), "thn__Complimentary__c");
+        String complimentaryQuoteHotelRoom = JsonParser2.
+                getFieldValue(quoteHotelRoomRecord.toString(), "thn__Complimentary__c");
+        String complimentaryQuoteProduct = JsonParser2.
+                getFieldValue(quoteProductRecord.toString(), "thn__Complimentary__c");
+        String complimentaryQuoteMeetingRoom = JsonParser2.
+                getFieldValue(quoteMeetingRoomRecord.toString(), "thn__Complimentary__c");
+        String complimentaryQuotePackage = JsonParser2.
+                getFieldValue(quotePackageRecord.toString(), "thn__Complimentary__c");
+        String unitPriceQuoteHotelRoom = JsonParser2.
+                getFieldValue(quoteHotelRoomRecord.toString(), "thn__Unit_Price__c");
+        String unitPriceQuoteProduct = JsonParser2.
+                getFieldValue(quoteProductRecord.toString(), "thn__Unit_Price__c");
+        String unitPriceQuoteMeetingRoom = JsonParser2.
+                getFieldValue(quoteMeetingRoomRecord.toString(), "thn__Unit_Price__c");
+        String unitPriceQuotePackage = JsonParser2.
+                getFieldValue(quotePackageRecord.toString(), "thn__Unit_Price__c");
+        String discountQuoteHotelRoom = JsonParser2.
+                getFieldValue(quoteHotelRoomRecord.toString(), "thn__Discount_Percent__c");
+        String discountQuoteProduct = JsonParser2.
+                getFieldValue(quoteProductRecord.toString(), "thn__Discount_Percent__c");
+        String discountQuoteMeetingRoom = JsonParser2.
+                getFieldValue(quoteMeetingRoomRecord.toString(), "thn__Discount_Percent__c");
+        String discountQuotePackage = JsonParser2.
+                getFieldValue(quotePackageRecord.toString(), "thn__Discount__c");
         Assert.assertEquals(complimentaryMyceQuote, "true");
         Assert.assertEquals(complimentaryQuoteHotelRoom, "true");
         Assert.assertEquals(complimentaryQuoteProduct, "true");
@@ -364,7 +368,8 @@ public class Complimentary extends BaseTest {
                 "thn__MYCE_Quote__c",
                 "-v",
                 "Name='Test Complimentary 2' thn__Pax__c=10 thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
-                        date.generateTodayDate2() + " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 3),
+                        date.generateTodayDate2() + " thn__Departure_Date__c=" +
+                        date.generateTodayDate2_plus(0, 3),
                 "-u",
                 ORG_USERNAME,
                 "--json"});
@@ -390,8 +395,9 @@ public class Complimentary extends BaseTest {
                 "thn__Quote_Product__c",
                 "-v",
                 "thn__MYCE_Quote__c='" + myceQuoteID + "' thn__Product__c='" + productWinesID +
-                        "' thn__Pax__c=10 thn__Unit_Price__c=10 thn__Start_Date_Time__c=" + date.generateTodayDate2_plus(0, 0) +
-                        " thn__End_Date_Time__c=" + date.generateTodayDate2_plus(0, 1),
+                        "' thn__Pax__c=10 thn__Unit_Price__c=10 thn__Start_Date_Time__c=" +
+                        date.generateTodayDate2_plus(0, 0) + " thn__End_Date_Time__c=" +
+                        date.generateTodayDate2_plus(0, 1),
                 "-u",
                 ORG_USERNAME,
                 "--json"});
@@ -402,7 +408,8 @@ public class Complimentary extends BaseTest {
                 "-s",
                 "thn__Quote_Meeting_Room__c",
                 "-v",
-                "thn__MYCE_Quote__c='" + myceQuoteID + "' thn__Product__c='" + meetingHalfDayID + "' thn__Unit_Price__c=10",
+                "thn__MYCE_Quote__c='" + myceQuoteID + "' thn__Product__c='" + meetingHalfDayID + "'" +
+                        " thn__Unit_Price__c=10",
                 "-u",
                 ORG_USERNAME,
                 "--json"});
@@ -498,19 +505,32 @@ public class Complimentary extends BaseTest {
                 ORG_USERNAME,
                 "--json"});
         System.out.println(quotePackageRecord);
-        String complimentaryMyceQuote = JsonParser2.getFieldValue(myceQuoteRecord.toString(), "thn__Complimentary__c");
-        String complimentaryQuoteHotelRoom = JsonParser2.getFieldValue(quoteHotelRoomRecord.toString(), "thn__Complimentary__c");
-        String complimentaryQuoteProduct = JsonParser2.getFieldValue(quoteProductRecord.toString(), "thn__Complimentary__c");
-        String complimentaryQuoteMeetingRoom = JsonParser2.getFieldValue(quoteMeetingRoomRecord.toString(), "thn__Complimentary__c");
-        String complimentaryQuotePackage = JsonParser2.getFieldValue(quotePackageRecord.toString(), "thn__Complimentary__c");
-        String unitPriceQuoteHotelRoom = JsonParser2.getFieldValue(quoteHotelRoomRecord.toString(), "thn__Unit_Price__c");
-        String unitPriceQuoteProduct = JsonParser2.getFieldValue(quoteProductRecord.toString(), "thn__Unit_Price__c");
-        String unitPriceQuoteMeetingRoom = JsonParser2.getFieldValue(quoteMeetingRoomRecord.toString(), "thn__Unit_Price__c");
-        String unitPriceQuotePackage = JsonParser2.getFieldValue(quotePackageRecord.toString(), "thn__Unit_Price__c");
-        String discountQuoteHotelRoom = JsonParser2.getFieldValue(quoteHotelRoomRecord.toString(), "thn__Discount_Percent__c");
-        String discountQuoteProduct = JsonParser2.getFieldValue(quoteProductRecord.toString(), "thn__Discount_Percent__c");
-        String discountQuoteMeetingRoom = JsonParser2.getFieldValue(quoteMeetingRoomRecord.toString(), "thn__Discount_Percent__c");
-        String discountQuotePackage = JsonParser2.getFieldValue(quotePackageRecord.toString(), "thn__Discount__c");
+        String complimentaryMyceQuote = JsonParser2.
+                getFieldValue(myceQuoteRecord.toString(), "thn__Complimentary__c");
+        String complimentaryQuoteHotelRoom = JsonParser2.
+                getFieldValue(quoteHotelRoomRecord.toString(), "thn__Complimentary__c");
+        String complimentaryQuoteProduct = JsonParser2.
+                getFieldValue(quoteProductRecord.toString(), "thn__Complimentary__c");
+        String complimentaryQuoteMeetingRoom = JsonParser2.
+                getFieldValue(quoteMeetingRoomRecord.toString(), "thn__Complimentary__c");
+        String complimentaryQuotePackage = JsonParser2.
+                getFieldValue(quotePackageRecord.toString(), "thn__Complimentary__c");
+        String unitPriceQuoteHotelRoom = JsonParser2.
+                getFieldValue(quoteHotelRoomRecord.toString(), "thn__Unit_Price__c");
+        String unitPriceQuoteProduct = JsonParser2.
+                getFieldValue(quoteProductRecord.toString(), "thn__Unit_Price__c");
+        String unitPriceQuoteMeetingRoom = JsonParser2.
+                getFieldValue(quoteMeetingRoomRecord.toString(), "thn__Unit_Price__c");
+        String unitPriceQuotePackage = JsonParser2.
+                getFieldValue(quotePackageRecord.toString(), "thn__Unit_Price__c");
+        String discountQuoteHotelRoom = JsonParser2.
+                getFieldValue(quoteHotelRoomRecord.toString(), "thn__Discount_Percent__c");
+        String discountQuoteProduct = JsonParser2.
+                getFieldValue(quoteProductRecord.toString(), "thn__Discount_Percent__c");
+        String discountQuoteMeetingRoom = JsonParser2.
+                getFieldValue(quoteMeetingRoomRecord.toString(), "thn__Discount_Percent__c");
+        String discountQuotePackage = JsonParser2.
+                getFieldValue(quotePackageRecord.toString(), "thn__Discount__c");
         Assert.assertEquals(complimentaryMyceQuote, "false");
         Assert.assertEquals(complimentaryQuoteHotelRoom, "false");
         Assert.assertEquals(complimentaryQuoteProduct, "false");
@@ -617,8 +637,9 @@ public class Complimentary extends BaseTest {
                 "-s",
                 "thn__MYCE_Quote__c",
                 "-v",
-                "Name='Test Complimentary 3' thn__Pax__c=10 thn__Complimentary__c=true thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
-                        date.generateTodayDate2() + " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 3),
+                "Name='Test Complimentary 3' thn__Pax__c=10 thn__Complimentary__c=true thn__Hotel__c='" + propertyID +
+                        "' thn__Arrival_Date__c=" + date.generateTodayDate2() + " thn__Departure_Date__c=" +
+                        date.generateTodayDate2_plus(0, 3),
                 "-u",
                 ORG_USERNAME,
                 "--json"});
@@ -644,8 +665,9 @@ public class Complimentary extends BaseTest {
                 "thn__Quote_Product__c",
                 "-v",
                 "thn__MYCE_Quote__c='" + myceQuoteID + "' thn__Product__c='" + productWinesID +
-                        "' thn__Pax__c=10 thn__Unit_Price__c=10 thn__Start_Date_Time__c=" + date.generateTodayDate2_plus(0, 0) +
-                        " thn__End_Date_Time__c=" + date.generateTodayDate2_plus(0, 1),
+                        "' thn__Pax__c=10 thn__Unit_Price__c=10 thn__Start_Date_Time__c=" +
+                        date.generateTodayDate2_plus(0, 0) + " thn__End_Date_Time__c=" +
+                        date.generateTodayDate2_plus(0, 1),
                 "-u",
                 ORG_USERNAME,
                 "--json"});
@@ -656,7 +678,8 @@ public class Complimentary extends BaseTest {
                 "-s",
                 "thn__Quote_Meeting_Room__c",
                 "-v",
-                "thn__MYCE_Quote__c='" + myceQuoteID + "' thn__Product__c='" + meetingHalfDayID + "' thn__Unit_Price__c=10",
+                "thn__MYCE_Quote__c='" + myceQuoteID + "' thn__Product__c='" + meetingHalfDayID + "'" +
+                        " thn__Unit_Price__c=10",
                 "-u",
                 ORG_USERNAME,
                 "--json"});
@@ -728,17 +751,28 @@ public class Complimentary extends BaseTest {
                 ORG_USERNAME,
                 "--json"});
         System.out.println(quotePackageRecord);
-        String complimentaryMyceQuote = JsonParser2.getFieldValue(myceQuoteRecord.toString(), "thn__Complimentary__c");
-        String hotelRoomsAmount = JsonParser2.getFieldValue(myceQuoteRecord.toString(), "thn__Hotel_Rooms_Amount__c");
-        String meetingRoomsAmount = JsonParser2.getFieldValue(myceQuoteRecord.toString(), "thn__Meeting_Rooms_Amount__c");
-        String productAmount = JsonParser2.getFieldValue(myceQuoteRecord.toString(), "thn__Products_Amount__c");
-        String totalAmountExclTax = JsonParser2.getFieldValue(myceQuoteRecord.toString(), "thn__Total_Amount_incl_Tax__c");
-        String totalAmountInclTax = JsonParser2.getFieldValue(myceQuoteRecord.toString(), "thn__Total_Amount_excl_Tax__c");
-        String totalVatAmount = JsonParser2.getFieldValue(myceQuoteRecord.toString(), "thn__Total_VAT_Amount__c");
-        String unitPriceQuoteHotelRoom = JsonParser2.getFieldValue(quoteHotelRoomRecord.toString(), "thn__Unit_Price__c");
-        String unitPriceQuoteProduct = JsonParser2.getFieldValue(quoteProductRecord.toString(), "thn__Unit_Price__c");
-        String unitPriceQuoteMeetingRoom = JsonParser2.getFieldValue(quoteMeetingRoomRecord.toString(), "thn__Unit_Price__c");
-        String unitPriceQuotePackage = JsonParser2.getFieldValue(quotePackageRecord.toString(), "thn__Unit_Price__c");
+        String complimentaryMyceQuote = JsonParser2.
+                getFieldValue(myceQuoteRecord.toString(), "thn__Complimentary__c");
+        String hotelRoomsAmount = JsonParser2.
+                getFieldValue(myceQuoteRecord.toString(), "thn__Hotel_Rooms_Amount__c");
+        String meetingRoomsAmount = JsonParser2.
+                getFieldValue(myceQuoteRecord.toString(), "thn__Meeting_Rooms_Amount__c");
+        String productAmount = JsonParser2.
+                getFieldValue(myceQuoteRecord.toString(), "thn__Products_Amount__c");
+        String totalAmountExclTax = JsonParser2.
+                getFieldValue(myceQuoteRecord.toString(), "thn__Total_Amount_incl_Tax__c");
+        String totalAmountInclTax = JsonParser2.
+                getFieldValue(myceQuoteRecord.toString(), "thn__Total_Amount_excl_Tax__c");
+        String totalVatAmount = JsonParser2.
+                getFieldValue(myceQuoteRecord.toString(), "thn__Total_VAT_Amount__c");
+        String unitPriceQuoteHotelRoom = JsonParser2.
+                getFieldValue(quoteHotelRoomRecord.toString(), "thn__Unit_Price__c");
+        String unitPriceQuoteProduct = JsonParser2.
+                getFieldValue(quoteProductRecord.toString(), "thn__Unit_Price__c");
+        String unitPriceQuoteMeetingRoom = JsonParser2.
+                getFieldValue(quoteMeetingRoomRecord.toString(), "thn__Unit_Price__c");
+        String unitPriceQuotePackage = JsonParser2.
+                getFieldValue(quotePackageRecord.toString(), "thn__Unit_Price__c");
         Assert.assertEquals(complimentaryMyceQuote, "true");
         Assert.assertEquals(unitPriceQuoteHotelRoom, "0");
         Assert.assertEquals(unitPriceQuoteProduct, "0");

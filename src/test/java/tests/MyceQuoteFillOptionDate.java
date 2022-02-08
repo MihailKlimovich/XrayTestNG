@@ -16,19 +16,14 @@ import java.util.List;
 
 public class MyceQuoteFillOptionDate extends BaseTest {
 
-    @Test(priority = 1, description = "LogIn")
-    @Severity(SeverityLevel.NORMAL)
-    @Story("Myce quote - Fill Option date")
-    public void logIn() throws InterruptedException, IOException {
-        loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
-        loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
-    }
 
-    @Test(priority = 2, description = "Create a new myce quote. Expected result: Option date is filled with value" +
+    @Test(priority = 1, description = "Create a new myce quote. Expected result: Option date is filled with value" +
             " = today + option interval")
     @Severity(SeverityLevel.NORMAL)
     @Story("Myce quote - Fill Option date")
     public void case1() throws InterruptedException, IOException {
+        loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
+        loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
         myceQuotes.deleteQuoteSFDX(SFDX, "Name='FillOptionDateAutoTest1'", ORG_USERNAME);
         developerConsoleWindow.openDeveloperConsole();
         developerConsoleWindow.openExecuteAnonymousWindow();
@@ -48,7 +43,7 @@ public class MyceQuoteFillOptionDate extends BaseTest {
         Assert.assertEquals(quoteOptionDate, date.generateTodayDate2_plus(0, 5));
     }
 
-    @Test(priority = 3, description = "Create a new myce quote. Expected result: Option date is filled with value" +
+    @Test(priority = 2, description = "Create a new myce quote. Expected result: Option date is filled with value" +
             " = today + option interval")
     @Severity(SeverityLevel.NORMAL)
     @Story("Myce quote - Fill Option date")

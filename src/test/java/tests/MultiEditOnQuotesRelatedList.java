@@ -52,18 +52,13 @@ public class MultiEditOnQuotesRelatedList extends BaseTest {
         }
     }
 
-    @Test(priority = 1, description = "LogIn")
-    @Severity(SeverityLevel.NORMAL)
-    @Story("Multi edit on quote's related list UAT")
-    public void login() throws InterruptedException, IOException {
-        loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
-        loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
-    }
 
-    @Test(priority = 2, description = "Preconditions: Creating Packages and Quotes")
+    @Test(priority = 1, description = "Preconditions: Creating Packages and Quotes")
     @Severity(SeverityLevel.NORMAL)
     @Story("Multi edit on quote's related list UAT")
     public void preconditions() throws InterruptedException, IOException {
+        loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
+        loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
         packages.deletePackageSFDX(SFDX, "Name='MultiEditAutoPackage1", ORG_USERNAME);
         packages.deletePackageSFDX(SFDX, "Name='MultiEditAutoPackage2", ORG_USERNAME);
         myceQuotes.deleteQuoteSFDX(SFDX, "Name='MultiEditAutoTest1'", ORG_USERNAME);
@@ -71,9 +66,11 @@ public class MultiEditOnQuotesRelatedList extends BaseTest {
         myceQuotes.deleteQuoteSFDX(SFDX, "Name='MultiEditAutoTest3'", ORG_USERNAME);
         StringBuilder hotelRecord= hotel.getHotelSFDX(SFDX, "thn__Unique_Id__c='Demo'", ORG_USERNAME);
         String propertyID = JsonParser2.getFieldValue(hotelRecord.toString(), "Id");
-        StringBuilder meetingHalfDayRecord = product.getProductSFDX(SFDX, "Name='MEETING HALF DAY'", ORG_USERNAME);
+        StringBuilder meetingHalfDayRecord = product.getProductSFDX(SFDX, "Name='MEETING HALF DAY'",
+                ORG_USERNAME);
         String meetingHalfDayID = JsonParser2.getFieldValue(meetingHalfDayRecord.toString(), "Id");
-        StringBuilder meetingFullDayRecord = product.getProductSFDX(SFDX, "Name='MEETING FULL DAY'", ORG_USERNAME);
+        StringBuilder meetingFullDayRecord = product.getProductSFDX(SFDX, "Name='MEETING FULL DAY'",
+                ORG_USERNAME);
         String meetingFullDayID = JsonParser2.getFieldValue(meetingFullDayRecord.toString(), "Id");
         StringBuilder beverageRecord = product.getProductSFDX(SFDX, "Name='BEVERAGE'", ORG_USERNAME);
         String beverageID = JsonParser2.getFieldValue(beverageRecord.toString(), "Id");
@@ -137,7 +134,7 @@ public class MultiEditOnQuotesRelatedList extends BaseTest {
 
     }
 
-    @Test(priority = 3, description = "Quote products are part of the Quote Package")
+    @Test(priority = 2, description = "Quote products are part of the Quote Package")
     @Severity(SeverityLevel.NORMAL)
     @Story("Multi edit on quote's related list UAT")
     public void case1() throws InterruptedException, IOException {
@@ -185,7 +182,7 @@ public class MultiEditOnQuotesRelatedList extends BaseTest {
         Assert.assertEquals(productIsOnConsumption2, "false");
     }
 
-    @Test(priority = 4, description = "Meeting rooms are part of the Quote Package")
+    @Test(priority = 3, description = "Meeting rooms are part of the Quote Package")
     @Severity(SeverityLevel.NORMAL)
     @Story("Multi edit on quote's related list UAT")
     public void case2() throws InterruptedException, IOException {
@@ -236,7 +233,7 @@ public class MultiEditOnQuotesRelatedList extends BaseTest {
         Assert.assertEquals(quoteMeetingRoomLockResource2, "true");
     }
 
-    @Test(priority = 5, description = "Quote products are not part of the Quote Package")
+    @Test(priority = 4, description = "Quote products are not part of the Quote Package")
     @Severity(SeverityLevel.NORMAL)
     @Story("Multi edit on quote's related list UAT")
     public void case3() throws InterruptedException, IOException {
@@ -334,7 +331,7 @@ public class MultiEditOnQuotesRelatedList extends BaseTest {
         Assert.assertEquals(productUnitPrice2, "54");
     }
 
-    @Test(priority = 6, description = "Meeting rooms are not part of the Quote Package")
+    @Test(priority = 5, description = "Meeting rooms are not part of the Quote Package")
     @Severity(SeverityLevel.NORMAL)
     @Story("Multi edit on quote's related list UAT")
     public void case4() throws InterruptedException, IOException {
@@ -435,7 +432,7 @@ public class MultiEditOnQuotesRelatedList extends BaseTest {
         Assert.assertEquals(quoteMeetingRoomUnitPrice2, "378");
     }
 
-    @Test(priority = 7, description = "Quote products are  partially related to the Quote package")
+    @Test(priority = 6, description = "Quote products are  partially related to the Quote package")
     @Severity(SeverityLevel.NORMAL)
     @Story("Multi edit on quote's related list UAT")
     public void case5() throws InterruptedException, IOException {
@@ -483,7 +480,7 @@ public class MultiEditOnQuotesRelatedList extends BaseTest {
         Assert.assertEquals(productIsOnConsumption2, "false");
     }
 
-    @Test(priority = 8, description = "Meeting rooms are partially related to the Quote package")
+    @Test(priority = 7, description = "Meeting rooms are partially related to the Quote package")
     @Severity(SeverityLevel.NORMAL)
     @Story("Multi edit on quote's related list UAT")
     public void case6() throws InterruptedException, IOException {

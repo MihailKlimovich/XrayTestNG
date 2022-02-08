@@ -36,18 +36,13 @@ public class HotelInventory extends BaseTest {
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     }
 
-    @Test(priority = 1, description = "LogIn")
-    @Severity(SeverityLevel.NORMAL)
-    @Story("THY-624: Hotel Inventory")
-    public void logIn() throws InterruptedException, IOException {
-        loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
-        loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
-    }
 
-    @Test(priority = 2, description = "Create a MYCE Quote, create Availability records")
+    @Test(priority = 1, description = "Create a MYCE Quote, create Availability records")
     @Severity(SeverityLevel.NORMAL)
     @Story("THY-624: Hotel Inventory")
     public void precondition() throws InterruptedException, IOException {
+        loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
+        loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
         myceQuotes.deleteQuoteSFDX(SFDX, "Name='HotelInventoryAutoTest'", ORG_USERNAME);
         StringBuilder roomTypeQueenRecord = roomType.getRoomTypeSFDX(SFDX, "Name='Queen'", ORG_USERNAME);
         String roomTypeQueenID = JsonParser2.getFieldValue(roomTypeQueenRecord.toString(), "Id");
@@ -97,7 +92,7 @@ public class HotelInventory extends BaseTest {
 
     }
 
-    @Test(priority = 3, description = "Open the new Create quote hotel room component via the New (overbooking)" +
+    @Test(priority = 2, description = "Open the new Create quote hotel room component via the New (overbooking)" +
             " button: Product = Room 1 Night, Room Type = Queen, Pax = 10, Day number = Null, Arrival Date Time =" +
             " Null, Departure Date Time = Null. Expected result: A Quote Hotel Room was instantiated. Remaining" +
             " Inventory on the Availabilities records was updated.")
@@ -186,7 +181,7 @@ public class HotelInventory extends BaseTest {
         Assert.assertEquals(remainingInvventory7.get(0).intValue(), 30);
     }
 
-    @Test(priority = 4, description = "Instantiate another Quote Hotel Room to the MYCE Quote via the New" +
+    @Test(priority = 3, description = "Instantiate another Quote Hotel Room to the MYCE Quote via the New" +
             " (overbooking) button: Product = Room 1 Night, Room Type = Single, Pax = 100, Day number = Null," +
             " Arrival Date Time = today, Departure Date Time = today + 2. Since the remaining inventory is less" +
             " than booked rooms we get the Dialogue that the Quote hotel Room is in conflict whether we wish to" +
@@ -263,7 +258,7 @@ public class HotelInventory extends BaseTest {
         Assert.assertEquals(remainingInvventory7.get(0).intValue(), 30);
     }
 
-    @Test(priority = 5, description = "Instantiate another Quote Hotel Room to the MYCE Quote via the New" +
+    @Test(priority = 4, description = "Instantiate another Quote Hotel Room to the MYCE Quote via the New" +
             " (overbooking) button: Product = Room 1 Night, Room Type = Single, Pax = 100, Day number = 1," +
             " Arrival Date Time = null, Departure Date Time = null. Since the remaining inventory is less" +
             " than booked rooms we get the Dialogue that the Quote hotel Room is in conflict whether we wish to" +
@@ -339,7 +334,7 @@ public class HotelInventory extends BaseTest {
         Assert.assertEquals(remainingInvventory7.get(0).intValue(), 30);
     }
 
-    @Test(priority = 6, description = "Use the change dates of the MYCE Quote via the Change date flow button on the" +
+    @Test(priority = 5, description = "Use the change dates of the MYCE Quote via the Change date flow button on the" +
             " MYCE Quote. Change the date of the MYCE Quote to today + 3 days. Expected result: MYCE Quote dates were" +
             " updated. Availabilities were updated as well.")
     @Severity(SeverityLevel.NORMAL)
@@ -403,7 +398,7 @@ public class HotelInventory extends BaseTest {
         Assert.assertEquals(remainingInvventory7.get(0).intValue(), 20);
     }
 
-    @Test(priority = 7, description = "Open the last created Quote Hotel room which has Day Number = 1. Change the" +
+    @Test(priority = 6, description = "Open the last created Quote Hotel room which has Day Number = 1. Change the" +
             " Mews State to the state that is specified in Custom Settings > Stages > Hotel Room cancelled stage." +
             " Mews State = Canceled. Expected result: The Availabilities for the dates of the Cancelled Hotel Room" +
             " got updated")
@@ -467,7 +462,7 @@ public class HotelInventory extends BaseTest {
         Assert.assertEquals(remainingInvventory7.get(0).intValue(), 20);
     }
 
-    @Test(priority = 8, description = "Clone the MYCE Quote via the Clone MYCE Quote button on the Quote." +
+    @Test(priority = 7, description = "Clone the MYCE Quote via the Clone MYCE Quote button on the Quote." +
             " Arrival Date = today date. Pax = 10. Expected result: Arrival Date = today  date, Departure Date" +
             " = today date + 3. Availabilities were updated as well.")
     @Severity(SeverityLevel.NORMAL)

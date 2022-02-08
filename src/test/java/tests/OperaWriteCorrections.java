@@ -22,21 +22,7 @@ public class OperaWriteCorrections extends BaseTest {
     @Description("THY-582: Opera Write - Corrections")
     @Story("PMS Account")
     public void testOperaWrite1() throws InterruptedException, IOException {
-
-
-        StringBuilder authorise = SfdxCommand.runLinuxCommand1(new String[]{
-                SFDX,
-                "force:auth:jwt:grant",
-                "--clientid",
-                thynkPackKey,
-                "--jwtkeyfile",
-                "/home/user/jdoe/JWT/server.key",
-                "--username",
-                thynkPackUserName,
-                "--instanceurl",
-                thynkPackDevOrg
-        });
-        System.out.println(authorise);
+        loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
         StringBuilder resultDelete = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:delete",
@@ -54,7 +40,8 @@ public class OperaWriteCorrections extends BaseTest {
                 "-s",
                 "thn__PMS_Account__c",
                 "-v",
-                "Name='TestOperaWriteAuto' thn__PropertyDetailsCode__c='ESDH' thn__PropertyDetailsChainCode__c='THYNK' thn__Type__c='GROUP'",
+                "Name='TestOperaWriteAuto' thn__PropertyDetailsCode__c='ESDH'" +
+                        " thn__PropertyDetailsChainCode__c='THYNK' thn__Type__c='GROUP'",
                 "-u",
                 thynkPackUserName,
                 "--json"});
@@ -83,7 +70,8 @@ public class OperaWriteCorrections extends BaseTest {
                 thynkPackUserName,
                 "--json"});
         System.out.println(pmsAccountRecord);
-        String outboundRequest = JsonParser2.getFieldValue(pmsAccountRecord.toString(), "thn__Outbound_Request__c");
+        String outboundRequest = JsonParser2.
+                getFieldValue(pmsAccountRecord.toString(), "thn__Outbound_Request__c");
         Assert.assertNotNull(outboundRequest);
     }
 
@@ -110,8 +98,9 @@ public class OperaWriteCorrections extends BaseTest {
                 "-s",
                 "thn__Guest__c",
                 "-v",
-                "thn__FirstName__c='TestOperaWriteAuto' thn__LastName__c='TestOperaWrite' thn__PropertyDetailsCode__c='ESDH'" +
-                        " thn__PropertyDetailsChainCode__c='THYNK' thn__Type__c='GUEST' thn__Source__c='Myce'",
+                "thn__FirstName__c='TestOperaWriteAuto' thn__LastName__c='TestOperaWrite'" +
+                        " thn__PropertyDetailsCode__c='ESDH' thn__PropertyDetailsChainCode__c='THYNK'" +
+                        " thn__Type__c='GUEST' thn__Source__c='Myce'",
                 "-u",
                 thynkPackUserName,
                 "--json"});
@@ -296,7 +285,8 @@ public class OperaWriteCorrections extends BaseTest {
                 thynkPackUserName,
                 "--json"});
         System.out.println(reservationRecord);
-        String outboundRequest = JsonParser2.getFieldValue(reservationRecord.toString(), "thn__Outbound_Request__c");
+        String outboundRequest = JsonParser2.
+                getFieldValue(reservationRecord.toString(), "thn__Outbound_Request__c");
         Assert.assertNotNull(outboundRequest);
     }
 
@@ -326,8 +316,8 @@ public class OperaWriteCorrections extends BaseTest {
                         " thn__InventoryBlockType__c='NONELASTIC' thn__Start__c=" + date.generateTodayDate2() +
                         " thn__End__c=" + date.generateTodayDate2_plus(0, 1) + " CurrencyIsoCode='EUR'" +
                         " thn__CurrencyCode__c='USD' thn__PaymentMethodCode__c='CC' thn__SegmentationMarket__c='GROUP'" +
-                        " thn__SegmentationSource__c='CD' thn__SegmentationChannel__c='CRO' thn__PMS_Block_Status__c='DEF'" +
-                        " thn__Code__c='a1g3X00000Py7rxQAB'",
+                        " thn__SegmentationSource__c='CD' thn__SegmentationChannel__c='CRO'" +
+                        " thn__PMS_Block_Status__c='DEF' thn__Code__c='a1g3X00000Py7rxQAB'",
                 "-u",
                 thynkPackUserName,
                 "--json"});

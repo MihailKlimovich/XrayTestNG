@@ -46,21 +46,16 @@ public class ResourceGroupingTesting extends BaseTest {
         }
     }
 
-    @Test(priority = 1, description = "LogIn")
-    @Severity(SeverityLevel.NORMAL)
-    @Story("Resource grouping")
-    public void logIn() throws InterruptedException, IOException {
-        loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
-        loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
-    }
 
-    @Test(priority = 2, description = "Clone MYCE Quote that has Meeting room with Resource Grouping. User has" +
+    @Test(priority = 1, description = "Clone MYCE Quote that has Meeting room with Resource Grouping. User has" +
             " Overbooking permission. Result: New Myce Quote with Quote meeting room with shadows is created. New" +
             " meeting room has Waiting list and Overbooking level 2. On Meeting room that was cloned Waiting list" +
             " and overbooking level = 1")
     @Severity(SeverityLevel.NORMAL)
     @Story("Resource grouping")
     public void case1() throws InterruptedException, IOException {
+        loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
+        loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
         user.addPermissionSet(SFDX, "Overbooking_User", ORG_USERNAME, ADMIN_USERNAME);
         myceQuotes.deleteQuoteSFDX(SFDX, "Name='ResourceGroupingAutoTest1'", ORG_USERNAME);
         myceQuotes.deleteQuoteSFDX(SFDX, "Name='CloneResourceGroupingAutoTest1'", ORG_USERNAME);
@@ -72,7 +67,8 @@ public class ResourceGroupingTesting extends BaseTest {
                 " SobjectType='thn__MYCE_Quote__c' AND Name='Quote'", ORG_USERNAME);
         System.out.println(recordTypes);
         List<String> recordTypeID = JsonParser2.getFieldValueSoql(recordTypes.toString(), "Id");
-        StringBuilder meetingHalfDayRecord = product.getProductSFDX(SFDX, "Name='MEETING HALF DAY'", ORG_USERNAME);
+        StringBuilder meetingHalfDayRecord = product.getProductSFDX(SFDX, "Name='MEETING HALF DAY'",
+                ORG_USERNAME);
         String meetingHalfDayID = JsonParser2.getFieldValue(meetingHalfDayRecord.toString(), "Id");
         String resourceId1 = resource.createResourceSFDX(SFDX, "Name='ResourceGrouping1' thn__Hotel__c='"
                 + propertyID + "' thn__Type__c='Meeting Room'", ORG_USERNAME);
@@ -87,7 +83,8 @@ public class ResourceGroupingTesting extends BaseTest {
         quoteMeetingRoom.createQuoteMeetingRoomSFDX(SFDX, "thn__MYCE_Quote__c='" + quoteID + "'" +
                 " thn__Product__c='" + meetingHalfDayID + "' thn__Resource__c='" + resourceId1 + "'", ORG_USERNAME);
         myceQuotes.goToMyceQuotes().openMyceQoteRecord("ResourceGroupingAutoTest1");
-        myceQuotes.cloneMyceQuote("CloneResourceGroupingAutoTest1", date.generateTodayDate3_plus(0, 0));
+        myceQuotes.cloneMyceQuote("CloneResourceGroupingAutoTest1",
+                date.generateTodayDate3_plus(0, 0));
         StringBuilder clonedQuoteRecord = myceQuotes.getQuoteSFDX(SFDX, "Name='CloneResourceGroupingAutoTest1'",
                 ORG_USERNAME);
         String clonedQuoteID= JsonParser2.getFieldValue(clonedQuoteRecord.toString(), "Id");
@@ -103,8 +100,8 @@ public class ResourceGroupingTesting extends BaseTest {
                 getFieldValue(clonedQuoteMeetingRoomRecord.toString(), "thn__Overbooking_Level__c");
         String waitingListClonedQMR = JsonParser2.
                 getFieldValue(clonedQuoteMeetingRoomRecord.toString(), "thn__Waiting_List__c");
-        StringBuilder shadowMeetingRooms = myceQuotes.soql(SFDX, "SELECT Id FROM thn__Quote_Meeting_Room__c WHERE" +
-                " thn__ShadowRoomQuote__c='" + quoteID + "'", ORG_USERNAME);
+        StringBuilder shadowMeetingRooms = myceQuotes.soql(SFDX, "SELECT Id FROM thn__Quote_Meeting_Room__c" +
+                " WHERE thn__ShadowRoomQuote__c='" + quoteID + "'", ORG_USERNAME);
         System.out.println(recordTypes);
         List<String> shadowMeetingRoomsID = JsonParser2.getFieldValueSoql(shadowMeetingRooms.toString(), "Id");
         Assert.assertEquals(shadowMeetingRoomsID.size(), 1);
@@ -114,7 +111,7 @@ public class ResourceGroupingTesting extends BaseTest {
         Assert.assertEquals(waitingListClonedQMR, "2");
     }
 
-    @Test(priority = 3, description = "Clone MYCE Quote that has Meeting room with Resource Grouping. User hasn’t" +
+    @Test(priority = 2, description = "Clone MYCE Quote that has Meeting room with Resource Grouping. User hasn’t" +
             " Overbooking permission. Result: New Myce Quote with Quote meeting room with Default resource is" +
             " created. The Meeting room that was cloned is not changed. Shadows are not created.")
     @Severity(SeverityLevel.NORMAL)
@@ -135,7 +132,8 @@ public class ResourceGroupingTesting extends BaseTest {
                 " SobjectType='thn__MYCE_Quote__c' AND Name='Quote'", ORG_USERNAME);
         System.out.println(recordTypes);
         List<String> recordTypeID = JsonParser2.getFieldValueSoql(recordTypes.toString(), "Id");
-        StringBuilder meetingHalfDayRecord = product.getProductSFDX(SFDX, "Name='MEETING HALF DAY'", ORG_USERNAME);
+        StringBuilder meetingHalfDayRecord = product.getProductSFDX(SFDX, "Name='MEETING HALF DAY'",
+                ORG_USERNAME);
         String meetingHalfDayID = JsonParser2.getFieldValue(meetingHalfDayRecord.toString(), "Id");
         String resourceId1 = resource.createResourceSFDX(SFDX, "Name='ResourceGrouping3' thn__Hotel__c='"
                 + propertyID + "' thn__Type__c='Meeting Room'", ORG_USERNAME);
@@ -150,7 +148,8 @@ public class ResourceGroupingTesting extends BaseTest {
         quoteMeetingRoom.createQuoteMeetingRoomSFDX(SFDX, "thn__MYCE_Quote__c='" + quoteID + "'" +
                 " thn__Product__c='" + meetingHalfDayID + "' thn__Resource__c='" + resourceId1 + "'", ORG_USERNAME);
         myceQuotes.goToMyceQuotes().openMyceQoteRecord("ResourceGroupingAutoTest2");
-        myceQuotes.cloneMyceQuote("CloneResourceGroupingAutoTest2", date.generateTodayDate3_plus(0, 0));
+        myceQuotes.cloneMyceQuote("CloneResourceGroupingAutoTest2",
+                date.generateTodayDate3_plus(0, 0));
         StringBuilder clonedQuoteRecord = myceQuotes.getQuoteSFDX(SFDX, "Name='CloneResourceGroupingAutoTest2'",
                 ORG_USERNAME);
         String clonedQuoteID= JsonParser2.getFieldValue(clonedQuoteRecord.toString(), "Id");
@@ -158,8 +157,8 @@ public class ResourceGroupingTesting extends BaseTest {
                 getQuoteMeetingRoomSFDX(SFDX, "thn__MYCE_Quote__c='" + clonedQuoteID + "'", ORG_USERNAME );
         String resourceClonedQMR = JsonParser2.
                 getFieldValue(clonedQuoteMeetingRoomRecord.toString(), "thn__Resource__c");
-        StringBuilder shadowMeetingRooms = myceQuotes.soql(SFDX, "SELECT Id FROM thn__Quote_Meeting_Room__c WHERE" +
-                " thn__ShadowRoomQuote__c='" + quoteID + "'", ORG_USERNAME);
+        StringBuilder shadowMeetingRooms = myceQuotes.soql(SFDX, "SELECT Id FROM thn__Quote_Meeting_Room__c" +
+                " WHERE thn__ShadowRoomQuote__c='" + quoteID + "'", ORG_USERNAME);
         System.out.println(recordTypes);
         List<String> shadowMeetingRoomsID = JsonParser2.getFieldValueSoql(shadowMeetingRooms.toString(), "Id");
         Assert.assertEquals(shadowMeetingRoomsID.size(), 0);
@@ -167,7 +166,7 @@ public class ResourceGroupingTesting extends BaseTest {
 
     }
 
-    @Test(priority = 4, description = "Clone MYCE Quote that has Meeting room with Default Resource. Result: New" +
+    @Test(priority = 3, description = "Clone MYCE Quote that has Meeting room with Default Resource. Result: New" +
             " Myce Quote with Quote meeting room without shadows and overbooking is created")
     @Severity(SeverityLevel.NORMAL)
     @Story("Resource grouping")
@@ -182,16 +181,19 @@ public class ResourceGroupingTesting extends BaseTest {
                 " SobjectType='thn__MYCE_Quote__c' AND Name='Quote'", ORG_USERNAME);
         System.out.println(recordTypes);
         List<String> recordTypeID = JsonParser2.getFieldValueSoql(recordTypes.toString(), "Id");
-        StringBuilder meetingHalfDayRecord = product.getProductSFDX(SFDX, "Name='MEETING HALF DAY'", ORG_USERNAME);
+        StringBuilder meetingHalfDayRecord = product.getProductSFDX(SFDX, "Name='MEETING HALF DAY'",
+                ORG_USERNAME);
         String meetingHalfDayID = JsonParser2.getFieldValue(meetingHalfDayRecord.toString(), "Id");
         String quoteID = myceQuotes.createQuoteSFDX(SFDX, "Name='ResourceGroupingAutoTest3' thn__Pax__c=5" +
                 " thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" + date.generateTodayDate2()
                 + " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 2) + "" +
                 " RecordTypeId='" + recordTypeID.get(0) + "'", ORG_USERNAME);
         quoteMeetingRoom.createQuoteMeetingRoomSFDX(SFDX, "thn__MYCE_Quote__c='" + quoteID + "'" +
-                " thn__Product__c='" + meetingHalfDayID + "' thn__Resource__c='" + defaultResourceID + "'", ORG_USERNAME);
+                " thn__Product__c='" + meetingHalfDayID + "' thn__Resource__c='" + defaultResourceID + "'",
+                ORG_USERNAME);
         myceQuotes.goToMyceQuotes().openMyceQoteRecord("ResourceGroupingAutoTest3");
-        myceQuotes.cloneMyceQuote("CloneResourceGroupingAutoTest3", date.generateTodayDate3_plus(0, 0));
+        myceQuotes.cloneMyceQuote("CloneResourceGroupingAutoTest3",
+                date.generateTodayDate3_plus(0, 0));
         StringBuilder clonedQuoteRecord = myceQuotes.getQuoteSFDX(SFDX, "Name='CloneResourceGroupingAutoTest3'",
                 ORG_USERNAME);
         String clonedQuoteID= JsonParser2.getFieldValue(clonedQuoteRecord.toString(), "Id");
@@ -199,15 +201,15 @@ public class ResourceGroupingTesting extends BaseTest {
                 getQuoteMeetingRoomSFDX(SFDX, "thn__MYCE_Quote__c='" + clonedQuoteID + "'", ORG_USERNAME );
         String resourceClonedQMR = JsonParser2.
                 getFieldValue(clonedQuoteMeetingRoomRecord.toString(), "thn__Resource__c");
-        StringBuilder shadowMeetingRooms = myceQuotes.soql(SFDX, "SELECT Id FROM thn__Quote_Meeting_Room__c WHERE" +
-                " thn__ShadowRoomQuote__c='" + quoteID + "'", ORG_USERNAME);
+        StringBuilder shadowMeetingRooms = myceQuotes.soql(SFDX, "SELECT Id FROM thn__Quote_Meeting_Room__c" +
+                " WHERE thn__ShadowRoomQuote__c='" + quoteID + "'", ORG_USERNAME);
         System.out.println(recordTypes);
         List<String> shadowMeetingRoomsID = JsonParser2.getFieldValueSoql(shadowMeetingRooms.toString(), "Id");
         Assert.assertEquals(shadowMeetingRoomsID.size(), 0);
         Assert.assertEquals(resourceClonedQMR, defaultResourceID);
     }
 
-    @Test(priority = 5, description = "Clone MYCE Quote that has Meeting room with Shareable resource. Result:" +
+    @Test(priority = 4, description = "Clone MYCE Quote that has Meeting room with Shareable resource. Result:" +
             " New Myce Quote with Quote meeting room with shareable resource without shadows and overbooking" +
             " is created.")
     @Severity(SeverityLevel.NORMAL)
@@ -224,7 +226,8 @@ public class ResourceGroupingTesting extends BaseTest {
         String resourceId1 = resource.createResourceSFDX(SFDX, "Name='ResourceGrouping5' thn__Hotel__c='"
                 + propertyID + "' thn__Type__c='Meeting Room' thn__is_Shareable__c=true", ORG_USERNAME);
         List<String> recordTypeID = JsonParser2.getFieldValueSoql(recordTypes.toString(), "Id");
-        StringBuilder meetingHalfDayRecord = product.getProductSFDX(SFDX, "Name='MEETING HALF DAY'", ORG_USERNAME);
+        StringBuilder meetingHalfDayRecord = product.getProductSFDX(SFDX, "Name='MEETING HALF DAY'",
+                ORG_USERNAME);
         String meetingHalfDayID = JsonParser2.getFieldValue(meetingHalfDayRecord.toString(), "Id");
         String quoteID = myceQuotes.createQuoteSFDX(SFDX, "Name='ResourceGroupingAutoTest4' thn__Pax__c=5" +
                 " thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" + date.generateTodayDate2()
@@ -233,7 +236,8 @@ public class ResourceGroupingTesting extends BaseTest {
         quoteMeetingRoom.createQuoteMeetingRoomSFDX(SFDX, "thn__MYCE_Quote__c='" + quoteID + "'" +
                 " thn__Product__c='" + meetingHalfDayID + "' thn__Resource__c='" + resourceId1 + "'", ORG_USERNAME);
         myceQuotes.goToMyceQuotes().openMyceQoteRecord("ResourceGroupingAutoTest4");
-        myceQuotes.cloneMyceQuote("CloneResourceGroupingAutoTest4", date.generateTodayDate3_plus(0, 0));
+        myceQuotes.cloneMyceQuote("CloneResourceGroupingAutoTest4",
+                date.generateTodayDate3_plus(0, 0));
         StringBuilder clonedQuoteRecord = myceQuotes.getQuoteSFDX(SFDX, "Name='CloneResourceGroupingAutoTest4'",
                 ORG_USERNAME);
         String clonedQuoteID= JsonParser2.getFieldValue(clonedQuoteRecord.toString(), "Id");
@@ -241,15 +245,15 @@ public class ResourceGroupingTesting extends BaseTest {
                 getQuoteMeetingRoomSFDX(SFDX, "thn__MYCE_Quote__c='" + clonedQuoteID + "'", ORG_USERNAME );
         String resourceClonedQMR = JsonParser2.
                 getFieldValue(clonedQuoteMeetingRoomRecord.toString(), "thn__Resource__c");
-        StringBuilder shadowMeetingRooms = myceQuotes.soql(SFDX, "SELECT Id FROM thn__Quote_Meeting_Room__c WHERE" +
-                " thn__ShadowRoomQuote__c='" + quoteID + "'", ORG_USERNAME);
+        StringBuilder shadowMeetingRooms = myceQuotes.soql(SFDX, "SELECT Id FROM thn__Quote_Meeting_Room__c" +
+                " WHERE thn__ShadowRoomQuote__c='" + quoteID + "'", ORG_USERNAME);
         System.out.println(recordTypes);
         List<String> shadowMeetingRoomsID = JsonParser2.getFieldValueSoql(shadowMeetingRooms.toString(), "Id");
         Assert.assertEquals(shadowMeetingRoomsID.size(), 0);
         Assert.assertEquals(resourceClonedQMR, resourceId1);
     }
 
-    @Test(priority = 6, description = "Clone MYCE Quote in status Closed Lost that has Meeting room with" +
+    @Test(priority = 5, description = "Clone MYCE Quote in status Closed Lost that has Meeting room with" +
             " Group Resource. Result: New Myce Quote with Quote meeting room without shadows and overbooking" +
             " is created.")
     @Severity(SeverityLevel.NORMAL)
@@ -266,7 +270,8 @@ public class ResourceGroupingTesting extends BaseTest {
                 " SobjectType='thn__MYCE_Quote__c' AND Name='Quote'", ORG_USERNAME);
         System.out.println(recordTypes);
         List<String> recordTypeID = JsonParser2.getFieldValueSoql(recordTypes.toString(), "Id");
-        StringBuilder meetingHalfDayRecord = product.getProductSFDX(SFDX, "Name='MEETING HALF DAY'", ORG_USERNAME);
+        StringBuilder meetingHalfDayRecord = product.getProductSFDX(SFDX, "Name='MEETING HALF DAY'",
+                ORG_USERNAME);
         String meetingHalfDayID = JsonParser2.getFieldValue(meetingHalfDayRecord.toString(), "Id");
         String resourceId1 = resource.createResourceSFDX(SFDX, "Name='ResourceGrouping6' thn__Hotel__c='"
                 + propertyID + "' thn__Type__c='Meeting Room'", ORG_USERNAME);
@@ -283,7 +288,8 @@ public class ResourceGroupingTesting extends BaseTest {
         myceQuotes.updateQuoteSFDX(SFDX, "Id='" + quoteID + "'", "thn__Stage__c='4 - Closed'" +
                 " thn__Closed_Status__c='Lost'", ORG_USERNAME);
         myceQuotes.goToMyceQuotes().openMyceQoteRecord("ResourceGroupingAutoTest5");
-        myceQuotes.cloneMyceQuote("CloneResourceGroupingAutoTest5", date.generateTodayDate3_plus(0, 0));
+        myceQuotes.cloneMyceQuote("CloneResourceGroupingAutoTest5",
+                date.generateTodayDate3_plus(0, 0));
         StringBuilder clonedQuoteRecord = myceQuotes.getQuoteSFDX(SFDX, "Name='CloneResourceGroupingAutoTest5'",
                 ORG_USERNAME);
         String clonedQuoteID= JsonParser2.getFieldValue(clonedQuoteRecord.toString(), "Id");
@@ -291,15 +297,15 @@ public class ResourceGroupingTesting extends BaseTest {
                 getQuoteMeetingRoomSFDX(SFDX, "thn__MYCE_Quote__c='" + clonedQuoteID + "'", ORG_USERNAME );
         String resourceClonedQMR = JsonParser2.
                 getFieldValue(clonedQuoteMeetingRoomRecord.toString(), "thn__Resource__c");
-        StringBuilder shadowMeetingRooms = myceQuotes.soql(SFDX, "SELECT Id FROM thn__Quote_Meeting_Room__c WHERE" +
-                " thn__ShadowRoomQuote__c='" + quoteID + "'", ORG_USERNAME);
+        StringBuilder shadowMeetingRooms = myceQuotes.soql(SFDX, "SELECT Id FROM thn__Quote_Meeting_Room__c" +
+                " WHERE thn__ShadowRoomQuote__c='" + quoteID + "'", ORG_USERNAME);
         System.out.println(recordTypes);
         List<String> shadowMeetingRoomsID = JsonParser2.getFieldValueSoql(shadowMeetingRooms.toString(), "Id");
         Assert.assertEquals(shadowMeetingRoomsID.size(), 0);
         Assert.assertEquals(resourceClonedQMR, resourceId1);
     }
 
-    @Test(priority = 7, description = "Clone Quote meeting room with Resource Grouping. Result: New Quote meeting" +
+    @Test(priority = 6, description = "Clone Quote meeting room with Resource Grouping. Result: New Quote meeting" +
             " room with shadows is created.")
     @Severity(SeverityLevel.NORMAL)
     @Story("Resource grouping")
@@ -315,7 +321,8 @@ public class ResourceGroupingTesting extends BaseTest {
                 " SobjectType='thn__MYCE_Quote__c' AND Name='Quote'", ORG_USERNAME);
         System.out.println(recordTypes);
         List<String> recordTypeID = JsonParser2.getFieldValueSoql(recordTypes.toString(), "Id");
-        StringBuilder meetingHalfDayRecord = product.getProductSFDX(SFDX, "Name='MEETING HALF DAY'", ORG_USERNAME);
+        StringBuilder meetingHalfDayRecord = product.getProductSFDX(SFDX, "Name='MEETING HALF DAY'",
+                ORG_USERNAME);
         String meetingHalfDayID = JsonParser2.getFieldValue(meetingHalfDayRecord.toString(), "Id");
         String resourceId1 = resource.createResourceSFDX(SFDX, "Name='ResourceGrouping8' thn__Hotel__c='"
                 + propertyID + "' thn__Type__c='Meeting Room'", ORG_USERNAME);
@@ -334,15 +341,15 @@ public class ResourceGroupingTesting extends BaseTest {
         StringBuilder quoteMeetingRoom = myceQuotes.soql(SFDX, "SELECT Id FROM thn__Quote_Meeting_Room__c WHERE" +
                 " thn__MYCE_Quote__c='" + quoteID + "'", ORG_USERNAME);
         List<String> quoteMeetingRoomsID = JsonParser2.getFieldValueSoql(quoteMeetingRoom.toString(), "Id");
-        StringBuilder shadowMeetingRooms = myceQuotes.soql(SFDX, "SELECT Id FROM thn__Quote_Meeting_Room__c WHERE" +
-                " thn__ShadowRoomQuote__c='" + quoteID + "'", ORG_USERNAME);
+        StringBuilder shadowMeetingRooms = myceQuotes.soql(SFDX, "SELECT Id FROM thn__Quote_Meeting_Room__c" +
+                " WHERE thn__ShadowRoomQuote__c='" + quoteID + "'", ORG_USERNAME);
         System.out.println(recordTypes);
         List<String> shadowMeetingRoomsID = JsonParser2.getFieldValueSoql(shadowMeetingRooms.toString(), "Id");
         Assert.assertEquals(quoteMeetingRoomsID.size(), 2);
         Assert.assertEquals(shadowMeetingRoomsID.size(), 2);
     }
 
-    @Test(priority = 8, description = "Clone Quote meeting room with Default Resource. Result: New Quote meeting" +
+    @Test(priority = 7, description = "Clone Quote meeting room with Default Resource. Result: New Quote meeting" +
             " room without shadows and overbooking is created.")
     @Severity(SeverityLevel.NORMAL)
     @Story("Resource grouping")
@@ -357,28 +364,30 @@ public class ResourceGroupingTesting extends BaseTest {
                 " SobjectType='thn__MYCE_Quote__c' AND Name='Quote'", ORG_USERNAME);
         System.out.println(recordTypes);
         List<String> recordTypeID = JsonParser2.getFieldValueSoql(recordTypes.toString(), "Id");
-        StringBuilder meetingHalfDayRecord = product.getProductSFDX(SFDX, "Name='MEETING HALF DAY'", ORG_USERNAME);
+        StringBuilder meetingHalfDayRecord = product.getProductSFDX(SFDX, "Name='MEETING HALF DAY'",
+                ORG_USERNAME);
         String meetingHalfDayID = JsonParser2.getFieldValue(meetingHalfDayRecord.toString(), "Id");
         String quoteID = myceQuotes.createQuoteSFDX(SFDX, "Name='ResourceGroupingAutoTest7' thn__Pax__c=5" +
                 " thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" + date.generateTodayDate2()
                 + " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 2) + "" +
                 " RecordTypeId='" + recordTypeID.get(0) + "'", ORG_USERNAME);
         quoteMeetingRoom.createQuoteMeetingRoomSFDX(SFDX, "thn__MYCE_Quote__c='" + quoteID + "'" +
-                " thn__Product__c='" + meetingHalfDayID + "' thn__Resource__c='" + defaultResourceID + "'", ORG_USERNAME);
+                " thn__Product__c='" + meetingHalfDayID + "' thn__Resource__c='" + defaultResourceID + "'",
+                ORG_USERNAME);
         myceQuotes.goToMyceQuotes().openMyceQoteRecord("ResourceGroupingAutoTest7");
         myceQuotes.cloneRelatedRecord(date.generateTodayDate3_plus(0, 0), "Quote Meetings Room");
         StringBuilder quoteMeetingRoom = myceQuotes.soql(SFDX, "SELECT Id FROM thn__Quote_Meeting_Room__c WHERE" +
                 " thn__MYCE_Quote__c='" + quoteID + "'", ORG_USERNAME);
         List<String> quoteMeetingRoomsID = JsonParser2.getFieldValueSoql(quoteMeetingRoom.toString(), "Id");
-        StringBuilder shadowMeetingRooms = myceQuotes.soql(SFDX, "SELECT Id FROM thn__Quote_Meeting_Room__c WHERE" +
-                " thn__ShadowRoomQuote__c='" + quoteID + "'", ORG_USERNAME);
+        StringBuilder shadowMeetingRooms = myceQuotes.soql(SFDX, "SELECT Id FROM thn__Quote_Meeting_Room__c" +
+                " WHERE thn__ShadowRoomQuote__c='" + quoteID + "'", ORG_USERNAME);
         System.out.println(recordTypes);
         List<String> shadowMeetingRoomsID = JsonParser2.getFieldValueSoql(shadowMeetingRooms.toString(), "Id");
         Assert.assertEquals(quoteMeetingRoomsID.size(), 2);
         Assert.assertEquals(shadowMeetingRoomsID.size(), 0);
     }
 
-    @Test(priority = 9, description = "Clone Meeting room with Shareable resource. Result: New Quote meeting room" +
+    @Test(priority = 8, description = "Clone Meeting room with Shareable resource. Result: New Quote meeting room" +
             " with shareable resource without shadows and overbooking is created.")
     @Severity(SeverityLevel.NORMAL)
     @Story("Resource grouping")
@@ -394,7 +403,8 @@ public class ResourceGroupingTesting extends BaseTest {
         String resourceId1 = resource.createResourceSFDX(SFDX, "Name='ResourceGrouping10' thn__Hotel__c='"
                 + propertyID + "' thn__Type__c='Meeting Room' thn__is_Shareable__c=true", ORG_USERNAME);
         List<String> recordTypeID = JsonParser2.getFieldValueSoql(recordTypes.toString(), "Id");
-        StringBuilder meetingHalfDayRecord = product.getProductSFDX(SFDX, "Name='MEETING HALF DAY'", ORG_USERNAME);
+        StringBuilder meetingHalfDayRecord = product.getProductSFDX(SFDX, "Name='MEETING HALF DAY'",
+                ORG_USERNAME);
         String meetingHalfDayID = JsonParser2.getFieldValue(meetingHalfDayRecord.toString(), "Id");
         String quoteID = myceQuotes.createQuoteSFDX(SFDX, "Name='ResourceGroupingAutoTest8' thn__Pax__c=5" +
                 " thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" + date.generateTodayDate2()
@@ -407,15 +417,15 @@ public class ResourceGroupingTesting extends BaseTest {
         StringBuilder quoteMeetingRoom = myceQuotes.soql(SFDX, "SELECT Id FROM thn__Quote_Meeting_Room__c WHERE" +
                 " thn__MYCE_Quote__c='" + quoteID + "'", ORG_USERNAME);
         List<String> quoteMeetingRoomsID = JsonParser2.getFieldValueSoql(quoteMeetingRoom.toString(), "Id");
-        StringBuilder shadowMeetingRooms = myceQuotes.soql(SFDX, "SELECT Id FROM thn__Quote_Meeting_Room__c WHERE" +
-                " thn__ShadowRoomQuote__c='" + quoteID + "'", ORG_USERNAME);
+        StringBuilder shadowMeetingRooms = myceQuotes.soql(SFDX, "SELECT Id FROM thn__Quote_Meeting_Room__c" +
+                " WHERE thn__ShadowRoomQuote__c='" + quoteID + "'", ORG_USERNAME);
         System.out.println(recordTypes);
         List<String> shadowMeetingRoomsID = JsonParser2.getFieldValueSoql(shadowMeetingRooms.toString(), "Id");
         Assert.assertEquals(quoteMeetingRoomsID.size(), 2);
         Assert.assertEquals(shadowMeetingRoomsID.size(), 0);
     }
 
-    @Test(priority = 10, description = "Clone Meeting room with Group Resource on Quote in status Closed Lost." +
+    @Test(priority = 9, description = "Clone Meeting room with Group Resource on Quote in status Closed Lost." +
             " Result: New Quote meeting room without shadows and overbooking is created.")
     @Severity(SeverityLevel.NORMAL)
     @Story("Resource grouping")
@@ -430,7 +440,8 @@ public class ResourceGroupingTesting extends BaseTest {
                 " SobjectType='thn__MYCE_Quote__c' AND Name='Quote'", ORG_USERNAME);
         System.out.println(recordTypes);
         List<String> recordTypeID = JsonParser2.getFieldValueSoql(recordTypes.toString(), "Id");
-        StringBuilder meetingHalfDayRecord = product.getProductSFDX(SFDX, "Name='MEETING HALF DAY'", ORG_USERNAME);
+        StringBuilder meetingHalfDayRecord = product.getProductSFDX(SFDX, "Name='MEETING HALF DAY'",
+                ORG_USERNAME);
         String meetingHalfDayID = JsonParser2.getFieldValue(meetingHalfDayRecord.toString(), "Id");
         String resourceId1 = resource.createResourceSFDX(SFDX, "Name='ResourceGrouping11' thn__Hotel__c='"
                 + propertyID + "' thn__Type__c='Meeting Room'", ORG_USERNAME);
@@ -451,15 +462,15 @@ public class ResourceGroupingTesting extends BaseTest {
         StringBuilder quoteMeetingRoom = myceQuotes.soql(SFDX, "SELECT Id FROM thn__Quote_Meeting_Room__c WHERE" +
                 " thn__MYCE_Quote__c='" + quoteID + "'", ORG_USERNAME);
         List<String> quoteMeetingRoomsID = JsonParser2.getFieldValueSoql(quoteMeetingRoom.toString(), "Id");
-        StringBuilder shadowMeetingRooms = myceQuotes.soql(SFDX, "SELECT Id FROM thn__Quote_Meeting_Room__c WHERE" +
-                " thn__ShadowRoomQuote__c='" + quoteID + "'", ORG_USERNAME);
+        StringBuilder shadowMeetingRooms = myceQuotes.soql(SFDX, "SELECT Id FROM thn__Quote_Meeting_Room__c" +
+                " WHERE thn__ShadowRoomQuote__c='" + quoteID + "'", ORG_USERNAME);
         System.out.println(recordTypes);
         List<String> shadowMeetingRoomsID = JsonParser2.getFieldValueSoql(shadowMeetingRooms.toString(), "Id");
         Assert.assertEquals(quoteMeetingRoomsID.size(), 2);
         Assert.assertEquals(shadowMeetingRoomsID.size(), 0);
     }
 
-    @Test(priority = 11, description = "Create Myce Quote. Change Quote’s status to Closed Lost. Add Quote Meeting" +
+    @Test(priority = 10, description = "Create Myce Quote. Change Quote’s status to Closed Lost. Add Quote Meeting" +
             " rooms. Change Resource on added rooms (with the flow). Result: Shadows are not created, rooms are" +
             " not overbooked.")
     @Severity(SeverityLevel.NORMAL)
@@ -474,9 +485,11 @@ public class ResourceGroupingTesting extends BaseTest {
                 " SobjectType='thn__MYCE_Quote__c' AND Name='Quote'", ORG_USERNAME);
         System.out.println(recordTypes);
         List<String> recordTypeID = JsonParser2.getFieldValueSoql(recordTypes.toString(), "Id");
-        StringBuilder meetingHalfDayRecord = product.getProductSFDX(SFDX, "Name='MEETING HALF DAY'", ORG_USERNAME);
+        StringBuilder meetingHalfDayRecord = product.getProductSFDX(SFDX, "Name='MEETING HALF DAY'",
+                ORG_USERNAME);
         String meetingHalfDayID = JsonParser2.getFieldValue(meetingHalfDayRecord.toString(), "Id");
-        StringBuilder meetingFullDayRecord = product.getProductSFDX(SFDX, "Name='MEETING FULL DAY'", ORG_USERNAME);
+        StringBuilder meetingFullDayRecord = product.getProductSFDX(SFDX, "Name='MEETING FULL DAY'",
+                ORG_USERNAME);
         String meetingFullDayID = JsonParser2.getFieldValue(meetingFullDayRecord.toString(), "Id");
         String resourceId1 = resource.createResourceSFDX(SFDX, "Name='ResourceGrouping13' thn__Hotel__c='"
                 + propertyID + "' thn__Type__c='Meeting Room'", ORG_USERNAME);
@@ -498,15 +511,15 @@ public class ResourceGroupingTesting extends BaseTest {
         StringBuilder quoteMeetingRoom = myceQuotes.soql(SFDX, "SELECT Id FROM thn__Quote_Meeting_Room__c WHERE" +
                 " thn__MYCE_Quote__c='" + quoteID + "'", ORG_USERNAME);
         List<String> quoteMeetingRoomsID = JsonParser2.getFieldValueSoql(quoteMeetingRoom.toString(), "Id");
-        StringBuilder shadowMeetingRooms = myceQuotes.soql(SFDX, "SELECT Id FROM thn__Quote_Meeting_Room__c WHERE" +
-                " thn__ShadowRoomQuote__c='" + quoteID + "'", ORG_USERNAME);
+        StringBuilder shadowMeetingRooms = myceQuotes.soql(SFDX, "SELECT Id FROM thn__Quote_Meeting_Room__c" +
+                " WHERE thn__ShadowRoomQuote__c='" + quoteID + "'", ORG_USERNAME);
         System.out.println(recordTypes);
         List<String> shadowMeetingRoomsID = JsonParser2.getFieldValueSoql(shadowMeetingRooms.toString(), "Id");
         Assert.assertEquals(quoteMeetingRoomsID.size(), 2);
         Assert.assertEquals(shadowMeetingRoomsID.size(), 0);
     }
 
-    @Test(priority = 12, description = "Change Quote’s status to Closed Lost. Quote has Meeting rooms with shadows" +
+    @Test(priority = 11, description = "Change Quote’s status to Closed Lost. Quote has Meeting rooms with shadows" +
             " and overbooking. Result: All Shadows are deleted, Overbooking level and Waiting list are cleared" +
             " (no Overbooking)")
     @Severity(SeverityLevel.NORMAL)
@@ -522,9 +535,11 @@ public class ResourceGroupingTesting extends BaseTest {
                 " SobjectType='thn__MYCE_Quote__c' AND Name='Quote'", ORG_USERNAME);
         System.out.println(recordTypes);
         List<String> recordTypeID = JsonParser2.getFieldValueSoql(recordTypes.toString(), "Id");
-        StringBuilder meetingHalfDayRecord = product.getProductSFDX(SFDX, "Name='MEETING HALF DAY'", ORG_USERNAME);
+        StringBuilder meetingHalfDayRecord = product.getProductSFDX(SFDX, "Name='MEETING HALF DAY'",
+                ORG_USERNAME);
         String meetingHalfDayID = JsonParser2.getFieldValue(meetingHalfDayRecord.toString(), "Id");
-        StringBuilder meetingFullDayRecord = product.getProductSFDX(SFDX, "Name='MEETING FULL DAY'", ORG_USERNAME);
+        StringBuilder meetingFullDayRecord = product.getProductSFDX(SFDX, "Name='MEETING FULL DAY'",
+                ORG_USERNAME);
         String meetingFullDayID = JsonParser2.getFieldValue(meetingFullDayRecord.toString(), "Id");
         String resourceId1 = resource.createResourceSFDX(SFDX, "Name='ResourceGrouping14' thn__Hotel__c='"
                 + propertyID + "' thn__Type__c='Meeting Room'", ORG_USERNAME);
@@ -537,7 +552,8 @@ public class ResourceGroupingTesting extends BaseTest {
                 + " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 2) + "" +
                 " RecordTypeId='" + recordTypeID.get(0) + "'", ORG_USERNAME);
         String quoteMeetingRoomId1 = quoteMeetingRoom.createQuoteMeetingRoomSFDX(SFDX, "thn__MYCE_Quote__c='"
-                + quoteID + "' thn__Product__c='" + meetingHalfDayID + "' thn__Resource__c='" + resourceId1 + "'", ORG_USERNAME);
+                + quoteID + "' thn__Product__c='" + meetingHalfDayID + "' thn__Resource__c='" + resourceId1 + "'",
+                ORG_USERNAME);
         String quoteMeetingRoomId2 = quoteMeetingRoom.createQuoteMeetingRoomSFDX(SFDX, "thn__MYCE_Quote__c='"
                 + quoteID + "' thn__Product__c='" + meetingFullDayID + "'", ORG_USERNAME);
         myceQuotes.goToMyceQuotes().openMyceQoteRecord("ResourceGroupingAutoTest11");
@@ -545,8 +561,8 @@ public class ResourceGroupingTesting extends BaseTest {
         quoteMeetingRoom.selectItem("2");
         quoteMeetingRoom.clickChangeResource();
         changeResource.changeResource("ResourceGrouping14");
-        StringBuilder shadowMeetingRooms = myceQuotes.soql(SFDX, "SELECT Id FROM thn__Quote_Meeting_Room__c WHERE" +
-                " thn__ShadowRoomQuote__c='" + quoteID + "'", ORG_USERNAME);
+        StringBuilder shadowMeetingRooms = myceQuotes.soql(SFDX, "SELECT Id FROM thn__Quote_Meeting_Room__c" +
+                " WHERE thn__ShadowRoomQuote__c='" + quoteID + "'", ORG_USERNAME);
         List<String> shadowMeetingRoomsID = JsonParser2.getFieldValueSoql(shadowMeetingRooms.toString(), "Id");
         StringBuilder quoteMeetingRoomRecord1 = quoteMeetingRoom.
                 getQuoteMeetingRoomSFDX(SFDX, "Id='" + quoteMeetingRoomId1 + "'", ORG_USERNAME );
@@ -567,8 +583,8 @@ public class ResourceGroupingTesting extends BaseTest {
         Assert.assertEquals(waitingListQMR2, "2");
         myceQuotes.updateQuoteSFDX(SFDX, "Id='" + quoteID + "'", "thn__Stage__c='4 - Closed'" +
                 " thn__Closed_Status__c='Lost'", ORG_USERNAME);
-        StringBuilder shadowMeetingRooms2 = myceQuotes.soql(SFDX, "SELECT Id FROM thn__Quote_Meeting_Room__c WHERE" +
-                " thn__ShadowRoomQuote__c='" + quoteID + "'", ORG_USERNAME);
+        StringBuilder shadowMeetingRooms2 = myceQuotes.soql(SFDX, "SELECT Id FROM thn__Quote_Meeting_Room__c" +
+                " WHERE thn__ShadowRoomQuote__c='" + quoteID + "'", ORG_USERNAME);
         List<String> shadowMeetingRoomsID2 = JsonParser2.getFieldValueSoql(shadowMeetingRooms2.toString(), "Id");
         Assert.assertEquals(shadowMeetingRoomsID2.size(), 0);
         StringBuilder updatedQuoteMeetingRoomRecord1 = quoteMeetingRoom.
@@ -589,7 +605,7 @@ public class ResourceGroupingTesting extends BaseTest {
         Assert.assertEquals(updatedWaitingListQMR2, null);
     }
 
-    @Test(priority = 13, description = "Change Quote’s status to Closed Won from Closed Lost. User has Overbooking" +
+    @Test(priority = 12, description = "Change Quote’s status to Closed Won from Closed Lost. User has Overbooking" +
             " permission. Result: Shadows are created, rooms are overbooked (Overbooking level and Waiting list" +
             " is specified)")
     @Severity(SeverityLevel.NORMAL)
@@ -605,9 +621,11 @@ public class ResourceGroupingTesting extends BaseTest {
                 " SobjectType='thn__MYCE_Quote__c' AND Name='Quote'", ORG_USERNAME);
         System.out.println(recordTypes);
         List<String> recordTypeID = JsonParser2.getFieldValueSoql(recordTypes.toString(), "Id");
-        StringBuilder meetingHalfDayRecord = product.getProductSFDX(SFDX, "Name='MEETING HALF DAY'", ORG_USERNAME);
+        StringBuilder meetingHalfDayRecord = product.getProductSFDX(SFDX, "Name='MEETING HALF DAY'",
+                ORG_USERNAME);
         String meetingHalfDayID = JsonParser2.getFieldValue(meetingHalfDayRecord.toString(), "Id");
-        StringBuilder meetingFullDayRecord = product.getProductSFDX(SFDX, "Name='MEETING FULL DAY'", ORG_USERNAME);
+        StringBuilder meetingFullDayRecord = product.getProductSFDX(SFDX, "Name='MEETING FULL DAY'",
+                ORG_USERNAME);
         String meetingFullDayID = JsonParser2.getFieldValue(meetingFullDayRecord.toString(), "Id");
         String resourceId1 = resource.createResourceSFDX(SFDX, "Name='ResourceGrouping16' thn__Hotel__c='"
                 + propertyID + "' thn__Type__c='Meeting Room'", ORG_USERNAME);
@@ -629,8 +647,8 @@ public class ResourceGroupingTesting extends BaseTest {
         quoteMeetingRoom.selectItem("2");
         quoteMeetingRoom.clickChangeResource();
         changeResource.changeResource("ResourceGrouping16");
-        StringBuilder shadowMeetingRooms = myceQuotes.soql(SFDX, "SELECT Id FROM thn__Quote_Meeting_Room__c WHERE" +
-                " thn__ShadowRoomQuote__c='" + quoteID + "'", ORG_USERNAME);
+        StringBuilder shadowMeetingRooms = myceQuotes.soql(SFDX, "SELECT Id FROM thn__Quote_Meeting_Room__c" +
+                " WHERE thn__ShadowRoomQuote__c='" + quoteID + "'", ORG_USERNAME);
         List<String> shadowMeetingRoomsID = JsonParser2.getFieldValueSoql(shadowMeetingRooms.toString(), "Id");
         StringBuilder quoteMeetingRoomRecord1 = quoteMeetingRoom.
                 getQuoteMeetingRoomSFDX(SFDX, "Id='" + quoteMeetingRoomId1 + "'", ORG_USERNAME );
@@ -651,8 +669,8 @@ public class ResourceGroupingTesting extends BaseTest {
         Assert.assertEquals(waitingListQMR2, "2");
         myceQuotes.updateQuoteSFDX(SFDX, "Id='" + quoteID + "'", "thn__Stage__c='4 - Closed'" +
                 " thn__Closed_Status__c='Lost'", ORG_USERNAME);
-        StringBuilder shadowMeetingRooms2 = myceQuotes.soql(SFDX, "SELECT Id FROM thn__Quote_Meeting_Room__c WHERE" +
-                " thn__ShadowRoomQuote__c='" + quoteID + "'", ORG_USERNAME);
+        StringBuilder shadowMeetingRooms2 = myceQuotes.soql(SFDX, "SELECT Id FROM thn__Quote_Meeting_Room__c" +
+                " WHERE thn__ShadowRoomQuote__c='" + quoteID + "'", ORG_USERNAME);
         List<String> shadowMeetingRoomsID2 = JsonParser2.getFieldValueSoql(shadowMeetingRooms2.toString(), "Id");
         Assert.assertEquals(shadowMeetingRoomsID2.size(), 0);
         StringBuilder updatedQuoteMeetingRoomRecord1 = quoteMeetingRoom.
@@ -673,8 +691,8 @@ public class ResourceGroupingTesting extends BaseTest {
         Assert.assertEquals(updatedWaitingListQMR2, null);
         myceQuotes.updateQuoteSFDX(SFDX, "Id='" + quoteID + "'", "thn__Stage__c='4 - Closed'" +
                 " thn__Closed_Status__c='Won'", ORG_USERNAME);
-        StringBuilder shadowMeetingRooms3 = myceQuotes.soql(SFDX, "SELECT Id FROM thn__Quote_Meeting_Room__c WHERE" +
-                " thn__ShadowRoomQuote__c='" + quoteID + "'", ORG_USERNAME);
+        StringBuilder shadowMeetingRooms3 = myceQuotes.soql(SFDX, "SELECT Id FROM thn__Quote_Meeting_Room__c" +
+                " WHERE thn__ShadowRoomQuote__c='" + quoteID + "'", ORG_USERNAME);
         List<String> shadowMeetingRoomsID3 = JsonParser2.getFieldValueSoql(shadowMeetingRooms3.toString(), "Id");
         Assert.assertEquals(shadowMeetingRoomsID3.size(), 2);
         StringBuilder updatedQuoteMeetingRoomRecord11 = quoteMeetingRoom.
@@ -695,7 +713,7 @@ public class ResourceGroupingTesting extends BaseTest {
         Assert.assertEquals(updatedWaitingListQMR22, "2");
     }
 
-    @Test(priority = 14, description = "Change Quote’s status to Closed Won from Closed Lost. User doesn’t have" +
+    @Test(priority = 13, description = "Change Quote’s status to Closed Won from Closed Lost. User doesn’t have" +
             " Overbooking permission. Result: Meeting rooms' Resource is changed to Default. Shadows are not" +
             " created, rooms are not overbooked.")
     @Severity(SeverityLevel.NORMAL)
@@ -714,9 +732,11 @@ public class ResourceGroupingTesting extends BaseTest {
                 " SobjectType='thn__MYCE_Quote__c' AND Name='Quote'", ORG_USERNAME);
         System.out.println(recordTypes);
         List<String> recordTypeID = JsonParser2.getFieldValueSoql(recordTypes.toString(), "Id");
-        StringBuilder meetingHalfDayRecord = product.getProductSFDX(SFDX, "Name='MEETING HALF DAY'", ORG_USERNAME);
+        StringBuilder meetingHalfDayRecord = product.getProductSFDX(SFDX, "Name='MEETING HALF DAY'",
+                ORG_USERNAME);
         String meetingHalfDayID = JsonParser2.getFieldValue(meetingHalfDayRecord.toString(), "Id");
-        StringBuilder meetingFullDayRecord = product.getProductSFDX(SFDX, "Name='MEETING FULL DAY'", ORG_USERNAME);
+        StringBuilder meetingFullDayRecord = product.getProductSFDX(SFDX, "Name='MEETING FULL DAY'",
+                ORG_USERNAME);
         String meetingFullDayID = JsonParser2.getFieldValue(meetingFullDayRecord.toString(), "Id");
         String resourceId1 = resource.createResourceSFDX(SFDX, "Name='ResourceGrouping18' thn__Hotel__c='"
                 + propertyID + "' thn__Type__c='Meeting Room'", ORG_USERNAME);
@@ -736,8 +756,8 @@ public class ResourceGroupingTesting extends BaseTest {
         myceQuotes.updateQuoteSFDX(SFDX, "Id='" + quoteID + "'", "thn__Stage__c='4 - Closed'" +
                 " thn__Closed_Status__c='Lost'", ORG_USERNAME);
         String quoteMeetingRoomId2 = quoteMeetingRoom.createQuoteMeetingRoomSFDX(SFDX, "thn__MYCE_Quote__c='"
-                        + quoteID + "' thn__Product__c='" + meetingFullDayID + "' thn__Resource__c='" + resourceId1 + "'",
-                ORG_USERNAME);
+                        + quoteID + "' thn__Product__c='" + meetingFullDayID + "' thn__Resource__c='" + resourceId1 +
+                "'", ORG_USERNAME);
         myceQuotes.updateQuoteSFDX(SFDX, "Id='" + quoteID + "'", "thn__Stage__c='4 - Closed'" +
                 " thn__Closed_Status__c='Won'", ORG_USERNAME);
         StringBuilder updatedQuoteMeetingRoomRecord1 = quoteMeetingRoom.
@@ -748,15 +768,15 @@ public class ResourceGroupingTesting extends BaseTest {
                 getFieldValue(updatedQuoteMeetingRoomRecord1.toString(), "thn__Resource__c");
         String resourceQMR2 = JsonParser2.
                 getFieldValue(updatedQuoteMeetingRoomRecord2.toString(), "thn__Resource__c");
-        StringBuilder shadowMeetingRooms = myceQuotes.soql(SFDX, "SELECT Id FROM thn__Quote_Meeting_Room__c WHERE" +
-                " thn__ShadowRoomQuote__c='" + quoteID + "'", ORG_USERNAME);
+        StringBuilder shadowMeetingRooms = myceQuotes.soql(SFDX, "SELECT Id FROM thn__Quote_Meeting_Room__c" +
+                " WHERE thn__ShadowRoomQuote__c='" + quoteID + "'", ORG_USERNAME);
         List<String> shadowMeetingRoomsID = JsonParser2.getFieldValueSoql(shadowMeetingRooms.toString(), "Id");
         Assert.assertEquals(shadowMeetingRoomsID.size(), 0);
         Assert.assertEquals(resourceQMR1,defaultResourceID);
         Assert.assertEquals(resourceQMR2, defaultResourceID);
     }
 
-    @Test(priority = 15, description = "Delete Meeting room in case there are multiple overbooked rooms and Shadows." +
+    @Test(priority = 14, description = "Delete Meeting room in case there are multiple overbooked rooms and Shadows." +
             " Result: Shadows linked to deleted room are deleted. Waiting list on third room is changed from 3 to 2.")
     @Severity(SeverityLevel.NORMAL)
     @Story("Resource grouping")
@@ -772,9 +792,11 @@ public class ResourceGroupingTesting extends BaseTest {
                 " SobjectType='thn__MYCE_Quote__c' AND Name='Quote'", ORG_USERNAME);
         System.out.println(recordTypes);
         List<String> recordTypeID = JsonParser2.getFieldValueSoql(recordTypes.toString(), "Id");
-        StringBuilder meetingHalfDayRecord = product.getProductSFDX(SFDX, "Name='MEETING HALF DAY'", ORG_USERNAME);
+        StringBuilder meetingHalfDayRecord = product.getProductSFDX(SFDX, "Name='MEETING HALF DAY'",
+                ORG_USERNAME);
         String meetingHalfDayID = JsonParser2.getFieldValue(meetingHalfDayRecord.toString(), "Id");
-        StringBuilder meetingFullDayRecord = product.getProductSFDX(SFDX, "Name='MEETING FULL DAY'", ORG_USERNAME);
+        StringBuilder meetingFullDayRecord = product.getProductSFDX(SFDX, "Name='MEETING FULL DAY'",
+                ORG_USERNAME);
         String meetingFullDayID = JsonParser2.getFieldValue(meetingFullDayRecord.toString(), "Id");
         String resourceId1 = resource.createResourceSFDX(SFDX, "Name='ResourceGrouping20' thn__Hotel__c='"
                 + propertyID + "' thn__Type__c='Meeting Room'", ORG_USERNAME);
@@ -787,14 +809,14 @@ public class ResourceGroupingTesting extends BaseTest {
                 + " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 2) + "" +
                 " RecordTypeId='" + recordTypeID.get(0) + "'", ORG_USERNAME);
         String quoteMeetingRoomId1 = quoteMeetingRoom.createQuoteMeetingRoomSFDX(SFDX, "thn__MYCE_Quote__c='"
-                        + quoteID + "' thn__Product__c='" + meetingHalfDayID + "' thn__Resource__c='" + resourceId1 + "'",
-                ORG_USERNAME);
+                        + quoteID + "' thn__Product__c='" + meetingHalfDayID + "' thn__Resource__c='" + resourceId1 +
+                "'", ORG_USERNAME);
         String quoteMeetingRoomId2 = quoteMeetingRoom.createQuoteMeetingRoomSFDX(SFDX, "thn__MYCE_Quote__c='"
-                        + quoteID + "' thn__Product__c='" + meetingHalfDayID + "' thn__Resource__c='" + resourceId1 + "'",
-                ORG_USERNAME);
+                        + quoteID + "' thn__Product__c='" + meetingHalfDayID + "' thn__Resource__c='" + resourceId1 +
+                "'", ORG_USERNAME);
         String quoteMeetingRoomId3 = quoteMeetingRoom.createQuoteMeetingRoomSFDX(SFDX, "thn__MYCE_Quote__c='"
-                        + quoteID + "' thn__Product__c='" + meetingFullDayID + "' thn__Resource__c='" + resourceId1 + "'",
-                ORG_USERNAME);
+                        + quoteID + "' thn__Product__c='" + meetingFullDayID + "' thn__Resource__c='" + resourceId1 +
+                "'", ORG_USERNAME);
         StringBuilder quoteMeetingRoomRecord1 = quoteMeetingRoom.
                 getQuoteMeetingRoomSFDX(SFDX, "Id='" + quoteMeetingRoomId1 + "'", ORG_USERNAME );
         StringBuilder quoteMeetingRoomRecord2 = quoteMeetingRoom.
@@ -813,8 +835,8 @@ public class ResourceGroupingTesting extends BaseTest {
                 getFieldValue(quoteMeetingRoomRecord3.toString(), "thn__Overbooking_Level__c");
         String waitingListQMR3 = JsonParser2.
                 getFieldValue(quoteMeetingRoomRecord3.toString(), "thn__Waiting_List__c");
-        StringBuilder shadowMeetingRooms = myceQuotes.soql(SFDX, "SELECT Id FROM thn__Quote_Meeting_Room__c WHERE" +
-                " thn__ShadowRoomQuote__c='" + quoteID + "'", ORG_USERNAME);
+        StringBuilder shadowMeetingRooms = myceQuotes.soql(SFDX, "SELECT Id FROM thn__Quote_Meeting_Room__c" +
+                " WHERE thn__ShadowRoomQuote__c='" + quoteID + "'", ORG_USERNAME);
         List<String> shadowMeetingRoomsID = JsonParser2.getFieldValueSoql(shadowMeetingRooms.toString(), "Id");
         Assert.assertEquals(overbookingLevelQMR1, "1");
         Assert.assertEquals(waitingListQMR1, "1");

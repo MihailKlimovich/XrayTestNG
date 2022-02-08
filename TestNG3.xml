@@ -300,6 +300,21 @@
             <class name="tests.TB.ReservationGuestCreatedTwice"/>
         </classes>
     </test>
+    <test name="THY-663: Quote hotel room quantity - PMS Blocks">
+        <classes>
+            <class name="tests.QuoteHotelRoomQuantityPMSBlocks"/>
+        </classes>
+    </test>
+    <test name="TB-279: Quote business segment is not sent to Mews.">
+        <classes>
+            <class name="tests.TB.QuoteBusinessSegmentIsNotSentToMews"/>
+        </classes>
+    </test>
+    <test name="TB-277: Total tax is not calculated correctly on one Quote.">
+        <classes>
+            <class name="tests.TB.TotalTaxIsNotCalculatedCorrectlyOnOneQuote"/>
+        </classes>
+    </test>
 </suite>
 
 

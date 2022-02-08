@@ -12,19 +12,14 @@ import java.util.List;
 
 public class QuoteHotelRoomQuantityPerNight extends BaseTest {
 
-    @Test(priority = 1, description = "LogIn")
-    @Severity(SeverityLevel.NORMAL)
-    @Story("THY-591: Quote hotel room - quantity per night")
-    public void logIn() throws InterruptedException, IOException {
-        loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
-    }
 
-    @Test(priority = 2, description = "Create MYCE Quote where Pax = 5 and Departure Date = Arrival Date + 2," +
+    @Test(priority = 1, description = "Create MYCE Quote where Pax = 5 and Departure Date = Arrival Date + 2," +
             " Instantiate a Quote Hotel Room. Expected result: A Quote Hotel Room was created. Two Quote Hotel" +
             " Room Prices records were created.")
     @Severity(SeverityLevel.NORMAL)
     @Story("THY-591: Quote hotel room - quantity per night")
     public void case1() throws InterruptedException, IOException {
+        loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
         rate.deleteRateSFDX(SFDX, "Name='QuoteHotelRoomQuantityPerNightAuto", ORG_USERNAME);
         myceQuotes.deleteQuoteSFDX(SFDX, "Name='QuoteHotelRoomQuantityPerNightAutoTest'", ORG_USERNAME);
         StringBuilder hotelRecord1= hotel.getHotelSFDX(SFDX, "thn__Unique_Id__c='Demo'", ORG_USERNAME);
@@ -97,7 +92,7 @@ public class QuoteHotelRoomQuantityPerNight extends BaseTest {
         Assert.assertEquals(quoteHotelRoomPricesQuantity.get(1).intValue(), 5);
     }
 
-    @Test(priority = 3, description = "Change the Quantity = 7 on the thirst quote hotel room price. Expected result:" +
+    @Test(priority = 2, description = "Change the Quantity = 7 on the thirst quote hotel room price. Expected result:" +
             " Sales Price  on Quote Hotel Room Price and Sales Price on Quote Hotel Room are changed.")
     @Severity(SeverityLevel.NORMAL)
     @Story("THY-591: Quote hotel room - quantity per night")
@@ -108,9 +103,11 @@ public class QuoteHotelRoomQuantityPerNight extends BaseTest {
         StringBuilder quoteHotelRoomRecord = quoteHotelRoom.getQuoteHotelRoomSFDX(SFDX, "thn__MYCE_Quote__c='"
                 + quoteID + "'", ORG_USERNAME);
         String quoteHotelRoomID= JsonParser2.getFieldValue(quoteHotelRoomRecord.toString(), "Id");
-        StringBuilder quoteHotelRoomPrices = myceQuotes.soql(SFDX, "SELECT Id FROM thn__Quote_Hotel_Room_Price__c" +
-                " WHERE thn__Quote_Hotel_Room__c='" + quoteHotelRoomID + "'", ORG_USERNAME);
-        List<String> quoteHotelRoomPricesID = JsonParser2.getFieldValueSoql(quoteHotelRoomPrices.toString(), "Id");
+        StringBuilder quoteHotelRoomPrices = myceQuotes.soql(SFDX, "SELECT Id FROM" +
+                " thn__Quote_Hotel_Room_Price__c WHERE thn__Quote_Hotel_Room__c='" + quoteHotelRoomID + "'",
+                ORG_USERNAME);
+        List<String> quoteHotelRoomPricesID = JsonParser2.
+                getFieldValueSoql(quoteHotelRoomPrices.toString(), "Id");
         quoteHotelRoomPrice.updateQuoteHotelRoomPriceSFDX(SFDX, "Id='" + quoteHotelRoomPricesID.get(0) + "'",
                 "thn__Quantity__c=7", ORG_USERNAME);
         StringBuilder updatedQuoteHotelRoomRecord = quoteHotelRoom.getQuoteHotelRoomSFDX(SFDX,
@@ -136,7 +133,7 @@ public class QuoteHotelRoomQuantityPerNight extends BaseTest {
         Assert.assertEquals(quoteHotelRoomPriceSalesPriceInclTax2, "550");
     }
 
-    @Test(priority = 4, description = "Change the Number = 3 on Quote Hotel Room record. Expected result:The" +
+    @Test(priority = 3, description = "Change the Number = 3 on Quote Hotel Room record. Expected result:The" +
             " Quantity should change if the value of the QHR.Number matched the value of QHRP.Quantity." +
             " Prices also updated.")
     @Severity(SeverityLevel.NORMAL)
@@ -168,7 +165,7 @@ public class QuoteHotelRoomQuantityPerNight extends BaseTest {
         Assert.assertEquals(quoteHotelRoomPriceSalesPriceInclTax2.get(0).intValue(), 330);
     }
 
-    @Test(priority = 5, description = "Create Quote, create a Package and add a Hotel Room as Package Line." +
+    @Test(priority = 4, description = "Create Quote, create a Package and add a Hotel Room as Package Line." +
             " Instantiate the created Package to the Quote. Change the Quantity on the Quote Hotel Room price." +
             " Expected result: An error is thrown and Quantity isn’t changed.")
     @Severity(SeverityLevel.NORMAL)

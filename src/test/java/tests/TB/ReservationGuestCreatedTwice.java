@@ -16,14 +16,8 @@ public class ReservationGuestCreatedTwice extends BaseTest {
     @Test(priority = 1, description = "LogIn")
     @Severity(SeverityLevel.NORMAL)
     @Story("TB-261: Reservation Guest created twice")
-    public void logIn() throws InterruptedException, IOException {
-        loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
-    }
-
-    @Test(priority = 2, description = "LogIn")
-    @Severity(SeverityLevel.NORMAL)
-    @Story("TB-261: Reservation Guest created twice")
     public void case1() throws InterruptedException, IOException {
+        loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
         myceQuotes.deleteQuoteSFDX(SFDX, "Name='ReservationGuestCreatedTwiceAutoTest'", ORG_USERNAME);
         StringBuilder hotelRecord= hotel.getHotelSFDX(SFDX, "thn__Unique_Id__c='Demo'", ORG_USERNAME);
         String propertyID = JsonParser2.getFieldValue(hotelRecord.toString(), "Id");

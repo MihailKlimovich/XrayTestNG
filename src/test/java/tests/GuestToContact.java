@@ -15,10 +15,11 @@ import java.io.IOException;
 
 public class GuestToContact extends BaseTest {
 
-    @Test(priority = 1, description = "LogIn")
+
+    @Test(priority = 1, description = "Preconditions: creating guests and contacts")
     @Severity(SeverityLevel.NORMAL)
     @Story("Guest to contact")
-    public void logIn() throws InterruptedException, IOException {
+    public void preconditions() throws InterruptedException, IOException {
         loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
         loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
         developerConsoleWindow.openDeveloperConsole();
@@ -35,12 +36,6 @@ public class GuestToContact extends BaseTest {
                         " settings.thn__Last_execution_date_time__c = myDate.toStartOfMonth();" +
                         " settings.thn__isNotValid__c = 'user@booking.com, user@partner.expedia.com, noreply@domain.com';" +
                         " upsert settings;");
-    }
-
-    @Test(priority = 2, description = "Preconditions: creating guests and contacts")
-    @Severity(SeverityLevel.NORMAL)
-    @Story("Guest to contact")
-    public void preconditions() throws InterruptedException, IOException {
         guests.deleteGuestSFDX(SFDX, "thn__Email__c='carleone@gmail.com'" , ORG_USERNAME);
         contact.deleteContactSFDX(SFDX, "Email='carleone@gmail.com'", ORG_USERNAME);
         guests.deleteGuestSFDX(SFDX, "thn__Email__c='malkovich@gmail.com'" , ORG_USERNAME);
@@ -93,7 +88,7 @@ public class GuestToContact extends BaseTest {
 
     }
 
-    @Test(priority = 3, description = "Run batch")
+    @Test(priority = 2, description = "Run batch")
     @Severity(SeverityLevel.NORMAL)
     @Story("Guest to contact")
     public void runBatch() throws InterruptedException, IOException {
@@ -102,7 +97,7 @@ public class GuestToContact extends BaseTest {
         developerConsoleWindow.runApexCodeFromFile("src/main/Data/BatchGuestToContact");
     }
 
-    @Test(priority = 4, description = "If Guest.CheckEmail == Contact.CheckEmail  and  Guest.Check2 == Contact.Check2," +
+    @Test(priority = 3, description = "If Guest.CheckEmail == Contact.CheckEmail  and  Guest.Check2 == Contact.Check2," +
             " Contact.UpdateFromGuest=true. Result: Contact fields are updated")
     @Severity(SeverityLevel.NORMAL)
     @Story("Guest to contact")
@@ -128,7 +123,7 @@ public class GuestToContact extends BaseTest {
         Assert.assertEquals(contactGuest, contactId);
     }
 
-    @Test(priority = 5, description = "If Guest.CheckEmail == Contact.CheckEmail and Guest.Check2 == Contact.Check2." +
+    @Test(priority = 4, description = "If Guest.CheckEmail == Contact.CheckEmail and Guest.Check2 == Contact.Check2." +
             " Expected result: Guest is related to Contact")
     @Severity(SeverityLevel.NORMAL)
     @Story("Guest to contact")
@@ -143,7 +138,7 @@ public class GuestToContact extends BaseTest {
         Assert.assertEquals(contactGuest, contactId);
     }
 
-    @Test(priority = 6, description = "Guest.CheckEmail != Contact.CheckEmail and Guest.Check2 != null &&" +
+    @Test(priority = 5, description = "Guest.CheckEmail != Contact.CheckEmail and Guest.Check2 != null &&" +
             " Guest.Check3 != null, if Guest.Check2 = Contact.Check2 and Guest.Check3 = Contact.Check3," +
             " Contact.UpdateFromGuest == true. Expected result: Guest is related to Contact and Contact.Email2 field" +
             " is updated with Guest.CheckEmail value, Contact fields are updated")
@@ -171,7 +166,7 @@ public class GuestToContact extends BaseTest {
         Assert.assertEquals(contactGuest, contactId);
     }
 
-    @Test(priority = 7, description = "Guest.CheckEmail != Contact.CheckEmail and are valid and" +
+    @Test(priority = 6, description = "Guest.CheckEmail != Contact.CheckEmail and are valid and" +
             " Guest.Check2 == Contact.Check2 and Guest.Check3 != Contact.Check3. Expected result: Contact is created" +
             " with field values equal values on Guest records. Guest is related to created Contact")
     @Severity(SeverityLevel.NORMAL)
@@ -201,7 +196,7 @@ public class GuestToContact extends BaseTest {
         Assert.assertNotEquals(newContactId, oldContactId);
     }
 
-    @Test(priority = 8, description = "Guest.CheckEmail != Contact.CheckEmail and are valid, if" +
+    @Test(priority = 7, description = "Guest.CheckEmail != Contact.CheckEmail and are valid, if" +
             " Guest.CreateContact == true. Expected result:  Contact is created. Guest is related to Contact")
     @Severity(SeverityLevel.NORMAL)
     @Story("Guest to contact")
@@ -221,7 +216,7 @@ public class GuestToContact extends BaseTest {
         Assert.assertNotEquals(newContactId, oldContactId);
     }
 
-    @Test(priority = 9, description = "If Guest.CheckEmail is not valid and Guest.Check2 != null &&" +
+    @Test(priority = 8, description = "If Guest.CheckEmail is not valid and Guest.Check2 != null &&" +
             " Guest.Check3 != null, if Guest.Check2 == Contact.Check2 and Guest.Check3 == Contact.Check3." +
             " Expected result: Guest is related to Contact")
     @Severity(SeverityLevel.NORMAL)

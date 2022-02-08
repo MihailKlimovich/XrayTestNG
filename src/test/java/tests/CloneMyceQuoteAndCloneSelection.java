@@ -17,19 +17,12 @@ import java.util.List;
 
 public class CloneMyceQuoteAndCloneSelection extends BaseTest {
 
-    @Test(priority = 1, description = "LogIn")
-    @Severity(SeverityLevel.NORMAL)
-    @Story("Clone Myce quote and clone selection")
-    public void logIn() throws InterruptedException, IOException {
-        loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
-        loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
-
-    }
-
-    @Test(priority = 2, description = "Preconditions")
+    @Test(priority = 1, description = "Preconditions")
     @Severity(SeverityLevel.NORMAL)
     @Story("Clone Myce quote and clone selection")
     public void preconditions() throws InterruptedException, IOException {
+        loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
+        loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
         myceQuotes.deleteQuoteSFDX(SFDX, "Name='CloneMyceQuoteAutoTest'", ORG_USERNAME);
         packages.deletePackageSFDX(SFDX, "Name='CloneAutoTest", ORG_USERNAME);
         StringBuilder hotelRecord= hotel.getHotelSFDX(SFDX, "thn__Unique_Id__c='Demo'", ORG_USERNAME);
@@ -77,7 +70,7 @@ public class CloneMyceQuoteAndCloneSelection extends BaseTest {
                 " thn__Product__c='" + meetingFullDayID + "'", ORG_USERNAME);
     }
 
-    @Test(priority = 3, description = "Clone quote")
+    @Test(priority = 2, description = "Clone quote")
     @Severity(SeverityLevel.NORMAL)
     @Story("Clone Myce quote and clone selection")
     public void cloneQuote() throws InterruptedException, IOException {
@@ -132,7 +125,7 @@ public class CloneMyceQuoteAndCloneSelection extends BaseTest {
         Assert.assertNotNull(clonedQuoteMeetingRoomD2);
     }
 
-    @Test(priority = 4, description = "Clone selection of records: quote hotel room")
+    @Test(priority = 3, description = "Clone selection of records: quote hotel room")
     @Severity(SeverityLevel.NORMAL)
     @Story("Clone Myce quote and clone selection")
     public void cloneQuoteHotelRooms() throws InterruptedException, IOException {
@@ -159,7 +152,7 @@ public class CloneMyceQuoteAndCloneSelection extends BaseTest {
         Assert.assertEquals(quoteHotelRoomsDepartureDateTime.get(0), quoteHotelRoomsDepartureDateTime.get(1));
     }
 
-    @Test(priority = 5, description = "Clone selection of records: quote product")
+    @Test(priority = 4, description = "Clone selection of records: quote product")
     @Severity(SeverityLevel.NORMAL)
     @Story("Clone Myce quote and clone selection")
     public void cloneQuoteProduct() throws InterruptedException, IOException {
@@ -185,7 +178,7 @@ public class CloneMyceQuoteAndCloneSelection extends BaseTest {
         Assert.assertEquals(quoteProductsEndDateTime.get(0), quoteProductsEndDateTime.get(1));
     }
 
-    @Test(priority = 6, description = "Clone selection of records: quote meeting room")
+    @Test(priority = 5, description = "Clone selection of records: quote meeting room")
     @Severity(SeverityLevel.NORMAL)
     @Story("Clone Myce quote and clone selection")
     public void cloneQuoteMeetingRoom() throws InterruptedException, IOException {
@@ -213,7 +206,7 @@ public class CloneMyceQuoteAndCloneSelection extends BaseTest {
         Assert.assertEquals(quoteMeetingRoomsEndDateTime.get(0), quoteMeetingRoomsEndDateTime.get(1));
     }
 
-    @Test(priority = 7, description = "Clone selection of records: quote package")
+    @Test(priority = 6, description = "Clone selection of records: quote package")
     @Severity(SeverityLevel.NORMAL)
     @Story("Clone Myce quote and clone selection")
     public void cloneQuotePackage() throws InterruptedException, IOException {

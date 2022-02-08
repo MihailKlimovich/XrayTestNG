@@ -22,19 +22,7 @@ public class OperaWriteCorrections2 extends BaseTest {
     @Description("THY-582: Opera Write - Corrections")
     @Story("PMS Account")
     public void testOperaWrite1() throws InterruptedException, IOException {
-        StringBuilder authorise = SfdxCommand.runLinuxCommand1(new String[]{
-                SFDX,
-                "force:auth:jwt:grant",
-                "--clientid",
-                thynkPackKey,
-                "--jwtkeyfile",
-                "/home/user/jdoe/JWT/server.key",
-                "--username",
-                thynkPackUserName,
-                "--instanceurl",
-                thynkPackDevOrg
-        });
-        System.out.println(authorise);
+        loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
         StringBuilder pmsAccountRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:get",
@@ -46,7 +34,8 @@ public class OperaWriteCorrections2 extends BaseTest {
                 thynkPackUserName,
                 "--json"});
         System.out.println(pmsAccountRecord);
-        String outboundRequest = JsonParser2.getFieldValue(pmsAccountRecord.toString(), "thn__Outbound_Request__c");
+        String outboundRequest = JsonParser2.
+                getFieldValue(pmsAccountRecord.toString(), "thn__Outbound_Request__c");
         String hapiId = JsonParser2.getFieldValue(pmsAccountRecord.toString(), "thn__HapiId__c");
         Assert.assertNull(outboundRequest);
         Assert.assertNotNull(hapiId);
@@ -100,8 +89,10 @@ public class OperaWriteCorrections2 extends BaseTest {
                 thynkPackUserName,
                 "--json"});
         System.out.println(reservationRecord);
-        String outboundRequest = JsonParser2.getFieldValue(reservationRecord.toString(), "thn__Outbound_Request__c");
-        String hapiId = JsonParser2.getFieldValue(reservationRecord.toString(), "thn__HapiId__c");
+        String outboundRequest = JsonParser2.
+                getFieldValue(reservationRecord.toString(), "thn__Outbound_Request__c");
+        String hapiId = JsonParser2.
+                getFieldValue(reservationRecord.toString(), "thn__HapiId__c");
         Assert.assertNull(outboundRequest);
         Assert.assertNotNull(hapiId);
     }

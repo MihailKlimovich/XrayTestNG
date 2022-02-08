@@ -16,14 +16,8 @@ import java.io.IOException;
 
 public class QuotesAccountToMews extends BaseTest {
 
-    @Test(priority = 1, description = "LogIn")
-    @Severity(SeverityLevel.NORMAL)
-    @Story("Quote's accounts to Mews")
-    public void logIn() throws InterruptedException, IOException {
-        loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
-    }
 
-    @Test(priority = 2, description = "1. Create Myce Quote, 2. Specify Agent, make sure agent.mews_id == null," +
+    @Test(priority = 1, description = "1. Create Myce Quote, 2. Specify Agent, make sure agent.mews_id == null," +
             " agent.hotel != quote.hotel, 3. Update Quote’s stage to stage defined in ‘Guest Creation Stage’ field of" +
             " the ‘Default Agile Values’ mdt. Result: agent.hotel__c is updated to quote.hotel__c and" +
             " agent.send_to_mews__c is updated to TRUE; agent is sent to mews: if successfully, Mews_Id is filled," +
@@ -31,6 +25,7 @@ public class QuotesAccountToMews extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     @Story("Quote's accounts to Mews")
     public void case1() throws InterruptedException, IOException {
+        loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
         SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:delete",
@@ -127,11 +122,11 @@ public class QuotesAccountToMews extends BaseTest {
         Assert.assertNotNull(accountMewsID);
     }
 
-    @Test(priority = 3, description = "1. Create Myce Quote, 2. Specify Company, make sure company.mews_id == null," +
-            " company.hotel != quote.hotel, 3. Update Quote’s stage to stage defined in ‘Guest Creation Stage’ field of" +
-            " the ‘Default Agile Values’ mdt. Result: company.hotel__c is updated to quote.hotel__c and" +
-            " company.send_to_mews__c is updated to TRUE; company is sent to mews: if successfully, Mews_Id is filled," +
-            " else Mews Error Message is filled")
+    @Test(priority = 2, description = "1. Create Myce Quote, 2. Specify Company, make sure company.mews_id == null," +
+            " company.hotel != quote.hotel, 3. Update Quote’s stage to stage defined in ‘Guest Creation Stage’ field" +
+            " of the ‘Default Agile Values’ mdt. Result: company.hotel__c is updated to quote.hotel__c and" +
+            " company.send_to_mews__c is updated to TRUE; company is sent to mews: if successfully, Mews_Id is" +
+            " filled, else Mews Error Message is filled")
     @Severity(SeverityLevel.NORMAL)
     @Story("Quote's accounts to Mews")
     public void case2() throws InterruptedException, IOException {

@@ -13,19 +13,14 @@ import java.util.List;
 
 public class MoveProcessesToApex extends BaseTest {
 
-    @Test(priority = 1, description = "LogIn")
-    @Severity(SeverityLevel.NORMAL)
-    @Story("Move processes to apex")
-    public void logIn() throws InterruptedException, IOException {
-        loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
-    }
 
-    @Test(priority = 2, description = "Go to the Properties app. Open the Demo Property and select ‘Resort’ = Resort." +
+    @Test(priority = 1, description = "Go to the Properties app. Open the Demo Property and select ‘Resort’ = Resort." +
             " Create a new MYCE Quote. For the Property make sure you select Demo. Pax = 6. Result: MYCE Quote was" +
             " created and the Resort field of the MYCE Quote was filled with Resort from Property.")
     @Severity(SeverityLevel.NORMAL)
     @Story("Move processes to apex")
     public void case1() throws InterruptedException, IOException {
+        loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
         myceQuotes.deleteQuoteSFDX(SFDX, "Name='MoveProcessesToApexAutoTest'", ORG_USERNAME);
         StringBuilder hotelRecord= hotel.getHotelSFDX(SFDX, "thn__Unique_Id__c='Demo'", ORG_USERNAME);
         String propertyID = JsonParser2.getFieldValue(hotelRecord.toString(), "Id");
@@ -43,7 +38,7 @@ public class MoveProcessesToApex extends BaseTest {
         Assert.assertEquals(quoteResort, "Resort");
     }
 
-    @Test(priority = 3, description = "Add a Quote Hotel Room with Pax = Quote’s Pax. Add a Quote Hotel Room with" +
+    @Test(priority = 2, description = "Add a Quote Hotel Room with Pax = Quote’s Pax. Add a Quote Hotel Room with" +
             " Pax = 3. Add a Quote Product with Pax = Quote’s Pax. Add a Quote Product with Pax = 3. Add a Quote" +
             " Meeting Room with Pax = Quote’s Pax. Add a Quote Meeting Room with Pax = 3. Add a Quote Package with" +
             " Pax = Quote’s Pax. Add a Quote Package with Pax = 3. Change Pax on the Quote to 7. Result: The Pax" +
@@ -141,7 +136,7 @@ public class MoveProcessesToApex extends BaseTest {
         Assert.assertEquals(quotePackagePax2, "3");
     }
 
-    @Test(priority = 4, description = "Add a Company Account to the MYCE Quote.  Add a Billing Address to the" +
+    @Test(priority = 3, description = "Add a Company Account to the MYCE Quote.  Add a Billing Address to the" +
             " Account. Add an Agent Account to the MYCE Quote. Add a Billing Address to the Account. Select Bill" +
             " to = Agent on the MYCE Quote. Go to the Invoices. Create a new Invoice. Specify our  MYCE Quote." +
             " Add the amount in ‘% to invoice’ field. Result: Invoice record is created. Billing Address is filled" +
@@ -173,15 +168,18 @@ public class MoveProcessesToApex extends BaseTest {
         String invoiceId =  invoice.createInvoiceSFDX(SFDX, "thn__MYCE_Quote__c='" + quoteID + "'" +
                 " thn__to_invoice__c=10 thn__Type__c='Finale'", ORG_USERNAME);
         StringBuilder invoiceRecord = invoice.getInvoiceSFDX(SFDX, "Id='" + invoiceId + "'", ORG_USERNAME);
-        String invoiceBillingAddress= JsonParser2.getFieldValue(invoiceRecord.toString(), "thn__Billing_Address__c");
-        String invoiceAccount= JsonParser2.getFieldValue(invoiceRecord.toString(), "thn__Account__c");
-        String invoiceContact= JsonParser2.getFieldValue(invoiceRecord.toString(), "thn__Contact__c");
+        String invoiceBillingAddress= JsonParser2.
+                getFieldValue(invoiceRecord.toString(), "thn__Billing_Address__c");
+        String invoiceAccount= JsonParser2.
+                getFieldValue(invoiceRecord.toString(), "thn__Account__c");
+        String invoiceContact= JsonParser2.
+                getFieldValue(invoiceRecord.toString(), "thn__Contact__c");
         Assert.assertEquals(invoiceBillingAddress, "Frantsiska Skoriny, Polack, Belarus");
         Assert.assertEquals(invoiceAccount, accountId2);
         Assert.assertEquals(invoiceContact, contactId2);
     }
 
-    @Test(priority = 5, description = "Update ‘Bill to’ on MYCE Quote to ‘Company’. Update the ‘% to invoice’ on the" +
+    @Test(priority = 4, description = "Update ‘Bill to’ on MYCE Quote to ‘Company’. Update the ‘% to invoice’ on the" +
             " Invoice to trigger the invoice update. Result: The Billing Address on the Invoice was changed. The" +
             " values are taken from the Company Account. The Account and Contact on the Invoice were changed to the" +
             " Company Account and Company Contact.")
@@ -214,7 +212,7 @@ public class MoveProcessesToApex extends BaseTest {
         Assert.assertEquals(invoiceContact, contactCompanyID);
     }
 
-    @Test(priority = 6, description = "Postconditions")
+    @Test(priority = 5, description = "Postconditions")
     @Severity(SeverityLevel.NORMAL)
     @Story("Move processes to apex")
     public void postcondition() throws InterruptedException, IOException {

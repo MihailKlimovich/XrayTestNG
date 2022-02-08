@@ -12,20 +12,15 @@ import java.util.List;
 
 public class QuoteProductsUnit extends BaseTest {
 
-    @Test(priority = 1, description = "LogIn")
-    @Severity(SeverityLevel.NORMAL)
-    @Story("Quote products - unit + Prices calculation regression")
-    public void logIn() throws InterruptedException, IOException {
-        loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
-        //loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
-    }
 
-    @Test(priority = 2, description = "Create Package, Create package line, type == Food, Unit == 5, Unit Price" +
+    @Test(priority = 1, description = "Create Package, Create package line, type == Food, Unit == 5, Unit Price" +
             " == 100. Result: Total price is 500 (Unit price (100) * Unit (5)). List Price on Package is changed" +
             " to 500.")
     @Severity(SeverityLevel.NORMAL)
     @Story("Quote products - unit + Prices calculation regression")
     public void case1() throws InterruptedException, IOException {
+        loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
+        //loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
         packages.deletePackageSFDX(SFDX, "Name='QuoteProductsUnitAutoTest", ORG_USERNAME);
         StringBuilder hotelRecord= hotel.getHotelSFDX(SFDX, "thn__Unique_Id__c='Demo'", ORG_USERNAME);
         String propertyID = JsonParser2.getFieldValue(hotelRecord.toString(), "Id");
@@ -44,7 +39,7 @@ public class QuoteProductsUnit extends BaseTest {
         Assert.assertEquals(packagePrice, "500");
     }
 
-    @Test(priority = 3, description = "Create Package line, type == Beverage, Unit == null, Unit Price ==100. Result:" +
+    @Test(priority = 2, description = "Create Package line, type == Beverage, Unit == null, Unit Price ==100. Result:" +
             " Unit is set to “1”. Total price is 100 (Unit price (100) * Unit (1)). List Price on Package is changed" +
             " to 600.")
     @Severity(SeverityLevel.NORMAL)
@@ -71,9 +66,9 @@ public class QuoteProductsUnit extends BaseTest {
         Assert.assertEquals(packagePrice, "600");
     }
 
-    @Test(priority = 4, description = " Create Package line, type == Equipment, Unit == -5, Unit price == 100. Result:" +
-            " Unit is set to “1”. Total price is 100 (Unit price (100) * Unit (1)). List Price on Package is changed" +
-            " to 700.")
+    @Test(priority = 3, description = " Create Package line, type == Equipment, Unit == -5, Unit price == 100." +
+            " Result: Unit is set to “1”. Total price is 100 (Unit price (100) * Unit (1)). List Price on Package" +
+            " is changed to 700.")
     @Severity(SeverityLevel.NORMAL)
     @Story("Quote products - unit + Prices calculation regression")
     public void case3() throws InterruptedException, IOException {
@@ -97,7 +92,7 @@ public class QuoteProductsUnit extends BaseTest {
         Assert.assertEquals(packagePrice, "700");
     }
 
-    @Test(priority = 5, description = "Delete Package line, Equipment. Result: List Price is updated to 600.")
+    @Test(priority = 4, description = "Delete Package line, Equipment. Result: List Price is updated to 600.")
     @Severity(SeverityLevel.NORMAL)
     @Story("Quote products - unit + Prices calculation regression")
     public void case4() throws InterruptedException, IOException {
@@ -114,7 +109,7 @@ public class QuoteProductsUnit extends BaseTest {
         Assert.assertEquals(packagePrice, "600");
     }
 
-    @Test(priority = 6, description = "Update Package line Unit, set Unit on Beverage to 10. Result: Total price" +
+    @Test(priority = 5, description = "Update Package line Unit, set Unit on Beverage to 10. Result: Total price" +
             " is 1000 (Unit price (100) * Unit (10). List Price on Package is changed to 1500.")
     @Severity(SeverityLevel.NORMAL)
     @Story("Quote products - unit + Prices calculation regression")
@@ -132,7 +127,7 @@ public class QuoteProductsUnit extends BaseTest {
         Assert.assertEquals(packagePrice, "1500");
     }
 
-    @Test(priority = 7, description = " Create Package line, product == Combo, Unit ==  5, Unit Price == 150." +
+    @Test(priority = 6, description = " Create Package line, product == Combo, Unit ==  5, Unit Price == 150." +
             " Result: Unit is set to “1”. Total price is 150 (Unit price (150) * Unit (1)). List Price on Package" +
             " is changed to 1650.")
     @Severity(SeverityLevel.NORMAL)
@@ -168,7 +163,7 @@ public class QuoteProductsUnit extends BaseTest {
         Assert.assertEquals(packageLineUnit, "1");
     }
 
-    @Test(priority = 8, description = "Create Package line, type == Hotel room, Unit == 5,Unit Price == 100. Result:" +
+    @Test(priority = 7, description = "Create Package line, type == Hotel room, Unit == 5,Unit Price == 100. Result:" +
             " Unit is set to “1”. Total price is 100 (Unit price (100) * Unit (1)). List Price on Package is changed" +
             " to 1750.")
     @Severity(SeverityLevel.NORMAL)
@@ -193,7 +188,7 @@ public class QuoteProductsUnit extends BaseTest {
         Assert.assertEquals(packageLineUnit, "1");
     }
 
-    @Test(priority = 9, description = "Create Package line, type == Meeting room, Unit == 5, Unit Price == 100." +
+    @Test(priority = 8, description = "Create Package line, type == Meeting room, Unit == 5, Unit Price == 100." +
             " Result: Unit is set to “1”. Total price is 100 (Unit price (100) * Unit (1)). List" +
             " Price on Package is changed to 1750.")
     @Severity(SeverityLevel.NORMAL)
@@ -219,7 +214,7 @@ public class QuoteProductsUnit extends BaseTest {
         Assert.assertEquals(packageLineUnit, "1");
     }
 
-    @Test(priority = 10, description = "Create MYCE Quote, specify “1” for Pax, Create Quote package, leave Pax," +
+    @Test(priority = 9, description = "Create MYCE Quote, specify “1” for Pax, Create Quote package, leave Pax," +
             " Discounts empty (package created above). Result: Quote package, Quote package lines are copied to the" +
             " Quote with price values.")
     @Severity(SeverityLevel.NORMAL)
@@ -246,7 +241,7 @@ public class QuoteProductsUnit extends BaseTest {
         Assert.assertEquals(quoteTotalAmountInclTax, "1850");
     }
 
-    @Test(priority = 11, description = "Update Pax on Quote package. Result: Hotel Rooms Amount, Meeting Rooms" +
+    @Test(priority = 10, description = "Update Pax on Quote package. Result: Hotel Rooms Amount, Meeting Rooms" +
             " Amount, Products Amount, Total Amount excl. Tax, Total Amount excl. Tax fields on the Quote are" +
             " recalculated according to the new Pax value.")
     @Severity(SeverityLevel.NORMAL)
@@ -292,7 +287,7 @@ public class QuoteProductsUnit extends BaseTest {
         Assert.assertEquals(updatedTotalAmmountInclclTax, expectedtotalAmmountInclclTax);
     }
 
-    @Test(priority = 12, description = "Add Quote product to the Quote, Product == Equipment, Pax == 1, Unit == 5." +
+    @Test(priority = 11, description = "Add Quote product to the Quote, Product == Equipment, Pax == 1, Unit == 5." +
             " Result: Quote product record is created: List price is 300 (Unit Price incl. Tax (60) * Unit (5))." +
             " Products Amount, Total Amount excl. Tax, Total Tax, Total Amount incl. Tax fields on the Quote are" +
             " recalculated.")
@@ -310,7 +305,8 @@ public class QuoteProductsUnit extends BaseTest {
                 "' thn__Product__c='" + equipmentID + "' thn__Pax__c=1 thn__Unit__c=5", ORG_USERNAME);
         StringBuilder quoteProductRecord = quoteProducts.getQuoteProductSFDX(SFDX, "Id='" + quoteProductId +
                 "'", ORG_USERNAME);
-        String quoteProductListPrice= JsonParser2.getFieldValue(quoteProductRecord.toString(), "thn__List_price__c");
+        String quoteProductListPrice= JsonParser2.
+                getFieldValue(quoteProductRecord.toString(), "thn__List_price__c");
         Integer expectedtotalAmmountInclclTax = totalAmmountInclclTax + 300;
         StringBuilder updatedQuote = myceQuotes.
                 getQuoteSFDX(SFDX, "Name='QuoteProductsUnitAutoTest'", ORG_USERNAME);
@@ -320,7 +316,7 @@ public class QuoteProductsUnit extends BaseTest {
         Assert.assertEquals(updatedTotalAmmountInclclTax, expectedtotalAmmountInclclTax);
     }
 
-    @Test(priority = 13, description = "Update Unit on added Quote product to 10. Result: Quote product record is" +
+    @Test(priority = 12, description = "Update Unit on added Quote product to 10. Result: Quote product record is" +
             " updated: List price is 600 (Unit Price incl. Tax (60) * Unit (10)). Products Amount, Total Amount" +
             " excl. Tax, Total Tax, Total Amount incl. Tax fields on the Quote are recalculated.")
     @Severity(SeverityLevel.NORMAL)
@@ -337,7 +333,8 @@ public class QuoteProductsUnit extends BaseTest {
                 + equipmentID + "'", "thn__Unit__c=10", ORG_USERNAME);
         StringBuilder quoteProductRecord = quoteProducts.getQuoteProductSFDX(SFDX, "thn__MYCE_Quote__c='"
                 + quoteID + "' thn__Product__c='" + equipmentID + "'", ORG_USERNAME);
-        String quoteProductListPrice= JsonParser2.getFieldValue(quoteProductRecord.toString(), "thn__List_price__c");
+        String quoteProductListPrice= JsonParser2.
+                getFieldValue(quoteProductRecord.toString(), "thn__List_price__c");
         Integer expectedtotalAmmountInclclTax = totalAmmountInclclTax + 300;
         StringBuilder updatedQuote = myceQuotes.
                 getQuoteSFDX(SFDX, "Name='QuoteProductsUnitAutoTest'", ORG_USERNAME);
@@ -347,7 +344,7 @@ public class QuoteProductsUnit extends BaseTest {
         Assert.assertEquals(updatedTotalAmmountInclclTax, expectedtotalAmmountInclclTax);
     }
 
-    @Test(priority = 14, description = "Update Pax on added Quote product to 5. Result: Quote product record is" +
+    @Test(priority = 13, description = "Update Pax on added Quote product to 5. Result: Quote product record is" +
             " updated: Sales Price excl. Tax, Sales Price incl. Tax. fields. Products Amount, Total Amount excl." +
             " Tax, Total Tax, Total Amount incl. Tax fields on the Quote are recalculated.")
     @Severity(SeverityLevel.NORMAL)
@@ -364,7 +361,8 @@ public class QuoteProductsUnit extends BaseTest {
                 + equipmentID + "'", "thn__Pax__c=5", ORG_USERNAME);
         StringBuilder quoteProductRecord = quoteProducts.getQuoteProductSFDX(SFDX, "thn__MYCE_Quote__c='"
                 + quoteID + "' thn__Product__c='" + equipmentID + "'", ORG_USERNAME);
-        String quoteProductListPrice= JsonParser2.getFieldValue(quoteProductRecord.toString(), "thn__List_price__c");
+        String quoteProductListPrice= JsonParser2.
+                getFieldValue(quoteProductRecord.toString(), "thn__List_price__c");
         Integer expectedtotalAmmountInclclTax = totalAmmountInclclTax + 2400;
         StringBuilder updatedQuote = myceQuotes.
                 getQuoteSFDX(SFDX, "Name='QuoteProductsUnitAutoTest'", ORG_USERNAME);
@@ -374,7 +372,7 @@ public class QuoteProductsUnit extends BaseTest {
         Assert.assertEquals(updatedTotalAmmountInclclTax, expectedtotalAmmountInclclTax);
     }
 
-    @Test(priority = 15, description = "Change Discount on created Equipment record. Result: Quote product record" +
+    @Test(priority = 14, description = "Change Discount on created Equipment record. Result: Quote product record" +
             " is updated: Unit Price incl. Tax, Unit Price excl. Tax, Sales Price excl. Tax, Sales Price incl. Tax." +
             " Discount Amount fields. Products Amount, Total Amount excl. Tax, Total Tax, Total Amount incl. Tax" +
             " fields on the Quote are recalculated.")
@@ -406,7 +404,7 @@ public class QuoteProductsUnit extends BaseTest {
         Assert.assertEquals(updatedTotalAmmountInclclTax, expectedtotalAmmountInclclTax);
     }
 
-    @Test(priority = 16, description = "Change Discount on Quote package. Result: Discount Amount," +
+    @Test(priority = 15, description = "Change Discount on Quote package. Result: Discount Amount," +
             " Discount Max fields on Quote package are recalculated.")
     @Severity(SeverityLevel.NORMAL)
     @Story("Quote products - unit + Prices calculation regression")
@@ -439,7 +437,7 @@ public class QuoteProductsUnit extends BaseTest {
         Assert.assertEquals(updatedTotalAmmountInclclTax, expectedTotalAmountInclTax);
     }
 
-    @Test(priority = 17, description = "Quote budget record is created once Quote Product / Quote meeting room /" +
+    @Test(priority = 16, description = "Quote budget record is created once Quote Product / Quote meeting room /" +
             " Quote hotel room is added to the Quote for each Product type with Total Amount incl. Tax," +
             " Total Amount excl. Tax fields.")
     @Severity(SeverityLevel.NORMAL)

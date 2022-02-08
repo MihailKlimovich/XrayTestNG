@@ -18,18 +18,13 @@ import java.util.List;
 
 public class FSDatesOnQuotePackage extends BaseTest {
 
-    @Test(priority = 1, description = "LogIn")
-    @Severity(SeverityLevel.NORMAL)
-    @Story("FS dates on quote package")
-    public void logIn() throws InterruptedException, IOException {
-        loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
-    }
 
-    @Test(priority = 2, description = "Create Myce Quote, Add Quote package, Change Myce Quote stage to 2 - Propose to generate FS dates")
+    @Test(priority = 1, description = "Create Myce Quote, Add Quote package, Change Myce Quote stage to 2 - Propose" +
+            " to generate FS dates")
     @Severity(SeverityLevel.NORMAL)
     @Story("FS dates on quote package")
     public void case1() throws InterruptedException, IOException {
-
+        loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
         SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:delete",
@@ -227,10 +222,14 @@ public class FSDatesOnQuotePackage extends BaseTest {
                 ORG_USERNAME,
                 "--json"});
         System.out.println(fsDateRecordsSoql);
-        List<String> quoteProductFSDate = JsonParser2.getFieldValueSoql(quoteProductRecordsSoql.toString(), "thn__FS_Date__c");
-        List<String> quoteMeetingRoomFSDate = JsonParser2.getFieldValueSoql(quoteMeetingRoomRecordsSoql.toString(), "thn__FS_Date__c");
-        List<String> dates = JsonParser2.getFieldValueSoql(fsDateRecordsSoql.toString(), "thn__Date__c");
-        List<String> IdFSDate = JsonParser2.getFieldValueSoql(fsDateRecordsSoql.toString(), "Id");
+        List<String> quoteProductFSDate = JsonParser2.
+                getFieldValueSoql(quoteProductRecordsSoql.toString(), "thn__FS_Date__c");
+        List<String> quoteMeetingRoomFSDate = JsonParser2.
+                getFieldValueSoql(quoteMeetingRoomRecordsSoql.toString(), "thn__FS_Date__c");
+        List<String> dates = JsonParser2.
+                getFieldValueSoql(fsDateRecordsSoql.toString(), "thn__Date__c");
+        List<String> IdFSDate = JsonParser2.
+                getFieldValueSoql(fsDateRecordsSoql.toString(), "Id");
         System.out.println(dates);
         Assert.assertEquals(quoteProductFSDate.size(), 1);
         Assert.assertEquals(quoteMeetingRoomFSDate.size(), 1);
@@ -307,10 +306,14 @@ public class FSDatesOnQuotePackage extends BaseTest {
                 ORG_USERNAME,
                 "--json"});
         System.out.println(fsDateRecordsSoql);
-        List<String> quoteProductFSDate = JsonParser2.getFieldValueSoql(quoteProductRecordsSoql.toString(), "thn__FS_Date__c");
-        List<String> quoteMeetingRoomFSDate = JsonParser2.getFieldValueSoql(quoteMeetingRoomRecordsSoql.toString(), "thn__FS_Date__c");
-        List<String> dates = JsonParser2.getFieldValueSoql(fsDateRecordsSoql.toString(), "thn__Date__c");
-        List<String> IdFSDate = JsonParser2.getFieldValueSoql(fsDateRecordsSoql.toString(), "Id");
+        List<String> quoteProductFSDate = JsonParser2.
+                getFieldValueSoql(quoteProductRecordsSoql.toString(), "thn__FS_Date__c");
+        List<String> quoteMeetingRoomFSDate = JsonParser2.
+                getFieldValueSoql(quoteMeetingRoomRecordsSoql.toString(), "thn__FS_Date__c");
+        List<String> dates = JsonParser2.
+                getFieldValueSoql(fsDateRecordsSoql.toString(), "thn__Date__c");
+        List<String> IdFSDate = JsonParser2.
+                getFieldValueSoql(fsDateRecordsSoql.toString(), "Id");
         System.out.println(dates);
         Assert.assertEquals(quoteProductFSDate.size(), 2);
         Assert.assertEquals(quoteMeetingRoomFSDate.size(), 2);

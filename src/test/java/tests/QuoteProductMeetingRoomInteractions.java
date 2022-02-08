@@ -12,25 +12,21 @@ import java.util.List;
 
 public class QuoteProductMeetingRoomInteractions extends BaseTest{
 
-    @Test(priority = 1, description = "LogIn")
-    @Severity(SeverityLevel.NORMAL)
-    @Story("Quote product / meeting room interactions")
-    public void logIn() throws InterruptedException, IOException {
-        loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
-        //loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
-    }
 
-    @Test(priority = 2, description = "Create a MYCE Quote. Add a Meeting Room to the Quote. Add a couple products to" +
+    @Test(priority = 1, description = "Create a MYCE Quote. Add a Meeting Room to the Quote. Add a couple products to" +
             " the Quote. When adding new products make sure that ‘Start Time’ and ‘End Time’ fields of the products" +
             " that we add varies. Add a product to the Quote that doesn’t have a ‘Meeting Room’ selected" +
             " (service_area__c == null).")
     @Severity(SeverityLevel.NORMAL)
     @Story("Quote product / meeting room interactions")
     public void preconditions() throws InterruptedException, IOException {
+        loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
+        //loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
         myceQuotes.deleteQuoteSFDX(SFDX, "Name='QuoteProductMeetingRoomInteractionsAutoTest'", ORG_USERNAME);
         StringBuilder hotelRecord= hotel.getHotelSFDX(SFDX, "thn__Unique_Id__c='Demo'", ORG_USERNAME);
         String propertyID = JsonParser2.getFieldValue(hotelRecord.toString(), "Id");
-        StringBuilder meetingHalfDayRecord = product.getProductSFDX(SFDX, "Name='MEETING HALF DAY'", ORG_USERNAME);
+        StringBuilder meetingHalfDayRecord = product.getProductSFDX(SFDX, "Name='MEETING HALF DAY'",
+                ORG_USERNAME);
         String meetingHalfDayID = JsonParser2.getFieldValue(meetingHalfDayRecord.toString(), "Id");
         StringBuilder beverageRecord = product.getProductSFDX(SFDX, "Name='BEVERAGE'", ORG_USERNAME);
         StringBuilder dinerRecord = product.getProductSFDX(SFDX, "Name='DINER'", ORG_USERNAME);
@@ -92,7 +88,7 @@ public class QuoteProductMeetingRoomInteractions extends BaseTest{
         Assert.assertEquals(quoteMeetingRoomEndTime, "19:00:00.000Z");
     }
 
-    @Test(priority = 3, description = "Change the ‘Start Date/Time’ field of the ‘Quote Meetings Room’ so the value" +
+    @Test(priority = 2, description = "Change the ‘Start Date/Time’ field of the ‘Quote Meetings Room’ so the value" +
             " is less than the minimum value of ‘Start Date/Time’ field of the ‘Quote Product’. Result: the" +
             " ‘Start Date/Time’ fields of the related ‘Quote Products’ did not change.")
     @Severity(SeverityLevel.NORMAL)
@@ -117,7 +113,8 @@ public class QuoteProductMeetingRoomInteractions extends BaseTest{
         String activityStartTime= JsonParser2.getFieldValue(quoteProductActivity.toString(), "thn__Start_Time__c");
         StringBuilder quoteProductEquipment = quoteProducts.getQuoteProductSFDX(SFDX, "thn__MYCE_Quote__c='"
                 + quoteID + "' Name='EQUIPMENT'", ORG_USERNAME);
-        String equipmentStartTime= JsonParser2.getFieldValue(quoteProductEquipment.toString(), "thn__Start_Time__c");
+        String equipmentStartTime= JsonParser2.
+                getFieldValue(quoteProductEquipment.toString(), "thn__Start_Time__c");
         StringBuilder quoteMeetingRoomRecord = quoteMeetingRoom.getQuoteMeetingRoomSFDX(SFDX,
                 "thn__MYCE_Quote__c='" + quoteID + "'", ORG_USERNAME);
         String quoteMeetingRoomStartTime= JsonParser2.
@@ -130,7 +127,7 @@ public class QuoteProductMeetingRoomInteractions extends BaseTest{
         Assert.assertEquals(equipmentStartTime, "07:15:00.000Z");
     }
 
-    @Test(priority = 4, description = "Change the ‘Start Date/Time’ field of the ‘Quote Meetings Room’ so the value" +
+    @Test(priority = 3, description = "Change the ‘Start Date/Time’ field of the ‘Quote Meetings Room’ so the value" +
             " is more than the minimum value of ‘Start Date/Time’ field of the ‘Quote Product’. Result: The ‘Start" +
             " Date/Time’ fields of the related ‘Quote Products’ which ‘Start Date/Time’ values were lower than the" +
             " new value of the Meeting room have had their ‘Start Date/Time’ field values changed.")
@@ -156,7 +153,8 @@ public class QuoteProductMeetingRoomInteractions extends BaseTest{
         String activityStartTime= JsonParser2.getFieldValue(quoteProductActivity.toString(), "thn__Start_Time__c");
         StringBuilder quoteProductEquipment = quoteProducts.getQuoteProductSFDX(SFDX, "thn__MYCE_Quote__c='"
                 + quoteID + "' Name='EQUIPMENT'", ORG_USERNAME);
-        String equipmentStartTime= JsonParser2.getFieldValue(quoteProductEquipment.toString(), "thn__Start_Time__c");
+        String equipmentStartTime= JsonParser2.
+                getFieldValue(quoteProductEquipment.toString(), "thn__Start_Time__c");
         StringBuilder quoteMeetingRoomRecord = quoteMeetingRoom.getQuoteMeetingRoomSFDX(SFDX,
                 "thn__MYCE_Quote__c='" + quoteID + "'", ORG_USERNAME);
         String quoteMeetingRoomStartTime= JsonParser2.
@@ -169,7 +167,7 @@ public class QuoteProductMeetingRoomInteractions extends BaseTest{
         Assert.assertEquals(equipmentStartTime, "07:15:00.000Z");
     }
 
-    @Test(priority = 5, description = "Change the ‘End Date/Time’ field of the ‘Quote Meetings Room’ so the value" +
+    @Test(priority = 4, description = "Change the ‘End Date/Time’ field of the ‘Quote Meetings Room’ so the value" +
             " is more than the maximum value of ‘End Date/Time’ field of the ‘Quote Product’. Result: The" +
             " ‘End Date/Time’ fields of the related ‘Quote Products’ did not change.")
     @Severity(SeverityLevel.NORMAL)
@@ -207,7 +205,7 @@ public class QuoteProductMeetingRoomInteractions extends BaseTest{
         Assert.assertEquals(equipmentEndTime, "19:00:00.000Z");
     }
 
-    @Test(priority = 6, description = "Change the ‘End Date/Time’ field of the ‘Quote Meetings Room’ so the value is" +
+    @Test(priority = 5, description = "Change the ‘End Date/Time’ field of the ‘Quote Meetings Room’ so the value is" +
             " less than the maximum value of ‘End Date/Time’ field of the ‘Quote Product’. Result: The" +
             " ‘End Date/Time’ fields of the related ‘Quote Products’ which ‘End Date/Time’ values were lower than" +
             " the new value of the Meeting room have had their ‘End Date/Time’ field values changed.")
@@ -246,7 +244,7 @@ public class QuoteProductMeetingRoomInteractions extends BaseTest{
         Assert.assertEquals(equipmentEndTime, "19:00:00.000Z");
     }
 
-    @Test(priority = 7, description = "Change the ‘Start Date/Time’ field of the ‘Quote Product’ so the value is" +
+    @Test(priority = 6, description = "Change the ‘Start Date/Time’ field of the ‘Quote Product’ so the value is" +
             " less than the minimum value of ‘Start Date/Time’ field of the ‘Quote Meetings Room’. Result: The" +
             " ‘Start Date/Time’ field of the ‘Quote Meetings Room’ has had its ‘Start Date/Time’ field value changed.")
     @Severity(SeverityLevel.NORMAL)
@@ -268,7 +266,7 @@ public class QuoteProductMeetingRoomInteractions extends BaseTest{
         Assert.assertEquals(quoteMeetingRoomStartTime, "07:30:00.000Z");
     }
 
-    @Test(priority = 8, description = "Change the ‘Start Date/Time’ field of the ‘Quote Product’ so the value is" +
+    @Test(priority = 7, description = "Change the ‘Start Date/Time’ field of the ‘Quote Product’ so the value is" +
             " more than the minimum value of ‘Start Date/Time’ field of the ‘Quote Meetings Room’. Result: The" +
             " ‘Start Date/Time’ field of the ‘Quote Meetings Room’ has had its ‘Start Date/Time’ field value changed.")
     @Severity(SeverityLevel.NORMAL)
@@ -290,7 +288,7 @@ public class QuoteProductMeetingRoomInteractions extends BaseTest{
         Assert.assertEquals(quoteMeetingRoomStartTime, "07:45:00.000Z");
     }
 
-    @Test(priority = 9, description = "Change the ‘End Date/Time’ field of the ‘Quote Product’ so the value is more" +
+    @Test(priority = 8, description = "Change the ‘End Date/Time’ field of the ‘Quote Product’ so the value is more" +
             " than the maximum value of ‘End Date/Time’ field of the ‘Quote Meetings Room’. Result: The" +
             " ‘End Date/Time’ field of the ‘Quote Meetings Room’ has had its ‘End Date/Time’ field value changed.")
     @Severity(SeverityLevel.NORMAL)
@@ -312,7 +310,7 @@ public class QuoteProductMeetingRoomInteractions extends BaseTest{
         Assert.assertEquals(quoteMeetingRoomEndTime, "19:30:00.000Z");
     }
 
-    @Test(priority = 10, description = "Change the ‘End Date/Time’ field of the ‘Quote Product’ so the value is less" +
+    @Test(priority = 9, description = "Change the ‘End Date/Time’ field of the ‘Quote Product’ so the value is less" +
             " than the maximum value of ‘End Date/Time’ field of the ‘Quote Meetings Room’. Result: The" +
             " ‘End Date/Time’ field of the ‘Quote Meetings Room’ has had its ‘End Date/Time’ field value changed.")
     @Severity(SeverityLevel.NORMAL)

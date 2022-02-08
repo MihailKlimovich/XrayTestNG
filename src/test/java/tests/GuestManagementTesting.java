@@ -16,19 +16,13 @@ import java.io.IOException;
 
 public class GuestManagementTesting extends BaseTest {
 
-    @Test(priority = 1, description = "LogIn")
-    @Severity(SeverityLevel.NORMAL)
-    @Story("Guest Management testing")
-    public void logIn() throws InterruptedException, IOException {
-        loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
-    }
 
-    @Test(priority = 2, description = "Create a new myce quote and fill values: company and contact, agent and contact," +
-            " reservation guest name and set 'Bill to' to Company.")
+    @Test(priority = 1, description = "Create a new myce quote and fill values: company and contact, agent and" +
+            " contact, reservation guest name and set 'Bill to' to Company.")
     @Severity(SeverityLevel.NORMAL)
     @Story("Guest Management testing")
     public void precondition() throws InterruptedException, IOException {
-
+        loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
         SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:delete",
@@ -153,8 +147,8 @@ public class GuestManagementTesting extends BaseTest {
         String quoteID = JsonParser2.getFieldValue(myseQuoteResult.toString(), "id");
     }
 
-    @Test(priority = 3, description = "Change stage to the one referenced in Default Agile Values mdt ('2 - Propose' by" +
-            " default). Expected result: Company contact’s guest is created and sent to Mews, Reservation guest is" +
+    @Test(priority = 2, description = "Change stage to the one referenced in Default Agile Values mdt ('2 - Propose'" +
+            " by default). Expected result: Company contact’s guest is created and sent to Mews, Reservation guest is" +
             " created and added on quote")
     @Severity(SeverityLevel.NORMAL)
     @Story("Guest Management testing")
@@ -205,7 +199,8 @@ public class GuestManagementTesting extends BaseTest {
                 "-u",
                 ORG_USERNAME,
                 "--json"});
-        String reservationGuestMewsId = JsonParser2.getFieldValue(reservationGuestRecord.toString(), "thn__Mews_Id__c");
+        String reservationGuestMewsId = JsonParser2.
+                getFieldValue(reservationGuestRecord.toString(), "thn__Mews_Id__c");
         StringBuilder companyGuestRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:get",
@@ -221,7 +216,8 @@ public class GuestManagementTesting extends BaseTest {
         Assert.assertNotNull(companyGuestMewsId);
     }
 
-    @Test(priority = 4, description = "Modify value in 'Bill to' to Agent. Expected result: Agent contact’s guest is created")
+    @Test(priority = 3, description = "Modify value in 'Bill to' to Agent. Expected result: Agent contact’s guest" +
+            " is created")
     @Severity(SeverityLevel.NORMAL)
     @Story("Guest Management testing")
     public void case2() throws InterruptedException, IOException {
@@ -275,7 +271,7 @@ public class GuestManagementTesting extends BaseTest {
         Assert.assertNotNull(agentGuestMewsId);
     }
 
-    @Test(priority = 5, description = "Modify value in reservation guest name. Expected result: Reservation guest’s" +
+    @Test(priority = 4, description = "Modify value in reservation guest name. Expected result: Reservation guest’s" +
             " last name is updated and sent to Mews")
     @Severity(SeverityLevel.NORMAL)
     @Story("Guest Management testing")
@@ -314,8 +310,10 @@ public class GuestManagementTesting extends BaseTest {
                 "-u",
                 ORG_USERNAME,
                 "--json"});
-        String reservationGuestMewsId = JsonParser2.getFieldValue(reservationGuestRecord.toString(), "thn__Mews_Id__c");
-        String reservationGuestLastName = JsonParser2.getFieldValue(reservationGuestRecord.toString(), "thn__LastName__c");
+        String reservationGuestMewsId = JsonParser2.
+                getFieldValue(reservationGuestRecord.toString(), "thn__Mews_Id__c");
+        String reservationGuestLastName = JsonParser2.
+                getFieldValue(reservationGuestRecord.toString(), "thn__LastName__c");
         Assert.assertNotNull(reservationGuestMewsId);
         Assert.assertEquals(reservationGuestLastName, "GuestManagementTesting");
     }

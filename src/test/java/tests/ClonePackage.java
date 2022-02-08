@@ -15,21 +15,15 @@ import java.io.IOException;
 
 public class ClonePackage extends BaseTest {
 
-    @Test(priority = 1, description = "LogIn")
-    @Severity(SeverityLevel.NORMAL)
-    @Story("Clone Package testing")
-    public void logIn() throws InterruptedException, IOException {
-        loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
-        loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
-    }
-
-    @Test(priority = 2, description = "Create new Package, package lines. To test all the possibilities," +
+    @Test(priority = 1, description = "Create new Package, package lines. To test all the possibilities," +
             " create one of type food and one of type meeting room. Link the first package line to the meeting room," +
             " click on Clone Package. Expected result: the package and its related lines have been cloned, the package" +
             " line of type food is linked to the cloned line of type meeting room")
     @Severity(SeverityLevel.NORMAL)
     @Story("Clone Package testing")
     public void case1() throws InterruptedException, IOException {
+        loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
+        loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
         packages.deletePackageSFDX(SFDX, "Name='ClonePackageAutoTest", ORG_USERNAME);
         packages.deletePackageSFDX(SFDX, "Name='NewClonePackageAuto'", ORG_USERNAME);
         StringBuilder hotelRecord= hotel.getHotelSFDX(SFDX, "thn__Unique_Id__c='Demo'", ORG_USERNAME);

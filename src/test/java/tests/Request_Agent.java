@@ -17,19 +17,14 @@ import java.io.IOException;
 
 public class Request_Agent extends BaseTest{
 
-    @Test(priority = 1, description = "LogIn")
-    @Severity(SeverityLevel.NORMAL)
-    @Story("THY-506: Request - Agent")
-    public void logIn() throws InterruptedException, IOException {
-        loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
-        loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
-    }
 
-    @Test(priority = 2, description = "Fill Agent contact Email, make sure Contact with matching email exists in the" +
+    @Test(priority = 1, description = "Fill Agent contact Email, make sure Contact with matching email exists in the" +
             " system and is linked to Account, convert the record")
     @Severity(SeverityLevel.NORMAL)
     @Story("THY-506: Request - Agent")
     public void RequestAgent_case1() throws InterruptedException, IOException {
+        loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
+        loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
         StringBuilder res = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:delete",
@@ -124,7 +119,7 @@ public class Request_Agent extends BaseTest{
         Assert.assertEquals(agent, accountId);
     }
 
-    @Test(priority = 3, description = "    Fill Agent contact Email, make sure Contact with matching email exists" +
+    @Test(priority = 2, description = "    Fill Agent contact Email, make sure Contact with matching email exists" +
             " in the system, fill Agent Name, make sure such an account doesn’t exist, convert the record")
     @Severity(SeverityLevel.NORMAL)
     @Story("THY-506: Request - Agent")
@@ -199,17 +194,21 @@ public class Request_Agent extends BaseTest{
                 "-u",
                 ORG_USERNAME,
                 "--json"});
-        String myceQuoteAgentContactId = JsonParser2.getFieldValue(myceQuoteRecord.toString(), "thn__Agent_Contact__c");
-        String myceQuoteAgentId = JsonParser2.getFieldValue(myceQuoteRecord.toString(), "thn__Agent__c");
-        String myceQuoteCompanyId = JsonParser2.getFieldValue(myceQuoteRecord.toString(), "thn__Company__c");
-        String myceQuoteCompanyContactId = JsonParser2.getFieldValue(myceQuoteRecord.toString(), "thn__Company_Contact__c");
+        String myceQuoteAgentContactId = JsonParser2.
+                getFieldValue(myceQuoteRecord.toString(), "thn__Agent_Contact__c");
+        String myceQuoteAgentId = JsonParser2.
+                getFieldValue(myceQuoteRecord.toString(), "thn__Agent__c");
+        String myceQuoteCompanyId = JsonParser2.
+                getFieldValue(myceQuoteRecord.toString(), "thn__Company__c");
+        String myceQuoteCompanyContactId = JsonParser2.
+                getFieldValue(myceQuoteRecord.toString(), "thn__Company_Contact__c");
         Assert.assertEquals(myceQuoteAgentContactId, agentContactId);
         Assert.assertEquals(agentId, myceQuoteAgentId);
         Assert.assertEquals(myceQuoteCompanyId, requestAccountId);
         Assert.assertEquals(myceQuoteCompanyContactId, requestContactId);
     }
 
-    @Test(priority = 4, description = "Fill Agent contact Email, Contact with matching email doesn’t exist in the" +
+    @Test(priority = 3, description = "Fill Agent contact Email, Contact with matching email doesn’t exist in the" +
             " system, fill Agent Name, convert record")
     @Severity(SeverityLevel.NORMAL)
     @Story("THY-506: Request - Agent")
@@ -271,14 +270,16 @@ public class Request_Agent extends BaseTest{
                 "thn__Request__c",
                 "-v",
                 "thn__Agent_contact_Email__c='test3@tut.by' thn__Agent_contact_Last_Name__c='TestAgentContact'" +
-                        " thn__Last_Name__c='TestContact' thn__Account_Name__c='TestAccount'  thn__Agent_Name__c='Sandman2'",
+                        " thn__Last_Name__c='TestContact' thn__Account_Name__c='TestAccount'" +
+                        "  thn__Agent_Name__c='Sandman2'",
                 "-u",
                 ORG_USERNAME,
                 "--json"});
         String requestId = JsonParser2.getFieldValue(requestResult.toString(), "id");
         requests.openRequestRecord(requestId);
         requests.clickConvert();
-        convertWindow.fillConvertForm("Demo", "3", date.generateTodayDate(), date.generateDate_plus(0, 3));
+        convertWindow.fillConvertForm("Demo", "3", date.generateTodayDate(),
+                date.generateDate_plus(0, 3));
         Thread.sleep(3000);
         StringBuilder requestRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
@@ -304,10 +305,14 @@ public class Request_Agent extends BaseTest{
                 "-u",
                 ORG_USERNAME,
                 "--json"});
-        String myceQuoteAgentContactId = JsonParser2.getFieldValue(myceQuoteRecord.toString(), "thn__Agent_Contact__c");
-        String myceQuoteAgentId = JsonParser2.getFieldValue(myceQuoteRecord.toString(), "thn__Agent__c");
-        String myceQuoteCompanyId = JsonParser2.getFieldValue(myceQuoteRecord.toString(), "thn__Company__c");
-        String myceQuoteCompanyContactId = JsonParser2.getFieldValue(myceQuoteRecord.toString(), "thn__Company_Contact__c");
+        String myceQuoteAgentContactId = JsonParser2.
+                getFieldValue(myceQuoteRecord.toString(), "thn__Agent_Contact__c");
+        String myceQuoteAgentId = JsonParser2.
+                getFieldValue(myceQuoteRecord.toString(), "thn__Agent__c");
+        String myceQuoteCompanyId = JsonParser2.
+                getFieldValue(myceQuoteRecord.toString(), "thn__Company__c");
+        String myceQuoteCompanyContactId = JsonParser2.
+                getFieldValue(myceQuoteRecord.toString(), "thn__Company_Contact__c");
         Assert.assertEquals(myceQuoteAgentContactId, agentContactId);
         Assert.assertEquals(agentId, myceQuoteAgentId);
         Assert.assertEquals(myceQuoteCompanyId, requestAccountId);

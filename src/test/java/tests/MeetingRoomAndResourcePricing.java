@@ -12,17 +12,12 @@ import java.util.List;
 
 public class MeetingRoomAndResourcePricing extends BaseTest{
 
-    @Test(priority = 1, description = "LogIn")
-    @Severity(SeverityLevel.NORMAL)
-    @Story("Meeting room and resource pricing")
-    public void logIn() throws InterruptedException, IOException {
-        loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
-    }
 
-    @Test(priority = 2, description = "Preconditions")
+    @Test(priority = 1, description = "Preconditions")
     @Severity(SeverityLevel.NORMAL)
     @Story("Meeting room and resource pricing")
     public void preconditions() throws InterruptedException, IOException {
+        loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
         resource.deleteResourceSFDX(SFDX, "Name='ResourcePricingAutoTest'", ORG_USERNAME);
         resource.deleteResourceSFDX(SFDX, "Name='ResourcePricingAutoTest2'", ORG_USERNAME);
         myceQuotes.deleteQuoteSFDX(SFDX, "Name='ResourcePricingAutoTest'", ORG_USERNAME);
@@ -43,7 +38,7 @@ public class MeetingRoomAndResourcePricing extends BaseTest{
                 " RecordTypeId='" + recordTypeID.get(0) + "'", ORG_USERNAME);
     }
 
-    @Test(priority = 3, description = "Create Quote meeting room with conditions: Resource != default resource," +
+    @Test(priority = 2, description = "Create Quote meeting room with conditions: Resource != default resource," +
             " Resource price !=null, Shadow == false, Half day == true, Break out == true. Expected result:" +
             " Unit price = resource Break out half day")
     @Severity(SeverityLevel.NORMAL)
@@ -70,7 +65,7 @@ public class MeetingRoomAndResourcePricing extends BaseTest{
         Assert.assertEquals(meetingRoomUnitPrice, resourceBreakOutHalfDay);
     }
 
-    @Test(priority = 4, description = "Create Quote meeting room with conditions: Resource != default resource," +
+    @Test(priority = 3, description = "Create Quote meeting room with conditions: Resource != default resource," +
             " Resource price !=null, Shadow == false, Half day == true, Break out == false. Expected result:" +
             " Unit price = resource Half day price")
     @Severity(SeverityLevel.NORMAL)
@@ -97,7 +92,7 @@ public class MeetingRoomAndResourcePricing extends BaseTest{
         Assert.assertEquals(meetingRoomUnitPrice, resourceHalfDayPrice);
     }
 
-    @Test(priority = 5, description = "Create Quote meeting room with conditions: Resource != default resource," +
+    @Test(priority = 4, description = "Create Quote meeting room with conditions: Resource != default resource," +
             " Resource price !=null, Shadow == false, Half day == false, Break out == true. Expected result:" +
             " Unit price = resource Break out half day")
     @Severity(SeverityLevel.NORMAL)
@@ -124,7 +119,7 @@ public class MeetingRoomAndResourcePricing extends BaseTest{
         Assert.assertEquals(meetingRoomUnitPrice, resourceBreakOutFullDay);
     }
 
-    @Test(priority = 6, description = "Create Quote meeting room with conditions: Resource != default resource," +
+    @Test(priority = 5, description = "Create Quote meeting room with conditions: Resource != default resource," +
             " Resource price !=null, Shadow == false, Half day == false, Break out == false. Expected result:" +
             " Unit price = resource Half day price")
     @Severity(SeverityLevel.NORMAL)
@@ -151,7 +146,7 @@ public class MeetingRoomAndResourcePricing extends BaseTest{
         Assert.assertEquals(meetingRoomUnitPrice, resourceFullDayPrice);
     }
 
-    @Test(priority = 7, description = "Remove prices from the Resource used while creating Quote meeting rooms." +
+    @Test(priority = 6, description = "Remove prices from the Resource used while creating Quote meeting rooms." +
             " Repeat steps above specifying Unit price . Unit price is as specified while creation")
     @Severity(SeverityLevel.NORMAL)
     @Story("Meeting room and resource pricing")

@@ -50,18 +50,13 @@ public class OverbookingAndPriceUpdate extends BaseTest {
         }
     }
 
-    @Test(priority = 1, description = "LogIn")
-    @Severity(SeverityLevel.NORMAL)
-    @Story("Overbooking & price update")
-    public void logIn() throws InterruptedException, IOException {
-        loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
-        loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
-    }
 
-    @Test(priority = 2, description = "Preconditions")
+    @Test(priority = 1, description = "Preconditions")
     @Severity(SeverityLevel.NORMAL)
     @Story("Overbooking & price update")
     public void preconditions() throws InterruptedException, IOException {
+        loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
+        loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
         user.addPermissionSet(SFDX, "Overbooking_User", ORG_USERNAME, ADMIN_USERNAME);
         myceQuotes.deleteQuoteSFDX(SFDX, "Name='OverbookingChangePriceAutoTest'", ORG_USERNAME);
         resource.deleteResourceSFDX(SFDX, "Name='OverbookingChangePriceAutoTest1", ORG_USERNAME);
@@ -78,7 +73,8 @@ public class OverbookingAndPriceUpdate extends BaseTest {
         String resourceID3 = resource.createResourceSFDX(SFDX, "Name='OverbookingChangePriceAutoTest3'" +
                 " thn__Hotel__c='" + propertyID + "' thn__Type__c='Meeting Room'", ORG_USERNAME);
         String resourceID4 = resource.createResourceSFDX(SFDX, "Name='OverbookingChangePriceAutoTest4'" +
-                " thn__Hotel__c='" + propertyID + "' thn__Type__c='Meeting Room' thn__is_Shareable__c=true", ORG_USERNAME);
+                " thn__Hotel__c='" + propertyID + "' thn__Type__c='Meeting Room' thn__is_Shareable__c=true",
+                ORG_USERNAME);
         String resourceID5 = resource.createResourceSFDX(SFDX, "Name='OverbookingChangePriceAutoTest5'" +
                 " thn__Hotel__c='" + propertyID + "' thn__Type__c='Meeting Room' thn__is_Shareable__c=true" +
                 " thn__Break_out_half_day__c=60 thn__Break_out_full_day__c=100", ORG_USERNAME);
@@ -94,7 +90,7 @@ public class OverbookingAndPriceUpdate extends BaseTest {
                 " RecordTypeId='" + recordTypeID.get(0) + "'", ORG_USERNAME);
     }
 
-    @Test(priority = 3, description = "Create a quote meeting room. Click on change resource to assign a different" +
+    @Test(priority = 2, description = "Create a quote meeting room. Click on change resource to assign a different" +
             " one from the default. Expected result: No Warning (resource isn’t booked yet")
     @Severity(SeverityLevel.NORMAL)
     @Story("Overbooking & price update")
@@ -103,7 +99,8 @@ public class OverbookingAndPriceUpdate extends BaseTest {
         StringBuilder quoteRecord = myceQuotes.
                 getQuoteSFDX(SFDX, "Name='OverbookingChangePriceAutoTest'", ORG_USERNAME);
         String myceQuoteID= JsonParser2.getFieldValue(quoteRecord.toString(), "Id");
-        StringBuilder meetingFullDayRecord = product.getProductSFDX(SFDX, "Name='MEETING FULL DAY'", ORG_USERNAME);
+        StringBuilder meetingFullDayRecord = product.getProductSFDX(SFDX, "Name='MEETING FULL DAY'",
+                ORG_USERNAME);
         String meetingFullDayID = JsonParser2.getFieldValue(meetingFullDayRecord.toString(), "Id");
         String quoteMeetingRoomId = quoteMeetingRoom.createQuoteMeetingRoomSFDX(SFDX, "thn__MYCE_Quote__c='"
                 + myceQuoteID + "' thn__Product__c='" + meetingFullDayID + "'", ORG_USERNAME);
@@ -125,9 +122,9 @@ public class OverbookingAndPriceUpdate extends BaseTest {
         Assert.assertEquals(message, expectedMessage);
     }
 
-    @Test(priority = 4, description = "Create a new quote meeting room and then assign the same resource as the" +
-            " previous record. Expected result: overbooking message asking for confirmation if you have the permission" +
-            " to overbook.")
+    @Test(priority = 3, description = "Create a new quote meeting room and then assign the same resource as the" +
+            " previous record. Expected result: overbooking message asking for confirmation if you have the" +
+            " permission to overbook.")
     @Severity(SeverityLevel.NORMAL)
     @Story("Overbooking & price update")
     public void case2() throws InterruptedException, IOException {
@@ -135,7 +132,8 @@ public class OverbookingAndPriceUpdate extends BaseTest {
         StringBuilder quoteRecord = myceQuotes.
                 getQuoteSFDX(SFDX, "Name='OverbookingChangePriceAutoTest'", ORG_USERNAME);
         String myceQuoteID= JsonParser2.getFieldValue(quoteRecord.toString(), "Id");
-        StringBuilder meetingHalfDayRecord = product.getProductSFDX(SFDX, "Name='MEETING HALF DAY'", ORG_USERNAME);
+        StringBuilder meetingHalfDayRecord = product.getProductSFDX(SFDX, "Name='MEETING HALF DAY'",
+                ORG_USERNAME);
         String meetingHalfDayID = JsonParser2.getFieldValue(meetingHalfDayRecord.toString(), "Id");
         String quoteMeetingRoomId = quoteMeetingRoom.createQuoteMeetingRoomSFDX(SFDX, "thn__MYCE_Quote__c='"
                 + myceQuoteID + "' thn__Product__c='" + meetingHalfDayID + "'", ORG_USERNAME);
@@ -152,7 +150,7 @@ public class OverbookingAndPriceUpdate extends BaseTest {
         Assert.assertEquals(message, expectedMessage);
     }
 
-    @Test(priority = 5, description = "Update Quote meeting room with conditions: Resource != default resource and" +
+    @Test(priority = 4, description = "Update Quote meeting room with conditions: Resource != default resource and" +
             " assigned resource has groupings. Expected result: No overbooking found, changes are saved.")
     @Severity(SeverityLevel.NORMAL)
     @Story("Overbooking & price update")
@@ -161,7 +159,8 @@ public class OverbookingAndPriceUpdate extends BaseTest {
         StringBuilder resourceRecord1 = resource.
                 getResourceSFDX(SFDX, "Name='OverbookingChangePriceAutoTest2'", ORG_USERNAME);
         String resourceId = JsonParser2.getFieldValue(resourceRecord1.toString(), "Id");
-        StringBuilder meetingHalfDayRecord = product.getProductSFDX(SFDX, "Name='MEETING HALF DAY'", ORG_USERNAME);
+        StringBuilder meetingHalfDayRecord = product.getProductSFDX(SFDX, "Name='MEETING HALF DAY'",
+                ORG_USERNAME);
         String meetingHalfDayID = JsonParser2.getFieldValue(meetingHalfDayRecord.toString(), "Id");
         StringBuilder quoteRecord = myceQuotes.
                 getQuoteSFDX(SFDX, "Name='OverbookingChangePriceAutoTest'", ORG_USERNAME);
@@ -182,13 +181,14 @@ public class OverbookingAndPriceUpdate extends BaseTest {
         Assert.assertEquals(quoteMeetingRoom2Resource, resourceId);
     }
 
-    @Test(priority = 6, description = "Create new meeting room then update: Resource = resource where is" +
+    @Test(priority = 5, description = "Create new meeting room then update: Resource = resource where is" +
             " shareable = true. Expected result: No Warning.")
     @Severity(SeverityLevel.NORMAL)
     @Story("Overbooking & price update")
     public void case4() throws InterruptedException, IOException {
         String expectedMessage = "Message not found";
-        StringBuilder meetingFullDayRecord = product.getProductSFDX(SFDX, "Name='MEETING FULL DAY'", ORG_USERNAME);
+        StringBuilder meetingFullDayRecord = product.getProductSFDX(SFDX, "Name='MEETING FULL DAY'",
+                ORG_USERNAME);
         String meetingFullDayID = JsonParser2.getFieldValue(meetingFullDayRecord.toString(), "Id");
         StringBuilder quoteRecord = myceQuotes.
                 getQuoteSFDX(SFDX, "Name='OverbookingChangePriceAutoTest'", ORG_USERNAME);
@@ -204,13 +204,14 @@ public class OverbookingAndPriceUpdate extends BaseTest {
         Assert.assertEquals(message, expectedMessage);
     }
 
-    @Test(priority = 7, description = "Create new meeting room then update: Resource = one with shadow from case 3." +
+    @Test(priority = 6, description = "Create new meeting room then update: Resource = one with shadow from case 3." +
             " Expected result: Warning for overbooking.")
     @Severity(SeverityLevel.NORMAL)
     @Story("Overbooking & price update")
     public void case5() throws InterruptedException, IOException {
         String expectedMessage = "Do you wish to overbook?";
-        StringBuilder meetingHalfDayRecord = product.getProductSFDX(SFDX, "Name='MEETING HALF DAY'", ORG_USERNAME);
+        StringBuilder meetingHalfDayRecord = product.getProductSFDX(SFDX, "Name='MEETING HALF DAY'",
+                ORG_USERNAME);
         String meetingHalfDayID = JsonParser2.getFieldValue(meetingHalfDayRecord.toString(), "Id");
         StringBuilder quoteRecord = myceQuotes.
                 getQuoteSFDX(SFDX, "Name='OverbookingChangePriceAutoTest'", ORG_USERNAME);
@@ -226,13 +227,14 @@ public class OverbookingAndPriceUpdate extends BaseTest {
         Assert.assertEquals(message, expectedMessage);
     }
 
-    @Test(priority = 8, description = "Update meeting room and change resource / start and/or end date/times with" +
+    @Test(priority = 7, description = "Update meeting room and change resource / start and/or end date/times with" +
             " expected overbooking. Cancel modifications. Expected result: No changes occur on meeting room.")
     @Severity(SeverityLevel.NORMAL)
     @Story("Overbooking & price update")
     public void case6() throws InterruptedException, IOException {
         String expectedMessage = "Do you wish to overbook?";
-        StringBuilder meetingFullDayRecord = product.getProductSFDX(SFDX, "Name='MEETING FULL DAY'", ORG_USERNAME);
+        StringBuilder meetingFullDayRecord = product.getProductSFDX(SFDX, "Name='MEETING FULL DAY'",
+                ORG_USERNAME);
         String meetingFullDayID = JsonParser2.getFieldValue(meetingFullDayRecord.toString(), "Id");
         StringBuilder quoteRecord = myceQuotes.
                 getQuoteSFDX(SFDX, "Name='OverbookingChangePriceAutoTest'", ORG_USERNAME);
@@ -279,12 +281,13 @@ public class OverbookingAndPriceUpdate extends BaseTest {
         Assert.assertEquals(updatedQuoteMeetingRoomEndTime, quoteMeetingRoomEndTime);
     }
 
-    @Test(priority = 9, description = "Update meeting room’s resource and check ‘update prices’. Expected result:" +
+    @Test(priority = 8, description = "Update meeting room’s resource and check ‘update prices’. Expected result:" +
             " Prices are updated based on new resource’s pricing and value on meeting room (break out/half day)")
     @Severity(SeverityLevel.NORMAL)
     @Story("Overbooking & price update")
     public void case7() throws InterruptedException, IOException {
-        StringBuilder meetingFullDayRecord = product.getProductSFDX(SFDX, "Name='MEETING FULL DAY'", ORG_USERNAME);
+        StringBuilder meetingFullDayRecord = product.getProductSFDX(SFDX, "Name='MEETING FULL DAY'",
+                ORG_USERNAME);
         String meetingFullDayID = JsonParser2.getFieldValue(meetingFullDayRecord.toString(), "Id");
         StringBuilder quoteRecord = myceQuotes.
                 getQuoteSFDX(SFDX, "Name='OverbookingChangePriceAutoTest'", ORG_USERNAME);
@@ -324,7 +327,7 @@ public class OverbookingAndPriceUpdate extends BaseTest {
         Assert.assertEquals(updatedQuoteMeetingRoomHalfDayCheckbox, "true");
     }
 
-    @Test(priority = 10, description = "Remove permission set from user and update a meeting room with booked" +
+    @Test(priority = 9, description = "Remove permission set from user and update a meeting room with booked" +
             " resource. Expected result: Warning for overbooking with no possibility to update the meeting room")
     @Severity(SeverityLevel.NORMAL)
     @Story("Overbooking & price update")
@@ -335,7 +338,8 @@ public class OverbookingAndPriceUpdate extends BaseTest {
         StringBuilder resourceRecord = resource.
                 getResourceSFDX(SFDX, "Name='OverbookingChangePriceAutoTest3'", ORG_USERNAME);
         String resourceId = JsonParser2.getFieldValue(resourceRecord.toString(), "Id");
-        StringBuilder meetingFullDayRecord = product.getProductSFDX(SFDX, "Name='MEETING FULL DAY'", ORG_USERNAME);
+        StringBuilder meetingFullDayRecord = product.getProductSFDX(SFDX, "Name='MEETING FULL DAY'",
+                ORG_USERNAME);
         String meetingFullDayID = JsonParser2.getFieldValue(meetingFullDayRecord.toString(), "Id");
         StringBuilder quoteRecord = myceQuotes.
                 getQuoteSFDX(SFDX, "Name='OverbookingChangePriceAutoTest'", ORG_USERNAME);
@@ -355,7 +359,7 @@ public class OverbookingAndPriceUpdate extends BaseTest {
         Assert.assertNotEquals(quoteMeetingRoomResource, resourceId);
     }
 
-    @Test(priority = 11, description = "Return Overbooking Permission to the user")
+    @Test(priority = 10, description = "Return Overbooking Permission to the user")
     @Severity(SeverityLevel.NORMAL)
     @Story("Overbooking & price update")
     public void postconditions() throws InterruptedException, IOException {

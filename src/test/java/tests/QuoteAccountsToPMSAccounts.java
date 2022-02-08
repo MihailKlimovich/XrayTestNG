@@ -12,14 +12,8 @@ import java.util.List;
 
 public class QuoteAccountsToPMSAccounts extends BaseTest {
 
-    @Test(priority = 1, description = "LogIn")
-    @Severity(SeverityLevel.NORMAL)
-    @Story("THY-659: Quote accounts to PMS accounts")
-    public void logIn() throws InterruptedException, IOException {
-        loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
-    }
 
-    @Test(priority = 2, description = "Create MYCE Quote, Add the created Account to the Company field on the Quote," +
+    @Test(priority = 1, description = "Create MYCE Quote, Add the created Account to the Company field on the Quote," +
             " Change the stage of the Quote from ‘1 - Propose’ to ‘3 - Tentative’. Expected result: A PMS Company" +
             " record was created and linked to the Quote. The fields that we filled on the Account record correspond" +
             " to the fields on the PMS Company record. Checkbox 'Is Primary' = True. Property Details Chain Code =" +
@@ -28,6 +22,7 @@ public class QuoteAccountsToPMSAccounts extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     @Story("THY-659: Quote accounts to PMS accounts")
     public void case1() throws InterruptedException, IOException {
+        loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
         myceQuotes.deleteQuoteSFDX(SFDX, "Name='QuoteAccountToPMSAccountsAutoTest'", ORG_USERNAME);
         accounts.deleteAccountSFDX(SFDX, "Name=PMSCompanyAutoTest", ORG_USERNAME);
         StringBuilder hotelRecord= hotel.getHotelSFDX(SFDX, "thn__Unique_Id__c='Demo'", ORG_USERNAME);
@@ -37,9 +32,9 @@ public class QuoteAccountsToPMSAccounts extends BaseTest {
                 " SobjectType='thn__MYCE_Quote__c' AND Name='Quote'", ORG_USERNAME);
         System.out.println(recordTypes);
         List<String> recordTypeID = JsonParser2.getFieldValueSoql(recordTypes.toString(), "Id");
-        String quoteID = myceQuotes.createQuoteSFDX(SFDX, "Name='QuoteAccountToPMSAccountsAutoTest' thn__Pax__c=3" +
-                " thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" + date.generateTodayDate2()
-                + " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 3) + " RecordTypeId='"
+        String quoteID = myceQuotes.createQuoteSFDX(SFDX, "Name='QuoteAccountToPMSAccountsAutoTest'" +
+                " thn__Pax__c=3 thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" + date.generateTodayDate2() +
+                " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 3) + " RecordTypeId='"
                 + recordTypeID.get(0) + "'", ORG_USERNAME);
         String accountId = accounts.createAccountSFDX(SFDX, "Name='PMSCompanyAutoTest' BillingCity='Brest'" +
                 " BillingPostalCode='224016' BillingStreet='22 Gorky Street' Fax='+375253254514' thn__IATA__c='IATA'" +
@@ -48,7 +43,8 @@ public class QuoteAccountsToPMSAccounts extends BaseTest {
                 ORG_USERNAME);
         myceQuotes.updateQuoteSFDX(SFDX, "Id='" + quoteID + "'", "thn__Company__c='" + accountId + "'",
                 ORG_USERNAME);
-        myceQuotes.updateQuoteSFDX(SFDX, "Id='" + quoteID + "'", "thn__Stage__c='3 - Tentative'", ORG_USERNAME);
+        myceQuotes.updateQuoteSFDX(SFDX, "Id='" + quoteID + "'", "thn__Stage__c='3 - Tentative'",
+                ORG_USERNAME);
         StringBuilder quoteRecord = myceQuotes.getQuoteSFDX(SFDX, "Id='" + quoteID + "'", ORG_USERNAME);
         StringBuilder accountRecord = accounts.getAccountSFDX(SFDX, "Id='" + accountId + "'", ORG_USERNAME);
         String quotePMSCompany = JsonParser2.getFieldValue(quoteRecord.toString(), "thn__PMS_Company__c");
@@ -111,7 +107,7 @@ public class QuoteAccountsToPMSAccounts extends BaseTest {
         Assert.assertEquals(pmsAccountPropertyDetailCode, propertyHotelCode);
     }
 
-    @Test(priority = 3, description = "Remove the linked PMS Company record from the Quote. Change the stage of the" +
+    @Test(priority = 2, description = "Remove the linked PMS Company record from the Quote. Change the stage of the" +
             " Quote from ‘3 - Tentative’  to ‘1 - Qualify’. Expected result: The earlier created PMS Company record" +
             " was linked to the Quote.")
     @Severity(SeverityLevel.NORMAL)
@@ -135,7 +131,7 @@ public class QuoteAccountsToPMSAccounts extends BaseTest {
         Assert.assertEquals(updatedQuotePMSCompany, quotePMSCompany);
     }
 
-    @Test(priority = 4, description = "Remove the linked PMS Company record from the Quote. Add a different PMS" +
+    @Test(priority = 3, description = "Remove the linked PMS Company record from the Quote. Add a different PMS" +
             " Company record to the Quote. Change the stage of the Quote from ‘1 - Propose’ to ‘3 - Tentative’." +
             " Expected result: The earlier created PMS Company record was linked to the Quote.")
     @Severity(SeverityLevel.NORMAL)
@@ -161,7 +157,7 @@ public class QuoteAccountsToPMSAccounts extends BaseTest {
         Assert.assertEquals(updatedQuotePMSCompany, quotePMSCompany);
     }
 
-    @Test(priority = 5, description = "Remove the linked PMS Company and Company record from the Quote. Create an" +
+    @Test(priority = 4, description = "Remove the linked PMS Company and Company record from the Quote. Create an" +
             " Account record with the Name of 110 characters. Change the stage of the Quote from ‘3 - Tentative’  to" +
             " ‘1 - Qualify’. Expected result: The Name of the created PMS Company was shortened to 80 characters. ")
     @Severity(SeverityLevel.NORMAL)
@@ -189,7 +185,7 @@ public class QuoteAccountsToPMSAccounts extends BaseTest {
         Assert.assertEquals(pmsAccountName.length(), 80);
     }
 
-    @Test(priority = 6, description = "Create MYCE Quote, Add the created Account to the Agent field on the Quote," +
+    @Test(priority = 5, description = "Create MYCE Quote, Add the created Account to the Agent field on the Quote," +
             " Change the stage of the Quote from ‘1 - Propose’ to ‘3 - Tentative’. Expected result: A PMS Company" +
             " record was created and linked to the Quote. The fields that we filled on the Account record correspond" +
             " to the fields on the PMS Company record. Checkbox 'Is Primary' = True. Property Details Chain Code =" +
@@ -212,14 +208,14 @@ public class QuoteAccountsToPMSAccounts extends BaseTest {
                 + " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 3) + " RecordTypeId='"
                 + recordTypeID.get(0) + "'", ORG_USERNAME);
         String accountId = accounts.createAccountSFDX(SFDX, "Name='PMSCompanyAutoTest2' BillingCity='Polotsk'" +
-                        " BillingPostalCode='211400' BillingStreet='15 Frantsiska Skoriny' Fax='+375253254789' thn__IATA__c='IATA'" +
-                        " Phone='+375253254987' ShippingCity='Farinovo' ShippingPostalCode='211654'" +
-                        " ShippingStreet='16 Frantsiska Skoriny' Sic='SIC Code' SicDesc='SIC Description'" +
-                        " Website='polotsk.com' thn__Type__c='Agent'",
-                ORG_USERNAME);
+                " BillingPostalCode='211400' BillingStreet='15 Frantsiska Skoriny' Fax='+375253254789'" +
+                " thn__IATA__c='IATA' Phone='+375253254987' ShippingCity='Farinovo' ShippingPostalCode='211654'" +
+                " ShippingStreet='16 Frantsiska Skoriny' Sic='SIC Code' SicDesc='SIC Description'" +
+                " Website='polotsk.com' thn__Type__c='Agent'", ORG_USERNAME);
         myceQuotes.updateQuoteSFDX(SFDX, "Id='" + quoteID + "'", "thn__Agent__c='" + accountId + "'",
                 ORG_USERNAME);
-        myceQuotes.updateQuoteSFDX(SFDX, "Id='" + quoteID + "'", "thn__Stage__c='3 - Tentative'", ORG_USERNAME);
+        myceQuotes.updateQuoteSFDX(SFDX, "Id='" + quoteID + "'", "thn__Stage__c='3 - Tentative'",
+                ORG_USERNAME);
         StringBuilder quoteRecord = myceQuotes.getQuoteSFDX(SFDX, "Id='" + quoteID + "'", ORG_USERNAME);
         StringBuilder accountRecord = accounts.getAccountSFDX(SFDX, "Id='" + accountId + "'", ORG_USERNAME);
         String quotePMSAgent = JsonParser2.getFieldValue(quoteRecord.toString(), "thn__PMS_Travel_Agent__c");
@@ -281,9 +277,9 @@ public class QuoteAccountsToPMSAccounts extends BaseTest {
         Assert.assertEquals(pmsAccountPropertyDetailCode, propertyHotelCode);
     }
 
-    @Test(priority = 7, description = "Remove the linked PMS Travel Agent record from the Quote. Change the stage of the" +
-            " Quote from ‘3 - Tentative’  to ‘1 - Qualify’. Expected result: The earlier created PMS Company record" +
-            " was linked to the Quote.")
+    @Test(priority = 6, description = "Remove the linked PMS Travel Agent record from the Quote. Change the stage of" +
+            " the Quote from ‘3 - Tentative’  to ‘1 - Qualify’. Expected result: The earlier created PMS Company" +
+            " record was linked to the Quote.")
     @Severity(SeverityLevel.NORMAL)
     @Story("THY-659: Quote accounts to PMS accounts")
     public void case6() throws InterruptedException, IOException {
@@ -305,7 +301,7 @@ public class QuoteAccountsToPMSAccounts extends BaseTest {
         Assert.assertEquals(updatedQuotePMSAgent, quotePMSAgent);
     }
 
-    @Test(priority = 8, description = "Remove the linked PMS Travel Agent record from the Quote. Add a different PMS" +
+    @Test(priority = 7, description = "Remove the linked PMS Travel Agent record from the Quote. Add a different PMS" +
             " Travel Agent record to the Quote. Change the stage of the Quote from ‘1 - Propose’ to ‘3 - Tentative’." +
             " Expected result: The earlier created PMS Travel Agent record was linked to the Quote.")
     @Severity(SeverityLevel.NORMAL)
@@ -331,7 +327,7 @@ public class QuoteAccountsToPMSAccounts extends BaseTest {
         Assert.assertEquals(updatedQuotePMSAgent, quotePMSAgent);
     }
 
-    @Test(priority = 9, description = "Remove the linked PMS Travel Agent and Agent record from the Quote. Create an" +
+    @Test(priority = 8, description = "Remove the linked PMS Travel Agent and Agent record from the Quote. Create an" +
             " Account record with the Name of 110 characters. Change the stage of the Quote from ‘3 - Tentative’  to" +
             " ‘1 - Qualify’. Expected result: The Name of the created PMS Travel Agent was shortened to 80 characters.")
     @Severity(SeverityLevel.NORMAL)
@@ -340,7 +336,8 @@ public class QuoteAccountsToPMSAccounts extends BaseTest {
         accounts.deleteAccountSFDX(SFDX, "Name=OneHundreedOneHundreedOneHundreedOneHundreedOneHundreedOne" +
                 "HundreedOneHundreedOneHundreedOneHundreedOneHundreed", ORG_USERNAME);
         String accountId = accounts.createAccountSFDX(SFDX, "Name='OneHundreedOneHundreedOneHundreedOneHundreed" +
-                "OneHundreedOneHundreedOneHundreedOneHundreedOneHundreedOneHundreed' thn__Type__c='Agent'", ORG_USERNAME);
+                "OneHundreedOneHundreedOneHundreedOneHundreedOneHundreedOneHundreed' thn__Type__c='Agent'",
+                ORG_USERNAME);
         StringBuilder accountRecord = accounts.getAccountSFDX(SFDX, "Id='" + accountId + "'", ORG_USERNAME);
         String accountName= JsonParser2.
                 getFieldValue(accountRecord.toString(), "Name");

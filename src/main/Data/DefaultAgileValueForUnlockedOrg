@@ -99,6 +99,11 @@
             customField18.value = '1 - Qualify, 3 - Tentative, 4 - Closed';
             cmd.values.add(customField18);
 
+      Metadata.CustomMetadataValue customField19 = new Metadata.CustomMetadataValue();
+            customField19.field = 'thn__Use_Cat_Prices__c';
+            customField19.value = true;
+            cmd.values.add(customField19);
+
       Metadata.CustomMetadataValue customField21 = new Metadata.CustomMetadataValue();
       customField21.field = 'thn__Default_Day_Price_Checkbox__c';
       customField21.value = false;

@@ -12,18 +12,13 @@ import java.util.List;
 
 public class CreateQuoteMeetingRoomFromQuoteProduct extends BaseTest {
 
-    @Test(priority = 1, description = "LogIn")
-    @Severity(SeverityLevel.NORMAL)
-    @Story("THY-621: Create quote meeting room from quote product")
-    public void logIn() throws InterruptedException, IOException {
-        loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
-        loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
-    }
 
-    @Test(priority = 2, description = "Preconditions: Create a new Myce quote, create QuoteProduct.")
+    @Test(priority = 1, description = "Preconditions: Create a new Myce quote, create QuoteProduct.")
     @Severity(SeverityLevel.NORMAL)
     @Story("THY-621: Create quote meeting room from quote product")
     public void preconditions() throws InterruptedException, IOException {
+        loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
+        loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
         myceQuotes.deleteQuoteSFDX(SFDX, "Name='CreateQuoteMeetingRoomFromQuoteProduct'", ORG_USERNAME);
         StringBuilder hotelRecord= hotel.getHotelSFDX(SFDX, "thn__Unique_Id__c='Demo'", ORG_USERNAME);
         String propertyID = JsonParser2.getFieldValue(hotelRecord.toString(), "Id");
@@ -41,7 +36,7 @@ public class CreateQuoteMeetingRoomFromQuoteProduct extends BaseTest {
                 beverageID + "'", ORG_USERNAME);
     }
 
-    @Test(priority = 3, description = "Open the ‘Quote Product’ that we added earlier to the Quote. Click the" +
+    @Test(priority = 2, description = "Open the ‘Quote Product’ that we added earlier to the Quote. Click the" +
             " ‘Create Resource’ button that we added earlier. Fill in all the fields. Result: A ‘Meeting Room’ was" +
             " created and assigned to the ‘Quote Product’. The Related tab of the ‘Quote Meeting Room’ has the" +
             " related Quote products.")
@@ -68,7 +63,8 @@ public class CreateQuoteMeetingRoomFromQuoteProduct extends BaseTest {
         StringBuilder quoteProductRecord = quoteProducts.
                 getQuoteProductSFDX(SFDX, "thn__MYCE_Quote__c='" + quoteID + "'", ORG_USERNAME);
         System.out.println(quoteMeetingRoomRecord);
-        String quoteProductMeetingRoom= JsonParser2.getFieldValue(quoteProductRecord.toString(), "thn__Service_Area__c");
+        String quoteProductMeetingRoom= JsonParser2.
+                getFieldValue(quoteProductRecord.toString(), "thn__Service_Area__c");
         String quoteMeetingRoomId = JsonParser2.getFieldValue(quoteMeetingRoomRecord.toString(), "Id");
         String quoteMeetingRoomResource = JsonParser2.
                 getFieldValue(quoteMeetingRoomRecord.toString(), "thn__Resource__c");

@@ -16,17 +16,13 @@ import java.util.List;
 
 public class PaymentToMews extends BaseTest {
 
-    @Test(priority = 1, description = "LogIn")
-    @Severity(SeverityLevel.NORMAL)
-    @Story("Payment to Mews")
-    public void logIn() throws InterruptedException, IOException {
-        loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
-    }
 
-    @Test(priority = 2, description = "Fill guest, Gross value, type, accounting category and notes, check send to mews")
+    @Test(priority = 1, description = "Fill guest, Gross value, type, accounting category and notes, check send" +
+            " to mews")
     @Severity(SeverityLevel.NORMAL)
     @Story("Payment to Mews")
     public void case1() throws InterruptedException, IOException {
+        loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
         myceQuotes.deleteQuoteSFDX(SFDX, "Name='PaymentToMewsAutoTest'", ORG_USERNAME);
         StringBuilder hotelRecord= hotel.getHotelSFDX(SFDX, "thn__Unique_Id__c='Demo'", ORG_USERNAME);
         String propertyID = JsonParser2.getFieldValue(hotelRecord.toString(), "Id");

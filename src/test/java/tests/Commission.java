@@ -17,17 +17,11 @@ import java.util.List;
 
 public class Commission extends BaseTest {
 
-    @Test(priority = 1, description = "LogIn")
-    @Severity(SeverityLevel.NORMAL)
-    @Story("Commission")
-    public void logIn() throws InterruptedException, IOException {
-        loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
-    }
-
-    @Test(priority = 2, description = "Preconditions")
+    @Test(priority = 1, description = "Preconditions")
     @Severity(SeverityLevel.NORMAL)
     @Story("Commission")
     public void preconditions() throws InterruptedException, IOException {
+        loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
         SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:delete",
@@ -85,8 +79,9 @@ public class Commission extends BaseTest {
                 "-s",
                 "Account",
                 "-v",
-                "Name='TestAccountWithCommissionAuto' thn__Comm_Activity__c=15 thn__Beverage__c=15 thn__Comm_Equipment__c=15" +
-                        " thn__Food__c=15 thn__Room__c=15 thn__Meeting_Room__c=15 thn__Other__c=15 thn__Comm_Packages__c=15",
+                "Name='TestAccountWithCommissionAuto' thn__Comm_Activity__c=15 thn__Beverage__c=15" +
+                        " thn__Comm_Equipment__c=15 thn__Food__c=15 thn__Room__c=15 thn__Meeting_Room__c=15" +
+                        " thn__Other__c=15 thn__Comm_Packages__c=15",
                 "-u",
                 ORG_USERNAME,
                 "--json"});
@@ -132,7 +127,7 @@ public class Commission extends BaseTest {
         String myceQuoteID = JsonParser2.getFieldValue(myseQuoteResult.toString(), "id");
     }
 
-    @Test(priority = 3, description = "Add an agent or a company to the quote (Account with Commission) and" +
+    @Test(priority = 2, description = "Add an agent or a company to the quote (Account with Commission) and" +
             " change the field 'commission to' to the value of the field you completed")
     @Severity(SeverityLevel.NORMAL)
     @Story("Commission")
@@ -181,22 +176,38 @@ public class Commission extends BaseTest {
                 "-u",
                 ORG_USERNAME,
                 "--json"});
-        String quoteCommActivity = JsonParser2.getFieldValue(updateQuoteRecord.toString(), "thn__Comm_Activity__c");
-        String quoteCommBeverage = JsonParser2.getFieldValue(updateQuoteRecord.toString(), "thn__Comm_Beverage__c");
-        String quoteCommEquipment = JsonParser2.getFieldValue(updateQuoteRecord.toString(), "thn__Comm_Equipment__c");
-        String quoteCommFood = JsonParser2.getFieldValue(updateQuoteRecord.toString(), "thn__Comm_Food__c");
-        String quoteCommHotelRooms = JsonParser2.getFieldValue(updateQuoteRecord.toString(), "thn__Comm_Hotel_Rooms__c");
-        String quoteCommMeetingRooms = JsonParser2.getFieldValue(updateQuoteRecord.toString(), "thn__Comm_Meeting_Rooms__c");
-        String quoteCommOther = JsonParser2.getFieldValue(updateQuoteRecord.toString(), "thn__Comm_Other__c");
-        String quoteCommPackage = JsonParser2.getFieldValue(updateQuoteRecord.toString(), "thn__Comm_Package__c");
-        String accountCommActivity = JsonParser2.getFieldValue(accountRecord.toString(), "thn__Comm_Activity__c");
-        String accountCommBeverage = JsonParser2.getFieldValue(accountRecord.toString(), "thn__Beverage__c");
-        String accountCommEquipment = JsonParser2.getFieldValue(accountRecord.toString(), "thn__Comm_Equipment__c");
-        String accountCommFood = JsonParser2.getFieldValue(accountRecord.toString(), "thn__Food__c");
-        String accountCommHotelRooms = JsonParser2.getFieldValue(accountRecord.toString(), "thn__Room__c");
-        String accountCommMeetingRooms = JsonParser2.getFieldValue(accountRecord.toString(), "thn__Meeting_Room__c");
-        String accountCommOther = JsonParser2.getFieldValue(accountRecord.toString(), "thn__Other__c");
-        String accountCommPackage = JsonParser2.getFieldValue(accountRecord.toString(), "thn__Comm_Packages__c");
+        String quoteCommActivity = JsonParser2.
+                getFieldValue(updateQuoteRecord.toString(), "thn__Comm_Activity__c");
+        String quoteCommBeverage = JsonParser2.
+                getFieldValue(updateQuoteRecord.toString(), "thn__Comm_Beverage__c");
+        String quoteCommEquipment = JsonParser2.
+                getFieldValue(updateQuoteRecord.toString(), "thn__Comm_Equipment__c");
+        String quoteCommFood = JsonParser2.
+                getFieldValue(updateQuoteRecord.toString(), "thn__Comm_Food__c");
+        String quoteCommHotelRooms = JsonParser2.
+                getFieldValue(updateQuoteRecord.toString(), "thn__Comm_Hotel_Rooms__c");
+        String quoteCommMeetingRooms = JsonParser2.
+                getFieldValue(updateQuoteRecord.toString(), "thn__Comm_Meeting_Rooms__c");
+        String quoteCommOther = JsonParser2.
+                getFieldValue(updateQuoteRecord.toString(), "thn__Comm_Other__c");
+        String quoteCommPackage = JsonParser2.
+                getFieldValue(updateQuoteRecord.toString(), "thn__Comm_Package__c");
+        String accountCommActivity = JsonParser2.
+                getFieldValue(accountRecord.toString(), "thn__Comm_Activity__c");
+        String accountCommBeverage = JsonParser2.
+                getFieldValue(accountRecord.toString(), "thn__Beverage__c");
+        String accountCommEquipment = JsonParser2.
+                getFieldValue(accountRecord.toString(), "thn__Comm_Equipment__c");
+        String accountCommFood = JsonParser2.
+                getFieldValue(accountRecord.toString(), "thn__Food__c");
+        String accountCommHotelRooms = JsonParser2.
+                getFieldValue(accountRecord.toString(), "thn__Room__c");
+        String accountCommMeetingRooms = JsonParser2.
+                getFieldValue(accountRecord.toString(), "thn__Meeting_Room__c");
+        String accountCommOther = JsonParser2.
+                getFieldValue(accountRecord.toString(), "thn__Other__c");
+        String accountCommPackage = JsonParser2.
+                getFieldValue(accountRecord.toString(), "thn__Comm_Packages__c");
         Assert.assertEquals(quoteCommActivity, accountCommActivity);
         Assert.assertEquals(quoteCommBeverage, accountCommBeverage);
         Assert.assertEquals(quoteCommEquipment, accountCommEquipment);
@@ -207,7 +218,7 @@ public class Commission extends BaseTest {
         Assert.assertEquals(quoteCommPackage, accountCommPackage);
     }
 
-    @Test(priority = 4, description = "Update an agent or a company to the quote (Account without Commission) and" +
+    @Test(priority = 3, description = "Update an agent or a company to the quote (Account without Commission) and" +
             " change the field 'commission to' to the value of the field you completed")
     @Severity(SeverityLevel.NORMAL)
     @Story("Commission")
@@ -268,22 +279,38 @@ public class Commission extends BaseTest {
                 "-u",
                 ORG_USERNAME,
                 "--json"});
-        String propertyCommActivity = JsonParser2.getFieldValue(propertyRecord.toString(), "thn__Comm_Activity__c");
-        String propertyCommBeverage = JsonParser2.getFieldValue(propertyRecord.toString(), "thn__Comm_Beverage__c");
-        String propertyCommEquipment = JsonParser2.getFieldValue(propertyRecord.toString(), "thn__Comm_Equipment__c");
-        String propertyCommFood  = JsonParser2.getFieldValue(propertyRecord.toString(), "thn__Comm_Food__c");
-        String propertyHotelRooms= JsonParser2.getFieldValue(propertyRecord.toString(), "thn__Comm_Hotel_Rooms__c");
-        String propertyMeetingRooms  = JsonParser2.getFieldValue(propertyRecord.toString(), "thn__Comm_Meeting_Rooms__c");
-        String propertyCommOther = JsonParser2.getFieldValue(propertyRecord.toString(), "thn__Comm_Other__c");
-        String propertyCommPackage = JsonParser2.getFieldValue(propertyRecord.toString(), "thn__Comm_Packages__c");
-        String quoteCommActivity = JsonParser2.getFieldValue(updateQuoteRecord.toString(), "thn__Comm_Activity__c");
-        String quoteCommBeverage = JsonParser2.getFieldValue(updateQuoteRecord.toString(), "thn__Comm_Beverage__c");
-        String quoteCommEquipment = JsonParser2.getFieldValue(updateQuoteRecord.toString(), "thn__Comm_Equipment__c");
-        String quoteCommFood = JsonParser2.getFieldValue(updateQuoteRecord.toString(), "thn__Comm_Food__c");
-        String quoteCommHotelRooms = JsonParser2.getFieldValue(updateQuoteRecord.toString(), "thn__Comm_Hotel_Rooms__c");
-        String quoteCommMeetingRooms = JsonParser2.getFieldValue(updateQuoteRecord.toString(), "thn__Comm_Meeting_Rooms__c");
-        String quoteCommOther = JsonParser2.getFieldValue(updateQuoteRecord.toString(), "thn__Comm_Other__c");
-        String quoteCommPackage = JsonParser2.getFieldValue(updateQuoteRecord.toString(), "thn__Comm_Package__c");
+        String propertyCommActivity = JsonParser2.
+                getFieldValue(propertyRecord.toString(), "thn__Comm_Activity__c");
+        String propertyCommBeverage = JsonParser2.
+                getFieldValue(propertyRecord.toString(), "thn__Comm_Beverage__c");
+        String propertyCommEquipment = JsonParser2.
+                getFieldValue(propertyRecord.toString(), "thn__Comm_Equipment__c");
+        String propertyCommFood  = JsonParser2.
+                getFieldValue(propertyRecord.toString(), "thn__Comm_Food__c");
+        String propertyHotelRooms= JsonParser2.
+                getFieldValue(propertyRecord.toString(), "thn__Comm_Hotel_Rooms__c");
+        String propertyMeetingRooms  = JsonParser2.
+                getFieldValue(propertyRecord.toString(), "thn__Comm_Meeting_Rooms__c");
+        String propertyCommOther = JsonParser2.
+                getFieldValue(propertyRecord.toString(), "thn__Comm_Other__c");
+        String propertyCommPackage = JsonParser2.
+                getFieldValue(propertyRecord.toString(), "thn__Comm_Packages__c");
+        String quoteCommActivity = JsonParser2.
+                getFieldValue(updateQuoteRecord.toString(), "thn__Comm_Activity__c");
+        String quoteCommBeverage = JsonParser2.
+                getFieldValue(updateQuoteRecord.toString(), "thn__Comm_Beverage__c");
+        String quoteCommEquipment = JsonParser2.
+                getFieldValue(updateQuoteRecord.toString(), "thn__Comm_Equipment__c");
+        String quoteCommFood = JsonParser2.
+                getFieldValue(updateQuoteRecord.toString(), "thn__Comm_Food__c");
+        String quoteCommHotelRooms = JsonParser2.
+                getFieldValue(updateQuoteRecord.toString(), "thn__Comm_Hotel_Rooms__c");
+        String quoteCommMeetingRooms = JsonParser2.
+                getFieldValue(updateQuoteRecord.toString(), "thn__Comm_Meeting_Rooms__c");
+        String quoteCommOther = JsonParser2.
+                getFieldValue(updateQuoteRecord.toString(), "thn__Comm_Other__c");
+        String quoteCommPackage = JsonParser2.
+                getFieldValue(updateQuoteRecord.toString(), "thn__Comm_Package__c");
         Assert.assertEquals(quoteCommActivity, propertyCommActivity);
         Assert.assertEquals(quoteCommBeverage, propertyCommBeverage);
         Assert.assertEquals(quoteCommEquipment, propertyCommEquipment);
@@ -294,7 +321,7 @@ public class Commission extends BaseTest {
         Assert.assertEquals(quoteCommPackage, propertyCommPackage);
     }
 
-    @Test(priority = 5, description = "Add related records to the quote where it is part of Package ")
+    @Test(priority = 4, description = "Add related records to the quote where it is part of Package ")
     @Severity(SeverityLevel.NORMAL)
     @Story("Commission")
     public void case3() throws InterruptedException, IOException {
@@ -578,14 +605,22 @@ public class Commission extends BaseTest {
                 "-u",
                 ORG_USERNAME,
                 "--json"});
-        String quoteCommPackage = JsonParser2.getFieldValue(updateQuoteRecord.toString(), "thn__Comm_Package__c");
-        String commissionPercentageQuotePackage = JsonParser2.getFieldValue(quotePackageRecord.toString(), "thn__Commission__c");
-        String commissionPercentageQuoteHotelRoom = JsonParser2.getFieldValue(quoteHotelRoomRecord.toString(), "thn__Commission_Percentage__c");
-        String commissionPercentageBeverageProduct = JsonParser2.getFieldValue(beverageProductRecord.toString(), "thn__Commission_Percentage__c");
-        String commissionPercentageActivityProduct = JsonParser2.getFieldValue(activityProductRecord.toString(), "thn__Commission_Percentage__c");
-        String commissionPercentageEquipmentProduct = JsonParser2.getFieldValue(equipmentProductRecord.toString(), "thn__Commission_Percentage__c");
-        String commissionPercentageFoodProduct = JsonParser2.getFieldValue(foodProductRecord.toString(), "thn__Commission_Percentage__c");
-        String commissionPercentageQuoteMeetingRoom = JsonParser2.getFieldValue(quoteMeetingRoomRecord.toString(), "thn__Commission_Percentage__c");
+        String quoteCommPackage = JsonParser2.
+                getFieldValue(updateQuoteRecord.toString(), "thn__Comm_Package__c");
+        String commissionPercentageQuotePackage = JsonParser2.
+                getFieldValue(quotePackageRecord.toString(), "thn__Commission__c");
+        String commissionPercentageQuoteHotelRoom = JsonParser2.
+                getFieldValue(quoteHotelRoomRecord.toString(), "thn__Commission_Percentage__c");
+        String commissionPercentageBeverageProduct = JsonParser2.
+                getFieldValue(beverageProductRecord.toString(), "thn__Commission_Percentage__c");
+        String commissionPercentageActivityProduct = JsonParser2.
+                getFieldValue(activityProductRecord.toString(), "thn__Commission_Percentage__c");
+        String commissionPercentageEquipmentProduct = JsonParser2.
+                getFieldValue(equipmentProductRecord.toString(), "thn__Commission_Percentage__c");
+        String commissionPercentageFoodProduct = JsonParser2.
+                getFieldValue(foodProductRecord.toString(), "thn__Commission_Percentage__c");
+        String commissionPercentageQuoteMeetingRoom = JsonParser2.
+                getFieldValue(quoteMeetingRoomRecord.toString(), "thn__Commission_Percentage__c");
         Assert.assertEquals(commissionPercentageQuotePackage, quoteCommPackage);
         Assert.assertEquals(commissionPercentageQuoteHotelRoom, quoteCommPackage);
         Assert.assertEquals(commissionPercentageBeverageProduct, quoteCommPackage);
@@ -605,8 +640,8 @@ public class Commission extends BaseTest {
                 "--json"});
     }
 
-    @Test(priority = 6, description = "Add related records to the quote where it is not  part of Package and update one" +
-            " or multiple comm. fields on quote. ")
+    @Test(priority = 5, description = "Add related records to the quote where it is not  part of Package and update" +
+            " one or multiple comm. fields on quote. ")
     @Severity(SeverityLevel.NORMAL)
     @Story("Commission")
     public void case4() throws InterruptedException, IOException {
@@ -796,8 +831,9 @@ public class Commission extends BaseTest {
                 "-w",
                 "Id='" + quoteID + "'",
                 "-v",
-                "thn__Stage__c='2 - Propose' thn__Comm_Activity__c=5 thn__Comm_Beverage__c=6 thn__Comm_Equipment__c=7 thn__Comm_Food__c=8" +
-                        " thn__Comm_Hotel_Rooms__c=9 thn__Comm_Meeting_Rooms__c=11 thn__Comm_Other__c=12",
+                "thn__Stage__c='2 - Propose' thn__Comm_Activity__c=5 thn__Comm_Beverage__c=6 thn__Comm_Equipment__c=7" +
+                        " thn__Comm_Food__c=8 thn__Comm_Hotel_Rooms__c=9 thn__Comm_Meeting_Rooms__c=11" +
+                        " thn__Comm_Other__c=12",
                 "-u",
                 ORG_USERNAME,
                 "--json"});
@@ -882,19 +918,32 @@ public class Commission extends BaseTest {
                 ORG_USERNAME,
                 "--json"});
         System.out.println(commissionRecordsSoql);
-        List<String> commissionName = JsonParser2.getFieldValueSoql(commissionRecordsSoql.toString(), "Name");
-        String quoteCommActivity = JsonParser2.getFieldValue(updateQuoteRecord.toString(), "thn__Comm_Activity__c");
-        String quoteCommBeverage = JsonParser2.getFieldValue(updateQuoteRecord.toString(), "thn__Comm_Beverage__c");
-        String quoteCommEquipment = JsonParser2.getFieldValue(updateQuoteRecord.toString(), "thn__Comm_Equipment__c");
-        String quoteCommFood = JsonParser2.getFieldValue(updateQuoteRecord.toString(), "thn__Comm_Food__c");
-        String quoteCommHotelRooms = JsonParser2.getFieldValue(updateQuoteRecord.toString(), "thn__Comm_Hotel_Rooms__c");
-        String quoteCommMeetingRooms = JsonParser2.getFieldValue(updateQuoteRecord.toString(), "thn__Comm_Meeting_Rooms__c");
-        String commissionPercentageQuoteHotelRoom = JsonParser2.getFieldValue(quoteHotelRoomRecord.toString(), "thn__Commission_Percentage__c");
-        String commissionPercentageBeverageProduct = JsonParser2.getFieldValue(beverageProductRecord.toString(), "thn__Commission_Percentage__c");
-        String commissionPercentageActivityProduct = JsonParser2.getFieldValue(activityProductRecord.toString(), "thn__Commission_Percentage__c");
-        String commissionPercentageEquipmentProduct = JsonParser2.getFieldValue(equipmentProductRecord.toString(), "thn__Commission_Percentage__c");
-        String commissionPercentageFoodProduct = JsonParser2.getFieldValue(foodProductRecord.toString(), "thn__Commission_Percentage__c");
-        String commissionPercentageQuoteMeetingRoom = JsonParser2.getFieldValue(quoteMeetingRoomRecord.toString(), "thn__Commission_Percentage__c");
+        List<String> commissionName = JsonParser2.
+                getFieldValueSoql(commissionRecordsSoql.toString(), "Name");
+        String quoteCommActivity = JsonParser2.
+                getFieldValue(updateQuoteRecord.toString(), "thn__Comm_Activity__c");
+        String quoteCommBeverage = JsonParser2.
+                getFieldValue(updateQuoteRecord.toString(), "thn__Comm_Beverage__c");
+        String quoteCommEquipment = JsonParser2.
+                getFieldValue(updateQuoteRecord.toString(), "thn__Comm_Equipment__c");
+        String quoteCommFood = JsonParser2.
+                getFieldValue(updateQuoteRecord.toString(), "thn__Comm_Food__c");
+        String quoteCommHotelRooms = JsonParser2.
+                getFieldValue(updateQuoteRecord.toString(), "thn__Comm_Hotel_Rooms__c");
+        String quoteCommMeetingRooms = JsonParser2.
+                getFieldValue(updateQuoteRecord.toString(), "thn__Comm_Meeting_Rooms__c");
+        String commissionPercentageQuoteHotelRoom = JsonParser2.
+                getFieldValue(quoteHotelRoomRecord.toString(), "thn__Commission_Percentage__c");
+        String commissionPercentageBeverageProduct = JsonParser2.
+                getFieldValue(beverageProductRecord.toString(), "thn__Commission_Percentage__c");
+        String commissionPercentageActivityProduct = JsonParser2.
+                getFieldValue(activityProductRecord.toString(), "thn__Commission_Percentage__c");
+        String commissionPercentageEquipmentProduct = JsonParser2.
+                getFieldValue(equipmentProductRecord.toString(), "thn__Commission_Percentage__c");
+        String commissionPercentageFoodProduct = JsonParser2.
+                getFieldValue(foodProductRecord.toString(), "thn__Commission_Percentage__c");
+        String commissionPercentageQuoteMeetingRoom = JsonParser2.
+                getFieldValue(quoteMeetingRoomRecord.toString(), "thn__Commission_Percentage__c");
         Assert.assertEquals(commissionPercentageQuoteHotelRoom, quoteCommHotelRooms);
         Assert.assertEquals(commissionPercentageBeverageProduct, quoteCommBeverage);
         Assert.assertEquals(commissionPercentageActivityProduct, quoteCommActivity);
@@ -910,7 +959,7 @@ public class Commission extends BaseTest {
         Assert.assertTrue(commissionName.contains("Equipment - 7.00%"));
     }
 
-    @Test(priority = 7, description = "Update some related records comm. %.")
+    @Test(priority = 6, description = "Update some related records comm. %.")
     @Severity(SeverityLevel.NORMAL)
     @Story("Commission")
     public void case5() throws InterruptedException, IOException {
@@ -1016,8 +1065,8 @@ public class Commission extends BaseTest {
         Assert.assertTrue(commissionName.contains("Equipment - 17.00%"));
     }
 
-    @Test(priority = 8, description = "Update one or multiple comm. fields on quote. Expected result: the related which" +
-            " comm % value isn’t equal to the previous value on quote are not updated. the others are.")
+    @Test(priority = 7, description = "Update one or multiple comm. fields on quote. Expected result: the related" +
+            " which comm % value isn’t equal to the previous value on quote are not updated. the others are.")
     @Severity(SeverityLevel.NORMAL)
     @Story("Commission")
     public void case6() throws InterruptedException, IOException {
@@ -1040,8 +1089,9 @@ public class Commission extends BaseTest {
                 "-w",
                 "Id='" + quoteID + "'",
                 "-v",
-                "thn__Stage__c='2 - Propose' thn__Comm_Activity__c=15 thn__Comm_Beverage__c=15 thn__Comm_Equipment__c=15 thn__Comm_Food__c=15" +
-                        " thn__Comm_Hotel_Rooms__c=15 thn__Comm_Meeting_Rooms__c=15 thn__Comm_Other__c=15",
+                "thn__Stage__c='2 - Propose' thn__Comm_Activity__c=15 thn__Comm_Beverage__c=15" +
+                        " thn__Comm_Equipment__c=15 thn__Comm_Food__c=15 thn__Comm_Hotel_Rooms__c=15" +
+                        " thn__Comm_Meeting_Rooms__c=15 thn__Comm_Other__c=15",
                 "-u",
                 ORG_USERNAME,
                 "--json"});

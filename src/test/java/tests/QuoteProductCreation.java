@@ -12,19 +12,14 @@ import java.util.List;
 
 public class QuoteProductCreation extends BaseTest {
 
-    @Test(priority = 1, description = "LogIn")
-    @Severity(SeverityLevel.NORMAL)
-    @Story("THY-619: Quote product creation")
-    public void logIn() throws InterruptedException, IOException {
-        loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
-        loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
-    }
 
-    @Test(priority = 2, description = "Preconditions: Create a new MYCE Quote, Current Default Start hour and Default" +
+    @Test(priority = 1, description = "Preconditions: Create a new MYCE Quote, Current Default Start hour and Default" +
             " End hour on the org.")
     @Severity(SeverityLevel.NORMAL)
     @Story("THY-619: Quote product creation")
     public void preconditions() throws InterruptedException, IOException {
+        loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
+        loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
         /*developerConsoleWindow.openDeveloperConsole();
         developerConsoleWindow.openExecuteAnonymousWindow();
         developerConsoleWindow.runApexCode(" Metadata.DeployContainer mdContainer = new Metadata.DeployContainer();\n" +
@@ -55,7 +50,7 @@ public class QuoteProductCreation extends BaseTest {
                 " RecordTypeId='" + recordTypeID.get(0) + "'", ORG_USERNAME);
     }
 
-    @Test(priority = 3, description = "Add a product to the Quote. Leave the ‘Day Number’, ‘Start Time', 'End Time’" +
+    @Test(priority = 2, description = "Add a product to the Quote. Leave the ‘Day Number’, ‘Start Time', 'End Time’" +
             " fields empty. Result: A product was added to the Quote. The ‘Start Date’, ‘End Date’ fields" +
             " were filled with values from ‘Arrival Date’ on the Quote. The ‘Start Time', 'End Time’ fields were" +
             " filled with values from ‘Start Time', 'End Time’ fields of the Product. ")
@@ -87,7 +82,7 @@ public class QuoteProductCreation extends BaseTest {
         Assert.assertEquals(quoteProductEndTime, productEndTime);
     }
 
-    @Test(priority = 4, description = "Add a product to the Quote. Leave the ‘Day Number’, 'End Time’ fields empty." +
+    @Test(priority = 3, description = "Add a product to the Quote. Leave the ‘Day Number’, 'End Time’ fields empty." +
             " Chose a value for the ‘Start Time' field.  (E.g. 11:00). Result: A product was added to the Quote. The" +
             " ‘Start Date’, ‘End Date’ fields were filled with values from ‘Arrival Date’ on the Quote." +
             " The ‘Start Time’ was set to 11:00 as we specified above. The ‘End Time’ was filled ‘Start time’ +1 hour" +
@@ -117,7 +112,7 @@ public class QuoteProductCreation extends BaseTest {
         Assert.assertEquals(quoteProductEndTime, "12:00:00.000Z");
     }
 
-    @Test(priority = 5, description = "Add a product to the Quote. Leave the ‘Day Number’, 'End Time’ fields empty." +
+    @Test(priority = 4, description = "Add a product to the Quote. Leave the ‘Day Number’, 'End Time’ fields empty." +
             " Chose a value for the ‘Start Time' field (E.g. 07:00). Result: A product was added to the Quote. The" +
             " ‘Start Date’, ‘End Date’ fields were filled with values from ‘Arrival Date’ on the Quote." +
             " The ‘Start Time’ was set to 07:00 as we specified above. The ‘End Time’ was filled from the  Default" +
@@ -147,7 +142,7 @@ public class QuoteProductCreation extends BaseTest {
         Assert.assertEquals(quoteProductEndTime, "09:00:00.000Z");
     }
 
-    @Test(priority = 6, description = "Add a product to the Quote. Leave the ‘Day Number’, 'Start Time’ fields empty." +
+    @Test(priority = 5, description = "Add a product to the Quote. Leave the ‘Day Number’, 'Start Time’ fields empty." +
             " Chose a value for the 'End Time’ field (E.g. 11:00). Result: A product was added to the Quote. The" +
             " ‘Start Date’, ‘End Date’ fields were filled with values from ‘Arrival Date’ on the Quote." +
             " The ‘End Time’ was set to 11:00 as we specified above. The ‘Start Time’ was filled from the  Default" +
@@ -177,7 +172,7 @@ public class QuoteProductCreation extends BaseTest {
         Assert.assertEquals(quoteProductEndTime, "11:00:00.000Z");
     }
 
-    @Test(priority = 7, description = "Add a product to the Quote. Leave the ‘Start Time' field empty. Set the value" +
+    @Test(priority = 6, description = "Add a product to the Quote. Leave the ‘Start Time' field empty. Set the value" +
             " in the ‘Day Number’ to 3. Chose a value for the 'End Time’ field (E.g. 13:15). Result: A product was" +
             " added to the Quote. The ‘Start Date’, ‘End Date’ fields were filled with values from" +
             " (‘Arrival Date’ + 2)on the Quote. The ‘End Time’ was set to 13:15 as we specified above. The ‘Start" +
@@ -207,7 +202,7 @@ public class QuoteProductCreation extends BaseTest {
         Assert.assertEquals(quoteProductEndTime, "13:15:00.000Z");
     }
 
-    @Test(priority = 8, description = "Add a product to the Quote. Leave the ‘End Time' field empty. Set the value" +
+    @Test(priority = 7, description = "Add a product to the Quote. Leave the ‘End Time' field empty. Set the value" +
             " in the ‘Day Number’ to 3. Chose a value for the 'Start Time’ field (E.g. 07:00). Result: A product was" +
             " added to the Quote. The ‘Start Date’, ‘End Date’ fields were filled with values from " +
             "(‘Arrival Date’ + 2)on the Quote. The ‘Start Time’ was set to 07:00 as we specified above. The " +
@@ -237,7 +232,7 @@ public class QuoteProductCreation extends BaseTest {
         Assert.assertEquals(quoteProductEndTime, "09:00:00.000Z");
     }
 
-    @Test(priority = 9, description = "Add a product to the Quote. Leave the ‘End Time' field empty. Set the value" +
+    @Test(priority = 8, description = "Add a product to the Quote. Leave the ‘End Time' field empty. Set the value" +
             " in the ‘Day Number’ to 3. Chose a value for the 'Start Time’ field (E.g. 14:30). Result: A product was" +
             " added to the Quote. The ‘Start Date’, ‘End Date’ fields were filled with values from" +
             " (‘Arrival Date’ + 2)on the Quote. The ‘Start Time’ was set to 14:30 as we specified above. The" +

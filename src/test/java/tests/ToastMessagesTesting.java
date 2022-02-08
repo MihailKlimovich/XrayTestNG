@@ -12,20 +12,15 @@ import java.util.List;
 
 public class ToastMessagesTesting extends BaseTest {
 
-    @Test(priority = 1, description = "LogIn")
-    @Severity(SeverityLevel.NORMAL)
-    @Story("Toast messages testing")
-    public void logIn() throws InterruptedException, IOException {
-        loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
-        loginPage.authoriseURL(SFDX, ADMIN_AUTH_URL, ADMIN_USERNAME);
-        loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
-    }
 
-    @Test(priority = 2, description = "Create a MYCE Quote and add a Hotel room to it. Add a Discount to the Quote" +
+    @Test(priority = 1, description = "Create a MYCE Quote and add a Hotel room to it. Add a Discount to the Quote" +
             " Hotel Room.")
     @Severity(SeverityLevel.NORMAL)
     @Story("Toast messages testing")
     public void preconditions() throws InterruptedException, IOException {
+        loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
+        loginPage.authoriseURL(SFDX, ADMIN_AUTH_URL, ADMIN_USERNAME);
+        loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
         resource.deleteResourceSFDX(SFDX, "Name='ToastMessagesTesting", ORG_USERNAME);
         myceQuotes.deleteQuoteSFDX(SFDX, "Name='ToastMessagesTesting'", ORG_USERNAME);
         rate.deleteRateSFDX(SFDX, "Name='TestRateAuto4'", ORG_USERNAME);
@@ -55,7 +50,7 @@ public class ToastMessagesTesting extends BaseTest {
                 " thn__Hotel__c='" + propertyID + "' thn__Type__c='Meeting Room'", ORG_USERNAME);
     }
 
-    @Test(priority = 3, description = "Change the Room Type of the added room. Result: A toast message appears with" +
+    @Test(priority = 2, description = "Change the Room Type of the added room. Result: A toast message appears with" +
             " the message: ‘Discount % updated due to change of Room type/Rate plan.’The discount was set to 0 %.")
     @Severity(SeverityLevel.NORMAL)
     @Story("Toast messages testing")
@@ -78,7 +73,7 @@ public class ToastMessagesTesting extends BaseTest {
         Assert.assertEquals(quoteHotelRoomDiscountPercente, "0");
     }
 
-    @Test(priority = 4, description = "Set the discount of the Quote Hotel Room to 10%. Change the Rate plan of" +
+    @Test(priority = 3, description = "Set the discount of the Quote Hotel Room to 10%. Change the Rate plan of" +
             " the Quote Hotel Room. Result: A toast message appears with the message: ‘Discount % updated due to" +
             " change of Room type/Rate plan. The discount was set to 0 %.")
     @Severity(SeverityLevel.NORMAL)
@@ -104,7 +99,7 @@ public class ToastMessagesTesting extends BaseTest {
         Assert.assertEquals(quoteHotelRoomDiscountPercente, "0");
     }
 
-    @Test(priority = 5, description = "Add a Meeting Room to the MYCE Quote with resount that is not Default. Add" +
+    @Test(priority = 4, description = "Add a Meeting Room to the MYCE Quote with resount that is not Default. Add" +
             " another Meeting room to the Quote so that it’s dates overlap the first one. Result: A toast message " +
             "appears saying: ‘Quote Meeting Room is overbooked.’ The ‘Overbooking Message' field of the Quote" +
             " Meeting room is filled with 'Quote Meeting Room is overbooked.’")

@@ -17,18 +17,12 @@ import java.util.List;
 public class PreventReservedHotelRoomsFromBeingDeleted extends BaseTest {
 
 
-    @Test(priority = 1, description = "LogIn")
-    @Severity(SeverityLevel.NORMAL)
-    @Story("Prevent reserved hotel rooms from being deleted")
-    public void logIn() throws InterruptedException, IOException {
-        loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
-    }
-
-    @Test(priority = 2, description = "Preconditions: create a new myce quote,a hotel room and quote package that" +
+    @Test(priority = 1, description = "Preconditions: create a new myce quote,a hotel room and quote package that" +
             " contains a hotel room. Send the reservation to Mews")
     @Severity(SeverityLevel.NORMAL)
     @Story("Prevent reserved hotel rooms from being deleted")
     public void preconditions() throws InterruptedException, IOException {
+        loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
         myceQuotes.deleteQuoteSFDX(SFDX, "Name='DeleteReservedHotelRoomAutoTest'", ORG_USERNAME);
         packages.deletePackageSFDX(SFDX, "Name='PackWithHotelRoomAuto", ORG_USERNAME);
         StringBuilder hotelRecord= hotel.getHotelSFDX(SFDX, "thn__Unique_Id__c='Demo'", ORG_USERNAME);
@@ -52,7 +46,8 @@ public class PreventReservedHotelRoomsFromBeingDeleted extends BaseTest {
                 " thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" + date.generateTodayDate2()
                 + " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 2) + " RecordTypeId='"
                 + recordTypeID.get(0) + "'", ORG_USERNAME);
-        myceQuotes.updateQuoteSFDX(SFDX, "Id='" + quoteID + "'", "thn__Stage__c='2 - Propose'", ORG_USERNAME);
+        myceQuotes.updateQuoteSFDX(SFDX, "Id='" + quoteID + "'", "thn__Stage__c='2 - Propose'",
+                ORG_USERNAME);
         myceQuotes.updateQuoteSFDX(SFDX, "Id='" + quoteID + "'", "thn__Stage__c='1 - Qualify'" +
                 " thn__SendToMews__c=false", ORG_USERNAME);
         String packageID = packages.createPackageSFDX(SFDX, "Name='PackWithHotelRoomAuto' thn__Hotel__c='"
@@ -69,7 +64,7 @@ public class PreventReservedHotelRoomsFromBeingDeleted extends BaseTest {
                 " thn__SendToMews__c=true", ORG_USERNAME);
     }
 
-    @Test(priority = 3, description = "Delete the quote hotel room. Expected result: you get an error message" +
+    @Test(priority = 2, description = "Delete the quote hotel room. Expected result: you get an error message" +
             " preventing you from deleting the record")
     @Severity(SeverityLevel.NORMAL)
     @Story("Prevent reserved hotel rooms from being deleted")
@@ -84,7 +79,7 @@ public class PreventReservedHotelRoomsFromBeingDeleted extends BaseTest {
         Assert.assertEquals(message,expectedMessage);
     }
 
-    @Test(priority = 4, description = "Delete the quote package. Expected result: you get an error message preventing" +
+    @Test(priority = 3, description = "Delete the quote package. Expected result: you get an error message preventing" +
             " you from deleting the record")
     @Severity(SeverityLevel.NORMAL)
     @Story("Prevent reserved hotel rooms from being deleted")
@@ -99,7 +94,7 @@ public class PreventReservedHotelRoomsFromBeingDeleted extends BaseTest {
         Assert.assertEquals(message,expectedMessage);
     }
 
-    @Test(priority = 5, description = "Change the Mews State in hotel room to ‘Canceled’ and delete the record")
+    @Test(priority = 4, description = "Change the Mews State in hotel room to ‘Canceled’ and delete the record")
     @Severity(SeverityLevel.NORMAL)
     @Story("Prevent reserved hotel rooms from being deleted")
     public void case3() throws InterruptedException, IOException {

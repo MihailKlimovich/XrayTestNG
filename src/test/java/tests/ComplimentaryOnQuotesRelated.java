@@ -12,19 +12,14 @@ import java.util.List;
 
 public class ComplimentaryOnQuotesRelated extends BaseTest {
 
-    @Test(priority = 1, description = "LogIn")
-    @Severity(SeverityLevel.NORMAL)
-    @Story("THY-662: Complimentary on quote's related")
-    public void logIn() throws InterruptedException, IOException {
-        loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
-    }
 
-    @Test(priority = 2, description = "Create MYCE Quote, Add a Quote Product to the Quote, Product = WINES," +
+    @Test(priority = 1, description = "Create MYCE Quote, Add a Quote Product to the Quote, Product = WINES," +
             " Unit price = 100, Discount = 0%. Change the discount to 50% while Complimentary=True. Expected result:" +
             " Discount was reverted to 100%, Unit Price = 0, Discount = 100%, List Price = 100. ")
     @Severity(SeverityLevel.NORMAL)
     @Story("THY-662: Complimentary on quote's related")
     public void case1() throws InterruptedException, IOException {
+        loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
         myceQuotes.deleteQuoteSFDX(SFDX, "Name='ComplimentaryOnQuotesRelatedAutoTest'", ORG_USERNAME);
         StringBuilder hotelRecord= hotel.getHotelSFDX(SFDX, "thn__Unique_Id__c='Demo'", ORG_USERNAME);
         String propertyID = JsonParser2.getFieldValue(hotelRecord.toString(), "Id");
@@ -33,8 +28,8 @@ public class ComplimentaryOnQuotesRelated extends BaseTest {
         StringBuilder recordTypes = myceQuotes.soql(SFDX, "SELECT Id FROM RecordType WHERE" +
                 " SobjectType='thn__MYCE_Quote__c' AND Name='Quote'", ORG_USERNAME);
         List<String> recordTypeID = JsonParser2.getFieldValueSoql(recordTypes.toString(), "Id");
-        String quoteID = myceQuotes.createQuoteSFDX(SFDX, "Name='ComplimentaryOnQuotesRelatedAutoTest' thn__Pax__c=5" +
-                " thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" + date.generateTodayDate2()
+        String quoteID = myceQuotes.createQuoteSFDX(SFDX, "Name='ComplimentaryOnQuotesRelatedAutoTest'" +
+                " thn__Pax__c=5 thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" + date.generateTodayDate2()
                 + " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 1) + " RecordTypeId='"
                 + recordTypeID.get(0) + "'", ORG_USERNAME);
         String quoteProductID = quoteProducts.createQuoteProductSFDX(SFDX, "thn__MYCE_Quote__c='" + quoteID +
@@ -54,7 +49,7 @@ public class ComplimentaryOnQuotesRelated extends BaseTest {
         Assert.assertEquals(quoteProductListPrice, "100");
     }
 
-    @Test(priority = 3, description = "On Quote product Set checkbox Complimentary = False. Expected result:" +
+    @Test(priority = 2, description = "On Quote product Set checkbox Complimentary = False. Expected result:" +
             " Unit Price = 100, Discount = 0%, List Price = 100.")
     @Severity(SeverityLevel.NORMAL)
     @Story("THY-662: Complimentary on quote's related")
@@ -77,7 +72,7 @@ public class ComplimentaryOnQuotesRelated extends BaseTest {
         Assert.assertEquals(quoteProductListPrice, "100");
     }
 
-    @Test(priority = 4, description = "Set the Unit Price to 80. Expected result: Unit Price = 80, Discount = 20%," +
+    @Test(priority = 3, description = "Set the Unit Price to 80. Expected result: Unit Price = 80, Discount = 20%," +
             " List Price = 100.")
     @Severity(SeverityLevel.NORMAL)
     @Story("THY-662: Complimentary on quote's related")
@@ -100,7 +95,7 @@ public class ComplimentaryOnQuotesRelated extends BaseTest {
         Assert.assertEquals(quoteProductListPrice, "100");
     }
 
-    @Test(priority = 5, description = "Set checkbox Complimentary = True. Expected result: Unit Price = 0," +
+    @Test(priority = 4, description = "Set checkbox Complimentary = True. Expected result: Unit Price = 0," +
             " Discount = 100%, List Price = 100.")
     @Severity(SeverityLevel.NORMAL)
     @Story("THY-662: Complimentary on quote's related")
@@ -123,7 +118,7 @@ public class ComplimentaryOnQuotesRelated extends BaseTest {
         Assert.assertEquals(quoteProductListPrice, "100");
     }
 
-    @Test(priority = 6, description = "Change the Unit price to  50 while Complimentary=True. Expected result:" +
+    @Test(priority = 5, description = "Change the Unit price to  50 while Complimentary=True. Expected result:" +
             " Unit Price = 0, Discount = 100%, List Price = 100.")
     @Severity(SeverityLevel.NORMAL)
     @Story("THY-662: Complimentary on quote's related")
@@ -146,7 +141,7 @@ public class ComplimentaryOnQuotesRelated extends BaseTest {
         Assert.assertEquals(quoteProductListPrice, "100");
     }
 
-    @Test(priority = 7, description = "On Quote product Set checkbox Complimentary = False. Expected result:" +
+    @Test(priority = 6, description = "On Quote product Set checkbox Complimentary = False. Expected result:" +
             " Unit Price = 100, Discount = 0%, List Price = 100.")
     @Severity(SeverityLevel.NORMAL)
     @Story("THY-662: Complimentary on quote's related")
@@ -170,7 +165,7 @@ public class ComplimentaryOnQuotesRelated extends BaseTest {
         Assert.assertEquals(quoteProductListPrice, "100");
     }
 
-    @Test(priority = 8, description = "Add a Quote Meeting Room to the Quote. Product = MEETING HALF DAY." +
+    @Test(priority = 7, description = "Add a Quote Meeting Room to the Quote. Product = MEETING HALF DAY." +
             " Expected result: A Quote Meeting Room is created,  Unit Price = 240, Discount = Null, List Price = 240," +
             " Resource = DEFAULT.")
     @Severity(SeverityLevel.NORMAL)
@@ -196,7 +191,7 @@ public class ComplimentaryOnQuotesRelated extends BaseTest {
         Assert.assertEquals(quoteMeetingRoomListPrice, "240");
     }
 
-    @Test(priority = 9, description = "On Quote Meeting Room Set checkbox Complimentary = True. Expected result:" +
+    @Test(priority = 8, description = "On Quote Meeting Room Set checkbox Complimentary = True. Expected result:" +
             " Unit Price = 0, Discount = 100, List Price = 240.")
     @Severity(SeverityLevel.NORMAL)
     @Story("THY-662: Complimentary on quote's related")
@@ -219,7 +214,7 @@ public class ComplimentaryOnQuotesRelated extends BaseTest {
         Assert.assertEquals(quoteMeetingRoomListPrice, "240");
     }
 
-    @Test(priority = 10, description = "On Quote Meeting Room Set checkbox Complimentary = False. Expected result:" +
+    @Test(priority = 9, description = "On Quote Meeting Room Set checkbox Complimentary = False. Expected result:" +
             " Unit Price = 0, Discount = 100, List Price = 240.")
     @Severity(SeverityLevel.NORMAL)
     @Story("THY-662: Complimentary on quote's related")
@@ -242,7 +237,7 @@ public class ComplimentaryOnQuotesRelated extends BaseTest {
         Assert.assertEquals(quoteMeetingRoomListPrice, "240");
     }
 
-    @Test(priority = 11, description = "On Quote Meeting Room Set the Unit Price to 192. Expected result:" +
+    @Test(priority = 10, description = "On Quote Meeting Room Set the Unit Price to 192. Expected result:" +
             " Unit Price = 192, Discount = 20, List Price = 240.")
     @Severity(SeverityLevel.NORMAL)
     @Story("THY-662: Complimentary on quote's related")
@@ -265,7 +260,7 @@ public class ComplimentaryOnQuotesRelated extends BaseTest {
         Assert.assertEquals(quoteMeetingRoomListPrice, "240");
     }
 
-    @Test(priority = 12, description = "On Quote Meeting Room Set checkbox Complimentary = True. Expected result:" +
+    @Test(priority = 11, description = "On Quote Meeting Room Set checkbox Complimentary = True. Expected result:" +
             " Unit Price = 0, Discount = 100, List Price = 240.")
     @Severity(SeverityLevel.NORMAL)
     @Story("THY-662: Complimentary on quote's related")
@@ -289,7 +284,7 @@ public class ComplimentaryOnQuotesRelated extends BaseTest {
         Assert.assertEquals(quoteMeetingRoomListPrice, "240");
     }
 
-    @Test(priority = 13, description = "On Quote Meeting Room Change the Unit price to  50 while Complimentary=True." +
+    @Test(priority = 12, description = "On Quote Meeting Room Change the Unit price to  50 while Complimentary=True." +
             " Expected result: Unit Price = 0, Discount = 100, List Price = 240.")
     @Severity(SeverityLevel.NORMAL)
     @Story("THY-662: Complimentary on quote's related")
@@ -312,7 +307,7 @@ public class ComplimentaryOnQuotesRelated extends BaseTest {
         Assert.assertEquals(quoteMeetingRoomListPrice, "240");
     }
 
-    @Test(priority = 14, description = "Change the Resource of the Meeting Room. Expected result: Unit Price and" +
+    @Test(priority = 13, description = "Change the Resource of the Meeting Room. Expected result: Unit Price and" +
             " Discount did not change. Unit Price = 0, Discount = 100, List Price = 240.")
     @Severity(SeverityLevel.NORMAL)
     @Story("THY-662: Complimentary on quote's related")
@@ -341,7 +336,7 @@ public class ComplimentaryOnQuotesRelated extends BaseTest {
         Assert.assertEquals(quoteMeetingRoomListPrice, "240");
     }
 
-    @Test(priority = 15, description = "Add a Quote Hotel Room to the Quote. Product = ROOM 1 NIGHT, Room Type" +
+    @Test(priority = 14, description = "Add a Quote Hotel Room to the Quote. Product = ROOM 1 NIGHT, Room Type" +
             " = Queen. Expected result: A Quote Hotel Room is created. Unit Price = 90, Discount = Null," +
             " List Price = 90")
     @Severity(SeverityLevel.NORMAL)
@@ -352,8 +347,8 @@ public class ComplimentaryOnQuotesRelated extends BaseTest {
         String propertyID = JsonParser2.getFieldValue(hotelRecord.toString(), "Id");
         StringBuilder roomTypeQueenRecord = roomType.getRoomTypeSFDX(SFDX, "Name='Queen'", ORG_USERNAME);
         String roomTypeQueenID = JsonParser2.getFieldValue(roomTypeQueenRecord.toString(), "Id");
-        String rateId = rate.createRateSFDX(SFDX, "Name='RateAutoTestComplimentary1' thn__IsActive__c=true thn__IsPublic__c=true" +
-                " thn__getPrices__c=true thn__Hotel__c='" + propertyID + "'", ORG_USERNAME);
+        String rateId = rate.createRateSFDX(SFDX, "Name='RateAutoTestComplimentary1' thn__IsActive__c=true" +
+                " thn__IsPublic__c=true thn__getPrices__c=true thn__Hotel__c='" + propertyID + "'", ORG_USERNAME);
         ratePrice.createRatePriceSFDX(SFDX, "thn__Rate__c='" + rateId + "' thn__Date__c=" +
                 date.generateTodayDate2() + " thn__Base_Price__c=100 thn__RelativeAdjustment__c=1" +
                 " thn__AbsoluteAdjustment__c=1 thn__EmptyUnitAdjustment__c=1 thn__ExtraUnitAdjustment__c=1",
@@ -395,7 +390,7 @@ public class ComplimentaryOnQuotesRelated extends BaseTest {
         Assert.assertEquals(quoteHotelRoomListPrice, "90");
     }
 
-    @Test(priority = 16, description = "On Quote Hotel Room set checkbox Complimentary = True. Expected result:" +
+    @Test(priority = 15, description = "On Quote Hotel Room set checkbox Complimentary = True. Expected result:" +
             " Unit Price = 0, Discount = 100, List Price = 90")
     @Severity(SeverityLevel.NORMAL)
     @Story("THY-662: Complimentary on quote's related")
@@ -418,7 +413,7 @@ public class ComplimentaryOnQuotesRelated extends BaseTest {
         Assert.assertEquals(quoteHotelRoomListPrice, "90");
     }
 
-    @Test(priority = 17, description = "On Quote Hotel Room set checkbox Complimentary = false. Expected result:" +
+    @Test(priority = 16, description = "On Quote Hotel Room set checkbox Complimentary = false. Expected result:" +
             " Unit Price = 90, Discount = 0, List Price = 90")
     @Severity(SeverityLevel.NORMAL)
     @Story("THY-662: Complimentary on quote's related")
@@ -441,7 +436,7 @@ public class ComplimentaryOnQuotesRelated extends BaseTest {
         Assert.assertEquals(quoteHotelRoomListPrice, "90");
     }
 
-    @Test(priority = 18, description = "Set the Unit Price to 72. Expected result: Unit Price = 72, Discount = 20," +
+    @Test(priority = 17, description = "Set the Unit Price to 72. Expected result: Unit Price = 72, Discount = 20," +
             " List Price = 90")
     @Severity(SeverityLevel.NORMAL)
     @Story("THY-662: Complimentary on quote's related")
@@ -464,7 +459,7 @@ public class ComplimentaryOnQuotesRelated extends BaseTest {
         Assert.assertEquals(quoteHotelRoomListPrice, "90");
     }
 
-    @Test(priority = 19, description = "On Quote Hotel Room set checkbox Complimentary = true. Expected result:" +
+    @Test(priority = 18, description = "On Quote Hotel Room set checkbox Complimentary = true. Expected result:" +
             " Unit Price = 0, Discount = 100, List Price = 90")
     @Severity(SeverityLevel.NORMAL)
     @Story("THY-662: Complimentary on quote's related")
@@ -488,7 +483,7 @@ public class ComplimentaryOnQuotesRelated extends BaseTest {
         Assert.assertEquals(quoteHotelRoomListPrice, "90");
     }
 
-    @Test(priority = 20, description = "Change the discount to 50% while Complimentary=True. Expected result:" +
+    @Test(priority = 19, description = "Change the discount to 50% while Complimentary=True. Expected result:" +
             " Unit Price = 0, Discount = 100, List Price = 90")
     @Severity(SeverityLevel.NORMAL)
     @Story("THY-662: Complimentary on quote's related")
@@ -512,7 +507,7 @@ public class ComplimentaryOnQuotesRelated extends BaseTest {
         Assert.assertEquals(quoteHotelRoomListPrice, "90");
     }
 
-    @Test(priority = 21, description = "Change the Unit price to  50 while Complimentary=True. Expected result:" +
+    @Test(priority = 20, description = "Change the Unit price to  50 while Complimentary=True. Expected result:" +
             " Unit Price = 0, Discount = 100, List Price = 90")
     @Severity(SeverityLevel.NORMAL)
     @Story("THY-662: Complimentary on quote's related")
@@ -536,7 +531,7 @@ public class ComplimentaryOnQuotesRelated extends BaseTest {
         Assert.assertEquals(quoteHotelRoomListPrice, "90");
     }
 
-    @Test(priority = 22, description = "Change the Rate and Room type while Complimentary=True. Expected result:" +
+    @Test(priority = 21, description = "Change the Rate and Room type while Complimentary=True. Expected result:" +
             " Unit Price = 0, Discount = 100, List Price = 90")
     @Severity(SeverityLevel.NORMAL)
     @Story("THY-662: Complimentary on quote's related")
@@ -546,8 +541,8 @@ public class ComplimentaryOnQuotesRelated extends BaseTest {
         String propertyID = JsonParser2.getFieldValue(hotelRecord.toString(), "Id");
         StringBuilder roomTypeKingRecord = roomType.getRoomTypeSFDX(SFDX, "Name='King'", ORG_USERNAME);
         String roomTypeKingID = JsonParser2.getFieldValue(roomTypeKingRecord.toString(), "Id");
-        String rateId = rate.createRateSFDX(SFDX, "Name='RateAutoTestComplimentary2' thn__IsActive__c=true thn__IsPublic__c=true" +
-                " thn__getPrices__c=true thn__Hotel__c='" + propertyID + "'", ORG_USERNAME);
+        String rateId = rate.createRateSFDX(SFDX, "Name='RateAutoTestComplimentary2' thn__IsActive__c=true" +
+                " thn__IsPublic__c=true thn__getPrices__c=true thn__Hotel__c='" + propertyID + "'", ORG_USERNAME);
         ratePrice.createRatePriceSFDX(SFDX, "thn__Rate__c='" + rateId + "' thn__Date__c=" +
                         date.generateTodayDate2() + " thn__Base_Price__c=50 thn__RelativeAdjustment__c=1" +
                         " thn__AbsoluteAdjustment__c=1 thn__EmptyUnitAdjustment__c=1 thn__ExtraUnitAdjustment__c=1",

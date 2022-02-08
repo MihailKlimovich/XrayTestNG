@@ -13,18 +13,14 @@ import java.util.List;
 
 public class QuoteBudgetMultipropertyQuote extends BaseTest{
 
-    @Test(priority = 1, description = "LogIn")
-    @Severity(SeverityLevel.NORMAL)
-    @Story("TB-264: Quote budget - multiproperty quote")
-    public void logIn() throws InterruptedException, IOException {
-        loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
-    }
 
-    @Test(priority = 2, description = "Create quote with property == property 1. Add products on property 1 and" +
+
+    @Test(priority = 1, description = "Create quote with property == property 1. Add products on property 1 and" +
             " property 2. Expected result: Quote budgets created for each property")
     @Severity(SeverityLevel.NORMAL)
     @Story("TB-264: Quote budget - multiproperty quote")
     public void case1() throws InterruptedException, IOException {
+        loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
         rate.deleteRateSFDX(SFDX, "Name='QuoteBudgetMultipropertyQuoteAutoTest1", ORG_USERNAME);
         rate.deleteRateSFDX(SFDX, "Name='QuoteBudgetMultipropertyQuoteAutoTest2", ORG_USERNAME);
         myceQuotes.deleteQuoteSFDX(SFDX, "Name='QuoteBudgetMultipropertyQuoteAutoTest'", ORG_USERNAME);
@@ -103,7 +99,6 @@ public class QuoteBudgetMultipropertyQuote extends BaseTest{
         List<String> quoteBudgetID2 = JsonParser2.getFieldValueSoql(quoteBudgetProperty2Records.toString(), "Id");
         Assert.assertEquals(quoteBudgetID1.size(), 2);
         Assert.assertEquals(quoteBudgetID2.size(), 2);
-
     }
 
 }

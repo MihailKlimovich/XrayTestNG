@@ -49,18 +49,13 @@ public class MultiDeleteTesting extends BaseTest {
         }
     }
 
-    @Test(priority = 1, description = "LogIn")
-    @Severity(SeverityLevel.NORMAL)
-    @Story("Multi delete testing")
-    public void logIn() throws InterruptedException, IOException {
-        loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
-        loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
-    }
 
-    @Test(priority = 2, description = "Preconditions")
+    @Test(priority = 1, description = "Preconditions")
     @Severity(SeverityLevel.NORMAL)
     @Story("Multi delete testing")
     public void preconditions() throws InterruptedException, IOException {
+        loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
+        loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
         packages.deletePackageSFDX(SFDX, "Name='PackageTestMultiDeleteAuto1'", ORG_USERNAME);
         myceQuotes.deleteQuoteSFDX(SFDX, "Name='QuoteTestMultiDeleteAuto1", ORG_USERNAME);
         myceQuotes.deleteQuoteSFDX(SFDX, "Name='QuoteTestMultiDeleteAuto2", ORG_USERNAME);
@@ -133,7 +128,7 @@ public class MultiDeleteTesting extends BaseTest {
                 " thn__Product__c='" + room1NightID + "' thn__Space_Area__c='" + roomTypeSingleID + "'", ORG_USERNAME);
     }
 
-    @Test(priority = 3, description = "Delete quote products, meeting rooms, hotel rooms which are part of the package")
+    @Test(priority = 2, description = "Delete quote products, meeting rooms, hotel rooms which are part of the package")
     @Severity(SeverityLevel.NORMAL)
     @Story("Multi delete testing")
     public void multiDeleteTest1() throws InterruptedException, IOException {
@@ -201,7 +196,7 @@ public class MultiDeleteTesting extends BaseTest {
         Assert.assertEquals(quotesMeetingRoomsID.size(), 2);
     }
 
-    @Test(priority = 4, description = "Delete quote package")
+    @Test(priority = 3, description = "Delete quote package")
     @Severity(SeverityLevel.NORMAL)
     @Story("Multi delete testing")
     public void multiDeleteTest2() throws InterruptedException, IOException {
@@ -255,7 +250,7 @@ public class MultiDeleteTesting extends BaseTest {
         Assert.assertEquals(quotesMeetingRoomsID.size(), 0);
     }
 
-    @Test(priority = 5, description = "Delete quote products, meeting rooms, hotel rooms which are not part of the package")
+    @Test(priority = 4, description = "Delete quote products, meeting rooms, hotel rooms which are not part of the package")
     @Severity(SeverityLevel.NORMAL)
     @Story("Multi delete testing")
     public void multiDeleteTest3() throws InterruptedException, IOException {
@@ -321,7 +316,7 @@ public class MultiDeleteTesting extends BaseTest {
         Assert.assertEquals(quotesMeetingRoomsID.size(), 0);
     }
 
-    @Test(priority = 6, description = "Delete quote hotel rooms Quote_Hotel_Room__c records If in one of them" +
+    @Test(priority = 5, description = "Delete quote hotel rooms Quote_Hotel_Room__c records If in one of them" +
             " reserved__c == true and Mews_State__c != Cancelled")
     @Severity(SeverityLevel.NORMAL)
     @Story("Multi delete testing")

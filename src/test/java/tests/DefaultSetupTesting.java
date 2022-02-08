@@ -50,18 +50,13 @@ public class DefaultSetupTesting extends BaseTest {
         }
     }
 
-    @Test(priority = 1, description = "LogIn")
-    @Severity(SeverityLevel.NORMAL)
-    @Story("Default Setup testing")
-    public void logIn() throws InterruptedException, IOException {
-        loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
-        loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
-    }
 
-    @Test(priority = 2, description = "Preconditions: Create a new Myce quote, create Resource records with a setup.")
+    @Test(priority = 1, description = "Preconditions: Create a new Myce quote, create Resource records with a setup.")
     @Severity(SeverityLevel.NORMAL)
     @Story("Default Setup testing")
     public void preconditions() throws InterruptedException, IOException {
+        loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
+        loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
         user.addPermissionSet(SFDX, "Overbooking_User", ORG_USERNAME, ADMIN_USERNAME);
         myceQuotes.deleteQuoteSFDX(SFDX, "Name='DefaultSetupAutoTesting'", ORG_USERNAME);
         resource.deleteResourceSFDX(SFDX, "Name='DefaultSetupAutoTest'", ORG_USERNAME);
@@ -85,7 +80,7 @@ public class DefaultSetupTesting extends BaseTest {
                 " RecordTypeId='" + recordTypeID.get(0) + "'", ORG_USERNAME);
     }
 
-    @Test(priority = 3, description = "Create a quote meeting room without setup and assign a resource. Expected" +
+    @Test(priority = 2, description = "Create a quote meeting room without setup and assign a resource. Expected" +
             " result: meeting room setup is filled with resource’s default setup")
     @Severity(SeverityLevel.NORMAL)
     @Story("Default Setup testing")
@@ -93,9 +88,11 @@ public class DefaultSetupTesting extends BaseTest {
         StringBuilder quoteRecord = myceQuotes.getQuoteSFDX(SFDX, "Name='DefaultSetupAutoTesting'",
                 ORG_USERNAME);
         String quoteID = JsonParser2.getFieldValue(quoteRecord.toString(), "Id");
-        StringBuilder resourceRecord = resource.getResourceSFDX(SFDX, "Name='DefaultSetupAutoTest'", ORG_USERNAME);
+        StringBuilder resourceRecord = resource.getResourceSFDX(SFDX, "Name='DefaultSetupAutoTest'",
+                ORG_USERNAME);
         String resourceId = JsonParser2.getFieldValue(resourceRecord.toString(), "Id");
-        StringBuilder meetingFullDayRecord = product.getProductSFDX(SFDX, "Name='MEETING FULL DAY'", ORG_USERNAME);
+        StringBuilder meetingFullDayRecord = product.getProductSFDX(SFDX, "Name='MEETING FULL DAY'",
+                ORG_USERNAME);
         String meetingFullDayID = JsonParser2.getFieldValue(meetingFullDayRecord.toString(), "Id");
         String quoteMeetingRoomId = quoteMeetingRoom.createQuoteMeetingRoomSFDX(SFDX, "thn__MYCE_Quote__c='"
                 + quoteID + "'" + " thn__Product__c='" + meetingFullDayID + "' thn__Resource__c='" + resourceId + "'",
@@ -109,7 +106,7 @@ public class DefaultSetupTesting extends BaseTest {
         Assert.assertEquals(setupQuoteMeetingRoom, defaultSetupResource);
     }
 
-    @Test(priority = 4, description = "Change the assigned resource on the meeting room. Expected" +
+    @Test(priority = 3, description = "Change the assigned resource on the meeting room. Expected" +
             " result: no change occurs on meeting room’s setup")
     @Severity(SeverityLevel.NORMAL)
     @Story("Default Setup testing")
@@ -125,7 +122,8 @@ public class DefaultSetupTesting extends BaseTest {
         StringBuilder quoteRecord = myceQuotes.getQuoteSFDX(SFDX, "Name='DefaultSetupAutoTesting'",
                 ORG_USERNAME);
         String quoteID = JsonParser2.getFieldValue(quoteRecord.toString(), "Id");
-        StringBuilder meetingFullDayRecord = product.getProductSFDX(SFDX, "Name='MEETING FULL DAY'", ORG_USERNAME);
+        StringBuilder meetingFullDayRecord = product.getProductSFDX(SFDX, "Name='MEETING FULL DAY'",
+                ORG_USERNAME);
         String meetingFullDayID = JsonParser2.getFieldValue(meetingFullDayRecord.toString(), "Id");
         myceQuotes.goToMyceQuotes();
         myceQuotes.openMyceQoteRecord("DefaultSetupAutoTesting");
@@ -143,7 +141,7 @@ public class DefaultSetupTesting extends BaseTest {
         Assert.assertEquals(setupQuoteMeetingRoom, defaultSetupResource1);
     }
 
-    @Test(priority = 5, description = "Create a meeting room with a setup and assign a resource. Expected" +
+    @Test(priority = 4, description = "Create a meeting room with a setup and assign a resource. Expected" +
             " result: no change occurs on meeting room’s setup")
     @Severity(SeverityLevel.NORMAL)
     @Story("Default Setup testing")
@@ -172,7 +170,7 @@ public class DefaultSetupTesting extends BaseTest {
         Assert.assertNotEquals(setupQuoteMeetingRoom, defaultSetupResource);
     }
 
-    @Test(priority = 6, description = "Create a meeting room without setup and without resource. Expected" +
+    @Test(priority = 5, description = "Create a meeting room without setup and without resource. Expected" +
             " result: no change occurs on meeting room’s setup")
     @Severity(SeverityLevel.NORMAL)
     @Story("Default Setup testing")

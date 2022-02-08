@@ -16,29 +16,25 @@ import java.util.List;
 
 public class UpdateOrders extends BaseTest {
 
-    @Test(priority = 1, description = "LogIn")
+
+    @Test(priority = 1, description = "Preconditions: Create a quote with products and meeting rooms. Click the" +
+            " ‘ProdMod’ Button the the Quote that we created. ")
     @Severity(SeverityLevel.NORMAL)
     @Story("Update Orders")
-    public void logIn() throws InterruptedException, IOException {
+    public void preconditions() throws InterruptedException, IOException {
         loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
         loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
         developerConsoleWindow.openDeveloperConsole();
         developerConsoleWindow.openExecuteAnonymousWindow();
         developerConsoleWindow.runApexCodeFromFile("src/main/Data/UpdateGenerateXDaysBefore");
-    }
-
-    @Test(priority = 2, description = "Preconditions: Create a quote with products and meeting rooms. Click the" +
-            " ‘ProdMod’ Button the the Quote that we created. ")
-    @Severity(SeverityLevel.NORMAL)
-    @Story("Update Orders")
-    public void preconditions() throws InterruptedException, IOException {
         //loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
         myceQuotes.deleteQuoteSFDX(SFDX, "Name='UpdateOrdersAutoTest'", ORG_USERNAME);
         myceQuotes.deleteQuoteSFDX(SFDX, "Name='UpdateOrdersAutoTest2'", ORG_USERNAME);
         myceQuotes.deleteQuoteSFDX(SFDX, "Name='UpdateOrdersAutoTest3'", ORG_USERNAME);
         StringBuilder hotelRecord= hotel.getHotelSFDX(SFDX, "thn__Unique_Id__c='Demo'", ORG_USERNAME);
         String propertyID = JsonParser2.getFieldValue(hotelRecord.toString(), "Id");
-        StringBuilder meetingFullDayRecord = product.getProductSFDX(SFDX, "Name='MEETING FULL DAY'", ORG_USERNAME);
+        StringBuilder meetingFullDayRecord = product.getProductSFDX(SFDX, "Name='MEETING FULL DAY'",
+                ORG_USERNAME);
         String meetingFullDayID = JsonParser2.getFieldValue(meetingFullDayRecord.toString(), "Id");
         StringBuilder dinerRecord = product.getProductSFDX(SFDX, "Name='DINER'", ORG_USERNAME);
         String productDinerID= JsonParser2.getFieldValue(dinerRecord.toString(), "Id");
@@ -51,8 +47,8 @@ public class UpdateOrders extends BaseTest {
         StringBuilder quoteMeetingRoomRecord = quoteMeetingRoom.
                 getQuoteMeetingRoomSFDX(SFDX, "Id='" + quoteMeetingRoomID + "'", ORG_USERNAME);
         String unitPriceQMR = JsonParser2.getFieldValue(quoteMeetingRoomRecord.toString(), "thn__Unit_Price__c");
-        String quoteProductID = quoteProducts.createQuoteProductSFDX(SFDX, "thn__MYCE_Quote__c='" + quoteID + "'" +
-                " thn__Product__c='" + productDinerID + "'", ORG_USERNAME);
+        String quoteProductID = quoteProducts.createQuoteProductSFDX(SFDX, "thn__MYCE_Quote__c='" + quoteID +
+                "' thn__Product__c='" + productDinerID + "'", ORG_USERNAME);
 
         String quoteID2 = myceQuotes.createQuoteSFDX(SFDX, "Name='UpdateOrdersAutoTest2' thn__Pax__c=5" +
                 " thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" + date.generateTodayDate2()
@@ -69,13 +65,15 @@ public class UpdateOrders extends BaseTest {
 
         StringBuilder quoteProductRecord = quoteProducts.
                 getQuoteProductSFDX(SFDX, "Id='" + quoteProductID + "'", ORG_USERNAME);
-        String unitPriceQuoteProduct = JsonParser2.getFieldValue(quoteProductRecord.toString(), "thn__Unit_Price__c");
+        String unitPriceQuoteProduct = JsonParser2.
+                getFieldValue(quoteProductRecord.toString(), "thn__Unit_Price__c");
         developerConsoleWindow.openDeveloperConsole();
         developerConsoleWindow.openExecuteAnonymousWindow();
         developerConsoleWindow.runApexCodeFromFile("src/main/Data/BatchCreateOrders");
         //developerConsoleWindow.runApexCode("thn.BatchGlobalScheduling brs = new thn.BatchGlobalScheduling();\n" +
         //        "Database.executeBatch(brs, 1);");
-        StringBuilder orderRecord = order.getOrderSFDX(SFDX, "thn__MYCE_Quote__c='" + quoteID + "'", ORG_USERNAME);
+        StringBuilder orderRecord = order.getOrderSFDX(SFDX, "thn__MYCE_Quote__c='" + quoteID + "'",
+                ORG_USERNAME);
         String orderID = JsonParser2.getFieldValue(orderRecord.toString(), "Id");
         String orderConsumptionDate = JsonParser2.getFieldValue(orderRecord.toString(), "thn__ConsumptionUtc__c");
         StringBuilder orderLineRecord1 = order.getOrderLineSFDX(SFDX, "thn__Order__c='" + orderID + "'" +
@@ -89,14 +87,15 @@ public class UpdateOrders extends BaseTest {
         Assert.assertEquals(GrossValue2, unitPriceQuoteProduct);
     }
 
-    @Test(priority = 3, description = "Edit the ‘MEWS Id’ field of our created Order, click the ‘ProdMod’. Result: No" +
+    @Test(priority = 2, description = "Edit the ‘MEWS Id’ field of our created Order, click the ‘ProdMod’. Result: No" +
             " new orders were created.")
     @Severity(SeverityLevel.NORMAL)
     @Story("Update Orders")
     public void case1() throws InterruptedException, IOException {
         StringBuilder quoteRecord = myceQuotes.getQuoteSFDX(SFDX, "Name='UpdateOrdersAutoTest'", ORG_USERNAME);
         String quoteID= JsonParser2.getFieldValue(quoteRecord.toString(), "Id");
-        StringBuilder orderRecord = order.getOrderSFDX(SFDX, "thn__MYCE_Quote__c='" + quoteID + "'", ORG_USERNAME);
+        StringBuilder orderRecord = order.getOrderSFDX(SFDX, "thn__MYCE_Quote__c='" + quoteID + "'",
+                ORG_USERNAME);
         String orderID = JsonParser2.getFieldValue(orderRecord.toString(), "Id");
         order.updateOrderSFDX(SFDX, "Id='" + orderID + "'", "thn__Mews_Id__c='" +
                 (int) ( Math.random() * 300000 ) + "'", ORG_USERNAME);
@@ -104,19 +103,21 @@ public class UpdateOrders extends BaseTest {
         myceQuotes.openMyceQoteRecord("UpdateOrdersAutoTest");
         myceQuotes.updateOrder();
         StringBuilder orders = myceQuotes.
-                soql(SFDX, "SELECT Id from thn__Order__c where thn__MYCE_Quote__c='" + quoteID + "'", ORG_USERNAME);
+                soql(SFDX, "SELECT Id from thn__Order__c where thn__MYCE_Quote__c='" + quoteID + "'",
+                        ORG_USERNAME);
         List<String> ordersId = JsonParser2.getFieldValueSoql(orders.toString(), "Id");
         Assert.assertEquals(ordersId.size(), 1);
     }
 
-    @Test(priority = 4, description = "Change the ‘Pax’ on quote Product. Result:a duplicate ‘Order’ was crated, A new" +
+    @Test(priority = 3, description = "Change the ‘Pax’ on quote Product. Result:a duplicate ‘Order’ was crated, A new" +
             " 'Order’ was created and an ‘Order Line’ related record for our ‘Quote Product’ with the new changed pax. ")
     @Severity(SeverityLevel.NORMAL)
     @Story("Update Orders")
     public void case2() throws InterruptedException, IOException {
         StringBuilder quoteRecord = myceQuotes.getQuoteSFDX(SFDX, "Name='UpdateOrdersAutoTest'", ORG_USERNAME);
         String quoteID= JsonParser2.getFieldValue(quoteRecord.toString(), "Id");
-        StringBuilder orderRecord = order.getOrderSFDX(SFDX, "thn__MYCE_Quote__c='" + quoteID + "'", ORG_USERNAME);
+        StringBuilder orderRecord = order.getOrderSFDX(SFDX, "thn__MYCE_Quote__c='" + quoteID + "'",
+                ORG_USERNAME);
         String orderID = JsonParser2.getFieldValue(orderRecord.toString(), "Id");
         order.updateOrderSFDX(SFDX, "Id='" + orderID + "'", "thn__Mews_Id__c='" +
                 (int) ( Math.random() * 300000 ) + "'", ORG_USERNAME);
@@ -133,7 +134,8 @@ public class UpdateOrders extends BaseTest {
         System.out.println(orders);
         List<String> ordersId = JsonParser2.getFieldValueSoql(orders.toString(), "Id");
         StringBuilder oldOrderRecord = order.getOrderSFDX(SFDX, "Id='" + ordersId.get(0) + "'", ORG_USERNAME);
-        StringBuilder duplicateOrderRecord = order.getOrderSFDX(SFDX, "Id='" + ordersId.get(1) + "'", ORG_USERNAME);
+        StringBuilder duplicateOrderRecord = order.getOrderSFDX(SFDX, "Id='" + ordersId.get(1) + "'",
+                ORG_USERNAME);
         String oldOrderStatus = JsonParser2.getFieldValue(oldOrderRecord.toString(), "thn__Status__c");
         String duplicateOrderName = JsonParser2.getFieldValue(duplicateOrderRecord.toString(), "Name");
         StringBuilder orderLineRecord = order.getOrderLineSFDX(SFDX, "thn__Order__c='" + ordersId.get(2) + "'" +
@@ -145,7 +147,7 @@ public class UpdateOrders extends BaseTest {
         Assert.assertEquals(paxNewOrderLine, "3");
     }
 
-    @Test(priority = 5, description = "Change the ‘Start Date Time’ on quote Product. Result:a duplicate ‘Order’ was" +
+    @Test(priority = 4, description = "Change the ‘Start Date Time’ on quote Product. Result:a duplicate ‘Order’ was" +
             " crated, A new 'Order’ was created.")
     @Severity(SeverityLevel.NORMAL)
     @Story("Update Orders")
@@ -153,7 +155,8 @@ public class UpdateOrders extends BaseTest {
         StringBuilder quoteRecord = myceQuotes.getQuoteSFDX(SFDX, "Name='UpdateOrdersAutoTest2'", ORG_USERNAME);
         System.out.println(quoteRecord);
         String quoteID= JsonParser2.getFieldValue(quoteRecord.toString(), "Id");
-        StringBuilder orderRecord = order.getOrderSFDX(SFDX, "thn__MYCE_Quote__c='" + quoteID + "'", ORG_USERNAME);
+        StringBuilder orderRecord = order.getOrderSFDX(SFDX, "thn__MYCE_Quote__c='" + quoteID + "'",
+                ORG_USERNAME);
         String orderID = JsonParser2.getFieldValue(orderRecord.toString(), "Id");
         order.updateOrderSFDX(SFDX, "Id='" + orderID + "'", "thn__Mews_Id__c='" +
                 (int) ( Math.random() * 300000 ) + "'", ORG_USERNAME);
@@ -171,7 +174,8 @@ public class UpdateOrders extends BaseTest {
         System.out.println(orders);
         List<String> ordersId = JsonParser2.getFieldValueSoql(orders.toString(), "Id");
         StringBuilder oldOrderRecord = order.getOrderSFDX(SFDX, "Id='" + ordersId.get(0) + "'", ORG_USERNAME);
-        StringBuilder duplicateOrderRecord = order.getOrderSFDX(SFDX, "Id='" + ordersId.get(1) + "'", ORG_USERNAME);
+        StringBuilder duplicateOrderRecord = order.getOrderSFDX(SFDX, "Id='" + ordersId.get(1) + "'",
+                ORG_USERNAME);
         String oldOrderStatus = JsonParser2.getFieldValue(oldOrderRecord.toString(), "thn__Status__c");
         String duplicateOrderName = JsonParser2.getFieldValue(duplicateOrderRecord.toString(), "Name");
         Assert.assertEquals(ordersId.size(), 3);
@@ -179,15 +183,16 @@ public class UpdateOrders extends BaseTest {
         Assert.assertEquals(duplicateOrderName, "Stay (Duplicate)");
     }
 
-    @Test(priority = 6, description = "Change the ‘Unit price’ on quote Product. Result:a duplicate ‘Order’ was" +
-            " crated, A new 'Order’ was created and an ‘Order Line’ related record for our ‘Quote Product’ with the new" +
-            " changed 'Gross Value'. ")
+    @Test(priority = 5, description = "Change the ‘Unit price’ on quote Product. Result:a duplicate ‘Order’ was" +
+            " crated, A new 'Order’ was created and an ‘Order Line’ related record for our ‘Quote Product’ with the" +
+            " new changed 'Gross Value'. ")
     @Severity(SeverityLevel.NORMAL)
     @Story("Update Orders")
     public void case4() throws InterruptedException, IOException {
         StringBuilder quoteRecord = myceQuotes.getQuoteSFDX(SFDX, "Name='UpdateOrdersAutoTest3'", ORG_USERNAME);
         String quoteID= JsonParser2.getFieldValue(quoteRecord.toString(), "Id");
-        StringBuilder orderRecord = order.getOrderSFDX(SFDX, "thn__MYCE_Quote__c='" + quoteID + "'", ORG_USERNAME);
+        StringBuilder orderRecord = order.getOrderSFDX(SFDX, "thn__MYCE_Quote__c='" + quoteID + "'",
+                ORG_USERNAME);
         String orderID = JsonParser2.getFieldValue(orderRecord.toString(), "Id");
         order.updateOrderSFDX(SFDX, "Id='" + orderID + "'", "thn__Mews_Id__c='" +
                 (int) ( Math.random() * 300000 ) + "'", ORG_USERNAME);
@@ -204,7 +209,8 @@ public class UpdateOrders extends BaseTest {
         System.out.println(orders);
         List<String> ordersId = JsonParser2.getFieldValueSoql(orders.toString(), "Id");
         StringBuilder oldOrderRecord = order.getOrderSFDX(SFDX, "Id='" + ordersId.get(0) + "'", ORG_USERNAME);
-        StringBuilder duplicateOrderRecord = order.getOrderSFDX(SFDX, "Id='" + ordersId.get(1) + "'", ORG_USERNAME);
+        StringBuilder duplicateOrderRecord = order.getOrderSFDX(SFDX, "Id='" + ordersId.get(1) + "'",
+                ORG_USERNAME);
         String oldOrderStatus = JsonParser2.getFieldValue(oldOrderRecord.toString(), "thn__Status__c");
         String duplicateOrderName = JsonParser2.getFieldValue(duplicateOrderRecord.toString(), "Name");
         StringBuilder orderLineRecord = order.getOrderLineSFDX(SFDX, "thn__Order__c='" + ordersId.get(2) + "'" +

@@ -25,19 +25,6 @@ public class MyceToOpera extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     @Story("THY-589: MYCE to Opera")
     public void testMyceToOpera_WhereOneHotelRoom() throws InterruptedException, IOException {
-        /*StringBuilder authorise = SfdxCommand.runLinuxCommand1(new String[]{
-                SFDX,
-                "force:auth:jwt:grant",
-                "--clientid",
-                CONSUMER_KEY,
-                "--jwtkeyfile",
-                SERVER_KEY_PATH,
-                "--username",
-                ORG_USERNAME,
-                "--instanceurl",
-                ORG_URL
-        });
-        System.out.println(authorise);*/
         loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
         SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
@@ -188,26 +175,46 @@ public class MyceToOpera extends BaseTest {
                 ORG_USERNAME,
                 "--json"});
         System.out.println(pmsBlockRateRecord);
-        String pmsBlockRateMessage= JsonParser2.getFieldValue2(pmsBlockRateRecord.toString(), "message");
-        String pmsBlockInventoryStartDate = JsonParser2.getFieldValue(pmsBlockInventoryRecord.toString(), "thn__Start__c");
-        String pmsBlockInventoryEndDate = JsonParser2.getFieldValue(pmsBlockInventoryRecord.toString(), "thn__End__c");
-        String pmsBlockInventoryRoomType = JsonParser2.getFieldValue(pmsBlockInventoryRecord.toString(), "thn__RoomType__c");
-        String myceQuoteName = JsonParser2.getFieldValue(myceQuoteRecord.toString(), "Name");
-        String pmsBlockName = JsonParser2.getFieldValue(pmsBlockRecord.toString(), "Name");
-        String myceQuoteShoulderStartDate = JsonParser2.getFieldValue(myceQuoteRecord.toString(), "thn__Shoulder_Start_Date__c");
-        String pmsBlockShoulderStartDate = JsonParser2.getFieldValue(pmsBlockRecord.toString(), "thn__StartShoulderDate__c");
-        String myceQuoteShoulderEndDate = JsonParser2.getFieldValue(myceQuoteRecord.toString(), "thn__Shoulder_End_Date__c");
-        String pmsBlockShoulderEndDate = JsonParser2.getFieldValue(pmsBlockRecord.toString(), "thn__EndShoulderDate__c");
-        String myceQuoteArrivalDate = JsonParser2.getFieldValue(myceQuoteRecord.toString(), "thn__Arrival_Date__c");
-        String pmsBlockArrivalDate = JsonParser2.getFieldValue(pmsBlockRecord.toString(), "thn__Start__c");
-        String myceQuoteDepartureDate = JsonParser2.getFieldValue(myceQuoteRecord.toString(), "thn__Departure_Date__c");
-        String pmsBlockDepartureDate = JsonParser2.getFieldValue(pmsBlockRecord.toString(), "thn__End__c");
-        String myceQuoteReleaseDate = JsonParser2.getFieldValue(myceQuoteRecord.toString(), "thn__Release_Date__c");
-        String pmsBlockReleaseDate = JsonParser2.getFieldValue(pmsBlockRecord.toString(), "thn__PMS_Release_Date_Time__c");
-        String propertyHotelCode = JsonParser2.getFieldValue(propertyDemoRecord2.toString(), "thn__HotelCode__c");
-        String pmsBlockHotelCode = JsonParser2.getFieldValue(pmsBlockRecord.toString(), "thn__PropertyDetailsCode__c");
-        String propertyHotelBrandCode = JsonParser2.getFieldValue(propertyDemoRecord2.toString(), "thn__HotelBrand__c");
-        String pmsBlockHotelBrandCode = JsonParser2.getFieldValue(pmsBlockRecord.toString(), "thn__PropertyDetailsBrandCode__c");
+        String pmsBlockRateMessage= JsonParser2.
+                getFieldValue2(pmsBlockRateRecord.toString(), "message");
+        String pmsBlockInventoryStartDate = JsonParser2.
+                getFieldValue(pmsBlockInventoryRecord.toString(), "thn__Start__c");
+        String pmsBlockInventoryEndDate = JsonParser2.
+                getFieldValue(pmsBlockInventoryRecord.toString(), "thn__End__c");
+        String pmsBlockInventoryRoomType = JsonParser2.
+                getFieldValue(pmsBlockInventoryRecord.toString(), "thn__RoomType__c");
+        String myceQuoteName = JsonParser2.
+                getFieldValue(myceQuoteRecord.toString(), "Name");
+        String pmsBlockName = JsonParser2.
+                getFieldValue(pmsBlockRecord.toString(), "Name");
+        String myceQuoteShoulderStartDate = JsonParser2.
+                getFieldValue(myceQuoteRecord.toString(), "thn__Shoulder_Start_Date__c");
+        String pmsBlockShoulderStartDate = JsonParser2.
+                getFieldValue(pmsBlockRecord.toString(), "thn__StartShoulderDate__c");
+        String myceQuoteShoulderEndDate = JsonParser2.
+                getFieldValue(myceQuoteRecord.toString(), "thn__Shoulder_End_Date__c");
+        String pmsBlockShoulderEndDate = JsonParser2.
+                getFieldValue(pmsBlockRecord.toString(), "thn__EndShoulderDate__c");
+        String myceQuoteArrivalDate = JsonParser2.
+                getFieldValue(myceQuoteRecord.toString(), "thn__Arrival_Date__c");
+        String pmsBlockArrivalDate = JsonParser2.
+                getFieldValue(pmsBlockRecord.toString(), "thn__Start__c");
+        String myceQuoteDepartureDate = JsonParser2.
+                getFieldValue(myceQuoteRecord.toString(), "thn__Departure_Date__c");
+        String pmsBlockDepartureDate = JsonParser2.
+                getFieldValue(pmsBlockRecord.toString(), "thn__End__c");
+        String myceQuoteReleaseDate = JsonParser2.
+                getFieldValue(myceQuoteRecord.toString(), "thn__Release_Date__c");
+        String pmsBlockReleaseDate = JsonParser2.
+                getFieldValue(pmsBlockRecord.toString(), "thn__PMS_Release_Date_Time__c");
+        String propertyHotelCode = JsonParser2.
+                getFieldValue(propertyDemoRecord2.toString(), "thn__HotelCode__c");
+        String pmsBlockHotelCode = JsonParser2.
+                getFieldValue(pmsBlockRecord.toString(), "thn__PropertyDetailsCode__c");
+        String propertyHotelBrandCode = JsonParser2.
+                getFieldValue(propertyDemoRecord2.toString(), "thn__HotelBrand__c");
+        String pmsBlockHotelBrandCode = JsonParser2.
+                getFieldValue(pmsBlockRecord.toString(), "thn__PropertyDetailsBrandCode__c");
         Assert.assertEquals(pmsBlockName, myceQuoteName);
         Assert.assertEquals(pmsBlockShoulderStartDate, myceQuoteShoulderStartDate);
         Assert.assertEquals(pmsBlockShoulderEndDate, myceQuoteShoulderEndDate);
@@ -313,8 +320,8 @@ public class MyceToOpera extends BaseTest {
                             date.generateTodayDate2_plus(0, 3) + " thn__Hotel__c='" + propertyDemoID +
                             "' thn__Arrival_Date__c=" + date.generateTodayDate2() + " thn__Departure_Date__c=" +
                             date.generateTodayDate2_plus(0, 3) + " thn__Closed_Status__c='Won'" +
-                            " thn__Shoulder_Start_Date__c=" + date.generateTodayDate2() + " thn__Shoulder_End_Date__c=" +
-                            date.generateTodayDate2_plus(0, 3),
+                            " thn__Shoulder_Start_Date__c=" + date.generateTodayDate2() + " thn__Shoulder_End_Date__c="
+                            + date.generateTodayDate2_plus(0, 3),
                     "-u",
                     ORG_USERNAME,
                     "--json"});
@@ -415,7 +422,8 @@ public class MyceToOpera extends BaseTest {
             Object rates = SfdxCommand.runLinuxCommand1(new String[]{SFDX,
                     "force:data:soql:query",
                     "-q",
-                    "SELECT Id, thn__Start__c, thn__End__c FROM thn__BlockRate__c WHERE thn__PMS_Block__c='" + pmsBlockID + "'",
+                    "SELECT Id, thn__Start__c, thn__End__c FROM thn__BlockRate__c WHERE thn__PMS_Block__c='"
+                            + pmsBlockID + "'",
                     "-u",
                     ORG_USERNAME,
                     "--json"});
@@ -788,12 +796,17 @@ public class MyceToOpera extends BaseTest {
                 ORG_USERNAME,
                 "--json"});
         System.out.println(pmsBlockRateRecord);
-        String pmsBlockRateMessage= JsonParser2.getFieldValue2(pmsBlockRateRecord.toString(), "message");
+        String pmsBlockRateMessage= JsonParser2.
+                getFieldValue2(pmsBlockRateRecord.toString(), "message");
         Assert.assertTrue(pmsBlockRateMessage.contains("2 records were retrieved"));
-        String pmsBlockInventoryStartDate = JsonParser2.getFieldValue(pmsBlockInventoryRecord.toString(), "thn__Start__c");
-        String pmsBlockInventoryEndDate = JsonParser2.getFieldValue(pmsBlockInventoryRecord.toString(), "thn__End__c");
-        String quoteHotelroomArrivalDate = JsonParser2.getFieldValue(quoteHotelRoomRecord.toString(), "thn__Arrival_Date__c");
-        String quoteHotelRoomDepartureDate = JsonParser2.getFieldValue(quoteHotelRoomRecord.toString(), "thn__Departure_Date__c");
+        String pmsBlockInventoryStartDate = JsonParser2.
+                getFieldValue(pmsBlockInventoryRecord.toString(), "thn__Start__c");
+        String pmsBlockInventoryEndDate = JsonParser2.
+                getFieldValue(pmsBlockInventoryRecord.toString(), "thn__End__c");
+        String quoteHotelroomArrivalDate = JsonParser2.
+                getFieldValue(quoteHotelRoomRecord.toString(), "thn__Arrival_Date__c");
+        String quoteHotelRoomDepartureDate = JsonParser2.
+                getFieldValue(quoteHotelRoomRecord.toString(), "thn__Departure_Date__c");
         Assert.assertEquals(pmsBlockInventoryStartDate, quoteHotelroomArrivalDate);
         Assert.assertEquals(pmsBlockInventoryEndDate, quoteHotelRoomDepartureDate);
         Assert.assertTrue(pmsBlockRateMessage.contains("2 records were retrieved"));
@@ -934,7 +947,8 @@ public class MyceToOpera extends BaseTest {
                 SFDX,
                 "force:data:soql:query",
                 "-q",
-                "SELECT Id, thn__Property__c, thn__Start__c, thn__End__c FROM thn__PMS_Block__c WHERE thn__MYCE_Quote__c='" + myceQuoteID + "'",
+                "SELECT Id, thn__Property__c, thn__Start__c, thn__End__c FROM thn__PMS_Block__c WHERE" +
+                        " thn__MYCE_Quote__c='" + myceQuoteID + "'",
                 "-u",
                 ORG_USERNAME,
                 "--json"});
@@ -1079,8 +1093,10 @@ public class MyceToOpera extends BaseTest {
         Assert.assertEquals(roomTypeBlockRate4, roomTypeQueenAutoID);
         Assert.assertEquals(roomTypeBlockRate5, roomTypeQueenAutoID);
         Assert.assertEquals(roomTypeBlockRate6, roomTypeQueenAutoID);
-        List<String> pmsBlockRatesStartEndDates1= JsonParser2.getFieldValueSoql(pmsBlockRates1.toString(), "thn__Start__c", "thn__End__c");
-        List<String> pmsBlockRatesStartEndDates2= JsonParser2.getFieldValueSoql(pmsBlockRates2.toString(), "thn__Start__c", "thn__End__c");
+        List<String> pmsBlockRatesStartEndDates1= JsonParser2.
+                getFieldValueSoql(pmsBlockRates1.toString(), "thn__Start__c", "thn__End__c");
+        List<String> pmsBlockRatesStartEndDates2= JsonParser2.
+                getFieldValueSoql(pmsBlockRates2.toString(), "thn__Start__c", "thn__End__c");
         Assert.assertEquals(pmsBlockRatesStartEndDates1.get(0), date.generateTodayDate2() );
         Assert.assertEquals(pmsBlockRatesStartEndDates1.get(1), date.generateTodayDate2_plus(0, 1));
         Assert.assertEquals(pmsBlockRatesStartEndDates1.get(2), date.generateTodayDate2_plus(0, 1));
@@ -1240,7 +1256,8 @@ public class MyceToOpera extends BaseTest {
                 SFDX,
                 "force:data:soql:query",
                 "-q",
-                "SELECT Id, thn__Property__c, thn__Start__c, thn__End__c FROM thn__PMS_Block__c WHERE thn__MYCE_Quote__c='" + myceQuoteID + "'",
+                "SELECT Id, thn__Property__c, thn__Start__c, thn__End__c FROM thn__PMS_Block__c WHERE" +
+                        " thn__MYCE_Quote__c='" + myceQuoteID + "'",
                 "-u",
                 ORG_USERNAME,
                 "--json"});
@@ -1377,7 +1394,8 @@ public class MyceToOpera extends BaseTest {
                 SFDX,
                 "force:data:soql:query",
                 "-q",
-                "SELECT Id, thn__Property__c, thn__Start__c, thn__End__c FROM thn__PMS_Block__c WHERE thn__MYCE_Quote__c='" + cloneMyceQuoteID + "'",
+                "SELECT Id, thn__Property__c, thn__Start__c, thn__End__c FROM thn__PMS_Block__c WHERE" +
+                        " thn__MYCE_Quote__c='" + cloneMyceQuoteID + "'",
                 "-u",
                 ORG_USERNAME,
                 "--json"});
@@ -1487,12 +1505,18 @@ public class MyceToOpera extends BaseTest {
         String rateClone4 = JsonParser2.getFieldValue(pmsBlockRateClone4.toString(), "thn__Rate__c");
         String rateClone5 = JsonParser2.getFieldValue(pmsBlockRateClone5.toString(), "thn__Rate__c");
         String rateClone6 = JsonParser2.getFieldValue(pmsBlockRateClone6.toString(), "thn__Rate__c");
-        String roomTypeBlockRateClone1 = JsonParser2.getFieldValue(pmsBlockRateClone1.toString(), "thn__RoomType__c");
-        String roomTypeBlockRateClone2 = JsonParser2.getFieldValue(pmsBlockRateClone2.toString(), "thn__RoomType__c");
-        String roomTypeBlockRateClone3 = JsonParser2.getFieldValue(pmsBlockRateClone3.toString(), "thn__RoomType__c");
-        String roomTypeBlockRateClone4 = JsonParser2.getFieldValue(pmsBlockRateClone4.toString(), "thn__RoomType__c");
-        String roomTypeBlockRateClone5 = JsonParser2.getFieldValue(pmsBlockRateClone5.toString(), "thn__RoomType__c");
-        String roomTypeBlockRateClone6 = JsonParser2.getFieldValue(pmsBlockRateClone6.toString(), "thn__RoomType__c");
+        String roomTypeBlockRateClone1 = JsonParser2.
+                getFieldValue(pmsBlockRateClone1.toString(), "thn__RoomType__c");
+        String roomTypeBlockRateClone2 = JsonParser2.
+                getFieldValue(pmsBlockRateClone2.toString(), "thn__RoomType__c");
+        String roomTypeBlockRateClone3 = JsonParser2.
+                getFieldValue(pmsBlockRateClone3.toString(), "thn__RoomType__c");
+        String roomTypeBlockRateClone4 = JsonParser2.
+                getFieldValue(pmsBlockRateClone4.toString(), "thn__RoomType__c");
+        String roomTypeBlockRateClone5 = JsonParser2.
+                getFieldValue(pmsBlockRateClone5.toString(), "thn__RoomType__c");
+        String roomTypeBlockRateClone6 = JsonParser2.
+                getFieldValue(pmsBlockRateClone6.toString(), "thn__RoomType__c");
         Assert.assertEquals(rateClone1, rate1);
         Assert.assertEquals(rateClone2, rate2);
         Assert.assertEquals(rateClone3, rate3);
@@ -1619,7 +1643,8 @@ public class MyceToOpera extends BaseTest {
                 "-u",
                 ORG_USERNAME,
                 "--json"});
-        List<String> pmsBlockRatesStartEndDates= JsonParser2.getFieldValueSoql(pmsBlockRates.toString(), "thn__Start__c", "thn__End__c");
+        List<String> pmsBlockRatesStartEndDates= JsonParser2.
+                getFieldValueSoql(pmsBlockRates.toString(), "thn__Start__c", "thn__End__c");
         Assert.assertEquals(pmsBlockRatesStartEndDates.get(0), date.generateTodayDate2_plus(0, 1) );
         Assert.assertEquals(pmsBlockRatesStartEndDates.get(1), date.generateTodayDate2_plus(0, 2));
         Assert.assertEquals(pmsBlockRatesStartEndDates.get(2), date.generateTodayDate2_plus(0, 2));

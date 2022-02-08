@@ -21,19 +21,12 @@ import java.util.concurrent.TimeUnit;
 
 public class CloneOverbookingVersion extends BaseTest{
 
-
-    @Test(priority = 1, description = "LogIn")
-    @Severity(SeverityLevel.NORMAL)
-    @Story("Clone Myce quote and clone selection - overbooking version")
-    public void logIn() throws InterruptedException, IOException {
-        loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
-        loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
-    }
-
-    @Test(priority = 2, description = "Preconditions")
+    @Test(priority = 1, description = "Preconditions")
     @Severity(SeverityLevel.NORMAL)
     @Story("Clone Myce quote and clone selection - overbooking version")
     public void preconditions() throws InterruptedException, IOException {
+        loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
+        loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
         developerConsoleWindow.openDeveloperConsole();
         developerConsoleWindow.openExecuteAnonymousWindow();
         developerConsoleWindow.runApexCodeFromFile("src/main/Data/RemoveOverbookingPermissionSet");
@@ -91,7 +84,7 @@ public class CloneOverbookingVersion extends BaseTest{
                 resourceID2 + "'", ORG_USERNAME);
     }
 
-    @Test(priority = 3, description = "Clone MYCE Quote, specify Arrival Date so it is equal to Arrival Date of the" +
+    @Test(priority = 2, description = "Clone MYCE Quote, specify Arrival Date so it is equal to Arrival Date of the" +
             " Quote being cloned (User hasn’t overbooking permission)")
     @Severity(SeverityLevel.NORMAL)
     @Story("Clone Myce quote and clone selection - overbooking version")
@@ -123,7 +116,7 @@ public class CloneOverbookingVersion extends BaseTest{
         Assert.assertEquals(quoteMeetingRoomsOverbookingMessage.get(1), expectedMessage);
     }
 
-    @Test(priority = 4, description = "Clone Quote package, specify  Date to clone so it is equal to Start date of the" +
+    @Test(priority = 3, description = "Clone Quote package, specify  Date to clone so it is equal to Start date of the" +
             " Quote Package being cloned (User hasn’t overbooking permission)")
     @Severity(SeverityLevel.NORMAL)
     @Story("Clone Myce quote and clone selection - overbooking version")
@@ -153,7 +146,7 @@ public class CloneOverbookingVersion extends BaseTest{
         Assert.assertEquals(quoteMeetingRoomsOverbookingMessage.get(0), expectedMessage);
     }
 
-    @Test(priority = 5, description = " Clone Quote meeting room (User hasn’t overbooking permission)")
+    @Test(priority = 4, description = " Clone Quote meeting room (User hasn’t overbooking permission)")
     @Severity(SeverityLevel.NORMAL)
     @Story("Clone Myce quote and clone selection - overbooking version")
     public void сloneQuoteMeetingRoom1() throws InterruptedException, IOException {
@@ -182,7 +175,7 @@ public class CloneOverbookingVersion extends BaseTest{
         Assert.assertEquals(quoteMeetingRoomsOverbookingMessage.get(0), expectedMessage);
     }
 
-    @Test(priority = 6, description = "Clone MYCE Quote, specify Arrival Date so it is equal to Arrival Date of the" +
+    @Test(priority = 5, description = "Clone MYCE Quote, specify Arrival Date so it is equal to Arrival Date of the" +
             " Quote being cloned (User has overbooking permission)")
     @Severity(SeverityLevel.NORMAL)
     @Story("Clone Myce quote and clone selection - overbooking version")
@@ -215,7 +208,7 @@ public class CloneOverbookingVersion extends BaseTest{
         Assert.assertEquals(quoteMeetingRoomsOverbookingMessage.get(1), expectedMessage);
     }
 
-    @Test(priority = 7, description = "Clone Quote package, specify  Date to clone so it is equal to Start date of the" +
+    @Test(priority = 6, description = "Clone Quote package, specify  Date to clone so it is equal to Start date of the" +
             " Quote Package being cloned (User has overbooking permission)")
     @Severity(SeverityLevel.NORMAL)
     @Story("Clone Myce quote and clone selection - overbooking version")
@@ -237,7 +230,7 @@ public class CloneOverbookingVersion extends BaseTest{
         Assert.assertEquals(quoteMeetingRoomsResource.get(0), quoteMeetingRoomsResource.get(1));
     }
 
-    @Test(priority = 8, description = " Clone Quote meeting room (User has overbooking permission)")
+    @Test(priority = 7, description = " Clone Quote meeting room (User has overbooking permission)")
     @Severity(SeverityLevel.NORMAL)
     @Story("Clone Myce quote and clone selection - overbooking version")
     public void сloneQuoteMeetingRoom2() throws InterruptedException, IOException {

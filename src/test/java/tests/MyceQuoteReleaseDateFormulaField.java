@@ -12,19 +12,14 @@ import java.util.List;
 
 public class MyceQuoteReleaseDateFormulaField extends BaseTest{
 
-    @Test(priority = 1, description = "LogIn")
-    @Severity(SeverityLevel.NORMAL)
-    @Story("Myce Quote - release date formula field")
-    public void logIn() throws InterruptedException, IOException {
-        loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
-        loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
-    }
 
-    @Test(priority = 2, description = "Create MYCE Quote record. Result: Release date formula field value == Quote" +
+    @Test(priority = 1, description = "Create MYCE Quote record. Result: Release date formula field value == Quote" +
             " arrival date - 1.")
     @Severity(SeverityLevel.NORMAL)
     @Story("Myce Quote - release date formula field")
     public void case1() throws InterruptedException, IOException {
+        loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
+        loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
         myceQuotes.deleteQuoteSFDX(SFDX, "Name='ReleaseDateAutoTest'", ORG_USERNAME);
         StringBuilder hotelRecord= hotel.getHotelSFDX(SFDX, "thn__Unique_Id__c='Demo'", ORG_USERNAME);
         String propertyID = JsonParser2.getFieldValue(hotelRecord.toString(), "Id");
@@ -43,7 +38,7 @@ public class MyceQuoteReleaseDateFormulaField extends BaseTest{
         Assert.assertEquals(releaseDateFormula, date.generateTodayDate2_minus(0, 1));
     }
 
-    @Test(priority = 3, description = "Change Quote’s dates using flow. Result: Release date formula field" +
+    @Test(priority = 2, description = "Change Quote’s dates using flow. Result: Release date formula field" +
             " value is updated and is equal to the new Quote arrival date - 1.")
     @Severity(SeverityLevel.NORMAL)
     @Story("Myce Quote - release date formula field")
@@ -59,7 +54,7 @@ public class MyceQuoteReleaseDateFormulaField extends BaseTest{
 
     }
 
-    @Test(priority = 4, description = "Update MYCE Quote’s arrival date manually. Result: Release date formula field" +
+    @Test(priority = 3, description = "Update MYCE Quote’s arrival date manually. Result: Release date formula field" +
             " value is updated and is equal to the new Quote arrival date - 1.")
     @Severity(SeverityLevel.NORMAL)
     @Story("Myce Quote - release date formula field")
@@ -74,7 +69,7 @@ public class MyceQuoteReleaseDateFormulaField extends BaseTest{
         Assert.assertEquals(releaseDateFormula, date.generateTodayDate2_plus(0, 2));
     }
 
-    @Test(priority = 5, description = "Clone MYCE Quote. Result: Release date formula field value on the new Quote" +
+    @Test(priority = 4, description = "Clone MYCE Quote. Result: Release date formula field value on the new Quote" +
             " == Quote arrival date - 1.")
     @Severity(SeverityLevel.NORMAL)
     @Story("Myce Quote - release date formula field")
@@ -83,7 +78,8 @@ public class MyceQuoteReleaseDateFormulaField extends BaseTest{
         myceQuotes.goToMyceQuotes();
         myceQuotes.openMyceQoteRecord("ReleaseDateAutoTest");
         myceQuotes.cloneMyceQuote("CloneReleaseDateAutoTest", date.generateTodayDate3_plus(0, 7));
-        StringBuilder quoteRecord = myceQuotes.getQuoteSFDX(SFDX, "Name='CloneReleaseDateAutoTest'", ORG_USERNAME);
+        StringBuilder quoteRecord = myceQuotes.getQuoteSFDX(SFDX, "Name='CloneReleaseDateAutoTest'",
+                ORG_USERNAME);
         System.out.println(quoteRecord);
         String releaseDateFormula = JsonParser2.
                 getFieldValue(quoteRecord.toString(), "thn__Release_date_formula__c");

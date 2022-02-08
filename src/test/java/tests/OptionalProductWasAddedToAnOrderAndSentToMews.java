@@ -17,31 +17,13 @@ import java.util.List;
 
 public class OptionalProductWasAddedToAnOrderAndSentToMews extends BaseTest {
 
-    @Test(priority = 1, description = "LogIn")
-    @Severity(SeverityLevel.NORMAL)
-    @Story("TB-132: Optional Product was added to an Order and sent to Mews")
-    public void logIn() throws InterruptedException, IOException {
-        /*StringBuilder authorise = SfdxCommand.runLinuxCommand1(new String[]{
-                SFDX,
-                "force:auth:jwt:grant",
-                "--clientid",
-                CONSUMER_KEY,
-                "--jwtkeyfile",
-                SERVER_KEY_PATH,
-                "--username",
-                ORG_USERNAME,
-                "--instanceurl",
-                ORG_URL
-        });
-        System.out.println(authorise);*/
-        loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
-        loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
-    }
 
-    @Test(priority = 2, description = "Add quote product, Optional’ checkbox is set to ‘true’")
+    @Test(priority = 1, description = "Add quote product, Optional’ checkbox is set to ‘true’")
     @Severity(SeverityLevel.NORMAL)
     @Story("TB-132: Optional Product was added to an Order and sent to Mews")
     public void testOptionalProduct1() throws InterruptedException, IOException {
+        loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
+        loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
         SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:delete",
@@ -81,9 +63,10 @@ public class OptionalProductWasAddedToAnOrderAndSentToMews extends BaseTest {
                 "-s",
                 "thn__MYCE_Quote__c",
                 "-v",
-                "Name='TestOptionalProductAuto1' thn__Stage__c='4 - Closed' thn__Closed_Status__c='Won' thn__Pax__c=10" +
-                        " thn__Hotel__c='" + propertyDemoID + "' thn__Arrival_Date__c=" + date.generateTodayDate2() +
-                        " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 3),
+                "Name='TestOptionalProductAuto1' thn__Stage__c='4 - Closed' thn__Closed_Status__c='Won'" +
+                        " thn__Pax__c=10 thn__Hotel__c='" + propertyDemoID + "' thn__Arrival_Date__c=" +
+                        date.generateTodayDate2() + " thn__Departure_Date__c=" +
+                        date.generateTodayDate2_plus(0, 3),
                 "-u",
                 ORG_USERNAME,
                 "--json"});
@@ -115,7 +98,7 @@ public class OptionalProductWasAddedToAnOrderAndSentToMews extends BaseTest {
         Assert.assertEquals(ordersID.size(), 0);
     }
 
-    @Test(priority = 3, description = "Add quote product, ‘Optional’ checkbox is set to ‘false")
+    @Test(priority = 2, description = "Add quote product, ‘Optional’ checkbox is set to ‘false")
     @Severity(SeverityLevel.NORMAL)
     @Story("TB-132: Optional Product was added to an Order and sent to Mews")
     public void testOptionalProduct2() throws InterruptedException, IOException {
@@ -158,9 +141,10 @@ public class OptionalProductWasAddedToAnOrderAndSentToMews extends BaseTest {
                 "-s",
                 "thn__MYCE_Quote__c",
                 "-v",
-                "Name='TestOptionalProductAuto2' thn__Stage__c='4 - Closed' thn__Closed_Status__c='Won' thn__Pax__c=10" +
-                        " thn__Hotel__c='" + propertyDemoID + "' thn__Arrival_Date__c=" + date.generateTodayDate2() +
-                        " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 3),
+                "Name='TestOptionalProductAuto2' thn__Stage__c='4 - Closed' thn__Closed_Status__c='Won'" +
+                        " thn__Pax__c=10 thn__Hotel__c='" + propertyDemoID + "' thn__Arrival_Date__c=" +
+                        date.generateTodayDate2() + " thn__Departure_Date__c=" +
+                        date.generateTodayDate2_plus(0, 3),
                 "-u",
                 ORG_USERNAME,
                 "--json"});
@@ -212,7 +196,7 @@ public class OptionalProductWasAddedToAnOrderAndSentToMews extends BaseTest {
         //Assert.assertEquals(ordersName, "[Stay]");
     }
 
-    @Test(priority = 4, description = "Add quote meeting room, Optional’ checkbox is set to ‘true’")
+    @Test(priority = 3, description = "Add quote meeting room, Optional’ checkbox is set to ‘true’")
     @Severity(SeverityLevel.NORMAL)
     @Story("TB-132: Optional Product was added to an Order and sent to Mews")
     public void testOptionalProduct3() throws InterruptedException, IOException {
@@ -254,9 +238,10 @@ public class OptionalProductWasAddedToAnOrderAndSentToMews extends BaseTest {
                 "-s",
                 "thn__MYCE_Quote__c",
                 "-v",
-                "Name='TestOptionalProductAuto3' thn__Stage__c='4 - Closed' thn__Closed_Status__c='Won' thn__Pax__c=10" +
-                        " thn__Hotel__c='" + propertyDemoID + "' thn__Arrival_Date__c=" + date.generateTodayDate2() +
-                        " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 3),
+                "Name='TestOptionalProductAuto3' thn__Stage__c='4 - Closed' thn__Closed_Status__c='Won'" +
+                        " thn__Pax__c=10 thn__Hotel__c='" + propertyDemoID + "' thn__Arrival_Date__c=" +
+                        date.generateTodayDate2() + " thn__Departure_Date__c=" +
+                        date.generateTodayDate2_plus(0, 3),
                 "-u",
                 ORG_USERNAME,
                 "--json"});
@@ -289,7 +274,7 @@ public class OptionalProductWasAddedToAnOrderAndSentToMews extends BaseTest {
         Assert.assertEquals(ordersID.size(), 0);
     }
 
-    @Test(priority = 5, description = "Add quote meeting room, Optional’ checkbox is set to ‘false’")
+    @Test(priority = 4, description = "Add quote meeting room, Optional’ checkbox is set to ‘false’")
     @Severity(SeverityLevel.NORMAL)
     @Story("TB-132: Optional Product was added to an Order and sent to Mews")
     public void testOptionalProduct4() throws InterruptedException, IOException {
@@ -377,7 +362,8 @@ public class OptionalProductWasAddedToAnOrderAndSentToMews extends BaseTest {
         System.out.println(orderLinesRecord);
         String orderLineID = JsonParser2.getFieldValue(orderLinesRecord.toString(), "Id");
         System.out.println(orderLineID);
-        String orderLineQuoteMeetingRoom = JsonParser2.getFieldValue(orderLinesRecord.toString(), "thn__Quote_Meetings_Room__c");
+        String orderLineQuoteMeetingRoom = JsonParser2.
+                getFieldValue(orderLinesRecord.toString(), "thn__Quote_Meetings_Room__c");
         String orderLineName = JsonParser2.getFieldValue(orderLinesRecord.toString(), "Name");
         Assert.assertEquals(ordersID.size(), 1);
         Assert.assertNotNull(orderLineID);

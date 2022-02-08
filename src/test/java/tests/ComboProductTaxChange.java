@@ -15,20 +15,13 @@ import java.io.IOException;
 
 public class ComboProductTaxChange extends BaseTest {
 
-    @Test(priority = 1, description = "LogIn")
-    @Severity(SeverityLevel.NORMAL)
-    @Story("Combo product: tax change")
-    public void logIn() throws InterruptedException, IOException {
-        loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
-    }
-
-
-    @Test(priority = 2, description = "Create a combo product, add combo components, on the component side, change the" +
+    @Test(priority = 1, description = "Create a combo product, add combo components, on the component side, change the" +
             " VAT category. Expected result: on the combo components, the VAT is updated and the list price including" +
             " tax is recalculated")
     @Severity(SeverityLevel.NORMAL)
     @Story("Combo product: tax change")
     public void case1() throws InterruptedException, IOException {
+        loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
         product.deleteProductSFDX(SFDX, "Name='ComboAutoTest", ORG_USERNAME);
         product.deleteProductSFDX(SFDX, "Name='Coffee", ORG_USERNAME);
         StringBuilder hotelRecord= hotel.getHotelSFDX(SFDX, "thn__Unique_Id__c='Demo'", ORG_USERNAME);

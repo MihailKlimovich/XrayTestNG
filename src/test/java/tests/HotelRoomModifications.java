@@ -17,17 +17,12 @@ import java.util.List;
 
 public class HotelRoomModifications extends BaseTest {
 
-    @Test(priority = 1, description = "LogIn")
-    @Severity(SeverityLevel.NORMAL)
-    @Story("Hotel room modification")
-    public void logIn() throws InterruptedException, IOException {
-        loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
-    }
 
-    @Test(priority = 2, description = "Preconditions")
+    @Test(priority = 1, description = "Preconditions")
     @Severity(SeverityLevel.NORMAL)
     @Story("Hotel room modification")
     public void preconditions() throws InterruptedException, IOException {
+        loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
         SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:delete",
@@ -64,7 +59,7 @@ public class HotelRoomModifications extends BaseTest {
         String myceQuoteID = JsonParser2.getFieldValue(myseQuoteResult.toString(), "id");
     }
 
-    @Test(priority = 3, description = "Add Quote hotel room, while adding select Type of Occupancy")
+    @Test(priority = 2, description = "Add Quote hotel room, while adding select Type of Occupancy")
     @Severity(SeverityLevel.NORMAL)
     @Story("Hotel room modification")
     public void hotelRoomModificationTest1() throws InterruptedException, IOException {
@@ -119,7 +114,8 @@ public class HotelRoomModifications extends BaseTest {
                 "thn__Quote_Hotel_Room__c",
                 "-v",
                 "thn__MYCE_Quote__c='" + quoteID + "' thn__Product__c='"
-                        + room1NightID + "' thn__Space_Area__c='" + roomTypeSingleID + "' thn__Type_of_Occupancy__c='Twin'" ,
+                        + room1NightID + "' thn__Space_Area__c='" + roomTypeSingleID + "'" +
+                        " thn__Type_of_Occupancy__c='Twin'" ,
                 "-u",
                 ORG_USERNAME,
                 "--json"});
@@ -134,11 +130,13 @@ public class HotelRoomModifications extends BaseTest {
                 "-u",
                 ORG_USERNAME,
                 "--json"});
-        String numberOfAdults = JsonParser2.getFieldValue(quoteHotelRoomRecord.toString(), "thn__Number_of_Adults__c");
+        String numberOfAdults = JsonParser2.
+                getFieldValue(quoteHotelRoomRecord.toString(), "thn__Number_of_Adults__c");
         Assert.assertEquals(numberOfAdults, numberOccupancyType);
     }
 
-    @Test(priority = 4, description = "Update Type of Occupancy on the room to the for which there is custom metadata type record")
+    @Test(priority = 3, description = "Update Type of Occupancy on the room to the for which there is custom metadata" +
+            " type record")
     @Severity(SeverityLevel.NORMAL)
     @Story("Hotel room modification")
     public void hotelRoomModificationTest2() throws InterruptedException, IOException {
@@ -195,11 +193,13 @@ public class HotelRoomModifications extends BaseTest {
                 "-u",
                 ORG_USERNAME,
                 "--json"});
-        String numberOfAdults = JsonParser2.getFieldValue(quoteHotelRoomRecord.toString(), "thn__Number_of_Adults__c");
+        String numberOfAdults = JsonParser2.
+                getFieldValue(quoteHotelRoomRecord.toString(), "thn__Number_of_Adults__c");
         Assert.assertEquals(numberOfAdults, numberOccupancyType);
     }
 
-    @Test(priority = 5, description = "Update Type of Occupancy on the room to the one for which there is no custom metadata type record")
+    @Test(priority = 4, description = "Update Type of Occupancy on the room to the one for which there is no custom" +
+            " metadata type record")
     @Severity(SeverityLevel.NORMAL)
     @Story("Hotel room modification")
     public void hotelRoomModificationTest3() throws InterruptedException, IOException {
@@ -257,12 +257,13 @@ public class HotelRoomModifications extends BaseTest {
                 "-u",
                 ORG_USERNAME,
                 "--json"});
-        String numberOfAdults = JsonParser2.getFieldValue(quoteHotelRoomRecord.toString(), "thn__Number_of_Adults__c");
+        String numberOfAdults = JsonParser2.
+                getFieldValue(quoteHotelRoomRecord.toString(), "thn__Number_of_Adults__c");
         Assert.assertEquals(numberOfAdults,"1");
         Assert.assertEquals(occupancyTypeMessage, "No matching record found");
     }
 
-    @Test(priority = 6, description = "Update Type of Occupancy to -None-")
+    @Test(priority = 5, description = "Update Type of Occupancy to -None-")
     @Severity(SeverityLevel.NORMAL)
     @Story("Hotel room modification")
     public void hotelRoomModificationTest4() throws InterruptedException, IOException {
@@ -311,11 +312,12 @@ public class HotelRoomModifications extends BaseTest {
                 ORG_USERNAME,
                 "--json"});
         System.out.println(quoteHotelRoomRecord);
-        String numberOfAdults = JsonParser2.getFieldValue(quoteHotelRoomRecord.toString(), "thn__Number_of_Adults__c");
+        String numberOfAdults = JsonParser2.
+                getFieldValue(quoteHotelRoomRecord.toString(), "thn__Number_of_Adults__c");
         Assert.assertEquals(numberOfAdults,"1");
     }
 
-    @Test(priority = 7, description = "Update Number of Adults having Type of Occupancy specified")
+    @Test(priority = 6, description = "Update Number of Adults having Type of Occupancy specified")
     @Severity(SeverityLevel.NORMAL)
     @Story("Hotel room modification")
     public void hotelRoomModificationTest5() throws InterruptedException, IOException {
@@ -376,13 +378,15 @@ public class HotelRoomModifications extends BaseTest {
                 ORG_USERNAME,
                 "--json"});
         System.out.println(quoteHotelRoomRecord);
-        String numberOfAdults = JsonParser2.getFieldValue(quoteHotelRoomRecord.toString(), "thn__Number_of_Adults__c");
-        String typeOfOccupancy = JsonParser2.getFieldValue(quoteHotelRoomRecord.toString(), "thn__Type_of_Occupancy__c");
+        String numberOfAdults = JsonParser2.
+                getFieldValue(quoteHotelRoomRecord.toString(), "thn__Number_of_Adults__c");
+        String typeOfOccupancy = JsonParser2.
+                getFieldValue(quoteHotelRoomRecord.toString(), "thn__Type_of_Occupancy__c");
         Assert.assertEquals(typeOfOccupancy, "Quadruple");
         Assert.assertEquals(numberOfAdults,"15");
     }
 
-    @Test(priority = 8, description = "Update room, any field but Number of Adults and Type of Occupancy")
+    @Test(priority = 7, description = "Update room, any field but Number of Adults and Type of Occupancy")
     @Severity(SeverityLevel.NORMAL)
     @Story("Hotel room modification")
     public void hotelRoomModificationTest6() throws InterruptedException, IOException {

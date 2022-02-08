@@ -16,19 +16,14 @@ import java.util.List;
 
 public class ErrorManagementNullPriceOnProduct extends BaseTest {
 
-    @Test(priority = 1, description = "LogIn")
-    @Severity(SeverityLevel.NORMAL)
-    @Story("Error management: null price on product")
-    public void logIn() throws InterruptedException, IOException {
-        loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
-    }
 
-    @Test(priority = 2, description = "Create a product and leave the price fields empty, Create a quote" +
+    @Test(priority = 1, description = "Create a product and leave the price fields empty, Create a quote" +
             " product/meeting room (depending on the type of product you created). Expected result: the price" +
             " of the record has been set to 0 instead of having an error thrown.")
     @Severity(SeverityLevel.NORMAL)
     @Story("Error management: null price on product.")
     public void case1() throws InterruptedException, IOException {
+        loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
         myceQuotes.deleteQuoteSFDX(SFDX, "Name='NullPriceOnProductAutoTest'", ORG_USERNAME);
         product.deleteProductSFDX(SFDX, "Name='WhiskeyAuto'", ORG_USERNAME);
         StringBuilder hotelRecord= hotel.getHotelSFDX(SFDX, "thn__Unique_Id__c='Demo'", ORG_USERNAME);

@@ -924,7 +924,6 @@ public class PackagesCustomPrice extends BaseTest {
         Assert.assertEquals(salesPriceExclTaxQuotePackage, sumSalesPriceExclTaxQuotePackageLines);
         Assert.assertEquals(salesPriceInclTaxQuotePackage, sumSalesPriceInclTaxQuotePackageLines);
         Assert.assertEquals(discountQuotePackage, sumDiscountQuotePackageLines);
-
     }
 
 }

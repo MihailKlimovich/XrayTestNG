@@ -12,19 +12,14 @@ import java.util.List;
 
 public class QuoteHotelRoomQuantityBudgetsAndSubtotals extends BaseTest {
 
-    @Test(priority = 1, description = "LogIn")
-    @Severity(SeverityLevel.NORMAL)
-    @Story("THY-677: Quote hotel room quantity - Budgets & subtotals")
-    public void logIn() throws InterruptedException, IOException {
-        loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
-    }
 
-    @Test(priority = 2, description = "Create MYCE Quote 5 days, Instantiate a Quote Hotel Room. Expected result:" +
+    @Test(priority = 1, description = "Create MYCE Quote 5 days, Instantiate a Quote Hotel Room. Expected result:" +
             " A Quote Hotel Room was created. Four Quote Hotel Room Prices records were created. Four Quote Budget" +
             " records were created.")
     @Severity(SeverityLevel.NORMAL)
     @Story("THY-677: Quote hotel room quantity - Budgets & subtotals")
     public void case1() throws InterruptedException, IOException {
+        loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
         rate.deleteRateSFDX(SFDX, "Name='RateAutoTestBudgets", ORG_USERNAME);
         myceQuotes.deleteQuoteSFDX(SFDX, "Name='QuoteHotelRoomQuantityBudgetsAndSubtotalsAutoTest'", ORG_USERNAME);
         StringBuilder hotelRecord= hotel.getHotelSFDX(SFDX, "thn__Unique_Id__c='Demo'", ORG_USERNAME);
@@ -107,7 +102,7 @@ public class QuoteHotelRoomQuantityBudgetsAndSubtotals extends BaseTest {
         Assert.assertEquals(quoteBudgetTotalAmountInclTax.get(3).intValue(), 221);
     }
 
-    @Test(priority = 3, description = "Change the Quantity = 10 on one of Quote Hotel Room Prices record." +
+    @Test(priority = 2, description = "Change the Quantity = 10 on one of Quote Hotel Room Prices record." +
             " Expected result: Sales price excl. Tax and Sales Price incl. Tax changed. uote Budget record updated" +
             " accordingly.")
     @Severity(SeverityLevel.NORMAL)
@@ -119,9 +114,11 @@ public class QuoteHotelRoomQuantityBudgetsAndSubtotals extends BaseTest {
         StringBuilder quoteHotelRoomRecord = quoteHotelRoom.getQuoteHotelRoomSFDX(SFDX, "thn__MYCE_Quote__c='"
                 + quoteID + "'", ORG_USERNAME);
         String quoteHotelRoomID= JsonParser2.getFieldValue(quoteHotelRoomRecord.toString(), "Id");
-        StringBuilder quoteHotelRoomPrices = myceQuotes.soql(SFDX, "SELECT Id FROM thn__Quote_Hotel_Room_Price__c" +
-                " WHERE thn__Quote_Hotel_Room__c='" + quoteHotelRoomID + "'", ORG_USERNAME);
-        List<String> quoteHotelRoomPricesID = JsonParser2.getFieldValueSoql(quoteHotelRoomPrices.toString(), "Id");
+        StringBuilder quoteHotelRoomPrices = myceQuotes.soql(SFDX, "SELECT Id FROM" +
+                " thn__Quote_Hotel_Room_Price__c WHERE thn__Quote_Hotel_Room__c='" + quoteHotelRoomID + "'",
+                ORG_USERNAME);
+        List<String> quoteHotelRoomPricesID = JsonParser2.
+                getFieldValueSoql(quoteHotelRoomPrices.toString(), "Id");
         quoteHotelRoomPrice.updateQuoteHotelRoomPriceSFDX(SFDX, "Id='" + quoteHotelRoomPricesID.get(0) + "'",
                 "thn__Quantity__c=10", ORG_USERNAME);
         StringBuilder quoteBudgetRecords = myceQuotes.soql(SFDX, "SELECT Id, thn__Total_Amount_incl_Tax__c" +

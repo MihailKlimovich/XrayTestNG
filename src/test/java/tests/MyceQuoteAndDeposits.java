@@ -16,18 +16,13 @@ import java.util.List;
 
 public class MyceQuoteAndDeposits extends BaseTest {
 
-    @Test(priority = 1, description = "LogIn")
-    @Severity(SeverityLevel.NORMAL)
-    @Story("Myce quote and deposits")
-    public void logIn() throws InterruptedException, IOException {
-        loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
-    }
 
-    @Test(priority = 2, description = "Preconditions: Create a new ‘MYCE Quote’, create a couple  new Deposits with" +
+    @Test(priority = 1, description = "Preconditions: Create a new ‘MYCE Quote’, create a couple  new Deposits with" +
             " various ‘Deposit numbers’. The deposit which number is lower is going to be used first.")
     @Severity(SeverityLevel.NORMAL)
     @Story("Update Orders")
     public void preconditions() throws InterruptedException, IOException {
+        loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
         myceQuotes.deleteQuoteSFDX(SFDX, "Name='QuoteAndDepositAutoTest'", ORG_USERNAME);
         StringBuilder hotelRecord= hotel.getHotelSFDX(SFDX, "thn__Unique_Id__c='Demo'", ORG_USERNAME);
         String propertyID = JsonParser2.getFieldValue(hotelRecord.toString(), "Id");
@@ -41,7 +36,7 @@ public class MyceQuoteAndDeposits extends BaseTest {
                 date.generateTodayDate2() + " thn__Payment_Method__c='Cash' thn__Deposit_number__c=2", ORG_USERNAME);
     }
 
-    @Test(priority = 3, description = "Preconditions: Create Payments on the ‘MYCE Quote’, the ‘Gross Value' = 1500’.")
+    @Test(priority = 2, description = "Preconditions: Create Payments on the ‘MYCE Quote’, the ‘Gross Value' = 1500’.")
     @Severity(SeverityLevel.NORMAL)
     @Story("Update Orders")
     public void case1() throws InterruptedException, IOException {
@@ -83,7 +78,7 @@ public class MyceQuoteAndDeposits extends BaseTest {
         Assert.assertEquals(depositTotalPaid2, "500");
     }
 
-    @Test(priority = 4, description = "Preconditions: Create Payments on the ‘MYCE Quote’, the ‘Gross Value' = 1500’.")
+    @Test(priority = 3, description = "Preconditions: Create Payments on the ‘MYCE Quote’, the ‘Gross Value' = 1500’.")
     @Severity(SeverityLevel.NORMAL)
     @Story("Update Orders")
     public void case2() throws InterruptedException, IOException {
