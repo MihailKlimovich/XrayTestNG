@@ -52,7 +52,7 @@ public class QuotesAccountToMews extends BaseTest {
                 "-s",
                 "thn__Hotel__c",
                 "-w",
-                "thn__Unique_Id__c='Demo'",
+                "thn__Unique_Id__c='Demo2'",
                 "-u",
                 ORG_USERNAME,
                 "--json"});
@@ -63,7 +63,7 @@ public class QuotesAccountToMews extends BaseTest {
                 "-s",
                 "thn__Hotel__c",
                 "-w",
-                "Name='Test'",
+                "Name='Demo2'",
                 "-u",
                 ORG_USERNAME,
                 "--json"});
@@ -167,7 +167,7 @@ public class QuotesAccountToMews extends BaseTest {
                 "-s",
                 "thn__Hotel__c",
                 "-w",
-                "Name='Test'",
+                "Name='Demo2'",
                 "-u",
                 ORG_USERNAME,
                 "--json"});

@@ -19,6 +19,7 @@ public class OverbookingDateTimes extends BaseTest{
     @Story("Overbooking - date times")
     public void preconditions() throws InterruptedException, IOException {
         loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
+        loginPage.authoriseURL(SFDX, ADMIN_AUTH_URL, ADMIN_USERNAME);
         loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
         user.addPermissionSet(SFDX, "Overbooking_User", ORG_USERNAME, ADMIN_USERNAME);
         myceQuotes.deleteQuoteSFDX(SFDX, "Name='OverbookingDateTimesAutoTest'", ORG_USERNAME);
@@ -78,9 +79,7 @@ public class OverbookingDateTimes extends BaseTest{
     public void case2() throws InterruptedException, IOException {
         String expectedMessage = "Something went wrong. Please contact support@thynk.cloud.";
         myceQuotes.goToMyceQuotes();
-        developerConsoleWindow.openDeveloperConsole();
-        developerConsoleWindow.openExecuteAnonymousWindow();
-        developerConsoleWindow.runApexCodeFromFile("src/main/Data/RemoveOverbookingPermissionSet");
+        user.apexExecute(SFDX, ADMIN_USERNAME, "src/main/Data/RemoveOverbookingPermissionSet.apex");
         myceQuotes.openMyceQoteRecord("OverbookingDateTimesAutoTest");
         myceQuotes.openMeetingRooms();
         quoteMeetingRoom.openRecordByName("OverbookingDateTimesAutoTest - MEETING FULL DAY");

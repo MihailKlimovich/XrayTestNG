@@ -31,4 +31,18 @@ public class User extends BasePage {
         System.out.println(result);
     }
 
+    @Step("Apex execute")
+    public void apexExecute(String sfdxPath, String userName, String path)
+            throws IOException, InterruptedException {
+        StringBuilder result = SfdxCommand.runLinuxCommand1(new String[]{
+                sfdxPath,
+                "force:apex:execute",
+                "-u",
+                userName,
+                "-f",
+                path,
+                "--json"});
+        System.out.println(result);
+    }
+
 }

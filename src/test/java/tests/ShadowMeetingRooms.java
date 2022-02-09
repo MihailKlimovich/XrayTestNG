@@ -58,10 +58,11 @@ public class ShadowMeetingRooms extends BaseTest {
     public void case1() throws InterruptedException, IOException {
         loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
         loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
+        loginPage.authoriseURL(SFDX, ADMIN_AUTH_URL, ADMIN_USERNAME);
         resource.deleteResourceSFDX(SFDX, "Name='ShadowMR1'", ORG_USERNAME);
         resource.deleteResourceSFDX(SFDX, "Name='ShadowMR2'", ORG_USERNAME);
         myceQuotes.deleteQuoteSFDX(SFDX, "Name='ShadowMeetingRoomsAutoTest'", ORG_USERNAME);
-        myceQuotes.deleteQuoteSFDX(SFDX, "Name='Shadow'", ORG_USERNAME);
+        myceQuotes.deleteQuoteSFDX(SFDX, "Name='ShadowAutoTest'", ORG_USERNAME);
         StringBuilder hotelRecord= hotel.getHotelSFDX(SFDX, "thn__Unique_Id__c='Demo'", ORG_USERNAME);
         String propertyID = JsonParser2.getFieldValue(hotelRecord.toString(), "Id");
         StringBuilder meetingHalfDayRecord = product.getProductSFDX(SFDX, "Name='MEETING HALF DAY'",
@@ -73,22 +74,10 @@ public class ShadowMeetingRooms extends BaseTest {
                 "' thn__Type__c='Meeting Room'", ORG_USERNAME);
         resourceGrouping.createResourceGroupingSFDX(SFDX, "thn__Grouped_Resource__c='" + resourceId1 + "'" +
                 " thn__Resource_Group__c='" + resourceId2 + "'", ORG_USERNAME);
-        String shadowQuoteID = myceQuotes.createQuoteSFDX(SFDX, "Name='Shadow' thn__Pax__c=1" +
+        String shadowQuoteID = myceQuotes.createQuoteSFDX(SFDX, "Name='ShadowAutoTest' thn__Pax__c=1" +
                 " thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" + date.generateTodayDate2()
                 + " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 25), ORG_USERNAME);
-        developerConsoleWindow.openDeveloperConsole();
-        developerConsoleWindow.openExecuteAnonymousWindow();
-        developerConsoleWindow.runApexCode("Metadata.DeployContainer mdContainer = new Metadata.DeployContainer();" + "\n" +
-                " Metadata.CustomMetadata cmd = new Metadata.CustomMetadata();" + "\n" +
-                " cmd.fullName = 'thn__Default_Agile_Value__mdt.thn__Hotel_Demo';" + "\n" +
-                " cmd.label = 'Hotel Demo';" + "\n" +
-                " Metadata.CustomMetadataValue customField1 = new Metadata.CustomMetadataValue();" + "\n" +
-                " customField1.field = 'thn__Shadow_Quote_Id__c';" + "\n" +
-                " customField1.value = '" + shadowQuoteID + "';" + "\n" +
-                " cmd.values.add(customField1);" + "\n" +
-                " mdContainer.addMetadata(cmd);" + "\n" +
-                " Id job = Metadata.Operations.enqueueDeployment(mdContainer, null);" + "\n" +
-                " System.debug(job);");
+        user.apexExecute(SFDX, ADMIN_USERNAME, "src/main/Data/ShadowIDInDAV.apex");
         StringBuilder recordTypes = myceQuotes.soql(SFDX, "SELECT Id FROM RecordType WHERE" +
                 " SobjectType='thn__MYCE_Quote__c' AND Name='Quote'", ORG_USERNAME);
         System.out.println(recordTypes);

@@ -55,6 +55,7 @@ public class ResourceGroupingTesting extends BaseTest {
     @Story("Resource grouping")
     public void case1() throws InterruptedException, IOException {
         loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
+        loginPage.authoriseURL(SFDX, ADMIN_AUTH_URL, ADMIN_USERNAME);
         loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
         user.addPermissionSet(SFDX, "Overbooking_User", ORG_USERNAME, ADMIN_USERNAME);
         myceQuotes.deleteQuoteSFDX(SFDX, "Name='ResourceGroupingAutoTest1'", ORG_USERNAME);
@@ -117,17 +118,16 @@ public class ResourceGroupingTesting extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     @Story("Resource grouping")
     public void case2() throws InterruptedException, IOException {
-        developerConsoleWindow.openDeveloperConsole();
-        developerConsoleWindow.openExecuteAnonymousWindow();
-        developerConsoleWindow.runApexCodeFromFile("src/main/Data/RemoveOverbookingPermissionSet");
+        user.apexExecute(SFDX, ADMIN_USERNAME, "src/main/Data/RemoveOverbookingPermissionSet.apex");
         myceQuotes.deleteQuoteSFDX(SFDX, "Name='ResourceGroupingAutoTest2'", ORG_USERNAME);
         myceQuotes.deleteQuoteSFDX(SFDX, "Name='CloneResourceGroupingAutoTest2'", ORG_USERNAME);
         resource.deleteResourceSFDX(SFDX, "Name='ResourceGrouping3'", ORG_USERNAME);
         resource.deleteResourceSFDX(SFDX, "Name='ResourceGrouping4'", ORG_USERNAME);
-        StringBuilder defaultResourceRecord = resource.getResourceSFDX(SFDX, "Name='DEFAULT'", ORG_USERNAME);
-        String defaultResourceID = JsonParser2.getFieldValue(defaultResourceRecord.toString(), "Id");
         StringBuilder hotelRecord= hotel.getHotelSFDX(SFDX, "thn__Unique_Id__c='Demo'", ORG_USERNAME);
         String propertyID = JsonParser2.getFieldValue(hotelRecord.toString(), "Id");
+        StringBuilder defaultResourceRecord = resource.getResourceSFDX(SFDX, "Name='DEFAULT' thn__Hotel__c='"
+                + propertyID + "'", ORG_USERNAME);
+        String defaultResourceID = JsonParser2.getFieldValue(defaultResourceRecord.toString(), "Id");
         StringBuilder recordTypes = myceQuotes.soql(SFDX, "SELECT Id FROM RecordType WHERE" +
                 " SobjectType='thn__MYCE_Quote__c' AND Name='Quote'", ORG_USERNAME);
         System.out.println(recordTypes);
@@ -173,10 +173,11 @@ public class ResourceGroupingTesting extends BaseTest {
     public void case3() throws InterruptedException, IOException {
         myceQuotes.deleteQuoteSFDX(SFDX, "Name='ResourceGroupingAutoTest3'", ORG_USERNAME);
         myceQuotes.deleteQuoteSFDX(SFDX, "Name='CloneResourceGroupingAutoTest3'", ORG_USERNAME);
-        StringBuilder defaultResourceRecord = resource.getResourceSFDX(SFDX, "Name='DEFAULT'", ORG_USERNAME);
-        String defaultResourceID = JsonParser2.getFieldValue(defaultResourceRecord.toString(), "Id");
         StringBuilder hotelRecord= hotel.getHotelSFDX(SFDX, "thn__Unique_Id__c='Demo'", ORG_USERNAME);
         String propertyID = JsonParser2.getFieldValue(hotelRecord.toString(), "Id");
+        StringBuilder defaultResourceRecord = resource.getResourceSFDX(SFDX, "Name='DEFAULT' thn__Hotel__c='"
+                + propertyID + "'", ORG_USERNAME);
+        String defaultResourceID = JsonParser2.getFieldValue(defaultResourceRecord.toString(), "Id");
         StringBuilder recordTypes = myceQuotes.soql(SFDX, "SELECT Id FROM RecordType WHERE" +
                 " SobjectType='thn__MYCE_Quote__c' AND Name='Quote'", ORG_USERNAME);
         System.out.println(recordTypes);
@@ -356,10 +357,11 @@ public class ResourceGroupingTesting extends BaseTest {
     public void case7() throws InterruptedException, IOException {
         //loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
         myceQuotes.deleteQuoteSFDX(SFDX, "Name='ResourceGroupingAutoTest7'", ORG_USERNAME);
-        StringBuilder defaultResourceRecord = resource.getResourceSFDX(SFDX, "Name='DEFAULT'", ORG_USERNAME);
-        String defaultResourceID = JsonParser2.getFieldValue(defaultResourceRecord.toString(), "Id");
         StringBuilder hotelRecord= hotel.getHotelSFDX(SFDX, "thn__Unique_Id__c='Demo'", ORG_USERNAME);
         String propertyID = JsonParser2.getFieldValue(hotelRecord.toString(), "Id");
+        StringBuilder defaultResourceRecord = resource.getResourceSFDX(SFDX, "Name='DEFAULT' thn__Hotel__c='"
+                + propertyID + "'", ORG_USERNAME);
+        String defaultResourceID = JsonParser2.getFieldValue(defaultResourceRecord.toString(), "Id");
         StringBuilder recordTypes = myceQuotes.soql(SFDX, "SELECT Id FROM RecordType WHERE" +
                 " SobjectType='thn__MYCE_Quote__c' AND Name='Quote'", ORG_USERNAME);
         System.out.println(recordTypes);
@@ -720,9 +722,7 @@ public class ResourceGroupingTesting extends BaseTest {
     @Story("Resource grouping")
     public void case13() throws InterruptedException, IOException {
         //loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
-        developerConsoleWindow.openDeveloperConsole();
-        developerConsoleWindow.openExecuteAnonymousWindow();
-        developerConsoleWindow.runApexCodeFromFile("src/main/Data/RemoveOverbookingPermissionSet");
+        user.apexExecute(SFDX, ADMIN_USERNAME, "src/main/Data/RemoveOverbookingPermissionSet.apex");
         myceQuotes.deleteQuoteSFDX(SFDX, "Name='ResourceGroupingAutoTest13'", ORG_USERNAME);
         resource.deleteResourceSFDX(SFDX, "Name='ResourceGrouping18'", ORG_USERNAME);
         resource.deleteResourceSFDX(SFDX, "Name='ResourceGrouping19'", ORG_USERNAME);
@@ -742,7 +742,8 @@ public class ResourceGroupingTesting extends BaseTest {
                 + propertyID + "' thn__Type__c='Meeting Room'", ORG_USERNAME);
         String resourceId2 = resource.createResourceSFDX(SFDX, "Name='ResourceGrouping19' thn__Hotel__c='"
                 + propertyID + "' thn__Type__c='Meeting Room'", ORG_USERNAME);
-        StringBuilder defaultResourceRecord = resource.getResourceSFDX(SFDX, "Name='DEFAULT'", ORG_USERNAME);
+        StringBuilder defaultResourceRecord = resource.getResourceSFDX(SFDX, "Name='DEFAULT' thn__Hotel__c='"
+                + propertyID + "'", ORG_USERNAME);
         String defaultResourceID = JsonParser2.getFieldValue(defaultResourceRecord.toString(), "Id");
         resourceGrouping.createResourceGroupingSFDX(SFDX, "thn__Grouped_Resource__c='" + resourceId1 + "'" +
                 " thn__Resource_Group__c='" + resourceId2 + "'", ORG_USERNAME);

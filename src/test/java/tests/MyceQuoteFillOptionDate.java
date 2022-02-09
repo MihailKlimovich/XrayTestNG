@@ -24,10 +24,9 @@ public class MyceQuoteFillOptionDate extends BaseTest {
     public void case1() throws InterruptedException, IOException {
         loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
         loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
+        loginPage.authoriseURL(SFDX, ADMIN_AUTH_URL, ADMIN_USERNAME);
+        user.apexExecute(SFDX, ADMIN_USERNAME, "src/main/Data/UpdateOptionInterval5Days.apex");
         myceQuotes.deleteQuoteSFDX(SFDX, "Name='FillOptionDateAutoTest1'", ORG_USERNAME);
-        developerConsoleWindow.openDeveloperConsole();
-        developerConsoleWindow.openExecuteAnonymousWindow();
-        developerConsoleWindow.runApexCodeFromFile("src/main/Data/UpdateOptionInterval5Days");
         StringBuilder hotelRecord= hotel.getHotelSFDX(SFDX, "thn__Unique_Id__c='Demo'", ORG_USERNAME);
         String propertyID = JsonParser2.getFieldValue(hotelRecord.toString(), "Id");
         StringBuilder recordTypes = myceQuotes.soql(SFDX, "SELECT Id FROM RecordType WHERE" +
@@ -49,9 +48,7 @@ public class MyceQuoteFillOptionDate extends BaseTest {
     @Story("Myce quote - Fill Option date")
     public void case2() throws InterruptedException, IOException {
         myceQuotes.deleteQuoteSFDX(SFDX, "Name='FillOptionDateAutoTest2'", ORG_USERNAME);
-        developerConsoleWindow.openDeveloperConsole();
-        developerConsoleWindow.openExecuteAnonymousWindow();
-        developerConsoleWindow.runApexCodeFromFile("src/main/Data/UpdateOptionInterval0Days");
+        user.apexExecute(SFDX, ADMIN_USERNAME, "src/main/Data/UpdateOptionInterval0Days.apex");
         StringBuilder hotelRecord= hotel.getHotelSFDX(SFDX, "thn__Unique_Id__c='Demo'", ORG_USERNAME);
         String propertyID = JsonParser2.getFieldValue(hotelRecord.toString(), "Id");
         StringBuilder recordTypes = myceQuotes.soql(SFDX, "SELECT Id FROM RecordType WHERE" +

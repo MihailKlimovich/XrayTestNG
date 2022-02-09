@@ -135,7 +135,7 @@ public class MyceQuotes extends BasePage {
         wait1.until(ExpectedConditions.presenceOfElementLocated(KEEP_ROOMS_PAX_CHECKBOX));
         click3(KEEP_ROOMS_PAX_CHECKBOX);
         wait1.until(ExpectedConditions.presenceOfElementLocated(SAVE_BUTTON_FOR_CLONE)).click();
-        wait1.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//slot[@slot='header']//slot[@slot='primaryField']//lightning-formatted-text[text()='" + name + "']")));
+        wait1.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//slot[@name='primaryField']//lightning-formatted-text[text()='" + name + "']")));
         Thread.sleep(5000);
     }
 

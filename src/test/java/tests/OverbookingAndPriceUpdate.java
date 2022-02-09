@@ -56,6 +56,7 @@ public class OverbookingAndPriceUpdate extends BaseTest {
     @Story("Overbooking & price update")
     public void preconditions() throws InterruptedException, IOException {
         loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
+        loginPage.authoriseURL(SFDX, ADMIN_AUTH_URL, ADMIN_USERNAME);
         loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
         user.addPermissionSet(SFDX, "Overbooking_User", ORG_USERNAME, ADMIN_USERNAME);
         myceQuotes.deleteQuoteSFDX(SFDX, "Name='OverbookingChangePriceAutoTest'", ORG_USERNAME);
@@ -332,9 +333,7 @@ public class OverbookingAndPriceUpdate extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     @Story("Overbooking & price update")
     public void case8() throws InterruptedException, IOException {
-        developerConsoleWindow.openDeveloperConsole();
-        developerConsoleWindow.openExecuteAnonymousWindow();
-        developerConsoleWindow.runApexCodeFromFile("src/main/Data/RemoveOverbookingPermissionSet");
+        user.apexExecute(SFDX, ADMIN_USERNAME, "src/main/Data/RemoveOverbookingPermissionSet.apex");
         StringBuilder resourceRecord = resource.
                 getResourceSFDX(SFDX, "Name='OverbookingChangePriceAutoTest3'", ORG_USERNAME);
         String resourceId = JsonParser2.getFieldValue(resourceRecord.toString(), "Id");

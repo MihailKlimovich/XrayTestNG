@@ -19,13 +19,13 @@ public class ChangeResource extends BasePage {
 
     By NEW_RESOURCE_FIELD = By.xpath("//label[text()='Resource']/following::input[@type='search']");
     By REMOVE_BUTTON = By.xpath("//label[text()='Resource']/following::button[@title='Remove']");
-    By NEXT_BUTTON = By.xpath("//button[@title='Next']");
-    By FINISH_BUTTON = By.xpath("//button[@title='Finish']");
+    By NEXT_BUTTON = By.xpath("//button[@class='slds-button slds-button_brand flow-button__NEXT']");
+    By FINISH_BUTTON = By.xpath("//button[@class='slds-button slds-button_brand flow-button__FINISH']");
     By CONFIRMATION_MESSAGE = By.xpath("//flowruntime-display-text-lwc//span//p[text()='Do you wish to overbook?']");
     By YES_RADIO_BUTTON = By.xpath("//span//input[@value='Yes']");
     By NO_RADIO_BUTTON = By.xpath("//span//input[@value='No']");
-    By START_DATE_FIELD = By.xpath("//button[@title='Select a date']/parent::lightning-button-icon/parent::div//input[@name='Start_Date_Time']");
-    By END_DATE_FIELD = By.xpath("//button[@title='Select a date']/parent::lightning-button-icon/parent::div//input[@name='End_Date_Time']");
+    By START_DATE_FIELD = By.xpath("//div//label[text()='Date']/following::lightning-button-icon/parent::div//input[@name='Start_Date_Time']");
+    By END_DATE_FIELD = By.xpath("//div//label[text()='Date']/following::lightning-button-icon/parent::div//input[@name='End_Date_Time']");
     By START_TIME_FIELD = By.xpath("//lightning-timepicker//input[@name='Start_Date_Time']");
     By END_TIME_FIELD = By.xpath("//lightning-timepicker//input[@name='End_Date_Time']");
     By UPDATE_PRICES_CHECKBOX = By.xpath("//input[@name='Update_Prices']");

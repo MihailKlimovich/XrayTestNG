@@ -91,13 +91,12 @@ public class BaseTest {
     public String ORG_USERNAME = System.getenv("JAVAUSERNAME");
     public String ORG_PASSWORD = System.getenv("JAVAPASSWORD");
     public String ORG_URL = System.getenv("SF_URL");
-    public String CONSUMER_KEY = System.getenv("SF_CONSUMER_KEY");
     public String SFDX = System.getenv("SFDX");
-    public String SERVER_KEY_PATH = System.getenv("SERVER_KEY_PATH");
     public String SFDX_AUTH_URL = System.getenv("AUTH_URL");
     public String ADMIN_USERNAME = System.getenv("ADMINUSERNAME");
     public String ADMIN_PASSWORD = System.getenv("ADMINPASSWORD");
     public String ADMIN_AUTH_URL = System.getenv("ADMIN_AUTH_URL");
+
 
 
 
