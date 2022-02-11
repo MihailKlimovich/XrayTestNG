@@ -96,10 +96,10 @@ public class QuoteHotelRoomQuantityBudgetsAndSubtotals extends BaseTest {
                 "thn__Total_Amount_incl_Tax__c");
         Assert.assertEquals(quoteHotelRoomPricesID.size(), 4 );
         Assert.assertEquals(quoteBudgetID.size(), 4);
-        Assert.assertEquals(quoteBudgetTotalAmountInclTax.get(0).intValue(), 221);
-        Assert.assertEquals(quoteBudgetTotalAmountInclTax.get(1).intValue(), 221);
-        Assert.assertEquals(quoteBudgetTotalAmountInclTax.get(2).intValue(), 221);
-        Assert.assertEquals(quoteBudgetTotalAmountInclTax.get(3).intValue(), 221);
+        Assert.assertEquals(quoteBudgetTotalAmountInclTax.get(0).intValue(), 110);
+        Assert.assertEquals(quoteBudgetTotalAmountInclTax.get(1).intValue(), 110);
+        Assert.assertEquals(quoteBudgetTotalAmountInclTax.get(2).intValue(), 110);
+        Assert.assertEquals(quoteBudgetTotalAmountInclTax.get(3).intValue(), 110);
     }
 
     @Test(priority = 2, description = "Change the Quantity = 10 on one of Quote Hotel Room Prices record." +
@@ -128,10 +128,10 @@ public class QuoteHotelRoomQuantityBudgetsAndSubtotals extends BaseTest {
                 "thn__Total_Amount_incl_Tax__c");
         Assert.assertEquals(quoteHotelRoomPricesID.size(), 4 );
         Assert.assertEquals(quoteBudgetID.size(), 4);
-        Assert.assertEquals(quoteBudgetTotalAmountInclTax.get(0).intValue(), 2210);
-        Assert.assertEquals(quoteBudgetTotalAmountInclTax.get(1).intValue(), 221);
-        Assert.assertEquals(quoteBudgetTotalAmountInclTax.get(2).intValue(), 221);
-        Assert.assertEquals(quoteBudgetTotalAmountInclTax.get(3).intValue(), 221);
+        Assert.assertEquals(quoteBudgetTotalAmountInclTax.get(0).intValue(), 1100);
+        Assert.assertEquals(quoteBudgetTotalAmountInclTax.get(1).intValue(), 110);
+        Assert.assertEquals(quoteBudgetTotalAmountInclTax.get(2).intValue(), 110);
+        Assert.assertEquals(quoteBudgetTotalAmountInclTax.get(3).intValue(), 110);
     }
 
 }

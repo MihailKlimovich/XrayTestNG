@@ -27,9 +27,9 @@ public class MultiEditProducts extends BasePage {
     By NEW_DISCOUNT_PERCENTAGE_FIELD = By.xpath("//input[@name='New_Discount_Percentage']");
     By NEW_DISCOUNT_AMOUNT_FIELD = By.xpath("//input[@name='New_Discount_Amount']");
     By NEW_UNIT_PRICE_FIELD = By.xpath("//input[@name='New_Unit_Price']");
-    By NEXT_BUTTON = By.xpath("//button[@title='Next']");
+    By NEXT_BUTTON = By.xpath("//button[@class='slds-button slds-button_brand flow-button__NEXT']");
     By YES_CHOICE_BUTTON = By.xpath("//input[@name='UserChoice' and @value='Yes_Choice' ]");
-    By FINISH_BUTTON = By.xpath("//button[@title='Finish']");
+    By FINISH_BUTTON = By.xpath("//button[@class='slds-button slds-button_brand flow-button__FINISH']");
 
 
     @Step("Multi Edit Products (Products are part of Package)")

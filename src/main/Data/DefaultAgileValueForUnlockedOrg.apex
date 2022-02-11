@@ -129,6 +129,16 @@
       customField25.value = true;
       cmd.values.add(customField25);
 
+      Metadata.CustomMetadataValue customField26 = new Metadata.CustomMetadataValue();
+      customField26.field = 'thn__Quote_shoulder_start__c';
+      customField26.value = '0';
+      cmd.values.add(customField26);
+
+      Metadata.CustomMetadataValue customField27 = new Metadata.CustomMetadataValue();
+      customField27.field = 'thn__Quote_shoulder_end__c';
+      customField27.value = '2';
+      cmd.values.add(customField27);
+
       Metadata.CustomMetadataValue customField28 = new Metadata.CustomMetadataValue();
       customField28.field = 'thn__Assign_default_Rate_plan__c';
       customField28.value = true;

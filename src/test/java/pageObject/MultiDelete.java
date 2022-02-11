@@ -13,9 +13,9 @@ public class MultiDelete extends BasePage {
         super(driver);
     }
 
-    By NEXT_BUTTON = By.xpath("//button[@title='Next']");
+    By NEXT_BUTTON = By.xpath("//button[@class='slds-button slds-button_brand flow-button__NEXT']");
     By MESSAGE = By.xpath("//lightning-formatted-rich-text[@class='slds-rich-text-editor__output']//span//p");
-    By FINISH_BUTTON = By.xpath("//button[@title='Finish']");
+    By FINISH_BUTTON = By.xpath("//button[@class='slds-button slds-button_brand flow-button__FINISH']");
 
 
     @Step("Multi delete records")

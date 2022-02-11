@@ -79,6 +79,7 @@ public class BaseTest {
     protected QuoteHotelRoomPrice quoteHotelRoomPrice;
     protected CreateQuoteHotelRoomComponent createQuoteHotelRoomComponent;
     protected Availability availability;
+    protected MAdjustments mAdjustments;
 
 
 
@@ -96,9 +97,6 @@ public class BaseTest {
     public String ADMIN_USERNAME = System.getenv("ADMINUSERNAME");
     public String ADMIN_PASSWORD = System.getenv("ADMINPASSWORD");
     public String ADMIN_AUTH_URL = System.getenv("ADMIN_AUTH_URL");
-
-
-
 
     final protected String thynkPackDevOrg = "https://thynkpack-dev-ed.my.salesforce.com/";
     final protected String thynkPackUserName = "rostislav.orel@succraft.com";
@@ -196,6 +194,7 @@ public class BaseTest {
         quoteHotelRoomPrice = new QuoteHotelRoomPrice(driver);
         createQuoteHotelRoomComponent = new CreateQuoteHotelRoomComponent(driver);
         availability = new Availability(driver);
+        mAdjustments = new MAdjustments(driver);
     }
 
     @AfterClass

@@ -1,0 +1,11 @@
+ thn__Contact_Check_Settings__c settings = thn__Contact_Check_Settings__c.getOrgDefaults();
+ settings.thn__Contact_Check2__c = 'Phone';
+ settings.thn__Contact_Check3__c = 'Title';
+ settings.thn__Contact_CheckEmail__c = 'Email';
+ settings.thn__Guest_Check2__c = 'thn__Phone__c';
+ settings.thn__Guest_Check3__c = 'thn__Title__c';
+ settings.thn__Guest_CheckEmail__c = 'thn__Email__c';
+ Date myDate = Date.today();
+ settings.thn__Last_execution_date_time__c = myDate.toStartOfMonth();
+ settings.thn__isNotValid__c = 'user@booking.com, user@partner.expedia.com, noreply@domain.com';
+ upsert settings;

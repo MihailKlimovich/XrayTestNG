@@ -265,6 +265,11 @@
             <class name="tests.TB.ReservationGuestCreatedTwice"/>
         </classes>
     </test>
+    <test name="THY-632: PMS block and Madjustments - Mews Interface">
+        <classes>
+            <class name="tests.PMSBlockAndMadjustmentsMewsInterface"/>
+        </classes>
+    </test>
 
 
 </suite>

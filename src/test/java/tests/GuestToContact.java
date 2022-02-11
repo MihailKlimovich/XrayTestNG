@@ -22,20 +22,8 @@ public class GuestToContact extends BaseTest {
     public void preconditions() throws InterruptedException, IOException {
         loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
         loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
-        developerConsoleWindow.openDeveloperConsole();
-        developerConsoleWindow.openExecuteAnonymousWindow();
-        developerConsoleWindow.runApexCode(
-                "thn__Contact_Check_Settings__c settings = thn__Contact_Check_Settings__c.getOrgDefaults();" +
-                        " settings.thn__Contact_Check2__c = 'Phone';" +
-                        " settings.thn__Contact_Check3__c = 'Title';" +
-                        " settings.thn__Contact_CheckEmail__c = 'Email';" +
-                        " settings.thn__Guest_Check2__c = 'thn__Phone__c';" +
-                        " settings.thn__Guest_Check3__c = 'thn__Title__c';" +
-                        " settings.thn__Guest_CheckEmail__c = 'thn__Email__c';" +
-                        " Date myDate = Date.today();" +
-                        " settings.thn__Last_execution_date_time__c = myDate.toStartOfMonth();" +
-                        " settings.thn__isNotValid__c = 'user@booking.com, user@partner.expedia.com, noreply@domain.com';" +
-                        " upsert settings;");
+        loginPage.authoriseURL(SFDX, ADMIN_AUTH_URL, ADMIN_USERNAME);
+        user.apexExecute(SFDX, ADMIN_USERNAME, "src/main/Data/ContactCheckSettings.apex");
         guests.deleteGuestSFDX(SFDX, "thn__Email__c='carleone@gmail.com'" , ORG_USERNAME);
         contact.deleteContactSFDX(SFDX, "Email='carleone@gmail.com'", ORG_USERNAME);
         guests.deleteGuestSFDX(SFDX, "thn__Email__c='malkovich@gmail.com'" , ORG_USERNAME);
@@ -85,16 +73,16 @@ public class GuestToContact extends BaseTest {
                 " thn__Title__c='Guest6'", ORG_USERNAME);
         String contactID6 = contact.createContactSFDX(SFDX, "LastName='Dreiser' Phone='741741'" +
                 " Email='writer@gmail.com' Title='Guest6'", ORG_USERNAME);
-
+        Thread.sleep(2000);
     }
 
     @Test(priority = 2, description = "Run batch")
     @Severity(SeverityLevel.NORMAL)
     @Story("Guest to contact")
     public void runBatch() throws InterruptedException, IOException {
-        developerConsoleWindow.openDeveloperConsole();
+        /*developerConsoleWindow.openDeveloperConsole();
         developerConsoleWindow.openExecuteAnonymousWindow();
-        developerConsoleWindow.runApexCodeFromFile("src/main/Data/BatchGuestToContact");
+        developerConsoleWindow.runApexCodeFromFile("src/main/Data/BatchGuestToContact");*/
     }
 
     @Test(priority = 3, description = "If Guest.CheckEmail == Contact.CheckEmail  and  Guest.Check2 == Contact.Check2," +

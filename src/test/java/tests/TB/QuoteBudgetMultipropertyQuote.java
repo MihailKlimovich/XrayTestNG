@@ -97,8 +97,8 @@ public class QuoteBudgetMultipropertyQuote extends BaseTest{
         StringBuilder quoteBudgetProperty2Records = myceQuotes.soql(SFDX, "SELECT Id, thn__Total_Amount_incl_Tax__c" +
                 " FROM thn__Quote_Budget__c WHERE thn__MYCE_Quote__c='" + quoteID + "' AND thn__Property__c='" + propertyID2 + "'", ORG_USERNAME);
         List<String> quoteBudgetID2 = JsonParser2.getFieldValueSoql(quoteBudgetProperty2Records.toString(), "Id");
-        Assert.assertEquals(quoteBudgetID1.size(), 2);
-        Assert.assertEquals(quoteBudgetID2.size(), 2);
+        Assert.assertEquals(quoteBudgetID1.size(), 1);
+        Assert.assertEquals(quoteBudgetID2.size(), 1);
     }
 
 }
