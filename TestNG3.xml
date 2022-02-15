@@ -320,6 +320,21 @@
             <class name="tests.PMSBlockAndMadjustmentsMewsInterface"/>
         </classes>
     </test>
+    <test name="THY-666: Mews Block update">
+        <classes>
+            <class name="tests.MewsBlockUpdate"/>
+        </classes>
+    </test>
+    <test name="TTB-283: Quote - 'Date' records not generated">
+        <classes>
+            <class name="tests.TB.QuoteDateRecordsNotGenerated"/>
+        </classes>
+    </test>
+    <test name="THY-528: Allow resource selection when adding package.">
+        <classes>
+            <class name="tests.AllowResourceSelectionWhenAddingPackage"/>
+        </classes>
+    </test>
 </suite>
 
 

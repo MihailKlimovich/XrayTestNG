@@ -245,6 +245,11 @@
             <class name="tests.TB.ReservationGuestCreatedTwice"/>
         </classes>
     </test>
+    <test name="THY-528: Allow resource selection when adding package.">
+        <classes>
+            <class name="tests.AllowResourceSelectionWhenAddingPackage"/>
+        </classes>
+    </test>
 
 </suite>
 
