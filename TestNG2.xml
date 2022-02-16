@@ -105,11 +105,6 @@
             <class name="tests.MyceQuoteAndDeposits"/>
         </classes>
     </test>
-    <test name="Payment to Mews">
-        <classes>
-            <class name="tests.PaymentToMews"/>
-        </classes>
-    </test>
     <test name="Prevent reserved hotel rooms from being deleted">
         <classes>
             <class name="tests.PreventReservedHotelRoomsFromBeingDeleted"/>
@@ -128,11 +123,6 @@
     <test name="Shadow Meeting rooms">
         <classes>
             <class name="tests.ShadowMeetingRooms"/>
-        </classes>
-    </test>
-    <test name="Rooming list testing">
-        <classes>
-            <class name="tests.RoomingList"/>
         </classes>
     </test>
     <test name="Clone Package testing">
@@ -260,7 +250,6 @@
             <class name="tests.AllowResourceSelectionWhenAddingPackage"/>
         </classes>
     </test>
-
 
 </suite>
 
