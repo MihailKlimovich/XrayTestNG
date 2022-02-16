@@ -15,21 +15,6 @@
             <class name="tests.Preparation"/>
         </classes>
     </test>
-    <test name="Guest to contact">
-        <classes>
-            <class name="tests.GuestToContact"/>
-        </classes>
-    </test>
-    <test name="Update Orders">
-        <classes>
-            <class name="tests.UpdateOrders"/>
-        </classes>
-    </test>
-    <test name="TB-132: Optional Product was added to an Order and sent to Mews">
-        <classes>
-            <class name="tests.OptionalProductWasAddedToAnOrderAndSentToMews"/>
-        </classes>
-    </test>
     <test name="THY-487: Reservation creation process">
         <classes>
             <class name="tests.ReservationCreationProcess"/>

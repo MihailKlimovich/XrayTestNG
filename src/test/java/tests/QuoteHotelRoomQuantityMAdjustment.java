@@ -12,7 +12,10 @@ import java.util.List;
 
 public class QuoteHotelRoomQuantityMAdjustment extends BaseTest {
 
-    @Test(priority = 1, description = "")
+    @Test(priority = 1, description = "Create MYCE Quote. Instantiate a Quote Hotel Room. Set checkbox ‘Create" +
+            " PMS Block’ = True on MYCE Quote. Expected result: PMS block is created. Start Date=quote.arrivalDate," +
+            " End Date=quote.departureDate, PMS Release Date Time = quote.releaseDate, PMS Status = Send," +
+            " PMS Response = 200 OK.")
     @Severity(SeverityLevel.NORMAL)
     @Story("THY-665: Quote hotel room quantity - MAdjustment")
     public void precondition() throws InterruptedException, IOException {
@@ -36,7 +39,7 @@ public class QuoteHotelRoomQuantityMAdjustment extends BaseTest {
         String quoteID = myceQuotes.createQuoteSFDX(SFDX,
                 "Name='QuoteHotelRoomQuantityMAdjustmentAutoTest' thn__Pax__c=1 thn__Hotel__c='"
                         + propertyID + "' thn__Arrival_Date__c=" + date.generateTodayDate2_plus(0, 4) + "" +
-                        " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 8) + "" +
+                        " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 7) + "" +
                         " RecordTypeId='" + recordTypeID.get(0) + "' thn__Release_Date__c=" +
                         date.generateTodayDate2_plus(0, 3) + " thn__Closed_Status__c='Won'", ORG_USERNAME);
         String quoteHotelRoomId1 = quoteHotelRoom.createQuoteHotelRoomSFDX(SFDX, "thn__MYCE_Quote__c='"
@@ -63,6 +66,21 @@ public class QuoteHotelRoomQuantityMAdjustment extends BaseTest {
         Assert.assertEquals(pmsStartDate, quoteArrivalDate);
         Assert.assertEquals(pmsEndDate, quoteDepartureDate);
         Assert.assertTrue(pmsReleaseDateTime.contains(quoteReleaseDate));
+    }
+
+    @Test(priority = 2, description = "Change the stage of the Quote to ‘3 - Tentative’. Expected result: MAdjustment" +
+            " records are created on PMS Block. Start UTC = (date == day 1 ? quote hotel room price date + quote" +
+            " hotel room arrival time : quote hotel room date 00:00). End UTC =  (date == last day ? quote hotel" +
+            " room price date + quote hotel room departure time : quote hotel room date 23:59). PMS Quantity = quote" +
+            " hotel room price quantity")
+    @Severity(SeverityLevel.NORMAL)
+    @Story("THY-665: Quote hotel room quantity - MAdjustment")
+    public void case1() throws InterruptedException, IOException {
+        StringBuilder quoteRecord = myceQuotes.
+                getQuoteSFDX(SFDX, "Name='QuoteHotelRoomQuantityMAdjustmentAutoTest'", ORG_USERNAME);
+        String quoteID= JsonParser2.getFieldValue(quoteRecord.toString(), "Id");
+        myceQuotes.updateQuoteSFDX(SFDX, "Id='" + quoteID + "'", "thn__Stage__c='3 - Tentative'", ORG_USERNAME);
+
     }
 
 }
