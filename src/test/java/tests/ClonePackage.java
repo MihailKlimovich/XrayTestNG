@@ -25,7 +25,7 @@ public class ClonePackage extends BaseTest {
         loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
         loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
         packages.deletePackageSFDX(SFDX, "Name='ClonePackageAutoTest", ORG_USERNAME);
-        packages.deletePackageSFDX(SFDX, "Name='NewClonePackageAuto'", ORG_USERNAME);
+        packages.deletePackageSFDX(SFDX, "Name='ClonePackageAutoTest clone'", ORG_USERNAME);
         StringBuilder hotelRecord= hotel.getHotelSFDX(SFDX, "thn__Unique_Id__c='Demo'", ORG_USERNAME);
         String propertyID = JsonParser2.getFieldValue(hotelRecord.toString(), "Id");
         StringBuilder resourceRecord = resource.getResourceSFDX(SFDX, "Name='DEFAULT' thn__Hotel__c='"
@@ -50,12 +50,13 @@ public class ClonePackage extends BaseTest {
                 " thn__Function__c='DEFAULT'", ORG_USERNAME);
         packageLine.updatePackageLineSFDX(SFDX, "Id='" + plID1 + "'",
                 "thn__Service_Area__c='" + plID2 + "'", ORG_USERNAME);
-        homePageForScratchOrg.openAppLauncher();
-        homePageForScratchOrg.sendTextInAppWindow("Packages");
+        packages.goToPackages();
+        //homePageForScratchOrg.openAppLauncher();
+        //homePageForScratchOrg.sendTextInAppWindow("Packages");
         packages.openPackageRecord("ClonePackageAutoTest");
-        packages.clonePackage("NewClonePackageAuto");
+        packages.clonePackage("ClonePackageAutoTest clone");
         StringBuilder originalPackage = packages.getPackageSFDX(SFDX, "Name='ClonePackageAutoTest'", ORG_USERNAME);
-        StringBuilder clonedPackage = packages.getPackageSFDX(SFDX, "Name='NewClonePackageAuto'", ORG_USERNAME);
+        StringBuilder clonedPackage = packages.getPackageSFDX(SFDX, "Name='ClonePackageAutoTest clone'", ORG_USERNAME);
         String originalPackageId= JsonParser2.
                 getFieldValue(originalPackage.toString(), "Id");
         String clonedPackageId= JsonParser2.

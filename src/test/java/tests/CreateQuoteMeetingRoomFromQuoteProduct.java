@@ -58,6 +58,7 @@ public class CreateQuoteMeetingRoomFromQuoteProduct extends BaseTest {
         quoteProducts.clickCreateREsourceButton();
         createResourceForm.createResource("DEFAULT", "DEFAULT", "Custom", "3",
                 "151", "Description 123", "English", "France", "Des FS");
+        Thread.sleep(5000);
         StringBuilder quoteMeetingRoomRecord = quoteMeetingRoom.
                 getQuoteMeetingRoomSFDX(SFDX, "thn__MYCE_Quote__c='" + quoteID + "'", ORG_USERNAME);
         StringBuilder quoteProductRecord = quoteProducts.

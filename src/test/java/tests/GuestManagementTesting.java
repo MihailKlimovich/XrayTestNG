@@ -166,6 +166,7 @@ public class GuestManagementTesting extends BaseTest {
                 ORG_USERNAME,
                 "--json"});
         Thread.sleep(3000);
+        System.out.println(res);
         StringBuilder quoteRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:get",

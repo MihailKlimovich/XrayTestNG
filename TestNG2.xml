@@ -250,7 +250,6 @@
             <class name="tests.AllowResourceSelectionWhenAddingPackage"/>
         </classes>
     </test>
-
 </suite>
 
 

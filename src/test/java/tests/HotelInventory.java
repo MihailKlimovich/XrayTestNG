@@ -99,6 +99,7 @@ public class HotelInventory extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     @Story("THY-624: Hotel Inventory")
     public void case1() throws InterruptedException, IOException {
+        //loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
         myceQuotes.goToMyceQuotes();
         myceQuotes.openMyceQoteRecord("HotelInventoryAutoTest");
         myceQuotes.openHotelRooms();

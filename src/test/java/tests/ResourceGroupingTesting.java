@@ -27,9 +27,9 @@ public class ResourceGroupingTesting extends BaseTest {
         options.addArguments("--disable-gpu");
         options.addArguments("--disable-extensions");
         options.addArguments("--disable-dev-shm-usage");
-        options.addArguments("user-data-dir=/tmp/temp_profile");
+        //options.addArguments("user-data-dir=/tmp/temp_profile");
         options.addArguments(" --whitelisted-ips=\"\"");
-        options.addArguments("--headless", "window-size=1920,1024", "--no-sandbox");
+        //options.addArguments("--headless", "window-size=1920,1024", "--no-sandbox");
         driver = new ChromeDriver(options);
         driver.manage().deleteAllCookies();
         driver.manage().window().maximize();
@@ -613,7 +613,7 @@ public class ResourceGroupingTesting extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     @Story("Resource grouping")
     public void case12() throws InterruptedException, IOException {
-        //loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
+        loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
         myceQuotes.deleteQuoteSFDX(SFDX, "Name='ResourceGroupingAutoTest12'", ORG_USERNAME);
         resource.deleteResourceSFDX(SFDX, "Name='ResourceGrouping16'", ORG_USERNAME);
         resource.deleteResourceSFDX(SFDX, "Name='ResourceGrouping17'", ORG_USERNAME);

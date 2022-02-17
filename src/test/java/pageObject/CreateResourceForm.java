@@ -13,9 +13,9 @@ public class CreateResourceForm extends BasePage {
         super(driver);
     }
 
-    By RESOURCE_FIELD = By.xpath("//slot//label[text()='Resource']/following-sibling::div//input");
-    By FUNCTION_FIELD = By.xpath("//slot//label[text()='Function']/following-sibling::div//input");
-    By SETUP_FIELD = By.xpath("//slot//label[text()='Setup']/following-sibling::div//input");
+    By RESOURCE_FIELD = By.xpath("//div//label[text()='Resource']/following-sibling::div//input");
+    By FUNCTION_FIELD = By.xpath("//div//label[text()='Function']/following-sibling::div//button");
+    By SETUP_FIELD = By.xpath("//div//label[text()='Setup']/following-sibling::div//button");
     By PAX_FIELD = By.xpath("//slot//label[text()='Pax']/following-sibling::div//input");
     By UNIT_PRICE_FIELD = By.xpath("//slot//label[text()='Unit Price']/following-sibling::div//input");
     By DESCRIPTION_FIELD = By.xpath("//label[text()='Description']/following-sibling::div//textarea");

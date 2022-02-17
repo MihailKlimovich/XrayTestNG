@@ -98,14 +98,20 @@ public class MultiDeleteTesting extends BaseTest {
         packageLine.createPackageLineSFDX(SFDX, "Name='TestMultiDeletePL6' thn__Package__c='" + packageId +
                 "' thn__Type__c='Beverage' thn__Product__c='" + beverageID + "' thn__Start_Time__c=12:00" +
                 " thn__End_Time__c=13:00 thn__Unit_Price__c=20 thn__VAT_Category__c=1", ORG_USERNAME);
+        StringBuilder recordTypes = myceQuotes.soql(SFDX, "SELECT Id FROM RecordType WHERE" +
+                " SobjectType='thn__MYCE_Quote__c' AND Name='Quote'", ORG_USERNAME);
+        System.out.println(recordTypes);
+        List<String> recordTypeID = JsonParser2.getFieldValueSoql(recordTypes.toString(), "Id");
         String myceQuoteID = myceQuotes.createQuoteSFDX(SFDX, "Name='QuoteTestMultiDeleteAuto1' thn__Pax__c=1" +
                 " thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" + date.generateTodayDate2() + "" +
-                " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 3), ORG_USERNAME);
+                " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 3) + " RecordTypeId='"
+                + recordTypeID.get(0) + "'", ORG_USERNAME);
         quoteMeetingPackages.createQuotePackageSFDX(SFDX, "thn__MYCE_Quote__c='" + myceQuoteID +
                 "' thn__Package__c='" + packageId + "'", ORG_USERNAME);
         String myceQuoteID2 = myceQuotes.createQuoteSFDX(SFDX, "Name='QuoteTestMultiDeleteAuto2' thn__Pax__c=1" +
                 " thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" + date.generateTodayDate2() + "" +
-                " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 3), ORG_USERNAME);
+                " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 3) + " RecordTypeId='"
+                + recordTypeID.get(0) + "'", ORG_USERNAME);
         quoteHotelRoom.createQuoteHotelRoomSFDX(SFDX, "thn__MYCE_Quote__c='" + myceQuoteID2 + "'" +
                 " thn__Product__c='" + room1NightID + "' thn__Space_Area__c='" + roomTypeSingleID + "'", ORG_USERNAME);
         quoteHotelRoom.createQuoteHotelRoomSFDX(SFDX, "thn__MYCE_Quote__c='" + myceQuoteID2 + "'" +
@@ -120,7 +126,8 @@ public class MultiDeleteTesting extends BaseTest {
                 " thn__Product__c='" + beverageID + "'", ORG_USERNAME);
         String myceQuoteID3 = myceQuotes.createQuoteSFDX(SFDX, "Name='QuoteTestMultiDeleteAuto3' thn__Pax__c=1" +
                 " thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" + date.generateTodayDate2() + "" +
-                " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 3), ORG_USERNAME);
+                " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 3) + " RecordTypeId='"
+                + recordTypeID.get(0) + "'", ORG_USERNAME);
         quoteHotelRoom.createQuoteHotelRoomSFDX(SFDX, "thn__MYCE_Quote__c='" + myceQuoteID3 + "'" +
                 " thn__Product__c='" + room1NightID + "' thn__Space_Area__c='" + roomTypeSingleID + "'" +
                 " thn__Reserved__c=true", ORG_USERNAME);

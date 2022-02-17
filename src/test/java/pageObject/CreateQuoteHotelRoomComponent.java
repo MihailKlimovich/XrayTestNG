@@ -31,7 +31,7 @@ public class CreateQuoteHotelRoomComponent extends BasePage {
     By SAVE_BUTTON = By.xpath("//button[text()='Save']");
     By CONFIRMATION_MESSAGE = By.xpath("//flowruntime-display-text-lwc//span//p[text()='Do you wish to overbook?']");
     By YES_RADIO_BUTTON = By.xpath("//span//input[@value='YesChoice']");
-    By NEXT_BUTTON = By.xpath("//button[@title='Next']");
+    By NEXT_BUTTON = By.xpath("//button[@class='slds-button slds-button_brand flow-button__NEXT']");
 
 
     @Step("Create New Quote Hotel Room")
