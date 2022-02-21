@@ -89,23 +89,16 @@ public class BaseTest {
     public static final String testDataExcelFileName = "testdata.xlsx";
 
 
-    /*public String ORG_USERNAME = System.getenv("JAVAUSERNAME");
+    public String ORG_USERNAME = System.getenv("JAVAUSERNAME");
     public String ORG_PASSWORD = System.getenv("JAVAPASSWORD");
     public String ORG_URL = System.getenv("SF_URL");
     public String SFDX = System.getenv("SFDX");
     public String SFDX_AUTH_URL = System.getenv("AUTH_URL");
     public String ADMIN_USERNAME = System.getenv("ADMINUSERNAME");
     public String ADMIN_PASSWORD = System.getenv("ADMINPASSWORD");
-    public String ADMIN_AUTH_URL = System.getenv("ADMIN_AUTH_URL");*/
+    public String ADMIN_AUTH_URL = System.getenv("ADMIN_AUTH_URL");
 
-    public String ORG_USERNAME = "standard.test.unlocked@thynk.cloud";
-    public String ORG_PASSWORD = "MJ-;b%I?jX0p:1+";
-    public String ORG_URL = "https://login.salesforce.com/";
-    public String SFDX = "/home/user/sfdx/bin/sfdx";
-    public String SFDX_AUTH_URL = "force://PlatformCLI::5Aep861yNl8cSWS3xUL2N2n9_bXbYd3N5JhNprTSDzKIR4hpbN6D8AgcmxIW4V_Q_RwBa7omXkW1DNPCDrtP3uh@thynk-test-unlocked-dev-ed.my.salesforce.com";
-    public String ADMIN_USERNAME = "dev.autotest.unlocked@thynk.cloud";
-    public String ADMIN_PASSWORD = "Welcome2022";
-    public String ADMIN_AUTH_URL = "force://PlatformCLI::5Aep861yNl8cSWS3xUL2N2n9_bXbYd3N5JhNprTah2dCsO5IEWzPh2JObOETyqNnMEf326dlv5rrpwNrrR0hNQZ@thynk-test-unlocked-dev-ed.my.salesforce.com";
+
 
 
 

@@ -250,6 +250,31 @@
             <class name="tests.AllowResourceSelectionWhenAddingPackage"/>
         </classes>
     </test>
+    <test name="TB-264: Quote budget - multiproperty quote">
+        <classes>
+            <class name="tests.TB.QuoteBudgetMultipropertyQuote"/>
+        </classes>
+    </test>
+    <test name="THY-591: Quote hotel room - quantity per night">
+        <classes>
+            <class name="tests.QuoteHotelRoomQuantityPerNight"/>
+        </classes>
+    </test>
+    <test name="THY-662: Complimentary on quote's related">
+        <classes>
+            <class name="tests.ComplimentaryOnQuotesRelated"/>
+        </classes>
+    </test>
+    <test name="THY-632: PMS block and Madjustments - Mews Interface">
+        <classes>
+            <class name="tests.PMSBlockAndMadjustmentsMewsInterface"/>
+        </classes>
+    </test>
+    <test name="THY-677: Quote hotel room quantity - Budgets and subtotals">
+        <classes>
+            <class name="tests.QuoteHotelRoomQuantityBudgetsAndSubtotals"/>
+        </classes>
+    </test>
 
 </suite>
 
