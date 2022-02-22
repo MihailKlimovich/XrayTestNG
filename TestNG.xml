@@ -15,6 +15,11 @@
             <class name="tests.TestData"/>
         </classes>
     </test>
+    <test name="Preparation">
+        <classes>
+            <class name="tests.Preparation"/>
+        </classes>
+    </test>
     <test name="THY-510: ValidationRule1">
         <classes>
             <class name="tests.ValidationRules.ValidationRule1"/>

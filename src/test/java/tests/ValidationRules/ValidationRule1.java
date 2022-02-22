@@ -94,6 +94,7 @@ public class ValidationRule1 extends BaseTest{
     @Severity(SeverityLevel.NORMAL)
     @Story("THY-510: Validation rule updated")
     public void testCreateNewMyceQuote1() throws InterruptedException, IOException {
+        myceQuotes.deleteQuoteSFDX(SFDX, "Name='Test1'", ORG_USERNAME);
         String expectedMessage = "If commissionable = true, 'Commission to' field shouldn't be null or \n" +
                 "if  'Commission to' field equals 'agent', agent shouldn't be null or\n" +
                 "if  'Commission to' field equals 'company', company shouldn't be null";
@@ -118,6 +119,7 @@ public class ValidationRule1 extends BaseTest{
     @Description("Myce_Quote__c.Commission_Validation_Rule")
     @Story("Commissionable == true & thn__Commission_to__c != Agent & thn__Agent__c == null")
     public void testCreateNewMyceQuote2() throws InterruptedException, IOException {
+        myceQuotes.deleteQuoteSFDX(SFDX, "Name='Test2'", ORG_USERNAME);
         String expectedMessage = "If commissionable = true, 'Commission to' field shouldn't be null or \n" +
                 "if  'Commission to' field equals 'agent', agent shouldn't be null or\n" +
                 "if  'Commission to' field equals 'company', company shouldn't be null";
@@ -140,6 +142,7 @@ public class ValidationRule1 extends BaseTest{
     @Description("Myce_Quote__c.Commission_Validation_Rule")
     @Story("Commissionable == true & thn__Commission_to__c == Company & thn__Company__c == null")
     public void testCreateNewMyceQuote3() throws InterruptedException, IOException {
+        myceQuotes.deleteQuoteSFDX(SFDX, "Name='Test3'", ORG_USERNAME);
         String expectedMessage = "If commissionable = true, 'Commission to' field shouldn't be null or \n" +
                 "if  'Commission to' field equals 'agent', agent shouldn't be null or\n" +
                 "if  'Commission to' field equals 'company', company shouldn't be null";
@@ -162,6 +165,7 @@ public class ValidationRule1 extends BaseTest{
     @Description("Myce_Quote__c.VR05_Dates")
     @Story("thn__Departure_Date__c < thn__Arrival_Date__c")
     public void testCreateNewMyceQuote4() throws InterruptedException, IOException {
+        myceQuotes.deleteQuoteSFDX(SFDX, "Name='Test4'", ORG_USERNAME);
         String expectedMessage = "Departure Date cannot be anterior to Arrival Date";
         StringBuilder result = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
@@ -183,36 +187,21 @@ public class ValidationRule1 extends BaseTest{
     @Description("Myce_Quote__c.VR27_Company_Agent_Type")
     @Story("Create MYCE Quote: Select Company for Agent field ,Select Agent for Company field")
     public void testCreateNewMyceQuote5() throws InterruptedException, IOException {
+        myceQuotes.deleteQuoteSFDX(SFDX, "Name='Test5'", ORG_USERNAME);
+        accounts.deleteAccountSFDX(SFDX, "Name = 'Test Agent'", ORG_USERNAME);
+        accounts.deleteAccountSFDX(SFDX, "Name = 'Test Company'", ORG_USERNAME);
+        String accountAgentId = accounts.createAccountSFDX(SFDX, "Name = 'Test Agent' thn__Type__c = 'Agent'",
+                ORG_USERNAME);
+        String accountCompanyId = accounts.createAccountSFDX(SFDX, "Name = 'Test Company'" +
+                " thn__Type__c = 'Company'", ORG_USERNAME);
         String expectedMessage = "Company cannot be of type 'Agent'  and Agent must be of type 'Agent' or 'Leads'";
-        StringBuilder res1 = SfdxCommand.runLinuxCommand1(new String[]{
-                SFDX,
-                "force:data:record:get",
-                "-s",
-                "Account",
-                "-w",
-                "Name='Test Company'",
-                "-u",
-                ORG_USERNAME,
-                "--json"});
-        String testCompanyID = JsonParser2.getFieldValue(res1.toString(), "Id");
-        StringBuilder res2 = SfdxCommand.runLinuxCommand1(new String[]{
-                SFDX,
-                "force:data:record:get",
-                "-s",
-                "Account",
-                "-w",
-                "Name='Test Agent'",
-                "-u",
-                ORG_USERNAME,
-                "--json"});
-        String testAgentID = JsonParser2.getFieldValue(res2.toString(), "Id");
         StringBuilder result = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:create",
                 "-s",
                 "thn__MYCE_Quote__c",
                 "-v",
-                "Name='Test5' thn__Company__c='" + testAgentID + "' thn__Agent__c='" + testCompanyID + "'",
+                "Name='Test5' thn__Company__c='" + accountAgentId + "' thn__Agent__c='" + accountCompanyId + "'",
                 "-u",
                 ORG_USERNAME,
                 "--json"});
@@ -225,6 +214,7 @@ public class ValidationRule1 extends BaseTest{
     @Description("Myce_Quote__c.VR13_Reservation_Guest")
     @Story("Create MYCE Quote: leave thn__Reservation_Guest__c empty, Set thn__Send_to_Mews__c to TRUE")
     public void testCreateNewMyceQuote6() throws InterruptedException, IOException {
+        myceQuotes.deleteQuoteSFDX(SFDX, "Name='Test6'", ORG_USERNAME);
         String expectedMessage = "Reservation guest is required to send reservations to Mews";
         StringBuilder result = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
@@ -245,6 +235,7 @@ public class ValidationRule1 extends BaseTest{
     @Description("Myce_Quote__c.VR22_ClosedStatus")
     @Story("Change Stage om MYCE Quote to '4 - Closed'")
     public void testCreateNewMyceQuote7() throws InterruptedException, IOException {
+        myceQuotes.deleteQuoteSFDX(SFDX, "Name='Test7'", ORG_USERNAME);
         String expectedMessage = "Closed Status is required when quote is at stage '4 - Closed'";
         StringBuilder result = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
@@ -265,6 +256,7 @@ public class ValidationRule1 extends BaseTest{
     @Description("Myce_Quote__c.VR28_Cancelled_Status")
     @Story("Set thn__Is_Confirmed__c to false, Change MYCE Quote Closed Status to ‘Cancelled’")
     public void testCreateNewMyceQuote8() throws InterruptedException, IOException {
+        myceQuotes.deleteQuoteSFDX(SFDX, "Name='Test8'", ORG_USERNAME);
         String expectedMessage = "Failed to update record with code FIELD_CUSTOM_VALIDATION_EXCEPTION. Fields: []";
         StringBuilder hotelRecord= hotel.getHotelSFDX(SFDX, "thn__Unique_Id__c='Demo'", ORG_USERNAME);
         String propertyID = JsonParser2.getFieldValue(hotelRecord.toString(), "Id");
@@ -315,6 +307,7 @@ public class ValidationRule1 extends BaseTest{
     @Description("Package_Line__c.VR30_IsMultidays")
     @Story("For Package where thn__Multi_Days__c == true, create Package line: thn__AppliedDay__c == null")
     public void testCreateNewPackageLine1() throws InterruptedException, IOException {
+        packages.deletePackageSFDX(SFDX, "Name='Test Package 11", ORG_USERNAME);
         String expectedMessage = "Applied Day is required when a package is Multi days";
         StringBuilder productRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
@@ -378,6 +371,7 @@ public class ValidationRule1 extends BaseTest{
     @Description("Package_Line__c.VR31_IsNotMultidays")
     @Story("For Package where hn__Multi_Days__c == false, create Package line: thn__AppliedDay__c != null")
     public void testCreateNewPackageLine2() throws InterruptedException, IOException {
+        packages.deletePackageSFDX(SFDX, "Name='Test Package 22", ORG_USERNAME);
         String expectedMessage = "Applied Day must be left empty when a package is not Multi days";
         StringBuilder productRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
@@ -433,6 +427,7 @@ public class ValidationRule1 extends BaseTest{
     @Description("Package_Line__c.VR29_Product_property")
     @Story("Create package line where Proferty  ‘A' for Package with Property 'B’")
     public void testCreateNewPackageLine3() throws InterruptedException, IOException {
+        packages.deletePackageSFDX(SFDX, "Name='Test Package 33", ORG_USERNAME);
         //given
         String expectedMessage = "Product's property must be the same than the package's";
         //when
@@ -499,6 +494,7 @@ public class ValidationRule1 extends BaseTest{
     @Description("Quote_Hotel_Room__c.VR06_Departure_after")
     @Story("Add Quote hotel room on MYCE Quote: thn__Arrival_Date_Time__c > thn__Departure_Date_Time__c")
     public void testCreateQuoteHotelRoom() throws InterruptedException, IOException {
+        myceQuotes.deleteQuoteSFDX(SFDX, "Name='Test9'", ORG_USERNAME);
         String expectedMessage = "Arrival Date time cannot be after Departure Date time";
         StringBuilder res1 = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
@@ -554,6 +550,7 @@ public class ValidationRule1 extends BaseTest{
     @Description("Quote_Hotel_Room__c.VR09_Dates_within_Quote_dates")
     @Story("thn__Arrival_Date_Time__c < thn__MYCE_Quote__r.thn__Arrival_Date__c")
     public void testCreateQuoteHotelRoom2() throws InterruptedException, IOException {
+        myceQuotes.deleteQuoteSFDX(SFDX, "Name='Test10'", ORG_USERNAME);
         String expectedMessage = "Arrival and Departure date of hotel room must be within Quote arrival and departure dates";
         StringBuilder res1 = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
@@ -633,6 +630,7 @@ public class ValidationRule1 extends BaseTest{
     @Description("Add Quote hotel room on MYCE Quote where thn__Arrival_Date_Time__c >  thn__MYCE_Quote__r.thn__Departure_Date__c")
     @Story("thn__Arrival_Date_Time__c >  thn__MYCE_Quote__r.thn__Departure_Date__c")
     public void testCreateQuoteHotelRoom3() throws InterruptedException, IOException {
+        myceQuotes.deleteQuoteSFDX(SFDX, "Name='Test11'", ORG_USERNAME);
         String expectedMessage = "Arrival Date time cannot be after Departure Date time";
         StringBuilder res1 = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
@@ -712,6 +710,7 @@ public class ValidationRule1 extends BaseTest{
     @Description("Add Quote hotel room on MYCE Quote where thn__Departure_Date_Time__c <  thn__MYCE_Quote__r.thn__Arrival_Date__c")
     @Story("thn__Departure_Date_Time__c <  thn__MYCE_Quote__r.thn__Arrival_Date__c")
     public void testCreateQuoteHotelRoom4() throws InterruptedException, IOException {
+        myceQuotes.deleteQuoteSFDX(SFDX, "Name='Test12'", ORG_USERNAME);
         String expectedMessage = "Arrival Date time cannot be after Departure Date time";
         StringBuilder res1 = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
@@ -791,6 +790,7 @@ public class ValidationRule1 extends BaseTest{
     @Description("Add Quote hotel room on MYCE Quote where thn__Departure_Date_Time__c > thn__MYCE_Quote__r.thn__Departure_Date__c")
     @Story("thn__Departure_Date_Time__c > thn__MYCE_Quote__r.thn__Departure_Date__c")
     public void testCreateQuoteHotelRoom5() throws InterruptedException, IOException {
+        myceQuotes.deleteQuoteSFDX(SFDX, "Name='Test13'", ORG_USERNAME);
         String expectedMessage = "Arrival and Departure date of hotel room must be within Quote arrival and departure dates";
         StringBuilder res1 = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
@@ -871,6 +871,7 @@ public class ValidationRule1 extends BaseTest{
     @Description("Quote_Hotel_Room__c.VR15_Pax")
     @Story("Add Quote hotel room on MYCE Quote: thn__Pax__c > thn__MYCE_Quote__r.thn__Pax__c")
     public void testCreateQuoteHotelRoom6() throws InterruptedException, IOException {
+        myceQuotes.deleteQuoteSFDX(SFDX, "Name='Test14'", ORG_USERNAME);
         String expectedMessage = "Pax cannot be greater than quote's pax";
         StringBuilder res1 = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
@@ -950,6 +951,8 @@ public class ValidationRule1 extends BaseTest{
     @Description("Quote_Meetings_Room__c.VR19_SetupResource")
     @Story("")
     public void testCreateQuoteMeetingsRoom1() throws InterruptedException, IOException {
+        myceQuotes.deleteQuoteSFDX(SFDX, "Name='Test15'", ORG_USERNAME);
+        resource.deleteResourceSFDX(SFDX, "Name='TestRes'", ORG_USERNAME);
         String expectedMessage = "Meeting room's pax exceeds the resource's capacity for this setup";
         StringBuilder res1 = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
@@ -961,6 +964,7 @@ public class ValidationRule1 extends BaseTest{
                 "-u",
                 ORG_USERNAME,
                 "--json"});
+        String propertyID = JsonParser2.getFieldValue(res1.toString(), "Id");
         StringBuilder res2 = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:get",
@@ -971,19 +975,11 @@ public class ValidationRule1 extends BaseTest{
                 "-u",
                 ORG_USERNAME,
                 "--json"});
-        StringBuilder res3 = SfdxCommand.runLinuxCommand1(new String[]{
-                SFDX,
-                "force:data:record:get",
-                "-s",
-                "thn__Resource__c",
-                "-w",
-                "Name='TestRes'",
-                "-u",
-                ORG_USERNAME,
-                "--json"});
-        String propertyID = JsonParser2.getFieldValue(res1.toString(), "Id");
+        String resourceID = resource.createResourceSFDX(SFDX, "Name = 'TestRes' thn__Bookable__c=true thn__Hotel__c='" + propertyID +
+                "' thn__U_Shape_pax__c=5 thn__Theater_pax__c=5 thn__Square_pax__c=5 thn__Circle_pax__c=5" +
+                " thn__Cabaret_pax__c=5 thn__Classroom_pax__c=5 thn__Dinner_pax__c=5 thn__Buffet_pax__c=5" +
+                " thn__Boardroom_pax__c=5 thn__Party_pax__c=5 thn__Custom_pax__c=5", ORG_USERNAME);
         String productID = JsonParser2.getFieldValue(res2.toString(), "Id");
-        String resourceID = JsonParser2.getFieldValue(res3.toString(), "Id");
         SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:create",
@@ -1144,6 +1140,7 @@ public class ValidationRule1 extends BaseTest{
     @Description("Quote_Meetings_Room__c.VR21_Lock_Resource")
     @Story("")
     public void testCreateQuoteMeetingsRoom2() throws InterruptedException, IOException {
+        myceQuotes.deleteQuoteSFDX(SFDX, "Name='Test15'", ORG_USERNAME);
         String expectedMessage = "Failed to update record with code FIELD_CUSTOM_VALIDATION_EXCEPTION. Fields: [ 'thn__Resource__c' ]";
         StringBuilder res1 = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,

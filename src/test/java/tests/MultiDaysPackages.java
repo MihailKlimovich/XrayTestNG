@@ -762,7 +762,8 @@ public class MultiDaysPackages extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     @Story("THY-607-608: Multi days packages")
     public void testMultiDaysPackages7() throws InterruptedException, IOException {
-        String expectedMessage = "Failed to update record with code FIELD_CUSTOM_VALIDATION_EXCEPTION.";
+        String expectedMessage = "From Date / To Date fields cannot be changed on multi-days package. To change the" +
+                " dates, update the 'Applied Day' field.";
         StringBuilder quoteRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:get",
@@ -800,7 +801,8 @@ public class MultiDaysPackages extends BaseTest {
                 "--json"});
         System.out.println(updateQuotePackageLineRecord);
         String message = JsonParser2.getFieldValue2(updateQuotePackageLineRecord.toString(), "message");
-        Assert.assertTrue(message.contains(expectedMessage));
+        Assert.assertEquals(message, expectedMessage);
+
     }
 
 }

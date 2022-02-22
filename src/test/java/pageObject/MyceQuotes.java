@@ -122,7 +122,7 @@ public class MyceQuotes extends BasePage {
 
 
     @Step("Clone Myce Quote")
-    public void cloneMyceQuote(String name, String date) throws InterruptedException {
+    public void cloneMyceQuote(String name, String date, String pax) throws InterruptedException {
         //waitForTests.until(ExpectedConditions.presenceOfElementLocated(CLONE_MYCE_QUOTE_BUTTON));
         click4(CLONE_MYCE_QUOTE_BUTTON);
         wait1.until(ExpectedConditions.presenceOfElementLocated(NAME_QUOTE_FIELD)).click();
@@ -130,6 +130,9 @@ public class MyceQuotes extends BasePage {
         click3(CLONE_QUOTE_ARRIVAL_DAY_FIELD);
         clear(CLONE_QUOTE_ARRIVAL_DAY_FIELD);
         writeText(CLONE_QUOTE_ARRIVAL_DAY_FIELD, date);
+        click3(CLONE_PAX_FIELD);
+        clear(CLONE_PAX_FIELD);
+        writeText(CLONE_PAX_FIELD, pax);
         wait1.until(ExpectedConditions.presenceOfElementLocated(KEEP_ALL_PAX_CHECKBOX));
         Thread.sleep(1000);
         click3(KEEP_ALL_PAX_CHECKBOX);
@@ -153,7 +156,7 @@ public class MyceQuotes extends BasePage {
         clear(CLONE_PAX_FIELD);
         writeText(CLONE_PAX_FIELD, pax);
         wait1.until(ExpectedConditions.presenceOfElementLocated(SAVE_BUTTON_FOR_CLONE)).click();
-        wait1.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//slot[@slot='header']//slot[@slot='primaryField']//lightning-formatted-text[text()='" + name + "']")));
+        wait1.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//slot[@name='primaryField']//lightning-formatted-text[text()='" + name + "']")));
         Thread.sleep(5000);
     }
 

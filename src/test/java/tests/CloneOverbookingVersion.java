@@ -93,7 +93,7 @@ public class CloneOverbookingVersion extends BaseTest{
         myceQuotes.deleteQuoteSFDX(SFDX, "Name='CloneOverbookingAutoTestClone'", ORG_USERNAME);
         myceQuotes.goToMyceQuotes();
         myceQuotes.openMyceQoteRecord("CloneOverbookingAutoTest");
-        myceQuotes.cloneMyceQuote("CloneOverbookingAutoTestClone", date.generateTodayDate3_plus(0, 0));
+        myceQuotes.cloneMyceQuote("CloneOverbookingAutoTestClone", date.generateTodayDate3_plus(0, 0), "5");
         StringBuilder clonedQuoteRecord = myceQuotes.getQuoteSFDX(SFDX, "Name='CloneOverbookingAutoTestClone'",
                 ORG_USERNAME);
         String clonedQuoteID= JsonParser2.getFieldValue(clonedQuoteRecord.toString(), "Id");
@@ -185,7 +185,7 @@ public class CloneOverbookingVersion extends BaseTest{
         myceQuotes.deleteQuoteSFDX(SFDX, "Name='CloneOverbookingAutoTestClone2'", ORG_USERNAME);
         myceQuotes.goToMyceQuotes();
         myceQuotes.openMyceQoteRecord("CloneOverbookingAutoTest2");
-        myceQuotes.cloneMyceQuote("CloneOverbookingAutoTestClone2", date.generateTodayDate3_plus(0, 0));
+        myceQuotes.cloneMyceQuote("CloneOverbookingAutoTestClone2", date.generateTodayDate3_plus(0, 0), "5");
         StringBuilder clonedQuoteRecord = myceQuotes.getQuoteSFDX(SFDX, "Name='CloneOverbookingAutoTestClone2'",
                 ORG_USERNAME);
         String clonedQuoteID= JsonParser2.getFieldValue(clonedQuoteRecord.toString(), "Id");

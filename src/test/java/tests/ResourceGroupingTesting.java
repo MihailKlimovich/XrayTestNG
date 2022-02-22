@@ -27,9 +27,9 @@ public class ResourceGroupingTesting extends BaseTest {
         options.addArguments("--disable-gpu");
         options.addArguments("--disable-extensions");
         options.addArguments("--disable-dev-shm-usage");
-        //options.addArguments("user-data-dir=/tmp/temp_profile");
+        options.addArguments("user-data-dir=/tmp/temp_profile");
         options.addArguments(" --whitelisted-ips=\"\"");
-        //options.addArguments("--headless", "window-size=1920,1024", "--no-sandbox");
+        options.addArguments("--headless", "window-size=1920,1024", "--no-sandbox");
         driver = new ChromeDriver(options);
         driver.manage().deleteAllCookies();
         driver.manage().window().maximize();
@@ -85,7 +85,7 @@ public class ResourceGroupingTesting extends BaseTest {
                 " thn__Product__c='" + meetingHalfDayID + "' thn__Resource__c='" + resourceId1 + "'", ORG_USERNAME);
         myceQuotes.goToMyceQuotes().openMyceQoteRecord("ResourceGroupingAutoTest1");
         myceQuotes.cloneMyceQuote("CloneResourceGroupingAutoTest1",
-                date.generateTodayDate3_plus(0, 0));
+                date.generateTodayDate3_plus(0, 0), "5");
         StringBuilder clonedQuoteRecord = myceQuotes.getQuoteSFDX(SFDX, "Name='CloneResourceGroupingAutoTest1'",
                 ORG_USERNAME);
         String clonedQuoteID= JsonParser2.getFieldValue(clonedQuoteRecord.toString(), "Id");
@@ -149,7 +149,7 @@ public class ResourceGroupingTesting extends BaseTest {
                 " thn__Product__c='" + meetingHalfDayID + "' thn__Resource__c='" + resourceId1 + "'", ORG_USERNAME);
         myceQuotes.goToMyceQuotes().openMyceQoteRecord("ResourceGroupingAutoTest2");
         myceQuotes.cloneMyceQuote("CloneResourceGroupingAutoTest2",
-                date.generateTodayDate3_plus(0, 0));
+                date.generateTodayDate3_plus(0, 0), "5");
         StringBuilder clonedQuoteRecord = myceQuotes.getQuoteSFDX(SFDX, "Name='CloneResourceGroupingAutoTest2'",
                 ORG_USERNAME);
         String clonedQuoteID= JsonParser2.getFieldValue(clonedQuoteRecord.toString(), "Id");
@@ -194,7 +194,7 @@ public class ResourceGroupingTesting extends BaseTest {
                 ORG_USERNAME);
         myceQuotes.goToMyceQuotes().openMyceQoteRecord("ResourceGroupingAutoTest3");
         myceQuotes.cloneMyceQuote("CloneResourceGroupingAutoTest3",
-                date.generateTodayDate3_plus(0, 0));
+                date.generateTodayDate3_plus(0, 0), "5");
         StringBuilder clonedQuoteRecord = myceQuotes.getQuoteSFDX(SFDX, "Name='CloneResourceGroupingAutoTest3'",
                 ORG_USERNAME);
         String clonedQuoteID= JsonParser2.getFieldValue(clonedQuoteRecord.toString(), "Id");
@@ -238,7 +238,7 @@ public class ResourceGroupingTesting extends BaseTest {
                 " thn__Product__c='" + meetingHalfDayID + "' thn__Resource__c='" + resourceId1 + "'", ORG_USERNAME);
         myceQuotes.goToMyceQuotes().openMyceQoteRecord("ResourceGroupingAutoTest4");
         myceQuotes.cloneMyceQuote("CloneResourceGroupingAutoTest4",
-                date.generateTodayDate3_plus(0, 0));
+                date.generateTodayDate3_plus(0, 0), "5");
         StringBuilder clonedQuoteRecord = myceQuotes.getQuoteSFDX(SFDX, "Name='CloneResourceGroupingAutoTest4'",
                 ORG_USERNAME);
         String clonedQuoteID= JsonParser2.getFieldValue(clonedQuoteRecord.toString(), "Id");
@@ -290,7 +290,7 @@ public class ResourceGroupingTesting extends BaseTest {
                 " thn__Closed_Status__c='Lost'", ORG_USERNAME);
         myceQuotes.goToMyceQuotes().openMyceQoteRecord("ResourceGroupingAutoTest5");
         myceQuotes.cloneMyceQuote("CloneResourceGroupingAutoTest5",
-                date.generateTodayDate3_plus(0, 0));
+                date.generateTodayDate3_plus(0, 0), "5");
         StringBuilder clonedQuoteRecord = myceQuotes.getQuoteSFDX(SFDX, "Name='CloneResourceGroupingAutoTest5'",
                 ORG_USERNAME);
         String clonedQuoteID= JsonParser2.getFieldValue(clonedQuoteRecord.toString(), "Id");
@@ -613,7 +613,7 @@ public class ResourceGroupingTesting extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     @Story("Resource grouping")
     public void case12() throws InterruptedException, IOException {
-        loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
+        //loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
         myceQuotes.deleteQuoteSFDX(SFDX, "Name='ResourceGroupingAutoTest12'", ORG_USERNAME);
         resource.deleteResourceSFDX(SFDX, "Name='ResourceGrouping16'", ORG_USERNAME);
         resource.deleteResourceSFDX(SFDX, "Name='ResourceGrouping17'", ORG_USERNAME);

@@ -14,10 +14,8 @@ public class MultiEditProducts extends BasePage {
         super(driver);
     }
 
-    By NEW_START_DATE_FIELD = By.xpath("//button[@title='Select a date']/parent::lightning-button-icon/parent::div//" +
-            "input[@name='New_Start_Date_Time']");
-    By NEW_END_DATE_FIELD = By.xpath("//button[@title='Select a date']/parent::lightning-button-icon/parent::div//" +
-            "input[@name='New_End_Date_Time']");
+    By NEW_START_DATE_FIELD = By.xpath("//div//label[text()='Date']/following-sibling::div//input[@name='New_Start_Date_Time']");
+    By NEW_END_DATE_FIELD = By.xpath("//div//label[text()='Date']/following-sibling::div//input[@name='New_End_Date_Time']");
     By NEW_START_TIME_FIELD = By.xpath("//lightning-timepicker//input[@name='New_Start_Date_Time']");
     By NEW_END_TIME_FIELD = By.xpath("//lightning-timepicker//input[@name='New_End_Date_Time']");
     By NEW_MEETING_ROOM_FIELD = By.xpath("//div//label[text()='New Meeting Room']/following::input[1]");

@@ -1378,7 +1378,8 @@ public class MyceToOpera extends BaseTest {
         homePageForScratchOrg.openAppLauncher();
         homePageForScratchOrg.sendTextInAppWindow("MYCE Quotes");
         myceQuotes.openMyceQoteRecord("TestMyceToOperaAuto6");
-        myceQuotes.cloneMyceQuote("CloneTestMyceToOperaAuto6", date.generateTodayDate_plus(0, 0));
+        myceQuotes.cloneMyceQuote("CloneTestMyceToOperaAuto6", date.generateTodayDate_plus(0, 0),
+                "1");
         StringBuilder cloneMyceQuoteRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:get",

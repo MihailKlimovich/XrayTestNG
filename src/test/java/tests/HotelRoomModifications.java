@@ -260,7 +260,7 @@ public class HotelRoomModifications extends BaseTest {
         String numberOfAdults = JsonParser2.
                 getFieldValue(quoteHotelRoomRecord.toString(), "thn__Number_of_Adults__c");
         Assert.assertEquals(numberOfAdults,"1");
-        Assert.assertEquals(occupancyTypeMessage, "No matching record found");
+        Assert.assertEquals(occupancyTypeMessage, "No matching record found.");
     }
 
     @Test(priority = 5, description = "Update Type of Occupancy to -None-")

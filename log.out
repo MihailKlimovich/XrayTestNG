@@ -1,3 +1,8 @@
-2022-02-17 16:28:13,006 INFO  - RequestAgent_case1 test is starting.
-2022-02-17 16:29:02,314 INFO  - RequestAgent_case2 test is starting.
-2022-02-17 16:29:43,595 INFO  - RequestAgent_case3 test is starting.
+2022-02-22 17:26:10,369 INFO  - preconditions test is starting.
+2022-02-22 17:27:36,584 INFO  - testMultiDaysPackages1 test is starting.
+2022-02-22 17:28:16,181 INFO  - testMultiDaysPackages2 test is starting.
+2022-02-22 17:28:45,121 INFO  - testMultiDaysPackages3 test is starting.
+2022-02-22 17:29:17,186 INFO  - testMultiDaysPackages4 test is starting.
+2022-02-22 17:29:54,088 INFO  - testMultiDaysPackages5 test is starting.
+2022-02-22 17:30:16,224 INFO  - testMultiDaysPackages6 test is starting.
+2022-02-22 17:30:50,190 INFO  - testMultiDaysPackages7 test is starting.

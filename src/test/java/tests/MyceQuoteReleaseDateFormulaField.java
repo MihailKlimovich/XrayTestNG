@@ -30,7 +30,8 @@ public class MyceQuoteReleaseDateFormulaField extends BaseTest{
         String quoteID = myceQuotes.createQuoteSFDX(SFDX, "Name='ReleaseDateAutoTest' thn__Pax__c=5" +
                 " thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" + date.generateTodayDate2()
                 + " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 10) +
-                " RecordTypeId='" + recordTypeID.get(0) + "' thn__Closed_Status__c='Won'", ORG_USERNAME);
+                " RecordTypeId='" + recordTypeID.get(0) + "' thn__Stage__c='4 - Closed' thn__Closed_Status__c='Won'",
+                ORG_USERNAME);
         StringBuilder quoteRecord = myceQuotes.getQuoteSFDX(SFDX, "Id='" + quoteID + "'", ORG_USERNAME);
         System.out.println(quoteRecord);
         String releaseDateFormula = JsonParser2.
@@ -77,7 +78,7 @@ public class MyceQuoteReleaseDateFormulaField extends BaseTest{
         myceQuotes.deleteQuoteSFDX(SFDX, "Name='CloneReleaseDateAutoTest'", ORG_USERNAME);
         myceQuotes.goToMyceQuotes();
         myceQuotes.openMyceQoteRecord("ReleaseDateAutoTest");
-        myceQuotes.cloneMyceQuote("CloneReleaseDateAutoTest", date.generateTodayDate3_plus(0, 7));
+        myceQuotes.cloneMyceQuote("CloneReleaseDateAutoTest", date.generateTodayDate3_plus(0, 7), "5");
         StringBuilder quoteRecord = myceQuotes.getQuoteSFDX(SFDX, "Name='CloneReleaseDateAutoTest'",
                 ORG_USERNAME);
         System.out.println(quoteRecord);

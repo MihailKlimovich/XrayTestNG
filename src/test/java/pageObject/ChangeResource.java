@@ -31,11 +31,16 @@ public class ChangeResource extends BasePage {
     By UPDATE_PRICES_CHECKBOX = By.xpath("//input[@name='Update_Prices']");
     By BREAK_OUT_CHECKBOX = By.xpath("//input[@name='Break_Out']");
     By HALF_DAY_CHECKBOX = By.xpath("//input[@name='Half_Day']");
+    By FRAME = By.xpath("//div//iframe");
 
 
     @Step("Change resource")
     public String changeResource(String newResource) throws InterruptedException {
+        //wait1.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(FRAME));
+        //waitForTests.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(FRAME));
         driver.switchTo().frame(0);
+        wait1.until(ExpectedConditions.elementToBeClickable(REMOVE_BUTTON));
+        click3(REMOVE_BUTTON);
         click3(REMOVE_BUTTON);
         click3(NEW_RESOURCE_FIELD);
         writeText(NEW_RESOURCE_FIELD, newResource);

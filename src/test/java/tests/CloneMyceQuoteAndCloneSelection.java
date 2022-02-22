@@ -77,7 +77,7 @@ public class CloneMyceQuoteAndCloneSelection extends BaseTest {
         myceQuotes.deleteQuoteSFDX(SFDX, "Name='CloneMyceQuoteAutoTestClone'", ORG_USERNAME);
         myceQuotes.goToMyceQuotes();
         myceQuotes.openMyceQoteRecord("CloneMyceQuoteAutoTest");
-        myceQuotes.cloneMyceQuote("CloneMyceQuoteAutoTestClone", date.generateTodayDate3_plus(0, 0));
+        myceQuotes.cloneMyceQuote("CloneMyceQuoteAutoTestClone", date.generateTodayDate3_plus(0, 0), "5");
         StringBuilder clonedQuoteRecord = myceQuotes.getQuoteSFDX(SFDX, "Name='CloneMyceQuoteAutoTestClone'", ORG_USERNAME);
         String clonedQuoteID= JsonParser2.getFieldValue(clonedQuoteRecord.toString(), "Id");
         String clonedQuoteArrivalDay = JsonParser2.getFieldValue(clonedQuoteRecord.toString(), "thn__Arrival_Date__c");
