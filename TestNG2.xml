@@ -250,6 +250,11 @@
             <class name="tests.AllowResourceSelectionWhenAddingPackage"/>
         </classes>
     </test>
+    <test name="THY-665: Quote hotel room quantity - MAdjustment.">
+        <classes>
+            <class name="tests.QuoteHotelRoomQuantityMAdjustment"/>
+        </classes>
+    </test>
 </suite>
 
 

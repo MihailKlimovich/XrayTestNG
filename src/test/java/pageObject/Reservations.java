@@ -8,6 +8,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import pages.BasePage;
 
+import java.io.IOException;
+
 import static org.openqa.selenium.support.ui.ExpectedConditions.alertIsPresent;
 
 public class Reservations extends BasePage {
@@ -157,8 +159,23 @@ public class Reservations extends BasePage {
     public String readHelpErrorMessage() throws InterruptedException {
         return readRecalculateMessage(HELP_ERROR_MESSAGE);
     }
+     //////////////////////////////   SFDX COMMANDS   ////////////////////////////////////
 
-
+    @Step("Delete Reservation SFDX")
+    public void deleteReservationSFDX(String sfdxPath, String where, String userName)
+            throws IOException, InterruptedException {
+        StringBuilder result = SfdxCommand.runLinuxCommand1(new String[]{
+                sfdxPath,
+                "force:data:record:delete",
+                "-s",
+                "thn__Reservation__c",
+                "-w",
+                where,
+                "-u",
+                userName,
+                "--json"});
+        System.out.println(result);
+    }
 
 
 

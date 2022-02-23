@@ -26,7 +26,9 @@ public class ValidationRule1 extends BaseTest{
     @Severity(SeverityLevel.NORMAL)
     @Story("THY-510: Validation rule updated")
     public void settingUpValidationRules() throws InterruptedException, IOException {
+        loginPage.authoriseURL(SFDX, ADMIN_AUTH_URL, ADMIN_USERNAME);
         loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
+        user.apexExecute(SFDX, ADMIN_USERNAME, "src/main/Data/DataForVRTesting.apex");
         SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:update",
@@ -37,7 +39,7 @@ public class ValidationRule1 extends BaseTest{
                 "-v",
                 "thn__ByPassVR__c=false",
                 "-u",
-                ORG_USERNAME,
+                ADMIN_USERNAME,
                 "--json"});
         Object byPass = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
@@ -45,7 +47,7 @@ public class ValidationRule1 extends BaseTest{
                 "-q",
                 "SELECT Id FROM thn__bypass__c",
                 "-u",
-                ORG_USERNAME,
+                ADMIN_USERNAME,
                 "--json"});
         List<String> byPassID= JsonParser2.getFieldValueSoql(byPass.toString(), "Id");
         String byPassId = byPassID.get(0);
@@ -59,7 +61,7 @@ public class ValidationRule1 extends BaseTest{
                 "-v",
                 "thn__bypassvr__c=false",
                 "-u",
-                ORG_USERNAME,
+                ADMIN_USERNAME,
                 "--json"});
         StringBuilder userRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
@@ -69,7 +71,7 @@ public class ValidationRule1 extends BaseTest{
                 "-w",
                 "Username='" + ORG_USERNAME + "'",
                 "-u",
-                ORG_USERNAME,
+                ADMIN_USERNAME,
                 "--json"});
         String userByPass = JsonParser2.getFieldValue(userRecord.toString(), "thn__ByPassVR__c");
         StringBuilder byPassRecord = SfdxCommand.runLinuxCommand1(new String[]{
@@ -80,7 +82,7 @@ public class ValidationRule1 extends BaseTest{
                 "-w",
                 "Id='" + byPassId + "'",
                 "-u",
-                ORG_USERNAME,
+                ADMIN_USERNAME,
                 "--json"});
         System.out.println(byPassRecord);
         String byPassVr = JsonParser2.getFieldValue(byPassRecord.toString(), "thn__ByPassVR__c");
@@ -188,12 +190,12 @@ public class ValidationRule1 extends BaseTest{
     @Story("Create MYCE Quote: Select Company for Agent field ,Select Agent for Company field")
     public void testCreateNewMyceQuote5() throws InterruptedException, IOException {
         myceQuotes.deleteQuoteSFDX(SFDX, "Name='Test5'", ORG_USERNAME);
-        accounts.deleteAccountSFDX(SFDX, "Name = 'Test Agent'", ORG_USERNAME);
-        accounts.deleteAccountSFDX(SFDX, "Name = 'Test Company'", ORG_USERNAME);
-        String accountAgentId = accounts.createAccountSFDX(SFDX, "Name = 'Test Agent' thn__Type__c = 'Agent'",
+        accounts.deleteAccountSFDX(SFDX, "Name='Test Agent'", ORG_USERNAME);
+        accounts.deleteAccountSFDX(SFDX, "Name='Test Company'", ORG_USERNAME);
+        String accountAgentId = accounts.createAccountSFDX(SFDX, "Name='Test Agent' thn__Type__c='Agent'",
                 ORG_USERNAME);
-        String accountCompanyId = accounts.createAccountSFDX(SFDX, "Name = 'Test Company'" +
-                " thn__Type__c = 'Company'", ORG_USERNAME);
+        String accountCompanyId = accounts.createAccountSFDX(SFDX, "Name='Test Company'" +
+                " thn__Type__c='Company'", ORG_USERNAME);
         String expectedMessage = "Company cannot be of type 'Agent'  and Agent must be of type 'Agent' or 'Leads'";
         StringBuilder result = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
@@ -257,7 +259,7 @@ public class ValidationRule1 extends BaseTest{
     @Story("Set thn__Is_Confirmed__c to false, Change MYCE Quote Closed Status to ‘Cancelled’")
     public void testCreateNewMyceQuote8() throws InterruptedException, IOException {
         myceQuotes.deleteQuoteSFDX(SFDX, "Name='Test8'", ORG_USERNAME);
-        String expectedMessage = "Failed to update record with code FIELD_CUSTOM_VALIDATION_EXCEPTION. Fields: []";
+        String expectedMessage = "Closed Status can be 'Cancelled' only if Myce quote was 'Won'";
         StringBuilder hotelRecord= hotel.getHotelSFDX(SFDX, "thn__Unique_Id__c='Demo'", ORG_USERNAME);
         String propertyID = JsonParser2.getFieldValue(hotelRecord.toString(), "Id");
         String quoteID = myceQuotes.createQuoteSFDX(SFDX, "Name='Test8' thn__Pax__c=5" +
@@ -952,187 +954,193 @@ public class ValidationRule1 extends BaseTest{
     @Story("")
     public void testCreateQuoteMeetingsRoom1() throws InterruptedException, IOException {
         myceQuotes.deleteQuoteSFDX(SFDX, "Name='Test15'", ORG_USERNAME);
-        resource.deleteResourceSFDX(SFDX, "Name='TestRes'", ORG_USERNAME);
-        String expectedMessage = "Meeting room's pax exceeds the resource's capacity for this setup";
-        StringBuilder res1 = SfdxCommand.runLinuxCommand1(new String[]{
-                SFDX,
-                "force:data:record:get",
-                "-s",
-                "thn__Hotel__c",
-                "-w",
-                "thn__Unique_Id__c='Demo'",
-                "-u",
-                ORG_USERNAME,
-                "--json"});
-        String propertyID = JsonParser2.getFieldValue(res1.toString(), "Id");
-        StringBuilder res2 = SfdxCommand.runLinuxCommand1(new String[]{
-                SFDX,
-                "force:data:record:get",
-                "-s",
-                "thn__Product__c",
-                "-w",
-                "Name='MEETING HALF DAY'",
-                "-u",
-                ORG_USERNAME,
-                "--json"});
-        String resourceID = resource.createResourceSFDX(SFDX, "Name = 'TestRes' thn__Bookable__c=true thn__Hotel__c='" + propertyID +
-                "' thn__U_Shape_pax__c=5 thn__Theater_pax__c=5 thn__Square_pax__c=5 thn__Circle_pax__c=5" +
-                " thn__Cabaret_pax__c=5 thn__Classroom_pax__c=5 thn__Dinner_pax__c=5 thn__Buffet_pax__c=5" +
-                " thn__Boardroom_pax__c=5 thn__Party_pax__c=5 thn__Custom_pax__c=5", ORG_USERNAME);
-        String productID = JsonParser2.getFieldValue(res2.toString(), "Id");
-        SfdxCommand.runLinuxCommand1(new String[]{
-                SFDX,
-                "force:data:record:create",
-                "-s",
-                "thn__MYCE_Quote__c",
-                "-v",
-                "Name='Test15' thn__Pax__c=10 thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
-                        date.generateTodayDate2_plus(0, 1) + " thn__Departure_Date__c=" +
-                        date.generateTodayDate2_plus(0, 3),
-                "-u",
-                ORG_USERNAME,
-                "--json"});
-        StringBuilder res4= SfdxCommand.runLinuxCommand1(new String[]{
-                SFDX,
-                "force:data:record:get",
-                "-s",
-                "thn__MYCE_Quote__c",
-                "-w",
-                "Name='Test15'",
-                "-u",
-                ORG_USERNAME,
-                "--json"});
-        String myceQuoteID = JsonParser2.getFieldValue(res4.toString(), "Id");
-        StringBuilder result1 =SfdxCommand.runLinuxCommand1(new String[]{
-                SFDX,
-                "force:data:record:create",
-                "-s",
-                "thn__Quote_Meeting_Room__c",
-                "-v",
-                "thn__MYCE_Quote__c='" + myceQuoteID + "' thn__Product__c='" + productID + "' thn__Resource__c='" +
-                        resourceID + "' thn__Pax__c=6 thn__Setup__c='Buffet'",
-                "-u",
-                ORG_USERNAME,
-                "--json"});
-        String message1 = JsonParser2.getFieldValue2(result1.toString(), "message");
-        Assert.assertEquals(message1, expectedMessage);
-        StringBuilder result2 =SfdxCommand.runLinuxCommand1(new String[]{
-                SFDX,
-                "force:data:record:create",
-                "-s",
-                "thn__Quote_Meeting_Room__c",
-                "-v",
-                "thn__MYCE_Quote__c='" + myceQuoteID + "' thn__Product__c='" + productID + "' thn__Resource__c='" +
-                        resourceID + "' thn__Pax__c=6 thn__Setup__c='Cabaret'",
-                "-u",
-                ORG_USERNAME,
-                "--json"});
-        String message2 = JsonParser2.getFieldValue2(result2.toString(), "message");
-        Assert.assertEquals(message2, expectedMessage);
-        StringBuilder result3 =SfdxCommand.runLinuxCommand1(new String[]{
-                SFDX,
-                "force:data:record:create",
-                "-s",
-                "thn__Quote_Meeting_Room__c",
-                "-v",
-                "thn__MYCE_Quote__c='" + myceQuoteID + "' thn__Product__c='" + productID + "' thn__Resource__c='" +
-                        resourceID + "' thn__Pax__c=6 thn__Setup__c='Circle'",
-                "-u",
-                ORG_USERNAME,
-                "--json"});
-        String message3 = JsonParser2.getFieldValue2(result3.toString(), "message");
-        Assert.assertEquals(message3, expectedMessage);
-        StringBuilder result4 =SfdxCommand.runLinuxCommand1(new String[]{
-                SFDX,
-                "force:data:record:create",
-                "-s",
-                "thn__Quote_Meeting_Room__c",
-                "-v",
-                "thn__MYCE_Quote__c='" + myceQuoteID + "' thn__Product__c='" + productID + "' thn__Resource__c='" +
-                        resourceID + "' thn__Pax__c=6 thn__Setup__c='Classroom'",
-                "-u",
-                ORG_USERNAME,
-                "--json"});
-        String message4 = JsonParser2.getFieldValue2(result4.toString(), "message");
-        Assert.assertEquals(message4, expectedMessage);
-        StringBuilder result5 =SfdxCommand.runLinuxCommand1(new String[]{
-                SFDX,
-                "force:data:record:create",
-                "-s",
-                "thn__Quote_Meeting_Room__c",
-                "-v",
-                "thn__MYCE_Quote__c='" + myceQuoteID + "' thn__Product__c='" + productID + "' thn__Resource__c='" +
-                        resourceID + "' thn__Pax__c=6 thn__Setup__c='Custom'",
-                "-u",
-                ORG_USERNAME,
-                "--json"});
-        String message5 = JsonParser2.getFieldValue2(result5.toString(), "message");
-        Assert.assertEquals(message5, expectedMessage);
-        StringBuilder result6 =SfdxCommand.runLinuxCommand1(new String[]{
-                SFDX,
-                "force:data:record:create",
-                "-s",
-                "thn__Quote_Meeting_Room__c",
-                "-v",
-                "thn__MYCE_Quote__c='" + myceQuoteID + "' thn__Product__c='" + productID + "' thn__Resource__c='" +
-                        resourceID + "' thn__Pax__c=6 thn__Setup__c='Dinner'",
-                "-u",
-                ORG_USERNAME,
-                "--json"});
-        String message6 = JsonParser2.getFieldValue2(result6.toString(), "message");
-        Assert.assertEquals(message6, expectedMessage);
-        StringBuilder result7 =SfdxCommand.runLinuxCommand1(new String[]{
-                SFDX,
-                "force:data:record:create",
-                "-s",
-                "thn__Quote_Meeting_Room__c",
-                "-v",
-                "thn__MYCE_Quote__c='" + myceQuoteID + "' thn__Product__c='" + productID + "' thn__Resource__c='" +
-                        resourceID + "' thn__Pax__c=6 thn__Setup__c='Party'",
-                "-u",
-                ORG_USERNAME,
-                "--json"});
-        String message7 = JsonParser2.getFieldValue2(result7.toString(), "message");
-        Assert.assertEquals(message7, expectedMessage);
-        StringBuilder result8 =SfdxCommand.runLinuxCommand1(new String[]{
-                SFDX,
-                "force:data:record:create",
-                "-s",
-                "thn__Quote_Meeting_Room__c",
-                "-v",
-                "thn__MYCE_Quote__c='" + myceQuoteID + "' thn__Product__c='" + productID + "' thn__Resource__c='" +
-                        resourceID + "' thn__Pax__c=6 thn__Setup__c='Square'",
-                "-u",
-                ORG_USERNAME,
-                "--json"});
-        String message8 = JsonParser2.getFieldValue2(result8.toString(), "message");
-        Assert.assertEquals(message8, expectedMessage);
-        StringBuilder result9 =SfdxCommand.runLinuxCommand1(new String[]{
-                SFDX,
-                "force:data:record:create",
-                "-s",
-                "thn__Quote_Meeting_Room__c",
-                "-v",
-                "thn__MYCE_Quote__c='" + myceQuoteID + "' thn__Product__c='" + productID + "' thn__Resource__c='" +
-                        resourceID + "' thn__Pax__c=6 thn__Setup__c='Theater'",
-                "-u",
-                ORG_USERNAME,
-                "--json"});
-        String message9 = JsonParser2.getFieldValue2(result9.toString(), "message");
-        Assert.assertEquals(message9, expectedMessage);
-        StringBuilder result10 =SfdxCommand.runLinuxCommand1(new String[]{
-                SFDX,
-                "force:data:record:create",
-                "-s",
-                "thn__Quote_Meeting_Room__c",
-                "-v",
-                "thn__MYCE_Quote__c='" + myceQuoteID + "' thn__Product__c='" + productID + "' thn__Resource__c='" +
-                        resourceID + "' thn__Pax__c=6 thn__Setup__c='U-Shape'",
-                "-u",
-                ORG_USERNAME,
-                "--json"});
-        String message10 = JsonParser2.getFieldValue2(result10.toString(), "message");
-        Assert.assertEquals(message10, expectedMessage);
+            String expectedMessage = "Meeting room's pax exceeds the resource's capacity for this setup";
+            StringBuilder res1 = SfdxCommand.runLinuxCommand1(new String[]{
+                    SFDX,
+                    "force:data:record:get",
+                    "-s",
+                    "thn__Hotel__c",
+                    "-w",
+                    "thn__Unique_Id__c='Demo'",
+                    "-u",
+                    ORG_USERNAME,
+                    "--json"});
+            StringBuilder res2 = SfdxCommand.runLinuxCommand1(new String[]{
+                    SFDX,
+                    "force:data:record:get",
+                    "-s",
+                    "thn__Product__c",
+                    "-w",
+                    "Name='MEETING HALF DAY'",
+                    "-u",
+                    ORG_USERNAME,
+                    "--json"});
+            StringBuilder res3 = SfdxCommand.runLinuxCommand1(new String[]{
+                    SFDX,
+                    "force:data:record:get",
+                    "-s",
+                    "thn__Resource__c",
+                    "-w",
+                    "Name='TestRes'",
+                    "-u",
+                    ORG_USERNAME,
+                    "--json"});
+            String propertyID = JsonParser2.getFieldValue(res1.toString(), "Id");
+            String productID = JsonParser2.getFieldValue(res2.toString(), "Id");
+            String resourceID = JsonParser2.getFieldValue(res3.toString(), "Id");
+            SfdxCommand.runLinuxCommand1(new String[]{
+                    SFDX,
+                    "force:data:record:create",
+                    "-s",
+                    "thn__MYCE_Quote__c",
+                    "-v",
+                    "Name='Test15' thn__Pax__c=10 thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
+                            date.generateTodayDate2_plus(0, 1) + " thn__Departure_Date__c=" +
+                            date.generateTodayDate2_plus(0, 3),
+                    "-u",
+                    ORG_USERNAME,
+                    "--json"});
+            StringBuilder res4= SfdxCommand.runLinuxCommand1(new String[]{
+                    SFDX,
+                    "force:data:record:get",
+                    "-s",
+                    "thn__MYCE_Quote__c",
+                    "-w",
+                    "Name='Test15'",
+                    "-u",
+                    ORG_USERNAME,
+                    "--json"});
+            String myceQuoteID = JsonParser2.getFieldValue(res4.toString(), "Id");
+            StringBuilder result1 =SfdxCommand.runLinuxCommand1(new String[]{
+                    SFDX,
+                    "force:data:record:create",
+                    "-s",
+                    "thn__Quote_Meeting_Room__c",
+                    "-v",
+                    "thn__MYCE_Quote__c='" + myceQuoteID + "' thn__Product__c='" + productID + "' thn__Resource__c='" +
+                            resourceID + "' thn__Pax__c=6 thn__Setup__c='Buffet'",
+                    "-u",
+                    ORG_USERNAME,
+                    "--json"});
+            String message1 = JsonParser2.getFieldValue2(result1.toString(), "message");
+            Assert.assertEquals(message1, expectedMessage);
+            StringBuilder result2 =SfdxCommand.runLinuxCommand1(new String[]{
+                    SFDX,
+                    "force:data:record:create",
+                    "-s",
+                    "thn__Quote_Meeting_Room__c",
+                    "-v",
+                    "thn__MYCE_Quote__c='" + myceQuoteID + "' thn__Product__c='" + productID + "' thn__Resource__c='" +
+                            resourceID + "' thn__Pax__c=6 thn__Setup__c='Cabaret'",
+                    "-u",
+                    ORG_USERNAME,
+                    "--json"});
+            String message2 = JsonParser2.getFieldValue2(result2.toString(), "message");
+            Assert.assertEquals(message2, expectedMessage);
+            StringBuilder result3 =SfdxCommand.runLinuxCommand1(new String[]{
+                    SFDX,
+                    "force:data:record:create",
+                    "-s",
+                    "thn__Quote_Meeting_Room__c",
+                    "-v",
+                    "thn__MYCE_Quote__c='" + myceQuoteID + "' thn__Product__c='" + productID + "' thn__Resource__c='" +
+                            resourceID + "' thn__Pax__c=6 thn__Setup__c='Circle'",
+                    "-u",
+                    ORG_USERNAME,
+                    "--json"});
+            String message3 = JsonParser2.getFieldValue2(result3.toString(), "message");
+            Assert.assertEquals(message3, expectedMessage);
+            StringBuilder result4 =SfdxCommand.runLinuxCommand1(new String[]{
+                    SFDX,
+                    "force:data:record:create",
+                    "-s",
+                    "thn__Quote_Meeting_Room__c",
+                    "-v",
+                    "thn__MYCE_Quote__c='" + myceQuoteID + "' thn__Product__c='" + productID + "' thn__Resource__c='" +
+                            resourceID + "' thn__Pax__c=6 thn__Setup__c='Classroom'",
+                    "-u",
+                    ORG_USERNAME,
+                    "--json"});
+            String message4 = JsonParser2.getFieldValue2(result4.toString(), "message");
+            Assert.assertEquals(message4, expectedMessage);
+            StringBuilder result5 =SfdxCommand.runLinuxCommand1(new String[]{
+                    SFDX,
+                    "force:data:record:create",
+                    "-s",
+                    "thn__Quote_Meeting_Room__c",
+                    "-v",
+                    "thn__MYCE_Quote__c='" + myceQuoteID + "' thn__Product__c='" + productID + "' thn__Resource__c='" +
+                            resourceID + "' thn__Pax__c=6 thn__Setup__c='Custom'",
+                    "-u",
+                    ORG_USERNAME,
+                    "--json"});
+            String message5 = JsonParser2.getFieldValue2(result5.toString(), "message");
+            Assert.assertEquals(message5, expectedMessage);
+            StringBuilder result6 =SfdxCommand.runLinuxCommand1(new String[]{
+                    SFDX,
+                    "force:data:record:create",
+                    "-s",
+                    "thn__Quote_Meeting_Room__c",
+                    "-v",
+                    "thn__MYCE_Quote__c='" + myceQuoteID + "' thn__Product__c='" + productID + "' thn__Resource__c='" +
+                            resourceID + "' thn__Pax__c=6 thn__Setup__c='Dinner'",
+                    "-u",
+                    ORG_USERNAME,
+                    "--json"});
+            String message6 = JsonParser2.getFieldValue2(result6.toString(), "message");
+            Assert.assertEquals(message6, expectedMessage);
+            StringBuilder result7 =SfdxCommand.runLinuxCommand1(new String[]{
+                    SFDX,
+                    "force:data:record:create",
+                    "-s",
+                    "thn__Quote_Meeting_Room__c",
+                    "-v",
+                    "thn__MYCE_Quote__c='" + myceQuoteID + "' thn__Product__c='" + productID + "' thn__Resource__c='" +
+                            resourceID + "' thn__Pax__c=6 thn__Setup__c='Party'",
+                    "-u",
+                    ORG_USERNAME,
+                    "--json"});
+            String message7 = JsonParser2.getFieldValue2(result7.toString(), "message");
+            Assert.assertEquals(message7, expectedMessage);
+            StringBuilder result8 =SfdxCommand.runLinuxCommand1(new String[]{
+                    SFDX,
+                    "force:data:record:create",
+                    "-s",
+                    "thn__Quote_Meeting_Room__c",
+                    "-v",
+                    "thn__MYCE_Quote__c='" + myceQuoteID + "' thn__Product__c='" + productID + "' thn__Resource__c='" +
+                            resourceID + "' thn__Pax__c=6 thn__Setup__c='Square'",
+                    "-u",
+                    ORG_USERNAME,
+                    "--json"});
+            String message8 = JsonParser2.getFieldValue2(result8.toString(), "message");
+            Assert.assertEquals(message8, expectedMessage);
+            StringBuilder result9 =SfdxCommand.runLinuxCommand1(new String[]{
+                    SFDX,
+                    "force:data:record:create",
+                    "-s",
+                    "thn__Quote_Meeting_Room__c",
+                    "-v",
+                    "thn__MYCE_Quote__c='" + myceQuoteID + "' thn__Product__c='" + productID + "' thn__Resource__c='" +
+                            resourceID + "' thn__Pax__c=6 thn__Setup__c='Theater'",
+                    "-u",
+                    ORG_USERNAME,
+                    "--json"});
+            String message9 = JsonParser2.getFieldValue2(result9.toString(), "message");
+            Assert.assertEquals(message9, expectedMessage);
+            StringBuilder result10 =SfdxCommand.runLinuxCommand1(new String[]{
+                    SFDX,
+                    "force:data:record:create",
+                    "-s",
+                    "thn__Quote_Meeting_Room__c",
+                    "-v",
+                    "thn__MYCE_Quote__c='" + myceQuoteID + "' thn__Product__c='" + productID + "' thn__Resource__c='" +
+                            resourceID + "' thn__Pax__c=6 thn__Setup__c='U-Shape'",
+                    "-u",
+                    ORG_USERNAME,
+                    "--json"});
+            String message10 = JsonParser2.getFieldValue2(result10.toString(), "message");
+            Assert.assertEquals(message10, expectedMessage);
     }
 
     @Test(priority = 21, description = "Quote_Meetings_Room__c.VR21_Lock_Resource")
@@ -1140,8 +1148,8 @@ public class ValidationRule1 extends BaseTest{
     @Description("Quote_Meetings_Room__c.VR21_Lock_Resource")
     @Story("")
     public void testCreateQuoteMeetingsRoom2() throws InterruptedException, IOException {
-        myceQuotes.deleteQuoteSFDX(SFDX, "Name='Test15'", ORG_USERNAME);
-        String expectedMessage = "Failed to update record with code FIELD_CUSTOM_VALIDATION_EXCEPTION. Fields: [ 'thn__Resource__c' ]";
+        myceQuotes.deleteQuoteSFDX(SFDX, "Name='Test16'", ORG_USERNAME);
+        String expectedMessage = "Resource cannot be changed when meeting room is locked";
         StringBuilder res1 = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:get",
@@ -1243,7 +1251,8 @@ public class ValidationRule1 extends BaseTest{
     @Story("Add meeting room to the package, Add package on MYCE Quote, Open Quote meeting room record," +
             " thn__Shadow__c == FALSE, Change thn__Start_Date_Time__c, thn__End_Date_Time__c")
     public void testCreateQuoteMeetingsRoom3() throws InterruptedException, IOException {
-        String expectedMessage = "Failed to update record with code FIELD_CUSTOM_VALIDATION_EXCEPTION. Fields: []";
+        myceQuotes.deleteQuoteSFDX(SFDX, "Name='Test17'", ORG_USERNAME);
+        String expectedMessage = "Date cannot be changed if Meeting room is part of package";
         StringBuilder propertyRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:get",
@@ -1324,6 +1333,7 @@ public class ValidationRule1 extends BaseTest{
     @Description("Quote_Package__c.VR12_Dates_within_Quote_dates")
     @Story("")
     public void testCreateQuotePackage1() throws InterruptedException, IOException {
+        myceQuotes.deleteQuoteSFDX(SFDX, "Name='Test18'", ORG_USERNAME);
         String expectedMessage = "Start and end date of package must be within Quote arrival and departure dates";
         String expectedMessage2 = "Start Date of the package is after the Departure Date";
         String expectedMessage3 = "End Date of the package is after the Departure Date";
@@ -1428,7 +1438,9 @@ public class ValidationRule1 extends BaseTest{
     @Description("Quote_Package__c.VR14_Discount")
     @Story("")
     public void testCreateQuotePackage2() throws InterruptedException, IOException {
-        String expectedMessage = "Failed to update record with code FIELD_CUSTOM_VALIDATION_EXCEPTION. Fields: [ 'thn__Unit_Price__c' ]";
+        myceQuotes.deleteQuoteSFDX(SFDX, "Name='Test19'", ORG_USERNAME);
+        packages.deletePackageSFDX(SFDX, "Name='Test Package 44'", ORG_USERNAME);
+        String expectedMessage = "No Discount possible, package is not configured correctly. Please contact your admin";
         StringBuilder propertyRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:get",
@@ -1543,6 +1555,7 @@ public class ValidationRule1 extends BaseTest{
     @Description("Quote_Package__c.VR18_Pax")
     @Story("Add Quote package to the MYCE Quote: thn__Pax__c > thn__MYCE_Quote__r.thn__Pax__c")
     public void testCreateQuotePackage3() throws InterruptedException, IOException {
+        myceQuotes.deleteQuoteSFDX(SFDX, "Name='Test20'", ORG_USERNAME);
         String expectedMessage = "Pax cannot be greater than quote's pax";
         StringBuilder propertyRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
@@ -1599,6 +1612,7 @@ public class ValidationRule1 extends BaseTest{
     @Description("Quote_Package__c.VR33_QuotePackage_Account")
     @Story("")
     public void testCreateQuotePackage4() throws InterruptedException, IOException {
+        myceQuotes.deleteQuoteSFDX(SFDX, "Name='Test21'", ORG_USERNAME);
         String expectedMessage = "This Package can only be instantiated on a quote which is related to its account";
         StringBuilder propertyRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
@@ -1621,6 +1635,7 @@ public class ValidationRule1 extends BaseTest{
                 "-u",
                 ORG_USERNAME,
                 "--json"});
+        System.out.println(packageRecord);
         String packageID = JsonParser2.getFieldValue(packageRecord.toString(), "Id");
         StringBuilder myseQuoteResult = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
@@ -1646,6 +1661,7 @@ public class ValidationRule1 extends BaseTest{
                 "-u",
                 ORG_USERNAME,
                 "--json"});
+        System.out.println(quotePackageResult);
         String message = JsonParser2.getFieldValue2(quotePackageResult.toString(), "message");
         Assert.assertEquals(message, expectedMessage);
     }
@@ -1655,6 +1671,8 @@ public class ValidationRule1 extends BaseTest{
     @Description("Quote_Package__c.VR34_QuotePackage_Dates")
     @Story("")
     public void testCreateQuotePackage5() throws InterruptedException, IOException {
+        myceQuotes.deleteQuoteSFDX(SFDX, "Name='Test22'", ORG_USERNAME);
+        packages.deletePackageSFDX(SFDX, "Name='Test Package 55'", ORG_USERNAME);
         String expectedMessage = "Quote package start date must be within package's start and end dates";
         StringBuilder propertyRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
@@ -1764,7 +1782,9 @@ public class ValidationRule1 extends BaseTest{
     @Description("Quote_Package__c.VR37_Max_Discount")
     @Story("Add Quote Package to MYCE Quote: set Discount on quote package > Discount max on Package")
     public void testCreateQuotePackage6() throws InterruptedException, IOException {
-        String expectedMessage = "Failed to update record with code FIELD_CUSTOM_VALIDATION_EXCEPTION. Fields: []";
+        myceQuotes.deleteQuoteSFDX(SFDX, "Name='Test23'", ORG_USERNAME);
+        packages.deletePackageSFDX(SFDX, "Name='Test Package 66'", ORG_USERNAME);
+        String expectedMessage = "Discount on quote package cannot be greater than discount max.";
         StringBuilder propertyRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:get",
@@ -1858,6 +1878,7 @@ public class ValidationRule1 extends BaseTest{
     @Description("Quote_Product__c.VR08_Start_End_Date")
     @Story("Add Quote Product to MYCE Quote: thn__Start_Date_Time__c >= thn__End_Date_Time__c")
     public void testCreateQuoteProduct1() throws InterruptedException, IOException {
+        myceQuotes.deleteQuoteSFDX(SFDX, "Name='Test24'", ORG_USERNAME);
         String expectedMessage = "Start Date time cannot be posterior to End Date time";
         StringBuilder propertyRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
@@ -1914,6 +1935,7 @@ public class ValidationRule1 extends BaseTest{
     @Description("Quote_Product__c.VR11_Dates_within_Quote_dates")
     @Story("")
     public void testCreateQuoteProduct2() throws InterruptedException, IOException {
+        myceQuotes.deleteQuoteSFDX(SFDX, "Name='Test25'", ORG_USERNAME);
         String expectedMessage1 = "Start and end date of product must be within Quote arrival and departure dates";
         String expectedMessage2 = "Start Date time cannot be posterior to End Date time";
         StringBuilder propertyRecord = SfdxCommand.runLinuxCommand1(new String[]{
@@ -2018,6 +2040,7 @@ public class ValidationRule1 extends BaseTest{
     @Description("Quote_Product__c.VR17_Pax")
     @Story("Add Quote product to MYCE Quote: thn__Pax__c > thn__MYCE_Quote__r.thn__Pax__c")
     public void testCreateQuoteProduct3() throws InterruptedException, IOException {
+        myceQuotes.deleteQuoteSFDX(SFDX, "Name='Test26'", ORG_USERNAME);
         String expectedMessage = "Pax cannot be greater than quote's pax";
         StringBuilder propertyRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
@@ -2076,6 +2099,7 @@ public class ValidationRule1 extends BaseTest{
     @Story("Add Meeting room to the Myce Quote, Add Quote product to the Quote: select Meeting Room while creating" +
             " Quote product, thn__Start_Date_Time__c != thn__Service_Area__r.thn__Start_Date_Time__c")
     public void testCreateQuoteProduct4() throws InterruptedException, IOException {
+        myceQuotes.deleteQuoteSFDX(SFDX, "Name='Test27'", ORG_USERNAME);
         String expectedMessage = "Date of the service area must be the same as the product's";
         StringBuilder propertyRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
@@ -2156,7 +2180,8 @@ public class ValidationRule1 extends BaseTest{
     @Story("Add Package having products to the Quote, Open Quote product record, Change dates:" +
             " thn__Start_Date_Time__c != thn__Start_Date__c, thn__End_Date_Time__c !=thn__End_Date__c")
     public void testCreateQuoteProduct5() throws InterruptedException, IOException {
-        String expectedMessage = "Failed to update record with code FIELD_CUSTOM_VALIDATION_EXCEPTION. Fields: []";
+        myceQuotes.deleteQuoteSFDX(SFDX, "Name='Test28'", ORG_USERNAME);
+        String expectedMessage = "Date cannot be changed if Product is part of package";
         StringBuilder propertyRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:get",
@@ -2239,7 +2264,8 @@ public class ValidationRule1 extends BaseTest{
     @Description("Quote_Product__c.VR36_Consumption_on_Package_Line")
     @Story("Add Package having products to the Quote, Open Quote product record, Set On_Consumption__c to TRUE")
     public void testCreateQuoteProduct6() throws InterruptedException, IOException {
-        String expectedMessage = "Failed to update record with code FIELD_CUSTOM_VALIDATION_EXCEPTION. Fields: []";
+        myceQuotes.deleteQuoteSFDX(SFDX, "Name='Test29'", ORG_USERNAME);
+        String expectedMessage = "In a package line quote product the on consumption option can not be used.";
         StringBuilder propertyRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:get",
@@ -2320,6 +2346,7 @@ public class ValidationRule1 extends BaseTest{
     @Description("Guest__c.VR01_guest_send_to_mews")
     @Story("Create Guest__c record, do not fill Hotel__c, Set Send_to_Mews__c to TRUE")
     public void testCreateGuest() throws InterruptedException, IOException {
+        guests.deleteGuestSFDX(SFDX, "thn__FirstName__c='JohnAutoTest'", ORG_USERNAME);
         String expectedMessage = "Hotel is required to create/update guest in Mews";
         StringBuilder guestResult = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
@@ -2327,7 +2354,7 @@ public class ValidationRule1 extends BaseTest{
                 "-s",
                 "thn__Guest__c",
                 "-v",
-                "thn__FirstName__c='John' thn__Send_to_Mews__c=true",
+                "thn__FirstName__c='JohnAutoTest' thn__Send_to_Mews__c=true",
                 "-u",
                 ORG_USERNAME,
                 "--json"});
@@ -2340,6 +2367,7 @@ public class ValidationRule1 extends BaseTest{
     @Description("Item__c.VR02_item_send_to_mews")
     @Story("On Item record where thn__Mews_Id__c != null, set thn__Send_to_Mews__c to TRUE")
     public void testCreateItem() throws InterruptedException, IOException {
+        guests.deleteGuestSFDX(SFDX, "thn__FirstName__c='TestVRGuest1'", ORG_USERNAME);
         String expectedMessage = "The Reservation product already exists and cannot be sent twice";
         SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
@@ -2413,7 +2441,7 @@ public class ValidationRule1 extends BaseTest{
                 "-s",
                 "thn__Guest__c",
                 "-v",
-                "thn__FirstName__c='Test'",
+                "thn__FirstName__c='TestVRGuest1'",
                 "-u",
                 ORG_USERNAME,
                 "--json"});
@@ -2453,6 +2481,7 @@ public class ValidationRule1 extends BaseTest{
     @Description("Reservation__c.VR03_Reason_update")
     @Story("On thn__Reservation__c record set thn__Update_Price__c to TRUE, Leave thn__Reason_update__c empty")
     public void testCreateReservation() throws InterruptedException, IOException {
+        guests.deleteGuestSFDX(SFDX, "thn__FirstName__c='TestVRGuest2'", ORG_USERNAME);
         String expectedMessage = "Reason update is required when price is updated";
         StringBuilder propertyRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
@@ -2504,7 +2533,7 @@ public class ValidationRule1 extends BaseTest{
                 "-s",
                 "thn__Guest__c",
                 "-v",
-                "thn__FirstName__c='Test2'",
+                "thn__FirstName__c='TestVRGuest2'",
                 "-u",
                 ORG_USERNAME,
                 "--json"});
@@ -2532,7 +2561,9 @@ public class ValidationRule1 extends BaseTest{
     @Description("Reservation__c.VR04_Cancellation_reason")
     @Story("On thn__Reservation__c record where thn__Mews_Id__c != null change thn__State__c to “Canceled")
     public void testCreateReservation2() throws InterruptedException, IOException {
-        String expectedMessage = "Failed to update record with code FIELD_CUSTOM_VALIDATION_EXCEPTION. Fields: [ 'thn__Notes__c' ]";
+        guests.deleteGuestSFDX(SFDX, "thn__FirstName__c='TestVRGuest3'", ORG_USERNAME);
+        reservations.deleteReservationSFDX(SFDX, "thn__Mews_Id__c=123", ORG_USERNAME);
+        String expectedMessage = "Notes cannot be empty if state is canceled";
         StringBuilder propertyRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:get",
@@ -2583,7 +2614,7 @@ public class ValidationRule1 extends BaseTest{
                 "-s",
                 "thn__Guest__c",
                 "-v",
-                "thn__FirstName__c='Test2'",
+                "thn__FirstName__c='TestVRGuest3'",
                 "-u",
                 ORG_USERNAME,
                 "--json"});
@@ -2598,10 +2629,11 @@ public class ValidationRule1 extends BaseTest{
                         "' thn__Customer__c='" + guestID + "' thn__StartUtc__c=" + date.generateTodayDate2() +
                         " thn__EndUtc__c=" + date.generateTodayDate2_plus(0, 5) +
                         " thn__AdultCount__c=2 thn__ChildCount__c=1 thn__RequestedCategory__c='" + roomTypeID +
-                        "' thn__Pricing_Type__c='Rate pricing' thn__Rate__c='" + rateID + "' thn__Mews_Id__c=''123",
+                        "' thn__Pricing_Type__c='Rate pricing' thn__Rate__c='" + rateID + "' thn__Mews_Id__c='123'",
                 "-u",
                 ORG_USERNAME,
                 "--json"});
+        System.out.println(reservationResult);
         String reservationID = JsonParser2.getFieldValue(reservationResult.toString(), "id");
         StringBuilder updateResult = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,

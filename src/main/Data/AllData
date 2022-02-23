@@ -1,15 +1,10 @@
 
-  delete [select name from thn__MYCE_Quote__c where name != 'Shadow'];
-     delete [select Name from thn__Payment__c];
-     delete [select Name from thn__Bill__c];
-     delete [select name from thn__Package__c];
-     delete [select thn__FirstName__c from thn__Guest__c];
-     delete [select name from thn__Reservation__c];
+
+
+     delete [select name from thn__Package__c where name='Pack a' or name='Pack b' or name='Pack c' or name='Pack d'];
+     delete [select thn__FirstName__c from thn__Guest__c where thn__FirstName__c='JohnAutoTest'];
      delete [select name from thn__Resource__c where name='TestRes' or name='TestRes2'];
      delete [select name from Account where name = 'First Test Account' or name='Test Agent' or name='Test Company'];
-     delete [select thn__Name__c from thn__Item__c];
-     delete [select Name from thn__Request__c];
-     delete [select Name from thn__Credit_Note__c];
      delete [select name from thn__Hotel__c where name = 'TestAuto'];
 
 
@@ -82,9 +77,7 @@
            thn__End_Time__c = time.newInstance(20, 00, 00, 00), thn__Unit_Price__c = 20, thn__VAT_Category__c = '2');
           insert pl4;
 
-          thn__Guest__c guest1 = new thn__Guest__c();
-           guest1.thn__FirstName__c = 'John';
-          insert guest1;
+
 
           thn__Reservation__c res1 = new thn__Reservation__c();
           List<thn__Hotel__c> propertyID5 = [select ID from thn__Hotel__c where Name = 'Demo'];

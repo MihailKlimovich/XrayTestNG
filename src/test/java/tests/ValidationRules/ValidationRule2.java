@@ -24,6 +24,7 @@ public class ValidationRule2 extends BaseTest {
     @Description("Setup.thn__ByPass__c.thn__ByPassVR__c == true and User.thn__ByPassVR__c == false")
     @Story("Settings")
     public void settingUpValidationRules() throws InterruptedException, IOException {
+        loginPage.authoriseURL(SFDX, ADMIN_AUTH_URL, ADMIN_USERNAME);
         loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
         SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
@@ -35,7 +36,7 @@ public class ValidationRule2 extends BaseTest {
                 "-v",
                 "thn__ByPassVR__c=false",
                 "-u",
-                ORG_USERNAME,
+                ADMIN_USERNAME,
                 "--json"});
         Object byPass = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
@@ -43,7 +44,7 @@ public class ValidationRule2 extends BaseTest {
                 "-q",
                 "SELECT Id FROM thn__bypass__c",
                 "-u",
-                ORG_USERNAME,
+                ADMIN_USERNAME,
                 "--json"});
         List<String> byPassID= JsonParser2.getFieldValueSoql(byPass.toString(), "Id");
         String byPassId = byPassID.get(0);
@@ -57,7 +58,7 @@ public class ValidationRule2 extends BaseTest {
                 "-v",
                 "thn__bypassvr__c=true",
                 "-u",
-                ORG_USERNAME,
+                ADMIN_USERNAME,
                 "--json"});
         StringBuilder userRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
@@ -67,7 +68,7 @@ public class ValidationRule2 extends BaseTest {
                 "-w",
                 "Username='" + ORG_USERNAME + "'",
                 "-u",
-                ORG_USERNAME,
+                ADMIN_USERNAME,
                 "--json"});
         String userByPass = JsonParser2.getFieldValue(userRecord.toString(), "thn__ByPassVR__c");
         StringBuilder byPassRecord = SfdxCommand.runLinuxCommand1(new String[]{
@@ -78,7 +79,7 @@ public class ValidationRule2 extends BaseTest {
                 "-w",
                 "Id='" + byPassId + "'",
                 "-u",
-                ORG_USERNAME,
+                ADMIN_USERNAME,
                 "--json"});
         System.out.println(byPassRecord);
         String byPassVr = JsonParser2.getFieldValue(byPassRecord.toString(), "thn__ByPassVR__c");
@@ -91,7 +92,7 @@ public class ValidationRule2 extends BaseTest {
     @Description("Myce_Quote__c.Commission_Validation_Rule")
     @Story("Commissionable == true & thn__Commission_to__c == null")
     public void testCreateNewMyceQuote1() throws InterruptedException, IOException {
-        //force:data:soql:query -q "SELECT thn__Commissionable__c, thn__Commission_to__c FROM thn__MYCE_Quote__c where Name='Test24'" -u THYNK-VR --json
+        myceQuotes.deleteQuoteSFDX(SFDX, "Name='Test30'", ORG_USERNAME);
         SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:create",
@@ -126,7 +127,7 @@ public class ValidationRule2 extends BaseTest {
     @Description("Myce_Quote__c.Commission_Validation_Rule")
     @Story("Commissionable == true & thn__Commission_to__c != Agent & thn__Agent__c == null")
     public void testCreateNewMyceQuote2() throws InterruptedException, IOException {
-
+        myceQuotes.deleteQuoteSFDX(SFDX, "Name='Test31'", ORG_USERNAME);
         SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:create",
@@ -162,7 +163,7 @@ public class ValidationRule2 extends BaseTest {
     @Description("Myce_Quote__c.Commission_Validation_Rule")
     @Story("Commissionable == true & thn__Commission_to__c == Company & thn__Company__c == null")
     public void testCreateNewMyceQuote3() throws InterruptedException, IOException {
-
+        myceQuotes.deleteQuoteSFDX(SFDX, "Name='Test32'", ORG_USERNAME);
         SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:create",
@@ -198,7 +199,7 @@ public class ValidationRule2 extends BaseTest {
     @Description("Myce_Quote__c.VR05_Dates")
     @Story("thn__Departure_Date__c < thn__Arrival_Date__c")
     public void testCreateNewMyceQuote4() throws InterruptedException, IOException {
-
+        myceQuotes.deleteQuoteSFDX(SFDX, "Name='Test33'", ORG_USERNAME);
         SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:create",
@@ -233,7 +234,7 @@ public class ValidationRule2 extends BaseTest {
     @Description("Myce_Quote__c.VR27_Company_Agent_Type")
     @Story("Create MYCE Quote: Select Company for Agent field ,Select Agent for Company field")
     public void testCreateNewMyceQuote5() throws InterruptedException, IOException {
-
+        myceQuotes.deleteQuoteSFDX(SFDX, "Name='Test34'", ORG_USERNAME);
         StringBuilder res1 = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:get",
@@ -289,6 +290,7 @@ public class ValidationRule2 extends BaseTest {
     @Description("Myce_Quote__c.VR13_Reservation_Guest")
     @Story("Create MYCE Quote: leave thn__Reservation_Guest__c empty, Set thn__Send_to_Mews__c to TRUE")
     public void testCreateNewMyceQuote6() throws InterruptedException, IOException {
+        myceQuotes.deleteQuoteSFDX(SFDX, "Name='Test35'", ORG_USERNAME);
         SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:create",
@@ -322,6 +324,7 @@ public class ValidationRule2 extends BaseTest {
     @Description("Myce_Quote__c.VR22_ClosedStatus")
     @Story("Change Stage om MYCE Quote to '4 - Closed'")
     public void testCreateNewMyceQuote7() throws InterruptedException, IOException {
+        myceQuotes.deleteQuoteSFDX(SFDX, "Name='Test36'", ORG_USERNAME);
         SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:create",
@@ -353,6 +356,7 @@ public class ValidationRule2 extends BaseTest {
     @Description("Myce_Quote__c.VR28_Cancelled_Status")
     @Story("Set thn__Is_Confirmed__c to false, Change MYCE Quote Closed Status to ‘Cancelled’")
     public void TesttestCreateNewMyceQuote8() throws InterruptedException, IOException {
+        myceQuotes.deleteQuoteSFDX(SFDX, "Name='Test37'", ORG_USERNAME);
         StringBuilder hotelRecord= hotel.getHotelSFDX(SFDX, "thn__Unique_Id__c='Demo'", ORG_USERNAME);
         String propertyID = JsonParser2.getFieldValue(hotelRecord.toString(), "Id");
         StringBuilder recordTypes = myceQuotes.soql(SFDX, "SELECT Id FROM RecordType WHERE" +
@@ -412,6 +416,7 @@ public class ValidationRule2 extends BaseTest {
     @Description("Package_Line__c.VR30_IsMultidays")
     @Story("For Package where thn__Multi_Days__c == true, create Package line: thn__AppliedDay__c == null")
     public void testCreateNewPackageLine1() throws InterruptedException, IOException {
+        packages.deletePackageSFDX(SFDX, "Name='Test Package'", ORG_USERNAME);
         StringBuilder res1 = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:get",
@@ -479,6 +484,7 @@ public class ValidationRule2 extends BaseTest {
     @Description("Package_Line__c.VR31_IsNotMultidays")
     @Story("For Package where hn__Multi_Days__c == false, create Package line: thn__AppliedDay__c != null")
     public void testCreateNewPackageLine2() throws InterruptedException, IOException {
+        packages.deletePackageSFDX(SFDX, "Name='Test Package 2'", ORG_USERNAME);
         StringBuilder res1 = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:get",
@@ -546,6 +552,7 @@ public class ValidationRule2 extends BaseTest {
     @Description("Package_Line__c.VR29_Product_property")
     @Story("Create package line where Proferty  ‘A' for Package with Property 'B’")
     public void testCreateNewPackageLine3() throws InterruptedException, IOException {
+        packages.deletePackageSFDX(SFDX, "Name='Test Package 3'", ORG_USERNAME);
         //given
         String expectedMessage = "Product's property must be the same than the package's";
         //when
@@ -627,6 +634,7 @@ public class ValidationRule2 extends BaseTest {
     @Description("Quote_Hotel_Room__c.VR06_Departure_after")
     @Story("Add Quote hotel room on MYCE Quote: thn__Arrival_Date_Time__c > thn__Departure_Date_Time__c")
     public void testCreateQuoteHotelRoom() throws InterruptedException, IOException {
+        myceQuotes.deleteQuoteSFDX(SFDX, "Name='Test38'", ORG_USERNAME);
         StringBuilder res1 = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:get",
@@ -697,6 +705,7 @@ public class ValidationRule2 extends BaseTest {
     @Description("Quote_Hotel_Room__c.VR09_Dates_within_Quote_dates")
     @Story("thn__Arrival_Date_Time__c < thn__MYCE_Quote__r.thn__Arrival_Date__c")
     public void testCreateQuoteHotelRoom2() throws InterruptedException, IOException {
+        myceQuotes.deleteQuoteSFDX(SFDX, "Name='Test39'", ORG_USERNAME);
         StringBuilder res1 = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:get",
@@ -793,6 +802,7 @@ public class ValidationRule2 extends BaseTest {
     @Description("Add Quote hotel room on MYCE Quote where thn__Arrival_Date_Time__c >  thn__MYCE_Quote__r.thn__Departure_Date__c")
     @Story("thn__Arrival_Date_Time__c >  thn__MYCE_Quote__r.thn__Departure_Date__c")
     public void testCreateQuoteHotelRoom3() throws InterruptedException, IOException {
+        myceQuotes.deleteQuoteSFDX(SFDX, "Name='Test40'", ORG_USERNAME);
         StringBuilder res1 = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:get",
@@ -889,6 +899,7 @@ public class ValidationRule2 extends BaseTest {
     @Description("Add Quote hotel room on MYCE Quote where thn__Departure_Date_Time__c <  thn__MYCE_Quote__r.thn__Arrival_Date__c")
     @Story("thn__Departure_Date_Time__c <  thn__MYCE_Quote__r.thn__Arrival_Date__c")
     public void testCreateQuoteHotelRoom4() throws InterruptedException, IOException {
+        myceQuotes.deleteQuoteSFDX(SFDX, "Name='Test41'", ORG_USERNAME);
         StringBuilder res1 = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:get",
@@ -985,6 +996,7 @@ public class ValidationRule2 extends BaseTest {
     @Description("Add Quote hotel room on MYCE Quote where thn__Departure_Date_Time__c > thn__MYCE_Quote__r.thn__Departure_Date__c")
     @Story("thn__Departure_Date_Time__c > thn__MYCE_Quote__r.thn__Departure_Date__c")
     public void testCreateQuoteHotelRoom5() throws InterruptedException, IOException {
+        myceQuotes.deleteQuoteSFDX(SFDX, "Name='Test42'", ORG_USERNAME);
         StringBuilder res1 = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:get",
@@ -1081,6 +1093,7 @@ public class ValidationRule2 extends BaseTest {
     @Description("Quote_Hotel_Room__c.VR15_Pax")
     @Story("Add Quote hotel room on MYCE Quote: thn__Pax__c > thn__MYCE_Quote__r.thn__Pax__c")
     public void testCreateQuoteHotelRoom6() throws InterruptedException, IOException {
+        myceQuotes.deleteQuoteSFDX(SFDX, "Name='Test43'", ORG_USERNAME);
         StringBuilder res1 = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:get",
@@ -1173,6 +1186,7 @@ public class ValidationRule2 extends BaseTest {
     @Description("Quote_Meetings_Room__c.VR19_SetupResource")
     @Story("")
     public void testCreateQuoteMeetingsRoom1() throws InterruptedException, IOException {
+        myceQuotes.deleteQuoteSFDX(SFDX, "Name='Test44'", ORG_USERNAME);
         StringBuilder res1 = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:get",
@@ -1366,6 +1380,7 @@ public class ValidationRule2 extends BaseTest {
     @Description("Quote_Meetings_Room__c.VR21_Lock_Resource")
     @Story("")
     public void testCreateQuoteMeetingsRoom2() throws InterruptedException, IOException {
+        myceQuotes.deleteQuoteSFDX(SFDX, "Name='Test45'", ORG_USERNAME);
         StringBuilder res1 = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:get",
@@ -1479,6 +1494,7 @@ public class ValidationRule2 extends BaseTest {
     @Story("Add meeting room to the package, Add package on MYCE Quote, Open Quote meeting room record," +
             " thn__Shadow__c == FALSE, Change thn__Start_Date_Time__c, thn__End_Date_Time__c")
     public void testCreateQuoteMeetingsRoom3() throws InterruptedException, IOException {
+        myceQuotes.deleteQuoteSFDX(SFDX, "Name='Test46'", ORG_USERNAME);
         StringBuilder propertyRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:get",
@@ -1653,6 +1669,8 @@ public class ValidationRule2 extends BaseTest {
     @Description("Quote_Package__c.VR14_Discount")
     @Story("")
     public void testCreateQuotePackage2() throws InterruptedException, IOException {
+        myceQuotes.deleteQuoteSFDX(SFDX, "Name='Test48'", ORG_USERNAME);
+        packages.deletePackageSFDX(SFDX, "Name='Test Package 4'", ORG_USERNAME);
         StringBuilder propertyRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:get",
@@ -1779,6 +1797,7 @@ public class ValidationRule2 extends BaseTest {
     @Description("Quote_Package__c.VR18_Pax")
     @Story("Add Quote package to the MYCE Quote: thn__Pax__c > thn__MYCE_Quote__r.thn__Pax__c")
     public void testCreateQuotePackage3() throws InterruptedException, IOException {
+        myceQuotes.deleteQuoteSFDX(SFDX, "Name='Test49'", ORG_USERNAME);
         StringBuilder propertyRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:get",
@@ -1847,6 +1866,7 @@ public class ValidationRule2 extends BaseTest {
     @Description("Quote_Package__c.VR33_QuotePackage_Account")
     @Story("")
     public void testCreateQuotePackage4() throws InterruptedException, IOException {
+        myceQuotes.deleteQuoteSFDX(SFDX, "Name='Test50'", ORG_USERNAME);
         StringBuilder propertyRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:get",
@@ -2003,6 +2023,8 @@ public class ValidationRule2 extends BaseTest {
     @Description("Quote_Package__c.VR37_Max_Discount")
     @Story("Add Quote Package to MYCE Quote: set Discount on quote package > Discount max on Package")
     public void testCreateQuotePackage6() throws InterruptedException, IOException {
+        packages.deletePackageSFDX(SFDX, "Name='Test Package 6'", ORG_USERNAME);
+        myceQuotes.deleteQuoteSFDX(SFDX, "Name='Test52'", ORG_USERNAME);
         StringBuilder propertyRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:get",
@@ -2106,6 +2128,7 @@ public class ValidationRule2 extends BaseTest {
     @Description("Quote_Product__c.VR08_Start_End_Date")
     @Story("Add Quote Product to MYCE Quote: thn__Start_Date_Time__c >= thn__End_Date_Time__c")
     public void testCreateQuoteProduct1() throws InterruptedException, IOException {
+        myceQuotes.deleteQuoteSFDX(SFDX, "Name='Test53'", ORG_USERNAME);
         StringBuilder propertyRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:get",
@@ -2161,6 +2184,7 @@ public class ValidationRule2 extends BaseTest {
     @Description("Quote_Product__c.VR11_Dates_within_Quote_dates")
     @Story("")
     public void testCreateQuoteProduct2() throws InterruptedException, IOException {
+        myceQuotes.deleteQuoteSFDX(SFDX, "Name='Test54'", ORG_USERNAME);
         StringBuilder propertyRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:get",
@@ -2263,6 +2287,7 @@ public class ValidationRule2 extends BaseTest {
     @Description("Quote_Product__c.VR17_Pax")
     @Story("Add Quote product to MYCE Quote: thn__Pax__c > thn__MYCE_Quote__r.thn__Pax__c")
     public void testCreateQuoteProduct3() throws InterruptedException, IOException {
+        myceQuotes.deleteQuoteSFDX(SFDX, "Name='Test55'", ORG_USERNAME);
         StringBuilder propertyRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:get",
@@ -2320,6 +2345,7 @@ public class ValidationRule2 extends BaseTest {
     @Story("Add Meeting room to the Myce Quote, Add Quote product to the Quote: select Meeting Room while creating" +
             " Quote product, thn__Start_Date_Time__c != thn__Service_Area__r.thn__Start_Date_Time__c")
     public void testCreateQuoteProduct4() throws InterruptedException, IOException {
+        myceQuotes.deleteQuoteSFDX(SFDX, "Name='Test56'", ORG_USERNAME);
         StringBuilder propertyRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:get",
@@ -2399,6 +2425,7 @@ public class ValidationRule2 extends BaseTest {
     @Story("Add Package having products to the Quote, Open Quote product record, Change dates:" +
             " thn__Start_Date_Time__c != thn__Start_Date__c, thn__End_Date_Time__c !=thn__End_Date__c")
     public void testCreateQuoteProduct5() throws InterruptedException, IOException {
+        myceQuotes.deleteQuoteSFDX(SFDX, "Name='Test57'", ORG_USERNAME);
         StringBuilder propertyRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:get",
@@ -2481,6 +2508,7 @@ public class ValidationRule2 extends BaseTest {
     @Description("Quote_Product__c.VR36_Consumption_on_Package_Line")
     @Story("Add Package having products to the Quote, Open Quote product record, Set On_Consumption__c to TRUE")
     public void testCreateQuoteProduct6() throws InterruptedException, IOException {
+        myceQuotes.deleteQuoteSFDX(SFDX, "Name='Test58'", ORG_USERNAME);
         StringBuilder propertyRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:get",
@@ -2561,13 +2589,14 @@ public class ValidationRule2 extends BaseTest {
     @Description("Guest__c.VR01_guest_send_to_mews")
     @Story("Create Guest__c record, do not fill Hotel__c, Set Send_to_Mews__c to TRUE")
     public void testCreateGuest() throws InterruptedException, IOException {
+        guests.deleteGuestSFDX(SFDX, "thn__FirstName__c='JohnAutoTest3'", ORG_USERNAME);
         StringBuilder guestResult = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:create",
                 "-s",
                 "thn__Guest__c",
                 "-v",
-                "thn__FirstName__c='John' thn__Send_to_Mews__c=true",
+                "thn__FirstName__c='JohnAutoTest3' thn__Send_to_Mews__c=true",
                 "-u",
                 ORG_USERNAME,
                 "--json"});
@@ -2580,6 +2609,7 @@ public class ValidationRule2 extends BaseTest {
     @Description("Item__c.VR02_item_send_to_mews")
     @Story("On Item record where thn__Mews_Id__c != null, set thn__Send_to_Mews__c to TRUE")
     public void testCreateItem() throws InterruptedException, IOException {
+        guests.deleteGuestSFDX(SFDX, "thn__FirstName__c='JohnAutoTest4'", ORG_USERNAME);
         SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:delete",
@@ -2652,7 +2682,7 @@ public class ValidationRule2 extends BaseTest {
                 "-s",
                 "thn__Guest__c",
                 "-v",
-                "thn__FirstName__c='Test'",
+                "thn__FirstName__c='JohnAutoTest4'",
                 "-u",
                 ORG_USERNAME,
                 "--json"});
@@ -2691,6 +2721,7 @@ public class ValidationRule2 extends BaseTest {
     @Description("Reservation__c.VR03_Reason_update")
     @Story("On thn__Reservation__c record set thn__Update_Price__c to TRUE, Leave thn__Reason_update__c empty")
     public void testCreateReservation() throws InterruptedException, IOException {
+        guests.deleteGuestSFDX(SFDX, "thn__FirstName__c='TestVRGuest4'", ORG_USERNAME);
         StringBuilder propertyRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:get",
@@ -2741,7 +2772,7 @@ public class ValidationRule2 extends BaseTest {
                 "-s",
                 "thn__Guest__c",
                 "-v",
-                "thn__FirstName__c='Test2'",
+                "thn__FirstName__c='TestVRGuest4'",
                 "-u",
                 ORG_USERNAME,
                 "--json"});
@@ -2782,6 +2813,8 @@ public class ValidationRule2 extends BaseTest {
     @Description("Reservation__c.VR04_Cancellation_reason")
     @Story("On thn__Reservation__c record where thn__Mews_Id__c != null change thn__State__c to “Canceled")
     public void testCreateReservation2() throws InterruptedException, IOException {
+        guests.deleteGuestSFDX(SFDX, "thn__FirstName__c='TestVRGuest5'", ORG_USERNAME);
+        reservations.deleteReservationSFDX(SFDX, "thn__Mews_Id__c='1234'", ORG_USERNAME);
         StringBuilder propertyRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:get",
@@ -2832,7 +2865,7 @@ public class ValidationRule2 extends BaseTest {
                 "-s",
                 "thn__Guest__c",
                 "-v",
-                "thn__FirstName__c='Test2'",
+                "thn__FirstName__c='TestVRGuest5'",
                 "-u",
                 ORG_USERNAME,
                 "--json"});
@@ -2847,7 +2880,7 @@ public class ValidationRule2 extends BaseTest {
                         "' thn__Customer__c='" + guestID + "' thn__StartUtc__c=" + date.generateTodayDate2() +
                         " thn__EndUtc__c=" + date.generateTodayDate2_plus(0, 5) +
                         " thn__AdultCount__c=2 thn__ChildCount__c=1 thn__RequestedCategory__c='" + roomTypeID +
-                        "' thn__Pricing_Type__c='Rate pricing' thn__Rate__c='" + rateID + "' thn__Mews_Id__c=''1234",
+                        "' thn__Pricing_Type__c='Rate pricing' thn__Rate__c='" + rateID + "' thn__Mews_Id__c='1234'",
                 "-u",
                 ORG_USERNAME,
                 "--json"});
