@@ -91,7 +91,7 @@
 
       Metadata.CustomMetadataValue customField17 = new Metadata.CustomMetadataValue();
       customField17.field = 'thn__Auto_Send_Reservations__c';
-      customField17.value = false;
+      customField17.value = true;
       cmd.values.add(customField17);
 
       Metadata.CustomMetadataValue customField18 = new Metadata.CustomMetadataValue();

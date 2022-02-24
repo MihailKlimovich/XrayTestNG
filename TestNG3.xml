@@ -340,6 +340,11 @@
             <class name="tests.QuoteHotelRoomQuantityMAdjustment"/>
         </classes>
     </test>
+    <test name="TB-298: Change Date Flow and Canceled Reservations.">
+        <classes>
+            <class name="tests.TB.ChangeDateFlowAndCanceledReservations"/>
+        </classes>
+    </test>
 </suite>
 
 

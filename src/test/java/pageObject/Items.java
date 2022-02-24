@@ -8,6 +8,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import pages.BasePage;
 
+import java.io.IOException;
+
 import static org.openqa.selenium.support.ui.ExpectedConditions.alertIsPresent;
 
 public class Items extends BasePage {
@@ -72,4 +74,21 @@ public class Items extends BasePage {
         return readRecalculateMessage(HELP_ERROR_MESSAGE);
     }
 
+
+    //////////////////////////////   SFDX COMMANDS   ////////////////////////////////////
+
+    @Step("Delete Item SFDX")
+    public void deleteItemSFDX(String sfdxPath, String where, String userName) throws IOException, InterruptedException {
+        StringBuilder result = SfdxCommand.runLinuxCommand1(new String[]{
+                sfdxPath,
+                "force:data:record:delete",
+                "-s",
+                "thn__Item__c",
+                "-w",
+                where,
+                "-u",
+                userName,
+                "--json"});
+        System.out.println(result);
+    }
 }

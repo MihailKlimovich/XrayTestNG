@@ -177,6 +177,22 @@ public class Reservations extends BasePage {
         System.out.println(result);
     }
 
+    @Step("Get Reservation SFDX")
+    public StringBuilder getReservationSFDX(String sfdxPath, String where, String userName)
+            throws IOException, InterruptedException {
+        StringBuilder reservationRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                sfdxPath,
+                "force:data:record:get",
+                "-s",
+                "thn__Reservation__c",
+                "-w",
+                where,
+                "-u",
+                userName,
+                "--json"});
+        return reservationRecord;
+    }
+
 
 
 }

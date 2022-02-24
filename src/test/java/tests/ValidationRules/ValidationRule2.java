@@ -2610,6 +2610,7 @@ public class ValidationRule2 extends BaseTest {
     @Story("On Item record where thn__Mews_Id__c != null, set thn__Send_to_Mews__c to TRUE")
     public void testCreateItem() throws InterruptedException, IOException {
         guests.deleteGuestSFDX(SFDX, "thn__FirstName__c='JohnAutoTest4'", ORG_USERNAME);
+        items.deleteItemSFDX(SFDX, "thn__Mews_Id__c=987", ORG_USERNAME);
         SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:delete",
@@ -2708,7 +2709,7 @@ public class ValidationRule2 extends BaseTest {
                 "-s",
                 "thn__Item__c",
                 "-v",
-                "thn__Reservation__c='" + reservationID + "' thn__Product__c='" + productRoom1NightID + "' thn__Mews_Id__c=555 thn__Send_to_Mews__c=true",
+                "thn__Reservation__c='" + reservationID + "' thn__Product__c='" + productRoom1NightID + "' thn__Mews_Id__c=987 thn__Send_to_Mews__c=true",
                 "-u",
                 ORG_USERNAME,
                 "--json"});
