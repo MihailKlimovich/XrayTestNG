@@ -83,6 +83,7 @@ public class MyceQuotes extends BasePage {
     By ROOMING_LIST_TAB = By.xpath("//li//a[@data-label='Rooming List']");
     By EDIT_ARRIVAL_DATE_BUTTON = By.xpath("//button[@title='Edit Arrival Date']");
     By CLONE_PAX_FIELD = By.xpath("//input[@name='Pax']");
+    By CHECK_AVAILABILITIES_BUTTON = By.xpath("//button[@name='thn__MYCE_Quote__c.thn__Check_Availabilities']");
 
 
 
@@ -96,7 +97,8 @@ public class MyceQuotes extends BasePage {
     @Step("Open Myce Quote page")
     public MyceQuotes goToMyceQuotes() throws InterruptedException {
         //driver.navigate().to("https://thynk-test-unlocked-dev-ed.lightning.force.com/lightning/o/thn__MYCE_Quote__c/list?filterName=Recent");
-        driver.navigate().to("https://thautomation-dev-ed.lightning.force.com/lightning/o/thn__MYCE_Quote__c/list?filterName=Recent");
+        //driver.navigate().to("https://thautomation-dev-ed.lightning.force.com/lightning/o/thn__MYCE_Quote__c/list?filterName=Recent");
+        driver.navigate().to("https://site-page-5161-dev-ed.lightning.force.com/lightning/o/thn__MYCE_Quote__c/list?filterName=Recent");
         try {
             if (wait2.until(ExpectedConditions.alertIsPresent()) != null) {
                 Alert alert = wait2.until(alertIsPresent());
@@ -118,6 +120,11 @@ public class MyceQuotes extends BasePage {
         wait1.until(ExpectedConditions.presenceOfElementLocated(MYCE_QUOTE_TAB));
         Thread.sleep(1000);
         click3(MYCE_QUOTE_TAB);
+    }
+
+    @Step("Click Сheck Availabilities button")
+    public void clickCheckkAvailabilitiesButton() throws InterruptedException {
+        click4(CHECK_AVAILABILITIES_BUTTON);
     }
 
 

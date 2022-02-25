@@ -270,7 +270,7 @@ public class ValidationRule1 extends BaseTest{
         StringBuilder result = myceQuotes.updateQuoteSFDX(SFDX, "Id='" + quoteID + "'",
                 "thn__Closed_Status__c='Cancelled'", ORG_USERNAME);
         String message = JsonParser2.getFieldValue2(result.toString(), "message");
-        Assert.assertEquals(message, expectedMessage);
+        Assert.assertTrue(message.contains(expectedMessage));
     }
 
     @Test(priority = 10, description = "Credit_Note_Line__c.Invoice_Line_Validation")
@@ -1194,7 +1194,7 @@ public class ValidationRule1 extends BaseTest{
         String propertyID = JsonParser2.getFieldValue(res1.toString(), "Id");
         String productID = JsonParser2.getFieldValue(res2.toString(), "Id");
         String resourceID = JsonParser2.getFieldValue(res3.toString(), "Id");
-        SfdxCommand.runLinuxCommand1(new String[]{
+        StringBuilder quoteRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:create",
                 "-s",
@@ -1206,17 +1206,7 @@ public class ValidationRule1 extends BaseTest{
                 "-u",
                 ORG_USERNAME,
                 "--json"});
-        StringBuilder res4= SfdxCommand.runLinuxCommand1(new String[]{
-                SFDX,
-                "force:data:record:get",
-                "-s",
-                "thn__MYCE_Quote__c",
-                "-w",
-                "Name='Test16'",
-                "-u",
-                ORG_USERNAME,
-                "--json"});
-        String myceQuoteID = JsonParser2.getFieldValue(res4.toString(), "Id");
+        String myceQuoteID = JsonParser2.getFieldValue(quoteRecord.toString(), "id");
         StringBuilder res5 = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:create",
@@ -1325,7 +1315,7 @@ public class ValidationRule1 extends BaseTest{
                 ORG_USERNAME,
                 "--json"});
         String message = JsonParser2.getFieldValue2(updateResult.toString(), "message");
-        Assert.assertEquals(message, expectedMessage);
+        Assert.assertTrue(message.contains(expectedMessage));
     }
 
     @Test(priority = 23, description = "Quote_Package__c.VR12_Dates_within_Quote_dates")
@@ -1547,7 +1537,7 @@ public class ValidationRule1 extends BaseTest{
                 ORG_USERNAME,
                 "--json"});
         String message = JsonParser2.getFieldValue2(updateResult.toString(), "message");
-        Assert.assertEquals(message, expectedMessage);
+        Assert.assertTrue(message.contains(expectedMessage));
     }
 
     @Test(priority = 25, description = "Quote_Package__c.VR18_Pax")
@@ -2255,7 +2245,7 @@ public class ValidationRule1 extends BaseTest{
                 ORG_USERNAME,
                 "--json"});
         String message = JsonParser2.getFieldValue2(updateResult.toString(), "message");
-        Assert.assertEquals(message, expectedMessage);
+        Assert.assertTrue(message.contains(expectedMessage));
     }
 
 
@@ -2277,7 +2267,7 @@ public class ValidationRule1 extends BaseTest{
                 ORG_USERNAME,
                 "--json"});
         String propertyID = JsonParser2.getFieldValue(propertyRecord.toString(), "Id");
-        StringBuilder  packageRecord = SfdxCommand.runLinuxCommand1(new String[]{
+        StringBuilder packageRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:get",
                 "-s",
@@ -2314,7 +2304,7 @@ public class ValidationRule1 extends BaseTest{
                 ORG_USERNAME,
                 "--json"});
         String quotePackageID = JsonParser2.getFieldValue(quotePackageResult.toString(), "id");
-        StringBuilder  quoteProductRecord = SfdxCommand.runLinuxCommand1(new String[]{
+        StringBuilder quoteProductRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:get",
                 "-s",
@@ -2338,7 +2328,7 @@ public class ValidationRule1 extends BaseTest{
                 ORG_USERNAME,
                 "--json"});
         String message = JsonParser2.getFieldValue2(updateResult.toString(), "message");
-        Assert.assertEquals(message, expectedMessage);
+        Assert.assertTrue(message.contains(expectedMessage));
     }
 
     @Test(priority = 35, description = "Guest__c.VR01_guest_send_to_mews")
@@ -2649,7 +2639,7 @@ public class ValidationRule1 extends BaseTest{
                 ORG_USERNAME,
                 "--json"});
         String message = JsonParser2.getFieldValue2(updateResult.toString(), "message");
-        Assert.assertEquals(message, expectedMessage);
+        Assert.assertTrue(message.contains(expectedMessage));
     }
 
     @Test(priority = 39, description = "VR38_Resource_Grouping")

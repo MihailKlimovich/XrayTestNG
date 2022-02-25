@@ -206,7 +206,7 @@ public class QuoteHotelRoomQuantityPerNight extends BaseTest {
                 "thn__Quote_Hotel_Room__c='" + quoteHotelRoomID +"'", ORG_USERNAME);
         String quoteHotelRoomPriceQuantity= JsonParser2.
                 getFieldValue(quoteHotelRoomPricerecord.toString(), "thn__Quantity__c");
-        Assert.assertEquals(message, "Quantity cannot be changed for packaged hotel rooms");
+        Assert.assertTrue(message.contains("Quantity cannot be changed for packaged hotel rooms"));
         Assert.assertEquals(quoteHotelRoomPriceQuantity, "5");
     }
 

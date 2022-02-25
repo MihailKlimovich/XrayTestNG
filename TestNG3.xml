@@ -345,6 +345,11 @@
             <class name="tests.TB.ChangeDateFlowAndCanceledReservations"/>
         </classes>
     </test>
+    <test name="TB-294: Availability Lightning component shows inactive room types.">
+        <classes>
+            <class name="tests.AvailabilityLightningComponentShowsInactiveRoomTypes"/>
+        </classes>
+    </test>
 </suite>
 
 

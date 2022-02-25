@@ -80,6 +80,7 @@ public class BaseTest {
     protected CreateQuoteHotelRoomComponent createQuoteHotelRoomComponent;
     protected Availability availability;
     protected MAdjustments mAdjustments;
+    protected CheckAvailabilitiesComponent checkAvailabilitiesComponent;
 
 
 
@@ -98,16 +99,7 @@ public class BaseTest {
     public String ADMIN_PASSWORD = System.getenv("ADMINPASSWORD");
     public String ADMIN_AUTH_URL = System.getenv("ADMIN_AUTH_URL");
 
-    /*public String ORG_USERNAME = "r@thautomation.sf";
-    public String ORG_PASSWORD = "Welcome1508";
-    public String ORG_URL = "https://login.salesforce.com/";
-    public String CONSUMER_KEY = "";
-    public String SFDX = "/home/user/sfdx/bin/sfdx";
-    public String SERVER_KEY_PATH = "/home/user/salesforceauthotest/jdoe/JWT/server.key";
-    public String SFDX_AUTH_URL = "force://platformcli::5aep861ynl8csws3xx63jhz.ngszamvp8hjcebhltltefbvhepiodvdm_zksa8zytrbpgqje1amsaurg6cavr5l@thautomation-dev-ed.my.salesforce.com";
-    public String ADMIN_USERNAME = "r@thautomation.sf";
-    public String ADMIN_PASSWORD = "Welcome1508";
-    public String ADMIN_AUTH_URL = "force://platformcli::5aep861ynl8csws3xx63jhz.ngszamvp8hjcebhltltefbvhepiodvdm_zksa8zytrbpgqje1amsaurg6cavr5l@thautomation-dev-ed.my.salesforce.com";*/
+
 
 
 
@@ -219,6 +211,7 @@ public class BaseTest {
         createQuoteHotelRoomComponent = new CreateQuoteHotelRoomComponent(driver);
         availability = new Availability(driver);
         mAdjustments = new MAdjustments(driver);
+        checkAvailabilitiesComponent = new CheckAvailabilitiesComponent(driver);
     }
 
     @AfterClass
