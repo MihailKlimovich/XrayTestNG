@@ -63,8 +63,8 @@ public class QuoteBudgetMultipropertyQuote extends BaseTest{
                 date.generateTodayDate2_plus(0, 1) + " thn__Price_excl_Tax__c=90" +
                 " thn__Price_incl_Tax__c=110 thn__Rate__c='" + rateId1 + "' thn__Space_Area__c='" + roomTypeQueenID +
                 "'", ORG_USERNAME);
-        StringBuilder roomTypeDemo2 = roomType.getRoomTypeSFDX(SFDX, "Name='Demo2'", ORG_USERNAME);
-        String roomTypeDemo2ID = JsonParser2.getFieldValue(roomTypeDemo2.toString(), "Id");
+        StringBuilder roomTypeDemo = roomType.getRoomTypeSFDX(SFDX, "Name='Demo'", ORG_USERNAME);
+        String roomTypeDemo2ID = JsonParser2.getFieldValue(roomTypeDemo.toString(), "Id");
         String rateId2 = rate.createRateSFDX(SFDX, "Name='QuoteBudgetMultipropertyQuoteAutoTest2' thn__IsActive__c=true" +
                 " thn__IsPublic__c=true thn__getPrices__c=true thn__Hotel__c='" + propertyID2 + "'", ORG_USERNAME);
         ratePrice.createRatePriceSFDX(SFDX, "thn__Rate__c='" + rateId2 + "' thn__Date__c=" +
@@ -92,10 +92,12 @@ public class QuoteBudgetMultipropertyQuote extends BaseTest{
                 + quoteID + "' thn__Product__c='" + roomDemo2ID + "' thn__Space_Area__c='" + roomTypeDemo2ID +
                 "' thn__Rate_Plan__c='" + rateId2 + "' thn__Property__c='" + propertyID2 + "'", ORG_USERNAME);
         StringBuilder quoteBudgetProperty1Records = myceQuotes.soql(SFDX, "SELECT Id, thn__Total_Amount_incl_Tax__c" +
-                " FROM thn__Quote_Budget__c WHERE thn__MYCE_Quote__c='" + quoteID + "' AND thn__Property__c='" + propertyID1 + "'", ORG_USERNAME);
+                " FROM thn__Quote_Budget__c WHERE thn__MYCE_Quote__c='" + quoteID + "' AND thn__Property__c='" +
+                propertyID1 + "'", ORG_USERNAME);
         List<String> quoteBudgetID1 = JsonParser2.getFieldValueSoql(quoteBudgetProperty1Records.toString(), "Id");
         StringBuilder quoteBudgetProperty2Records = myceQuotes.soql(SFDX, "SELECT Id, thn__Total_Amount_incl_Tax__c" +
-                " FROM thn__Quote_Budget__c WHERE thn__MYCE_Quote__c='" + quoteID + "' AND thn__Property__c='" + propertyID2 + "'", ORG_USERNAME);
+                " FROM thn__Quote_Budget__c WHERE thn__MYCE_Quote__c='" + quoteID + "' AND thn__Property__c='" +
+                propertyID2 + "'", ORG_USERNAME);
         List<String> quoteBudgetID2 = JsonParser2.getFieldValueSoql(quoteBudgetProperty2Records.toString(), "Id");
         Assert.assertEquals(quoteBudgetID1.size(), 1);
         Assert.assertEquals(quoteBudgetID2.size(), 1);

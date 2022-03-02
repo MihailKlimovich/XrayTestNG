@@ -41,7 +41,6 @@ public class ChangeResource extends BasePage {
         driver.switchTo().frame(0);
         wait1.until(ExpectedConditions.elementToBeClickable(REMOVE_BUTTON));
         click3(REMOVE_BUTTON);
-        click3(REMOVE_BUTTON);
         click3(NEW_RESOURCE_FIELD);
         writeText(NEW_RESOURCE_FIELD, newResource);
         click3(By.xpath("//li[@data-name='" + newResource + "']"));

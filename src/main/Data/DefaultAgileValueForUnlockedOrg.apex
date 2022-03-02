@@ -1,7 +1,7 @@
       String propertyID = [select ID from thn__Hotel__c where thn__Unique_Id__c = 'Demo' limit 1].ID;
       String resourceID = [select ID from thn__Resource__c where Name = 'DEFAULT' AND thn__Hotel__c = :propertyID limit 1].ID;
       String meetingRoomProductID = [select ID from thn__Product__c where Name = 'MEETING FULL DAY' AND thn__Hotel__c = :propertyID limit 1].ID;
-      String shadowQuoteID = [select ID from thn__MYCE_Quote__c where Name = 'Shadow' AND thn__Hotel__c = :propertyID limit 1].ID;
+
 
       Metadata.DeployContainer mdContainer = new Metadata.DeployContainer();
 
@@ -158,11 +158,6 @@
       customField31.field = 'thn__Meeting_Room_Product__c';
       customField31.value = meetingRoomProductID;
       cmd.values.add(customField31);
-
-      Metadata.CustomMetadataValue customField32 = new Metadata.CustomMetadataValue();
-      customField32.field = 'thn__Shadow_Quote_Id__c';
-      customField32.value = shadowQuoteID;
-      cmd.values.add(customField32);
 
       mdContainer.addMetadata(cmd);
       Id job = Metadata.Operations.enqueueDeployment(mdContainer, null);

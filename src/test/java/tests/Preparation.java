@@ -23,6 +23,14 @@ public class Preparation extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     @Description("Create Occupancy Type Metadata")
     @Story("Occupancy Type Metadata")
+    public void updateDefaultAgileValue2() throws InterruptedException, IOException {
+        user.apexExecute(SFDX, ADMIN_USERNAME, "src/main/Data/Demo2DefaultAgileValue.apex");
+    }
+
+    @Test (priority = 3)
+    @Severity(SeverityLevel.NORMAL)
+    @Description("Create Occupancy Type Metadata")
+    @Story("Occupancy Type Metadata")
     public void createOccupancyTypeMetadata() throws InterruptedException, IOException {
         user.apexExecute(SFDX, ADMIN_USERNAME, "src/main/Data/OccupancyTypeMetadata.apex");
     }

@@ -27,16 +27,16 @@ public class QuoteHotelRoomQuantityReservations extends BaseTest {
                 " SobjectType='thn__MYCE_Quote__c' AND Name='Quote'", ORG_USERNAME);
         List<String> recordTypeID = JsonParser2.getFieldValueSoql(recordTypes.toString(), "Id");
 
-        StringBuilder guest = myceQuotes.soql(SFDX, "SELECT Id FROM thn__Guest__c WHERE" +
-                " thn__Mews_Id__c!=null AND thn__Hotel__c='" + propertyID +  " LIMIT 1", ORG_USERNAME);
-        List<String> guestID = JsonParser2.getFieldValueSoql(guest.toString(), "Id");
-        System.out.println(guestID);
+        //StringBuilder guest = myceQuotes.soql(SFDX, "SELECT Id FROM thn__Guest__c WHERE" +
+         //       " thn__Mews_Id__c!=null AND thn__Hotel__c='" + propertyID +  " LIMIT 1", ORG_USERNAME);
+        //List<String> guestID = JsonParser2.getFieldValueSoql(guest.toString(), "Id");
+        //System.out.println(guestID);
         String quoteID = myceQuotes.createQuoteSFDX(SFDX, "Name='QuoteHotelRoomQuantityReservationsAutoTest'" +
                 " thn__Pax__c=5 thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
                 date.generateTodayDate2_plus(0  ,1) + " thn__Departure_Date__c=" +
                 date.generateTodayDate2_plus(0, 5) + " RecordTypeId='" + recordTypeID.get(0), ORG_USERNAME);
-        myceQuotes.updateQuoteSFDX(SFDX, "Id='" + quoteID + "'", "thn__Reservation_Guest__c='" +
-                guestID.get(0) + "'", ORG_USERNAME);
+        //myceQuotes.updateQuoteSFDX(SFDX, "Id='" + quoteID + "'", "thn__Reservation_Guest__c='" +
+                //guestID.get(0) + "'", ORG_USERNAME);
         StringBuilder room1NightRecord = product.getProductSFDX(SFDX, "Name='ROOM 1 NIGHT' thn__Hotel__c='"
                 + propertyID + "'", ORG_USERNAME);
         String room1NightID = JsonParser2.getFieldValue(room1NightRecord.toString(), "Id");
@@ -314,7 +314,7 @@ public class QuoteHotelRoomQuantityReservations extends BaseTest {
         Assert.assertEquals(reservationsState.get(6), "Canceled");
     }
 
-    @Test(priority = 6, description = "Go to the Quote Hotel Room Prices and update the Quantity = 4 on the records" +
+    /*@Test(priority = 6, description = "Go to the Quote Hotel Room Prices and update the Quantity = 4 on the records" +
             " with dates = today + 4 days and today + 5 days. Expected result: Two more reservations are created." )
     @Severity(SeverityLevel.NORMAL)
     @Story("THY-664: Quote hotel room quantity - Reservations")
@@ -376,6 +376,6 @@ public class QuoteHotelRoomQuantityReservations extends BaseTest {
                 date.generateTodayDate2_plus(0, 3) + "T11:00:00.000+0000");
         Assert.assertEquals(reservationsEndUTC.get(6),
                 date.generateTodayDate2_plus(0, 4) + "T13:30:00.000+0000");
-    }
+    }*/
 
 }

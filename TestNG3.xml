@@ -350,6 +350,11 @@
             <class name="tests.AvailabilityLightningComponentShowsInactiveRoomTypes"/>
         </classes>
     </test>
+    <test name="THY-664: Quote hotel room quantity - Reservations">
+        <classes>
+            <class name="tests.QuoteHotelRoomQuantityReservations"/>
+        </classes>
+    </test>
 </suite>
 
 
