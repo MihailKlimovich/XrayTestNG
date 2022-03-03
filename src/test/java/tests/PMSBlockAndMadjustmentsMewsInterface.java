@@ -89,8 +89,6 @@ public class PMSBlockAndMadjustmentsMewsInterface extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     @Story("THY-632: PMS block and Madjustments - Mews Interface")
     public void case2() throws InterruptedException, IOException {
-        loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
-        loginPage.authoriseURL(SFDX, ADMIN_AUTH_URL, ADMIN_USERNAME);
         user.apexExecute(SFDX, ADMIN_USERNAME, "src/main/Data/BlockSettings2.apex");
         rate.deleteRateSFDX(SFDX, "Name='PMSBlockAndMadjustmentsRateAutoTest2", ORG_USERNAME);
         myceQuotes.deleteQuoteSFDX(SFDX, "Name='PMSBlockAndMadjustmentsAutoTest2'", ORG_USERNAME);

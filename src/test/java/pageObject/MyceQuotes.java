@@ -11,6 +11,7 @@ import pages.BasePage;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 import static org.openqa.selenium.support.ui.ExpectedConditions.alertIsPresent;
 
@@ -135,6 +136,7 @@ public class MyceQuotes extends BasePage {
         wait1.until(ExpectedConditions.presenceOfElementLocated(NAME_QUOTE_FIELD)).click();
         writeText(NAME_QUOTE_FIELD, name);
         click3(CLONE_QUOTE_ARRIVAL_DAY_FIELD);
+        Thread.sleep(1000);
         clear(CLONE_QUOTE_ARRIVAL_DAY_FIELD);
         writeText(CLONE_QUOTE_ARRIVAL_DAY_FIELD, date);
         click3(CLONE_PAX_FIELD);
@@ -211,6 +213,7 @@ public class MyceQuotes extends BasePage {
     public void editArrivalDate(String date) throws InterruptedException {
         click3(EDIT_ARRIVAL_DATE_BUTTON);
         click3(ARRIVAL_DATA_FIELD);
+        Thread.sleep(1000);
         clear(ARRIVAL_DATA_FIELD);
         writeText(ARRIVAL_DATA_FIELD, date);
         click4(SAVE_EDIT_BUTTON);
@@ -642,6 +645,39 @@ public class MyceQuotes extends BasePage {
                 "--json"});
         return jsonObject;
     }
+
+    @Step("SOQL delete")
+    public void soqlDeleteRecords(String sfdxPath, String soql, String object,  String where, String userName) throws IOException, InterruptedException {
+        StringBuilder jsonObject = SfdxCommand.runLinuxCommand1(new String[]{
+                sfdxPath,
+                "force:data:soql:query",
+                "-q",
+                soql,
+                "-u",
+                userName,
+                "--json"});
+        List<String> recordsID = JsonParser2.getFieldValueSoql(jsonObject.toString(), "Id");
+        int quantity = recordsID.size();
+        int index = 0;
+        while (quantity > 0) {
+            StringBuilder result = SfdxCommand.runLinuxCommand1(new String[]{
+                    sfdxPath,
+                    "force:data:record:delete",
+                    "-s",
+                    object,
+                    "-w",
+                    where,
+                    "-u",
+                    userName,
+                    "--json"});
+            System.out.println(result);
+            quantity--;
+            index++;
+        }
+
+    }
+
+
 
 
 

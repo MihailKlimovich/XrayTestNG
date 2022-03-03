@@ -153,6 +153,7 @@ public class QuoteHotelRoom extends BasePage {
         By SELECT_ALL_ITEMS_CHECKBOX = By.xpath("//span[text()='Select " + numberOfElements + " items']/preceding-sibling::span");
         wait1.until(ExpectedConditions.presenceOfElementLocated(SELECT_ALL_ITEMS_CHECKBOX));
         click3(SELECT_ALL_ITEMS_CHECKBOX);
+        Thread.sleep(1000);
     }
 
     @Step("Select item number")

@@ -22,6 +22,7 @@ public class MultiDelete extends BasePage {
     public String multiDeleteRecords()
             throws InterruptedException {
         driver.switchTo().frame(0);
+        Thread.sleep(1000);
         click3(NEXT_BUTTON);
         String message = readText(MESSAGE);
         click3(FINISH_BUTTON);

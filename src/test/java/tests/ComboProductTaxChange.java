@@ -27,7 +27,7 @@ public class ComboProductTaxChange extends BaseTest {
         StringBuilder hotelRecord= hotel.getHotelSFDX(SFDX, "thn__Unique_Id__c='Demo'", ORG_USERNAME);
         String propertyID = JsonParser2.getFieldValue(hotelRecord.toString(), "Id");
         String coffeProductID = product.createProductSFDX(SFDX, "Name='Coffee' thn__Hotel__c='" + propertyID +
-                "' thn__MYCE_Product_Type__c='Beverage' thn__Price_Gross_Value__c='100' thn__Price_Net_Value__c='110'" +
+                "' thn__MYCE_Product_Type__c='Beverage' thn__Price_Gross_Value__c='120'" +
                 " thn__VAT_Category__c=0", ORG_USERNAME);
         String comboProductId = product.createProductSFDX(SFDX, "Name='ComboAutoTest' thn__Hotel__c='"
                 + propertyID + "' thn__MYCE_Product_Type__c='Beverage'", ORG_USERNAME);
@@ -42,7 +42,7 @@ public class ComboProductTaxChange extends BaseTest {
         String listPriceInclTaxProductComponent = JsonParser2.
                 getFieldValue(productComponentRecord.toString(), "thn__List_Price_incl_Tax__c");
         Assert.assertEquals(taxCategoryProductComponent, "2");
-        Assert.assertEquals(listPriceInclTaxProductComponent, "106");
+        Assert.assertEquals(listPriceInclTaxProductComponent, "144");
     }
 
 }

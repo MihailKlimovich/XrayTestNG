@@ -18,7 +18,7 @@ public class ChangeResource extends BasePage {
     }
 
     By NEW_RESOURCE_FIELD = By.xpath("//label[text()='Resource']/following::input[@type='search']");
-    By REMOVE_BUTTON = By.xpath("//label[text()='Resource']/following::button[@title='Remove']");
+    By REMOVE_BUTTON = By.xpath("//body//label[text()='Resource']/following::button[@title='Remove']");
     By NEXT_BUTTON = By.xpath("//button[@class='slds-button slds-button_brand flow-button__NEXT']");
     By FINISH_BUTTON = By.xpath("//button[@class='slds-button slds-button_brand flow-button__FINISH']");
     By CONFIRMATION_MESSAGE = By.xpath("//flowruntime-display-text-lwc//span//p[text()='Do you wish to overbook?']");
@@ -32,15 +32,16 @@ public class ChangeResource extends BasePage {
     By BREAK_OUT_CHECKBOX = By.xpath("//input[@name='Break_Out']");
     By HALF_DAY_CHECKBOX = By.xpath("//input[@name='Half_Day']");
     By FRAME = By.xpath("//div//iframe");
+    By FRAME2 = By.xpath("//div//iframe/following-sibling::force-form-auto-post//form");
 
 
     @Step("Change resource")
     public String changeResource(String newResource) throws InterruptedException {
-        //wait1.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(FRAME));
         //waitForTests.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(FRAME));
         driver.switchTo().frame(0);
+        Thread.sleep(1000);
         wait1.until(ExpectedConditions.elementToBeClickable(REMOVE_BUTTON));
-        click3(REMOVE_BUTTON);
+        click(REMOVE_BUTTON);
         click3(NEW_RESOURCE_FIELD);
         writeText(NEW_RESOURCE_FIELD, newResource);
         click3(By.xpath("//li[@data-name='" + newResource + "']"));

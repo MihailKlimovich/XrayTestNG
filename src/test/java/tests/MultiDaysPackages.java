@@ -801,7 +801,8 @@ public class MultiDaysPackages extends BaseTest {
                 "--json"});
         System.out.println(updateQuotePackageLineRecord);
         String message = JsonParser2.getFieldValue2(updateQuotePackageLineRecord.toString(), "message");
-        Assert.assertEquals(message, expectedMessage);
+        //Assert.assertEquals(message, expectedMessage);
+        Assert.assertTrue(message.contains(expectedMessage));
 
     }
 

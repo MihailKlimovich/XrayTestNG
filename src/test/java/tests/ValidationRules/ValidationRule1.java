@@ -1232,7 +1232,8 @@ public class ValidationRule1 extends BaseTest{
                 ORG_USERNAME,
                 "--json"});
         String message = JsonParser2.getFieldValue2(result.toString(), "message");
-        Assert.assertEquals(message, expectedMessage);
+        //Assert.assertEquals(message., expectedMessage);
+        Assert.assertTrue(message.contains(expectedMessage));
     }
 
     @Test(priority = 22, description = "Quote_Meetings_Room__c.VR25_PackageDate")
@@ -1860,7 +1861,8 @@ public class ValidationRule1 extends BaseTest{
                 ORG_USERNAME,
                 "--json"});
         String message = JsonParser2.getFieldValue2(updateQuotePackageResult.toString(), "message");
-        Assert.assertEquals(message, expectedMessage);
+       // Assert.assertEquals(message, expectedMessage);
+        Assert.assertTrue(message.contains(expectedMessage));
     }
 
     @Test(priority = 29, description = "Quote_Product__c.VR08_Start_End_Date")

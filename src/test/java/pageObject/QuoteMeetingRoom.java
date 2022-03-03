@@ -209,7 +209,7 @@ public class QuoteMeetingRoom extends BasePage {
     @Step("Click 'Change resource'")
     public void clickChangeResource() throws InterruptedException {
         click4(CHANGE_RESOURCE_BUTTON);
-        Thread.sleep(7000);
+        Thread.sleep(5000);
     }
 
     public void changeSetupType(String type) throws InterruptedException {
