@@ -355,6 +355,17 @@
             <class name="tests.QuoteHotelRoomQuantityReservations"/>
         </classes>
     </test>
+    <test name="THY-668: PMS account is primary">
+        <classes>
+            <class name="tests.PMSAccountIsPrimary"/>
+        </classes>
+    </test>
+    <test name="TB-309: Quote Meeting Room 'Half Day' and 'Break Out' check boxes does not adjust the meeting room
+     Unit price if not new">
+        <classes>
+            <class name="tests.TB.QuoteMeetingRoomHalfDayAndBreakOutCheckBoxesDoesNotAdjustTheMeetingRoomUnitPriceIfNotNew"/>
+        </classes>
+    </test>
 </suite>
 
 

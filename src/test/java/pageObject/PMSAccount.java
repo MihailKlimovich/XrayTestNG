@@ -65,6 +65,24 @@ public class PMSAccount extends BasePage {
         System.out.println(result);
     }
 
+    @Step("Update PMS Account SFDX")
+    public void updatePMSaccountSFDX(String sfdxPath, String where, String value, String userName)
+            throws IOException, InterruptedException {
+        StringBuilder pmsAccountUpdateResult = SfdxCommand.runLinuxCommand1(new String[]{
+                sfdxPath,
+                "force:data:record:update",
+                "-s",
+                "thn__PMS_Account__c",
+                "-w",
+                where,
+                "-v",
+                value,
+                "-u",
+                userName,
+                "--json"});
+        System.out.println(pmsAccountUpdateResult);
+    }
+
 
 
 }

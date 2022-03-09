@@ -96,41 +96,43 @@ public class PMSBlockAndMadjustmentsMewsInterface extends BaseTest {
         String propertyID1 = JsonParser2.getFieldValue(hotelRecord1.toString(), "Id");
         StringBuilder room1NightRecord = product.getProductSFDX(SFDX, "Name='ROOM 1 NIGHT'", ORG_USERNAME);
         String room1NightID = JsonParser2.getFieldValue(room1NightRecord.toString(), "Id");
-        StringBuilder roomTypeQueenRecord = roomType.getRoomTypeSFDX(SFDX, "Name='Queen'", ORG_USERNAME);
-        String roomTypeQueenID = JsonParser2.getFieldValue(roomTypeQueenRecord.toString(), "Id");
         StringBuilder recordTypes = myceQuotes.soql(SFDX, "SELECT Id FROM RecordType WHERE" +
                 " SobjectType='thn__MYCE_Quote__c' AND Name='Quote'", ORG_USERNAME);
         System.out.println(recordTypes);
         List<String> recordTypeID = JsonParser2.getFieldValueSoql(recordTypes.toString(), "Id");
+        StringBuilder roomTypeRecords = myceQuotes.soql(SFDX, "SELECT Id FROM thn__Space_Area__c WHERE" +
+                " thn__Hotel__c='" + propertyID1 + "' AND thn__Mews_Id__c!=null", ORG_USERNAME);
+        System.out.println(recordTypes);
+        List<String> roomTypeID = JsonParser2.getFieldValueSoql(roomTypeRecords.toString(), "Id");
         String quoteID = myceQuotes.createQuoteSFDX(SFDX,
                 "Name='PMSBlockAndMadjustmentsAutoTest2' thn__Pax__c=1 thn__Hotel__c='"
-                        + propertyID1 + "' thn__Arrival_Date__c=" + date.generateTodayDate2() + "" +
-                        " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 1) +
+                        + propertyID1 + "' thn__Arrival_Date__c=" + date.generateTodayDate2_plus(1, 2) + "" +
+                        " thn__Departure_Date__c=" + date.generateTodayDate2_plus(1, 3) +
                         " RecordTypeId='" + recordTypeID.get(0) + "'", ORG_USERNAME);
-        String rateId1 = rate.createRateSFDX(SFDX, "Name='PMSBlockAndMadjustmentsRateAutoTest2'" +
+        /*String rateId1 = rate.createRateSFDX(SFDX, "Name='PMSBlockAndMadjustmentsRateAutoTest2'" +
                 " thn__IsActive__c=true thn__IsPublic__c=true thn__getPrices__c=true thn__Hotel__c='" +
                 propertyID1 + "'", ORG_USERNAME);
         ratePrice.createRatePriceSFDX(SFDX, "thn__Rate__c='" + rateId1 + "' thn__Date__c=" +
-                date.generateTodayDate2() + " thn__Base_Price__c=100 thn__RelativeAdjustment__c=1" +
+                date.generateTodayDate2_plus(1, 2) + " thn__Base_Price__c=100 thn__RelativeAdjustment__c=1" +
                 " thn__AbsoluteAdjustment__c=1 thn__EmptyUnitAdjustment__c=1 thn__ExtraUnitAdjustment__c=1" +
                 " thn__Price_excl_Tax__c=90 thn__Price_incl_Tax__c=110", ORG_USERNAME);
         ratePrice.createRatePriceSFDX(SFDX, "thn__Rate__c='" + rateId1 + "' thn__Date__c=" +
-                date.generateTodayDate2_plus(0, 1) + " thn__Base_Price__c=100" +
+                date.generateTodayDate2_plus(1, 3) + " thn__Base_Price__c=100" +
                 " thn__RelativeAdjustment__c=1 thn__AbsoluteAdjustment__c=1 thn__EmptyUnitAdjustment__c=1" +
                 " thn__ExtraUnitAdjustment__c=1 thn__Price_excl_Tax__c=90 thn__Price_incl_Tax__c=110", ORG_USERNAME);
-        categoryAdjustment.createCategoryAdjustmentSFDX(SFDX, "thn__Space_Area__c='" + roomTypeQueenID +
+        categoryAdjustment.createCategoryAdjustmentSFDX(SFDX, "thn__Space_Area__c='" + roomTypeID.get(0) +
                 "' thn__Rate__c='" + rateId1 + "' thn__Adjustment_excl_Tax__c=1 thn__Adjustment_incl_Tax__c=1" +
                 " thn__RelativeValue__c=1 thn__AbsoluteValue__c=1", ORG_USERNAME);
-        categoryPrice.createCategoryPriceSFDX(SFDX, "thn__Price__c=100 thn__Date__c=" + date.generateTodayDate2()
+        categoryPrice.createCategoryPriceSFDX(SFDX, "thn__Price__c=100 thn__Date__c=" + date.generateTodayDate2_plus(1, 2)
                 + " thn__Price_excl_Tax__c=90 thn__Price_incl_Tax__c=110 thn__Rate__c='" + rateId1 + "'" +
-                " thn__Space_Area__c='" + roomTypeQueenID + "'", ORG_USERNAME);
+                " thn__Space_Area__c='" + roomTypeID.get(0) + "'", ORG_USERNAME);
         categoryPrice.createCategoryPriceSFDX(SFDX, "thn__Price__c=100 thn__Date__c=" +
-                date.generateTodayDate2_plus(0, 1) + " thn__Price_excl_Tax__c=90" +
-                " thn__Price_incl_Tax__c=110 thn__Rate__c='" + rateId1 + "' thn__Space_Area__c='" + roomTypeQueenID +
-                "'", ORG_USERNAME);
+                date.generateTodayDate2_plus(1, 3) + " thn__Price_excl_Tax__c=90" +
+                " thn__Price_incl_Tax__c=110 thn__Rate__c='" + rateId1 + "' thn__Space_Area__c='" + roomTypeID.get(0) +
+                "'", ORG_USERNAME);*/
         String quoteHotelRoomId1 = quoteHotelRoom.createQuoteHotelRoomSFDX(SFDX, "thn__MYCE_Quote__c='"
-                + quoteID + "' thn__Product__c='" + room1NightID + "' thn__Space_Area__c='" + roomTypeQueenID +
-                "' thn__Rate_Plan__c='" + rateId1 + "' thn__Property__c='" + propertyID1 + "'", ORG_USERNAME);
+                + quoteID + "' thn__Product__c='" + room1NightID + "' thn__Space_Area__c='" + roomTypeID.get(0) +
+                "' thn__Property__c='" + propertyID1 + "'", ORG_USERNAME);
         myceQuotes.updateQuoteSFDX(SFDX, "Id='" + quoteID + "'", "thn__Create_PMS_Block__c=true" +
                 " thn__Stage__c='3 - Tentative'", ORG_USERNAME);
         StringBuilder pmsBlockRecord = pmsBlock.getPMSBlockSFDX(SFDX, "thn__MYCE_Quote__c='" + quoteID + "'",
