@@ -32,7 +32,7 @@ public class Items extends BasePage {
 
     @Step("Open Items page")
     public Items goToItems() throws InterruptedException {
-        driver.navigate().to("https://agility-efficiency-64-dev-ed.lightning.force.com/lightning/o/thn__Item__c/list?filterName=Recent");
+        driver.navigate().to("https://thynk-test-unlocked-dev-ed.lightning.force.com/lightning/o/thn__Item__c/list?filterName=Recent");
         try{if(wait2.until(ExpectedConditions.alertIsPresent())!=null){
             Alert alert = wait2.until(alertIsPresent());
             alert.accept();
