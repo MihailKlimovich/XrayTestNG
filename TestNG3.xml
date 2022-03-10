@@ -366,6 +366,16 @@
             <class name="tests.TB.QuoteMeetingRoomHalfDayAndBreakOutCheckBoxesDoesNotAdjustTheMeetingRoomUnitPriceIfNotNew"/>
         </classes>
     </test>
+    <test name="TB-311: Unable to change Meeting room on Product">
+        <classes>
+            <class name="tests.TB.UnableToChangeMeetingRoomOnProduct"/>
+        </classes>
+    </test>
+    <test name="TB-299: Error 'Snag' Error in changing times in meeting rooms">
+        <classes>
+            <class name="tests.TB.ErrorInChangingTimesInMeetingRooms"/>
+        </classes>
+    </test>
 </suite>
 
 
