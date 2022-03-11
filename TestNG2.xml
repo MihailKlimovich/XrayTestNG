@@ -155,6 +155,11 @@
             <class name="tests.MeetingRoomAndResourcePricing"/>
         </classes>
     </test>
+    <test name="THY-540: Myce Quote - Complimentary.">
+        <classes>
+            <class name="tests.Complimentary"/>
+        </classes>
+    </test>
     <test name="Myce Quote - Complimentary. Change price calculation with handle Unit field.">
         <classes>
             <class name="tests.MyceQuoteComplimentaryChangePriceCalculationWithHandleUnitField"/>

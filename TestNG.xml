@@ -180,6 +180,11 @@
             <class name="tests.MeetingRoomAndResourcePricing"/>
         </classes>
     </test>
+    <test name="THY-540: Myce Quote - Complimentary.">
+        <classes>
+            <class name="tests.Complimentary"/>
+        </classes>
+    </test>
     <test name="Myce Quote - Complimentary. Change price calculation with handle Unit field.">
         <classes>
             <class name="tests.MyceQuoteComplimentaryChangePriceCalculationWithHandleUnitField"/>
@@ -273,6 +278,41 @@
     <test name="THY-677: Quote hotel room quantity - Budgets and subtotals">
         <classes>
             <class name="tests.QuoteHotelRoomQuantityBudgetsAndSubtotals"/>
+        </classes>
+    </test>
+    <test name="TB-277: Total tax is not calculated correctly on one Quote.">
+        <classes>
+            <class name="tests.TB.TotalTaxIsNotCalculatedCorrectlyOnOneQuote"/>
+        </classes>
+    </test>
+    <test name="TB-279: Quote business segment is not sent to Mews.">
+        <classes>
+            <class name="tests.TB.QuoteBusinessSegmentIsNotSentToMews"/>
+        </classes>
+    </test>
+    <test name="TTB-283: Quote - 'Date' records not generated">
+        <classes>
+            <class name="tests.TB.QuoteDateRecordsNotGenerated"/>
+        </classes>
+    </test>
+    <test name="TB-294: Availability Lightning component shows inactive room types.">
+        <classes>
+            <class name="tests.AvailabilityLightningComponentShowsInactiveRoomTypes"/>
+        </classes>
+    </test>
+    <test name="TB-298: Change Date Flow and Canceled Reservations.">
+        <classes>
+            <class name="tests.TB.ChangeDateFlowAndCanceledReservations"/>
+        </classes>
+    </test>
+    <test name="TB-299: Error 'Snag' Error in changing times in meeting rooms">
+        <classes>
+            <class name="tests.TB.ErrorInChangingTimesInMeetingRooms"/>
+        </classes>
+    </test>
+    <test name="TB-311: Unable to change Meeting room on Product">
+        <classes>
+            <class name="tests.TB.UnableToChangeMeetingRoomOnProduct"/>
         </classes>
     </test>
 

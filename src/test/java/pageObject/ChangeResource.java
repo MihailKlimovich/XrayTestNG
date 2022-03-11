@@ -22,6 +22,7 @@ public class ChangeResource extends BasePage {
     By NEXT_BUTTON = By.xpath("//button[@class='slds-button slds-button_brand flow-button__NEXT']");
     By FINISH_BUTTON = By.xpath("//button[@class='slds-button slds-button_brand flow-button__FINISH']");
     By CONFIRMATION_MESSAGE = By.xpath("//flowruntime-display-text-lwc//span//p[text()='Do you wish to overbook?']");
+    By COMLIMENTARY_MESSAGE = By.xpath("//p[text()='Cannot update prices because assigned MYCE Quote is complimentary.']");
     By YES_RADIO_BUTTON = By.xpath("//span//input[@value='Yes']");
     By NO_RADIO_BUTTON = By.xpath("//span//input[@value='No']");
     By START_DATE_FIELD = By.xpath("//div//label[text()='Date']/following::lightning-button-icon/parent::div//input[@name='Start_Date_Time']");
@@ -38,8 +39,9 @@ public class ChangeResource extends BasePage {
     @Step("Change resource")
     public String changeResource(String newResource) throws InterruptedException {
         //waitForTests.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(FRAME));
+        Thread.sleep(5000);
         driver.switchTo().frame(0);
-        Thread.sleep(1000);
+        Thread.sleep(5000);
         wait1.until(ExpectedConditions.elementToBeClickable(REMOVE_BUTTON));
         click(REMOVE_BUTTON);
         click3(NEW_RESOURCE_FIELD);
@@ -66,7 +68,9 @@ public class ChangeResource extends BasePage {
 
     @Step("Change resource and update price")
     public String changeResourceAndUpdatePrice(String newResource) throws InterruptedException {
+        Thread.sleep(5000);
         driver.switchTo().frame(0);
+        Thread.sleep(5000);
         click3(REMOVE_BUTTON);
         click3(NEW_RESOURCE_FIELD);
         writeText(NEW_RESOURCE_FIELD, newResource);
@@ -93,10 +97,38 @@ public class ChangeResource extends BasePage {
         return message;
     }
 
+    @Step("Change resource and update price on complimentary Quote")
+    public String changeResourceAndUpdatePrice_complimentary(String newResource) throws InterruptedException {
+        Thread.sleep(5000);
+        driver.switchTo().frame(0);
+        Thread.sleep(5000);
+        click3(REMOVE_BUTTON);
+        click3(NEW_RESOURCE_FIELD);
+        writeText(NEW_RESOURCE_FIELD, newResource);
+        click3(By.xpath("//li[@data-name='" + newResource + "']"));
+        click3(UPDATE_PRICES_CHECKBOX);
+        click4(NEXT_BUTTON);
+        try {
+            if (wait2.until(ExpectedConditions.presenceOfElementLocated(COMLIMENTARY_MESSAGE)) != null){
+                String confirmationMessage = readText(COMLIMENTARY_MESSAGE);
+                click4(FINISH_BUTTON);
+                driver.switchTo().defaultContent();
+                return confirmationMessage;
+            }
+        }catch (TimeoutException e) {
+            click4(FINISH_BUTTON);
+            driver.switchTo().defaultContent();
+        }
+        String message = "Message not found";
+        return message;
+    }
+
     @Step("Change resource and start/end time")
     public String changeResourceAndDateTime(String newResource, String startDate, String startTime, String endDate,
                                             String endTime, String confirm) throws InterruptedException {
+        Thread.sleep(5000);
         driver.switchTo().frame(0);
+        Thread.sleep(5000);
         click3(REMOVE_BUTTON);
         click3(NEW_RESOURCE_FIELD);
         writeText(NEW_RESOURCE_FIELD, newResource);
