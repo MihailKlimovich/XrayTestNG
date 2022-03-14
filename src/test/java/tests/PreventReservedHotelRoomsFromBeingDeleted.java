@@ -36,15 +36,14 @@ public class PreventReservedHotelRoomsFromBeingDeleted extends BaseTest {
         StringBuilder roomTypeRecords = myceQuotes.
                 soql(SFDX, "SELECT Id from thn__Space_Area__c where thn__Mews_Id__c!=null AND thn__Hotel__c='" +
                         propertyID + "'", ORG_USERNAME);
-        System.out.println(guests);
         List<String> roomTypesId = JsonParser2.getFieldValueSoql(roomTypeRecords.toString(), "Id");
         StringBuilder recordTypes = myceQuotes.soql(SFDX, "SELECT Id FROM RecordType WHERE" +
                 " SobjectType='thn__MYCE_Quote__c' AND Name='Quote'", ORG_USERNAME);
         System.out.println(recordTypes);
         List<String> recordTypeID = JsonParser2.getFieldValueSoql(recordTypes.toString(), "Id");
         String quoteID = myceQuotes.createQuoteSFDX(SFDX, "Name='DeleteReservedHotelRoomAutoTest' thn__Pax__c=1" +
-                " thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" + date.generateTodayDate2()
-                + " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 2) + " RecordTypeId='"
+                " thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" + date.generateTodayDate2_plus(0, 2)
+                + " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 4) + " RecordTypeId='"
                 + recordTypeID.get(0) + "'", ORG_USERNAME);
         myceQuotes.updateQuoteSFDX(SFDX, "Id='" + quoteID + "'", "thn__Stage__c='2 - Propose'",
                 ORG_USERNAME);

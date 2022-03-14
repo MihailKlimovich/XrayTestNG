@@ -84,7 +84,7 @@ public class MyceQuotes extends BasePage {
     By ROOMING_LIST_TAB = By.xpath("//li//a[@data-label='Rooming List']");
     By EDIT_ARRIVAL_DATE_BUTTON = By.xpath("//button[@title='Edit Arrival Date']");
     By CLONE_PAX_FIELD = By.xpath("//input[@name='Pax']");
-    By CHECK_AVAILABILITIES_BUTTON = By.xpath("//button[@name='thn__MYCE_Quote__c.thn__Check_Availabilities']");
+    By CHECK_AVAILABILITIES_BUTTON = By.xpath("//button[@name='thn__MYCE_Quote__c.Check_Avalabilities']");
 
 
 

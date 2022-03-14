@@ -847,12 +847,12 @@ public class PackagesCustomPrice extends BaseTest {
         double sumDiscountQuotePackageLines = discountQuotePackageLine5 + discountQuotePackageLine6;
         double unitPriceExclTaxQuotePackage1 = JsonParser2.
                 getFieldValueLikeDouble(quotePackageRecord2, "result", "thn__Unit_Price_excl_Tax__c");
-        double unitPriceExclTaxQuotePackage = Precision.round(unitPriceExclTaxQuotePackage1, 13);
+        double unitPriceExclTaxQuotePackage = Precision.round(unitPriceExclTaxQuotePackage1, 14);
         double unitPriceInclTaxQuotePackage = JsonParser2.
                 getFieldValueLikeDouble(quotePackageRecord2, "result", "thn__Unit_Price_incl_Tax__c");
         double salesPriceExclTaxQuotePackage1 = JsonParser2.
                 getFieldValueLikeDouble(quotePackageRecord2, "result", "thn__Sales_Price_excl_Tax__c");
-        double salesPriceExclTaxQuotePackage = Precision.round(salesPriceExclTaxQuotePackage1, 13);
+        double salesPriceExclTaxQuotePackage = Precision.round(salesPriceExclTaxQuotePackage1, 14);
         double salesPriceInclTaxQuotePackage = JsonParser2.
                 getFieldValueLikeDouble(quotePackageRecord2, "result", "thn__Sales_Price_incl_Tax__c");
         double unitPriceExclTaxQuotePackageLine1 = JsonParser2.

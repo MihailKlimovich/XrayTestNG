@@ -53,8 +53,8 @@ public class QuoteDateRecordsNotGenerated extends BaseTest {
         Assert.assertEquals(fsDateID2.size(), 8);
         String quoteProductId = quoteProducts.createQuoteProductSFDX(SFDX, "thn__MYCE_Quote__c='" + quoteID +
                 "' thn__Product__c='" + winesID + "' thn__Start_Date_Time__c=" +
-                date.generateTodayDate2_plus(0, 7) + " thn__End_Date_Time__c=" +
-                date.generateTodayDate2_plus(0, 7), ORG_USERNAME);
+                date.generateTodayDate2_plus(0, 7) + "T11:00:00.000+0000 thn__End_Date_Time__c=" +
+                date.generateTodayDate2_plus(0, 7) + "T12:00:00.000+0000", ORG_USERNAME);
         StringBuilder quoteProductRecord = quoteProducts.
                 getQuoteProductSFDX(SFDX, "Id='" + quoteProductId + "'", ORG_USERNAME);
         String quoteProductFSDate = JsonParser2.getFieldValue(quoteProductRecord.toString(), "thn__FS_Date__c");

@@ -39,8 +39,8 @@ public class ChangeDateFlowAndCanceledReservations extends BaseTest {
         List<String> recordTypeID = JsonParser2.getFieldValueSoql(recordTypes.toString(), "Id");
         String quoteID = myceQuotes.createQuoteSFDX(SFDX,
                 "Name='ChangeDateFlowAndCanceledReservationsAutoTest' thn__Pax__c=1 thn__Hotel__c='"
-                        + propertyID + "' thn__Arrival_Date__c=" + date.generateTodayDate2() + "" +
-                        " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 3) +
+                        + propertyID + "' thn__Arrival_Date__c=" + date.generateTodayDate2_plus(0, 2) + "" +
+                        " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 5) +
                         " RecordTypeId='" + recordTypeID.get(0) + "'", ORG_USERNAME);
         quoteHotelRoom.createQuoteHotelRoomSFDX(SFDX, "thn__MYCE_Quote__c='"
                 + quoteID + "' thn__Product__c='" + room1NightID + "' thn__Space_Area__c='" + roomTypesId.get(0) +
@@ -56,7 +56,7 @@ public class ChangeDateFlowAndCanceledReservations extends BaseTest {
         Assert.assertTrue(reservationArrival.contains(quoteArrivalDate));
         Assert.assertTrue(reservationDeparture.contains(quoteDepartureDate));
         myceQuotes.updateQuoteSFDX(SFDX, "Id='" + quoteID + "'", "thn__Stage__c='4 - Closed'" +
-                " thn__Closed_Status__c='Cancelled'", ORG_USERNAME);
+                " thn__Closed_Status__c='Lost'", ORG_USERNAME);
         myceQuotes.goToMyceQuotes().openMyceQoteRecord("ChangeDateFlowAndCanceledReservationsAutoTest");
         myceQuotes.changeDate(date.generateTodayDate3_plus(0, 3));
         StringBuilder updatedQuoteRecord = myceQuotes.getQuoteSFDX(SFDX, "Id='" + quoteID +"'", ORG_USERNAME);

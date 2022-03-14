@@ -57,7 +57,8 @@ public class TotalTaxIsNotCalculatedCorrectlyOnOneQuote extends BaseTest {
         String quoteID = myceQuotes.createQuoteSFDX(SFDX, "Name='TotalTaxIsNotCalculatedCorrectlyOnOneQuoteAutoTest'" +
                 " thn__Pax__c=5 thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" + date.generateTodayDate2() +
                 " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 4) + " RecordTypeId='" +
-                recordTypeID.get(0) + "' thn__Closed_Status__c='Won'", ORG_USERNAME);
+                recordTypeID.get(0) + "'", ORG_USERNAME);
+        myceQuotes.updateQuoteSFDX(SFDX, "Id='" + quoteID + "'", "thn__Closed_Status__c='Won'", ORG_USERNAME);
         quoteMeetingPackages.createQuotePackageSFDX(SFDX, "thn__MYCE_Quote__c='" + quoteID + "'" +
                 " thn__Package__c='" + packageID + "'", ORG_USERNAME);
         StringBuilder myceQuoteRecord = myceQuotes.getQuoteSFDX(SFDX, "Id='" + quoteID + "'", ORG_USERNAME);

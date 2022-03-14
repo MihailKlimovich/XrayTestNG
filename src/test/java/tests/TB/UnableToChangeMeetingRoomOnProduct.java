@@ -66,8 +66,8 @@ public class UnableToChangeMeetingRoomOnProduct extends BaseTest {
                 date.generateTodayDate2_plus(0, 1) + "T13:30:00.000+0000'", ORG_USERNAME);
         String quoteProductID = quoteProducts.createQuoteProductSFDX(SFDX, "thn__MYCE_Quote__c='" + quoteID +
                 "' thn__Product__c='" + winesID + "' thn__Start_Date_Time__c='" +
-                date.generateTodayDate2_plus(0, 2) + "T11:00:00.000+0000' thn__End_Date_Time__c='" +
-                date.generateTodayDate2_plus(0, 2) + "T11:15:00.000+0000' thn__Service_Area__c='" +
+                date.generateTodayDate2_plus(0, 1) + "T11:00:00.000+0000' thn__End_Date_Time__c='" +
+                date.generateTodayDate2_plus(0, 1) + "T11:15:00.000+0000' thn__Service_Area__c='" +
                 quotemeetingRoomId2 + "'", ORG_USERNAME);
         StringBuilder quoteMeetingRoomRecord = quoteMeetingRoom.getQuoteMeetingRoomSFDX(SFDX, "Id='" +
                 quotemeetingRoomId2 + "'", ORG_USERNAME);

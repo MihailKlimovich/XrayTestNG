@@ -27,8 +27,10 @@ public class QuoteBusinessSegmentIsNotSentToMews extends BaseTest {
         String propertyID = JsonParser2.getFieldValue(hotelRecord.toString(), "Id");
         StringBuilder room1NightRecord = product.getProductSFDX(SFDX, "Name='ROOM 1 NIGHT'", ORG_USERNAME);
         String room1NightID = JsonParser2.getFieldValue(room1NightRecord.toString(), "Id");
-        StringBuilder roomTypeQueenRecord = roomType.getRoomTypeSFDX(SFDX, "Name='Queen'", ORG_USERNAME);
-        String roomTypeQueenID = JsonParser2.getFieldValue(roomTypeQueenRecord.toString(), "Id");
+        StringBuilder roomTypeRecords = myceQuotes.
+                soql(SFDX, "SELECT Id from thn__Space_Area__c where thn__Mews_Id__c!=null AND thn__Hotel__c='" +
+                        propertyID + "'", ORG_USERNAME);
+        List<String> roomTypesId = JsonParser2.getFieldValueSoql(roomTypeRecords.toString(), "Id");
         StringBuilder recordTypes = myceQuotes.soql(SFDX, "SELECT Id FROM RecordType WHERE" +
                 " SobjectType='thn__MYCE_Quote__c' AND Name='Quote'", ORG_USERNAME);
         List<String> recordTypeID = JsonParser2.getFieldValueSoql(recordTypes.toString(), "Id");
@@ -37,13 +39,14 @@ public class QuoteBusinessSegmentIsNotSentToMews extends BaseTest {
                         propertyID + "'", ORG_USERNAME);
         List<String> businessSegmentId = JsonParser2.getFieldValueSoql(businessSegmentRecords.toString(), "Id");
         String quoteID = myceQuotes.createQuoteSFDX(SFDX, "Name='QuoteBusinessSegmentIsNotSentToMewsAutoTest'" +
-                " thn__Pax__c=5 thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" + date.generateTodayDate2() +
-                " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 4) + " RecordTypeId='" +
-                recordTypeID.get(0) + "' thn__Closed_Status__c='Won' thn__Business_Segment__c='"
-                + businessSegmentId.get(0) + "'", ORG_USERNAME);
+                " thn__Pax__c=5 thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
+                date.generateTodayDate2_plus(0, 2)  + " thn__Departure_Date__c=" +
+                date.generateTodayDate2_plus(0, 5) + " thn__Release_Date__c=" +
+                date.generateTodayDate2_plus(0, 1) + " RecordTypeId='" + recordTypeID.get(0) +
+                "' thn__Business_Segment__c='" + businessSegmentId.get(0) + "'", ORG_USERNAME);
         String quoteHotelRoomID = quoteHotelRoom.createQuoteHotelRoomSFDX(SFDX, "thn__MYCE_Quote__c='"
                 + quoteID + "' thn__Product__c='" + room1NightID + "' thn__Space_Area__c='"
-                + roomTypeQueenID + "'", ORG_USERNAME);
+                + roomTypesId.get(0) + "'", ORG_USERNAME);
         myceQuotes.updateQuoteSFDX(SFDX, "Id='" + quoteID + "'", "thn__Stage__c='2 - Propose'", ORG_USERNAME);
         StringBuilder rateRecords = myceQuotes.
                 soql(SFDX, "SELECT Id from thn__Rate__c where thn__Mews_Id__c!=null AND thn__Hotel__c='" +
@@ -53,7 +56,7 @@ public class QuoteBusinessSegmentIsNotSentToMews extends BaseTest {
         String mewsGroupID = JsonParser2.getFieldValue(quoteRecord.toString(), "thn__Mews_Group_Id__c");
         Assert.assertNotNull(mewsGroupID);
         quoteHotelRoom.updateQuoteHotelRoomSFDX(SFDX, "Id='" + quoteHotelRoomID + "'",
-                "thn__Rate_Plan__c='" + rateId.get(0) + "'", ORG_USERNAME);
+                "thn__Rate_Plan__c='" + rateId.get(1) + "'", ORG_USERNAME);
         StringBuilder updatedQuoteRecord = myceQuotes.getQuoteSFDX(SFDX, "Id='" + quoteID + "'", ORG_USERNAME);
         String quoteBusinessSegment = JsonParser2.
                 getFieldValue(updatedQuoteRecord.toString(), "thn__Business_Segment__c");

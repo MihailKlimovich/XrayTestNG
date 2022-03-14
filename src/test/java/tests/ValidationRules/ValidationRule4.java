@@ -509,7 +509,7 @@ public class ValidationRule4 extends BaseTest {
                 "-s",
                 "thn__Hotel__c",
                 "-w",
-                "Name='Test'",
+                "Name='Demo2'",
                 "-u",
                 ORG_USERNAME,
                 "--json"});
