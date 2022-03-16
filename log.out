@@ -1,3 +1,6 @@
-2022-03-14 16:54:59,155 INFO  - preconditions test is starting.
-2022-03-14 16:58:16,488 INFO  - multiDeleteTest1 test is starting.
-2022-03-14 16:59:24,203 INFO  - multiDeleteTest2 test is starting.
+2022-03-16 09:40:47,176 INFO  - case1 test is starting.
+2022-03-16 09:43:00,683 INFO  - case2 test is starting.
+2022-03-16 09:43:38,555 INFO  - case3 test is starting.
+2022-03-16 09:45:17,594 INFO  - case4 test is starting.
+2022-03-16 09:46:09,593 INFO  - case5 test is starting.
+2022-03-16 09:46:33,799 INFO  - case6 test is starting.

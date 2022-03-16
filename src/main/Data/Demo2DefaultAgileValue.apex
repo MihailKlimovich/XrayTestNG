@@ -119,6 +119,11 @@
        customField22.value = 'PMS';
        cmd.values.add(customField22);
 
+       Metadata.CustomMetadataValue customField23 = new Metadata.CustomMetadataValue();
+       customField23.field = 'thn__Delete_optional_products__c';
+       customField23.value = true;
+       cmd.values.add(customField23);
+
        Metadata.CustomMetadataValue customField24 = new Metadata.CustomMetadataValue();
        customField24.field = 'thn__Change_After__c';
        customField24.value = '10';

@@ -43,7 +43,6 @@ public class CloneMyceQuoteAndCloneSelection extends BaseTest {
         String roomTypeSingleID = JsonParser2.getFieldValue(roomTypeSingleRecord.toString(), "Id");
         StringBuilder recordTypes = myceQuotes.soql(SFDX, "SELECT Id FROM RecordType WHERE" +
                 " SobjectType='thn__MYCE_Quote__c' AND Name='Quote'", ORG_USERNAME);
-        System.out.println(recordTypes);
         List<String> recordTypeID = JsonParser2.getFieldValueSoql(recordTypes.toString(), "Id");
         String quoteID = myceQuotes.createQuoteSFDX(SFDX, "Name='CloneMyceQuoteAutoTest' thn__Pax__c=5" +
                 " thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" + date.generateTodayDate2()
