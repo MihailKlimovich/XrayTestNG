@@ -381,6 +381,11 @@
             <class name="tests.TB.ErrorInChangingTimesInMeetingRooms"/>
         </classes>
     </test>
+    <test name="THY-546: Optional products">
+        <classes>
+            <class name="tests.OptionalProducts"/>
+        </classes>
+    </test>
 </suite>
 
 

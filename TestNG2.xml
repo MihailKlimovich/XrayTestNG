@@ -295,6 +295,11 @@
             <class name="tests.TB.UnableToChangeMeetingRoomOnProduct"/>
         </classes>
     </test>
+    <test name="THY-546: Optional products">
+        <classes>
+            <class name="tests.OptionalProducts"/>
+        </classes>
+    </test>
 </suite>
 
 

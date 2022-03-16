@@ -210,7 +210,7 @@ public class OptionalProducts extends BaseTest {
             " to the Quote. Open added records and set Optional checkboxes to true on each added record. Expected" +
             " result: Sales price fields on added records are set to 0 (including Quote package child records)." +
             " Unit price and Pax stay as stated initially. Potential max revenue currency field on Quote meeting" +
-            " room, Quote Package, Quote hotel room and Quote Product, MYCE Quote are calculated (SUM (unit price" +
+            " room, Quote Package and Quote Product, MYCE Quote are calculated (SUM (unit price" +
             " * pax * unit) from quote related records where optional = true).")
     @Severity(SeverityLevel.NORMAL)
     @Story("THY-546: Optional products")
@@ -244,6 +244,8 @@ public class OptionalProducts extends BaseTest {
                 "' thn__Product__c='" + productDinerID + "'", ORG_USERNAME);
         String quotePackageID = quoteMeetingPackages.createQuotePackageSFDX(SFDX, "thn__MYCE_Quote__c='" +
                 quoteID + "'" + " thn__Package__c='" + packageID + "'", ORG_USERNAME);
+        quoteMeetingRoom.updateQuoteMeetingRoomSFDX(SFDX, "Id='" + quoteMeetingRoomID + "'",
+                "thn__Price_per_Person__c=true", ORG_USERNAME);
         quoteMeetingRoom.updateQuoteMeetingRoomSFDX(SFDX, "Id='" + quoteMeetingRoomID + "'",
                 "thn__Optional__c=true", ORG_USERNAME);
         quoteProducts.updateQuoteProducSFDX(SFDX, "Id='" + quoteProductID + "'",
@@ -301,17 +303,11 @@ public class OptionalProducts extends BaseTest {
                 getFieldValueLikeInteger(quoteProductRecord, "result", "thn__Pax__c");
         Integer quotePackagePax = JsonParser2.
                 getFieldValueLikeInteger(quotePackageRecord, "result", "thn__Pax__c");
-        Integer quoteProductPartPackagePax = JsonParser2.
-                getFieldValueLikeInteger(quoteProductPartPackageRecord, "result", "thn__Pax__c");
         Integer quoteProductUnit = JsonParser2.
                 getFieldValueLikeInteger(quoteProductRecord, "result", "thn__Unit__c");
-        Integer quoteProductPartPackageUnit = JsonParser2.
-                getFieldValueLikeInteger(quoteProductPartPackageRecord, "result", "thn__Unit__c");
         Integer expectedQuoteMeetingRoomPotentialMaxRevenue = quoteMeetingRoomUnitPrice*quoteMeetingRoomPax;
         Integer expectedQuotePackagePotentialMaxRevenue = quotePackageUnitPrice*quotePackagePax;
         Integer expectedQuoteProductPotentialMaxRevenue = quoteProductUnitPrice*quoteProductPax*quoteProductUnit;
-        Integer expectedQuoteProductPartPackagePotentialMaxRevenue =
-                quoteProductPartPackageUnitPrice*quoteProductPartPackagePax*quoteProductPartPackageUnit;
         Assert.assertEquals(quoteMeetingRoomOptional, "true");
         Assert.assertEquals(quoteProductOptional, "true");
         Assert.assertEquals(quotePackageOptional, "true");
@@ -323,8 +319,7 @@ public class OptionalProducts extends BaseTest {
         Assert.assertEquals(quoteMeetingRoomPotentialMaxRevenue, expectedQuoteMeetingRoomPotentialMaxRevenue );
         Assert.assertEquals(quotePackagePotentialMaxRevenue, expectedQuotePackagePotentialMaxRevenue );
         Assert.assertEquals(quoteProductPotentialMaxRevenue, expectedQuoteProductPotentialMaxRevenue );
-        Assert.assertEquals
-                (quoteProductPartPackagePotentialMaxRevenue, expectedQuoteProductPartPackagePotentialMaxRevenue );
+
     }
 
     @Test(priority = 4, description = "On the Quote that have related Optional records update stage to Closed Won." +
