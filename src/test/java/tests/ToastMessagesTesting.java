@@ -16,7 +16,7 @@ public class ToastMessagesTesting extends BaseTest {
     @Test(priority = 1, description = "Create a MYCE Quote and add a Hotel room to it. Add a Discount to the Quote" +
             " Hotel Room.")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Toast messages testing")
+    @Story("THY-628: Toast messages testing")
     public void preconditions() throws InterruptedException, IOException {
         loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
         loginPage.authoriseURL(SFDX, ADMIN_AUTH_URL, ADMIN_USERNAME);
@@ -53,7 +53,7 @@ public class ToastMessagesTesting extends BaseTest {
     @Test(priority = 2, description = "Change the Room Type of the added room. Result: A toast message appears with" +
             " the message: ‘Discount % updated due to change of Room type/Rate plan.’The discount was set to 0 %.")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Toast messages testing")
+    @Story("THY-628: Toast messages testing")
     public void case1() throws InterruptedException, IOException {
         String expectedMessage = "Discount % updated due to change of room type/rate plan.";
         myceQuotes.goToMyceQuotes();
@@ -77,7 +77,7 @@ public class ToastMessagesTesting extends BaseTest {
             " the Quote Hotel Room. Result: A toast message appears with the message: ‘Discount % updated due to" +
             " change of Room type/Rate plan. The discount was set to 0 %.")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Toast messages testing")
+    @Story("THY-628: Toast messages testing")
     public void case2() throws InterruptedException, IOException {
         String expectedMessage = "Discount % updated due to change of room type/rate plan.";
         StringBuilder quoteRecord = myceQuotes.
@@ -104,7 +104,7 @@ public class ToastMessagesTesting extends BaseTest {
             "appears saying: ‘Quote Meeting Room is overbooked.’ The ‘Overbooking Message' field of the Quote" +
             " Meeting room is filled with 'Quote Meeting Room is overbooked.’")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Toast messages testing")
+    @Story("THY-628: Toast messages testing")
     public void case3() throws InterruptedException, IOException {
         //loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
         user.addPermissionSet(SFDX, "Overbooking_User", ORG_USERNAME, ADMIN_USERNAME);

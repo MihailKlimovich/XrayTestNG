@@ -21,7 +21,7 @@ public class ErrorManagementNullPriceOnProduct extends BaseTest {
             " product/meeting room (depending on the type of product you created). Expected result: the price" +
             " of the record has been set to 0 instead of having an error thrown.")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Error management: null price on product.")
+    @Story("THY-452: Error management: null price on product")
     public void case1() throws InterruptedException, IOException {
         loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
         myceQuotes.deleteQuoteSFDX(SFDX, "Name='NullPriceOnProductAutoTest'", ORG_USERNAME);

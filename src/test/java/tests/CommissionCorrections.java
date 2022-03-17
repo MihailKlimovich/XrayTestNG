@@ -19,7 +19,7 @@ public class CommissionCorrections extends BaseTest {
 
     @Test(priority = 1, description = "Preconditions")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Commission correction")
+    @Story("THY-431: Commission correction")
     public void preconditions() throws InterruptedException, IOException {
         loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
         SfdxCommand.runLinuxCommand1(new String[]{
@@ -271,7 +271,7 @@ public class CommissionCorrections extends BaseTest {
 
     @Test(priority = 2, description = "When commission on quote package is updated, its related records are updated as well")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Commission correction")
+    @Story("THY-431: Commission correction")
     public void case1() throws InterruptedException, IOException {
         StringBuilder quoteRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
@@ -318,7 +318,7 @@ public class CommissionCorrections extends BaseTest {
 
     @Test(priority = 3, description = "If a commission record has an amount = 0, it is deleted")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Commission correction")
+    @Story("THY-431: Commission correction")
     public void case2() throws InterruptedException, IOException {
         StringBuilder quoteRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,

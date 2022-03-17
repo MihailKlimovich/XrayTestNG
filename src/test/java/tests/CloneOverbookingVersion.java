@@ -23,7 +23,7 @@ public class CloneOverbookingVersion extends BaseTest{
 
     @Test(priority = 1, description = "Preconditions")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Clone Myce quote and clone selection - overbooking version")
+    @Story("THY-520: Clone myce quote and clone selection - overbooking")
     public void preconditions() throws InterruptedException, IOException {
         loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
         loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
@@ -86,7 +86,7 @@ public class CloneOverbookingVersion extends BaseTest{
     @Test(priority = 2, description = "Clone MYCE Quote, specify Arrival Date so it is equal to Arrival Date of the" +
             " Quote being cloned (User hasn’t overbooking permission)")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Clone Myce quote and clone selection - overbooking version")
+    @Story("THY-520: Clone myce quote and clone selection - overbooking")
     public void сloneQuote1() throws InterruptedException, IOException {
         String expectedMessage =
                 "You don’t have the permission to overbook resources. Default meeting room has been assigned.";
@@ -118,7 +118,7 @@ public class CloneOverbookingVersion extends BaseTest{
     @Test(priority = 3, description = "Clone Quote package, specify  Date to clone so it is equal to Start date of the" +
             " Quote Package being cloned (User hasn’t overbooking permission)")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Clone Myce quote and clone selection - overbooking version")
+    @Story("THY-520: Clone myce quote and clone selection - overbooking")
     public void сloneQuotePackage1() throws InterruptedException, IOException {
         String expectedMessage =
                 "You don’t have the permission to overbook resources. Default meeting room has been assigned.";
@@ -147,7 +147,7 @@ public class CloneOverbookingVersion extends BaseTest{
 
     @Test(priority = 4, description = " Clone Quote meeting room (User hasn’t overbooking permission)")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Clone Myce quote and clone selection - overbooking version")
+    @Story("THY-520: Clone myce quote and clone selection - overbooking")
     public void сloneQuoteMeetingRoom1() throws InterruptedException, IOException {
         String expectedMessage =
                 "You don’t have the permission to overbook resources. Default meeting room has been assigned.";
@@ -177,7 +177,7 @@ public class CloneOverbookingVersion extends BaseTest{
     @Test(priority = 5, description = "Clone MYCE Quote, specify Arrival Date so it is equal to Arrival Date of the" +
             " Quote being cloned (User has overbooking permission)")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Clone Myce quote and clone selection - overbooking version")
+    @Story("THY-520: Clone myce quote and clone selection - overbooking")
     public void сloneQuote2() throws InterruptedException, IOException {
         //loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
         user.addPermissionSet(SFDX, "Overbooking_User", ORG_USERNAME, ADMIN_USERNAME);
@@ -210,7 +210,7 @@ public class CloneOverbookingVersion extends BaseTest{
     @Test(priority = 6, description = "Clone Quote package, specify  Date to clone so it is equal to Start date of the" +
             " Quote Package being cloned (User has overbooking permission)")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Clone Myce quote and clone selection - overbooking version")
+    @Story("THY-520: Clone myce quote and clone selection - overbooking")
     public void сloneQuotePackage2() throws InterruptedException, IOException {
         //loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
         myceQuotes.goToMyceQuotes();
@@ -231,7 +231,7 @@ public class CloneOverbookingVersion extends BaseTest{
 
     @Test(priority = 7, description = " Clone Quote meeting room (User has overbooking permission)")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Clone Myce quote and clone selection - overbooking version")
+    @Story("THY-520: Clone myce quote and clone selection - overbooking")
     public void сloneQuoteMeetingRoom2() throws InterruptedException, IOException {
         //loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
         myceQuotes.goToMyceQuotes();

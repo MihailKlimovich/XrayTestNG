@@ -20,7 +20,7 @@ public class PaymentToMews extends BaseTest {
     @Test(priority = 1, description = "Fill guest, Gross value, type, accounting category and notes, check send" +
             " to mews")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Payment to Mews")
+    @Story("THY-509: Payment to Mews")
     public void case1() throws InterruptedException, IOException {
         loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
         myceQuotes.deleteQuoteSFDX(SFDX, "Name='PaymentToMewsAutoTest'", ORG_USERNAME);

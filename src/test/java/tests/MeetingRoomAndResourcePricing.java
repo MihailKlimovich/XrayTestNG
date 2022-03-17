@@ -15,7 +15,7 @@ public class MeetingRoomAndResourcePricing extends BaseTest{
 
     @Test(priority = 1, description = "Preconditions")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Meeting room and resource pricing")
+    @Story("THY-428: Meeting room and resource pricing")
     public void preconditions() throws InterruptedException, IOException {
         loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
         resource.deleteResourceSFDX(SFDX, "Name='ResourcePricingAutoTest'", ORG_USERNAME);
@@ -42,7 +42,7 @@ public class MeetingRoomAndResourcePricing extends BaseTest{
             " Resource price !=null, Shadow == false, Half day == true, Break out == true. Expected result:" +
             " Unit price = resource Break out half day")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Meeting room and resource pricing")
+    @Story("THY-428: Meeting room and resource pricing")
     public void case1() throws InterruptedException, IOException {
         StringBuilder quoteRecord = myceQuotes.getQuoteSFDX(SFDX, "Name='ResourcePricingAutoTest'",
                 ORG_USERNAME);
@@ -69,7 +69,7 @@ public class MeetingRoomAndResourcePricing extends BaseTest{
             " Resource price !=null, Shadow == false, Half day == true, Break out == false. Expected result:" +
             " Unit price = resource Half day price")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Meeting room and resource pricing")
+    @Story("THY-428: Meeting room and resource pricing")
     public void case2() throws InterruptedException, IOException {
         StringBuilder quoteRecord = myceQuotes.getQuoteSFDX(SFDX, "Name='ResourcePricingAutoTest'",
                 ORG_USERNAME);
@@ -96,7 +96,7 @@ public class MeetingRoomAndResourcePricing extends BaseTest{
             " Resource price !=null, Shadow == false, Half day == false, Break out == true. Expected result:" +
             " Unit price = resource Break out half day")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Meeting room and resource pricing")
+    @Story("THY-428: Meeting room and resource pricing")
     public void case3() throws InterruptedException, IOException {
         StringBuilder quoteRecord = myceQuotes.getQuoteSFDX(SFDX, "Name='ResourcePricingAutoTest'",
                 ORG_USERNAME);
@@ -123,7 +123,7 @@ public class MeetingRoomAndResourcePricing extends BaseTest{
             " Resource price !=null, Shadow == false, Half day == false, Break out == false. Expected result:" +
             " Unit price = resource Half day price")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Meeting room and resource pricing")
+    @Story("THY-428: Meeting room and resource pricing")
     public void case4() throws InterruptedException, IOException {
         StringBuilder quoteRecord = myceQuotes.getQuoteSFDX(SFDX, "Name='ResourcePricingAutoTest'",
                 ORG_USERNAME);
@@ -149,7 +149,7 @@ public class MeetingRoomAndResourcePricing extends BaseTest{
     @Test(priority = 6, description = "Remove prices from the Resource used while creating Quote meeting rooms." +
             " Repeat steps above specifying Unit price . Unit price is as specified while creation")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Meeting room and resource pricing")
+    @Story("THY-428: Meeting room and resource pricing")
     public void case5() throws InterruptedException, IOException {
         StringBuilder quoteRecord = myceQuotes.getQuoteSFDX(SFDX, "Name='ResourcePricingAutoTest'",
                 ORG_USERNAME);

@@ -16,7 +16,7 @@ public class MyceQuoteComplimentaryChangePriceCalculationWithHandleUnitField ext
     @Test(priority = 1, description = "Preconditions: create a new ‘MYCE Quote’. Add a ‘Meeting Package’ to it.  Add" +
             " some  ‘Meeting Rooms’.")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Myce Quote - Complimentary. Change price calculation with handle Unit field.")
+    @Story("THY-602: Myce Quote - Complimentary. Change price calculation with handle Unit field.")
     public void preconditions() throws InterruptedException, IOException {
         loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
         myceQuotes.deleteQuoteSFDX(SFDX, "Name='ComplimentaryChangePriceCalculationAutoTest'", ORG_USERNAME);
@@ -60,7 +60,7 @@ public class MyceQuoteComplimentaryChangePriceCalculationWithHandleUnitField ext
             " ‘Unit Price excl. Tax’, ‘Sales Price incl. Tax’, ‘Sales Price excl. Tax’ on ‘Quote Package’ were also" +
             " set to 0.")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Myce Quote - Complimentary. Change price calculation with handle Unit field.")
+    @Story("THY-602: Myce Quote - Complimentary. Change price calculation with handle Unit field.")
     public void case1() throws InterruptedException, IOException {
         StringBuilder quoteRecord = myceQuotes.
                 getQuoteSFDX(SFDX, "Name='ComplimentaryChangePriceCalculationAutoTest'", ORG_USERNAME);
@@ -102,7 +102,7 @@ public class MyceQuoteComplimentaryChangePriceCalculationWithHandleUnitField ext
             " change to 100% and ‘Unit Price incl. Tax’, ‘Unit Price excl. Tax’, ‘Sales Price incl. Tax’," +
             " ‘Sales Price excl. Tax’ fields should set to 0.")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Myce Quote - Complimentary. Change price calculation with handle Unit field.")
+    @Story("THY-602: Myce Quote - Complimentary. Change price calculation with handle Unit field.")
     public void case2() throws InterruptedException, IOException {
         StringBuilder quoteRecord = myceQuotes.
                 getQuoteSFDX(SFDX, "Name='ComplimentaryChangePriceCalculationAutoTest'", ORG_USERNAME);
@@ -134,7 +134,7 @@ public class MyceQuoteComplimentaryChangePriceCalculationWithHandleUnitField ext
             " when it’s set to ‘True’ on the ‘Quote page’.  Result: ‘Complimentary’ checkbox can’t be unchecked on the" +
             " ‘Quote package’ if it is checked on the ‘Quote’ page.")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Myce Quote - Complimentary. Change price calculation with handle Unit field.")
+    @Story("THY-602: Myce Quote - Complimentary. Change price calculation with handle Unit field.")
     public void case3() throws InterruptedException, IOException {
         StringBuilder quoteRecord = myceQuotes.
                 getQuoteSFDX(SFDX, "Name='ComplimentaryChangePriceCalculationAutoTest'", ORG_USERNAME);
@@ -152,7 +152,7 @@ public class MyceQuoteComplimentaryChangePriceCalculationWithHandleUnitField ext
             " Product’. Try changing the ‘Discount’ on the created product to 20%. Result: The ‘Discount’ is being" +
             " reverted to 100%.")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Myce Quote - Complimentary. Change price calculation with handle Unit field.")
+    @Story("THY-602: Myce Quote - Complimentary. Change price calculation with handle Unit field.")
     public void case4() throws InterruptedException, IOException {
         StringBuilder quoteRecord = myceQuotes.
                 getQuoteSFDX(SFDX, "Name='ComplimentaryChangePriceCalculationAutoTest'", ORG_USERNAME);
@@ -176,7 +176,7 @@ public class MyceQuoteComplimentaryChangePriceCalculationWithHandleUnitField ext
             " Meetings Room’. Try changing the ‘Discount’ on the created product to 20%. Result: The ‘Discount’" +
             " is being reverted to 100%.")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Myce Quote - Complimentary. Change price calculation with handle Unit field.")
+    @Story("THY-602: Myce Quote - Complimentary. Change price calculation with handle Unit field.")
     public void case5() throws InterruptedException, IOException {
         StringBuilder quoteRecord = myceQuotes.
                 getQuoteSFDX(SFDX, "Name='ComplimentaryChangePriceCalculationAutoTest'", ORG_USERNAME);
@@ -200,7 +200,7 @@ public class MyceQuoteComplimentaryChangePriceCalculationWithHandleUnitField ext
             " Meetings Room’ and set the ‘Complimentary’ checkbox to ‘False’. Result: When the changes in the record" +
             " are saved The ‘Complimentary’ checkbox is set back to ‘True’.")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Myce Quote - Complimentary. Change price calculation with handle Unit field.")
+    @Story("THY-602: Myce Quote - Complimentary. Change price calculation with handle Unit field.")
     public void case6() throws InterruptedException, IOException {
         StringBuilder quoteRecord = myceQuotes.
                 getQuoteSFDX(SFDX, "Name='ComplimentaryChangePriceCalculationAutoTest'", ORG_USERNAME);
@@ -222,7 +222,7 @@ public class MyceQuoteComplimentaryChangePriceCalculationWithHandleUnitField ext
             " Product’ and set the ‘Complimentary’ checkbox to ‘False’. Result: When the changes in the record" +
             " are saved The ‘Complimentary’ checkbox is set back to ‘True’.")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Myce Quote - Complimentary. Change price calculation with handle Unit field.")
+    @Story("THY-602: Myce Quote - Complimentary. Change price calculation with handle Unit field.")
     public void case7() throws InterruptedException, IOException {
         StringBuilder quoteRecord = myceQuotes.
                 getQuoteSFDX(SFDX, "Name='ComplimentaryChangePriceCalculationAutoTest'", ORG_USERNAME);

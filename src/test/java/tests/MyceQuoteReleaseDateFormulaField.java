@@ -16,7 +16,7 @@ public class MyceQuoteReleaseDateFormulaField extends BaseTest{
     @Test(priority = 1, description = "Create MYCE Quote record. Result: Release date formula field value == Quote" +
             " arrival date - 1.")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Myce Quote - release date formula field")
+    @Story("THY-542: Myce Quote - release date formula field")
     public void case1() throws InterruptedException, IOException {
         loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
         loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
@@ -42,7 +42,7 @@ public class MyceQuoteReleaseDateFormulaField extends BaseTest{
     @Test(priority = 2, description = "Change Quote’s dates using flow. Result: Release date formula field" +
             " value is updated and is equal to the new Quote arrival date - 1.")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Myce Quote - release date formula field")
+    @Story("THY-542: Myce Quote - release date formula field")
     public void case2() throws InterruptedException, IOException {
         myceQuotes.goToMyceQuotes();
         myceQuotes.openMyceQoteRecord("ReleaseDateAutoTest");
@@ -58,7 +58,7 @@ public class MyceQuoteReleaseDateFormulaField extends BaseTest{
     @Test(priority = 3, description = "Update MYCE Quote’s arrival date manually. Result: Release date formula field" +
             " value is updated and is equal to the new Quote arrival date - 1.")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Myce Quote - release date formula field")
+    @Story("THY-542: Myce Quote - release date formula field")
     public void case3() throws InterruptedException, IOException {
         myceQuotes.goToMyceQuotes();
         myceQuotes.openMyceQoteRecord("ReleaseDateAutoTest");
@@ -73,7 +73,7 @@ public class MyceQuoteReleaseDateFormulaField extends BaseTest{
     @Test(priority = 4, description = "Clone MYCE Quote. Result: Release date formula field value on the new Quote" +
             " == Quote arrival date - 1.")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Myce Quote - release date formula field")
+    @Story("THY-542: Myce Quote - release date formula field")
     public void case4() throws InterruptedException, IOException {
         myceQuotes.deleteQuoteSFDX(SFDX, "Name='CloneReleaseDateAutoTest'", ORG_USERNAME);
         myceQuotes.goToMyceQuotes();

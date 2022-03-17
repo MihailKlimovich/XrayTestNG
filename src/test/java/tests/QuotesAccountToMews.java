@@ -23,7 +23,7 @@ public class QuotesAccountToMews extends BaseTest {
             " agent.send_to_mews__c is updated to TRUE; agent is sent to mews: if successfully, Mews_Id is filled," +
             " else Mews Error Message is filled")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Quote's accounts to Mews")
+    @Story("THY-496: Quote's accounts to Mews")
     public void case1() throws InterruptedException, IOException {
         loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
         SfdxCommand.runLinuxCommand1(new String[]{
@@ -128,7 +128,7 @@ public class QuotesAccountToMews extends BaseTest {
             " company.send_to_mews__c is updated to TRUE; company is sent to mews: if successfully, Mews_Id is" +
             " filled, else Mews Error Message is filled")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Quote's accounts to Mews")
+    @Story("THY-496: Quote's accounts to Mews")
     public void case2() throws InterruptedException, IOException {
         SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,

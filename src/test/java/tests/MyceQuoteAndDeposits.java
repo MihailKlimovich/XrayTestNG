@@ -20,7 +20,7 @@ public class MyceQuoteAndDeposits extends BaseTest {
     @Test(priority = 1, description = "Preconditions: Create a new ‘MYCE Quote’, create a couple  new Deposits with" +
             " various ‘Deposit numbers’. The deposit which number is lower is going to be used first.")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Update Orders")
+    @Story("THY-557: Myce quote and deposits")
     public void preconditions() throws InterruptedException, IOException {
         loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
         myceQuotes.deleteQuoteSFDX(SFDX, "Name='QuoteAndDepositAutoTest'", ORG_USERNAME);
@@ -38,7 +38,7 @@ public class MyceQuoteAndDeposits extends BaseTest {
 
     @Test(priority = 2, description = "Preconditions: Create Payments on the ‘MYCE Quote’, the ‘Gross Value' = 1500’.")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Update Orders")
+    @Story("THY-557: Myce quote and deposits")
     public void case1() throws InterruptedException, IOException {
         StringBuilder quoteRecord = myceQuotes.
                 getQuoteSFDX(SFDX, "Name='QuoteAndDepositAutoTest'", ORG_USERNAME);
@@ -80,7 +80,7 @@ public class MyceQuoteAndDeposits extends BaseTest {
 
     @Test(priority = 3, description = "Preconditions: Create Payments on the ‘MYCE Quote’, the ‘Gross Value' = 1500’.")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Update Orders")
+    @Story("THY-557: Myce quote and deposits")
     public void case2() throws InterruptedException, IOException {
         StringBuilder quoteRecord = myceQuotes.
                 getQuoteSFDX(SFDX, "Name='QuoteAndDepositAutoTest'", ORG_USERNAME);

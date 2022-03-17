@@ -270,7 +270,7 @@
             <class name="tests.ComplimentaryOnQuotesRelated"/>
         </classes>
     </test>
-    <test name="THY-632: PMS block and Madjustments - Mews Interface">
+    <test name="THY-632: PMS block and Madjustments - Block PMS corrections">
         <classes>
             <class name="tests.PMSBlockAndMadjustmentsMewsInterface"/>
         </classes>
@@ -320,8 +320,11 @@
             <class name="tests.OptionalProducts"/>
         </classes>
     </test>
-
-
+    <test name="THY-365: Meeting room - Setup">
+        <classes>
+            <class name="tests.MeetingRoomSetup"/>
+        </classes>
+    </test>
 </suite>
 
 

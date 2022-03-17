@@ -52,7 +52,7 @@ public class ResourceGroupingTesting extends BaseTest {
             " meeting room has Waiting list and Overbooking level 2. On Meeting room that was cloned Waiting list" +
             " and overbooking level = 1")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Resource grouping")
+    @Story("THY-526: Resource grouping")
     public void case1() throws InterruptedException, IOException {
         loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
         loginPage.authoriseURL(SFDX, ADMIN_AUTH_URL, ADMIN_USERNAME);
@@ -116,7 +116,7 @@ public class ResourceGroupingTesting extends BaseTest {
             " Overbooking permission. Result: New Myce Quote with Quote meeting room with Default resource is" +
             " created. The Meeting room that was cloned is not changed. Shadows are not created.")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Resource grouping")
+    @Story("THY-526: Resource grouping")
     public void case2() throws InterruptedException, IOException {
         user.apexExecute(SFDX, ADMIN_USERNAME, "src/main/Data/RemoveOverbookingPermissionSet.apex");
         myceQuotes.deleteQuoteSFDX(SFDX, "Name='ResourceGroupingAutoTest2'", ORG_USERNAME);
@@ -169,7 +169,7 @@ public class ResourceGroupingTesting extends BaseTest {
     @Test(priority = 3, description = "Clone MYCE Quote that has Meeting room with Default Resource. Result: New" +
             " Myce Quote with Quote meeting room without shadows and overbooking is created")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Resource grouping")
+    @Story("THY-526: Resource grouping")
     public void case3() throws InterruptedException, IOException {
         myceQuotes.deleteQuoteSFDX(SFDX, "Name='ResourceGroupingAutoTest3'", ORG_USERNAME);
         myceQuotes.deleteQuoteSFDX(SFDX, "Name='CloneResourceGroupingAutoTest3'", ORG_USERNAME);
@@ -214,7 +214,7 @@ public class ResourceGroupingTesting extends BaseTest {
             " New Myce Quote with Quote meeting room with shareable resource without shadows and overbooking" +
             " is created.")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Resource grouping")
+    @Story("THY-526: Resource grouping")
     public void case4() throws InterruptedException, IOException {
         myceQuotes.deleteQuoteSFDX(SFDX, "Name='ResourceGroupingAutoTest4'", ORG_USERNAME);
         myceQuotes.deleteQuoteSFDX(SFDX, "Name='CloneResourceGroupingAutoTest4'", ORG_USERNAME);
@@ -258,7 +258,7 @@ public class ResourceGroupingTesting extends BaseTest {
             " Group Resource. Result: New Myce Quote with Quote meeting room without shadows and overbooking" +
             " is created.")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Resource grouping")
+    @Story("THY-526: Resource grouping")
     public void case5() throws InterruptedException, IOException {
         //loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
         myceQuotes.deleteQuoteSFDX(SFDX, "Name='ResourceGroupingAutoTest5'", ORG_USERNAME);
@@ -309,7 +309,7 @@ public class ResourceGroupingTesting extends BaseTest {
     @Test(priority = 6, description = "Clone Quote meeting room with Resource Grouping. Result: New Quote meeting" +
             " room with shadows is created.")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Resource grouping")
+    @Story("THY-526: Resource grouping")
     public void case6() throws InterruptedException, IOException {
         //loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
         user.addPermissionSet(SFDX, "Overbooking_User", ORG_USERNAME, ADMIN_USERNAME);
@@ -353,7 +353,7 @@ public class ResourceGroupingTesting extends BaseTest {
     @Test(priority = 7, description = "Clone Quote meeting room with Default Resource. Result: New Quote meeting" +
             " room without shadows and overbooking is created.")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Resource grouping")
+    @Story("THY-526: Resource grouping")
     public void case7() throws InterruptedException, IOException {
         //loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
         myceQuotes.deleteQuoteSFDX(SFDX, "Name='ResourceGroupingAutoTest7'", ORG_USERNAME);
@@ -392,7 +392,7 @@ public class ResourceGroupingTesting extends BaseTest {
     @Test(priority = 8, description = "Clone Meeting room with Shareable resource. Result: New Quote meeting room" +
             " with shareable resource without shadows and overbooking is created.")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Resource grouping")
+    @Story("THY-526: Resource grouping")
     public void case8() throws InterruptedException, IOException {
         //loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
         myceQuotes.deleteQuoteSFDX(SFDX, "Name='ResourceGroupingAutoTest8'", ORG_USERNAME);
@@ -430,7 +430,7 @@ public class ResourceGroupingTesting extends BaseTest {
     @Test(priority = 9, description = "Clone Meeting room with Group Resource on Quote in status Closed Lost." +
             " Result: New Quote meeting room without shadows and overbooking is created.")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Resource grouping")
+    @Story("THY-526: Resource grouping")
     public void case9() throws InterruptedException, IOException {
         //loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
         myceQuotes.deleteQuoteSFDX(SFDX, "Name='ResourceGroupingAutoTest9'", ORG_USERNAME);
@@ -476,7 +476,7 @@ public class ResourceGroupingTesting extends BaseTest {
             " rooms. Change Resource on added rooms (with the flow). Result: Shadows are not created, rooms are" +
             " not overbooked.")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Resource grouping")
+    @Story("THY-526: Resource grouping")
     public void case10() throws InterruptedException, IOException {
         //loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
         myceQuotes.deleteQuoteSFDX(SFDX, "Name='ResourceGroupingAutoTest10'", ORG_USERNAME);
@@ -525,7 +525,7 @@ public class ResourceGroupingTesting extends BaseTest {
             " and overbooking. Result: All Shadows are deleted, Overbooking level and Waiting list are cleared" +
             " (no Overbooking)")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Resource grouping")
+    @Story("THY-526: Resource grouping")
     public void case11() throws InterruptedException, IOException {
         //loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
         myceQuotes.deleteQuoteSFDX(SFDX, "Name='ResourceGroupingAutoTest11'", ORG_USERNAME);
@@ -611,7 +611,7 @@ public class ResourceGroupingTesting extends BaseTest {
             " permission. Result: Shadows are created, rooms are overbooked (Overbooking level and Waiting list" +
             " is specified)")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Resource grouping")
+    @Story("THY-526: Resource grouping")
     public void case12() throws InterruptedException, IOException {
         //loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
         myceQuotes.deleteQuoteSFDX(SFDX, "Name='ResourceGroupingAutoTest12'", ORG_USERNAME);
@@ -719,7 +719,7 @@ public class ResourceGroupingTesting extends BaseTest {
             " Overbooking permission. Result: Meeting rooms' Resource is changed to Default. Shadows are not" +
             " created, rooms are not overbooked.")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Resource grouping")
+    @Story("THY-526: Resource grouping")
     public void case13() throws InterruptedException, IOException {
         //loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
         user.apexExecute(SFDX, ADMIN_USERNAME, "src/main/Data/RemoveOverbookingPermissionSet.apex");
@@ -780,7 +780,7 @@ public class ResourceGroupingTesting extends BaseTest {
     @Test(priority = 14, description = "Delete Meeting room in case there are multiple overbooked rooms and Shadows." +
             " Result: Shadows linked to deleted room are deleted. Waiting list on third room is changed from 3 to 2.")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Resource grouping")
+    @Story("THY-526: Resource grouping")
     public void case14() throws InterruptedException, IOException {
         //loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
         user.addPermissionSet(SFDX, "Overbooking_User", ORG_USERNAME, ADMIN_USERNAME);

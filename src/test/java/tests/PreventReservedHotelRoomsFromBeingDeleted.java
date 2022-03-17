@@ -20,7 +20,7 @@ public class PreventReservedHotelRoomsFromBeingDeleted extends BaseTest {
     @Test(priority = 1, description = "Preconditions: create a new myce quote,a hotel room and quote package that" +
             " contains a hotel room. Send the reservation to Mews")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Prevent reserved hotel rooms from being deleted")
+    @Story("THY-423: Prevent reserved hotel rooms from being deleted")
     public void preconditions() throws InterruptedException, IOException {
         loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
         myceQuotes.deleteQuoteSFDX(SFDX, "Name='DeleteReservedHotelRoomAutoTest'", ORG_USERNAME);
@@ -66,7 +66,7 @@ public class PreventReservedHotelRoomsFromBeingDeleted extends BaseTest {
     @Test(priority = 2, description = "Delete the quote hotel room. Expected result: you get an error message" +
             " preventing you from deleting the record")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Prevent reserved hotel rooms from being deleted")
+    @Story("THY-423: Prevent reserved hotel rooms from being deleted")
     public void case1() throws InterruptedException, IOException {
         String expectedMessage = "Quote Hotel Room is reserved and cannot be deleted until it had been cancelled";
         StringBuilder quoteRecord = myceQuotes.
@@ -81,7 +81,7 @@ public class PreventReservedHotelRoomsFromBeingDeleted extends BaseTest {
     @Test(priority = 3, description = "Delete the quote package. Expected result: you get an error message preventing" +
             " you from deleting the record")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Prevent reserved hotel rooms from being deleted")
+    @Story("THY-423: Prevent reserved hotel rooms from being deleted")
     public void case2() throws InterruptedException, IOException {
         String expectedMessage = "Quote Hotel Room is reserved and cannot be deleted until it had been cancelled";
         StringBuilder quoteRecord = myceQuotes.
@@ -95,7 +95,7 @@ public class PreventReservedHotelRoomsFromBeingDeleted extends BaseTest {
 
     @Test(priority = 4, description = "Change the Mews State in hotel room to ‘Canceled’ and delete the record")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Prevent reserved hotel rooms from being deleted")
+    @Story("THY-423: Prevent reserved hotel rooms from being deleted")
     public void case3() throws InterruptedException, IOException {
         String expectedMessage = "No matching record found.";
         StringBuilder quoteRecord = myceQuotes.

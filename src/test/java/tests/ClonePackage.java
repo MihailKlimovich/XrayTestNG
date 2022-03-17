@@ -20,7 +20,7 @@ public class ClonePackage extends BaseTest {
             " click on Clone Package. Expected result: the package and its related lines have been cloned, the package" +
             " line of type food is linked to the cloned line of type meeting room")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Clone Package testing")
+    @Story("THY-424: Clone Package testing")
     public void case1() throws InterruptedException, IOException {
         loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
         loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);

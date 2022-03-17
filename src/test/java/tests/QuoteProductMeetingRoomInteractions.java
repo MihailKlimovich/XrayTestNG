@@ -18,7 +18,7 @@ public class QuoteProductMeetingRoomInteractions extends BaseTest{
             " that we add varies. Add a product to the Quote that doesn’t have a ‘Meeting Room’ selected" +
             " (service_area__c == null).")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Quote product / meeting room interactions")
+    @Story("THY-620: Quote product / meeting room interactions")
     public void preconditions() throws InterruptedException, IOException {
         loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
         //loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
@@ -92,7 +92,7 @@ public class QuoteProductMeetingRoomInteractions extends BaseTest{
             " is less than the minimum value of ‘Start Date/Time’ field of the ‘Quote Product’. Result: the" +
             " ‘Start Date/Time’ fields of the related ‘Quote Products’ did not change.")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Quote product / meeting room interactions")
+    @Story("THY-620: Quote product / meeting room interactions")
     public void case1() throws InterruptedException, IOException {
         StringBuilder quoteRecord = myceQuotes.
                 getQuoteSFDX(SFDX, "Name='QuoteProductMeetingRoomInteractionsAutoTest'", ORG_USERNAME);
@@ -132,7 +132,7 @@ public class QuoteProductMeetingRoomInteractions extends BaseTest{
             " Date/Time’ fields of the related ‘Quote Products’ which ‘Start Date/Time’ values were lower than the" +
             " new value of the Meeting room have had their ‘Start Date/Time’ field values changed.")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Quote product / meeting room interactions")
+    @Story("THY-620: Quote product / meeting room interactions")
     public void case2() throws InterruptedException, IOException {
         StringBuilder quoteRecord = myceQuotes.
                 getQuoteSFDX(SFDX, "Name='QuoteProductMeetingRoomInteractionsAutoTest'", ORG_USERNAME);
@@ -171,7 +171,7 @@ public class QuoteProductMeetingRoomInteractions extends BaseTest{
             " is more than the maximum value of ‘End Date/Time’ field of the ‘Quote Product’. Result: The" +
             " ‘End Date/Time’ fields of the related ‘Quote Products’ did not change.")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Quote product / meeting room interactions")
+    @Story("THY-620: Quote product / meeting room interactions")
     public void case3() throws InterruptedException, IOException {
         StringBuilder quoteRecord = myceQuotes.
                 getQuoteSFDX(SFDX, "Name='QuoteProductMeetingRoomInteractionsAutoTest'", ORG_USERNAME);
@@ -210,7 +210,7 @@ public class QuoteProductMeetingRoomInteractions extends BaseTest{
             " ‘End Date/Time’ fields of the related ‘Quote Products’ which ‘End Date/Time’ values were lower than" +
             " the new value of the Meeting room have had their ‘End Date/Time’ field values changed.")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Quote product / meeting room interactions")
+    @Story("THY-620: Quote product / meeting room interactions")
     public void case4() throws InterruptedException, IOException {
         StringBuilder quoteRecord = myceQuotes.
                 getQuoteSFDX(SFDX, "Name='QuoteProductMeetingRoomInteractionsAutoTest'", ORG_USERNAME);
@@ -248,7 +248,7 @@ public class QuoteProductMeetingRoomInteractions extends BaseTest{
             " less than the minimum value of ‘Start Date/Time’ field of the ‘Quote Meetings Room’. Result: The" +
             " ‘Start Date/Time’ field of the ‘Quote Meetings Room’ has had its ‘Start Date/Time’ field value changed.")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Quote product / meeting room interactions")
+    @Story("THY-620: Quote product / meeting room interactions")
     public void case5() throws InterruptedException, IOException {
         StringBuilder quoteRecord = myceQuotes.
                 getQuoteSFDX(SFDX, "Name='QuoteProductMeetingRoomInteractionsAutoTest'", ORG_USERNAME);
@@ -270,7 +270,7 @@ public class QuoteProductMeetingRoomInteractions extends BaseTest{
             " more than the minimum value of ‘Start Date/Time’ field of the ‘Quote Meetings Room’. Result: The" +
             " ‘Start Date/Time’ field of the ‘Quote Meetings Room’ has had its ‘Start Date/Time’ field value changed.")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Quote product / meeting room interactions")
+    @Story("THY-620: Quote product / meeting room interactions")
     public void case6() throws InterruptedException, IOException {
         StringBuilder quoteRecord = myceQuotes.
                 getQuoteSFDX(SFDX, "Name='QuoteProductMeetingRoomInteractionsAutoTest'", ORG_USERNAME);
@@ -292,7 +292,7 @@ public class QuoteProductMeetingRoomInteractions extends BaseTest{
             " than the maximum value of ‘End Date/Time’ field of the ‘Quote Meetings Room’. Result: The" +
             " ‘End Date/Time’ field of the ‘Quote Meetings Room’ has had its ‘End Date/Time’ field value changed.")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Quote product / meeting room interactions")
+    @Story("THY-620: Quote product / meeting room interactions")
     public void case7() throws InterruptedException, IOException {
         StringBuilder quoteRecord = myceQuotes.
                 getQuoteSFDX(SFDX, "Name='QuoteProductMeetingRoomInteractionsAutoTest'", ORG_USERNAME);
@@ -314,7 +314,7 @@ public class QuoteProductMeetingRoomInteractions extends BaseTest{
             " than the maximum value of ‘End Date/Time’ field of the ‘Quote Meetings Room’. Result: The" +
             " ‘End Date/Time’ field of the ‘Quote Meetings Room’ has had its ‘End Date/Time’ field value changed.")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Quote product / meeting room interactions")
+    @Story("THY-620: Quote product / meeting room interactions")
     public void case8() throws InterruptedException, IOException {
         StringBuilder quoteRecord = myceQuotes.
                 getQuoteSFDX(SFDX, "Name='QuoteProductMeetingRoomInteractionsAutoTest'", ORG_USERNAME);

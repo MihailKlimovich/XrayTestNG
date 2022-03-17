@@ -18,7 +18,7 @@ public class PMSBlockAndMadjustmentsMewsInterface extends BaseTest {
             "created. The ‘PMS response’ field of the PMS Block is Null. The ‘PMS Status’ of the Block was set to" +
             "‘New’. The ‘PMS Response’ field on the related MAdjustment record is also Null.")
     @Severity(SeverityLevel.NORMAL)
-    @Story("THY-632: PMS block and Madjustments - Mews Interface")
+    @Story("THY-632: PMS block and Madjustments - Block PMS corrections")
     public void case1() throws InterruptedException, IOException {
         loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
         loginPage.authoriseURL(SFDX, ADMIN_AUTH_URL, ADMIN_USERNAME);
@@ -87,7 +87,7 @@ public class PMSBlockAndMadjustmentsMewsInterface extends BaseTest {
             " ‘PMS response’ field of the PMS Block is ‘200 OK’. The ‘PMS Status’ of the Block was set to ‘Send’." +
             " The ‘PMS Response’ field on the related MAdjustment record is also ‘200 OK’.")
     @Severity(SeverityLevel.NORMAL)
-    @Story("THY-632: PMS block and Madjustments - Mews Interface")
+    @Story("THY-632: PMS block and Madjustments - Block PMS corrections")
     public void case2() throws InterruptedException, IOException {
         user.apexExecute(SFDX, ADMIN_USERNAME, "src/main/Data/BlockSettings2.apex");
         rate.deleteRateSFDX(SFDX, "Name='PMSBlockAndMadjustmentsRateAutoTest2", ORG_USERNAME);

@@ -19,7 +19,7 @@ public class ComboProductTaxChange extends BaseTest {
             " VAT category. Expected result: on the combo components, the VAT is updated and the list price including" +
             " tax is recalculated")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Combo product: tax change")
+    @Story("THY-450: Combo product: tax change")
     public void case1() throws InterruptedException, IOException {
         loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
         product.deleteProductSFDX(SFDX, "Name='ComboAutoTest", ORG_USERNAME);

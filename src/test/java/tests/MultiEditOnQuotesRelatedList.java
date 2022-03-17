@@ -55,7 +55,7 @@ public class MultiEditOnQuotesRelatedList extends BaseTest {
 
     @Test(priority = 1, description = "Preconditions: Creating Packages and Quotes")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Multi edit on quote's related list UAT")
+    @Story("THY-516: Multi edit on quote's related list")
     public void preconditions() throws InterruptedException, IOException {
         loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
         loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
@@ -136,7 +136,7 @@ public class MultiEditOnQuotesRelatedList extends BaseTest {
 
     @Test(priority = 2, description = "Quote products are part of the Quote Package")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Multi edit on quote's related list UAT")
+    @Story("THY-516: Multi edit on quote's related list")
     public void case1() throws InterruptedException, IOException {
         //loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
         StringBuilder quoteRecord = myceQuotes.
@@ -184,7 +184,7 @@ public class MultiEditOnQuotesRelatedList extends BaseTest {
 
     @Test(priority = 3, description = "Meeting rooms are part of the Quote Package")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Multi edit on quote's related list UAT")
+    @Story("THY-516: Multi edit on quote's related list")
     public void case2() throws InterruptedException, IOException {
         //loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
         StringBuilder quoteRecord = myceQuotes.
@@ -235,7 +235,7 @@ public class MultiEditOnQuotesRelatedList extends BaseTest {
 
     @Test(priority = 4, description = "Quote products are not part of the Quote Package")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Multi edit on quote's related list UAT")
+    @Story("THY-516: Multi edit on quote's related list")
     public void case3() throws InterruptedException, IOException {
         //loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
         StringBuilder quoteRecord = myceQuotes.
@@ -333,7 +333,7 @@ public class MultiEditOnQuotesRelatedList extends BaseTest {
 
     @Test(priority = 5, description = "Meeting rooms are not part of the Quote Package")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Multi edit on quote's related list UAT")
+    @Story("THY-516: Multi edit on quote's related list")
     public void case4() throws InterruptedException, IOException {
         //loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
         StringBuilder quoteRecord = myceQuotes.
@@ -434,7 +434,7 @@ public class MultiEditOnQuotesRelatedList extends BaseTest {
 
     @Test(priority = 6, description = "Quote products are  partially related to the Quote package")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Multi edit on quote's related list UAT")
+    @Story("THY-516: Multi edit on quote's related list")
     public void case5() throws InterruptedException, IOException {
         //loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
         StringBuilder quoteRecord = myceQuotes.
@@ -482,7 +482,7 @@ public class MultiEditOnQuotesRelatedList extends BaseTest {
 
     @Test(priority = 7, description = "Meeting rooms are partially related to the Quote package")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Multi edit on quote's related list UAT")
+    @Story("THY-516: Multi edit on quote's related listT")
     public void case6() throws InterruptedException, IOException {
         //loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
         StringBuilder quoteRecord = myceQuotes.

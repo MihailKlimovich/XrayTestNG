@@ -19,7 +19,7 @@ public class MultiDaysPackages extends BaseTest {
 
     @Test(priority = 1, description = "Preconditions")
     @Severity(SeverityLevel.NORMAL)
-    @Story("THY-607-608: Multi days packages")
+    @Story("THY-607: Multi days packages")
     public void preconditions() throws InterruptedException, IOException {
         loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
         SfdxCommand.runLinuxCommand1(new String[]{
@@ -239,7 +239,7 @@ public class MultiDaysPackages extends BaseTest {
 
     @Test(priority = 2, description = "Edit the ‘Quote Package Line' with type ‘Activity’ on the Quote.")
     @Severity(SeverityLevel.NORMAL)
-    @Story("THY-607-608: Multi days packages")
+    @Story("THY-607: Multi days packages")
     public void testMultiDaysPackages1() throws InterruptedException, IOException {
         StringBuilder quoteRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
@@ -329,7 +329,7 @@ public class MultiDaysPackages extends BaseTest {
 
     @Test(priority = 3, description = "Edit the ‘Quote Package Line' with type ‘Equipment’ on the Quote.")
     @Severity(SeverityLevel.NORMAL)
-    @Story("THY-607-608: Multi days packages")
+    @Story("THY-607: Multi days packages")
     public void testMultiDaysPackages2() throws InterruptedException, IOException {
         StringBuilder quoteRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
@@ -418,7 +418,7 @@ public class MultiDaysPackages extends BaseTest {
 
     @Test(priority = 4, description = "Edit the ‘Quote Package Line' with type ‘Beverage’ on the Quote.")
     @Severity(SeverityLevel.NORMAL)
-    @Story("THY-607-608: Multi days packages")
+    @Story("THY-607: Multi days packages")
     public void testMultiDaysPackages3() throws InterruptedException, IOException {
         StringBuilder quoteRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
@@ -507,7 +507,7 @@ public class MultiDaysPackages extends BaseTest {
 
     @Test(priority = 5, description = "Edit the ‘Quote Package Line' with type ‘Food’ on the Quote.")
     @Severity(SeverityLevel.NORMAL)
-    @Story("THY-607-608: Multi days packages")
+    @Story("THY-607: Multi days packages")
     public void testMultiDaysPackages4() throws InterruptedException, IOException {
         StringBuilder quoteRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
@@ -596,7 +596,7 @@ public class MultiDaysPackages extends BaseTest {
 
     @Test(priority = 6, description = "Edit the ‘Quote Package Line' with type ‘Hotel Room’ on the Quote.")
     @Severity(SeverityLevel.NORMAL)
-    @Story("THY-607-608: Multi days packages")
+    @Story("THY-607: Multi days packages")
     public void testMultiDaysPackages5() throws InterruptedException, IOException {
         StringBuilder quoteRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
@@ -671,7 +671,7 @@ public class MultiDaysPackages extends BaseTest {
 
     @Test(priority = 7, description = "Edit the ‘Quote Package Line' with type ‘Hotel Room’ on the Quote.")
     @Severity(SeverityLevel.NORMAL)
-    @Story("THY-607-608: Multi days packages")
+    @Story("THY-607: Multi days packages")
     public void testMultiDaysPackages6() throws InterruptedException, IOException {
         StringBuilder quoteRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
@@ -760,7 +760,7 @@ public class MultiDaysPackages extends BaseTest {
 
     @Test(priority = 8, description = "Edit the ‘Quote Package Line' with type ‘Hotel Room’ on the Quote.")
     @Severity(SeverityLevel.NORMAL)
-    @Story("THY-607-608: Multi days packages")
+    @Story("THY-607: Multi days packages")
     public void testMultiDaysPackages7() throws InterruptedException, IOException {
         String expectedMessage = "From Date / To Date fields cannot be changed on multi-days package. To change the" +
                 " dates, update the 'Applied Day' field.";

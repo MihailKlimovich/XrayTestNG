@@ -19,7 +19,7 @@ public class Commission extends BaseTest {
 
     @Test(priority = 1, description = "Preconditions")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Commission")
+    @Story("THY-430: Commission")
     public void preconditions() throws InterruptedException, IOException {
         loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
         SfdxCommand.runLinuxCommand1(new String[]{
@@ -130,7 +130,7 @@ public class Commission extends BaseTest {
     @Test(priority = 2, description = "Add an agent or a company to the quote (Account with Commission) and" +
             " change the field 'commission to' to the value of the field you completed")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Commission")
+    @Story("THY-430: Commission")
     public void case1() throws InterruptedException, IOException {
         StringBuilder quoteRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
@@ -221,7 +221,7 @@ public class Commission extends BaseTest {
     @Test(priority = 3, description = "Update an agent or a company to the quote (Account without Commission) and" +
             " change the field 'commission to' to the value of the field you completed")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Commission")
+    @Story("THY-430: Commission")
     public void case2() throws InterruptedException, IOException {
         StringBuilder quoteRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
@@ -323,7 +323,7 @@ public class Commission extends BaseTest {
 
     @Test(priority = 4, description = "Add related records to the quote where it is part of Package ")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Commission")
+    @Story("THY-430: Commission")
     public void case3() throws InterruptedException, IOException {
         StringBuilder quoteRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
@@ -643,7 +643,7 @@ public class Commission extends BaseTest {
     @Test(priority = 5, description = "Add related records to the quote where it is not  part of Package and update" +
             " one or multiple comm. fields on quote. ")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Commission")
+    @Story("THY-430: Commission")
     public void case4() throws InterruptedException, IOException {
         StringBuilder quoteRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
@@ -961,7 +961,7 @@ public class Commission extends BaseTest {
 
     @Test(priority = 6, description = "Update some related records comm. %.")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Commission")
+    @Story("THY-430: Commission")
     public void case5() throws InterruptedException, IOException {
         StringBuilder quoteRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
@@ -1068,7 +1068,7 @@ public class Commission extends BaseTest {
     @Test(priority = 7, description = "Update one or multiple comm. fields on quote. Expected result: the related" +
             " which comm % value isn’t equal to the previous value on quote are not updated. the others are.")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Commission")
+    @Story("THY-430: Commission")
     public void case6() throws InterruptedException, IOException {
         StringBuilder quoteRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,

@@ -16,7 +16,7 @@ public class OverbookingDateTimes extends BaseTest{
     @Test(priority = 1, description = "Preconditions: Create a Meeting Room and assign a Resource to it that is" +
             " NOT Default, Create another one with the same Resource but different (date) times.")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Overbooking - date times")
+    @Story("THY-629: Overbooking - date times")
     public void preconditions() throws InterruptedException, IOException {
         loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
         loginPage.authoriseURL(SFDX, ADMIN_AUTH_URL, ADMIN_USERNAME);
@@ -58,7 +58,7 @@ public class OverbookingDateTimes extends BaseTest{
             " overlap the date time of  the first record. Result: Overbooking and shadow processes are triggered." +
             " Overbooking message is toasted.")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Overbooking - date times")
+    @Story("THY-629: Overbooking - date times")
     public void case1() throws InterruptedException, IOException {
         String expectedMessage = "Quote Meeting Room is overbooked.";
         myceQuotes.goToMyceQuotes();
@@ -75,7 +75,7 @@ public class OverbookingDateTimes extends BaseTest{
             " thrown with the message: ‘You don’t have the permission to overbook resources. Default meeting room " +
             "has been assigned.'")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Overbooking - date times")
+    @Story("THY-629: Overbooking - date times")
     public void case2() throws InterruptedException, IOException {
         String expectedMessage = "Something went wrong. Please contact support@thynk.cloud.";
         myceQuotes.goToMyceQuotes();
@@ -91,7 +91,7 @@ public class OverbookingDateTimes extends BaseTest{
     @Test(priority = 4, description = "Postconditions: Add the ‘Overbooking user’ permission set from the" +
             " current user.")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Overbooking - date times")
+    @Story("THY-629: Overbooking - date times")
     public void postconditions() throws InterruptedException, IOException {
         user.addPermissionSet(SFDX, "Overbooking_User", ORG_USERNAME, ADMIN_USERNAME);
     }

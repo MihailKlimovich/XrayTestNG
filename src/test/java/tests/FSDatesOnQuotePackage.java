@@ -22,7 +22,7 @@ public class FSDatesOnQuotePackage extends BaseTest {
     @Test(priority = 1, description = "Create Myce Quote, Add Quote package, Change Myce Quote stage to 2 - Propose" +
             " to generate FS dates")
     @Severity(SeverityLevel.NORMAL)
-    @Story("FS dates on quote package")
+    @Story("THY-502: Quote Package - FS Dates")
     public void case1() throws InterruptedException, IOException {
         loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
         SfdxCommand.runLinuxCommand1(new String[]{
@@ -244,7 +244,7 @@ public class FSDatesOnQuotePackage extends BaseTest {
 
     @Test(priority = 2, description = "Update Quote package, change Start / End date")
     @Severity(SeverityLevel.NORMAL)
-    @Story("FS dates on quote package")
+    @Story("THY-502: Quote Package - FS Dates")
     public void case2() throws InterruptedException, IOException {
         StringBuilder quoteRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,

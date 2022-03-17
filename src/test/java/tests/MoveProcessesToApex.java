@@ -18,7 +18,7 @@ public class MoveProcessesToApex extends BaseTest {
             " Create a new MYCE Quote. For the Property make sure you select Demo. Pax = 6. Result: MYCE Quote was" +
             " created and the Resort field of the MYCE Quote was filled with Resort from Property.")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Move processes to apex")
+    @Story("THY-639: Move processes to apex")
     public void case1() throws InterruptedException, IOException {
         loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
         myceQuotes.deleteQuoteSFDX(SFDX, "Name='MoveProcessesToApexAutoTest'", ORG_USERNAME);
@@ -46,7 +46,7 @@ public class MoveProcessesToApex extends BaseTest {
             " same value as Quote’s pax. The Pax value of the Quote Hotel Room/Quote Product/Quote Meeting Room/Quote" +
             " where Pax=3 did not change.")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Move processes to apex")
+    @Story("THY-639: Move processes to apex")
     public void case2() throws InterruptedException, IOException {
         packages.deletePackageSFDX(SFDX, "Name='MoveProcessesToApexAutoTest1", ORG_USERNAME);
         packages.deletePackageSFDX(SFDX, "Name='MoveProcessesToApexAutoTest2", ORG_USERNAME);
@@ -143,7 +143,7 @@ public class MoveProcessesToApex extends BaseTest {
             " from the Agent Account that is linked to the Quote because the current bill to on the MYCE Quote is set" +
             " to Agent.")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Move processes to apex")
+    @Story("THY-639: Move processes to apex")
     public void case3() throws InterruptedException, IOException {
         contact.deleteContactSFDX(SFDX, "LastName='ContactCompanyAuto'", ORG_USERNAME);
         contact.deleteContactSFDX(SFDX, "LastName='ContactAgentAuto'", ORG_USERNAME);
@@ -184,9 +184,8 @@ public class MoveProcessesToApex extends BaseTest {
             " values are taken from the Company Account. The Account and Contact on the Invoice were changed to the" +
             " Company Account and Company Contact.")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Move processes to apex")
+    @Story("THY-639: Move processes to apex")
     public void case4() throws InterruptedException, IOException {
-
         StringBuilder quoteRecord = myceQuotes.getQuoteSFDX(SFDX, "Name='MoveProcessesToApexAutoTest'",
                 ORG_USERNAME);
         String quoteID= JsonParser2.getFieldValue(quoteRecord.toString(), "Id");
@@ -214,7 +213,7 @@ public class MoveProcessesToApex extends BaseTest {
 
     @Test(priority = 5, description = "Postconditions")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Move processes to apex")
+    @Story("THY-639: Move processes to apex")
     public void postcondition() throws InterruptedException, IOException {
         myceQuotes.deleteQuoteSFDX(SFDX, "Name='MoveProcessesToApexAutoTest'", ORG_USERNAME);
         StringBuilder hotelRecord= hotel.getHotelSFDX(SFDX, "thn__Unique_Id__c='Demo'", ORG_USERNAME);

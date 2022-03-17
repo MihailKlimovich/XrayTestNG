@@ -22,7 +22,7 @@ public class TotalAmountInclTax extends BaseTest {
             " thn_Total_Product_incl_Tax__c + thn_Total_Meeting_Room_incl_Tax__c + thn_Total_Hotel_Room_incl_Tax__c")
     @Severity(SeverityLevel.NORMAL)
     @Description("THY-523 Total_amount_incl_Tax__c")
-    @Story("THY-523 Total_amount_incl_Tax__c")
+    @Story("THY-523: Total_amount_incl_Tax__c")
     public void totalAmountInclTaxTest() throws InterruptedException, IOException {
         loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
         myceQuotes.deleteQuoteSFDX(SFDX, "Name='TotalAmountInclTaxAutoTest'", ORG_USERNAME);

@@ -18,7 +18,7 @@ public class GuestToContact extends BaseTest {
 
     @Test(priority = 1, description = "Preconditions: creating guests and contacts")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Guest to contact")
+    @Story("THY-479: Guest to contact")
     public void preconditions() throws InterruptedException, IOException {
         loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
         loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
@@ -78,7 +78,7 @@ public class GuestToContact extends BaseTest {
 
     @Test(priority = 2, description = "Run batch")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Guest to contact")
+    @Story("THY-479: Guest to contact")
     public void runBatch() throws InterruptedException, IOException {
         /*developerConsoleWindow.openDeveloperConsole();
         developerConsoleWindow.openExecuteAnonymousWindow();
@@ -88,7 +88,7 @@ public class GuestToContact extends BaseTest {
     @Test(priority = 3, description = "If Guest.CheckEmail == Contact.CheckEmail  and  Guest.Check2 == Contact.Check2," +
             " Contact.UpdateFromGuest=true. Result: Contact fields are updated")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Guest to contact")
+    @Story("THY-479: Guest to contact")
     public void case1() throws InterruptedException, IOException {
         StringBuilder guestRecord = guests.getGuestSFDX(SFDX, "thn__Email__c='carleone@gmail.com", ORG_USERNAME);
         System.out.println(guestRecord);
@@ -114,7 +114,7 @@ public class GuestToContact extends BaseTest {
     @Test(priority = 4, description = "If Guest.CheckEmail == Contact.CheckEmail and Guest.Check2 == Contact.Check2." +
             " Expected result: Guest is related to Contact")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Guest to contact")
+    @Story("THY-479: Guest to contact")
     public void case2() throws InterruptedException, IOException {
         StringBuilder guestRecord = guests.getGuestSFDX(SFDX, "thn__Email__c='malkovich@gmail.com",
                 ORG_USERNAME);
@@ -131,7 +131,7 @@ public class GuestToContact extends BaseTest {
             " Contact.UpdateFromGuest == true. Expected result: Guest is related to Contact and Contact.Email2 field" +
             " is updated with Guest.CheckEmail value, Contact fields are updated")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Guest to contact")
+    @Story("THY-479: Guest to contact")
     public void case3() throws InterruptedException, IOException {
         StringBuilder guestRecord = guests.getGuestSFDX(SFDX, "thn__Email__c='mandela@gmail.com", ORG_USERNAME);
         System.out.println(guestRecord);
@@ -158,7 +158,7 @@ public class GuestToContact extends BaseTest {
             " Guest.Check2 == Contact.Check2 and Guest.Check3 != Contact.Check3. Expected result: Contact is created" +
             " with field values equal values on Guest records. Guest is related to created Contact")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Guest to contact")
+    @Story("THY-479: Guest to contact")
     public void case4() throws InterruptedException, IOException {
         StringBuilder guestRecord = guests.getGuestSFDX(SFDX, "thn__Email__c='gainsbourg@gmail.com",
                 ORG_USERNAME);
@@ -187,7 +187,7 @@ public class GuestToContact extends BaseTest {
     @Test(priority = 7, description = "Guest.CheckEmail != Contact.CheckEmail and are valid, if" +
             " Guest.CreateContact == true. Expected result:  Contact is created. Guest is related to Contact")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Guest to contact")
+    @Story("THY-479: Guest to contact")
     public void case5() throws InterruptedException, IOException {
         StringBuilder guestRecord = guests.getGuestSFDX(SFDX, "thn__Email__c='teslanikolai@gmail.com",
                 ORG_USERNAME);
@@ -208,7 +208,7 @@ public class GuestToContact extends BaseTest {
             " Guest.Check3 != null, if Guest.Check2 == Contact.Check2 and Guest.Check3 == Contact.Check3." +
             " Expected result: Guest is related to Contact")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Guest to contact")
+    @Story("THY-479: Guest to contact")
     public void case6() throws InterruptedException, IOException {
         StringBuilder guestRecord = guests.getGuestSFDX(SFDX, "thn__Email__c='user@booking.com",
                 ORG_USERNAME);

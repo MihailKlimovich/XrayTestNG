@@ -17,7 +17,7 @@ public class QuoteProductsUnit extends BaseTest {
             " == 100. Result: Total price is 500 (Unit price (100) * Unit (5)). List Price on Package is changed" +
             " to 500.")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Quote products - unit + Prices calculation regression")
+    @Story("THY-543: Quote products - unit")
     public void case1() throws InterruptedException, IOException {
         loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
         //loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
@@ -43,7 +43,7 @@ public class QuoteProductsUnit extends BaseTest {
             " Unit is set to “1”. Total price is 100 (Unit price (100) * Unit (1)). List Price on Package is changed" +
             " to 600.")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Quote products - unit + Prices calculation regression")
+    @Story("THY-543: Quote products - unit")
     public void case2() throws InterruptedException, IOException {
         StringBuilder packageRecord = packages.getPackageSFDX(SFDX, "Name='QuoteProductsUnitAutoTest",
                 ORG_USERNAME);
@@ -70,7 +70,7 @@ public class QuoteProductsUnit extends BaseTest {
             " Result: Unit is set to “1”. Total price is 100 (Unit price (100) * Unit (1)). List Price on Package" +
             " is changed to 700.")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Quote products - unit + Prices calculation regression")
+    @Story("THY-543: Quote products - unit")
     public void case3() throws InterruptedException, IOException {
         StringBuilder packageRecord = packages.getPackageSFDX(SFDX, "Name='QuoteProductsUnitAutoTest",
                 ORG_USERNAME);
@@ -94,7 +94,7 @@ public class QuoteProductsUnit extends BaseTest {
 
     @Test(priority = 4, description = "Delete Package line, Equipment. Result: List Price is updated to 600.")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Quote products - unit + Prices calculation regression")
+    @Story("THY-543: Quote products - unit")
     public void case4() throws InterruptedException, IOException {
         StringBuilder packageRecord = packages.getPackageSFDX(SFDX, "Name='QuoteProductsUnitAutoTest",
                 ORG_USERNAME);
@@ -112,7 +112,7 @@ public class QuoteProductsUnit extends BaseTest {
     @Test(priority = 5, description = "Update Package line Unit, set Unit on Beverage to 10. Result: Total price" +
             " is 1000 (Unit price (100) * Unit (10). List Price on Package is changed to 1500.")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Quote products - unit + Prices calculation regression")
+    @Story("THY-543: Quote products - unit")
     public void case5() throws InterruptedException, IOException {
         StringBuilder packageRecord = packages.getPackageSFDX(SFDX, "Name='QuoteProductsUnitAutoTest",
                 ORG_USERNAME);
@@ -131,7 +131,7 @@ public class QuoteProductsUnit extends BaseTest {
             " Result: Unit is set to “1”. Total price is 150 (Unit price (150) * Unit (1)). List Price on Package" +
             " is changed to 1650.")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Quote products - unit + Prices calculation regression")
+    @Story("THY-543: Quote products - unit")
     public void case6() throws InterruptedException, IOException {
         product.deleteProductSFDX(SFDX, "Name='ComboAutoTest2", ORG_USERNAME);
         product.deleteProductSFDX(SFDX, "Name='Absinthe", ORG_USERNAME);
@@ -167,7 +167,7 @@ public class QuoteProductsUnit extends BaseTest {
             " Unit is set to “1”. Total price is 100 (Unit price (100) * Unit (1)). List Price on Package is changed" +
             " to 1750.")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Quote products - unit + Prices calculation regression")
+    @Story("THY-543: Quote products - unit")
     public void case7() throws InterruptedException, IOException {
         StringBuilder packageRecord = packages.getPackageSFDX(SFDX, "Name='QuoteProductsUnitAutoTest",
                 ORG_USERNAME);
@@ -192,7 +192,7 @@ public class QuoteProductsUnit extends BaseTest {
             " Result: Unit is set to “1”. Total price is 100 (Unit price (100) * Unit (1)). List" +
             " Price on Package is changed to 1750.")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Quote products - unit + Prices calculation regression")
+    @Story("THY-543: Quote products - unit")
     public void case8() throws InterruptedException, IOException {
         StringBuilder packageRecord = packages.getPackageSFDX(SFDX, "Name='QuoteProductsUnitAutoTest",
                 ORG_USERNAME);
@@ -218,7 +218,7 @@ public class QuoteProductsUnit extends BaseTest {
             " Discounts empty (package created above). Result: Quote package, Quote package lines are copied to the" +
             " Quote with price values.")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Quote products - unit + Prices calculation regression")
+    @Story("THY-543: Quote products - unit")
     public void case9() throws InterruptedException, IOException {
         myceQuotes.deleteQuoteSFDX(SFDX, "Name='QuoteProductsUnitAutoTest'", ORG_USERNAME);
         StringBuilder packageRecord = packages.getPackageSFDX(SFDX, "Name='QuoteProductsUnitAutoTest",
@@ -245,7 +245,7 @@ public class QuoteProductsUnit extends BaseTest {
             " Amount, Products Amount, Total Amount excl. Tax, Total Amount excl. Tax fields on the Quote are" +
             " recalculated according to the new Pax value.")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Quote products - unit + Prices calculation regression")
+    @Story("THY-543: Quote products - unit")
     public void case10() throws InterruptedException, IOException {
         StringBuilder quoteRecord = myceQuotes.
                 getQuoteSFDX(SFDX, "Name='QuoteProductsUnitAutoTest'", ORG_USERNAME);
@@ -292,7 +292,7 @@ public class QuoteProductsUnit extends BaseTest {
             " Products Amount, Total Amount excl. Tax, Total Tax, Total Amount incl. Tax fields on the Quote are" +
             " recalculated.")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Quote products - unit + Prices calculation regression")
+    @Story("THY-543: Quote products - unit")
     public void case11() throws InterruptedException, IOException {
         StringBuilder quoteRecord = myceQuotes.
                 getQuoteSFDX(SFDX, "Name='QuoteProductsUnitAutoTest'", ORG_USERNAME);
@@ -320,7 +320,7 @@ public class QuoteProductsUnit extends BaseTest {
             " updated: List price is 600 (Unit Price incl. Tax (60) * Unit (10)). Products Amount, Total Amount" +
             " excl. Tax, Total Tax, Total Amount incl. Tax fields on the Quote are recalculated.")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Quote products - unit + Prices calculation regression")
+    @Story("THY-543: Quote products - unit")
     public void case12() throws InterruptedException, IOException {
         StringBuilder quoteRecord = myceQuotes.
                 getQuoteSFDX(SFDX, "Name='QuoteProductsUnitAutoTest'", ORG_USERNAME);
@@ -348,7 +348,7 @@ public class QuoteProductsUnit extends BaseTest {
             " updated: Sales Price excl. Tax, Sales Price incl. Tax. fields. Products Amount, Total Amount excl." +
             " Tax, Total Tax, Total Amount incl. Tax fields on the Quote are recalculated.")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Quote products - unit + Prices calculation regression")
+    @Story("THY-543: Quote products - unit")
     public void case13() throws InterruptedException, IOException {
         StringBuilder quoteRecord = myceQuotes.
                 getQuoteSFDX(SFDX, "Name='QuoteProductsUnitAutoTest'", ORG_USERNAME);
@@ -377,7 +377,7 @@ public class QuoteProductsUnit extends BaseTest {
             " Discount Amount fields. Products Amount, Total Amount excl. Tax, Total Tax, Total Amount incl. Tax" +
             " fields on the Quote are recalculated.")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Quote products - unit + Prices calculation regression")
+    @Story("THY-543: Quote products - unit")
     public void case14() throws InterruptedException, IOException {
         StringBuilder quoteRecord = myceQuotes.
                 getQuoteSFDX(SFDX, "Name='QuoteProductsUnitAutoTest'", ORG_USERNAME);
@@ -407,7 +407,7 @@ public class QuoteProductsUnit extends BaseTest {
     @Test(priority = 15, description = "Change Discount on Quote package. Result: Discount Amount," +
             " Discount Max fields on Quote package are recalculated.")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Quote products - unit + Prices calculation regression")
+    @Story("THY-543: Quote products - unit")
     public void case15() throws InterruptedException, IOException {
         StringBuilder quoteRecord = myceQuotes.
                 getQuoteSFDX(SFDX, "Name='QuoteProductsUnitAutoTest'", ORG_USERNAME);
@@ -441,7 +441,7 @@ public class QuoteProductsUnit extends BaseTest {
             " Quote hotel room is added to the Quote for each Product type with Total Amount incl. Tax," +
             " Total Amount excl. Tax fields.")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Quote products - unit + Prices calculation regression")
+    @Story("THY-543: Quote products - unit")
     public void case16() throws InterruptedException, IOException {
         StringBuilder quoteRecord = myceQuotes.
                 getQuoteSFDX(SFDX, "Name='QuoteProductsUnitAutoTest'", ORG_USERNAME);

@@ -20,7 +20,7 @@ public class UpdateOrders extends BaseTest {
     @Test(priority = 1, description = "Preconditions: Create a quote with products and meeting rooms. Click the" +
             " ‘ProdMod’ Button the the Quote that we created. ")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Update Orders")
+    @Story("THY-539: Update Orders")
     public void preconditions() throws InterruptedException, IOException {
         loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
         loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
@@ -90,7 +90,7 @@ public class UpdateOrders extends BaseTest {
     @Test(priority = 2, description = "Edit the ‘MEWS Id’ field of our created Order, click the ‘ProdMod’. Result: No" +
             " new orders were created.")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Update Orders")
+    @Story("THY-539: Update Orders")
     public void case1() throws InterruptedException, IOException {
         StringBuilder quoteRecord = myceQuotes.getQuoteSFDX(SFDX, "Name='UpdateOrdersAutoTest'", ORG_USERNAME);
         String quoteID= JsonParser2.getFieldValue(quoteRecord.toString(), "Id");
@@ -112,7 +112,7 @@ public class UpdateOrders extends BaseTest {
     @Test(priority = 3, description = "Change the ‘Pax’ on quote Product. Result:a duplicate ‘Order’ was crated, A new" +
             " 'Order’ was created and an ‘Order Line’ related record for our ‘Quote Product’ with the new changed pax. ")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Update Orders")
+    @Story("THY-539: Update Orders")
     public void case2() throws InterruptedException, IOException {
         StringBuilder quoteRecord = myceQuotes.getQuoteSFDX(SFDX, "Name='UpdateOrdersAutoTest'", ORG_USERNAME);
         String quoteID= JsonParser2.getFieldValue(quoteRecord.toString(), "Id");
@@ -150,7 +150,7 @@ public class UpdateOrders extends BaseTest {
     @Test(priority = 4, description = "Change the ‘Start Date Time’ on quote Product. Result:a duplicate ‘Order’ was" +
             " crated, A new 'Order’ was created.")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Update Orders")
+    @Story("THY-539: Update Orders")
     public void case3() throws InterruptedException, IOException {
         StringBuilder quoteRecord = myceQuotes.getQuoteSFDX(SFDX, "Name='UpdateOrdersAutoTest2'", ORG_USERNAME);
         System.out.println(quoteRecord);
@@ -187,7 +187,7 @@ public class UpdateOrders extends BaseTest {
             " crated, A new 'Order’ was created and an ‘Order Line’ related record for our ‘Quote Product’ with the" +
             " new changed 'Gross Value'. ")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Update Orders")
+    @Story("THY-539: Update Orders")
     public void case4() throws InterruptedException, IOException {
         StringBuilder quoteRecord = myceQuotes.getQuoteSFDX(SFDX, "Name='UpdateOrdersAutoTest3'", ORG_USERNAME);
         String quoteID= JsonParser2.getFieldValue(quoteRecord.toString(), "Id");

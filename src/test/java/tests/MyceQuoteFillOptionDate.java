@@ -20,7 +20,7 @@ public class MyceQuoteFillOptionDate extends BaseTest {
     @Test(priority = 1, description = "Create a new myce quote. Expected result: Option date is filled with value" +
             " = today + option interval")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Myce quote - Fill Option date")
+    @Story("THY-426: Myce quote - Fill Option date")
     public void case1() throws InterruptedException, IOException {
         loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
         loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
@@ -45,7 +45,7 @@ public class MyceQuoteFillOptionDate extends BaseTest {
     @Test(priority = 2, description = "Create a new myce quote. Expected result: Option date is filled with value" +
             " = today + option interval")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Myce quote - Fill Option date")
+    @Story("THY-426: Myce quote - Fill Option date")
     public void case2() throws InterruptedException, IOException {
         myceQuotes.deleteQuoteSFDX(SFDX, "Name='FillOptionDateAutoTest2'", ORG_USERNAME);
         user.apexExecute(SFDX, ADMIN_USERNAME, "src/main/Data/UpdateOptionInterval0Days.apex");

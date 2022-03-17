@@ -53,7 +53,7 @@ public class DefaultSetupTesting extends BaseTest {
 
     @Test(priority = 1, description = "Preconditions: Create a new Myce quote, create Resource records with a setup.")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Default Setup testing")
+    @Story("THY-365: Default Setup testing")
     public void preconditions() throws InterruptedException, IOException {
         loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
         loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
@@ -83,7 +83,7 @@ public class DefaultSetupTesting extends BaseTest {
     @Test(priority = 2, description = "Create a quote meeting room without setup and assign a resource. Expected" +
             " result: meeting room setup is filled with resource’s default setup")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Default Setup testing")
+    @Story("THY-365: Default Setup testing")
     public void case1() throws InterruptedException, IOException {
         StringBuilder quoteRecord = myceQuotes.getQuoteSFDX(SFDX, "Name='DefaultSetupAutoTesting'",
                 ORG_USERNAME);
@@ -95,7 +95,7 @@ public class DefaultSetupTesting extends BaseTest {
                 ORG_USERNAME);
         String meetingFullDayID = JsonParser2.getFieldValue(meetingFullDayRecord.toString(), "Id");
         String quoteMeetingRoomId = quoteMeetingRoom.createQuoteMeetingRoomSFDX(SFDX, "thn__MYCE_Quote__c='"
-                + quoteID + "'" + " thn__Product__c='" + meetingFullDayID + "' thn__Resource__c='" + resourceId + "'",
+                + quoteID + "'" + " thn__Product__c='" + meetingFullDayID + "' s",
                 ORG_USERNAME);
         StringBuilder quoteMeetingRoomRecord = quoteMeetingRoom.
                 getQuoteMeetingRoomSFDX(SFDX, "Id='" + quoteMeetingRoomId + "'", ORG_USERNAME);
@@ -109,7 +109,7 @@ public class DefaultSetupTesting extends BaseTest {
     @Test(priority = 3, description = "Change the assigned resource on the meeting room. Expected" +
             " result: no change occurs on meeting room’s setup")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Default Setup testing")
+    @Story("THY-365: Default Setup testing")
     public void case2() throws InterruptedException, IOException {
         StringBuilder resourceRecord1 = resource.
                 getResourceSFDX(SFDX, "Name='DefaultSetupAutoTest'", ORG_USERNAME);
@@ -144,7 +144,7 @@ public class DefaultSetupTesting extends BaseTest {
     @Test(priority = 4, description = "Create a meeting room with a setup and assign a resource. Expected" +
             " result: no change occurs on meeting room’s setup")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Default Setup testing")
+    @Story("THY-365: Default Setup testing")
     public void case3() throws InterruptedException, IOException {
         StringBuilder resourceRecord = resource.
                 getResourceSFDX(SFDX, "Name='DefaultSetupAutoTest'", ORG_USERNAME);
@@ -173,7 +173,7 @@ public class DefaultSetupTesting extends BaseTest {
     @Test(priority = 5, description = "Create a meeting room without setup and without resource. Expected" +
             " result: no change occurs on meeting room’s setup")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Default Setup testing")
+    @Story("THY-365: Default Setup testing")
     public void case4() throws InterruptedException, IOException {
         StringBuilder meetingHalfDayRecord = product.
                 getProductSFDX(SFDX, "Name='MEETING HALF DAY'", ORG_USERNAME);

@@ -54,7 +54,7 @@ public class ShadowMeetingRooms extends BaseTest {
     @Test(priority = 1, description = "Create a new myce quote and a meeting room, change the meeting room’s resource" +
             " to one with related groupings. ")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Shadow Meeting rooms")
+    @Story("THY-448: Shadow Meeting rooms")
     public void case1() throws InterruptedException, IOException {
         loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
         loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);

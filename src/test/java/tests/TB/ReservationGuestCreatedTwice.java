@@ -13,7 +13,10 @@ import java.util.List;
 
 public class ReservationGuestCreatedTwice extends BaseTest {
 
-    @Test(priority = 1, description = "LogIn")
+    @Test(priority = 1, description = "Create a MYCE Quote, Change the Stage of the Quote to ‘3 - Tentative’ then" +
+            " quickly manually change the stage of the Quote to ‘4 - Closed’ with closed status ‘Won’ then Quickly" +
+            " change the stage of the Quote to ‘2 - Propose’. Expected result: Only one reservation guest record is" +
+            " created sent to Mews and linked to the Quote.")
     @Severity(SeverityLevel.NORMAL)
     @Story("TB-261: Reservation Guest created twice")
     public void case1() throws InterruptedException, IOException {

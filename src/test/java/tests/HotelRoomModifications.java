@@ -20,7 +20,7 @@ public class HotelRoomModifications extends BaseTest {
 
     @Test(priority = 1, description = "Preconditions")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Hotel room modification")
+    @Story("THY-513: Quote Hotel Room - Number of Adults")
     public void preconditions() throws InterruptedException, IOException {
         loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
         SfdxCommand.runLinuxCommand1(new String[]{
@@ -61,7 +61,7 @@ public class HotelRoomModifications extends BaseTest {
 
     @Test(priority = 2, description = "Add Quote hotel room, while adding select Type of Occupancy")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Hotel room modification")
+    @Story("THY-513: Quote Hotel Room - Number of Adults")
     public void hotelRoomModificationTest1() throws InterruptedException, IOException {
         StringBuilder quoteRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
@@ -138,7 +138,7 @@ public class HotelRoomModifications extends BaseTest {
     @Test(priority = 3, description = "Update Type of Occupancy on the room to the for which there is custom metadata" +
             " type record")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Hotel room modification")
+    @Story("THY-513: Quote Hotel Room - Number of Adults")
     public void hotelRoomModificationTest2() throws InterruptedException, IOException {
         StringBuilder quoteRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
@@ -201,7 +201,7 @@ public class HotelRoomModifications extends BaseTest {
     @Test(priority = 4, description = "Update Type of Occupancy on the room to the one for which there is no custom" +
             " metadata type record")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Hotel room modification")
+    @Story("THY-513: Quote Hotel Room - Number of Adults")
     public void hotelRoomModificationTest3() throws InterruptedException, IOException {
         StringBuilder quoteRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
@@ -265,7 +265,7 @@ public class HotelRoomModifications extends BaseTest {
 
     @Test(priority = 5, description = "Update Type of Occupancy to -None-")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Hotel room modification")
+    @Story("THY-513: Quote Hotel Room - Number of Adults")
     public void hotelRoomModificationTest4() throws InterruptedException, IOException {
         StringBuilder quoteRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
@@ -319,7 +319,7 @@ public class HotelRoomModifications extends BaseTest {
 
     @Test(priority = 6, description = "Update Number of Adults having Type of Occupancy specified")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Hotel room modification")
+    @Story("THY-513: Quote Hotel Room - Number of Adults")
     public void hotelRoomModificationTest5() throws InterruptedException, IOException {
         StringBuilder quoteRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
@@ -388,7 +388,7 @@ public class HotelRoomModifications extends BaseTest {
 
     @Test(priority = 7, description = "Update room, any field but Number of Adults and Type of Occupancy")
     @Severity(SeverityLevel.NORMAL)
-    @Story("Hotel room modification")
+    @Story("THY-513: Quote Hotel Room - Number of Adults")
     public void hotelRoomModificationTest6() throws InterruptedException, IOException {
         StringBuilder quoteRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
