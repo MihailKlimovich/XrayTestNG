@@ -325,6 +325,11 @@
             <class name="tests.MeetingRoomSetup"/>
         </classes>
     </test>
+    <test name="THY-460: MEWS - Availability Block">
+        <classes>
+            <class name="tests.MEWSavailabilityBlock"/>
+        </classes>
+    </test>
 </suite>
 
 

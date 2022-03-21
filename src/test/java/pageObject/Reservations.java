@@ -194,6 +194,25 @@ public class Reservations extends BasePage {
         return reservationRecord;
     }
 
+    @Step("Update Reservation SFDX")
+    public StringBuilder updateReservationSFDX(String sfdxPath, String where, String value, String userName)
+            throws IOException, InterruptedException {
+        StringBuilder reservationUpdateResult = SfdxCommand.runLinuxCommand1(new String[]{
+                sfdxPath,
+                "force:data:record:update",
+                "-s",
+                "thn__Reservation__c",
+                "-w",
+                where,
+                "-v",
+                value,
+                "-u",
+                userName,
+                "--json"});
+        System.out.println(reservationUpdateResult);
+        return reservationUpdateResult;
+    }
+
 
 
 }
