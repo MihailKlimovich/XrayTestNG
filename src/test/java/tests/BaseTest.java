@@ -81,6 +81,7 @@ public class BaseTest {
     protected Availability availability;
     protected MAdjustments mAdjustments;
     protected CheckAvailabilitiesComponent checkAvailabilitiesComponent;
+    protected Mews mews;
 
 
 
@@ -98,10 +99,6 @@ public class BaseTest {
     public String ADMIN_USERNAME = System.getenv("ADMINUSERNAME");
     public String ADMIN_PASSWORD = System.getenv("ADMINPASSWORD");
     public String ADMIN_AUTH_URL = System.getenv("ADMIN_AUTH_URL");
-
-
-
-
 
 
 
@@ -209,6 +206,7 @@ public class BaseTest {
         availability = new Availability(driver);
         mAdjustments = new MAdjustments(driver);
         checkAvailabilitiesComponent = new CheckAvailabilitiesComponent(driver);
+        mews = new Mews(driver);
     }
 
     @AfterClass

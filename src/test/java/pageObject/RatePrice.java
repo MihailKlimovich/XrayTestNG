@@ -33,4 +33,20 @@ public class RatePrice extends BasePage {
         return ratePriceID;
     }
 
+    @Step("Get Rate Price SFDX")
+    public StringBuilder getRatePriceSFDX(String sfdxPath, String where, String userName)
+            throws IOException, InterruptedException {
+        StringBuilder ratePriceRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                sfdxPath,
+                "force:data:record:get",
+                "-s",
+                "thn__Rate_Price__c",
+                "-w",
+                where,
+                "-u",
+                userName,
+                "--json"});
+        return ratePriceRecord;
+    }
+
 }

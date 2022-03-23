@@ -396,6 +396,16 @@
             <class name="tests.MEWSavailabilityBlock"/>
         </classes>
     </test>
+    <test name="THY-647: Quote hotel room and rate prices">
+        <classes>
+            <class name="tests.QuoteHotelRoomAndRatePrices"/>
+        </classes>
+    </test>
+    <test name="THY-695: Reservation amount to 0 - Test">
+        <classes>
+            <class name="tests.ReservationAmountToZero"/>
+        </classes>
+    </test>
 </suite>
 
 

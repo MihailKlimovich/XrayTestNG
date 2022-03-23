@@ -34,4 +34,20 @@ public class CategoryAdjustment extends BasePage {
         return categoryAdjustmentID;
     }
 
+    @Step("Get Category Adjustment SFDX")
+    public StringBuilder getCategoryAdjustmentSFDX(String sfdxPath, String where, String userName)
+            throws IOException, InterruptedException {
+        StringBuilder categoryAdjustmentRecordRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                sfdxPath,
+                "force:data:record:get",
+                "-s",
+                "thn__Category_Adjustment__c",
+                "-w",
+                where,
+                "-u",
+                userName,
+                "--json"});
+        return categoryAdjustmentRecordRecord;
+    }
+
 }

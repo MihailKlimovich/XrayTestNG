@@ -34,6 +34,22 @@ public class CategoryPrice extends BasePage{
         return categoryPriceID;
     }
 
+    @Step("Get Category Price SFDX")
+    public StringBuilder getCategoryPriceSFDX(String sfdxPath, String where, String userName)
+            throws IOException, InterruptedException {
+        StringBuilder categoryPriceRecordRecord = SfdxCommand.runLinuxCommand1(new String[]{
+                sfdxPath,
+                "force:data:record:get",
+                "-s",
+                "thn__Category_Price__c",
+                "-w",
+                where,
+                "-u",
+                userName,
+                "--json"});
+        return categoryPriceRecordRecord;
+    }
+
 
 
 }
