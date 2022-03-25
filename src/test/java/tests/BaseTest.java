@@ -100,12 +100,6 @@ public class BaseTest {
     public String ADMIN_PASSWORD = System.getenv("ADMINPASSWORD");
     public String ADMIN_AUTH_URL = System.getenv("ADMIN_AUTH_URL");
 
-
-
-
-
-
-
     final protected String thynkPackDevOrg = "https://thynkpack-dev-ed.my.salesforce.com/";
     final protected String thynkPackUserName = "rostislav.orel@succraft.com";
     final protected String thynkPackPassword = "Rost1508";
@@ -219,7 +213,6 @@ public class BaseTest {
             driver = null;
         }
    }
-
 
 
 

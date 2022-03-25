@@ -406,6 +406,11 @@
             <class name="tests.ReservationAmountToZero"/>
         </classes>
     </test>
+    <test name="THY-683: Package line rate plan">
+        <classes>
+            <class name="tests.PackageLineRatePlan"/>
+        </classes>
+    </test>
 </suite>
 
 
