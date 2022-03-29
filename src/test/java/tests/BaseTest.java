@@ -91,14 +91,14 @@ public class BaseTest {
     public static final String testDataExcelFileName = "testdata.xlsx";
 
 
-    /*public String ORG_USERNAME = System.getenv("JAVAUSERNAME");
+    public String ORG_USERNAME = System.getenv("JAVAUSERNAME");
     public String ORG_PASSWORD = System.getenv("JAVAPASSWORD");
     public String ORG_URL = System.getenv("SF_URL");
     public String SFDX = System.getenv("SFDX");
     public String SFDX_AUTH_URL = System.getenv("AUTH_URL");
     public String ADMIN_USERNAME = System.getenv("ADMINUSERNAME");
     public String ADMIN_PASSWORD = System.getenv("ADMINPASSWORD");
-    public String ADMIN_AUTH_URL = System.getenv("ADMIN_AUTH_URL");*/
+    public String ADMIN_AUTH_URL = System.getenv("ADMIN_AUTH_URL");
 
     final protected String thynkPackDevOrg = "https://thynkpack-dev-ed.my.salesforce.com/";
     final protected String thynkPackUserName = "rostislav.orel@succraft.com";
