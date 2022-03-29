@@ -335,6 +335,32 @@
             <class name="tests.QuoteHotelRoomAndRatePrices"/>
         </classes>
     </test>
+    <test name="TB-309: Quote Meeting Room 'Half Day' and 'Break Out' check boxes does not adjust the meeting room
+     Unit price if not new">
+        <classes>
+            <class name="tests.TB.QuoteMeetingRoomHalfDayAndBreakOutCheckBoxesDoesNotAdjustTheMeetingRoomUnitPriceIfNotNew"/>
+        </classes>
+    </test>
+    <test name="THY-666: Mews Block update">
+        <classes>
+            <class name="tests.MewsBlockUpdate"/>
+        </classes>
+    </test>
+    <test name="THY-664: Quote hotel room quantity - Reservations">
+        <classes>
+            <class name="tests.QuoteHotelRoomQuantityReservations"/>
+        </classes>
+    </test>
+    <test name="THY-663: Quote hotel room quantity - PMS Blocks">
+        <classes>
+            <class name="tests.QuoteHotelRoomQuantityPMSBlocks"/>
+        </classes>
+    </test>
+    <test name="THY-665: Quote hotel room quantity - MAdjustment.">
+        <classes>
+            <class name="tests.QuoteHotelRoomQuantityMAdjustment"/>
+        </classes>
+    </test>
 </suite>
 
 
