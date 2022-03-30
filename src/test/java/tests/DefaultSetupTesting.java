@@ -95,7 +95,7 @@ public class DefaultSetupTesting extends BaseTest {
                 ORG_USERNAME);
         String meetingFullDayID = JsonParser2.getFieldValue(meetingFullDayRecord.toString(), "Id");
         String quoteMeetingRoomId = quoteMeetingRoom.createQuoteMeetingRoomSFDX(SFDX, "thn__MYCE_Quote__c='"
-                + quoteID + "'" + " thn__Product__c='" + meetingFullDayID + "' s",
+                + quoteID + "'" + " thn__Product__c='" + meetingFullDayID + "'",
                 ORG_USERNAME);
         StringBuilder quoteMeetingRoomRecord = quoteMeetingRoom.
                 getQuoteMeetingRoomSFDX(SFDX, "Id='" + quoteMeetingRoomId + "'", ORG_USERNAME);

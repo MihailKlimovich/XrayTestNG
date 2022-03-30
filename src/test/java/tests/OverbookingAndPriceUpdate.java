@@ -158,7 +158,7 @@ public class OverbookingAndPriceUpdate extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     @Story("Overbooking & price update")
     public void case3() throws InterruptedException, IOException {
-        loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
+        //loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
         String expectedMessage = "Message not found";
         StringBuilder resourceRecord1 = resource.
                 getResourceSFDX(SFDX, "Name='OverbookingChangePriceAutoTest2'", ORG_USERNAME);

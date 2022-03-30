@@ -74,8 +74,8 @@ public class PreventReservedHotelRoomsFromBeingDeleted extends BaseTest {
         String quoteID= JsonParser2.getFieldValue(quoteRecord.toString(), "Id");
         StringBuilder deleteResult = quoteHotelRoom.deleteQuoteHotelRoomSFDX(SFDX,
                 "thn__MYCE_Quote__c='" + quoteID + "'  Name='ROOM 2 NIGHTS'",ORG_USERNAME);
-        String message = JsonParser2.getFieldValue2(deleteResult.toString(), "message");
-        Assert.assertEquals(message,expectedMessage);
+        String message = JsonParser2.getFieldValue2(deleteResult.toString(), "stack");
+        Assert.assertTrue(message.contains(expectedMessage));
     }
 
     @Test(priority = 3, description = "Delete the quote package. Expected result: you get an error message preventing" +
@@ -89,15 +89,15 @@ public class PreventReservedHotelRoomsFromBeingDeleted extends BaseTest {
         String quoteID= JsonParser2.getFieldValue(quoteRecord.toString(), "Id");
         StringBuilder deleteResult = quoteMeetingPackages.deleteQuotePackageSFDX(SFDX,
                 "thn__MYCE_Quote__c='" + quoteID + "'  Name='PackWithHotelRoomAuto'",ORG_USERNAME);
-        String message = JsonParser2.getFieldValue2(deleteResult.toString(), "message");
-        Assert.assertEquals(message,expectedMessage);
+        String message = JsonParser2.getFieldValue2(deleteResult.toString(), "stack");
+        Assert.assertTrue(message.contains(expectedMessage));
     }
 
     @Test(priority = 4, description = "Change the Mews State in hotel room to ‘Canceled’ and delete the record")
     @Severity(SeverityLevel.NORMAL)
     @Story("THY-423: Prevent reserved hotel rooms from being deleted")
     public void case3() throws InterruptedException, IOException {
-        String expectedMessage = "No matching record found.";
+        String expectedMessage = "No matching record found";
         StringBuilder quoteRecord = myceQuotes.
                 getQuoteSFDX(SFDX, "Name='DeleteReservedHotelRoomAutoTest'", ORG_USERNAME);
         String quoteID= JsonParser2.getFieldValue(quoteRecord.toString(), "Id");

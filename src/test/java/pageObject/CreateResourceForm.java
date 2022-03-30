@@ -24,7 +24,7 @@ public class CreateResourceForm extends BasePage {
     By DESCRIPTION_LANGUAGE_3_FIELD = By.
             xpath("//label[text()='Description Language 3']/following-sibling::div//textarea");
     By DESCRIPTION_FS_FIELD = By.xpath("//label[text()='Description FS']/following-sibling::div//textarea");
-    By SAVE_BUTTON = By.xpath("//button[text()='Save']");
+    By SAVE_BUTTON_MODAL_PANEL = By.xpath("//div[@class='slds-modal__content']//button[text()='Save']");
 
     @Step("Create Resource")
     public void createResource(String resource, String function, String setup, String pax, String unitPrice,
@@ -48,7 +48,7 @@ public class CreateResourceForm extends BasePage {
         writeText(DESCRIPTION_LANGUAGE_3_FIELD, desLan3);
         click3(DESCRIPTION_FS_FIELD);
         writeText(DESCRIPTION_FS_FIELD, desFs);
-        click3(SAVE_BUTTON);
+        click3(SAVE_BUTTON_MODAL_PANEL);
         Thread.sleep(3000);
     }
 
