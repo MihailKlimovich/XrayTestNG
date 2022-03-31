@@ -411,6 +411,12 @@
             <class name="tests.PackageLineRatePlan"/>
         </classes>
     </test>
+    <test name="TB-316: Hotel Rooms revenue is counted to the Quote Total Hotel Room revenue, despite the Hotel Rooms
+     being cancelled.">
+        <classes>
+            <class name="tests.TB.HotelRoomsRevenueIsCountedToTheQuoteTotalHotelRoomRevenueDespiteTheHotelRoomsBeingCancelled"/>
+        </classes>
+    </test>
 </suite>
 
 

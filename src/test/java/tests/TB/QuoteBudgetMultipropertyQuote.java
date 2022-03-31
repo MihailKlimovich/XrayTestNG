@@ -36,7 +36,6 @@ public class QuoteBudgetMultipropertyQuote extends BaseTest{
         String roomTypeQueenID = JsonParser2.getFieldValue(roomTypeQueenRecord.toString(), "Id");
         StringBuilder recordTypes = myceQuotes.soql(SFDX, "SELECT Id FROM RecordType WHERE" +
                 " SobjectType='thn__MYCE_Quote__c' AND Name='Quote'", ORG_USERNAME);
-        System.out.println(recordTypes);
         List<String> recordTypeID = JsonParser2.getFieldValueSoql(recordTypes.toString(), "Id");
         String quoteID = myceQuotes.createQuoteSFDX(SFDX,
                 "Name='QuoteBudgetMultipropertyQuoteAutoTest' thn__Pax__c=1 thn__Hotel__c='"
