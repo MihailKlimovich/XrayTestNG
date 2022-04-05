@@ -401,6 +401,11 @@
             <class name="tests.QuoteHotelRoomAndRatePrices"/>
         </classes>
     </test>
+    <test name="TB-253: List price is recalculated when discount is changed">
+        <classes>
+            <class name="tests.TB.ListPriceIsRecalculatedWhenDiscountIsChanged"/>
+        </classes>
+    </test>
     <test name="THY-695: Reservation amount to 0 - Test">
         <classes>
             <class name="tests.ReservationAmountToZero"/>
@@ -415,6 +420,11 @@
      being cancelled.">
         <classes>
             <class name="tests.TB.HotelRoomsRevenueIsCountedToTheQuoteTotalHotelRoomRevenueDespiteTheHotelRoomsBeingCancelled"/>
+        </classes>
+    </test>
+    <test name="THY-685: Clone Myce Quote and QHRP.Quantity.">
+        <classes>
+            <class name="tests.CloneMyceQuoteAndQHRPQuantity"/>
         </classes>
     </test>
 </suite>

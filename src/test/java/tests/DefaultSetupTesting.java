@@ -31,9 +31,9 @@ public class DefaultSetupTesting extends BaseTest {
         options.addArguments("--disable-gpu");
         options.addArguments("--disable-extensions");
         options.addArguments("--disable-dev-shm-usage");
-        options.addArguments("user-data-dir=/tmp/temp_profile");
+        //options.addArguments("user-data-dir=/tmp/temp_profile");
         options.addArguments(" --whitelisted-ips=\"\"");
-        options.addArguments("--headless", "window-size=1920,1024", "--no-sandbox");
+        //options.addArguments("--headless", "window-size=1920,1024", "--no-sandbox");
         driver = new ChromeDriver(options);
         driver.manage().deleteAllCookies();
         driver.manage().window().maximize();
@@ -41,14 +41,14 @@ public class DefaultSetupTesting extends BaseTest {
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     }
 
-    @AfterClass
+    /*@AfterClass
     public void teardown() {
         driver.close();
         driver.quit();
         if (driver != null) {
             driver = null;
         }
-    }
+    }*/
 
 
     @Test(priority = 1, description = "Preconditions: Create a new Myce quote, create Resource records with a setup.")
@@ -95,7 +95,7 @@ public class DefaultSetupTesting extends BaseTest {
                 ORG_USERNAME);
         String meetingFullDayID = JsonParser2.getFieldValue(meetingFullDayRecord.toString(), "Id");
         String quoteMeetingRoomId = quoteMeetingRoom.createQuoteMeetingRoomSFDX(SFDX, "thn__MYCE_Quote__c='"
-                + quoteID + "'" + " thn__Product__c='" + meetingFullDayID + "'",
+                + quoteID + "'" + " thn__Product__c='" + meetingFullDayID + "' thn__Resource__c='" + resourceId + "'",
                 ORG_USERNAME);
         StringBuilder quoteMeetingRoomRecord = quoteMeetingRoom.
                 getQuoteMeetingRoomSFDX(SFDX, "Id='" + quoteMeetingRoomId + "'", ORG_USERNAME);

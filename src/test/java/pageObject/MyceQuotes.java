@@ -97,8 +97,8 @@ public class MyceQuotes extends BasePage {
 
     @Step("Open Myce Quote page")
     public MyceQuotes goToMyceQuotes() throws InterruptedException {
-        driver.navigate().to("https://thynk-test-unlocked-dev-ed.lightning.force.com/lightning/o/thn__MYCE_Quote__c/list?filterName=Recent");
-        //driver.navigate().to("https://thautomation-dev-ed.lightning.force.com/lightning/o/thn__MYCE_Quote__c/list?filterName=Recent");
+        //driver.navigate().to("https://thynk-test-unlocked-dev-ed.lightning.force.com/lightning/o/thn__MYCE_Quote__c/list?filterName=Recent");
+        driver.navigate().to("https://thautomation-dev-ed.lightning.force.com/lightning/o/thn__MYCE_Quote__c/list?filterName=Recent");
         try {
             if (wait2.until(ExpectedConditions.alertIsPresent()) != null) {
                 Alert alert = wait2.until(alertIsPresent());
@@ -151,7 +151,43 @@ public class MyceQuotes extends BasePage {
         Thread.sleep(5000);
     }
 
-    @Step("Clone Myce Quote. Change date and pax.")
+    @Step("Clone Myce Quote. Change date and pax. Keep all pax = true")
+    public void cloneMyceQuote_changeDateAndPaxKeepAllPax(String name, String date, String pax) throws InterruptedException {
+        //waitForTests.until(ExpectedConditions.presenceOfElementLocated(CLONE_MYCE_QUOTE_BUTTON));
+        click4(CLONE_MYCE_QUOTE_BUTTON);
+        wait1.until(ExpectedConditions.presenceOfElementLocated(NAME_QUOTE_FIELD)).click();
+        writeText(NAME_QUOTE_FIELD, name);
+        click3(CLONE_QUOTE_ARRIVAL_DAY_FIELD);
+        clear(CLONE_QUOTE_ARRIVAL_DAY_FIELD);
+        writeText(CLONE_QUOTE_ARRIVAL_DAY_FIELD, date);
+        click3(CLONE_PAX_FIELD);
+        clear(CLONE_PAX_FIELD);
+        writeText(CLONE_PAX_FIELD, pax);
+        click3(KEEP_ALL_PAX_CHECKBOX);
+        wait1.until(ExpectedConditions.presenceOfElementLocated(SAVE_BUTTON_FOR_CLONE)).click();
+        wait1.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//slot[@name='primaryField']//lightning-formatted-text[text()='" + name + "']")));
+        Thread.sleep(5000);
+    }
+
+    @Step("Clone Myce Quote. Change date and pax. Keep room pax = true")
+    public void cloneMyceQuote_changeDateAndPaxKeepRoomPax(String name, String date, String pax) throws InterruptedException {
+        //waitForTests.until(ExpectedConditions.presenceOfElementLocated(CLONE_MYCE_QUOTE_BUTTON));
+        click4(CLONE_MYCE_QUOTE_BUTTON);
+        wait1.until(ExpectedConditions.presenceOfElementLocated(NAME_QUOTE_FIELD)).click();
+        writeText(NAME_QUOTE_FIELD, name);
+        click3(CLONE_QUOTE_ARRIVAL_DAY_FIELD);
+        clear(CLONE_QUOTE_ARRIVAL_DAY_FIELD);
+        writeText(CLONE_QUOTE_ARRIVAL_DAY_FIELD, date);
+        click3(CLONE_PAX_FIELD);
+        clear(CLONE_PAX_FIELD);
+        writeText(CLONE_PAX_FIELD, pax);
+        click3(KEEP_ROOMS_PAX_CHECKBOX);
+        wait1.until(ExpectedConditions.presenceOfElementLocated(SAVE_BUTTON_FOR_CLONE)).click();
+        wait1.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//slot[@name='primaryField']//lightning-formatted-text[text()='" + name + "']")));
+        Thread.sleep(5000);
+    }
+
+    @Step("Clone Myce Quote. Change date and pax. ")
     public void cloneMyceQuote_changeDateAndPax(String name, String date, String pax) throws InterruptedException {
         //waitForTests.until(ExpectedConditions.presenceOfElementLocated(CLONE_MYCE_QUOTE_BUTTON));
         click4(CLONE_MYCE_QUOTE_BUTTON);

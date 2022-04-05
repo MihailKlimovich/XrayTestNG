@@ -335,6 +335,11 @@
             <class name="tests.QuoteHotelRoomAndRatePrices"/>
         </classes>
     </test>
+    <test name="TB-253: List price is recalculated when discount is changed">
+        <classes>
+            <class name="tests.TB.ListPriceIsRecalculatedWhenDiscountIsChanged"/>
+        </classes>
+    </test>
 </suite>
 
 

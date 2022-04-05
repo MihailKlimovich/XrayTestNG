@@ -28,7 +28,7 @@ public class Resource extends BasePage {
                 "-u",
                 userName,
                 "--json"});
-        System.out.println("Quote create result:");
+        System.out.println("Resource create result:");
         System.out.println(resourceResult);
         String resourceID = JsonParser2.getFieldValue(resourceResult.toString(), "id");
         return resourceID;
