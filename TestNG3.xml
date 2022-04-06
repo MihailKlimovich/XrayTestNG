@@ -406,6 +406,16 @@
             <class name="tests.TB.ListPriceIsRecalculatedWhenDiscountIsChanged"/>
         </classes>
     </test>
+    <test name="THY-660: Account addresses.">
+        <classes>
+            <class name="tests.AccountAddresses"/>
+        </classes>
+    </test>
+    <test name="THY-541: Clone Myce quote. Quote Name.">
+        <classes>
+            <class name="tests.CloneMyceQuoteQuoteName"/>
+        </classes>
+    </test>
     <test name="THY-695: Reservation amount to 0 - Test">
         <classes>
             <class name="tests.ReservationAmountToZero"/>

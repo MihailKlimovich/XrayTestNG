@@ -85,6 +85,7 @@ public class MyceQuotes extends BasePage {
     By EDIT_ARRIVAL_DATE_BUTTON = By.xpath("//button[@title='Edit Arrival Date']");
     By CLONE_PAX_FIELD = By.xpath("//input[@name='Pax']");
     By CHECK_AVAILABILITIES_BUTTON = By.xpath("//button[@name='thn__MYCE_Quote__c.Check_Avalabilities']");
+    By QUOTE_NAME_FIELD = By.xpath("//span[text()='Name']/parent::div/following::div//span//slot//lightning-formatted-text");
 
 
 
@@ -149,6 +150,30 @@ public class MyceQuotes extends BasePage {
         wait1.until(ExpectedConditions.presenceOfElementLocated(SAVE_BUTTON_FOR_CLONE)).click();
         wait1.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//slot[@name='primaryField']//lightning-formatted-text[text()='" + name + "']")));
         Thread.sleep(5000);
+    }
+
+    @Step("Clone Myce Quote and read name")
+    public String cloneMyceQuote_readName(String name, String date, String pax) throws InterruptedException {
+        //waitForTests.until(ExpectedConditions.presenceOfElementLocated(CLONE_MYCE_QUOTE_BUTTON));
+        click4(CLONE_MYCE_QUOTE_BUTTON);
+        wait1.until(ExpectedConditions.presenceOfElementLocated(NAME_QUOTE_FIELD)).click();
+        writeText(NAME_QUOTE_FIELD, name);
+        click3(CLONE_QUOTE_ARRIVAL_DAY_FIELD);
+        Thread.sleep(1000);
+        clear(CLONE_QUOTE_ARRIVAL_DAY_FIELD);
+        writeText(CLONE_QUOTE_ARRIVAL_DAY_FIELD, date);
+        click3(CLONE_PAX_FIELD);
+        clear(CLONE_PAX_FIELD);
+        writeText(CLONE_PAX_FIELD, pax);
+        wait1.until(ExpectedConditions.presenceOfElementLocated(KEEP_ALL_PAX_CHECKBOX));
+        Thread.sleep(1000);
+        click3(KEEP_ALL_PAX_CHECKBOX);
+        wait1.until(ExpectedConditions.presenceOfElementLocated(KEEP_ROOMS_PAX_CHECKBOX));
+        click3(KEEP_ROOMS_PAX_CHECKBOX);
+        wait1.until(ExpectedConditions.presenceOfElementLocated(SAVE_BUTTON_FOR_CLONE)).click();
+        Thread.sleep(5000);
+        refreshPage();
+        return readRecalculateMessage(QUOTE_NAME_FIELD);
     }
 
     @Step("Clone Myce Quote. Change date and pax. Keep all pax = true")
