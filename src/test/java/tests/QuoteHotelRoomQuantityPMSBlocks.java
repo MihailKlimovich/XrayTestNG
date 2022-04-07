@@ -34,7 +34,7 @@ public class QuoteHotelRoomQuantityPMSBlocks extends BaseTest {
         String quoteID = myceQuotes.createQuoteSFDX(SFDX, "Name='QuoteHotelRoomQuantityPMSBlockAutoTest'" +
                 " thn__Pax__c=5 thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" + date.generateTodayDate2() +
                 " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 4) + " RecordTypeId='" +
-                recordTypeID.get(0) + "' thn__Closed_Status__c='Won'", ORG_USERNAME);
+                recordTypeID.get(0) + "'", ORG_USERNAME);
         String quoteHotelRoomID = quoteHotelRoom.createQuoteHotelRoomSFDX(SFDX, "thn__MYCE_Quote__c='"
                         + quoteID + "' thn__Product__c='" + room1NightID + "' thn__Space_Area__c='"
                         + roomTypeQueenID + "' thn__Type_of_Occupancy__c='Triple'", ORG_USERNAME);
@@ -68,7 +68,7 @@ public class QuoteHotelRoomQuantityPMSBlocks extends BaseTest {
     }
 
     @Test(priority = 2, description = "Change the Quantity of the Quote Hotel Room Price Records. Expected result:" +
-            " The Occupancy 3 Blockeв of related PMS Block Inventory of the PMS Block got updated." )
+            " The Occupancy 3 Blocked of related PMS Block Inventory of the PMS Block got updated." )
     @Severity(SeverityLevel.NORMAL)
     @Story("THY-663: Quote hotel room quantity - PMS Blocks")
     public void case2() throws InterruptedException, IOException {
@@ -188,19 +188,20 @@ public class QuoteHotelRoomQuantityPMSBlocks extends BaseTest {
                 "thn__Type_of_Occupancy__c='Double'", ORG_USERNAME );
         StringBuilder updatedPMSBlockInventoryRecord1 = myceQuotes.soql(SFDX, "SELECT Id," +
                 " thn__Occupancy_3_Blocked__c, thn__Occupancy_2_Blocked__c FROM thn__PMS_Block_Inventory__c WHERE" +
-                " thn__PMS_Block__c='" +pmsBlockId + " AND thn__Start__c=" +
+                " thn__PMS_Block__c='" +pmsBlockId + "' AND thn__Start__c=" +
                 date.generateTodayDate2_plus(0 , 0), ORG_USERNAME);
+        System.out.println(updatedPMSBlockInventoryRecord1);
         StringBuilder updatedPMSBlockInventoryRecord2 = myceQuotes.soql(SFDX, "SELECT Id," +
                 " thn__Occupancy_3_Blocked__c, thn__Occupancy_2_Blocked__c FROM thn__PMS_Block_Inventory__c WHERE" +
-                " thn__PMS_Block__c='" +pmsBlockId + " AND thn__Start__c=" +
+                " thn__PMS_Block__c='" +pmsBlockId + "' AND thn__Start__c=" +
                 date.generateTodayDate2_plus(0 , 1), ORG_USERNAME);
         StringBuilder updatedPMSBlockInventoryRecord3 = myceQuotes.soql(SFDX, "SELECT Id," +
                 " thn__Occupancy_3_Blocked__c, thn__Occupancy_2_Blocked__c FROM thn__PMS_Block_Inventory__c WHERE" +
-                " thn__PMS_Block__c='" +pmsBlockId + " AND thn__Start__c=" +
+                " thn__PMS_Block__c='" +pmsBlockId + "' AND thn__Start__c=" +
                 date.generateTodayDate2_plus(0 , 2), ORG_USERNAME);
         StringBuilder updatedPMSBlockInventoryRecord4 = myceQuotes.soql(SFDX, "SELECT Id," +
                 " thn__Occupancy_3_Blocked__c, thn__Occupancy_2_Blocked__c FROM thn__PMS_Block_Inventory__c WHERE" +
-                " thn__PMS_Block__c='" +pmsBlockId + " AND thn__Start__c=" +
+                " thn__PMS_Block__c='" +pmsBlockId + "' AND thn__Start__c=" +
                 date.generateTodayDate2_plus(0 , 3), ORG_USERNAME);
         List<Integer> updatedPMSBlockInventoryOccupancy3Blocked1 = JsonParser2.
                 getFieldValueSoql2(updatedPMSBlockInventoryRecord1.toString(), "thn__Occupancy_3_Blocked__c");

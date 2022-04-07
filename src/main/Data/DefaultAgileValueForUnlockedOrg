@@ -16,7 +16,7 @@
 
       Metadata.CustomMetadataValue customField2 = new Metadata.CustomMetadataValue();
       customField2.field = 'thn__Connector__c';
-      customField2.value = 'None';
+      customField2.value = 'Opera';
       cmd.values.add(customField2);
 
       Metadata.CustomMetadataValue customField3 = new Metadata.CustomMetadataValue();

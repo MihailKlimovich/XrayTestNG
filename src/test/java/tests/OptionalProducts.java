@@ -344,9 +344,9 @@ public class OptionalProducts extends BaseTest {
         String message1 = JsonParser2.getFieldValue2(quoteMeetingRoomRecords.toString(), "message");
         String message2 = JsonParser2.getFieldValue2(quoteProductRecords.toString(), "message");
         String message3 = JsonParser2.getFieldValue2(quotePackageRecords.toString(), "message");
-        Assert.assertEquals(message1, "No matching record found.");
-        Assert.assertEquals(message2, "No matching record found.");
-        Assert.assertEquals(message3, "No matching record found.");
+        Assert.assertEquals(message1, "No matching record found");
+        Assert.assertEquals(message2, "No matching record found");
+        Assert.assertEquals(message3, "No matching record found");
     }
 
 }

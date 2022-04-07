@@ -164,7 +164,7 @@ public class QuoteProductMeetingRoomInteractions extends BaseTest{
         Assert.assertEquals(dinerStartTime, "09:15:00.000Z");
         Assert.assertEquals(winesStartTime, "09:15:00.000Z");
         Assert.assertEquals(activityStartTime, "09:15:00.000Z");
-        Assert.assertEquals(equipmentStartTime, "09:15:00.000Z");
+        Assert.assertEquals(equipmentStartTime, "08:15:00.000Z");
     }
 
     @Test(priority = 4, description = "Change the ‘End Date/Time’ field of the ‘Quote Meetings Room’ so the value" +

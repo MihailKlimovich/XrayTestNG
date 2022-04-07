@@ -44,20 +44,18 @@ public class CloneMyceQuoteQuoteName extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     @Story("THY-541: Clone Myce quote. Quote Name.")
     public void case2() throws InterruptedException, IOException {
-        loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
-        loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
-        myceQuotes.deleteQuoteSFDX(SFDX, "Name='Clone555'",
-                ORG_USERNAME);
+        myceQuotes.deleteQuoteSFDX(SFDX, "Name='Clone555'", ORG_USERNAME);
+        myceQuotes.deleteQuoteSFDX(SFDX, "Name='CloneMyceQuoteQuoteNameAutoTest2'", ORG_USERNAME);
         StringBuilder hotelRecord= hotel.getHotelSFDX(SFDX, "thn__Unique_Id__c='Demo'", ORG_USERNAME);
         String propertyID = JsonParser2.getFieldValue(hotelRecord.toString(), "Id");
         StringBuilder recordTypes = myceQuotes.soql(SFDX, "SELECT Id FROM RecordType WHERE" +
                 " SobjectType='thn__MYCE_Quote__c' AND Name='Quote'", ORG_USERNAME);
         List<String> recordTypeID = JsonParser2.getFieldValueSoql(recordTypes.toString(), "Id");
-        String quoteID = myceQuotes.createQuoteSFDX(SFDX, "Name='CloneMyceQuoteQuoteNameAutoTest' thn__Pax__c=5" +
+        String quoteID = myceQuotes.createQuoteSFDX(SFDX, "Name='CloneMyceQuoteQuoteNameAutoTest2' thn__Pax__c=5" +
                 " thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" + date.generateTodayDate2()
                 + " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 2) + " RecordTypeId='"
                 + recordTypeID.get(0) + "'", ORG_USERNAME);
-        myceQuotes.goToMyceQuotes().openMyceQoteRecord("CloneMyceQuoteQuoteNameAutoTest");
+        myceQuotes.goToMyceQuotes().openMyceQoteRecord("CloneMyceQuoteQuoteNameAutoTest2");
         String quoteName = myceQuotes.cloneMyceQuote_readName("Clone555", date.generateTodayDate3_plus(0, 5),
                 "5");
         Assert.assertEquals(quoteName, "Clone555");

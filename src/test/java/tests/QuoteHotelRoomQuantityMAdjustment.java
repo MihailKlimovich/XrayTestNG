@@ -41,7 +41,7 @@ public class QuoteHotelRoomQuantityMAdjustment extends BaseTest {
                         + propertyID + "' thn__Arrival_Date__c=" + date.generateTodayDate2_plus(0, 4) + "" +
                         " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 7) + "" +
                         " RecordTypeId='" + recordTypeID.get(0) + "' thn__Release_Date__c=" +
-                        date.generateTodayDate2_plus(0, 3) + " thn__Closed_Status__c='Won'", ORG_USERNAME);
+                        date.generateTodayDate2_plus(0, 3), ORG_USERNAME);
         String quoteHotelRoomId1 = quoteHotelRoom.createQuoteHotelRoomSFDX(SFDX, "thn__MYCE_Quote__c='"
                 + quoteID + "' thn__Product__c='" + room1NightID + "' thn__Space_Area__c='" + roomTypesId.get(0) +
                 "' thn__Rate_Plan__c='" + rateId.get(0) + "' thn__Property__c='" + propertyID + "'", ORG_USERNAME);
