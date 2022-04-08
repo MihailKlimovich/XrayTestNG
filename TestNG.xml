@@ -387,6 +387,11 @@
             <class name="tests.PackageLineRatePlan"/>
         </classes>
     </test>
+    <test name="TB-317: Changing Package lines timing does not change product timing.">
+        <classes>
+            <class name="tests.TB.ChangingPackageLinesTimingDoesNotChangeProductTiming"/>
+        </classes>
+    </test>
 </suite>
 
 
