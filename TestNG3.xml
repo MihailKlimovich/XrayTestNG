@@ -442,6 +442,11 @@
             <class name="tests.CloneMyceQuoteAndQHRPQuantity"/>
         </classes>
     </test>
+    <test name="TB-336: Unable to change Quote pax">
+        <classes>
+            <class name="tests.TB.UnableToChangeQuotePax"/>
+        </classes>
+    </test>
 </suite>
 
 

@@ -392,6 +392,11 @@
             <class name="tests.TB.ChangingPackageLinesTimingDoesNotChangeProductTiming"/>
         </classes>
     </test>
+    <test name="THY-685: Clone Myce Quote and QHRP.Quantity.">
+        <classes>
+            <class name="tests.CloneMyceQuoteAndQHRPQuantity"/>
+        </classes>
+    </test>
 </suite>
 
 

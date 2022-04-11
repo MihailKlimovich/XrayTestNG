@@ -39,7 +39,7 @@ public class MewsBlockUpdate extends BaseTest {
                         + propertyID + "' thn__Arrival_Date__c=" + date.generateTodayDate2() + "" +
                         " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 4) + "" +
                         " RecordTypeId='" + recordTypeID.get(0) + "' thn__Release_Date__c=" +
-                        date.generateTodayDate2_minus(0, 1) + " thn__Closed_Status__c='Won'", ORG_USERNAME);
+                        date.generateTodayDate2_minus(0, 1), ORG_USERNAME);
         StringBuilder rateRecords = myceQuotes.soql(SFDX, "SELECT Id FROM thn__Rate__c WHERE" +
                 " thn__Hotel__c='" + propertyID + "' AND thn__Mews_Id__c!=null AND thn__IsPublic__c=true AND" +
                 " Name='Bar'", ORG_USERNAME);
