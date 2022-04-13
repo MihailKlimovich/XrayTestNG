@@ -367,6 +367,11 @@
             <class name="tests.TB.ChangingPackageLinesTimingDoesNotChangeProductTiming"/>
         </classes>
     </test>
+    <test name="TB-256: Incorrect End Date on QP after Start Date is Changed on QP.">
+        <classes>
+            <class name="tests.TB.IncorrectEndDateOnQPafterStartDateIsChangedOnQP"/>
+        </classes>
+    </test>
 </suite>
 
 

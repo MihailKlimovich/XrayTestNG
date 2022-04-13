@@ -179,8 +179,8 @@ public class ReservationCreationProcess extends BaseTest {
                 "thn__MYCE_Quote__c",
                 "-v",
                 "Name='TestReservationProcessAuto2' thn__Pax__c=1 thn__Reservation_Guest__c='" + guestID + "'" +
-                        " thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" + date.generateTodayDate2() +
-                        " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 5),
+                        " thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" + date.generateTodayDate2_plus(0, 2) +
+                        " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 7),
                 "-u",
                 ORG_USERNAME,
                 "--json"});
@@ -253,13 +253,24 @@ public class ReservationCreationProcess extends BaseTest {
                 ORG_USERNAME,
                 "--json"});
         System.out.println(update);
+        StringBuilder reservationRecord2 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:get",
+                "-s",
+                "thn__Reservation__c",
+                "-w",
+                "thn__MYCE_Quote__c='" + myceQuoteID + "'",
+                "-u",
+                ORG_USERNAME,
+                "--json"});
+        String reservationId2 = JsonParser2.getFieldValue(reservationRecord2.toString(), "Id");
         StringBuilder reservationPricesRecords2 = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Reservation_Price__c",
                 "-w",
-                "thn__Reservation__c='" + reservationId + "'",
+                "thn__Reservation__c='" + reservationId2 + "'",
                 "-u",
                 ORG_USERNAME,
                 "--json"});
@@ -275,23 +286,34 @@ public class ReservationCreationProcess extends BaseTest {
                 "id='" + quoteHotelRoomId + "'",
                 "-v",
                 "thn__Arrival_Date_Time__c=" + date.generateTodayDate2() + " thn__Departure_Date_Time__c=" +
-                        date.generateTodayDate2_plus(0, 2),
+                        date.generateTodayDate2_plus(0, 5),
                 "-u",
                 ORG_USERNAME,
                 "--json"});
+        StringBuilder reservationRecord3 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:get",
+                "-s",
+                "thn__Reservation__c",
+                "-w",
+                "thn__MYCE_Quote__c='" + myceQuoteID + "'",
+                "-u",
+                ORG_USERNAME,
+                "--json"});
+        String reservationId3 = JsonParser2.getFieldValue(reservationRecord3.toString(), "Id");
         StringBuilder reservationPricesRecords3 = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Reservation_Price__c",
                 "-w",
-                "thn__Reservation__c='" + reservationId + "'",
+                "thn__Reservation__c='" + reservationId3 + "'",
                 "-u",
                 ORG_USERNAME,
                 "--json"});
         System.out.println(reservationPricesRecords3);
         String message3 = JsonParser2.getFieldValue2(reservationPricesRecords3.toString(), "message");
-        Assert.assertTrue(message3.contains("2 records were retrieved"));
+        Assert.assertTrue(message3.contains("5 records were retrieved"));
         StringBuilder update3 =SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:update",
@@ -305,20 +327,30 @@ public class ReservationCreationProcess extends BaseTest {
                 "-u",
                 ORG_USERNAME,
                 "--json"});
-        System.out.println(update);
+        StringBuilder reservationRecord4 = SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:get",
+                "-s",
+                "thn__Reservation__c",
+                "-w",
+                "thn__MYCE_Quote__c='" + myceQuoteID + "'",
+                "-u",
+                ORG_USERNAME,
+                "--json"});
+        String reservationId4 = JsonParser2.getFieldValue(reservationRecord4.toString(), "Id");
         StringBuilder reservationPricesRecords4 = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:get",
                 "-s",
                 "thn__Reservation_Price__c",
                 "-w",
-                "thn__Reservation__c='" + reservationId + "'",
+                "thn__Reservation__c='" + reservationId4 + "'",
                 "-u",
                 ORG_USERNAME,
                 "--json"});
         System.out.println(reservationPricesRecords4);
         String message4= JsonParser2.getFieldValue2(reservationPricesRecords4.toString(), "message");
-        Assert.assertTrue(message4.contains("2 records were retrieved"));
+        Assert.assertTrue(message4.contains("5 records were retrieved"));
     }
 
 }

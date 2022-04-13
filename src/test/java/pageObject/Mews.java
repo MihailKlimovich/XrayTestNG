@@ -23,6 +23,7 @@ public class Mews extends BasePage {
     By SEARCH_FIELD = By.xpath("//div[text()='Search within Thynk Hotel Paris']/following-sibling::input");
     By AVG_RATE = By.xpath("//span[text()='Avg. rate (nightly)']/parent::dt/following-sibling::dd[1]//strong//span");
     By TOTAL_AMOUNT = By.xpath("//span[text()='Total amount']/parent::dt/following-sibling::dd[1]//strong//span");
+    By RELEASE = By.xpath("//span[text()='Release']/parent::dt/following-sibling::dd[1]//span");
 
     @Step("Log in to Mews")
     public Mews logIn(String login, String password) throws InterruptedException {
@@ -54,6 +55,13 @@ public class Mews extends BasePage {
         wait1.until(ExpectedConditions.presenceOfElementLocated(TOTAL_AMOUNT));
         String amount = readText(TOTAL_AMOUNT);
         return amount;
+    }
+
+    @Step("Read release")
+    public String readRelease() throws InterruptedException {
+        wait1.until(ExpectedConditions.presenceOfElementLocated(RELEASE));
+        String releaseDate = readText(RELEASE);
+        return releaseDate;
     }
 
 

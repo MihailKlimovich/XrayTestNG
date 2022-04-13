@@ -92,6 +92,16 @@ public class Dates {
         return Res;
     }
 
+    public String generateDate_plus4(Integer Month, Integer Day){
+        SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");
+        Calendar c = Calendar.getInstance();
+        c.setTime(new Date());
+        c.add(Calendar.DAY_OF_MONTH, + Month);
+        c.add(Calendar.DAY_OF_WEEK, + Day);
+        String Res = format.format(c.getTime());
+        return Res;
+    }
+
     public String generateDateForPreviewSchedule_ddMMMyyyy(Integer Month, Integer Day){
         SimpleDateFormat format = new SimpleDateFormat("d MMM yyyy", Locale.US);
         Calendar c = Calendar.getInstance();

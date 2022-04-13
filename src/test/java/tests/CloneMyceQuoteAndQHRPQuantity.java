@@ -136,7 +136,7 @@ public class CloneMyceQuoteAndQHRPQuantity extends BaseTest{
     @Severity(SeverityLevel.NORMAL)
     @Story("THY-685: Clone Myce Quote and QHRP.Quantity.")
     public void case3() throws InterruptedException, IOException {
-        loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
+        //loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
         myceQuotes.deleteQuoteSFDX(SFDX, "Name='CloneMyceQuoteAndQHRPQuantityAutoTestClone3'", ORG_USERNAME);
         myceQuotes.goToMyceQuotes().openMyceQoteRecord("CloneMyceQuoteAndQHRPQuantityAutoTest");
         myceQuotes.cloneMyceQuote_changeDateAndPaxKeepRoomPax("CloneMyceQuoteAndQHRPQuantityAutoTestClone3",

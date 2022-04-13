@@ -98,17 +98,17 @@ public class QuoteHotelRoomQuantityMAdjustment extends BaseTest {
                 getFieldValueSoql2(mAdjustmentReocords.toString(), "thn__PMS_Quantity__c");
         Assert.assertEquals(mAdjustmentID.size(), 3);
         Assert.assertEquals(mAdjustmentStartUTC.get(0),
-                date.generateTodayDate2_plus(0, 4) + "T08:00:00.000+0000");
+                date.generateTodayDate2_plus(0, 4) + "T12:00:00.000+0000");
         Assert.assertEquals(mAdjustmentEndUTC.get(0),
-                date.generateTodayDate2_plus(0, 5) + "T22:59:59.000+0000");
+                date.generateTodayDate2_plus(0, 5) + "T23:59:59.000+0000");
         Assert.assertEquals(mAdjustmentStartUTC.get(1),
-                date.generateTodayDate2_plus(0, 4) + "T23:00:00.000+0000");
+                date.generateTodayDate2_plus(0, 5) + "T00:00:00.000+0000");
         Assert.assertEquals(mAdjustmentEndUTC.get(1),
-                date.generateTodayDate2_plus(0, 6) + "T22:59:59.000+0000");
+                date.generateTodayDate2_plus(0, 6) + "T23:59:59.000+0000");
         Assert.assertEquals(mAdjustmentStartUTC.get(2),
-                date.generateTodayDate2_plus(0, 5) + "T23:00:00.000+0000");
+                date.generateTodayDate2_plus(0, 6) + "T00:00:00.000+0000");
         Assert.assertEquals(mAdjustmentEndUTC.get(2),
-                date.generateTodayDate2_plus(0, 7) + "T11:00:00.000+0000");
+                date.generateTodayDate2_plus(0, 7) + "T14:30:00.000+0000");
         Assert.assertEquals(mAdjustmentPMSquantity.get(0).intValue(), 1);
         Assert.assertEquals(mAdjustmentPMSquantity.get(1).intValue(), 1);
         Assert.assertEquals(mAdjustmentPMSquantity.get(2).intValue(), 1);
@@ -158,41 +158,41 @@ public class QuoteHotelRoomQuantityMAdjustment extends BaseTest {
         Assert.assertEquals(mAdjustmentPMSquantity.get(7).intValue(), 5);
         Assert.assertEquals(mAdjustmentPMSquantity.get(8).intValue(), 1);
         Assert.assertEquals(mAdjustmentStartUTC.get(0),
-                date.generateTodayDate2_plus(0, 4) + "T08:00:00.000+0000");
+                date.generateTodayDate2_plus(0, 4) + "T12:00:00.000+0000");
         Assert.assertEquals(mAdjustmentEndUTC.get(0),
-                date.generateTodayDate2_plus(0, 5) + "T22:59:59.000+0000");
+                date.generateTodayDate2_plus(0, 5) + "T23:59:59.000+0000");
         Assert.assertEquals(mAdjustmentStartUTC.get(1),
-                date.generateTodayDate2_plus(0, 4) + "T23:00:00.000+0000");
+                date.generateTodayDate2_plus(0, 5) + "T00:00:00.000+0000");
         Assert.assertEquals(mAdjustmentEndUTC.get(1),
-                date.generateTodayDate2_plus(0, 6) + "T22:59:59.000+0000");
+                date.generateTodayDate2_plus(0, 6) + "T23:59:59.000+0000");
         Assert.assertEquals(mAdjustmentStartUTC.get(2),
-                date.generateTodayDate2_plus(0, 5) + "T23:00:00.000+0000");
+                date.generateTodayDate2_plus(0, 6) + "T00:00:00.000+0000");
         Assert.assertEquals(mAdjustmentEndUTC.get(2),
-                date.generateTodayDate2_plus(0, 7) + "T11:00:00.000+0000");
+                date.generateTodayDate2_plus(0, 7) + "T14:30:00.000+0000");
         Assert.assertEquals(mAdjustmentStartUTC.get(3),
-                date.generateTodayDate2_plus(0, 4) + "T08:00:00.000+0000");
+                date.generateTodayDate2_plus(0, 4) + "T12:00:00.000+0000");
         Assert.assertEquals(mAdjustmentEndUTC.get(3),
-                date.generateTodayDate2_plus(0, 5) + "T22:59:59.000+0000");
+                date.generateTodayDate2_plus(0, 5) + "T23:59:59.000+0000");
         Assert.assertEquals(mAdjustmentStartUTC.get(4),
-                date.generateTodayDate2_plus(0, 4) + "T23:00:00.000+0000");
+                date.generateTodayDate2_plus(0, 5) + "T00:00:00.000+0000");
         Assert.assertEquals(mAdjustmentEndUTC.get(4),
-                date.generateTodayDate2_plus(0, 6) + "T22:59:59.000+0000");
+                date.generateTodayDate2_plus(0, 6) + "T23:59:59.000+0000");
         Assert.assertEquals(mAdjustmentStartUTC.get(5),
-                date.generateTodayDate2_plus(0, 5) + "T23:00:00.000+0000");
+                date.generateTodayDate2_plus(0, 6) + "T00:00:00.000+0000");
         Assert.assertEquals(mAdjustmentEndUTC.get(5),
-                date.generateTodayDate2_plus(0, 7) + "T11:00:00.000+0000");
+                date.generateTodayDate2_plus(0, 7) + "T14:30:00.000+0000");
         Assert.assertEquals(mAdjustmentStartUTC.get(6),
-                date.generateTodayDate2_plus(0, 4) + "T08:00:00.000+0000");
+                date.generateTodayDate2_plus(0, 4) + "T12:00:00.000+0000");
         Assert.assertEquals(mAdjustmentEndUTC.get(6),
-                date.generateTodayDate2_plus(0, 5) + "T22:59:59.000+0000");
+                date.generateTodayDate2_plus(0, 5) + "T23:59:59.000+0000");
         Assert.assertEquals(mAdjustmentStartUTC.get(7),
-                date.generateTodayDate2_plus(0, 4) + "T23:00:00.000+0000");
+                date.generateTodayDate2_plus(0, 5) + "T00:00:00.000+0000");
         Assert.assertEquals(mAdjustmentEndUTC.get(7),
-                date.generateTodayDate2_plus(0, 6) + "T22:59:59.000+0000");
+                date.generateTodayDate2_plus(0, 6) + "T23:59:59.000+0000");
         Assert.assertEquals(mAdjustmentStartUTC.get(8),
-                date.generateTodayDate2_plus(0, 5) + "T23:00:00.000+0000");
+                date.generateTodayDate2_plus(0, 6) + "T00:00:00.000+0000");
         Assert.assertEquals(mAdjustmentEndUTC.get(8),
-                date.generateTodayDate2_plus(0, 7) + "T11:00:00.000+0000");
+                date.generateTodayDate2_plus(0, 7) + "T14:30:00.000+0000");
     }
 
 }
