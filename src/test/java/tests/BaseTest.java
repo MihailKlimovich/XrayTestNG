@@ -82,6 +82,7 @@ public class BaseTest {
     protected MAdjustments mAdjustments;
     protected CheckAvailabilitiesComponent checkAvailabilitiesComponent;
     protected Mews mews;
+    protected GroupBookingComponent groupBookingComponent;
 
 
 
@@ -106,11 +107,6 @@ public class BaseTest {
     final protected String thynkPackPassword = "Rost1508";
     final protected String thynkPackKey = "3MVG91BJr_0ZDQ4ta_ZwN1EEnfj.OQSJWOBWMPFXclJ22A8oaKqM9KTLdsoSupXX0idQnMIdsI3IweGbsJx6t";
     public String SFDX_AUTH_URL_THYNK = "force://PlatformCLI::5Aep861KhtojOqEEpf1C.laFhN16Pmut38yhtiYoOyrXXUeg8QGP2hZVxy39KizY65ljaqxviEldYCEYtpb1Gi1@thynkpack-dev-ed.my.salesforce.com";
-
-
-
-
-
 
 
 
@@ -204,6 +200,7 @@ public class BaseTest {
         mAdjustments = new MAdjustments(driver);
         checkAvailabilitiesComponent = new CheckAvailabilitiesComponent(driver);
         mews = new Mews(driver);
+        groupBookingComponent = new GroupBookingComponent(driver);
     }
 
     @AfterClass

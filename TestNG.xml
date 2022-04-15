@@ -402,6 +402,21 @@
             <class name="tests.TB.IncorrectEndDateOnQPafterStartDateIsChangedOnQP"/>
         </classes>
     </test>
+    <test name="TB-285: Reservation status discrepancy between Thynk and Mews">
+        <classes>
+            <class name="tests.TB.ReservationStatusDiscrepancyBetweenThynkAndMews"/>
+        </classes>
+    </test>
+    <test name="TB-315: Hotel room rate change not sent to Mews.">
+        <classes>
+            <class name="tests.TB.HotelRoomRateChangeNotSentToMews"/>
+        </classes>
+    </test>
+    <test name="THY-702: Package line type of occupancy.">
+        <classes>
+            <class name="tests.PackagLineTypeOfOccupancy"/>
+        </classes>
+    </test>
 </suite>
 
 

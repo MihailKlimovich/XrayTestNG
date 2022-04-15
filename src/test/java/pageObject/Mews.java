@@ -24,6 +24,8 @@ public class Mews extends BasePage {
     By AVG_RATE = By.xpath("//span[text()='Avg. rate (nightly)']/parent::dt/following-sibling::dd[1]//strong//span");
     By TOTAL_AMOUNT = By.xpath("//span[text()='Total amount']/parent::dt/following-sibling::dd[1]//strong//span");
     By RELEASE = By.xpath("//span[text()='Release']/parent::dt/following-sibling::dd[1]//span");
+    By DEPARTURE = By.xpath("//span[text()='Departure']/parent::dt/following-sibling::dd[1]//span");
+    By STATUS = By.xpath("//span[text()='Status']/parent::dt/following-sibling::dd[1]//span");
 
     @Step("Log in to Mews")
     public Mews logIn(String login, String password) throws InterruptedException {
@@ -62,6 +64,29 @@ public class Mews extends BasePage {
         wait1.until(ExpectedConditions.presenceOfElementLocated(RELEASE));
         String releaseDate = readText(RELEASE);
         return releaseDate;
+    }
+
+    @Step("Read departure")
+    public String readDeparture() throws InterruptedException {
+        wait1.until(ExpectedConditions.presenceOfElementLocated(DEPARTURE));
+        String departureDate = readText(DEPARTURE);
+        return departureDate;
+    }
+
+    @Step("Read status")
+    public String readStatus() throws InterruptedException {
+        wait1.until(ExpectedConditions.presenceOfElementLocated(STATUS));
+        String status = readText(STATUS);
+        return status;
+    }
+
+    @Step("Read nights rate")
+    public String readNightsRate(String night) throws InterruptedException {
+        wait1.until(ExpectedConditions.presenceOfElementLocated(By.
+                xpath("(//span[text()='Nights']/parent::dt/following-sibling::dd[1]//span/following-sibling::span)[" + night + "]")));
+        String rate = readText(By.
+                xpath("(//span[text()='Nights']/parent::dt/following-sibling::dd[1]//span/following-sibling::span)[" + night + "]"));
+        return rate;
     }
 
 

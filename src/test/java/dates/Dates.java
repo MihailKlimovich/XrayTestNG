@@ -93,7 +93,7 @@ public class Dates {
     }
 
     public String generateDate_plus4(Integer Month, Integer Day){
-        SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");
+        SimpleDateFormat format = new SimpleDateFormat("M/dd/yyyy");
         Calendar c = Calendar.getInstance();
         c.setTime(new Date());
         c.add(Calendar.DAY_OF_MONTH, + Month);

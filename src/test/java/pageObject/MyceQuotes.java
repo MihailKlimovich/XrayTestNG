@@ -86,6 +86,8 @@ public class MyceQuotes extends BasePage {
     By CLONE_PAX_FIELD = By.xpath("//input[@name='Pax']");
     By CHECK_AVAILABILITIES_BUTTON = By.xpath("//button[@name='thn__MYCE_Quote__c.Check_Avalabilities']");
     By QUOTE_NAME_FIELD = By.xpath("//span[text()='Name']/parent::div/following::div//span//slot//lightning-formatted-text");
+    By GROUP_BOOKING_TAB = By.xpath("//li//a[@data-label='Group Booking']");
+
 
 
 
@@ -500,6 +502,11 @@ public class MyceQuotes extends BasePage {
     public void clickEdit() throws InterruptedException {
         wait1.until(ExpectedConditions.elementToBeClickable(EDIT_BUTTON)).click();
         Thread.sleep(3000);
+    }
+
+    @Step("Click Group Booking Tab")
+    public void clickGroupBookingTab() throws IOException, InterruptedException {
+        click3(GROUP_BOOKING_TAB);
     }
 
     @Step("Change Stage type on Closed")
