@@ -31,7 +31,7 @@ public class QuoteHotelRoomQuantityReservations extends BaseTest {
         //List<String> guestID = JsonParser2.getFieldValueSoql(guest.toString(), "Id");
         //System.out.println(guestID);
         String quoteID = myceQuotes.createQuoteSFDX(SFDX, "Name='QuoteHotelRoomQuantityReservationsAutoTest'" +
-                " thn__Pax__c=5 thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
+                " thn__Pax__c=100 thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
                 date.generateTodayDate2_plus(0  ,2) + " thn__Departure_Date__c=" +
                 date.generateTodayDate2_plus(0, 6) + " RecordTypeId='" + recordTypeID.get(0), ORG_USERNAME);
         //myceQuotes.updateQuoteSFDX(SFDX, "Id='" + quoteID + "'", "thn__Reservation_Guest__c='" +
@@ -45,7 +45,7 @@ public class QuoteHotelRoomQuantityReservations extends BaseTest {
         List<String> roomTypesId = JsonParser2.getFieldValueSoql(roomTypeRecords.toString(), "Id");
         String quoteHotelRoomId = quoteHotelRoom.createQuoteHotelRoomSFDX(SFDX, "thn__MYCE_Quote__c='"
                 + quoteID + "' thn__Product__c='" + room1NightID + "' thn__Space_Area__c='" + roomTypesId.get(0) +
-                "' thn__Property__c='" + propertyID + "'", ORG_USERNAME);
+                "' thn__Property__c='" + propertyID + "' thn__Pax__c=5", ORG_USERNAME);
         myceQuotes.updateQuoteSFDX(SFDX, "Id='" + quoteID + "'", "thn__Stage__c='2 - Propose'",
                 ORG_USERNAME);
         myceQuotes.updateQuoteSFDX(SFDX, "Id='" + quoteID + "'", "thn__SendToMews__c='true'",

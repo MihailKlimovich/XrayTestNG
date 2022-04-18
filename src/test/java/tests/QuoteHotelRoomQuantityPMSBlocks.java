@@ -32,12 +32,12 @@ public class QuoteHotelRoomQuantityPMSBlocks extends BaseTest {
                 " SobjectType='thn__MYCE_Quote__c' AND Name='Quote'", ORG_USERNAME);
         List<String> recordTypeID = JsonParser2.getFieldValueSoql(recordTypes.toString(), "Id");
         String quoteID = myceQuotes.createQuoteSFDX(SFDX, "Name='QuoteHotelRoomQuantityPMSBlockAutoTest'" +
-                " thn__Pax__c=5 thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" + date.generateTodayDate2() +
+                " thn__Pax__c=100 thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" + date.generateTodayDate2() +
                 " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 4) + " RecordTypeId='" +
                 recordTypeID.get(0) + "'", ORG_USERNAME);
         String quoteHotelRoomID = quoteHotelRoom.createQuoteHotelRoomSFDX(SFDX, "thn__MYCE_Quote__c='"
                         + quoteID + "' thn__Product__c='" + room1NightID + "' thn__Space_Area__c='"
-                        + roomTypeQueenID + "' thn__Type_of_Occupancy__c='Triple'", ORG_USERNAME);
+                        + roomTypeQueenID + "' thn__Type_of_Occupancy__c='Triple' thn__Pax__c=5", ORG_USERNAME);
         myceQuotes.updateQuoteSFDX(SFDX, "Id='" + quoteID + "'", "thn__SendToPMS__c='true'", ORG_USERNAME);
         StringBuilder pmsBlockrecord = pmsBlock.getPMSBlockSFDX(SFDX, "thn__MYCE_Quote__c='" + quoteID + "'",
                 ORG_USERNAME);
