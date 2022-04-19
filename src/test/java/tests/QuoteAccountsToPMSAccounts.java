@@ -30,7 +30,6 @@ public class QuoteAccountsToPMSAccounts extends BaseTest {
         String propertyHotelCode = JsonParser2.getFieldValue(hotelRecord.toString(), "thn__HotelCode__c");
         StringBuilder recordTypes = myceQuotes.soql(SFDX, "SELECT Id FROM RecordType WHERE" +
                 " SobjectType='thn__MYCE_Quote__c' AND Name='Quote'", ORG_USERNAME);
-        System.out.println(recordTypes);
         List<String> recordTypeID = JsonParser2.getFieldValueSoql(recordTypes.toString(), "Id");
         String quoteID = myceQuotes.createQuoteSFDX(SFDX, "Name='QuoteAccountToPMSAccountsAutoTest'" +
                 " thn__Pax__c=3 thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" + date.generateTodayDate2() +

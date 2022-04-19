@@ -95,19 +95,19 @@
        cmd.values.add(customField17);
 
        Metadata.CustomMetadataValue customField18 = new Metadata.CustomMetadataValue();
-             customField18.field = 'thn__PMS_Account_stage__c';
-             customField18.value = '1 - Qualify, 3 - Tentative, 4 - Closed';
-             cmd.values.add(customField18);
+       customField18.field = 'thn__PMS_Account_stage__c';
+       customField18.value = '1 - Qualify, 3 - Tentative, 4 - Closed';
+       cmd.values.add(customField18);
 
        Metadata.CustomMetadataValue customField19 = new Metadata.CustomMetadataValue();
-             customField19.field = 'thn__Use_Cat_Prices__c';
-             customField19.value = true;
-             cmd.values.add(customField19);
+       customField19.field = 'thn__Use_Cat_Prices__c';
+       customField19.value = true;
+       cmd.values.add(customField19);
 
        Metadata.CustomMetadataValue customField20 = new Metadata.CustomMetadataValue();
-             customField20.field = 'thn__Create_Adjustment_Status__c';
-             customField20.value = '3 - Tentative';
-             cmd.values.add(customField20);
+       customField20.field = 'thn__Create_Adjustment_Status__c';
+       customField20.value = '3 - Tentative';
+       cmd.values.add(customField20);
 
        Metadata.CustomMetadataValue customField21 = new Metadata.CustomMetadataValue();
        customField21.field = 'thn__Default_Day_Price_Checkbox__c';
@@ -155,14 +155,19 @@
        cmd.values.add(customField29);
 
        Metadata.CustomMetadataValue customField30 = new Metadata.CustomMetadataValue();
-             customField30.field = 'thn__Hotel_room_overbooking__c';
-             customField30.value = true;
-             cmd.values.add(customField30);
+       customField30.field = 'thn__Hotel_room_overbooking__c';
+       customField30.value = true;
+       cmd.values.add(customField30);
 
        Metadata.CustomMetadataValue customField31 = new Metadata.CustomMetadataValue();
        customField31.field = 'thn__Meeting_Room_Product__c';
        customField31.value = meetingRoomProductID;
        cmd.values.add(customField31);
+
+       Metadata.CustomMetadataValue customField32 = new Metadata.CustomMetadataValue();
+       customField32.field = 'thn__Create_PMS_Account_Group__c';
+       customField32.value = true;
+       cmd.values.add(customField32);
 
 
        mdContainer.addMetadata(cmd);

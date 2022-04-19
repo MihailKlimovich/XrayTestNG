@@ -83,6 +83,7 @@ public class BaseTest {
     protected CheckAvailabilitiesComponent checkAvailabilitiesComponent;
     protected Mews mews;
     protected GroupBookingComponent groupBookingComponent;
+    protected HapiProperty hapiProperty;
 
 
 
@@ -100,8 +101,6 @@ public class BaseTest {
     public String ADMIN_USERNAME = System.getenv("ADMINUSERNAME");
     public String ADMIN_PASSWORD = System.getenv("ADMINPASSWORD");
     public String ADMIN_AUTH_URL = System.getenv("ADMIN_AUTH_URL");
-
-
 
 
     final protected String thynkPackDevOrg = "https://thynkpack-dev-ed.my.salesforce.com/";
@@ -203,6 +202,7 @@ public class BaseTest {
         checkAvailabilitiesComponent = new CheckAvailabilitiesComponent(driver);
         mews = new Mews(driver);
         groupBookingComponent = new GroupBookingComponent(driver);
+        hapiProperty = new HapiProperty(driver);
     }
 
     @AfterClass

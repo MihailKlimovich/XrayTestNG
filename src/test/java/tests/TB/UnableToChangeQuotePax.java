@@ -6,6 +6,7 @@ import io.qameta.allure.Story;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pageObject.JsonParser2;
+import pageObject.SfdxCommand;
 import tests.BaseTest;
 
 import java.io.IOException;
@@ -25,6 +26,18 @@ public class UnableToChangeQuotePax extends BaseTest {
     @Story("TB-336: Unable to change Quote pax")
     public void case1() throws InterruptedException, IOException {
         loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
+        SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:update",
+                "-s",
+                "User",
+                "-w",
+                "Username='" + ORG_USERNAME + "'",
+                "-v",
+                "thn__ByPassVR__c=true",
+                "-u",
+                ORG_USERNAME,
+                "--json"});
         myceQuotes.deleteQuoteSFDX(SFDX, "Name='UnableToChangeQuotePaxAutoTest'", ORG_USERNAME);
         packages.deletePackageSFDX(SFDX, "Name='TB-336 AutoPackage", ORG_USERNAME);
         StringBuilder hotelRecord = hotel.getHotelSFDX(SFDX, "thn__Unique_Id__c='Demo'", ORG_USERNAME);
@@ -116,6 +129,18 @@ public class UnableToChangeQuotePax extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     @Story("TB-336: Unable to change Quote pax")
     public void case2() throws InterruptedException, IOException {
+        SfdxCommand.runLinuxCommand1(new String[]{
+                SFDX,
+                "force:data:record:update",
+                "-s",
+                "User",
+                "-w",
+                "Username='" + ORG_USERNAME + "'",
+                "-v",
+                "thn__ByPassVR__c=false",
+                "-u",
+                ORG_USERNAME,
+                "--json"});
         StringBuilder quoteRecord = myceQuotes.getQuoteSFDX(SFDX,
                 "Name='UnableToChangeQuotePaxAutoTest'", ORG_USERNAME);
         String quoteID= JsonParser2.getFieldValue(quoteRecord.toString(), "Id");

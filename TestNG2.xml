@@ -387,6 +387,16 @@
             <class name="tests.PackagLineTypeOfOccupancy"/>
         </classes>
     </test>
+    <test name="TB-336: Unable to change Quote pax">
+        <classes>
+            <class name="tests.TB.UnableToChangeQuotePax"/>
+        </classes>
+    </test>
+    <test name="THY-708: PMS Account GROUP">
+        <classes>
+            <class name="tests.PMSAccountGROUP"/>
+        </classes>
+    </test>
 </suite>
 
 

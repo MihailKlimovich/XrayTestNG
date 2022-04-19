@@ -84,8 +84,8 @@ public class QuoteProductMeetingRoomInteractions extends BaseTest{
                 getFieldValue(quoteMeetingRoomRecord.toString(), "thn__Start_Time__c");
         String quoteMeetingRoomEndTime= JsonParser2.
                 getFieldValue(quoteMeetingRoomRecord.toString(), "thn__End_Time__c");
-        Assert.assertEquals(quoteMeetingRoomStartTime, "02:45:00.000Z");
-        Assert.assertEquals(quoteMeetingRoomEndTime, "20:00:00.000Z");
+        Assert.assertEquals(quoteMeetingRoomStartTime, "00:45:00.000Z");
+        Assert.assertEquals(quoteMeetingRoomEndTime, "18:00:00.000Z");
     }
 
     @Test(priority = 2, description = "Change the ‘Start Date/Time’ field of the ‘Quote Meetings Room’ so the value" +
@@ -119,12 +119,12 @@ public class QuoteProductMeetingRoomInteractions extends BaseTest{
                 "thn__MYCE_Quote__c='" + quoteID + "'", ORG_USERNAME);
         String quoteMeetingRoomStartTime= JsonParser2.
                 getFieldValue(quoteMeetingRoomRecord.toString(), "thn__Start_Time__c");
-        Assert.assertEquals(quoteMeetingRoomStartTime, "02:30:00.000Z");
-        Assert.assertEquals(baverageStartTime, "14:15:00.000Z");
-        Assert.assertEquals(dinerStartTime, "09:00:00.000Z");
-        Assert.assertEquals(winesStartTime, "04:15:00.000Z");
-        Assert.assertEquals(activityStartTime, "02:45:00.000Z");
-        Assert.assertEquals(equipmentStartTime, "08:15:00.000Z");
+        Assert.assertEquals(quoteMeetingRoomStartTime, "00:30:00.000Z");
+        Assert.assertEquals(baverageStartTime, "12:15:00.000Z");
+        Assert.assertEquals(dinerStartTime, "07:00:00.000Z");
+        Assert.assertEquals(winesStartTime, "02:15:00.000Z");
+        Assert.assertEquals(activityStartTime, "00:45:00.000Z");
+        Assert.assertEquals(equipmentStartTime, "06:15:00.000Z");
     }
 
     @Test(priority = 3, description = "Change the ‘Start Date/Time’ field of the ‘Quote Meetings Room’ so the value" +
@@ -159,12 +159,12 @@ public class QuoteProductMeetingRoomInteractions extends BaseTest{
                 "thn__MYCE_Quote__c='" + quoteID + "'", ORG_USERNAME);
         String quoteMeetingRoomStartTime= JsonParser2.
                 getFieldValue(quoteMeetingRoomRecord.toString(), "thn__Start_Time__c");
-        Assert.assertEquals(quoteMeetingRoomStartTime, "09:15:00.000Z");
-        Assert.assertEquals(baverageStartTime, "14:15:00.000Z");
-        Assert.assertEquals(dinerStartTime, "09:15:00.000Z");
-        Assert.assertEquals(winesStartTime, "09:15:00.000Z");
-        Assert.assertEquals(activityStartTime, "09:15:00.000Z");
-        Assert.assertEquals(equipmentStartTime, "08:15:00.000Z");
+        Assert.assertEquals(quoteMeetingRoomStartTime, "07:15:00.000Z");
+        Assert.assertEquals(baverageStartTime, "12:15:00.000Z");
+        Assert.assertEquals(dinerStartTime, "07:15:00.000Z");
+        Assert.assertEquals(winesStartTime, "07:15:00.000Z");
+        Assert.assertEquals(activityStartTime, "07:15:00.000Z");
+        Assert.assertEquals(equipmentStartTime, "06:15:00.000Z");
     }
 
     @Test(priority = 4, description = "Change the ‘End Date/Time’ field of the ‘Quote Meetings Room’ so the value" +
@@ -197,12 +197,12 @@ public class QuoteProductMeetingRoomInteractions extends BaseTest{
                 "thn__MYCE_Quote__c='" + quoteID + "'", ORG_USERNAME);
         String quoteMeetingRoomEndTime= JsonParser2.
                 getFieldValue(quoteMeetingRoomRecord.toString(), "thn__End_Time__c");
-        Assert.assertEquals(quoteMeetingRoomEndTime, "20:15:00.000Z");
-        Assert.assertEquals(baverageEndTime, "20:00:00.000Z");
-        Assert.assertEquals(dinerEndTime, "10:00:00.000Z");
-        Assert.assertEquals(winesEndTime, "11:30:00.000Z");
-        Assert.assertEquals(activityEndTime, "13:15:00.000Z");
-        Assert.assertEquals(equipmentEndTime, "20:00:00.000Z");
+        Assert.assertEquals(quoteMeetingRoomEndTime, "18:15:00.000Z");
+        Assert.assertEquals(baverageEndTime, "18:00:00.000Z");
+        Assert.assertEquals(dinerEndTime, "08:00:00.000Z");
+        Assert.assertEquals(winesEndTime, "09:30:00.000Z");
+        Assert.assertEquals(activityEndTime, "11:15:00.000Z");
+        Assert.assertEquals(equipmentEndTime, "18:00:00.000Z");
     }
 
     @Test(priority = 5, description = "Change the ‘End Date/Time’ field of the ‘Quote Meetings Room’ so the value is" +
@@ -236,12 +236,12 @@ public class QuoteProductMeetingRoomInteractions extends BaseTest{
                 "thn__MYCE_Quote__c='" + quoteID + "'", ORG_USERNAME);
         String quoteMeetingRoomEndTime= JsonParser2.
                 getFieldValue(quoteMeetingRoomRecord.toString(), "thn__End_Time__c");
-        Assert.assertEquals(quoteMeetingRoomEndTime, "19:45:00.000Z");
-        Assert.assertEquals(baverageEndTime, "19:45:00.000Z");
-        Assert.assertEquals(dinerEndTime, "10:00:00.000Z");
-        Assert.assertEquals(winesEndTime, "11:30:00.000Z");
-        Assert.assertEquals(activityEndTime, "13:15:00.000Z");
-        Assert.assertEquals(equipmentEndTime, "20:00:00.000Z");
+        Assert.assertEquals(quoteMeetingRoomEndTime, "17:45:00.000Z");
+        Assert.assertEquals(baverageEndTime, "17:45:00.000Z");
+        Assert.assertEquals(dinerEndTime, "08:00:00.000Z");
+        Assert.assertEquals(winesEndTime, "09:30:00.000Z");
+        Assert.assertEquals(activityEndTime, "11:15:00.000Z");
+        Assert.assertEquals(equipmentEndTime, "18:00:00.000Z");
     }
 
     @Test(priority = 6, description = "Change the ‘Start Date/Time’ field of the ‘Quote Product’ so the value is" +
@@ -262,8 +262,8 @@ public class QuoteProductMeetingRoomInteractions extends BaseTest{
                 "thn__MYCE_Quote__c='" + quoteID + "'", ORG_USERNAME);
         String quoteMeetingRoomStartTime= JsonParser2.
                 getFieldValue(quoteMeetingRoomRecord.toString(), "thn__Start_Time__c");
-        Assert.assertEquals(dinerStartTime, "08:30:00.000Z");
-        Assert.assertEquals(quoteMeetingRoomStartTime, "08:30:00.000Z");
+        Assert.assertEquals(dinerStartTime, "06:30:00.000Z");
+        Assert.assertEquals(quoteMeetingRoomStartTime, "06:30:00.000Z");
     }
 
     @Test(priority = 7, description = "Change the ‘Start Date/Time’ field of the ‘Quote Product’ so the value is" +
@@ -284,8 +284,8 @@ public class QuoteProductMeetingRoomInteractions extends BaseTest{
                 "thn__MYCE_Quote__c='" + quoteID + "'", ORG_USERNAME);
         String quoteMeetingRoomStartTime= JsonParser2.
                 getFieldValue(quoteMeetingRoomRecord.toString(), "thn__Start_Time__c");
-        Assert.assertEquals(dinerStartTime, "08:45:00.000Z");
-        Assert.assertEquals(quoteMeetingRoomStartTime, "08:45:00.000Z");
+        Assert.assertEquals(dinerStartTime, "06:45:00.000Z");
+        Assert.assertEquals(quoteMeetingRoomStartTime, "06:45:00.000Z");
     }
 
     @Test(priority = 8, description = "Change the ‘End Date/Time’ field of the ‘Quote Product’ so the value is more" +
@@ -306,8 +306,8 @@ public class QuoteProductMeetingRoomInteractions extends BaseTest{
                 "thn__MYCE_Quote__c='" + quoteID + "'", ORG_USERNAME);
         String quoteMeetingRoomEndTime= JsonParser2.
                 getFieldValue(quoteMeetingRoomRecord.toString(), "thn__End_Time__c");
-        Assert.assertEquals(baverageEndTime, "20:30:00.000Z");
-        Assert.assertEquals(quoteMeetingRoomEndTime, "20:30:00.000Z");
+        Assert.assertEquals(baverageEndTime, "18:30:00.000Z");
+        Assert.assertEquals(quoteMeetingRoomEndTime, "18:30:00.000Z");
     }
 
     @Test(priority = 9, description = "Change the ‘End Date/Time’ field of the ‘Quote Product’ so the value is less" +
@@ -328,7 +328,7 @@ public class QuoteProductMeetingRoomInteractions extends BaseTest{
                 "thn__MYCE_Quote__c='" + quoteID + "'", ORG_USERNAME);
         String quoteMeetingRoomEndTime= JsonParser2.
                 getFieldValue(quoteMeetingRoomRecord.toString(), "thn__End_Time__c");
-        Assert.assertEquals(baverageEndTime, "20:15:00.000Z");
-        Assert.assertEquals(quoteMeetingRoomEndTime, "20:15:00.000Z");
+        Assert.assertEquals(baverageEndTime, "18:15:00.000Z");
+        Assert.assertEquals(quoteMeetingRoomEndTime, "18:15:00.000Z");
     }
 }

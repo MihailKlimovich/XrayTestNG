@@ -153,17 +153,17 @@ public class QuoteHotelRoomQuantityPerNight extends BaseTest {
 
         StringBuilder quoteHotelRoomPrice1 = myceQuotes.soql(SFDX, "SELECT thn__Sales_Price_incl_Tax__c FROM" +
                 " thn__Quote_Hotel_Room_Price__c WHERE thn__Quote_Hotel_Room__c='" + quoteHotelRoomID + "'" +
-                " AND thn__Quantity__c=7", ORG_USERNAME);
+                " AND thn__Quantity__c=3", ORG_USERNAME);
         StringBuilder quoteHotelRoomPrice2 = myceQuotes.soql(SFDX, "SELECT thn__Sales_Price_incl_Tax__c FROM" +
                 " thn__Quote_Hotel_Room_Price__c WHERE thn__Quote_Hotel_Room__c='" + quoteHotelRoomID + "' AND" +
-                " thn__Quantity__c=3", ORG_USERNAME);
+                " thn__Quantity__c=5", ORG_USERNAME);
         List<Integer> quoteHotelRoomPriceSalesPriceInclTax1= JsonParser2.
                 getFieldValueSoql2(quoteHotelRoomPrice1.toString(), "thn__Sales_Price_incl_Tax__c");
         List<Integer> quoteHotelRoomPriceSalesPriceInclTax2= JsonParser2.
                 getFieldValueSoql2(quoteHotelRoomPrice2.toString(), "thn__Sales_Price_incl_Tax__c");
-        Assert.assertEquals(quoteHotelRoomSalesPriceInclTax, "1100");
-        Assert.assertEquals(quoteHotelRoomPriceSalesPriceInclTax1.get(0).intValue(), 770);
-        Assert.assertEquals(quoteHotelRoomPriceSalesPriceInclTax2.get(0).intValue(), 330);
+        Assert.assertEquals(quoteHotelRoomSalesPriceInclTax, "880");
+        Assert.assertEquals(quoteHotelRoomPriceSalesPriceInclTax1.get(0).intValue(), 330);
+        Assert.assertEquals(quoteHotelRoomPriceSalesPriceInclTax2.get(0).intValue(), 550);
     }
 
     @Test(priority = 4, description = "Create Quote, create a Package and add a Hotel Room as Package Line." +

@@ -447,6 +447,11 @@
             <class name="tests.TB.UnableToChangeQuotePax"/>
         </classes>
     </test>
+    <test name="THY-708: PMS Account GROUP">
+        <classes>
+            <class name="tests.PMSAccountGROUP"/>
+        </classes>
+    </test>
     <test name="TB-256: Incorrect End Date on QP after Start Date is Changed on QP.">
         <classes>
             <class name="tests.TB.IncorrectEndDateOnQPafterStartDateIsChangedOnQP"/>
@@ -472,7 +477,6 @@
             <class name="tests.MewsReleaseDateUpdate"/>
         </classes>
     </test>
-
 </suite>
 
 
