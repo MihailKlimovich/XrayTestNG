@@ -1,4 +1,4 @@
- String propertyID = [select ID from thn__Hotel__c where Name = 'Property Auto' limit 1].ID;
+  String propertyID = [select ID from thn__Hotel__c where Name = 'Property Auto' limit 1].ID;
   String resourceID = [select ID from thn__Resource__c where Name = 'DEFAULT PA' limit 1].ID;
 
   Metadata.DeployContainer mdContainer = new Metadata.DeployContainer();

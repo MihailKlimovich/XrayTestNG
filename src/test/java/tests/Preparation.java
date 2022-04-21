@@ -35,5 +35,13 @@ public class Preparation extends BaseTest {
         user.apexExecute(SFDX, ADMIN_USERNAME, "src/main/Data/OccupancyTypeMetadata.apex");
     }
 
+    @Test (priority = 4)
+    @Severity(SeverityLevel.NORMAL)
+    @Description("Create Hapi Connector Metadata")
+    @Story("Hapi Connector Metadata")
+    public void createHapiConnector() throws InterruptedException, IOException {
+        user.apexExecute(SFDX, ADMIN_USERNAME, "src/main/Data/HapiConnectorDemo.apex");
+    }
+
 
 }

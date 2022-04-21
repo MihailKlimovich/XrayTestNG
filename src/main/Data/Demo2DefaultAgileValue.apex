@@ -1,4 +1,4 @@
- String propertyID = [select ID from thn__Hotel__c where thn__Unique_Id__c = 'Demo2' limit 1].ID;
+       String propertyID = [select ID from thn__Hotel__c where thn__Unique_Id__c = 'Demo2' limit 1].ID;
        String resourceID = [select ID from thn__Resource__c where Name = 'DEFAULT' AND thn__Hotel__c = :propertyID limit 1].ID;
        String meetingRoomProductID = [select ID from thn__Product__c where Name = 'Meeting Room' AND thn__Hotel__c = :propertyID limit 1].ID;
 

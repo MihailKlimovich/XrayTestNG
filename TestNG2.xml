@@ -397,6 +397,16 @@
             <class name="tests.PMSAccountGROUP"/>
         </classes>
     </test>
+    <test name="TB-376: Quote hotel room - quantity">
+        <classes>
+            <class name="tests.TB.QuoteHotelRoomQuantity"/>
+        </classes>
+    </test>
+    <test name="TB-356: PMS Block - change date">
+        <classes>
+            <class name="tests.TB.PMSBlockChangeDate"/>
+        </classes>
+    </test>
 </suite>
 
 

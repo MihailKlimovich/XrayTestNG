@@ -452,6 +452,16 @@
             <class name="tests.PMSAccountGROUP"/>
         </classes>
     </test>
+    <test name="TB-376: Quote hotel room - quantity">
+        <classes>
+            <class name="tests.TB.QuoteHotelRoomQuantity"/>
+        </classes>
+    </test>
+    <test name="TB-356: PMS Block - change date">
+        <classes>
+            <class name="tests.TB.PMSBlockChangeDate"/>
+        </classes>
+    </test>
     <test name="TB-256: Incorrect End Date on QP after Start Date is Changed on QP.">
         <classes>
             <class name="tests.TB.IncorrectEndDateOnQPafterStartDateIsChangedOnQP"/>
@@ -475,6 +485,11 @@
     <test name="THY-641: Mews - Release date update">
         <classes>
             <class name="tests.MewsReleaseDateUpdate"/>
+        </classes>
+    </test>
+    <test name="TB-371: PMS_Block__c.Code__c doesn't map the value from Custom field on Quote">
+        <classes>
+            <class name="tests.TB.PMSBlockCodeDoesntMapTheValueFromCustomFieldOnQuote"/>
         </classes>
     </test>
 </suite>
