@@ -407,6 +407,11 @@
             <class name="tests.TB.PMSBlockChangeDate"/>
         </classes>
     </test>
+    <test name="THY-524: Quote Hotel room: assign mews state">
+        <classes>
+            <class name="tests.QuoteHotelRoomAssignMewsState"/>
+        </classes>
+    </test>
 </suite>
 
 

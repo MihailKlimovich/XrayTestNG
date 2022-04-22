@@ -33,7 +33,8 @@ public class QuoteHotelRoomQuantityReservations extends BaseTest {
         String quoteID = myceQuotes.createQuoteSFDX(SFDX, "Name='QuoteHotelRoomQuantityReservationsAutoTest'" +
                 " thn__Pax__c=100 thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
                 date.generateTodayDate2_plus(0  ,2) + " thn__Departure_Date__c=" +
-                date.generateTodayDate2_plus(0, 6) + " RecordTypeId='" + recordTypeID.get(0), ORG_USERNAME);
+                date.generateTodayDate2_plus(0, 6) + " RecordTypeId='" + recordTypeID.get(0) + "'",
+                ORG_USERNAME);
         //myceQuotes.updateQuoteSFDX(SFDX, "Id='" + quoteID + "'", "thn__Reservation_Guest__c='" +
                 //guestID.get(0) + "'", ORG_USERNAME);
         StringBuilder room1NightRecord = product.getProductSFDX(SFDX, "Name='ROOM 1 NIGHT' thn__Hotel__c='"
