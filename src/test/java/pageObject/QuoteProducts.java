@@ -180,6 +180,23 @@ public class QuoteProducts extends BasePage {
         return quoteProductID;
     }
 
+    @Step("Delete Quote Product SFDX")
+    public StringBuilder deleteQuoteProductSFDX(String sfdxPath, String where, String userName)
+            throws IOException, InterruptedException {
+        StringBuilder result = SfdxCommand.runLinuxCommand1(new String[]{
+                sfdxPath,
+                "force:data:record:delete",
+                "-s",
+                "thn__Quote_Product__c",
+                "-w",
+                where,
+                "-u",
+                userName,
+                "--json"});
+        System.out.println(result);
+        return result;
+    }
+
     @Step("Get Quote Product SFDX")
     public StringBuilder getQuoteProductSFDX(String sfdxPath, String where, String userName)
             throws IOException, InterruptedException {

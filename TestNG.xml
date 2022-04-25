@@ -442,6 +442,16 @@
             <class name="tests.QuoteHotelRoomAssignMewsState"/>
         </classes>
     </test>
+    <test name="THY-709: Quote meeting room times">
+        <classes>
+            <class name="tests.QuoteMeetingRoomTimes"/>
+        </classes>
+    </test>
+    <test name="TB-371: PMS_Block__c.Code__c doesn't map the value from Custom field on Quote">
+        <classes>
+            <class name="tests.TB.PMSBlockCodeDoesntMapTheValueFromCustomFieldOnQuote"/>
+        </classes>
+    </test>
 </suite>
 
 

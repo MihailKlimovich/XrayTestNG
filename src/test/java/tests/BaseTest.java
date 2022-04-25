@@ -13,6 +13,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import pageObject.*;
+import pageObject.QuoteAnalytics;
 import pageObject.RoomingList;
 import pages.HomePageForPackageOrg;
 import pages.HomePageForScratchOrg;
@@ -84,6 +85,7 @@ public class BaseTest {
     protected Mews mews;
     protected GroupBookingComponent groupBookingComponent;
     protected HapiProperty hapiProperty;
+    protected QuoteAnalytics quoteAnalytics;
 
 
 
@@ -204,6 +206,7 @@ public class BaseTest {
         mews = new Mews(driver);
         groupBookingComponent = new GroupBookingComponent(driver);
         hapiProperty = new HapiProperty(driver);
+        quoteAnalytics = new QuoteAnalytics(driver);
     }
 
     @AfterClass
