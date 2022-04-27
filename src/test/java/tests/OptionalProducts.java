@@ -12,7 +12,7 @@ import java.util.List;
 
 public class OptionalProducts extends BaseTest {
 
-    @Test(priority = 1, description = "Create MYCE Quote. dd Quote meeting room, Quote package and Quote product to" +
+    @Test(priority = 1, description = "Create MYCE Quote. Add Quote meeting room, Quote package and Quote product to" +
             " the Quote, set Optional checkboxes to true on each added record. Expected result: Sales price fields" +
             " on added records are set to 0 (including Quote package child records). Unit price and Pax stay as" +
             " stated initially. Potential max revenue currency field on Quote meeting room, Quote Package and" +

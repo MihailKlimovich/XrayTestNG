@@ -64,6 +64,7 @@ public class ReservationStatusDiscrepancyBetweenThynkAndMews extends BaseTest {
         Assert.assertEquals(reservationDeparture, date.generateTodayDate2_plus(0, 8) +
                 "T15:00:00.000+0000");
         Assert.assertEquals(mewsStatus, "FUTURE");
+        System.out.println(mewsDeparture);
         Assert.assertTrue(mewsDeparture.contains(date.generateDate_plus4(0, 8)));
     }
 

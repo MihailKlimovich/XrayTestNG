@@ -136,7 +136,7 @@ public class ChangingPackageLinesTimingDoesNotChangeProductTiming extends BaseTe
     @Test(priority = 3, description = "Change the Start Date Time to 03:45 and End Date Time to 12:30 on the Quote" +
             " Hotel Room. Go to the Quote Package line of type Hotel Room and change the Start Time aтв End Time." +
             " Expected Result: Arrival Date Time and Departure Date were updated on the Quote Hotel Rooms where the" +
-            " value wasn’t changed..")
+            " value wasn’t changed.")
     @Severity(SeverityLevel.NORMAL)
     @Story("TB-317: Changing Package lines timing does not change product timing.")
     public void case3() throws InterruptedException, IOException {
@@ -181,8 +181,8 @@ public class ChangingPackageLinesTimingDoesNotChangeProductTiming extends BaseTe
                 getFieldValue(updatedQuoteHotelRoomRecord2.toString(), "thn__Departure_Time__c");
         Assert.assertEquals(qhrArrivalTime1, "01:45:00.000Z");
         Assert.assertEquals(qhrDepartureTime1, "10:30:00.000Z");
-        Assert.assertEquals(qhrArrivalTime2, "03:00:00.000Z");
-        Assert.assertEquals(qhrDepartureTime2, "13:00:00.000Z");
+        Assert.assertEquals(qhrArrivalTime2, "05:00:00.000Z");
+        Assert.assertEquals(qhrDepartureTime2, "15                                                  :00:00.000Z");
     }
 
 }

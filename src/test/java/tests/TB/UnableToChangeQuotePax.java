@@ -25,7 +25,7 @@ public class UnableToChangeQuotePax extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     @Story("TB-336: Unable to change Quote pax")
     public void case1() throws InterruptedException, IOException {
-        loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
+        /*loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
         SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:update",
@@ -37,7 +37,7 @@ public class UnableToChangeQuotePax extends BaseTest {
                 "thn__ByPassVR__c=true",
                 "-u",
                 ORG_USERNAME,
-                "--json"});
+                "--json"});*/
         myceQuotes.deleteQuoteSFDX(SFDX, "Name='UnableToChangeQuotePaxAutoTest'", ORG_USERNAME);
         packages.deletePackageSFDX(SFDX, "Name='TB-336 AutoPackage", ORG_USERNAME);
         StringBuilder hotelRecord = hotel.getHotelSFDX(SFDX, "thn__Unique_Id__c='Demo'", ORG_USERNAME);
@@ -51,13 +51,14 @@ public class UnableToChangeQuotePax extends BaseTest {
         StringBuilder activityRecord = product.getProductSFDX(SFDX, "Name='ACTIVITY'", ORG_USERNAME);
         String productActivityID= JsonParser2.getFieldValue(activityRecord.toString(), "Id");
         String packageID = packages.createPackageSFDX(SFDX, "Name='TB-336 AutoPackage'" +
-                " thn__Hotel__c='" + propertyID + "' thn__Multi_Days__c=true", ORG_USERNAME);
+                " thn__Hotel__c='" + propertyID + "'", ORG_USERNAME);
         packageLine.createPackageLineSFDX(SFDX, "Name='Beverage' thn__Package__c='" + packageID + "'" +
                 " thn__Type__c='Beverage' thn__Product__c='" + beverageID + "' thn__Start_Time__c=15:00" +
                 " thn__End_Time__c=16:00 thn__Unit_Price__c=10 thn__VAT_Category__c=1", ORG_USERNAME);
         packageLine.createPackageLineSFDX(SFDX, "Name='Meeting Room' thn__Package__c='" + packageID +
                 "' thn__Type__c='Meeting Room' thn__Product__c='" + meetingHalfDayID + "' thn__Start_Time__c=12:00" +
                 " thn__End_Time__c=13:00 thn__Unit_Price__c=20 thn__VAT_Category__c=1", ORG_USERNAME);
+        packages.updatePackageSFDX(SFDX, "Id='" + packageID + "'", "thn__Multi_Days__c=true", ORG_USERNAME);
         packageLine.createPackageLineSFDX(SFDX, "Name='Food' thn__Package__c='" + packageID + "'" +
                 " thn__Type__c='Food' thn__Product__c='" + productDinerID + "' thn__Start_Time__c=15:00" +
                 " thn__End_Time__c=16:00 thn__Unit_Price__c=10 thn__VAT_Category__c=1 thn__AppliedDay__c=1", ORG_USERNAME);

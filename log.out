@@ -1,1 +1,6 @@
-2022-04-22 10:27:41,373 INFO  - case1 test is starting.
+2022-04-27 16:47:18,080 INFO  - preconditions test is starting.
+2022-04-27 16:49:00,539 INFO  - cloneQuote test is starting.
+2022-04-27 16:50:09,234 INFO  - cloneQuoteHotelRooms test is starting.
+2022-04-27 16:50:41,210 INFO  - cloneQuoteProduct test is starting.
+2022-04-27 16:51:10,380 INFO  - cloneQuoteMeetingRoom test is starting.
+2022-04-27 16:51:40,162 INFO  - cloneQuotePackage test is starting.

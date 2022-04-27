@@ -38,7 +38,6 @@ public class CreateQuoteHotelRoomComponent extends BasePage {
     public void createNewQuoteHotelRoom
             (String product, String roomType, String pax, String arrivalDate, String arrivalTime, String departureDate,
              String departureTime, String dayNumber) throws InterruptedException {
-
         driver.switchTo().frame(0);
 
         click3(PRODUCT_FIELD);

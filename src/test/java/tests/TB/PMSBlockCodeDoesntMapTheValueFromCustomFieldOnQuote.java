@@ -45,7 +45,7 @@ public class PMSBlockCodeDoesntMapTheValueFromCustomFieldOnQuote extends BaseTes
                 ORG_USERNAME);
         String pmsBlockCode = JsonParser2.getFieldValue(pmsBlockRecord.toString(), "thn__Code__c");
         System.out.println(pmsBlockCode);
-        Assert.assertEquals(pmsBlockCode, "22-CAN22-0755");
+        Assert.assertEquals(pmsBlockCode, "22CAN220755");
     }
 
     @Test(priority = 2, description = "Modify the CMT > Hapi Connector record. Set an invalid value inBlock Code" +
@@ -77,9 +77,10 @@ public class PMSBlockCodeDoesntMapTheValueFromCustomFieldOnQuote extends BaseTes
         myceQuotes.updateQuoteSFDX(SFDX, "Id='" + quoteID + "'", "thn__SendToPMS__c=true", ORG_USERNAME);
         StringBuilder pmsBlockRecord = pmsBlock.getPMSBlockSFDX(SFDX, "thn__MYCE_Quote__c='" + quoteID + "'",
                 ORG_USERNAME);
+        String pmsBlockId = JsonParser2.getFieldValue(pmsBlockRecord.toString(), "Id");
         String pmsBlockCode = JsonParser2.getFieldValue(pmsBlockRecord.toString(), "thn__Code__c");
         System.out.println(pmsBlockCode);
-        Assert.assertEquals(pmsBlockCode, quoteID.toUpperCase());
+        Assert.assertEquals(pmsBlockCode, pmsBlockId.toUpperCase());
     }
 
 }

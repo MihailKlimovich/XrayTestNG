@@ -502,6 +502,16 @@
             <class name="tests.QuoteMeetingRoomTimes"/>
         </classes>
     </test>
+    <test name="THY-706: Quote Analytics">
+        <classes>
+            <class name="tests.QuoteAnalyticsProcess"/>
+        </classes>
+    </test>
+    <test name="TB-388: Clone selection.">
+        <classes>
+            <class name="tests.TB.CloneSelection"/>
+        </classes>
+    </test>
 </suite>
 
 

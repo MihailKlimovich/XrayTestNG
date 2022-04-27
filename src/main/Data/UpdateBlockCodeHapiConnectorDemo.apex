@@ -7,7 +7,7 @@
 
   Metadata.CustomMetadataValue customField1 = new Metadata.CustomMetadataValue();
   customField1.field = 'thn__Block_Code_Fields__c';
-  customField1.value = 'thn__MYCE_Quote__c.Reference__c';
+  customField1.value = 'thn__MYCE_Quote__r.Reference__c';
   cmd.values.add(customField1);
 
   mdContainer.addMetadata(cmd);

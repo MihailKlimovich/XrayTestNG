@@ -421,9 +421,7 @@ public class MEWSavailabilityBlock extends BaseTest {
     }
 
     @Test(priority = 7, description = "Update MYCE Quote Shoulder Start Date / Shoulder End Date, new dates are not" +
-            " within the block interval. Expected result: On existing Blocks  PMS Block status is set to “Delete”," +
-            " Response and Response date/time is filled, External Id is cleared, Delete Block request is sent to" +
-            " MEWS. New TH PMS Blocks are created and are sent to MEWS.")
+            " within the block interval. Expected result: On existing PMS Block Name = 'Updated + Quote Name'")
     @Severity(SeverityLevel.NORMAL)
     @Story("THY-460: MEWS - Availability Block")
     public void case7() throws InterruptedException, IOException {
@@ -433,34 +431,10 @@ public class MEWSavailabilityBlock extends BaseTest {
         myceQuotes.updateQuoteSFDX(SFDX, "Id='" + quoteID + "'", "thn__Shoulder_Start_Date__c="
                 + date.generateTodayDate2_plus(0, 3) + " thn__Shoulder_End_Date__c="
                 + date.generateTodayDate2_plus(0, 9), ORG_USERNAME);
-        StringBuilder pmsBlockRecord1 = pmsBlock.getPMSBlockSFDX(SFDX, "thn__MYCE_Quote__c='" + quoteID +
-                "' thn__PMS_Status__c='Send'", ORG_USERNAME);
-        StringBuilder pmsBlockRecord2 = pmsBlock.getPMSBlockSFDX(SFDX, "thn__MYCE_Quote__c='" + quoteID +
-                "' thn__PMS_Status__c='Delete'", ORG_USERNAME);
-        String pmsBlockResponce1 = JsonParser2.getFieldValue(pmsBlockRecord1.toString(), "thn__PMS_Response__c");
-        String pmsBlockResponce2 = JsonParser2.getFieldValue(pmsBlockRecord2.toString(), "thn__PMS_Response__c");
-        String pmsBlockPMSstatus1 = JsonParser2.getFieldValue(pmsBlockRecord1.toString(), "thn__PMS_Status__c");
-        String pmsBlockPMSstatus2 = JsonParser2.getFieldValue(pmsBlockRecord2.toString(), "thn__PMS_Status__c");
-        String pmsBlockPMSid1 = JsonParser2.getFieldValue(pmsBlockRecord1.toString(), "thn__PMSId__c");
-        String pmsBlockPMSid2 = JsonParser2.getFieldValue(pmsBlockRecord2.toString(), "thn__PMSId__c");
-        String pmsShoulderStartDate1 = JsonParser2.
-                getFieldValue(pmsBlockRecord1.toString(), "thn__StartShoulderDate__c");
-        String pmsShoulderStartDate2 = JsonParser2.
-                getFieldValue(pmsBlockRecord2.toString(), "thn__StartShoulderDate__c");
-        String pmsShoulderEndDate1 = JsonParser2.
-                getFieldValue(pmsBlockRecord1.toString(), "thn__EndShoulderDate__c");
-        String pmsShoulderEndDate2 = JsonParser2.
-                getFieldValue(pmsBlockRecord2.toString(), "thn__EndShoulderDate__c");
-        Assert.assertEquals(pmsBlockResponce1, "200 OK");
-        Assert.assertEquals(pmsBlockResponce2, "200 OK");
-        Assert.assertEquals(pmsBlockPMSstatus1, "Send");
-        Assert.assertEquals(pmsBlockPMSstatus2, "Delete");
-        Assert.assertNotNull(pmsBlockPMSid1);
-        Assert.assertNull(pmsBlockPMSid2);
-        Assert.assertEquals(pmsShoulderStartDate1, date.generateTodayDate2_plus(0, 3));
-        Assert.assertEquals(pmsShoulderEndDate1, date.generateTodayDate2_plus(0, 9));
-        Assert.assertEquals(pmsShoulderStartDate2, date.generateTodayDate2_plus(0, 2));
-        Assert.assertEquals(pmsShoulderEndDate2, date.generateTodayDate2_plus(0, 8));
+        StringBuilder pmsBlockRecord1 = pmsBlock.getPMSBlockSFDX(SFDX, "thn__MYCE_Quote__c='" + quoteID + "'",
+                ORG_USERNAME);
+        String pmsBlockName = JsonParser2.getFieldValue(pmsBlockRecord1.toString(), "Name");
+        Assert.assertEquals(pmsBlockName, "Updated MEWSavailabilityBlockAutoTest6");
     }
 
     @Test(priority = 8, description = "On Quote that has Quote hotel rooms, set Send To Mews to true, make sure" +
