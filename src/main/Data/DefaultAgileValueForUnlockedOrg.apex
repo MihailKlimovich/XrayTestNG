@@ -169,6 +169,11 @@
       customField32.value = true;
       cmd.values.add(customField32);
 
+      Metadata.CustomMetadataValue customField33 = new Metadata.CustomMetadataValue();
+      customField33.field = 'thn__Display_hotel_room_inventory__c';
+      customField33.value = true;
+      cmd.values.add(customField33);
+
       mdContainer.addMetadata(cmd);
       Id job = Metadata.Operations.enqueueDeployment(mdContainer, null);
       System.debug(job);

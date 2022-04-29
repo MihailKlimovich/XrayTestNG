@@ -457,6 +457,16 @@
             <class name="tests.QuoteAnalyticsProcess"/>
         </classes>
     </test>
+    <test name="TB-327: Rooming list containing cancelled reservations">
+        <classes>
+            <class name="tests.TB.RoomingListContainingCancelledReservations"/>
+        </classes>
+    </test>
+    <test name="TB-333: Rooming list arrival date not updated if arrival date of the reservation is changed">
+        <classes>
+            <class name="tests.TB.RoomingListArrivalDateNotUpdatedIfArrivalDateOfTheReservationIsChanged"/>
+        </classes>
+    </test>
 </suite>
 
 

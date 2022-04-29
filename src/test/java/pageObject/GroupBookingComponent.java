@@ -15,7 +15,7 @@ public class GroupBookingComponent extends BasePage {
 
     By SAVE_BUTTON = By.xpath("//div[@thn-groupbooking_groupbooking]//button[text()='Save']");
     By NEW_BUTTON = By.xpath("//div[@thn-groupbooking_groupbooking]//button[text()='New']");
-    By RATE_PICKLIST = By.xpath("//button[@aria-label='Rate, Select an Option']");
+    By RATE_PICKLIST = By.xpath("//button[@aria-label='Hotel Rooms, Select an Option']");
     By OCCUPANCY_TYPE_PICKLIST = By.xpath("//button[@aria-label='Occupancy Type, Select an Option']");
     By NUMBER_OF_ROOMS_FIELD = By.xpath("//lightning-input[@data-field='thn__Pax__c']//input");
     By ROOM_TYPE_PICKLIST = By.xpath("//input[@placeholder='Select an Option']");
@@ -77,6 +77,11 @@ public class GroupBookingComponent extends BasePage {
         writeText(FILTER_VALUES, roomTypes);
         click3(By.xpath("//span[@title='" + roomTypes + "']"));
         click4(ADD_RATE_BUTTON);
+    }
+
+    @Step("Read Quote Hotel Room Name")
+    public String readQuoteHotelRoomName(String numberOfRooms) throws InterruptedException {
+        return readRecalculateMessage(By.xpath("(//span[@class='qhrDisplayName'])[" + numberOfRooms + "]"));
     }
 
 
