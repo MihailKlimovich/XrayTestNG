@@ -1,10 +1,12 @@
 package pageObject;
 
 import io.qameta.allure.Step;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
+import org.openqa.selenium.support.Color;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import pages.BasePage;
+
+import static org.openqa.selenium.support.ui.ExpectedConditions.alertIsPresent;
 
 public class GroupBookingComponent extends BasePage {
 
@@ -51,6 +53,8 @@ public class GroupBookingComponent extends BasePage {
 
     }
 
+
+
     @Step("Click Save button")
     public void clickSaveButton() throws InterruptedException {
         click4(SAVE_BUTTON);
@@ -83,6 +87,36 @@ public class GroupBookingComponent extends BasePage {
     public String readQuoteHotelRoomName(String numberOfRooms) throws InterruptedException {
         return readRecalculateMessage(By.xpath("(//span[@class='qhrDisplayName'])[" + numberOfRooms + "]"));
     }
+
+    @Step("Find room by Name")
+    public boolean findRoomByName(String name) throws InterruptedException {
+        boolean displaydElement = isDisplayed(By.xpath("//span[@class='qhrDisplayName'][text()='"+ name + "']"));
+        return displaydElement;
+    }
+
+    @Step("Read colour by number of element")
+    public String readColour_ByNumberOfElement(String numberOfElement) throws InterruptedException {
+        WebElement t = driver.findElement(By.
+                xpath("(//lightning-icon[@class='slds-icon-utility-stop clone-button pointer-auto slds-icon_container'])[" + numberOfElement + "]"));
+        String s = t.getAttribute("style");
+        return s;
+    }
+
+    @Step("Read checkbox on quote hotel room")
+    public Boolean checkCheckboxActivity(String numberOfElement) throws InterruptedException {
+        Boolean c = readCheckbox(By.xpath("(//div[@thn-groupbooking_groupbooking]//c-day-price-row//input[@type='checkbox'])[" + numberOfElement + "]"));
+        return c;
+    }
+
+
+
+    /*@Step("Check that the checkbox is not interactive")
+    public Boolean checkCheckbox_isNotIntaractive(String numberOfElement) throws InterruptedException {
+        WebElement t = driver.findElement(By.
+                xpath("(//div[@thn-groupbooking_groupbooking]//c-day-price-row//span[@class='slds-checkbox_faux'])[" + numberOfElement + "]"));
+        Boolean s = t.
+        return s;
+    }*/
 
 
 }

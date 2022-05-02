@@ -522,6 +522,11 @@
             <class name="tests.TB.RoomingListArrivalDateNotUpdatedIfArrivalDateOfTheReservationIsChanged"/>
         </classes>
     </test>
+    <test name="THY-712: Group booking - package lines">
+        <classes>
+            <class name="tests.GroupBookingPackageLines"/>
+        </classes>
+    </test>
 </suite>
 
 
