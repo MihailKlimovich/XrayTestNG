@@ -527,6 +527,11 @@
             <class name="tests.GroupBookingPackageLines"/>
         </classes>
     </test>
+    <test name="TB-373: Unable to add QP with QPL of type Meeting Room to Quote which has a PMS Block">
+        <classes>
+            <class name="tests.TB.UnableToAddQPwithQPofTypeMeetingRoomToQuoteWhichHasPMSblock"/>
+        </classes>
+    </test>
 </suite>
 
 
