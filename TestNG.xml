@@ -467,16 +467,6 @@
             <class name="tests.TB.RoomingListArrivalDateNotUpdatedIfArrivalDateOfTheReservationIsChanged"/>
         </classes>
     </test>
-    <test name="TB-373: Unable to add QP with QPL of type Meeting Room to Quote which has a PMS Block">
-        <classes>
-            <class name="tests.TB.UnableToAddQPwithQPofTypeMeetingRoomToQuoteWhichHasPMSblock"/>
-        </classes>
-    </test>
-    <test name="THY-712: Group booking - package lines">
-        <classes>
-            <class name="tests.GroupBookingPackageLines"/>
-        </classes>
-    </test>
     <test name="TB-388: Clone selection.">
         <classes>
             <class name="tests.TB.CloneSelection"/>
