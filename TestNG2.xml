@@ -10,11 +10,6 @@
             <class name="clearCache.ClearCache"/>
         </classes>
     </test>
-    <test name="Preparation">
-        <classes>
-            <class name="tests.Preparation"/>
-        </classes>
-    </test>
     <test name="THY-487: Reservation creation process">
         <classes>
             <class name="tests.ReservationCreationProcess"/>
