@@ -95,14 +95,23 @@ public class BaseTest {
     public static final String testDataExcelFileName = "testdata.xlsx";
 
 
-    public String ORG_USERNAME = System.getenv("JAVAUSERNAME");
+    /*public String ORG_USERNAME = System.getenv("JAVAUSERNAME");
     public String ORG_PASSWORD = System.getenv("JAVAPASSWORD");
     public String ORG_URL = System.getenv("SF_URL");
     public String SFDX = System.getenv("SFDX");
     public String SFDX_AUTH_URL = System.getenv("AUTH_URL");
     public String ADMIN_USERNAME = System.getenv("ADMINUSERNAME");
     public String ADMIN_PASSWORD = System.getenv("ADMINPASSWORD");
-    public String ADMIN_AUTH_URL = System.getenv("ADMIN_AUTH_URL");
+    public String ADMIN_AUTH_URL = System.getenv("ADMIN_AUTH_URL");*/
+
+    public String ORG_USERNAME = "r@thautomation.sf";
+    public String ORG_PASSWORD = "Welcome1508";
+    public String ORG_URL = "https://login.salesforce.com/";
+    public String SFDX = "/home/user/sfdx/bin/sfdx";
+    public String SFDX_AUTH_URL = "force://PlatformCLI::5Aep861yNl8cSWS3xX63jHZ.ngSZAmvp8hJceBHlTlTeFBvHeqzB5VbIIgXxAQXTHyIR_6i5vw.JsTk6ak_m.8z@thautomation-dev-ed.my.salesforce.com";
+    public String ADMIN_USERNAME = "r@thautomation.sf";
+    public String ADMIN_PASSWORD = "Welcome1508";
+    public String ADMIN_AUTH_URL = "force://PlatformCLI::5Aep861yNl8cSWS3xX63jHZ.ngSZAmvp8hJceBHlTlTeFBvHeqzB5VbIIgXxAQXTHyIR_6i5vw.JsTk6ak_m.8z@thautomation-dev-ed.my.salesforce.com";
 
 
 
@@ -139,9 +148,9 @@ public class BaseTest {
         options.addArguments("--disable-gpu");
         options.addArguments("--disable-extensions");
         options.addArguments("--disable-dev-shm-usage");
-        options.addArguments("user-data-dir=/tmp/temp_profile");
+        //options.addArguments("user-data-dir=/tmp/temp_profile");
         options.addArguments(" --whitelisted-ips=\"\"");
-        options.addArguments("--headless", "window-size=1920,1024", "--no-sandbox");
+        //options.addArguments("--headless", "window-size=1920,1024", "--no-sandbox");
         driver = new ChromeDriver(options);
         driver.manage().deleteAllCookies();
         driver.manage().window().maximize();
@@ -211,14 +220,14 @@ public class BaseTest {
         quoteAnalytics = new QuoteAnalytics(driver);
     }
 
-    @AfterClass
+    /*@AfterClass
     public void teardown(){
         driver.close();
         driver.quit();
         if (driver != null) {
             driver = null;
         }
-   }
+   }*/
 
 
 
