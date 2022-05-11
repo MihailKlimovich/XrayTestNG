@@ -43,7 +43,7 @@ public class QuoteHotelRoomAssignMewsState extends BaseTest {
                 "' thn__Property__c='" + propertyID + "' thn__Pax__c=1", ORG_USERNAME);
         myceQuotes.updateQuoteSFDX(SFDX, "Id='" + quoteID + "'", "thn__Stage__c='2 - Propose'",
                 ORG_USERNAME);
-        Thread.sleep(2000);
+        Thread.sleep(5000);
         StringBuilder quoteRecord = myceQuotes.getQuoteSFDX(SFDX, "Id='" + quoteID + "'", ORG_USERNAME);
         String reservationGuestID = JsonParser2.getFieldValue(quoteRecord.toString(), "thn__Reservation_Guest__c");
         String mewsGroupID = JsonParser2.getFieldValue(quoteRecord.toString(), "thn__Mews_Group_Id__c");

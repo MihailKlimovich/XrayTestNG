@@ -69,15 +69,15 @@ public class MewsBlockUpdate extends BaseTest {
         Assert.assertEquals(mAdjustmentStartUTC.get(0),
                 date.generateTodayDate2_plus(0, 2) + "T12:00:00.000+0000");
         Assert.assertEquals(mAdjustmentEndUTC.get(0),
-                date.generateTodayDate2_plus(0, 3) + "T23:59:59.000+0000");
+                date.generateTodayDate2_plus(0, 2) + "T23:59:00.000+0000");
         Assert.assertEquals(mAdjustmentStartUTC.get(1),
                 date.generateTodayDate2_plus(0, 3) + "T00:00:00.000+0000");
         Assert.assertEquals(mAdjustmentEndUTC.get(1),
-                date.generateTodayDate2_plus(0, 4) + "T23:59:59.000+0000");
+                date.generateTodayDate2_plus(0, 3) + "T23:59:00.000+0000");
         Assert.assertEquals(mAdjustmentStartUTC.get(2),
                 date.generateTodayDate2_plus(0, 4) + "T00:00:00.000+0000");
         Assert.assertEquals(mAdjustmentEndUTC.get(2),
-                date.generateTodayDate2_plus(0, 5) + "T23:59:59.000+0000");
+                date.generateTodayDate2_plus(0, 4) + "T23:59:00.000+0000");
         Assert.assertEquals(mAdjustmentStartUTC.get(3),
                 date.generateTodayDate2_plus(0, 5) + "T00:00:00.000+0000");
         Assert.assertEquals(mAdjustmentEndUTC.get(3),

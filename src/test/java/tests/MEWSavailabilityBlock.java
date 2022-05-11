@@ -110,10 +110,10 @@ public class MEWSavailabilityBlock extends BaseTest {
                 "'", ORG_USERNAME);
         String quoteHotelRoomId1 = quoteHotelRoom.createQuoteHotelRoomSFDX(SFDX, "thn__MYCE_Quote__c='"
                 + quoteID + "' thn__Product__c='" + room1NightID + "' thn__Space_Area__c='" + roomTypeID.get(0) +
-                "' thn__Property__c='" + propertyID + "' thn__Rate_Plan__c='" + rateID.get(0) + "'", ORG_USERNAME);
+                "' thn__Property__c='" + propertyID + "' thn__Rate_Plan__c='" + rateID.get(0) + "' thn__Unit_Price__c=100", ORG_USERNAME);
         String quoteHotelRoomId2 = quoteHotelRoom.createQuoteHotelRoomSFDX(SFDX, "thn__MYCE_Quote__c='"
                 + quoteID + "' thn__Product__c='" + room1NightID + "' thn__Space_Area__c='" + roomTypeID.get(0) +
-                "' thn__Property__c='" + propertyID + "' thn__Rate_Plan__c='" + rateID.get(1) + "'", ORG_USERNAME);
+                "' thn__Property__c='" + propertyID + "' thn__Rate_Plan__c='" + rateID.get(1) + "' thn__Unit_Price__c=100", ORG_USERNAME);
         myceQuotes.updateQuoteSFDX(SFDX, "Id='" + quoteID + "'", "thn__Stage__c='3 - Tentative'",
                 ORG_USERNAME);
         myceQuotes.updateQuoteSFDX(SFDX, "Id='" + quoteID + "'", "thn__Create_PMS_Block__c=true",

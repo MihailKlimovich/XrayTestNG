@@ -45,6 +45,12 @@ public class Mews extends BasePage {
         click3(By.xpath("//div//span[text()='" + reservationName + "']"));
     }
 
+    @Step("Go to main page")
+    public Mews goToMainPage() throws InterruptedException {
+        driver.navigate().to("https://app.mews-demo.com/Commander/Dashboard/Index");
+        return this;
+    }
+
     @Step("Read AVG Rate")
     public String readAvgRate() throws InterruptedException {
         wait1.until(ExpectedConditions.presenceOfElementLocated(AVG_RATE));

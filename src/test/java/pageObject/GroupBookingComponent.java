@@ -27,9 +27,9 @@ public class GroupBookingComponent extends BasePage {
 
     @Step("Change the price per day")
     public void changePricePerDay(String dayNumber, String rate) throws InterruptedException {
-        click3(By.xpath("(//c-day-price-table//lightning-input[@data-field='thn__Unit_Price_incl_Tax__c']//div//input)[" + dayNumber + "]"));
-        clear(By.xpath("(//c-day-price-table//lightning-input[@data-field='thn__Unit_Price_incl_Tax__c']//div//input)[" + dayNumber + "]"));
-        writeText(By.xpath("(//c-day-price-table//lightning-input[@data-field='thn__Unit_Price_incl_Tax__c']//div//input)[" + dayNumber + "]"), rate);
+        click3(By.xpath("(//c-day-price-table//input[@data-field='thn__Unit_Price_incl_Tax__c'])[" + dayNumber + "]"));
+        clear(By.xpath("(//c-day-price-table//input[@data-field='thn__Unit_Price_incl_Tax__c'])[" + dayNumber + "]"));
+        writeText(By.xpath("(//c-day-price-table//input[@data-field='thn__Unit_Price_incl_Tax__c'])[" + dayNumber + "]"), rate);
     }
 
     @Step("Change the price per day and quantity")

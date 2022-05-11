@@ -23,6 +23,7 @@ public class PMSBlockChangeDate extends BaseTest {
     public void case1() throws InterruptedException, IOException {
         loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
         loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
+        user.apexExecute(SFDX, ADMIN_USERNAME, "src/main/Data/UpdateBlockCodeHapiConnectorDemo3.apex");
         myceQuotes.deleteQuoteSFDX(SFDX, "Name='TB-356AutoTest'", ORG_USERNAME);
         StringBuilder hotelRecord= hotel.getHotelSFDX(SFDX, "thn__Unique_Id__c='Demo'", ORG_USERNAME);
         String propertyID = JsonParser2.getFieldValue(hotelRecord.toString(), "Id");

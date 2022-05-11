@@ -73,7 +73,7 @@ public class GroupBookingPackageLines extends BaseTest {
         myceQuotes.clickGroupBookingTab();
         groupBookingComponent.clickNewButton();
         groupBookingComponent.
-                cteateQuoteHotelRoom("DEFAULT", "Double", "1", "Queen");
+                cteateQuoteHotelRoom("Default", "Double", "1", "Queen");
         /*groupBookingComponent.
                 changePricePerDayAndQuantity("1", "1", "150", "10");
         groupBookingComponent.

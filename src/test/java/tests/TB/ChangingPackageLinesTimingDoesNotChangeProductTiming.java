@@ -182,7 +182,7 @@ public class ChangingPackageLinesTimingDoesNotChangeProductTiming extends BaseTe
         Assert.assertEquals(qhrArrivalTime1, "01:45:00.000Z");
         Assert.assertEquals(qhrDepartureTime1, "10:30:00.000Z");
         Assert.assertEquals(qhrArrivalTime2, "05:00:00.000Z");
-        Assert.assertEquals(qhrDepartureTime2, "15                                                  :00:00.000Z");
+        Assert.assertEquals(qhrDepartureTime2, "15:00:00.000Z");
     }
 
 }
