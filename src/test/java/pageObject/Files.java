@@ -26,6 +26,7 @@ public class Files extends BasePage {
     By SHOW_MORE_ACTION= By.xpath("//div//h1[@title='Files']/following::span[text()='Show Actions']");
     By DOWNLOAD_BUTTON= By.xpath("//li//a[@title='Download']");
 
+
     @Step("Click Download")
     public void clickDownload(String fileName) throws InterruptedException {
         refreshPage();
@@ -57,7 +58,7 @@ public class Files extends BasePage {
 
     @Step("Update xls")
     public void updateXLS(String fileName, int numberRow, int numderCell, String value) throws IOException {
-        File file = new File("/home/user/Downloads/" + fileName);
+        File file = new File("/home/user/project/thynk-selenium/TemporaryFiles/" + fileName);
         FileInputStream inputStream = new FileInputStream(file);
         XSSFWorkbook workbook = new XSSFWorkbook(inputStream);
         XSSFSheet sheet = workbook.getSheetAt(0);
@@ -67,6 +68,15 @@ public class Files extends BasePage {
         FileOutputStream out = new FileOutputStream(file);
         workbook.write(out);
         out.close();
+    }
+
+
+
+
+    @Step("Delete all files")
+    public void deleteAllFilesFolder(String path) {
+        for (File myFile : new File(path).listFiles())
+            if (myFile.isFile()) myFile.delete();
     }
 
 

@@ -174,9 +174,10 @@ public class ReservationAmountToZero extends BaseTest {
 
     @Test(priority = 4, description = "In CMT > Default Agile Value Set the checkbox Do not price reservations to" +
             " false. Create a MYCE Quote, Instantiate a Quote Hotel Room, Set the prices on the Quote hotel room" +
-            " prices to 50. On QHR set checkbox Do not price reservations = true. Change the Stage of the Quote to" +
-            " ‘2 - Propose’. Reservations are created and Sent to Mews. Expected Result: The prices on the Mews side" +
-            " are at 0.")
+            " prices to 50. On QHR set checkbox Do not price reservations = false. Change the Stage of the Quote to" +
+            " ‘2 - Propose’. Reservations are created and Sent to Mews. Reservations on Mews side have values from" +
+            " QHRP. Change on QHR Do not price reservations = true. Click Send to Mews.  Expected Result:" +
+            " reservations be updated to 0 value on Mews side.")
     @Severity(SeverityLevel.NORMAL)
     @Story("THY-695: Reservation amount to 0 - Test")
     public void case4() throws InterruptedException, IOException {

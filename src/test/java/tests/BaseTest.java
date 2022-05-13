@@ -9,6 +9,8 @@ import org.junit.runners.model.Statement;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.CapabilityType;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
@@ -21,6 +23,7 @@ import pages.LoginPageForPackageOrg;
 import pages.LoginPageForScratchOrg;
 import java.lang.String;
 
+import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
 public class BaseTest {
@@ -86,6 +89,7 @@ public class BaseTest {
     protected GroupBookingComponent groupBookingComponent;
     protected HapiProperty hapiProperty;
     protected QuoteAnalytics quoteAnalytics;
+    protected Rooms rooms;
 
 
 
@@ -103,6 +107,8 @@ public class BaseTest {
     public String ADMIN_USERNAME = System.getenv("ADMINUSERNAME");
     public String ADMIN_PASSWORD = System.getenv("ADMINPASSWORD");
     public String ADMIN_AUTH_URL = System.getenv("ADMIN_AUTH_URL");
+
+
 
 
 
@@ -131,7 +137,15 @@ public class BaseTest {
 
     @BeforeClass
     public void classLevelSetup(){
+        String downloadFilepath = "/home/user/project/thynk-selenium/TemporaryFiles";
+        HashMap<String, Object> chromePrefs = new HashMap<String, Object>();
+        chromePrefs.put("profile.default_content_settings.popups", 0);
+        chromePrefs.put("download.default_directory", downloadFilepath);
         ChromeOptions options= new ChromeOptions();
+        options.setExperimentalOption("prefs", chromePrefs);
+        DesiredCapabilities cap = DesiredCapabilities.chrome();
+        cap.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
+        cap.setCapability(ChromeOptions.CAPABILITY, options);
         options.addArguments("--incognito");
         options.addArguments("--disable-cache");
         options.addArguments("--disk-cache-size=1");
@@ -210,6 +224,7 @@ public class BaseTest {
         groupBookingComponent = new GroupBookingComponent(driver);
         hapiProperty = new HapiProperty(driver);
         quoteAnalytics = new QuoteAnalytics(driver);
+        rooms = new Rooms(driver);
     }
 
     @AfterClass
