@@ -16,7 +16,7 @@ import java.util.List;
 public class UnableToChangeQuotePax extends BaseTest {
 
     @AfterClass
-    public void teardown() throws InterruptedException, IOException{
+    public void updateByPass() throws InterruptedException, IOException{
         SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
                 "force:data:record:update",
