@@ -532,6 +532,16 @@
             <class name="tests.TB.UnableToAddQPwithQPofTypeMeetingRoomToQuoteWhichHasPMSblock"/>
         </classes>
     </test>
+    <test name="TB-419: Optional Products">
+        <classes>
+            <class name="tests.TB.OptionalProducts"/>
+        </classes>
+    </test>
+    <test name="THY-696: Orders amount to 0">
+        <classes>
+            <class name="tests.OrdersAmountToZero"/>
+        </classes>
+    </test>
 </suite>
 
 

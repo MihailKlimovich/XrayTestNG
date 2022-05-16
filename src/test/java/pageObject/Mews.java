@@ -26,6 +26,8 @@ public class Mews extends BasePage {
     By RELEASE = By.xpath("//span[text()='Release']/parent::dt/following-sibling::dd[1]//span");
     By DEPARTURE = By.xpath("//span[text()='Departure']/parent::dt/following-sibling::dd[1]//span");
     By STATUS = By.xpath("//span[text()='Status']/parent::dt/following-sibling::dd[1]//span");
+    By DASHBOARD_TAB = By.xpath("//button//div[text()='Dashboard']");
+    By TOTAL_AMOUNT_ORDERS = By.xpath("//td[@class='text-right ']");
 
     @Step("Log in to Mews")
     public Mews logIn(String login, String password) throws InterruptedException {
@@ -37,6 +39,13 @@ public class Mews extends BasePage {
         click3(SIGN_IN_BUTTON);
         return this;
     }
+
+    @Step("Click Dashboard Tab")
+    public void clickDashBoardTab() throws InterruptedException {
+        click3(DASHBOARD_TAB);
+    }
+
+
 
     @Step("Find record by ID")
     public void findRecordByID(String id, String reservationName) throws InterruptedException {
@@ -62,6 +71,13 @@ public class Mews extends BasePage {
     public String readTotalAmount() throws InterruptedException {
         wait1.until(ExpectedConditions.presenceOfElementLocated(TOTAL_AMOUNT));
         String amount = readText(TOTAL_AMOUNT);
+        return amount;
+    }
+
+    @Step("Read Total Amount Orders")
+    public String readTotalAmountOrders() throws InterruptedException {
+        wait1.until(ExpectedConditions.presenceOfElementLocated(TOTAL_AMOUNT_ORDERS));
+        String amount = readText(TOTAL_AMOUNT_ORDERS);
         return amount;
     }
 

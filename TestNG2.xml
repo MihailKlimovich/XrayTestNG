@@ -442,6 +442,11 @@
             <class name="tests.TB.CloneSelection"/>
         </classes>
     </test>
+    <test name="TB-419: Optional Products">
+        <classes>
+            <class name="tests.TB.OptionalProducts"/>
+        </classes>
+    </test>
 </suite>
 
 
