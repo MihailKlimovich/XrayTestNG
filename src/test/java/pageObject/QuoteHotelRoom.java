@@ -125,6 +125,7 @@ public class QuoteHotelRoom extends BasePage {
 
     @Step("Edit rate plan")
     public void editRatePlan(String rate) throws InterruptedException {
+        scrollToElement(EDIT_RATE_PLAN_BUTTON);
         click3(EDIT_RATE_PLAN_BUTTON);
         click3(By.xpath("//label[text()='Rate Plan']/following::button[@title='Clear Selection'][1]"));
         click3(By.xpath("//div//li//span[@title='" + rate + "']"));

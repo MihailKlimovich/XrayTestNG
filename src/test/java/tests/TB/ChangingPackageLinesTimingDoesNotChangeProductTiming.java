@@ -68,13 +68,14 @@ public class ChangingPackageLinesTimingDoesNotChangeProductTiming extends BaseTe
         quoteProducts.updateQuoteProducSFDX(SFDX, "Id='" + quoteProductID.get(0) + "'",
                 "thn__Start_Time__c=07:00:00.000Z", ORG_USERNAME);
         quoteProducts.updateQuoteProducSFDX(SFDX, "Id='" + quoteProductID.get(1) + "'",
-                "thn__End_Time__c=16:00:00.000Z", ORG_USERNAME);
+                "thn__End_Time__c=17:00:00.000Z", ORG_USERNAME);
         quotePackageLine.updateQuotePackageLineSFDX(SFDX, "thn__Quote_Package__c='" + quotePackageID + "'" +
                 " thn__Product__c='" + productDinerID + "'", "thn__Start_Time__c=08:00:00.000Z" +
                 " thn__End_Time__c=14:00:00.000Z", ORG_USERNAME);
         StringBuilder updatedQuoteProductsRecord = myceQuotes.soql(SFDX, "SELECT Id, thn__Start_Time__c," +
                 " thn__End_Time__c FROM thn__Quote_Product__c WHERE thn__MYCE_Quote__c='" + quoteID + "'",
                 ORG_USERNAME);
+        System.out.println(updatedQuoteProductsRecord);
         List<String> quoteProductsStartTime = JsonParser2.
                 getFieldValueSoql(updatedQuoteProductsRecord.toString(), "thn__Start_Time__c");
         List<String> quoteProductsEndTime = JsonParser2.
@@ -82,7 +83,7 @@ public class ChangingPackageLinesTimingDoesNotChangeProductTiming extends BaseTe
         Assert.assertEquals(quoteProductsStartTime.get(0), "07:00:00.000Z");
         Assert.assertEquals(quoteProductsEndTime.get(0), "14:00:00.000Z");
         Assert.assertEquals(quoteProductsStartTime.get(1), "08:00:00.000Z");
-        Assert.assertEquals(quoteProductsEndTime.get(1), "16:00:00.000Z");
+        Assert.assertEquals(quoteProductsEndTime.get(1), "17:00:00.000Z");
         Assert.assertEquals(quoteProductsStartTime.get(2), "08:00:00.000Z");
         Assert.assertEquals(quoteProductsEndTime.get(2), "14:00:00.000Z");
         Assert.assertEquals(quoteProductsStartTime.get(3), "08:00:00.000Z");

@@ -90,6 +90,8 @@ public class BaseTest {
     protected HapiProperty hapiProperty;
     protected QuoteAnalytics quoteAnalytics;
     protected Rooms rooms;
+    protected FunctionSheet functionSheet;
+    protected FunctionSheetDay functionSheetDay;
 
 
 
@@ -220,6 +222,8 @@ public class BaseTest {
         hapiProperty = new HapiProperty(driver);
         quoteAnalytics = new QuoteAnalytics(driver);
         rooms = new Rooms(driver);
+        functionSheet = new FunctionSheet(driver);
+        functionSheetDay = new FunctionSheetDay(driver);
     }
 
     @AfterClass

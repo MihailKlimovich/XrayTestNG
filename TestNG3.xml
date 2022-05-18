@@ -542,6 +542,16 @@
             <class name="tests.OrdersAmountToZero"/>
         </classes>
     </test>
+    <test name="THY-644: Cancellation of Orders">
+        <classes>
+            <class name="tests.OrdersAmountToZero"/>
+        </classes>
+    </test>
+    <test name="THY-584: Next Function sheet">
+        <classes>
+            <class name="tests.NextFunctionSheet"/>
+        </classes>
+    </test>
 </suite>
 
 

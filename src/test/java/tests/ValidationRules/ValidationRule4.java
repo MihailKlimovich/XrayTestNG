@@ -37,7 +37,7 @@ public class ValidationRule4 extends BaseTest {
                 "-v",
                 "thn__ByPassVR__c=true",
                 "-u",
-                ORG_USERNAME,
+                ADMIN_USERNAME,
                 "--json"});
         Object byPass = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
@@ -45,7 +45,7 @@ public class ValidationRule4 extends BaseTest {
                 "-q",
                 "SELECT Id FROM thn__bypass__c",
                 "-u",
-                ORG_USERNAME,
+                ADMIN_USERNAME,
                 "--json"});
         List<String> byPassID= JsonParser2.getFieldValueSoql(byPass.toString(), "Id");
         String byPassId = byPassID.get(0);
@@ -59,7 +59,7 @@ public class ValidationRule4 extends BaseTest {
                 "-v",
                 "thn__bypassvr__c=true",
                 "-u",
-                ORG_USERNAME,
+                ADMIN_USERNAME,
                 "--json"});
         StringBuilder userRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 SFDX,
@@ -69,7 +69,7 @@ public class ValidationRule4 extends BaseTest {
                 "-w",
                 "Username='" + ORG_USERNAME + "'",
                 "-u",
-                ORG_USERNAME,
+                ADMIN_USERNAME,
                 "--json"});
         String userByPass = JsonParser2.getFieldValue(userRecord.toString(), "thn__ByPassVR__c");
         StringBuilder byPassRecord = SfdxCommand.runLinuxCommand1(new String[]{
@@ -80,7 +80,7 @@ public class ValidationRule4 extends BaseTest {
                 "-w",
                 "Id='" + byPassId + "'",
                 "-u",
-                ORG_USERNAME,
+                ADMIN_USERNAME,
                 "--json"});
         System.out.println(byPassRecord);
         String byPassVr = JsonParser2.getFieldValue(byPassRecord.toString(), "thn__ByPassVR__c");

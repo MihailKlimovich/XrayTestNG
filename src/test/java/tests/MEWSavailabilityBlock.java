@@ -110,10 +110,12 @@ public class MEWSavailabilityBlock extends BaseTest {
                 "'", ORG_USERNAME);
         String quoteHotelRoomId1 = quoteHotelRoom.createQuoteHotelRoomSFDX(SFDX, "thn__MYCE_Quote__c='"
                 + quoteID + "' thn__Product__c='" + room1NightID + "' thn__Space_Area__c='" + roomTypeID.get(0) +
-                "' thn__Property__c='" + propertyID + "' thn__Rate_Plan__c='" + rateID.get(0) + "' thn__Unit_Price__c=100", ORG_USERNAME);
+                "' thn__Property__c='" + propertyID + "' thn__Rate_Plan__c='" + rateID.get(0) + "'" +
+                " thn__Unit_Price__c=100", ORG_USERNAME);
         String quoteHotelRoomId2 = quoteHotelRoom.createQuoteHotelRoomSFDX(SFDX, "thn__MYCE_Quote__c='"
                 + quoteID + "' thn__Product__c='" + room1NightID + "' thn__Space_Area__c='" + roomTypeID.get(0) +
-                "' thn__Property__c='" + propertyID + "' thn__Rate_Plan__c='" + rateID.get(1) + "' thn__Unit_Price__c=100", ORG_USERNAME);
+                "' thn__Property__c='" + propertyID + "' thn__Rate_Plan__c='" + rateID.get(1) + "'" +
+                " thn__Unit_Price__c=100", ORG_USERNAME);
         myceQuotes.updateQuoteSFDX(SFDX, "Id='" + quoteID + "'", "thn__Stage__c='3 - Tentative'",
                 ORG_USERNAME);
         myceQuotes.updateQuoteSFDX(SFDX, "Id='" + quoteID + "'", "thn__Create_PMS_Block__c=true",
@@ -339,7 +341,7 @@ public class MEWSavailabilityBlock extends BaseTest {
         Assert.assertEquals(mAdjustmentStartUTC.get(0),
                 date.generateTodayDate2_plus(0, 2) + "T11:00:00.000+0000");
         Assert.assertEquals(mAdjustmentEndUTC.get(0),
-                date.generateTodayDate2_plus(0, 3) + "T23:59:59.000+0000");
+                date.generateTodayDate2_plus(0, 2) + "T23:59:00.000+0000");
         Assert.assertEquals(mAdjustmentStartUTC.get(1),
                 date.generateTodayDate2_plus(0, 3) + "T00:00:00.000+0000");
         Assert.assertEquals(mAdjustmentEndUTC.get(1),
@@ -347,7 +349,7 @@ public class MEWSavailabilityBlock extends BaseTest {
         Assert.assertEquals(mAdjustmentStartUTC.get(2),
                 date.generateTodayDate2_plus(0, 2) + "T11:00:00.000+0000");
         Assert.assertEquals(mAdjustmentEndUTC.get(2),
-                date.generateTodayDate2_plus(0, 3) + "T23:59:59.000+0000");
+                date.generateTodayDate2_plus(0, 2) + "T23:59:00.000+0000");
         Assert.assertEquals(mAdjustmentStartUTC.get(3),
                 date.generateTodayDate2_plus(0, 3) + "T00:00:00.000+0000");
         Assert.assertEquals(mAdjustmentEndUTC.get(3),
@@ -355,11 +357,11 @@ public class MEWSavailabilityBlock extends BaseTest {
         Assert.assertEquals(mAdjustmentStartUTC.get(4),
                 date.generateTodayDate2_plus(0, 2) + "T11:00:00.000+0000");
         Assert.assertEquals(mAdjustmentEndUTC.get(4),
-                date.generateTodayDate2_plus(0, 3) + "T23:59:59.000+0000");
+                date.generateTodayDate2_plus(0, 2) + "T23:59:00.000+0000");
         Assert.assertEquals(mAdjustmentStartUTC.get(5),
                 date.generateTodayDate2_plus(0, 3) + "T00:00:00.000+0000");
         Assert.assertEquals(mAdjustmentEndUTC.get(5),
-                date.generateTodayDate2_plus(0, 4) + "T23:59:59.000+0000");
+                date.generateTodayDate2_plus(0, 3) + "T23:59:00.000+0000");
         Assert.assertEquals(mAdjustmentStartUTC.get(6),
                 date.generateTodayDate2_plus(0, 4) + "T00:00:00.000+0000");
         Assert.assertEquals(mAdjustmentEndUTC.get(6),
@@ -506,16 +508,16 @@ public class MEWSavailabilityBlock extends BaseTest {
         Assert.assertEquals(mAdjustmentID.size(), 5);
         Assert.assertEquals(mAdjustmentStartUTC.get(0), date.generateTodayDate2_plus(0, 2) +
                 "T12:00:00.000+0000");
-        Assert.assertEquals(mAdjustmentEndtUTC.get(0), date.generateTodayDate2_plus(0, 3) +
-                "T23:59:59.000+0000");
+        Assert.assertEquals(mAdjustmentEndtUTC.get(0), date.generateTodayDate2_plus(0, 2) +
+                "T23:59:00.000+0000");
         Assert.assertEquals(mAdjustmentStartUTC.get(1), date.generateTodayDate2_plus(0, 3) +
                 "T00:00:00.000+0000");
-        Assert.assertEquals(mAdjustmentEndtUTC.get(1), date.generateTodayDate2_plus(0, 4) +
-                "T23:59:59.000+0000");
+        Assert.assertEquals(mAdjustmentEndtUTC.get(1), date.generateTodayDate2_plus(0, 3) +
+                "T23:59:00.000+0000");
         Assert.assertEquals(mAdjustmentStartUTC.get(2), date.generateTodayDate2_plus(0, 4) +
                 "T00:00:00.000+0000");
-        Assert.assertEquals(mAdjustmentEndtUTC.get(2), date.generateTodayDate2_plus(0, 5) +
-                "T23:59:59.000+0000");
+        Assert.assertEquals(mAdjustmentEndtUTC.get(2), date.generateTodayDate2_plus(0, 4) +
+                "T23:59:00.000+0000");
         Assert.assertEquals(mAdjustmentStartUTC.get(3), date.generateTodayDate2_plus(0, 5) +
                 "T00:00:00.000+0000");
         Assert.assertEquals(mAdjustmentEndtUTC.get(3), date.generateTodayDate2_plus(0, 6) +
@@ -586,16 +588,16 @@ public class MEWSavailabilityBlock extends BaseTest {
         Assert.assertEquals(mAdjustmentID.size(), 6);
         Assert.assertEquals(mAdjustmentStartUTC.get(0), date.generateTodayDate2_plus(0, 2) +
                 "T12:00:00.000+0000");
-        Assert.assertEquals(mAdjustmentEndtUTC.get(0), date.generateTodayDate2_plus(0, 3) +
-                "T23:59:59.000+0000");
+        Assert.assertEquals(mAdjustmentEndtUTC.get(0), date.generateTodayDate2_plus(0, 2) +
+                "T23:59:00.000+0000");
         Assert.assertEquals(mAdjustmentStartUTC.get(1), date.generateTodayDate2_plus(0, 3) +
                 "T00:00:00.000+0000");
-        Assert.assertEquals(mAdjustmentEndtUTC.get(1), date.generateTodayDate2_plus(0, 4) +
-                "T23:59:59.000+0000");
+        Assert.assertEquals(mAdjustmentEndtUTC.get(1), date.generateTodayDate2_plus(0, 3) +
+                "T23:59:00.000+0000");
         Assert.assertEquals(mAdjustmentStartUTC.get(2), date.generateTodayDate2_plus(0, 4) +
                 "T00:00:00.000+0000");
-        Assert.assertEquals(mAdjustmentEndtUTC.get(2), date.generateTodayDate2_plus(0, 5) +
-                "T23:59:59.000+0000");
+        Assert.assertEquals(mAdjustmentEndtUTC.get(2), date.generateTodayDate2_plus(0, 4) +
+                "T23:59:00.000+0000");
         Assert.assertEquals(mAdjustmentStartUTC.get(3), date.generateTodayDate2_plus(0, 5) +
                 "T00:00:00.000+0000");
         Assert.assertEquals(mAdjustmentEndtUTC.get(3), date.generateTodayDate2_plus(0, 6) +
