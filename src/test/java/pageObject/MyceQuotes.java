@@ -99,7 +99,7 @@ public class MyceQuotes extends BasePage {
     public MyceQuotes goToMyceQuotes() throws InterruptedException {
         //driver.navigate().to("https://thynk-test-unlocked-dev-ed.lightning.force.com/lightning/o/thn__MYCE_Quote__c/list?filterName=Recent");
         driver.navigate().to("https://thautomation-dev-ed.lightning.force.com/lightning/o/thn__MYCE_Quote__c/list?filterName=Recent");
-        //driver.navigate().to("https://drive-computing-3168-dev-ed.lightning.force.com/lightning/o/thn__MYCE_Quote__c/list?filterName=Recent");
+        //driver.navigate().to("https://momentum-inspiration-8824-dev-ed.lightning.force.com/lightning/o/thn__MYCE_Quote__c/list?filterName=Recent");
         try {
             if (wait2.until(ExpectedConditions.alertIsPresent()) != null) {
                 Alert alert = wait2.until(alertIsPresent());

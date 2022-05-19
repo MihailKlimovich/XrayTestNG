@@ -552,6 +552,16 @@
             <class name="tests.NextFunctionSheet"/>
         </classes>
     </test>
+    <test name="THY- 679: Test Opera - Quote and PMS Block mapping">
+        <classes>
+            <class name="tests.OperaQuoteAndPMSBlockMapping"/>
+        </classes>
+    </test>
+    <test name="TB-403: Orders with negative revenue were not created, this resulted in discrepancy between Thynk and Mews">
+        <classes>
+            <class name="tests.TB.OrdersWithNegativeRevenueWereNotCreated"/>
+        </classes>
+    </test>
 </suite>
 
 

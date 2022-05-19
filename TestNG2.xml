@@ -457,6 +457,11 @@
             <class name="tests.NextFunctionSheet"/>
         </classes>
     </test>
+    <test name="THY- 679: Test Opera - Quote and PMS Block mapping">
+        <classes>
+            <class name="tests.OperaQuoteAndPMSBlockMapping"/>
+        </classes>
+    </test>
 </suite>
 
 
