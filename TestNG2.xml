@@ -462,6 +462,11 @@
             <class name="tests.OperaQuoteAndPMSBlockMapping"/>
         </classes>
     </test>
+    <test name="TB-424: Optional QP/QMR Discount issue">
+        <classes>
+            <class name="tests.TB.OptionalQPandQMRDiscount"/>
+        </classes>
+    </test>
 </suite>
 
 

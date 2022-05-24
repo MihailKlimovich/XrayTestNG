@@ -562,6 +562,16 @@
             <class name="tests.TB.OrdersWithNegativeRevenueWereNotCreated"/>
         </classes>
     </test>
+    <test name="THY- 650: Opera Block - multi properties quote">
+        <classes>
+            <class name="tests.OperaBlockMultiPropertiesQuote"/>
+        </classes>
+    </test>
+    <test name="TB-424: Optional QP/QMR Discount issue">
+        <classes>
+            <class name="tests.TB.OptionalQPandQMRDiscount"/>
+        </classes>
+    </test>
 </suite>
 
 
