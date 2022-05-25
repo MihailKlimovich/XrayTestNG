@@ -120,6 +120,11 @@ public class LoginPageForPackageOrg extends BasePage{
             pw.write(authURL);
             pw.flush();
             pw.close();
+            StringBuilder sfdxVersion = BasePage.runLinuxCommand1(new String[]{
+                    sfdxPath,
+                    "-v"
+            });
+            System.out.println(sfdxVersion);
             StringBuilder authorise = BasePage.runLinuxCommand1(new String[]{
                     sfdxPath,
                     "auth:sfdxurl:store",
