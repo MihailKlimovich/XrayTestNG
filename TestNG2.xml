@@ -467,6 +467,21 @@
             <class name="tests.TB.OptionalQPandQMRDiscount"/>
         </classes>
     </test>
+    <test name="THY-695: Reservation amount to 0 - Test">
+        <classes>
+            <class name="tests.ReservationAmountToZero"/>
+        </classes>
+    </test>
+    <test name="THY-696: Orders amount to 0">
+        <classes>
+            <class name="tests.OrdersAmountToZero"/>
+        </classes>
+    </test>
+    <test name="TB-403: Orders with negative revenue were not created, this resulted in discrepancy between Thynk and Mews">
+        <classes>
+            <class name="tests.TB.OrdersWithNegativeRevenueWereNotCreated"/>
+        </classes>
+    </test>
 </suite>
 
 

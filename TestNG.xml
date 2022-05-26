@@ -497,6 +497,11 @@
             <class name="tests.TB.OptionalQPandQMRDiscount"/>
         </classes>
     </test>
+    <test name="THY-695: Reservation amount to 0 - Test">
+        <classes>
+            <class name="tests.ReservationAmountToZero"/>
+        </classes>
+    </test>
 </suite>
 
 
