@@ -66,7 +66,8 @@ public class Guests extends BasePage {
     //////////////////////////////   SFDX COMMANDS   ////////////////////////////////////
 
     @Step("Create Guest SFDX")
-    public String createGuestSFDX(String sfdxPath, String value, String userName) throws IOException, InterruptedException {
+    public String createGuestSFDX(String sfdxPath, String value, String userName)
+            throws IOException, InterruptedException {
         StringBuilder guestResult = SfdxCommand.runLinuxCommand1(new String[]{
                 sfdxPath,
                 "force:data:record:create",
@@ -84,7 +85,8 @@ public class Guests extends BasePage {
     }
 
     @Step("Delete Guest SFDX")
-    public void deleteGuestSFDX(String sfdxPath, String where, String userName) throws IOException, InterruptedException {
+    public void deleteGuestSFDX(String sfdxPath, String where, String userName)
+            throws IOException, InterruptedException {
         StringBuilder result = SfdxCommand.runLinuxCommand1(new String[]{
                 sfdxPath,
                 "force:data:record:delete",
@@ -99,7 +101,8 @@ public class Guests extends BasePage {
     }
 
     @Step("Get Guest SFDX")
-    public StringBuilder getGuestSFDX(String sfdxPath, String where, String userName) throws IOException, InterruptedException {
+    public StringBuilder getGuestSFDX(String sfdxPath, String where, String userName)
+            throws IOException, InterruptedException {
         StringBuilder guestRecord = SfdxCommand.runLinuxCommand1(new String[]{
                 sfdxPath,
                 "force:data:record:get",

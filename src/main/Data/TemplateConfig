@@ -1,25 +1,32 @@
+ String propertyID = [select ID from thn__Hotel__c where thn__Unique_Id__c = 'Demo' limit 1].ID;
+
+
  Metadata.DeployContainer mdContainer = new Metadata.DeployContainer();
 
   Metadata.CustomMetadata cmd = new Metadata.CustomMetadata();
-     cmd.fullName = 'thn__Template_Config__mdt.thn__Demo';
+     cmd.fullName = 'thn__Template_Config__mdt.Demo';
      cmd.label = 'Demo';
 
      Metadata.CustomMetadataValue customField1 = new Metadata.CustomMetadataValue();
         customField1.field = 'thn__Columns__c';
-        customField1.value = 'thn__First_Name__c, thn__Last_Name__c, thn__Phone__c, thn__Room_Type__c, thn__Room__c, thn__Nationality__c, thn__Email__c, thn__Guest__c';
+        customField1.value = 'thn__Last_Name__c, thn__Phone__c, thn__Room_Type__c, thn__Room__c, thn__Arrival_Date_Time__c, thn__Departure_Date_Time__c';
         cmd.values.add(customField1);
 
      Metadata.CustomMetadataValue customField2 = new Metadata.CustomMetadataValue();
         customField2.field = 'thn__Pre_Populated_Columns__c';
-        customField2.value = 'thn__Last_Name__c,thn__Reservation__c, thn__Room_Type__c, thn__Room__c, thn__Nationality__c, thn__Email__c, thn__Guest__c';
+        customField2.value = 'thn__Last_Name__c, thn__Phone__c, thn__Room_Type__c, thn__Room__c, thn__Arrival_Date_Time__c, thn__Departure_Date_Time__c';
         cmd.values.add(customField2);
 
      Metadata.CustomMetadataValue customField3 = new Metadata.CustomMetadataValue();
         customField3.field = 'thn__Retrieve_Columns__c';
-        customField3.value = 'thn__First_Name__c, thn__Last_Name__c, thn__Room__c, thn__Nationality__c, thn__Email__c, thn__Guest__c';
+        customField3.value = 'thn__Last_Name__c, thn__Phone__c, thn__Arrival_Date_Time__c, thn__Departure_Date_Time__c';
         cmd.values.add(customField3);
 
-      mdContainer.addMetadata(cmd);
+     Metadata.CustomMetadataValue customField4 = new Metadata.CustomMetadataValue();
+        customField4.field = 'thn__Hotel_Id__c';
+        customField4.value = propertyID;
+        cmd.values.add(customField4);
 
+     mdContainer.addMetadata(cmd);
      Id job = Metadata.Operations.enqueueDeployment(mdContainer, null);
      System.debug(job);

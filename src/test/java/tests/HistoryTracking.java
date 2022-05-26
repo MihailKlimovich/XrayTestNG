@@ -630,9 +630,9 @@ public class HistoryTracking extends BaseTest {
         String history2NewValue = JsonParser2.getFieldValue(historyRecord2.toString(), "thn__New_Value__c");
         String history3OldValue = JsonParser2.getFieldValue(historyRecord3.toString(), "thn__Old_Value__c");
         String history3NewValue = JsonParser2.getFieldValue(historyRecord3.toString(), "thn__New_Value__c");
-        Assert.assertEquals(history1OldValue, date.generateTodayDate2_plus(0, 3) + " 13:30:00");
+        Assert.assertEquals(history1OldValue, date.generateTodayDate2_plus(0, 3) + " 14:30:00");
         Assert.assertEquals(history1NewValue, date.generateTodayDate2_plus(0, 2) + " 00:00:00");
-        Assert.assertEquals(history2OldValue, date.generateTodayDate2_plus(0, 0) + " 13:30:00");
+        Assert.assertEquals(history2OldValue, date.generateTodayDate2_plus(0, 0) + " 14:30:00");
         Assert.assertEquals(history2NewValue, date.generateTodayDate2_plus(0, 1) + " 00:00:00");
         Assert.assertEquals(history3OldValue, "10");
         Assert.assertEquals(history3NewValue, "5.0");

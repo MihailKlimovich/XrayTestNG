@@ -3,6 +3,7 @@ package pageObject;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import pages.BasePage;
 import tests.BaseTest;
 
@@ -20,9 +21,10 @@ public class MultiDelete extends BasePage {
 
     @Step("Multi delete records")
     public String multiDeleteRecords()
-            throws InterruptedException {
+            throws InterruptedException, WebDriverException {
+        Thread.sleep(3000);
         driver.switchTo().frame(0);
-        Thread.sleep(1000);
+        Thread.sleep(3000);
         click3(NEXT_BUTTON);
         String message = readText(MESSAGE);
         click3(FINISH_BUTTON);

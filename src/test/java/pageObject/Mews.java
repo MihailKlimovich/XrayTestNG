@@ -23,6 +23,11 @@ public class Mews extends BasePage {
     By SEARCH_FIELD = By.xpath("//div[text()='Search within Thynk Hotel Paris']/following-sibling::input");
     By AVG_RATE = By.xpath("//span[text()='Avg. rate (nightly)']/parent::dt/following-sibling::dd[1]//strong//span");
     By TOTAL_AMOUNT = By.xpath("//span[text()='Total amount']/parent::dt/following-sibling::dd[1]//strong//span");
+    By RELEASE = By.xpath("//span[text()='Release']/parent::dt/following-sibling::dd[1]//span");
+    By DEPARTURE = By.xpath("//span[text()='Departure']/parent::dt/following-sibling::dd[1]//span");
+    By STATUS = By.xpath("//span[text()='Status']/parent::dt/following-sibling::dd[1]//span");
+    By DASHBOARD_TAB = By.xpath("//button//div[text()='Dashboard']");
+    By TOTAL_AMOUNT_ORDERS = By.xpath("//td[@class='text-right ']");
 
     @Step("Log in to Mews")
     public Mews logIn(String login, String password) throws InterruptedException {
@@ -35,11 +40,24 @@ public class Mews extends BasePage {
         return this;
     }
 
+    @Step("Click Dashboard Tab")
+    public void clickDashBoardTab() throws InterruptedException {
+        click3(DASHBOARD_TAB);
+    }
+
+
+
     @Step("Find record by ID")
     public void findRecordByID(String id, String reservationName) throws InterruptedException {
         click3(SEARCH_FIELD);
         writeText(SEARCH_FIELD, id);
         click3(By.xpath("//div//span[text()='" + reservationName + "']"));
+    }
+
+    @Step("Go to main page")
+    public Mews goToMainPage() throws InterruptedException {
+        driver.navigate().to("https://app.mews-demo.com/Commander/Dashboard/Index");
+        return this;
     }
 
     @Step("Read AVG Rate")
@@ -54,6 +72,43 @@ public class Mews extends BasePage {
         wait1.until(ExpectedConditions.presenceOfElementLocated(TOTAL_AMOUNT));
         String amount = readText(TOTAL_AMOUNT);
         return amount;
+    }
+
+    @Step("Read Total Amount Orders")
+    public String readTotalAmountOrders() throws InterruptedException {
+        wait1.until(ExpectedConditions.presenceOfElementLocated(TOTAL_AMOUNT_ORDERS));
+        String amount = readText(TOTAL_AMOUNT_ORDERS);
+        return amount;
+    }
+
+    @Step("Read release")
+    public String readRelease() throws InterruptedException {
+        wait1.until(ExpectedConditions.presenceOfElementLocated(RELEASE));
+        String releaseDate = readText(RELEASE);
+        return releaseDate;
+    }
+
+    @Step("Read departure")
+    public String readDeparture() throws InterruptedException {
+        wait1.until(ExpectedConditions.presenceOfElementLocated(DEPARTURE));
+        String departureDate = readText(DEPARTURE);
+        return departureDate;
+    }
+
+    @Step("Read status")
+    public String readStatus() throws InterruptedException {
+        wait1.until(ExpectedConditions.presenceOfElementLocated(STATUS));
+        String status = readText(STATUS);
+        return status;
+    }
+
+    @Step("Read nights rate")
+    public String readNightsRate(String night) throws InterruptedException {
+        wait1.until(ExpectedConditions.presenceOfElementLocated(By.
+                xpath("(//span[text()='Nights']/parent::dt/following-sibling::dd[1]//span/following-sibling::span)[" + night + "]")));
+        String rate = readText(By.
+                xpath("(//span[text()='Nights']/parent::dt/following-sibling::dd[1]//span/following-sibling::span)[" + night + "]"));
+        return rate;
     }
 
 

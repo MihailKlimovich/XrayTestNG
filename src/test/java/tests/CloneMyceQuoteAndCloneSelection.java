@@ -73,6 +73,7 @@ public class CloneMyceQuoteAndCloneSelection extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     @Story("Clone Myce quote and clone selection")
     public void cloneQuote() throws InterruptedException, IOException {
+        //loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
         myceQuotes.deleteQuoteSFDX(SFDX, "Name='CloneMyceQuoteAutoTestClone'", ORG_USERNAME);
         myceQuotes.goToMyceQuotes();
         myceQuotes.openMyceQoteRecord("CloneMyceQuoteAutoTest");

@@ -387,6 +387,121 @@
             <class name="tests.PackageLineRatePlan"/>
         </classes>
     </test>
+    <test name="TB-317: Changing Package lines timing does not change product timing.">
+        <classes>
+            <class name="tests.TB.ChangingPackageLinesTimingDoesNotChangeProductTiming"/>
+        </classes>
+    </test>
+    <test name="THY-685: Clone Myce Quote and QHRP.Quantity.">
+        <classes>
+            <class name="tests.CloneMyceQuoteAndQHRPQuantity"/>
+        </classes>
+    </test>
+    <test name="TB-256: Incorrect End Date on QP after Start Date is Changed on QP.">
+        <classes>
+            <class name="tests.TB.IncorrectEndDateOnQPafterStartDateIsChangedOnQP"/>
+        </classes>
+    </test>
+    <test name="TB-285: Reservation status discrepancy between Thynk and Mews">
+        <classes>
+            <class name="tests.TB.ReservationStatusDiscrepancyBetweenThynkAndMews"/>
+        </classes>
+    </test>
+    <test name="TB-315: Hotel room rate change not sent to Mews.">
+        <classes>
+            <class name="tests.TB.HotelRoomRateChangeNotSentToMews"/>
+        </classes>
+    </test>
+    <test name="THY-702: Package line type of occupancy.">
+        <classes>
+            <class name="tests.PackagLineTypeOfOccupancy"/>
+        </classes>
+    </test>
+    <test name="TB-336: Unable to change Quote pax">
+        <classes>
+            <class name="tests.TB.UnableToChangeQuotePax"/>
+        </classes>
+    </test>
+    <test name="THY-708: PMS Account GROUP">
+        <classes>
+            <class name="tests.PMSAccountGROUP"/>
+        </classes>
+    </test>
+    <test name="TB-376: Quote hotel room - quantity">
+        <classes>
+            <class name="tests.TB.QuoteHotelRoomQuantity"/>
+        </classes>
+    </test>
+    <test name="TB-356: PMS Block - change date">
+        <classes>
+            <class name="tests.TB.PMSBlockChangeDate"/>
+        </classes>
+    </test>
+    <test name="THY-524: Quote Hotel room: assign mews state">
+        <classes>
+            <class name="tests.QuoteHotelRoomAssignMewsState"/>
+        </classes>
+    </test>
+    <test name="THY-709: Quote meeting room times">
+        <classes>
+            <class name="tests.QuoteMeetingRoomTimes"/>
+        </classes>
+    </test>
+    <test name="TB-371: PMS_Block__c.Code__c doesn't map the value from Custom field on Quote">
+        <classes>
+            <class name="tests.TB.PMSBlockCodeDoesntMapTheValueFromCustomFieldOnQuote"/>
+        </classes>
+    </test>
+    <test name="THY-706: Quote Analytics">
+        <classes>
+            <class name="tests.QuoteAnalyticsProcess"/>
+        </classes>
+    </test>
+    <test name="TB-327: Rooming list containing cancelled reservations">
+        <classes>
+            <class name="tests.TB.RoomingListContainingCancelledReservations"/>
+        </classes>
+    </test>
+    <test name="TB-333: Rooming list arrival date not updated if arrival date of the reservation is changed">
+        <classes>
+            <class name="tests.TB.RoomingListArrivalDateNotUpdatedIfArrivalDateOfTheReservationIsChanged"/>
+        </classes>
+    </test>
+    <test name="TB-373: Unable to add QP with QPL of type Meeting Room to Quote which has a PMS Block">
+        <classes>
+            <class name="tests.TB.UnableToAddQPwithQPofTypeMeetingRoomToQuoteWhichHasPMSblock"/>
+        </classes>
+    </test>
+    <test name="THY-712: Group booking - package lines">
+        <classes>
+            <class name="tests.GroupBookingPackageLines"/>
+        </classes>
+    </test>
+    <test name="TB-388: Clone selection.">
+        <classes>
+            <class name="tests.TB.CloneSelection"/>
+        </classes>
+    </test>
+    <test name="THY- 679: Test Opera - Quote and PMS Block mapping">
+        <classes>
+            <class name="tests.OperaQuoteAndPMSBlockMapping"/>
+        </classes>
+    </test>
+    <test name="THY- 650: Opera Block - multi properties quote">
+        <classes>
+            <class name="tests.OperaBlockMultiPropertiesQuote"/>
+        </classes>
+    </test>
+    <test name="TB-424: Optional QP/QMR Discount issue">
+        <classes>
+            <class name="tests.TB.OptionalQPandQMRDiscount"/>
+        </classes>
+    </test>
+    <test name="THY-695: Reservation amount to 0 - Test">
+        <classes>
+            <class name="tests.ReservationAmountToZero"/>
+        </classes>
+    </test>
 </suite>
 
 

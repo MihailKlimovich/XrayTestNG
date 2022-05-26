@@ -1,10 +1,7 @@
 package pageObject;
 
 import io.qameta.allure.Step;
-import org.openqa.selenium.Alert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import pages.BasePage;
 
@@ -86,6 +83,8 @@ public class MyceQuotes extends BasePage {
     By CLONE_PAX_FIELD = By.xpath("//input[@name='Pax']");
     By CHECK_AVAILABILITIES_BUTTON = By.xpath("//button[@name='thn__MYCE_Quote__c.Check_Avalabilities']");
     By QUOTE_NAME_FIELD = By.xpath("//span[text()='Name']/parent::div/following::div//span//slot//lightning-formatted-text");
+    By GROUP_BOOKING_TAB = By.xpath("//li//a[@data-label='Group Booking']");
+
 
 
 
@@ -98,8 +97,8 @@ public class MyceQuotes extends BasePage {
 
     @Step("Open Myce Quote page")
     public MyceQuotes goToMyceQuotes() throws InterruptedException {
-        driver.navigate().to("https://thynk-test-unlocked-dev-ed.lightning.force.com/lightning/o/thn__MYCE_Quote__c/list?filterName=Recent");
-        //driver.navigate().to("https://thautomation-dev-ed.lightning.force.com/lightning/o/thn__MYCE_Quote__c/list?filterName=Recent");
+        //driver.navigate().to("https://thynk-test-unlocked-dev-ed.lightning.force.com/lightning/o/thn__MYCE_Quote__c/list?filterName=Recent");
+        driver.navigate().to("https://thautomation-dev-ed.lightning.force.com/lightning/o/thn__MYCE_Quote__c/list?filterName=Recent");
         try {
             if (wait2.until(ExpectedConditions.alertIsPresent()) != null) {
                 Alert alert = wait2.until(alertIsPresent());
@@ -502,6 +501,11 @@ public class MyceQuotes extends BasePage {
         Thread.sleep(3000);
     }
 
+    @Step("Click Group Booking Tab")
+    public void clickGroupBookingTab() throws IOException, InterruptedException {
+        click3(GROUP_BOOKING_TAB);
+    }
+
     @Step("Change Stage type on Closed")
     public void changeStage() throws InterruptedException {
         scrollToElement(STAGE_FIELD);
@@ -615,13 +619,25 @@ public class MyceQuotes extends BasePage {
     @Step("Upload rooming list")
     public void uploadFile(String filePath) throws IOException, InterruptedException {
         refreshPage();
-        click3(ROOMING_LIST_TAB);
-        Thread.sleep(3000);
-        wait1.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//slot/child::input"))).sendKeys("" + filePath + "");
-        Thread.sleep(3000);
-        //By fileInput = By.cssSelector("input[type=file]");
-        //driver.findElement(fileInput).sendKeys(filePath);
-
+        int attempts = 0;
+        while (attempts < 4) {
+            try {
+                click3(ROOMING_LIST_TAB);
+                Thread.sleep(3000);
+                //wait1.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//slot/child::input"))).sendKeys("" + filePath + "");
+                WebElement addFile = driver.findElement(By.xpath("//slot/child::input"));
+                addFile.sendKeys(filePath);
+                Thread.sleep(3000);
+                wait1.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[text()='Success']")));
+                break;
+        /*By fileInput = By.cssSelector("input[type=file]");
+        driver.findElement(fileInput).sendKeys(filePath);*/
+            }
+            catch (Exception e){
+                refreshPage();
+            }
+            attempts++;
+        }
     }
 
     //////////////////////////////   SFDX COMMANDS   ////////////////////////////////////

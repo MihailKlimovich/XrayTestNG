@@ -39,7 +39,6 @@ public class PreventReservedHotelRoomsFromBeingDeleted extends BaseTest {
         List<String> roomTypesId = JsonParser2.getFieldValueSoql(roomTypeRecords.toString(), "Id");
         StringBuilder recordTypes = myceQuotes.soql(SFDX, "SELECT Id FROM RecordType WHERE" +
                 " SobjectType='thn__MYCE_Quote__c' AND Name='Quote'", ORG_USERNAME);
-        System.out.println(recordTypes);
         List<String> recordTypeID = JsonParser2.getFieldValueSoql(recordTypes.toString(), "Id");
         String quoteID = myceQuotes.createQuoteSFDX(SFDX, "Name='DeleteReservedHotelRoomAutoTest' thn__Pax__c=1" +
                 " thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" + date.generateTodayDate2_plus(0, 2)

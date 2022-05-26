@@ -15,6 +15,7 @@ public class Product extends BasePage {
 
 
     //////////////////////////////   SFDX COMMANDS   ////////////////////////////////////
+
     @Step("Get Product SFDX")
     public StringBuilder getProductSFDX(String sfdxPath, String where, String userName)
             throws IOException, InterruptedException {

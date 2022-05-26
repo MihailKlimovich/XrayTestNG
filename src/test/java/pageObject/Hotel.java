@@ -15,6 +15,7 @@ public class Hotel extends BasePage {
 
 
     //////////////////////////////   SFDX COMMANDS   ////////////////////////////////////
+
     @Step("Get Hotel SFDX")
     public StringBuilder getHotelSFDX(String sfdxPath, String where, String userName) throws IOException, InterruptedException {
         StringBuilder hotelRecord = SfdxCommand.runLinuxCommand1(new String[]{

@@ -362,6 +362,7 @@ public class BasePage {
             return false;
         }
     }
+
     public Boolean checkPopUpContent(String popupMessage) {
         if(popupMessage.contains("must be") || popupMessage.contains("should be")) return false;
         else if(popupMessage.contains("success") || popupMessage.contains("added") || popupMessage.contains("completed") || popupMessage.contains("deleted") || popupMessage.contains("saved")) return true;

@@ -33,7 +33,7 @@ public class QuoteHotelRoomQuantityPerNight extends BaseTest {
         System.out.println(recordTypes);
         List<String> recordTypeID = JsonParser2.getFieldValueSoql(recordTypes.toString(), "Id");
         String quoteID = myceQuotes.createQuoteSFDX(SFDX, "Name='QuoteHotelRoomQuantityPerNightAutoTest'" +
-                " thn__Pax__c=5 thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" + date.generateTodayDate2() +
+                " thn__Pax__c=100 thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" + date.generateTodayDate2() +
                 " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 2) + " RecordTypeId='" +
                 recordTypeID.get(0) + "'", ORG_USERNAME);
         String rateId = rate.createRateSFDX(SFDX, "Name='QuoteHotelRoomQuantityPerNightAuto'" +
@@ -67,7 +67,8 @@ public class QuoteHotelRoomQuantityPerNight extends BaseTest {
                 "'", ORG_USERNAME);
         String quoteHotelRoomId = quoteHotelRoom.createQuoteHotelRoomSFDX(SFDX, "thn__MYCE_Quote__c='"
                 + quoteID + "' thn__Product__c='" + room1NightID + "' thn__Space_Area__c='" + roomTypeQueenID +
-                "' thn__Rate_Plan__c='" + rateId + "' thn__Property__c='" + propertyID + "'", ORG_USERNAME);
+                "' thn__Rate_Plan__c='" + rateId + "' thn__Property__c='" + propertyID + "' thn__Pax__c=5",
+                ORG_USERNAME);
         StringBuilder quoteHotelRoomRecord = quoteHotelRoom.getQuoteHotelRoomSFDX(SFDX, "Id='"
                 + quoteHotelRoomId + "'", ORG_USERNAME);
         String quoteHotelRoomUnitPrice = JsonParser2.
@@ -152,17 +153,17 @@ public class QuoteHotelRoomQuantityPerNight extends BaseTest {
 
         StringBuilder quoteHotelRoomPrice1 = myceQuotes.soql(SFDX, "SELECT thn__Sales_Price_incl_Tax__c FROM" +
                 " thn__Quote_Hotel_Room_Price__c WHERE thn__Quote_Hotel_Room__c='" + quoteHotelRoomID + "'" +
-                " AND thn__Quantity__c=7", ORG_USERNAME);
+                " AND thn__Quantity__c=3", ORG_USERNAME);
         StringBuilder quoteHotelRoomPrice2 = myceQuotes.soql(SFDX, "SELECT thn__Sales_Price_incl_Tax__c FROM" +
                 " thn__Quote_Hotel_Room_Price__c WHERE thn__Quote_Hotel_Room__c='" + quoteHotelRoomID + "' AND" +
-                " thn__Quantity__c=3", ORG_USERNAME);
+                " thn__Quantity__c=5", ORG_USERNAME);
         List<Integer> quoteHotelRoomPriceSalesPriceInclTax1= JsonParser2.
                 getFieldValueSoql2(quoteHotelRoomPrice1.toString(), "thn__Sales_Price_incl_Tax__c");
         List<Integer> quoteHotelRoomPriceSalesPriceInclTax2= JsonParser2.
                 getFieldValueSoql2(quoteHotelRoomPrice2.toString(), "thn__Sales_Price_incl_Tax__c");
-        Assert.assertEquals(quoteHotelRoomSalesPriceInclTax, "1100");
-        Assert.assertEquals(quoteHotelRoomPriceSalesPriceInclTax1.get(0).intValue(), 770);
-        Assert.assertEquals(quoteHotelRoomPriceSalesPriceInclTax2.get(0).intValue(), 330);
+        Assert.assertEquals(quoteHotelRoomSalesPriceInclTax, "880");
+        Assert.assertEquals(quoteHotelRoomPriceSalesPriceInclTax1.get(0).intValue(), 330);
+        Assert.assertEquals(quoteHotelRoomPriceSalesPriceInclTax2.get(0).intValue(), 550);
     }
 
     @Test(priority = 4, description = "Create Quote, create a Package and add a Hotel Room as Package Line." +

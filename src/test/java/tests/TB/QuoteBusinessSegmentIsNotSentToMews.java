@@ -52,6 +52,7 @@ public class QuoteBusinessSegmentIsNotSentToMews extends BaseTest {
                 soql(SFDX, "SELECT Id from thn__Rate__c where thn__Mews_Id__c!=null AND thn__Hotel__c='" +
                         propertyID + "'", ORG_USERNAME);
         List<String> rateId = JsonParser2.getFieldValueSoql(businessSegmentRecords.toString(), "Id");
+        Thread.sleep(3000);
         StringBuilder quoteRecord = myceQuotes.getQuoteSFDX(SFDX, "Id='" + quoteID + "'", ORG_USERNAME);
         String mewsGroupID = JsonParser2.getFieldValue(quoteRecord.toString(), "thn__Mews_Group_Id__c");
         Assert.assertNotNull(mewsGroupID);

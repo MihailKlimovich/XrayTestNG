@@ -106,14 +106,16 @@ public class MEWSavailabilityBlock extends BaseTest {
         String quoteID = myceQuotes.createQuoteSFDX(SFDX, "Name='MEWSavailabilityBlockAutoTest2' thn__Pax__c=5" +
                 " thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
                 date.generateTodayDate2_plus(0, 2) + " thn__Departure_Date__c=" +
-                date.generateTodayDate2_plus(0, 4) + " RecordTypeId='" + recordTypeID.get(0) +
+                date.generateTodayDate2_plus(0, 3) + " RecordTypeId='" + recordTypeID.get(0) +
                 "'", ORG_USERNAME);
         String quoteHotelRoomId1 = quoteHotelRoom.createQuoteHotelRoomSFDX(SFDX, "thn__MYCE_Quote__c='"
                 + quoteID + "' thn__Product__c='" + room1NightID + "' thn__Space_Area__c='" + roomTypeID.get(0) +
-                "' thn__Property__c='" + propertyID + "' thn__Rate_Plan__c='" + rateID.get(0) + "'", ORG_USERNAME);
+                "' thn__Property__c='" + propertyID + "' thn__Rate_Plan__c='" + rateID.get(0) + "'" +
+                " thn__Unit_Price__c=100", ORG_USERNAME);
         String quoteHotelRoomId2 = quoteHotelRoom.createQuoteHotelRoomSFDX(SFDX, "thn__MYCE_Quote__c='"
                 + quoteID + "' thn__Product__c='" + room1NightID + "' thn__Space_Area__c='" + roomTypeID.get(0) +
-                "' thn__Property__c='" + propertyID + "' thn__Rate_Plan__c='" + rateID.get(1) + "'", ORG_USERNAME);
+                "' thn__Property__c='" + propertyID + "' thn__Rate_Plan__c='" + rateID.get(1) + "'" +
+                " thn__Unit_Price__c=100", ORG_USERNAME);
         myceQuotes.updateQuoteSFDX(SFDX, "Id='" + quoteID + "'", "thn__Stage__c='3 - Tentative'",
                 ORG_USERNAME);
         myceQuotes.updateQuoteSFDX(SFDX, "Id='" + quoteID + "'", "thn__Create_PMS_Block__c=true",
@@ -202,7 +204,7 @@ public class MEWSavailabilityBlock extends BaseTest {
         String quoteID = myceQuotes.createQuoteSFDX(SFDX, "Name='MEWSavailabilityBlockAutoTest3' thn__Pax__c=1" +
                 " thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
                 date.generateTodayDate2_plus(0, 2) + " thn__Departure_Date__c=" +
-                date.generateTodayDate2_plus(0, 4) + " RecordTypeId='" + recordTypeID.get(0) +
+                date.generateTodayDate2_plus(0, 3) + " RecordTypeId='" + recordTypeID.get(0) +
                 "'", ORG_USERNAME);
         String quoteHotelRoomId1 = quoteHotelRoom.createQuoteHotelRoomSFDX(SFDX, "thn__MYCE_Quote__c='"
                 + quoteID + "' thn__Product__c='" + room1NightID + "' thn__Space_Area__c='" + roomTypeID.get(0) +
@@ -264,7 +266,7 @@ public class MEWSavailabilityBlock extends BaseTest {
         String quoteID = myceQuotes.createQuoteSFDX(SFDX, "Name='MEWSavailabilityBlockAutoTest4' thn__Pax__c=1" +
                 " thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
                 date.generateTodayDate2_plus(0, 2) + " thn__Departure_Date__c=" +
-                date.generateTodayDate2_plus(0, 4) + " RecordTypeId='" + recordTypeID.get(0) +
+                date.generateTodayDate2_plus(0, 3) + " RecordTypeId='" + recordTypeID.get(0) +
                 "'", ORG_USERNAME);
         myceQuotes.updateQuoteSFDX(SFDX, "Id='" + quoteID + "'", "thn__Stage__c='3 - Tentative'",
                 ORG_USERNAME);
@@ -328,23 +330,43 @@ public class MEWSavailabilityBlock extends BaseTest {
                 getFieldValueSoql(mAdustmentRecords.toString(), "thn__PMS_Start_UTC__c");
         List<String> mAdjustmentEndUTC = JsonParser2.
                 getFieldValueSoql(mAdustmentRecords.toString(), "thn__PMS_End_UTC__c");
-        Assert.assertEquals(mAdjustmentID.size(), 3);
+        Assert.assertEquals(mAdjustmentID.size(), 7);
         Assert.assertEquals(mAdjustmentQuantity.get(0).intValue(), 5);
         Assert.assertEquals(mAdjustmentQuantity.get(1).intValue(), 5);
         Assert.assertEquals(mAdjustmentQuantity.get(2).intValue(), -5);
+        Assert.assertEquals(mAdjustmentQuantity.get(3).intValue(), -5);
+        Assert.assertEquals(mAdjustmentQuantity.get(4).intValue(), 5);
+        Assert.assertEquals(mAdjustmentQuantity.get(5).intValue(), 5);
+        Assert.assertEquals(mAdjustmentQuantity.get(6).intValue(), 5);
         Assert.assertEquals(mAdjustmentStartUTC.get(0),
                 date.generateTodayDate2_plus(0, 2) + "T11:00:00.000+0000");
+        Assert.assertEquals(mAdjustmentEndUTC.get(0),
+                date.generateTodayDate2_plus(0, 2) + "T23:59:00.000+0000");
         Assert.assertEquals(mAdjustmentStartUTC.get(1),
-                date.generateTodayDate2_plus(0, 2) + "T11:00:00.000+0000");
+                date.generateTodayDate2_plus(0, 3) + "T00:00:00.000+0000");
+        Assert.assertEquals(mAdjustmentEndUTC.get(1),
+                date.generateTodayDate2_plus(0, 4) + "T13:30:00.000+0000");
         Assert.assertEquals(mAdjustmentStartUTC.get(2),
                 date.generateTodayDate2_plus(0, 2) + "T11:00:00.000+0000");
-        Assert.assertEquals(mAdjustmentQuantity.get(2).intValue(), -5);
-        Assert.assertEquals(mAdjustmentEndUTC.get(0),
-                date.generateTodayDate2_plus(0, 4) + "T13:30:00.000+0000");
-        Assert.assertEquals(mAdjustmentEndUTC.get(1),
-                date.generateTodayDate2_plus(0, 5) + "T13:30:00.000+0000");
         Assert.assertEquals(mAdjustmentEndUTC.get(2),
+                date.generateTodayDate2_plus(0, 2) + "T23:59:00.000+0000");
+        Assert.assertEquals(mAdjustmentStartUTC.get(3),
+                date.generateTodayDate2_plus(0, 3) + "T00:00:00.000+0000");
+        Assert.assertEquals(mAdjustmentEndUTC.get(3),
                 date.generateTodayDate2_plus(0, 4) + "T13:30:00.000+0000");
+        Assert.assertEquals(mAdjustmentStartUTC.get(4),
+                date.generateTodayDate2_plus(0, 2) + "T11:00:00.000+0000");
+        Assert.assertEquals(mAdjustmentEndUTC.get(4),
+                date.generateTodayDate2_plus(0, 2) + "T23:59:00.000+0000");
+        Assert.assertEquals(mAdjustmentStartUTC.get(5),
+                date.generateTodayDate2_plus(0, 3) + "T00:00:00.000+0000");
+        Assert.assertEquals(mAdjustmentEndUTC.get(5),
+                date.generateTodayDate2_plus(0, 3) + "T23:59:00.000+0000");
+        Assert.assertEquals(mAdjustmentStartUTC.get(6),
+                date.generateTodayDate2_plus(0, 4) + "T00:00:00.000+0000");
+        Assert.assertEquals(mAdjustmentEndUTC.get(6),
+                date.generateTodayDate2_plus(0, 5) + "T13:30:00.000+0000");
+
     }
 
     @Test(priority = 6, description = "Update MYCE Quote Shoulder Start Date / Shoulder End Date, new dates are" +
@@ -401,9 +423,7 @@ public class MEWSavailabilityBlock extends BaseTest {
     }
 
     @Test(priority = 7, description = "Update MYCE Quote Shoulder Start Date / Shoulder End Date, new dates are not" +
-            " within the block interval. Expected result: On existing Blocks  PMS Block status is set to “Delete”," +
-            " Response and Response date/time is filled, External Id is cleared, Delete Block request is sent to" +
-            " MEWS. New TH PMS Blocks are created and are sent to MEWS.")
+            " within the block interval. Expected result: On existing PMS Block Name = 'Updated + Quote Name'")
     @Severity(SeverityLevel.NORMAL)
     @Story("THY-460: MEWS - Availability Block")
     public void case7() throws InterruptedException, IOException {
@@ -413,34 +433,10 @@ public class MEWSavailabilityBlock extends BaseTest {
         myceQuotes.updateQuoteSFDX(SFDX, "Id='" + quoteID + "'", "thn__Shoulder_Start_Date__c="
                 + date.generateTodayDate2_plus(0, 3) + " thn__Shoulder_End_Date__c="
                 + date.generateTodayDate2_plus(0, 9), ORG_USERNAME);
-        StringBuilder pmsBlockRecord1 = pmsBlock.getPMSBlockSFDX(SFDX, "thn__MYCE_Quote__c='" + quoteID +
-                "' thn__PMS_Status__c='Send'", ORG_USERNAME);
-        StringBuilder pmsBlockRecord2 = pmsBlock.getPMSBlockSFDX(SFDX, "thn__MYCE_Quote__c='" + quoteID +
-                "' thn__PMS_Status__c='Delete'", ORG_USERNAME);
-        String pmsBlockResponce1 = JsonParser2.getFieldValue(pmsBlockRecord1.toString(), "thn__PMS_Response__c");
-        String pmsBlockResponce2 = JsonParser2.getFieldValue(pmsBlockRecord2.toString(), "thn__PMS_Response__c");
-        String pmsBlockPMSstatus1 = JsonParser2.getFieldValue(pmsBlockRecord1.toString(), "thn__PMS_Status__c");
-        String pmsBlockPMSstatus2 = JsonParser2.getFieldValue(pmsBlockRecord2.toString(), "thn__PMS_Status__c");
-        String pmsBlockPMSid1 = JsonParser2.getFieldValue(pmsBlockRecord1.toString(), "thn__PMSId__c");
-        String pmsBlockPMSid2 = JsonParser2.getFieldValue(pmsBlockRecord2.toString(), "thn__PMSId__c");
-        String pmsShoulderStartDate1 = JsonParser2.
-                getFieldValue(pmsBlockRecord1.toString(), "thn__StartShoulderDate__c");
-        String pmsShoulderStartDate2 = JsonParser2.
-                getFieldValue(pmsBlockRecord2.toString(), "thn__StartShoulderDate__c");
-        String pmsShoulderEndDate1 = JsonParser2.
-                getFieldValue(pmsBlockRecord1.toString(), "thn__EndShoulderDate__c");
-        String pmsShoulderEndDate2 = JsonParser2.
-                getFieldValue(pmsBlockRecord2.toString(), "thn__EndShoulderDate__c");
-        Assert.assertEquals(pmsBlockResponce1, "200 OK");
-        Assert.assertEquals(pmsBlockResponce2, "200 OK");
-        Assert.assertEquals(pmsBlockPMSstatus1, "Send");
-        Assert.assertEquals(pmsBlockPMSstatus2, "Delete");
-        Assert.assertNotNull(pmsBlockPMSid1);
-        Assert.assertNull(pmsBlockPMSid2);
-        Assert.assertEquals(pmsShoulderStartDate1, date.generateTodayDate2_plus(0, 3));
-        Assert.assertEquals(pmsShoulderEndDate1, date.generateTodayDate2_plus(0, 9));
-        Assert.assertEquals(pmsShoulderStartDate2, date.generateTodayDate2_plus(0, 2));
-        Assert.assertEquals(pmsShoulderEndDate2, date.generateTodayDate2_plus(0, 8));
+        StringBuilder pmsBlockRecord1 = pmsBlock.getPMSBlockSFDX(SFDX, "thn__MYCE_Quote__c='" + quoteID + "'",
+                ORG_USERNAME);
+        String pmsBlockName = JsonParser2.getFieldValue(pmsBlockRecord1.toString(), "Name");
+        Assert.assertEquals(pmsBlockName, "Updated MEWSavailabilityBlockAutoTest6");
     }
 
     @Test(priority = 8, description = "On Quote that has Quote hotel rooms, set Send To Mews to true, make sure" +
@@ -509,13 +505,30 @@ public class MEWSavailabilityBlock extends BaseTest {
         Assert.assertEquals(reservationState, "Optional");
         Assert.assertEquals(pmsBlockStatus, "Optional");
         Assert.assertEquals(reservationPMSBlock, pmsBlockID);
-        Assert.assertEquals(mAdjustmentID.size(), 2);
-        Assert.assertEquals(mAdjustmentStartUTC.get(0), reservationArrival);
-        Assert.assertEquals(mAdjustmentStartUTC.get(1), reservationArrival);
-        Assert.assertEquals(mAdjustmentEndtUTC.get(0), reservationDeparture);
-        Assert.assertEquals(mAdjustmentEndtUTC.get(1), reservationDeparture);
+        Assert.assertEquals(mAdjustmentID.size(), 5);
+        Assert.assertEquals(mAdjustmentStartUTC.get(0), date.generateTodayDate2_plus(0, 2) +
+                "T12:00:00.000+0000");
+        Assert.assertEquals(mAdjustmentEndtUTC.get(0), date.generateTodayDate2_plus(0, 2) +
+                "T23:59:00.000+0000");
+        Assert.assertEquals(mAdjustmentStartUTC.get(1), date.generateTodayDate2_plus(0, 3) +
+                "T00:00:00.000+0000");
+        Assert.assertEquals(mAdjustmentEndtUTC.get(1), date.generateTodayDate2_plus(0, 3) +
+                "T23:59:00.000+0000");
+        Assert.assertEquals(mAdjustmentStartUTC.get(2), date.generateTodayDate2_plus(0, 4) +
+                "T00:00:00.000+0000");
+        Assert.assertEquals(mAdjustmentEndtUTC.get(2), date.generateTodayDate2_plus(0, 4) +
+                "T23:59:00.000+0000");
+        Assert.assertEquals(mAdjustmentStartUTC.get(3), date.generateTodayDate2_plus(0, 5) +
+                "T00:00:00.000+0000");
+        Assert.assertEquals(mAdjustmentEndtUTC.get(3), date.generateTodayDate2_plus(0, 6) +
+                "T14:30:00.000+0000");
+        Assert.assertEquals(mAdjustmentStartUTC.get(4), reservationArrival);
+        Assert.assertEquals(mAdjustmentEndtUTC.get(4), reservationDeparture);
         Assert.assertEquals(mAdjustmentQuantity.get(0).intValue(), 1);
-        Assert.assertEquals(mAdjustmentQuantity.get(1).intValue(), -1);
+        Assert.assertEquals(mAdjustmentQuantity.get(1).intValue(), 1);
+        Assert.assertEquals(mAdjustmentQuantity.get(2).intValue(), 1);
+        Assert.assertEquals(mAdjustmentQuantity.get(3).intValue(), 1);
+        Assert.assertEquals(mAdjustmentQuantity.get(4).intValue(), -1);
     }
 
     @Test(priority = 9, description = "Update MYCE Quote’s stage. Reservations have been sent successfully. Expected" +
@@ -572,16 +585,33 @@ public class MEWSavailabilityBlock extends BaseTest {
                 getFieldValueSoql(mAdjustmentRecords.toString(), "thn__PMS_Start_UTC__c");
         List<String> mAdjustmentEndtUTC = JsonParser2.
                 getFieldValueSoql(mAdjustmentRecords.toString(), "thn__PMS_End_UTC__c");
-        Assert.assertEquals(mAdjustmentID.size(), 3);
-        Assert.assertEquals(mAdjustmentStartUTC.get(0), reservationArrival);
-        Assert.assertEquals(mAdjustmentStartUTC.get(1), reservationArrival);
-        Assert.assertEquals(mAdjustmentStartUTC.get(2), reservationArrival);
-        Assert.assertEquals(mAdjustmentEndtUTC.get(0), reservationDeparture);
-        Assert.assertEquals(mAdjustmentEndtUTC.get(1), reservationDeparture);
-        Assert.assertEquals(mAdjustmentEndtUTC.get(2), reservationDeparture);
+        Assert.assertEquals(mAdjustmentID.size(), 6);
+        Assert.assertEquals(mAdjustmentStartUTC.get(0), date.generateTodayDate2_plus(0, 2) +
+                "T12:00:00.000+0000");
+        Assert.assertEquals(mAdjustmentEndtUTC.get(0), date.generateTodayDate2_plus(0, 2) +
+                "T23:59:00.000+0000");
+        Assert.assertEquals(mAdjustmentStartUTC.get(1), date.generateTodayDate2_plus(0, 3) +
+                "T00:00:00.000+0000");
+        Assert.assertEquals(mAdjustmentEndtUTC.get(1), date.generateTodayDate2_plus(0, 3) +
+                "T23:59:00.000+0000");
+        Assert.assertEquals(mAdjustmentStartUTC.get(2), date.generateTodayDate2_plus(0, 4) +
+                "T00:00:00.000+0000");
+        Assert.assertEquals(mAdjustmentEndtUTC.get(2), date.generateTodayDate2_plus(0, 4) +
+                "T23:59:00.000+0000");
+        Assert.assertEquals(mAdjustmentStartUTC.get(3), date.generateTodayDate2_plus(0, 5) +
+                "T00:00:00.000+0000");
+        Assert.assertEquals(mAdjustmentEndtUTC.get(3), date.generateTodayDate2_plus(0, 6) +
+                "T14:30:00.000+0000");
+        Assert.assertEquals(mAdjustmentStartUTC.get(4), reservationArrival);
+        Assert.assertEquals(mAdjustmentEndtUTC.get(4), reservationDeparture);
+        Assert.assertEquals(mAdjustmentStartUTC.get(5), reservationArrival);
+        Assert.assertEquals(mAdjustmentEndtUTC.get(5), reservationDeparture);
         Assert.assertEquals(mAdjustmentQuantity.get(0).intValue(), 1);
-        Assert.assertEquals(mAdjustmentQuantity.get(1).intValue(), -1);
+        Assert.assertEquals(mAdjustmentQuantity.get(1).intValue(), 1);
         Assert.assertEquals(mAdjustmentQuantity.get(2).intValue(), 1);
+        Assert.assertEquals(mAdjustmentQuantity.get(3).intValue(), 1);
+        Assert.assertEquals(mAdjustmentQuantity.get(4).intValue(), -1);
+        Assert.assertEquals(mAdjustmentQuantity.get(5).intValue(), 1);
     }
 
 }

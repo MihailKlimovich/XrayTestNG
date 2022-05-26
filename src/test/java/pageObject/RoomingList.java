@@ -30,4 +30,22 @@ public class RoomingList extends BasePage {
         return roomingListRecord;
     }
 
+    @Step("Update Rooming List SFDX")
+    public void updateRoomingListSFDX(String sfdxPath, String where, String value, String userName)
+            throws IOException, InterruptedException {
+        StringBuilder roomingListUpdateResult = SfdxCommand.runLinuxCommand1(new String[]{
+                sfdxPath,
+                "force:data:record:update",
+                "-s",
+                "thn__Rooming_List__c",
+                "-w",
+                where,
+                "-v",
+                value,
+                "-u",
+                userName,
+                "--json"});
+        System.out.println(roomingListUpdateResult);
+    }
+
 }

@@ -32,7 +32,7 @@ public class QuoteHotelRoomQuantityBudgetsAndSubtotals extends BaseTest {
         StringBuilder roomTypeQueenRecord = roomType.getRoomTypeSFDX(SFDX, "Name='Queen'", ORG_USERNAME);
         String roomTypeQueenID = JsonParser2.getFieldValue(roomTypeQueenRecord.toString(), "Id");
         String quoteID = myceQuotes.createQuoteSFDX(SFDX,
-                "Name='QuoteHotelRoomQuantityBudgetsAndSubtotalsAutoTest' thn__Pax__c=1 thn__Hotel__c='"
+                "Name='QuoteHotelRoomQuantityBudgetsAndSubtotalsAutoTest' thn__Pax__c=100 thn__Hotel__c='"
                         + propertyID + "' thn__Arrival_Date__c=" + date.generateTodayDate2() + "" +
                         " thn__Departure_Date__c=" + date.generateTodayDate2_plus(0, 4) +
                         " RecordTypeId='" + recordTypeID.get(0) + "'", ORG_USERNAME);
@@ -81,8 +81,8 @@ public class QuoteHotelRoomQuantityBudgetsAndSubtotals extends BaseTest {
                 " thn__Price_incl_Tax__c=110 thn__Rate__c='" + rateId + "' thn__Space_Area__c='" + roomTypeQueenID +
                 "'", ORG_USERNAME);
         String quoteHotelRoomId = quoteHotelRoom.createQuoteHotelRoomSFDX(SFDX, "thn__MYCE_Quote__c='"
-                + quoteID + "' thn__Product__c='" + room1NightID + "' thn__Space_Area__c='" + roomTypeQueenID + "'",
-                ORG_USERNAME);
+                + quoteID + "' thn__Product__c='" + room1NightID + "' thn__Space_Area__c='" + roomTypeQueenID + "'" +
+                " thn__Pax__c=1", ORG_USERNAME);
         quoteHotelRoom.updateQuoteHotelRoomSFDX(SFDX, "thn__MYCE_Quote__c='" + quoteID + "'",
                 "thn__Rate_Plan__c='" + rateId + "'", ORG_USERNAME);
         StringBuilder quoteHotelRoomPrices = myceQuotes.soql(SFDX, "SELECT Id FROM thn__Quote_Hotel_Room_Price__c" +

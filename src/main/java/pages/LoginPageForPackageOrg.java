@@ -114,24 +114,29 @@ public class LoginPageForPackageOrg extends BasePage{
 
         public void authoriseURL(String sfdxPath, String authURL, String userName) throws IOException, InterruptedException {
             System.out.println("I try!!!!!!!!!!!!!!!!!!!!!!");
-            File createFile = new File("/home/user/SFDX_URL.txt");
+            File createFile = new File("./SFDX_URL.txt");
             createFile.createNewFile();
             PrintWriter pw = new PrintWriter(createFile);
             pw.write(authURL);
             pw.flush();
             pw.close();
+            StringBuilder sfdxVersion = BasePage.runLinuxCommand1(new String[]{
+                    sfdxPath,
+                    "-v"
+            });
+            System.out.println(sfdxVersion);
             StringBuilder authorise = BasePage.runLinuxCommand1(new String[]{
                     sfdxPath,
                     "auth:sfdxurl:store",
                     "-f",
-                    "/home/user/SFDX_URL.txt",
+                    "./SFDX_URL.txt",
                     "-a",
                     userName
             });
             System.out.println(authorise);
             if(createFile.delete()){
-                System.out.println("/home/user/SFDX_URL.txt file deleted");
-            }else System.out.println("/home/user/SFDX_URL.txt file not found");
+                System.out.println("./SFDX_URL.txt file deleted");
+            }else System.out.println("./SFDX_URL.txt file not found");
         }
 
 

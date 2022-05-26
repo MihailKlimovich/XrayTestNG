@@ -33,13 +33,13 @@ public class CloneMyceQuoteAndQHRPQuantity extends BaseTest{
                 " SobjectType='thn__MYCE_Quote__c' AND Name='Quote'", ORG_USERNAME);
         List<String> recordTypeID = JsonParser2.getFieldValueSoql(recordTypes.toString(), "Id");
         String quoteID = myceQuotes.createQuoteSFDX(SFDX, "Name='CloneMyceQuoteAndQHRPQuantityAutoTest'" +
-                " thn__Pax__c=5 thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
+                " thn__Pax__c=500 thn__Hotel__c='" + propertyID + "' thn__Arrival_Date__c=" +
                 date.generateTodayDate2_plus(0, 2) + " thn__Departure_Date__c=" +
                 date.generateTodayDate2_plus(0, 6) + " RecordTypeId='" + recordTypeID.get(0) +
                 "'", ORG_USERNAME);
         String quoteHotelRoomID = quoteHotelRoom.createQuoteHotelRoomSFDX(SFDX, "thn__MYCE_Quote__c='" +
-                quoteID + "' thn__Product__c='" + room1NightID + "' thn__Space_Area__c='" + roomTypesId.get(0) + "'",
-                ORG_USERNAME);
+                quoteID + "' thn__Product__c='" + room1NightID + "' thn__Space_Area__c='" + roomTypesId.get(0) + "'" +
+                " thn__Pax__c=5", ORG_USERNAME);
         StringBuilder qhrPriceRecord1 = myceQuotes.soql(SFDX, "SELECT Id FROM thn__Quote_Hotel_Room_Price__c" +
                 " WHERE thn__Quote_Hotel_Room__c='" + quoteHotelRoomID + "' AND thn__Date__c=" +
                 date.generateTodayDate2_plus(0, 3), ORG_USERNAME);
@@ -69,6 +69,7 @@ public class CloneMyceQuoteAndQHRPQuantity extends BaseTest{
     @Severity(SeverityLevel.NORMAL)
     @Story("THY-685: Clone Myce Quote and QHRP.Quantity.")
     public void case1() throws InterruptedException, IOException {
+        //loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
         myceQuotes.deleteQuoteSFDX(SFDX, "Name='CloneMyceQuoteAndQHRPQuantityAutoTestClone'", ORG_USERNAME);
         myceQuotes.goToMyceQuotes().openMyceQoteRecord("CloneMyceQuoteAndQHRPQuantityAutoTest");
         myceQuotes.cloneMyceQuote_changeDateAndPax("CloneMyceQuoteAndQHRPQuantityAutoTestClone",
@@ -97,8 +98,8 @@ public class CloneMyceQuoteAndQHRPQuantity extends BaseTest{
     }
 
     @Test(priority = 3, description = "Use the Clone MYCE Quote button on the original Quote. Select a new" +
-            " Arrival Date. Pax = 100. Keep all Pax = true. Keep rooms Pax = False. Expected Result: New Pax value" +
-            " on the MYCE Quote = 100. QHR.Number = 5. QHRP.Quantity = 5 for all dates")
+            " Arrival Date. Pax = 500. Keep all Pax = true. Keep rooms Pax = False. Expected Result: New Pax value" +
+            " on the MYCE Quote = 500. QHR.Number = 100. QHRP.Quantity = 5, 10, 100, 5.")
     @Severity(SeverityLevel.NORMAL)
     @Story("THY-685: Clone Myce Quote and QHRP.Quantity.")
     public void case2() throws InterruptedException, IOException {
@@ -106,7 +107,7 @@ public class CloneMyceQuoteAndQHRPQuantity extends BaseTest{
         myceQuotes.deleteQuoteSFDX(SFDX, "Name='CloneMyceQuoteAndQHRPQuantityAutoTestClone2'", ORG_USERNAME);
         myceQuotes.goToMyceQuotes().openMyceQoteRecord("CloneMyceQuoteAndQHRPQuantityAutoTest");
         myceQuotes.cloneMyceQuote_changeDateAndPaxKeepAllPax("CloneMyceQuoteAndQHRPQuantityAutoTestClone2",
-                date.generateTodayDate3_plus(0, 3), "100");
+                date.generateTodayDate3_plus(0, 3), "500");
         StringBuilder quoteRecord = myceQuotes.getQuoteSFDX(SFDX,
                 "Name='CloneMyceQuoteAndQHRPQuantityAutoTestClone2'", ORG_USERNAME);
         String myceQuoteID= JsonParser2.getFieldValue(quoteRecord.toString(), "Id");
@@ -122,25 +123,25 @@ public class CloneMyceQuoteAndQHRPQuantity extends BaseTest{
                 ORG_USERNAME);
         List<Integer> qhrPriceQuantity = JsonParser2.
                 getFieldValueSoql2(qhrPriceRecords.toString(), "thn__Quantity__c");
-        Assert.assertEquals(quotePax.intValue(), 100);
-        Assert.assertEquals(quoteHotelRoomPax.intValue(), 5);
+        Assert.assertEquals(quotePax.intValue(), 500);
+        Assert.assertEquals(quoteHotelRoomPax.intValue(), 100);
         Assert.assertEquals(qhrPriceQuantity.get(0).intValue(), 5);
-        Assert.assertEquals(qhrPriceQuantity.get(1).intValue(), 5);
-        Assert.assertEquals(qhrPriceQuantity.get(2).intValue(), 5);
+        Assert.assertEquals(qhrPriceQuantity.get(1).intValue(), 10);
+        Assert.assertEquals(qhrPriceQuantity.get(2).intValue(), 100);
         Assert.assertEquals(qhrPriceQuantity.get(3).intValue(), 5);
     }
 
     @Test(priority = 4, description = "Use the Clone MYCE Quote button on the original Quote. Select a new" +
-            " Arrival Date. Pax = 60. Keep all Pax = false. Keep rooms Pax = true. Expected Result: New Pax value" +
-            " on the MYCE Quote = 60. QHR.Number = 5. QHRP.Quantity = 5 for all dates.")
+            " Arrival Date. Pax = 600. Keep all Pax = false. Keep rooms Pax = true. Expected Result: New Pax value" +
+            " on the MYCE Quote = 600. QHR.Number = 100. QHRP.Quantity =  5, 10, 100, 5.")
     @Severity(SeverityLevel.NORMAL)
     @Story("THY-685: Clone Myce Quote and QHRP.Quantity.")
     public void case3() throws InterruptedException, IOException {
-        loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
+        //loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
         myceQuotes.deleteQuoteSFDX(SFDX, "Name='CloneMyceQuoteAndQHRPQuantityAutoTestClone3'", ORG_USERNAME);
         myceQuotes.goToMyceQuotes().openMyceQoteRecord("CloneMyceQuoteAndQHRPQuantityAutoTest");
         myceQuotes.cloneMyceQuote_changeDateAndPaxKeepRoomPax("CloneMyceQuoteAndQHRPQuantityAutoTestClone3",
-                date.generateTodayDate3_plus(0, 3), "60");
+                date.generateTodayDate3_plus(0, 3), "600");
         StringBuilder quoteRecord = myceQuotes.getQuoteSFDX(SFDX,
                 "Name='CloneMyceQuoteAndQHRPQuantityAutoTestClone3'", ORG_USERNAME);
         String myceQuoteID= JsonParser2.getFieldValue(quoteRecord.toString(), "Id");
@@ -156,11 +157,11 @@ public class CloneMyceQuoteAndQHRPQuantity extends BaseTest{
                 ORG_USERNAME);
         List<Integer> qhrPriceQuantity = JsonParser2.
                 getFieldValueSoql2(qhrPriceRecords.toString(), "thn__Quantity__c");
-        Assert.assertEquals(quotePax.intValue(), 60);
-        Assert.assertEquals(quoteHotelRoomPax.intValue(), 5);
+        Assert.assertEquals(quotePax.intValue(), 600);
+        Assert.assertEquals(quoteHotelRoomPax.intValue(), 100);
         Assert.assertEquals(qhrPriceQuantity.get(0).intValue(), 5);
-        Assert.assertEquals(qhrPriceQuantity.get(1).intValue(), 5);
-        Assert.assertEquals(qhrPriceQuantity.get(2).intValue(), 5);
+        Assert.assertEquals(qhrPriceQuantity.get(1).intValue(), 10);
+        Assert.assertEquals(qhrPriceQuantity.get(2).intValue(), 100);
         Assert.assertEquals(qhrPriceQuantity.get(3).intValue(), 5);
     }
 

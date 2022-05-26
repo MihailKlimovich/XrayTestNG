@@ -9,10 +9,13 @@ import org.junit.runners.model.Statement;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.CapabilityType;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import pageObject.*;
+import pageObject.QuoteAnalytics;
 import pageObject.RoomingList;
 import pages.HomePageForPackageOrg;
 import pages.HomePageForScratchOrg;
@@ -20,6 +23,7 @@ import pages.LoginPageForPackageOrg;
 import pages.LoginPageForScratchOrg;
 import java.lang.String;
 
+import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
 public class BaseTest {
@@ -82,6 +86,12 @@ public class BaseTest {
     protected MAdjustments mAdjustments;
     protected CheckAvailabilitiesComponent checkAvailabilitiesComponent;
     protected Mews mews;
+    protected GroupBookingComponent groupBookingComponent;
+    protected HapiProperty hapiProperty;
+    protected QuoteAnalytics quoteAnalytics;
+    protected Rooms rooms;
+    protected FunctionSheet functionSheet;
+    protected FunctionSheetDay functionSheetDay;
 
 
 
@@ -102,21 +112,11 @@ public class BaseTest {
 
 
 
-
-
-
-
-
     final protected String thynkPackDevOrg = "https://thynkpack-dev-ed.my.salesforce.com/";
     final protected String thynkPackUserName = "rostislav.orel@succraft.com";
     final protected String thynkPackPassword = "Rost1508";
     final protected String thynkPackKey = "3MVG91BJr_0ZDQ4ta_ZwN1EEnfj.OQSJWOBWMPFXclJ22A8oaKqM9KTLdsoSupXX0idQnMIdsI3IweGbsJx6t";
     public String SFDX_AUTH_URL_THYNK = "force://PlatformCLI::5Aep861KhtojOqEEpf1C.laFhN16Pmut38yhtiYoOyrXXUeg8QGP2hZVxy39KizY65ljaqxviEldYCEYtpb1Gi1@thynkpack-dev-ed.my.salesforce.com";
-
-
-
-
-
 
 
 
@@ -134,7 +134,15 @@ public class BaseTest {
 
     @BeforeClass
     public void classLevelSetup(){
+        String downloadFilepath = "/home/user/project/thynk-selenium/TemporaryFiles";
+        HashMap<String, Object> chromePrefs = new HashMap<String, Object>();
+        chromePrefs.put("profile.default_content_settings.popups", 0);
+        chromePrefs.put("download.default_directory", downloadFilepath);
         ChromeOptions options= new ChromeOptions();
+        options.setExperimentalOption("prefs", chromePrefs);
+        DesiredCapabilities cap = DesiredCapabilities.chrome();
+        cap.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
+        cap.setCapability(ChromeOptions.CAPABILITY, options);
         options.addArguments("--incognito");
         options.addArguments("--disable-cache");
         options.addArguments("--disk-cache-size=1");
@@ -210,6 +218,12 @@ public class BaseTest {
         mAdjustments = new MAdjustments(driver);
         checkAvailabilitiesComponent = new CheckAvailabilitiesComponent(driver);
         mews = new Mews(driver);
+        groupBookingComponent = new GroupBookingComponent(driver);
+        hapiProperty = new HapiProperty(driver);
+        quoteAnalytics = new QuoteAnalytics(driver);
+        rooms = new Rooms(driver);
+        functionSheet = new FunctionSheet(driver);
+        functionSheetDay = new FunctionSheetDay(driver);
     }
 
     @AfterClass

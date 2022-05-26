@@ -207,7 +207,7 @@ public class MultiDeleteTesting extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     @Story("Multi delete testing")
     public void multiDeleteTest2() throws InterruptedException, IOException {
-        //loginPageForScratchOrg.logInOnScratchOrg2(driver, urlForScratch, ALIAS, passwordForScratch);
+        //loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
         myceQuotes.goToMyceQuotes();
         myceQuotes.openMyceQoteRecord("QuoteTestMultiDeleteAuto1");
         myceQuotes.openMeetingPackages();
