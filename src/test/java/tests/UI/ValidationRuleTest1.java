@@ -11,6 +11,7 @@ import tests.BaseTest;
 import utils.Listeners.TestListener;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 
 @Listeners({TestListener.class})
 
@@ -42,7 +43,7 @@ public class ValidationRuleTest1 extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     @Description("Myce_Quote__c.Commission_Validation_Rule")
     @Story("Commissionable == true & thn__Commission_to__c == null")
-    public void testCreateNewMyceQuote1() throws InterruptedException {
+    public void testCreateNewMyceQuote1() throws InterruptedException, MalformedURLException {
         //given
         String expectedMessage = "If commissionable = true, 'Commission to' field shouldn't be null or " +
                 "if 'Commission to' field equals 'agent', agent shouldn't be null or " +
@@ -62,7 +63,7 @@ public class ValidationRuleTest1 extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     @Description("Myce_Quote__c.Commission_Validation_Rule")
     @Story("Commissionable == true & thn__Commission_to__c != Agent & thn__Agent__c == null")
-    public void testCreateNewMyceQuote2() throws InterruptedException {
+    public void testCreateNewMyceQuote2() throws InterruptedException, MalformedURLException {
         //given
         String expectedMessage = "If commissionable = true, 'Commission to' field shouldn't be null or " +
                 "if 'Commission to' field equals 'agent', agent shouldn't be null or " +
@@ -82,7 +83,7 @@ public class ValidationRuleTest1 extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     @Description("Myce_Quote__c.Commission_Validation_Rule")
     @Story("Commissionable == true & thn__Commission_to__c != Company & thn__Company__c == null")
-    public void testCreateNewMyceQuote3() throws InterruptedException {
+    public void testCreateNewMyceQuote3() throws InterruptedException, MalformedURLException {
         //given
         String expectedMessage = "If commissionable = true, 'Commission to' field shouldn't be null or " +
                 "if 'Commission to' field equals 'agent', agent shouldn't be null or " +
@@ -102,7 +103,7 @@ public class ValidationRuleTest1 extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     @Description("Myce_Quote__c.VR05_Dates")
     @Story("thn__Departure_Date__c < thn__Arrival_Date__c")
-    public void testCreateNewMyceQuote4() throws InterruptedException {
+    public void testCreateNewMyceQuote4() throws InterruptedException, MalformedURLException {
         //given
         String expectedMessage = "Departure Date cannot be anterior to Arrival Date";
         //when
@@ -120,7 +121,7 @@ public class ValidationRuleTest1 extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     @Description("Myce_Quote__c.VR27_Company_Agent_Type")
     @Story("Create MYCE Quote: Select Company for Agent field ,Select Agent for Company field")
-    public void testCreateNewMyceQuote5() throws InterruptedException {
+    public void testCreateNewMyceQuote5() throws InterruptedException, MalformedURLException {
         //given
         String expectedMessage = "Company cannot be of type 'Agent' and Agent must be of type 'Agent' or 'Leads'";
         //when
@@ -138,7 +139,7 @@ public class ValidationRuleTest1 extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     @Description("Myce_Quote__c.VR13_Reservation_Guest")
     @Story("Create MYCE Quote: leave thn__Reservation_Guest__c empty, Set thn__Send_to_Mews__c to TRUE")
-    public void testCreateNewMyceQuote6() throws InterruptedException {
+    public void testCreateNewMyceQuote6() throws InterruptedException, MalformedURLException {
         //given
         String expectedMessage = "Reservation guest is required to send reservations to Mews";
         //when
@@ -155,7 +156,7 @@ public class ValidationRuleTest1 extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     @Description("Myce_Quote__c.VR22_ClosedStatus")
     @Story("Change Stage om MYCE Quote to '4 - Closed'")
-    public void testCreateNewMyceQuote7() throws InterruptedException {
+    public void testCreateNewMyceQuote7() throws InterruptedException, MalformedURLException {
         //given
         String expectedMessage = "Closed Status is required when quote is at stage '4 - Closed'";
         //when
@@ -175,7 +176,7 @@ public class ValidationRuleTest1 extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     @Description("Myce_Quote__c.VR28_Cancelled_Status")
     @Story("Set thn__Is_Confirmed__c to false, Change MYCE Quote Closed Status to ‘Cancelled’")
-    public void testCreateNewMyceQuote8() throws InterruptedException {
+    public void testCreateNewMyceQuote8() throws InterruptedException, MalformedURLException {
         //given
         String expectedMessage = "Closed Status can be 'Cancelled' only if Myce quote was 'Won'";
         //when
@@ -213,7 +214,7 @@ public class ValidationRuleTest1 extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     @Description("Package_Line__c.VR30_IsMultidays")
     @Story("For Package where hn__Multi_Days__c == true, create Package line: thn__AppliedDay__c == null")
-    public void testCreateNewPackageLine1() throws InterruptedException {
+    public void testCreateNewPackageLine1() throws InterruptedException, MalformedURLException {
         //given
         String expectedMessage = "Applied Day is required when a package is Multi days";
         //when
@@ -232,7 +233,7 @@ public class ValidationRuleTest1 extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     @Description("Package_Line__c.VR31_IsNotMultidays")
     @Story("For Package where hn__Multi_Days__c == false, create Package line: thn__AppliedDay__c != null")
-    public void testCreateNewPackageLine2() throws InterruptedException {
+    public void testCreateNewPackageLine2() throws InterruptedException, MalformedURLException {
         //given
         String expectedMessage = "Applied Day must be left empty when a package is Multi days";
         //when
@@ -252,7 +253,7 @@ public class ValidationRuleTest1 extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     @Description("Package_Line__c.VR29_Product_property")
     @Story("Create package line where Proferty  ‘A' for Package with Property 'B’")
-    public void testCreateNewPackageLine3() throws InterruptedException {
+    public void testCreateNewPackageLine3() throws InterruptedException, MalformedURLException {
         //given
         String expectedMessage = "Product's property must be the same than the package's";
         //when
@@ -271,7 +272,7 @@ public class ValidationRuleTest1 extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     @Description("Quote_Hotel_Room__c.VR06_Departure_after")
     @Story("Add Quote hotel room on MYCE Quote: thn__Arrival_Date_Time__c > thn__Departure_Date_Time__c")
-    public void testCreateQuoteHotelRoom() throws InterruptedException {
+    public void testCreateQuoteHotelRoom() throws InterruptedException, MalformedURLException {
         String expectedMessage = "Arrival Date time cannot be after Departure Date time";
         //when
         myceQuotes.goToMyceQuotes();
@@ -478,7 +479,7 @@ public class ValidationRuleTest1 extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     @Description("Quote_Package__c.VR14_Discount")
     @Story("")
-    public void testCreateQuotePackage2() throws InterruptedException {
+    public void testCreateQuotePackage2() throws InterruptedException, MalformedURLException {
         //given
         String expectedMessage = "No Discount possible, package is not configured correctly. Please contact your admin";
         //when
@@ -509,7 +510,7 @@ public class ValidationRuleTest1 extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     @Description("Quote_Package__c.VR18_Pax")
     @Story("Add Quote package to the MYCE Quote: thn__Pax__c > thn__MYCE_Quote__r.thn__Pax__c")
-    public void testCreateQuotePackage3() throws InterruptedException {
+    public void testCreateQuotePackage3() throws InterruptedException, MalformedURLException {
         //given
         String expectedMessage = "Pax cannot be greater than quote's pax";
         //when
@@ -547,7 +548,7 @@ public class ValidationRuleTest1 extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     @Description("Quote_Package__c.VR34_QuotePackage_Dates")
     @Story("")
-    public void testCreateQuotePackage5() throws InterruptedException {
+    public void testCreateQuotePackage5() throws InterruptedException, MalformedURLException {
         //given
         String expectedMessage = "Quote package start date must be within package's start and end dates";
         //when
@@ -579,7 +580,7 @@ public class ValidationRuleTest1 extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     @Description("Quote_Package__c.VR37_Max_Discount")
     @Story("Add Quote Package to MYCE Quote: set Discount on quote package > Discount max on Package")
-    public void testCreateQuotePackage6() throws InterruptedException {
+    public void testCreateQuotePackage6() throws InterruptedException, MalformedURLException {
         //given
         String expectedMessage = "Discount on quote package cannot be greater than discount max.";
         //when
