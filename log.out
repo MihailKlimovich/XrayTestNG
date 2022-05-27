@@ -1,3 +1,2 @@
-2022-05-18 15:47:28,881 INFO  - packageCustomPrice_DeletePackageLine test is starting.
-2022-05-18 15:48:21,966 INFO  - packageCustomPrice_addQuotePackageLine test is starting.
-2022-05-18 15:49:13,912 INFO  - packageCustomPrice_Discount test is starting.
+2022-05-26 16:06:19,157 INFO  - preconditions test is starting.
+2022-05-26 16:07:16,902 INFO  - cloneQuote test is starting.

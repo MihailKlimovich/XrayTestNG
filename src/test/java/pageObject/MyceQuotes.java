@@ -8,6 +8,8 @@ import pages.BasePage;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.List;
 
 import static org.openqa.selenium.support.ui.ExpectedConditions.alertIsPresent;
@@ -96,9 +98,14 @@ public class MyceQuotes extends BasePage {
     }
 
     @Step("Open Myce Quote page")
-    public MyceQuotes goToMyceQuotes() throws InterruptedException {
-        //driver.navigate().to("https://thynk-test-unlocked-dev-ed.lightning.force.com/lightning/o/thn__MYCE_Quote__c/list?filterName=Recent");
-        driver.navigate().to("https://thautomation-dev-ed.lightning.force.com/lightning/o/thn__MYCE_Quote__c/list?filterName=Recent");
+    public MyceQuotes goToMyceQuotes() throws MalformedURLException {
+        try {
+        URL baseUrl = new URL(driver.getCurrentUrl());
+        String url = "https://" + baseUrl.getAuthority() + "/lightning/o/thn__MYCE_Quote__c/list?filterName=Recent";
+        System.out.println(url);
+        driver.navigate().to(url);
+        } catch (Exception ex){ex.printStackTrace();
+        }
         try {
             if (wait2.until(ExpectedConditions.alertIsPresent()) != null) {
                 Alert alert = wait2.until(alertIsPresent());

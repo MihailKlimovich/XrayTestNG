@@ -9,6 +9,9 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import pages.BasePage;
 import tests.BaseTest;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+
 import static org.openqa.selenium.support.ui.ExpectedConditions.alertIsPresent;
 
 public class Requests extends BasePage {
@@ -21,9 +24,14 @@ public class Requests extends BasePage {
     By CONVERT_BUTTON = By.xpath("//button[@name='thn__Request__c.thn__Convert']");
 
     @Step("Open request record")
-    public Requests openRequestRecord(String id){
-        driver.navigate().to("https://thynk-test-unlocked-dev-ed.lightning.force.com/lightning/r/thn__Request__c/" + id + "/view");
-        //driver.navigate().to("https://thautomation-dev-ed.lightning.force.com/lightning/r/thn__Request__c/" + id + "/view");
+    public Requests openRequestRecord(String id) throws MalformedURLException {
+        try {
+            URL baseUrl = new URL(driver.getCurrentUrl());
+            String url = "https://" + baseUrl.getAuthority() + "/lightning/r/thn__Request__c/" + id + "/view";
+            System.out.println(url);
+            driver.navigate().to(url);
+        } catch (Exception ex){ex.printStackTrace();
+        }
         try{if(wait2.until(ExpectedConditions.alertIsPresent())!=null){
             Alert alert = wait2.until(alertIsPresent());
             alert.accept();

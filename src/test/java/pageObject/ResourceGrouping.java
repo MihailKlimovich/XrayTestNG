@@ -9,6 +9,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import pages.BasePage;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 import static org.openqa.selenium.support.ui.ExpectedConditions.alertIsPresent;
 
@@ -30,8 +32,14 @@ public class ResourceGrouping extends BasePage {
 
 
     @Step("Open Resource Grouping tab...")
-    public ResourceGrouping goToResourceGrouping() throws InterruptedException {
-        driver.navigate().to("https://agility-efficiency-64-dev-ed.lightning.force.com/lightning/o/thn__Resource_Grouping__c/list?filterName=Recent");
+    public ResourceGrouping goToResourceGrouping() throws MalformedURLException {
+        try {
+            URL baseUrl = new URL(driver.getCurrentUrl());
+            String url = "https://" + baseUrl.getAuthority() + "/lightning/o/thn__Resource_Grouping__c/list?filterName=Recent";
+            System.out.println(url);
+            driver.navigate().to(url);
+        } catch (Exception ex){ex.printStackTrace();
+        }
         try{if(wait2.until(ExpectedConditions.alertIsPresent())!=null){
             Alert alert = wait2.until(alertIsPresent());
             alert.accept();

@@ -9,6 +9,7 @@ import pageObject.JsonParser2;
 import tests.BaseTest;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.List;
 
 public class ChangeDateFlowAndCanceledReservations extends BaseTest {
@@ -23,6 +24,11 @@ public class ChangeDateFlowAndCanceledReservations extends BaseTest {
     public void case1() throws InterruptedException, IOException {
         loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
         loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
+        Thread.sleep(3000);
+        URL baseUrl = new URL(driver.getCurrentUrl());
+        String url = "https://" + baseUrl.getAuthority() + "/lightning/o/thn__MYCE_Quote__c/list?filterName=Recent";
+        System.out.println(url);
+        driver.navigate().to(url);
         myceQuotes.deleteQuoteSFDX(SFDX, "Name='ChangeDateFlowAndCanceledReservationsAutoTest'", ORG_USERNAME);
         StringBuilder hotelRecord1= hotel.getHotelSFDX(SFDX, "thn__Unique_Id__c='Demo'", ORG_USERNAME);
         String propertyID = JsonParser2.getFieldValue(hotelRecord1.toString(), "Id");

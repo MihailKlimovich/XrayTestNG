@@ -9,6 +9,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import pages.BasePage;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 import static org.openqa.selenium.support.ui.ExpectedConditions.alertIsPresent;
 
@@ -43,9 +45,14 @@ public class Reservations extends BasePage {
     By STATE__FIELD = By.xpath("//label[text()='State']/following-sibling::div//input");
 
     @Step("Open Reservations page")
-    public Reservations goToReservations() throws InterruptedException {
-        //driver.navigate().to("https://thautomation-dev-ed.lightning.force.com/lightning/o/thn__Reservation__c/list?filterName=Recent");
-        driver.navigate().to("https://thynk-test-unlocked-dev-ed.lightning.force.com/lightning/o/thn__Reservation__c/list?filterName=Recent");
+    public Reservations goToReservations() throws MalformedURLException {
+        try {
+            URL baseUrl = new URL(driver.getCurrentUrl());
+            String url = "https://" + baseUrl.getAuthority() + "lightning/o/thn__Reservation__c/list?filterName=Recent";
+            System.out.println(url);
+            driver.navigate().to(url);
+        } catch (Exception ex){ex.printStackTrace();
+        }
         try{if(wait2.until(ExpectedConditions.alertIsPresent())!=null){
             Alert alert = wait2.until(alertIsPresent());
             alert.accept();
