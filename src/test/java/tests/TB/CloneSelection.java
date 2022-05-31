@@ -1,5 +1,6 @@
 package tests.TB;
 
+import com.xpandit.testng.annotations.Xray;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.Story;
@@ -19,6 +20,7 @@ public class CloneSelection extends BaseTest {
             "thn__Clone__c = true. The cloned package has the linked Quote package lines stored.")
     @Severity(SeverityLevel.NORMAL)
     @Story("TB-388: Clone selection.")
+    @Xray(requirement = "TTP-263", test="TTP-284")
     public void case1() throws InterruptedException, IOException {
         loginPageForScratchOrg.logInOnScratchOrg2(driver, ORG_URL, ORG_USERNAME, ORG_PASSWORD);
         loginPage.authoriseURL(SFDX, SFDX_AUTH_URL, ORG_USERNAME);
