@@ -2,8 +2,6 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Salesforce Test Suite" >
     <listeners>
-        <listener class-name="utils.Listeners.TestListener"/>
-        <listener class-name="utils.Listeners.AnnotationTransformer"/>
         <listener class-name="utils.Annotations.XrayListener"/>
         <listener class-name="utils.Annotations.Xray"/>
     </listeners>
@@ -12,7 +10,6 @@
             <class name="tests.TB.CloneSelection"/>
         </classes>
     </test>
-
 </suite>
 
 
