@@ -1,10 +1,8 @@
-package utils.Listeners;
-
+package utils.Annotations;
 
 
 import java.lang.reflect.Method;
 
-import com.xpandit.testng.annotations.Xray;
 import org.testng.IInvokedMethod;
 import org.testng.IInvokedMethodListener;
 import org.testng.ITestContext;
@@ -14,9 +12,7 @@ import org.testng.ITestResult;
 import static java.lang.System.out;
 import static java.lang.System.err;
 
-
-
-public class XrayListener implements IInvokedMethodListener, ITestListener{
+public class XrayListener implements IInvokedMethodListener, ITestListener {
 
     boolean testSuccess = true;
 
@@ -83,4 +79,5 @@ public class XrayListener implements IInvokedMethodListener, ITestListener{
         // TODO Auto-generated method stub
 
     }
+
 }
