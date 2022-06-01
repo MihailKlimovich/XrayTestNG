@@ -6,7 +6,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.CLASS.RUNTIME)
-public @interface Xray {
+public @interface Xray{
 
     String requirement() default "";
 
