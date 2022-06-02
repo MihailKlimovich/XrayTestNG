@@ -2,7 +2,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Salesforce Test Suite" >
     <listeners>
-        <listener class-name="com.xpandit.testng.annotations.XrayListener"></listener>
+        <listener class-name="utils.Annotations.XrayListener"/>
     </listeners>
     <test name="TB-388: Clone selection.">
         <classes>

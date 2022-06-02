@@ -8,6 +8,9 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import pageObject.JsonParser2;
 import tests.BaseTest;
+import org.testng.Reporter;
+import org.testng.reporters.XMLReporter;
+import org.testng.ITestResult;
 
 import java.io.IOException;
 import java.util.List;
