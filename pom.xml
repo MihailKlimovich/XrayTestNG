@@ -13,9 +13,11 @@
 
 
     <properties>
+        <property>
         <aspectj.version>1.8.10</aspectj.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-
+        </property>
+        <property>
         <!--XRay Properties -->
 
         <!--IN PROFILE ~.m2/settings.xml-->
@@ -34,6 +36,7 @@
 
         <xray.surefire.location>${basedir}/target/surefire-reports</xray.surefire.location>
         <!--End Xray Properties -->
+        </property>
     </properties>
     <dependencies>
         <dependency>
@@ -168,9 +171,6 @@
                     <suiteXmlFiles>
                         <suiteXmlFile>testng.xml</suiteXmlFile>
                     </suiteXmlFiles>
-                    <argLine>
-                        -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
-                    </argLine>
                     <properties>
                         <property>
                             <name>reporter</name>
@@ -178,13 +178,6 @@
                         </property>
                     </properties>
                 </configuration>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.aspectj</groupId>
-                        <artifactId>aspectjweaver</artifactId>
-                        <version>${aspectj.version}</version>
-                    </dependency>
-                </dependencies>
             </plugin>
         </plugins>
     </build>
